@@ -5,26 +5,19 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
-var mongoose = require('mongoose');
 
-var authenticate = require('./authenticate');
+//var authenticate = require('./authenticate');
 
 var config = require('./config/config');
 
-mongoose.connect(config.mongoUrl);
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function(){
+var routes = require('./app/routes');
+var models = require('./app/models');
 
-    console.log("Connected correctly to the server");
+models.sequelize.sync().then(function () {
+  var server = app.listen(app.get('port'), function() {
+    debug('Express server listening on port ' + server.address().port);
+  });
 });
-
-var routes = require('./app/routes/index');
-var users = require('./app/routes/users');
-var dishRouter = require('./app/routes/dishRouter');
-var promoRouter = require('./app/routes/promoRouter');
-var leaderRouter = require('./app/routes/leaderRouter');
-var favoriteRouter = require('./app/routes/favoriteRouter');
 
 var app = express();
 
@@ -51,11 +44,6 @@ app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
-app.use('/dishes', dishRouter);
-app.use('/leadership',leaderRouter);
-app.use('/promotions',promoRouter);
-app.use('/favorites',favoriteRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
