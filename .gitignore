@@ -2,3 +2,5 @@
 # http://git-scm.com/docs/gitignore
 
 /dist
+/bower_components
+/node_modules
