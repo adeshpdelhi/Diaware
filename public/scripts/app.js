@@ -55,7 +55,7 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap'])
                 url:'new',
                 views: {
                     'content@': {
-                        templateUrl : 'views/registration/newregister.html'
+                        templateUrl : 'views/registration/test/newregister.html'
                     }
                 }
 
