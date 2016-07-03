@@ -3,6 +3,7 @@
   table{
     table-layout: fixed;
     width: 200px;
+    background-color:#FAEBFF;
   }
 
   th, td {
@@ -10,10 +11,18 @@
     overflow: hidden;
     width: 100px;
     height: 40px;
-  }
-  th, td
-  {
+    padding: 15px;
     text-align : center;
+  }
+  tr:nth-child(even) {background-color: #FCF5FF}
+  tr:hover{
+    background-color: #F5E6FA
+  }
+  th {
+    /*background-color: #4CAF50;*/
+    background-color: #003399;
+
+    color: white;
   }
   body
   {
@@ -52,9 +61,9 @@
 </style>
 <div class="container">
 <div class="row row-content">
-    <form class="form-horizontal col-sm-8" role="form">
+    <form class="form-horizontal col-sm-9" role="form">
       <div class="table-responsive">
-        <table id="box-table-b">
+        <table id="box-table-b" class="table table-bordered">
           <thead>
             <tr>
               <th>TIME</th>
