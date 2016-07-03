@@ -6,9 +6,10 @@
   }
 
   th, td {
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     overflow: hidden;
     width: 100px;
+    height: 40px;
   }
   th, td
   {
@@ -19,8 +20,7 @@
     line-height: 1.6em;
   }
 
-
-  #box-table-b
+ /* #box-table-b
   {
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
     font-size: 12px;
@@ -47,12 +47,12 @@
     background: #e8edff; 
     border-right: 1px solid #aabcfe;
     border-left: 1px solid #aabcfe;
-    color: #669;
+    color: #669;*/
   }
 </style>
 <div class="container">
-<div class="row">
-    <form class="form-horizontal" role="form">
+<div class="row row-content">
+    <form class="form-horizontal col-sm-8" role="form">
       <div class="table-responsive">
         <table id="box-table-b">
           <thead>
@@ -81,7 +81,7 @@
       </div>
 
       <div class="form-group">
-        <div class="col-sm-offset-4 col-sm-8">
+        <div class="col-sm-push-8 col-sm-2  ">
           <button type="submit" class="btn btn-primary">Save</button>
         </div>
       </div>

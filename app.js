@@ -6,16 +6,16 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var debug = require('debug')('express-example');
-var methodOverride = require('method-override');
+// var methodOverride = require('method-override');
 
 //var authenticate = require('./authenticate');
 
 var config = require('./config/config');
 
 var routes = require('./app/routes/index');
-var models = require('./app/models');
+// var models = require('./app/models');
 
-models.sequelize.sync();
+// models.sequelize.sync();
 
 var app = express();
 
@@ -33,7 +33,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(methodOverride('X-HTTP-Method-Override')); 
+// app.use(methodOverride('X-HTTP-Method-Override')); 
 app.use(cookieParser());
 
 app.use(passport.initialize());

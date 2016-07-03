@@ -91,7 +91,8 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap'])
                 url:'new',
                 views: {
                     'content@': {
-                        templateUrl : 'views/monitoring/newmonitoringchart.html',
+                        // templateUrl : 'views/monitoring/newmonitoringchart.html',
+                        templateUrl : 'views/monitoring/test/newmonitoringchart1.html',
                         controller : 'MonitoringController'
                     }
                 }
