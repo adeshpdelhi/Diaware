@@ -1,6 +1,6 @@
 var express = require('express'), bodyParser =require('body-parser');
-var mongoose = require('mongoose');
-var Dishes = require('../models/dishes');
+// var mongoose = require('mongoose');
+// var Dishes = require('../models/dishes');
 
 var Verify = require('./verify');
 
