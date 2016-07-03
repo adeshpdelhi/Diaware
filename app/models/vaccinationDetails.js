@@ -26,11 +26,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true
     },
-    lastModified: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: 'CURRENT_TIMESTAMP'
-    },
     lastModifiedBy: {
       type: DataTypes.STRING,
       allowNull: false

@@ -55,11 +55,6 @@ module.exports = function(sequelize, DataTypes) {
       type: 'BLOB',
       allowNull: true
     },
-    lastModified: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: 'CURRENT_TIMESTAMP'
-    },
     lastModifiedBy: {
       type: DataTypes.STRING,
       allowNull: false
