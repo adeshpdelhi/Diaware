@@ -15,7 +15,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Name</label>                        
                         <div class="col-sm-8">
-                            <input required type="text" class="form-control" id="name" name="name" placeholder="Enter Name" >
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" ng-model="newpatient.name">
                         </div>
                     </div>
                      
@@ -23,7 +23,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">DOB</label>
                         <div class="col-sm-8">
-                            <input required type="text" class="form-control" id="dob" name="dob" placeholder="Enter DOB">
+                            <input type="text" class="form-control" id="dob" name="dob" placeholder="Enter DOB">
                         </div>
                     </div>
                      
@@ -31,7 +31,7 @@
                      <div class="form-group">
                         <label  class="col-sm-2 control-label">Gender</label>
                          <div class="col-sm-8 ">
-                            <select name="gender" required class="form-control">
+                            <select name="gender"  class="form-control">
                                 <option value="" selected disabled>-</option>
                                 <option value="male">Male</option>
                                 <option value="female" >Female</option>
@@ -43,7 +43,7 @@
                      <div class="form-group">
                         <label class="col-sm-2 control-label">ID Number</label>
                         <div class="col-sm-8">
-                            <input required type="number" class="form-control" id="id" name="id" placeholder="Enter ID ">
+                            <input type="number" class="form-control" id="id" name="id" placeholder="Enter ID ">
                         </div>
                     </div>
                      
@@ -64,7 +64,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Home Telephone No</label>
                         <div class="col-sm-8">
-                            <input required type="number" class="form-control" id="home_telephone_no" name="home_telephone_no" placeholder="Tel. number">
+                            <input type="number" class="form-control" id="home_telephone_no" name="home_telephone_no" placeholder="Tel. number">
                         </div>
                     </div>
                      
@@ -73,7 +73,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Mobile No</label>
                         <div class="col-sm-8">
-                            <input required type="number" class="form-control" id="mobile_no" name="mobile_no" placeholder="Mobile number">
+                            <input type="number" class="form-control" id="mobile_no" name="mobile_no" placeholder="Mobile number">
                         </div>
                     </div>
                      
@@ -81,14 +81,14 @@
                      <div class="form-group">
                         <label  class="col-sm-2 control-label">Address</label>
                         <div class="col-sm-8">
-                            <textarea required class="form-control" id="address" name="address" rows="4"></textarea>
+                            <textarea  class="form-control" id="address" name="address" rows="4"></textarea>
                         </div>
                     </div>
                      
                      <div class="form-group">
                         <label class="col-sm-2 control-label">Referred By</label>                        
                         <div class="col-sm-8">
-                            <input required type="text" class="form-control" id="referred_by" name="relations" placeholder="Doctor name">
+                            <input type="text" class="form-control" id="referred_by" name="relations" placeholder="Doctor name">
                         </div>
                     </div>
                      
@@ -137,7 +137,7 @@
                          
                         <label class="col-sm-2 control-label">Children (Yes/No)</label>                       
                         <div class="col-sm-3 ">
-                            <select name="children" required class="form-control">
+                            <select name="children"  class="form-control">
                                 <option value="" selected disabled>-</option>
                                 <option value="yes" >Yes</option>
                                 <option value="no" >No</option>
@@ -166,7 +166,7 @@
                      <div class="form-group">
                         <label class="col-sm-2 control-label">Blood Group</label>               
                         <div class="col-sm-8 ">
-                            <select name="blood_group" required class="form-control">
+                            <select name="blood_group"  class="form-control">
                                 <option value="" selected disabled>-</option>
                                 <option value="A+" >A+</option>
                                 <option value="A-" >A-</option>
@@ -185,7 +185,7 @@
                          
                         <label class="col-sm-2 control-label">Transplant Waiting List</label>                       
                         <div class="col-sm-8 ">
-                            <select required class="form-control">
+                            <select  class="form-control">
                                 <option value="" selected disabled>-</option>
                                 <option value="yes" >Yes</option>
                                 <option value="no" >No</option>
@@ -239,12 +239,12 @@
                         <label  class="col-sm-2 control-label">Person to be contacted in case of Emergency</label>  
                         <label  class="col-sm-1 control-label">Name</label>                        
                         <div class="col-sm-3">
-                            <input required type="text" class="form-control" id="emergency_name" name="emergency_name" placeholder="Name">
+                            <input type="text" class="form-control" id="emergency_name" name="emergency_name" placeholder="Name">
                         </div>
                          
                         <label class="col-sm-1 control-label">Mobile No</label>
                         <div class="col-sm-3">
-                            <input required type="mobile" class="form-control" id="emergency_mobile_no" name="emergency_mobile_no" placeholder="Mobile number">
+                            <input type="mobile" class="form-control" id="emergency_mobile_no" name="emergency_mobile_no" placeholder="Mobile number">
                         </div>
                     
                      </div>
@@ -252,7 +252,7 @@
             
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-10">
-                            <button id="register" type="submit" class="btn btn-primary">Register</button>
+                            <button id="register" type="submit" class="btn btn-primary" ng-click="save_basic_details()">Register</button>
                         </div>
                     </div>
                 

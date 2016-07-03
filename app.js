@@ -13,6 +13,7 @@ var debug = require('debug')('express-example');
 var config = require('./config/config');
 
 var routes = require('./app/routes/index');
+var apiRouter = require('./app/routes/api');
 // var models = require('./app/models');
 
 // models.sequelize.sync();
@@ -41,7 +42,7 @@ app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use('/', routes);
-
+app.use('/api',apiRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

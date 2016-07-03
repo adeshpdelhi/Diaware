@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('App')
-
+.constant("baseURL","https://localhost:3443/api/")
 .factory('$localStorage', ['$window', function ($window) {
     return {
         store: function (key, value) {
@@ -33,6 +33,8 @@ angular.module('App')
   };
   return patFac;
 }])
+
+
 
 .factory('authorize', ['$localStorage', function ($localStorage) {
 	
@@ -91,7 +93,7 @@ angular.module('App')
     };
 }])
 
-.service('patientFactory', function(){
+.service('patientFactory', ['$resource', 'baseURL', function($resource,baseURL) {
     var patients = [
       {
         patientId:1,
@@ -108,9 +110,9 @@ angular.module('App')
         patientContact:8765432109
       }
     ];
-    this.getPatients = function(){
-      return patients;
-    };
+    // this.getPatients = function(){
+    //   return patients;
+    // };
     this.getPatient = function(id){
       for (var i = patients.length - 1; i >= 0; i--) {
         if(patients[i].patientId == id) 
@@ -118,7 +120,10 @@ angular.module('App')
       }
       return null;
     };
-  })
+    this.getPatients = function(){
+      return $resource(baseURL+"registration/:id",null,  {'update':{method:'PUT' }});
+     };
+  }])
 // use factory/service to interact with the database n inject that in controller
 
   .factory('dropDownFactory', function(){

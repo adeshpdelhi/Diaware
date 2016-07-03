@@ -206,6 +206,21 @@ angular.module('App')
         $scope.patient = patientFactory.getPatient(choosePatientFactory.getChosenPatient().id);
     }])
 
+
+ .controller('NewRegistrationController',['$scope','patientFactory', function($scope, patientFactory){
+        $scope.newpatient = {   patientId:'' , name: 'adesh' ,age: '' , DOB: '' , gender: '' , contact: '' , alternativeContact: '' , location: '' , address: '' , bloodGroup: '' , transplantWaitingList: '' , maritalStatus: '' , emergencyContactName: '' , emergencyContactRelationship: '' , emergencyContactMobile: '' , numberOfChildren: '' , childrenContact: '' , employementStatus: '' , officeName: '' , officeAddress: '' , otherClinicalDetails: '' , modeOfPayment: '' , refferedBy: '' , doctorName: '' , viralMarketStatus: '' , centreId: '' };
+        $scope.save_basic_details = function(){
+            // patientFactory.getPatients().query(function(patients){
+            //     patients.push($scope.newpatient);
+            //     patients.$save();
+            // });
+            $scope.newpatient.lastModifiedBy = 'adesh pandey';
+            $scope.newpatient.patientId = '123879';
+            patientFactory.getPatients().save($scope.newpatient);
+        }
+    }])
+
+
   .controller('MonitoringController',['$scope','patientFactory','choosePatientFactory', function($scope, patientFactory, choosePatientFactory){
        
         $scope.patient = patientFactory.getPatient(choosePatientFactory.getChosenPatient().id);
