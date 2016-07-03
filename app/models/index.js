@@ -4,9 +4,19 @@ var fs        = require("fs");
 var path      = require("path");
 var Sequelize = require("sequelize");
 var env       = process.env.NODE_ENV || "development";
+var config = require ('../../config/config')
 //var config    = require(path.join(__dirname, '..', 'config', 'config.json'))[env];
-var sequelize = new Sequelize('mysql://root:12345@localhost:3306/test');
-var db        = {};
+var sequelize = new Sequelize(config.sequelizeUrl);
+
+sequelize
+  .authenticate()
+  .then(function(err) {
+    console.log('Connection to database has been established successfully.');
+  }, function (err) { 
+    console.log('Unable to connect to the database:', err);
+  });
+
+var db = {};
 
 fs
   .readdirSync(__dirname)
