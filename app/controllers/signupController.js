@@ -16,12 +16,14 @@ module.exports.signup = function(req, res) {
   }
   
   users.create(newUser).then(function() {
-    res.redirect('/')
+    res.end('successful');
   }).catch(function(error) {
-    req.flash('error', "Please, choose a different username.")
-    res.redirect('/signup')
+    req.flash('error', "Please, choose a different username.");
+    res.end('error');
   // if(users.findOne({username:username})!=null)
   //   res.end('successful');
   // else
   //   res.end('error');
-}
+})
+
+};
