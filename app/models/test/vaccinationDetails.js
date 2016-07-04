@@ -2,13 +2,9 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('vaccinationDetails', {
-    patientId: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     diseaseName: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false,
     },
     dosage1: {
       type: DataTypes.DATE,

@@ -2,16 +2,6 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('panelDetails', {
-    panelId: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-      primaryKey: true
-    },
-    patientId: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      primaryKey: true
-    },
     panelPermissionDate: {
       type: DataTypes.DATE,
       allowNull: true

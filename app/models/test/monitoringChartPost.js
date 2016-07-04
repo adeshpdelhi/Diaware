@@ -2,11 +2,11 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('monitoringChartPost', {
-    patientId: {
-      type: DataTypes.STRING,
-      allowNull: false
+    monitoringDate:{
+      type:DataTypes.Date,
+      allowNull:true
     },
-    monitoringId: {
+    postId: {
       type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true,
@@ -42,15 +42,24 @@ module.exports = function(sequelize, DataTypes) {
     },
     symptomaticHypotension: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     prolongedBleeding: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     bruit: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     subjectiveStatement: {
       type: DataTypes.STRING,
@@ -73,7 +82,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     KtVAchieved: {
-      type: DataTypes.STRING,
+      type: DataTypes.DECIMAL,
       allowNull: true
     },
     EPODosage: {
@@ -90,7 +99,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     bloodTransfusion: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     numberOfUnits: {
       type: DataTypes.INTEGER(11),

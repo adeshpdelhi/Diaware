@@ -5,7 +5,9 @@ module.exports = function(sequelize, DataTypes) {
     patientId: {
       type: DataTypes.STRING,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      references: 'patientDetails', 
+      referencesKey: 'id'   
     },
     diseaseName: {
       type: DataTypes.STRING,

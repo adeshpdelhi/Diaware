@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('patientDetails', {
-    patientId: {
+    id: {
       type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true
@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
       type: Sequelize.DATE,
       allowNull: true,
       validate:{
-        isBefore: Sequelize.NOW
+        isBefore: Sequelize.NOW()
       }
     },
     gender: {
@@ -92,6 +92,13 @@ module.exports = function(sequelize, DataTypes) {
         isNumeric:true
       }
     },
+    hasChildren:{
+      type:DataTypes.STRING,
+      allowNull:true,
+      validate:{
+        isIn:[['Yes','No']]
+      }
+    },
     numberOfChildren: {
       type: DataTypes.INTEGER(11),
       allowNull: true
@@ -127,7 +134,7 @@ module.exports = function(sequelize, DataTypes) {
         isIn:[['Cash','Panel']]
       }
     },
-    refferedBy: {
+    referredBy: {
       type: DataTypes.STRING,
       allowNull: true
     },
@@ -137,11 +144,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     viralMarketStatus: {
       type: DataTypes.STRING,
-      allowNull: true
-    },
-    centreId: {
-      type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:[['Yes', 'No']]
+      }
     },
     lastModifiedBy: {
       type: DataTypes.STRING,

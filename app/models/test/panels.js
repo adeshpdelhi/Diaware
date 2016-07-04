@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('panels', {
-    panelId: {
+    id: {
       type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true,

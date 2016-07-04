@@ -16,36 +16,20 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     DOB: {
-      type: Sequelize.DATE,
-      allowNull: true,
-      validate:{
-        isBefore: Sequelize.NOW
-      }
+      type: DataTypes.DATE,
+      allowNull: true
     },
     gender: {
       type: DataTypes.CHAR(1),
-      allowNull: true,
-      validate:{
-        isIn:[['M','F']]
-      }
+      allowNull: true
     },
     contact: {
       type: DataTypes.STRING,
-      allowNull: true,
-      unique:true,
-      validate:{
-        len:10,
-        isNumeric:true
-      }
+      allowNull: true
     },
     alternativeContact: {
       type: DataTypes.STRING,
-      allowNull: true,
-      validate:{
-        len:10,
-        isNumeric:true
-      }
-
+      allowNull: true
     },
     location: {
       type: DataTypes.STRING,
@@ -57,24 +41,15 @@ module.exports = function(sequelize, DataTypes) {
     },
     bloodGroup: {
       type: DataTypes.STRING,
-      allowNull: true,
-      validate:{
-        isIn:[['B-','B+','A+','A-', 'O+', 'O-','AB+','AB-']]
-      }
+      allowNull: true
     },
     transplantWaitingList: {
       type: DataTypes.STRING,
-      allowNull: true,
-      validate:{
-        isIn:[['Yes', 'No']]
-      }
+      allowNull: true
     },
     maritalStatus: {
       type: DataTypes.STRING,
-      allowNull: true,
-      validate:{
-        isIn:[['married','unmarried']]
-      }
+      allowNull: true
     },
     emergencyContactName: {
       type: DataTypes.STRING,
@@ -86,11 +61,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     emergencyContactMobile: {
       type: DataTypes.STRING,
-      allowNull: true,
-      validate:{
-        len:10,
-        isNumeric:true
-      }
+      allowNull: true
     },
     numberOfChildren: {
       type: DataTypes.INTEGER(11),
@@ -98,11 +69,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     childrenContact: {
       type: DataTypes.STRING,
-      allowNull: true,
-      validate:{
-        len:10,
-        isNumeric:true
-      }
+      allowNull: true
     },
     employementStatus: {
       type: DataTypes.STRING,
@@ -122,10 +89,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     modeOfPayment: {
       type: DataTypes.STRING,
-      allowNull: true,
-      validate:{
-        isIn:[['Cash','Panel']]
-      }
+      allowNull: true
     },
     refferedBy: {
       type: DataTypes.STRING,
@@ -148,26 +112,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     }
   }, {
-    tableName: 'patientDetails',
+    tableName: 'patientDetails'
   });
 };
-
-
-
-// var Foo = sequelize.define('foo', {
-//   firstname: Sequelize.STRING,
-//   lastname: Sequelize.STRING
-// }, {
-//   getterMethods   : {
-//     fullName       : function()  { return this.firstname + ' ' + this.lastname }
-//   },
-
-//   setterMethods   : {
-//     fullName       : function(value) {
-//         var names = value.split(' ');
-
-//         this.setDataValue('firstname', names.slice(0, -1).join(' '));
-//         this.setDataValue('lastname', names.slice(-1).join(' '));
-//     },
-//   }
-// });

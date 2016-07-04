@@ -42,7 +42,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     heparinFree: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:[['Yes','No']]
+      }
     },
     heparinDosageBolus: {
       type: DataTypes.INTEGER(11),

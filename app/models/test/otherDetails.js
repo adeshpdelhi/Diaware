@@ -2,11 +2,6 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('otherDetails', {
-    patientId: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      primaryKey: true
-    },
     PAN: {
       type: DataTypes.STRING,
       allowNull: true

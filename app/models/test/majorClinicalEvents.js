@@ -18,7 +18,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     eventDate: {
       type: DataTypes.DATE,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isBefore:Sequelize.NOW()
+      }
     },
     eventComment: {
       type: DataTypes.STRING,

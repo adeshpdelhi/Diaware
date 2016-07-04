@@ -2,57 +2,63 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('monitoringChartIntra', {
-    patientId: {
-      type: DataTypes.STRING,
-      allowNull: false
+    monitoringDate:{
+      type:DataTypes.Date,
+      allowNull:true
     },
-    monitoringId: {
+    intraId: {
       type: DataTypes.BIGINT,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement:true
     },
     entryNumber: {
       type: DataTypes.INTEGER(11),
-      allowNull: true
+      allowNull: true,
+      validate:{
+        min:1,
+        max:8
+      }
     },
+    // in min ex 30 min 60 min 180 min 
     entryTime: {
       type: DataTypes.STRING,
       allowNull: true
     },
     bp: {
-      type: DataTypes.STRING,
+      type: DataTypes.DECIMAL,
       allowNull: true
     },
     pr: {
-      type: DataTypes.STRING,
+      type: DataTypes.DECIMAL,
       allowNull: true
     },
     ap: {
-      type: DataTypes.STRING,
+      type: DataTypes.DECIMAL,
       allowNull: true
     },
     vp: {
-      type: DataTypes.STRING,
+      type: DataTypes.DECIMAL,
       allowNull: true
     },
     tmp: {
-      type: DataTypes.STRING,
+      type: DataTypes.DECIMAL,
       allowNull: true
     },
     ufr: {
-      type: DataTypes.STRING,
+      type: DataTypes.DECIMAL,
       allowNull: true
     },
     totalUF: {
-      type: DataTypes.STRING,
+      type: DataTypes.DECIMAL,
       allowNull: true
     },
     bfr: {
-      type: DataTypes.STRING,
+      type: DataTypes.DECIMAL,
       allowNull: true
     },
     ebf: {
-      type: DataTypes.STRING,
+      type: DataTypes.DECIMAL,
       allowNull: true
     },
     remarks: {

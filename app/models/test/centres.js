@@ -2,22 +2,26 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('centres', {
-    centreId: {
+    id: {
       type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true
     },
-    centreName: {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    location: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    centreLocation: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    centreMaxPatients: {
+    maxPatients: {
       type: DataTypes.INTEGER(11),
       allowNull: true
+    },
+    accessLinesAvailable:{
+      type:DataTypes.STRING(500),
+      allowNull:true
     }
   }, {
     tableName: 'centres'

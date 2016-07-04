@@ -1,0 +1,21 @@
+notes
+*add relation between patientDetail and User
+*ask 7med about relation between vaccination details and list of diseases drop down (from clinical details panel)
+*link every table with user **
+add editable rights on user to admin only using passport 
+
+
+pre dialysis
+fetch last post hd weight from db ....
+calculate actual weight loss = prehdwieght-posthdweight - would be calculated only after filling post dia
+target weight loss = prehdweight - dryweight
+post weight neednt be stored in pre coz post stored in post dia obv
+
+
+','separated list of access lines in center table  : add validation for the same
+can set validation in db for accessUsed iin Pre as well
+
+
+
+set values false and true in db
+

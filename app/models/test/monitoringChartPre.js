@@ -2,18 +2,15 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('monitoringChartPre', {
-    patientId: {
-      type: DataTypes.STRING,
+    monitoringDate: {
+      type: DataTypes.DATE,
       allowNull: false
     },
-    monitoringdate: {
-      type: DataTypes.DATE,
-      allowNull: true
-    },
-    monitoringId: {
+    preId: {
       type: DataTypes.BIGINT,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     machineNumber: {
       type: DataTypes.INTEGER(11),
@@ -31,21 +28,43 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
+    // 12 hr format
     startTime: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        len:5,
+        isCorrectFormat: function(value){
+          var times = value.split(':');
+          if(!(parseInt(times[0]) <= 12 && parseInt(times[0]) >= 0) || !(parseInt(times[1]) < 60 && parseInt(times[1]) >= 0)) 
+            throw new Error('Invalid Time format');
+        }
+      }
     },
     endTime: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        len:5,
+        isCorrectFormat: function(value){
+          var times = value.split(':');
+          if(!(parseInt(times[0]) <= 12 && parseInt(times[0]) >= 0) || !(parseInt(times[1]) < 60 && parseInt(times[1]) >= 0)) 
+            throw new Error('Invalid Time format');
+        }
+      }
     },
+
+    // use drop down - fetched from centers access lines available
     accessUsed: {
       type: DataTypes.STRING,
       allowNull: true
     },
     centralLineCreated: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:[['Yes', 'No']]
+      }
     },
     centralLine: {
       type: DataTypes.STRING,
@@ -63,21 +82,35 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
+    //time input in HH:MM 12 hr format
     heparinStopBefore: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        len:5,
+        isCorrectFormat: function(value){
+          var times = value.split(':');
+          if(!(parseInt(times[0]) <= 12 && parseInt(times[0]) >= 0) || !(parseInt(times[1]) < 60 && parseInt(times[1]) >= 0)) 
+            throw new Error('Invalid Time format');
+        }
+      }
     },
     NSFlushingFrequency: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER(11),
       allowNull: true
     },
     NSFlushingVolume: {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
+
+
     machineTestPassed: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     machineTestCheckedBy: {
       type: DataTypes.STRING,
@@ -85,11 +118,17 @@ module.exports = function(sequelize, DataTypes) {
     },
     airDetector: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     alarmLimits: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     dialysateFlowRate: {
       type: DataTypes.INTEGER(11),
@@ -97,7 +136,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     dialysisCounterCurrentFlow: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     dialysateTemperature: {
       type: DataTypes.DECIMAL,
@@ -111,37 +153,48 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     },
-    postWeight: {
+
+
+    preHDWeight: {
       type: DataTypes.DECIMAL,
       allowNull: true
     },
-    weightGain: {
+    lastPostHDWeight: {
       type: DataTypes.DECIMAL,
       allowNull: true
     },
-    targetWeightLoss: {
+    dryWeight: {
       type: DataTypes.DECIMAL,
       allowNull: true
     },
-    actualWeightLoss: {
-      type: DataTypes.DECIMAL,
-      allowNull: true
-    },
-    physicalPain: {
+    
+    physicalChestPain: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     chestAuscultation: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     recentSurgery: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     peripheralOedema: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     respiratoryStatus: {
       type: DataTypes.STRING,
@@ -165,7 +218,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     breakfastLunchDinner: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     subjectiveStatement: {
       type: DataTypes.STRING,
@@ -173,7 +229,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     interdialyticComplaints: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     ambulatoryStatus: {
       type: DataTypes.STRING,
@@ -181,52 +240,87 @@ module.exports = function(sequelize, DataTypes) {
     },
     hypotension: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     headache: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     cramps: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     vomiting: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     fever: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     rigor: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     rash: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     chest: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     other: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     dyspnea: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     pruritus: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     generalComments: {
       type: DataTypes.STRING,
       allowNull: true
     },
+
+    
     bruit: {
       type: DataTypes.STRING,
       allowNull: true
@@ -237,7 +331,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     signOfAccessInfection: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:['Yes','No']
+      }
     },
     cannulation: {
       type: DataTypes.STRING,
