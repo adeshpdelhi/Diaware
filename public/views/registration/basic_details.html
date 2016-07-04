@@ -11,6 +11,13 @@
             
                 
                  <form class="form-horizontal" role="form">
+				 
+				 <div class="form-group">
+                        <label class="col-sm-2 control-label">ID Number</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="id" name="id" placeholder="Enter ID ">
+                        </div>
+                    </div>
                      
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Name</label>                        
@@ -23,150 +30,21 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">DOB</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="dob" name="dob" placeholder="Enter DOB">
+                            <input type="text" class="form-control" id="dob" name="dob" placeholder="Enter DOB" ng-model="newpatient.DOB">
                         </div>
                     </div>
-                     
-                     
-                     <div class="form-group">
-                        <label  class="col-sm-2 control-label">Gender</label>
-                         <div class="col-sm-8 ">
-                            <select name="gender"  class="form-control">
-                                <option value="" selected disabled>-</option>
-                                <option value="male">Male</option>
-                                <option value="female" >Female</option>
-                            </select>
-                        </div>
-                    </div>
-                     
-                     
-                     <div class="form-group">
-                        <label class="col-sm-2 control-label">ID Number</label>
+					
+					<div class="form-group">
+                        <label class="col-sm-2 control-label">Age</label>
                         <div class="col-sm-8">
-                            <input type="number" class="form-control" id="id" name="id" placeholder="Enter ID ">
+                            <input type="number" class="form-control" id="age" name="age" placeholder="Enter Age" ng-model="newpatient.age">
                         </div>
                     </div>
-                     
-                     
-                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Marrital Status</label>
-                         <div class="col-sm-8">
-                            <select name="marital_status" class="form-control">
-                                <option value="" selected disabled>-</option>
-                                <option value="married" >Married</option>
-                                <option value="unmarried" >Unmarried</option>
-                            </select>
-                        </div>
-                    </div>
-                
-            
-                
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Home Telephone No</label>
-                        <div class="col-sm-8">
-                            <input type="number" class="form-control" id="home_telephone_no" name="home_telephone_no" placeholder="Tel. number">
-                        </div>
-                    </div>
-                     
-                     
-                     
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Mobile No</label>
-                        <div class="col-sm-8">
-                            <input type="number" class="form-control" id="mobile_no" name="mobile_no" placeholder="Mobile number">
-                        </div>
-                    </div>
-                     
-                     
-                     <div class="form-group">
-                        <label  class="col-sm-2 control-label">Address</label>
-                        <div class="col-sm-8">
-                            <textarea  class="form-control" id="address" name="address" rows="4"></textarea>
-                        </div>
-                    </div>
-                     
-                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Referred By</label>                        
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="referred_by" name="relations" placeholder="Doctor name">
-                        </div>
-                    </div>
-                     
-                     
-                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Next of Kin</label>                        
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="next_of_kin" name="next_of_kin" placeholder="Next of kin">
-                        </div>
-                    </div>
-                     
-                     
-                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Relationship</label>                        
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="relationship" name="relationship" placeholder="Relationship">
-                        </div>
-                    </div>
-                     
-                     
-                     <div class="form-group">
-                        <label  class="col-sm-2 control-label">Mobile No</label>
-                        <div class="col-sm-8">
-                            <input type="number" class="form-control" id="kin_mobile_no" name="kin_mobile_no" placeholder="Mobile number">
-                        </div>
-                     </div>
-                     
-                     
-                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Care Giver</label>                        
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="care_giver" name="care_giver" placeholder="Care giver">
-                        </div>
-                    </div>
-                     
-                     
-                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Mobile No</label>
-                        <div class="col-sm-8 ">
-                            <input type="number" class="form-control" id="care_giver_mobile_no" name="care_giver_mobile_no" placeholder="Mobile number">
-                        </div>
-                     </div>
-                     
-                     
-                     <div class="form-group">
-                         
-                        <label class="col-sm-2 control-label">Children (Yes/No)</label>                       
-                        <div class="col-sm-3 ">
-                            <select name="children"  class="form-control">
-                                <option value="" selected disabled>-</option>
-                                <option value="yes" >Yes</option>
-                                <option value="no" >No</option>
-                            </select>
-                        </div>
-                         
-                        <label class="col-sm-2 control-label">Number</label>
-                        <div class="col-sm-1">
-                            <input type="number" class="form-control" id="no_of_children" name="no_of_children" >
-                        </div>
-                         
-                    </div>
-                     
-                     <div class="form-group">
-                        <label  class="col-sm-2 control-label">Mobile No</label>
-                        <div class="col-sm-8">
-                            <input type="mobile" class="form-control" id="children_mobile_no" name="children_mobile_no" placeholder="Children Mobile number">
-                        </div>
-                     </div>
-                     
-                     
-                     
-                     
-                     
-                     
-                     <div class="form-group">
+					
+					<div class="form-group">
                         <label class="col-sm-2 control-label">Blood Group</label>               
                         <div class="col-sm-8 ">
-                            <select name="blood_group"  class="form-control">
+                            <select name="blood_group"  class="form-control" ng-model="newpatient.bloodGroup">
                                 <option value="" selected disabled>-</option>
                                 <option value="A+" >A+</option>
                                 <option value="A-" >A-</option>
@@ -181,11 +59,105 @@
                         </div>
                      </div>
                      
+					
+					<div class="form-group">
+                        <label  class="col-sm-2 control-label">Gender</label>
+                         <div class="col-sm-8 ">
+                            <select name="gender"  class="form-control" ng-model="newpatient.gender">
+                                <option value="" selected disabled>-</option>
+                                <option value="male">Male</option>
+                                <option value="female" >Female</option>
+                            </select>
+                        </div>
+                    </div>
+					
+					<div class="form-group">
+                        <label class="col-sm-2 control-label">Location</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="location" name="location" placeholder="Enter Location" ng-model="newpatient.location">
+                        </div>
+                    </div>
+					
+					<div class="form-group">
+                        <label  class="col-sm-2 control-label">Address</label>
+                        <div class="col-sm-8">
+                            <textarea  class="form-control" id="address" name="address" rows="4" ng-model="newpatient.address"></textarea>
+                        </div>
+                    </div>             
+                                      
+            
+                     
+                     
+                     
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Contact No</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="mobile_no" name="mobile_no" placeholder="Mobile number" ng-model="newpatient.contact">
+                        </div>
+                    </div>
+                     
+                     
+                     
+					
+					<div class="form-group">
+                        <label class="col-sm-2 control-label">Alternative Contact No</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="alternative_contact_no" name="alternative_contact_no" placeholder="Mobile number" ng-model="newpatient.alternativeContact">
+                        </div>
+                    </div>
+					
+					 <div class="form-group">
+                        <label class="col-sm-2 control-label">Marrital Status</label>
+                         <div class="col-sm-8">
+                            <select name="marital_status" class="form-control" ng-model="newpatient.maritalStatus">
+                                <option value="" selected disabled>-</option>
+                                <option value="married" >Married</option>
+                                <option value="unmarried" >Unmarried</option>
+                            </select>
+                        </div>
+                    </div>
+                     
+                     <div class="form-group">
+                        <label class="col-sm-2 control-label">Referred By</label>                        
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="referred_by" name="relations" placeholder="Doctor name" ng-model="newpatient.refferedBy">
+                        </div>
+                    </div>
+                     
+                    
+                     
+                     
+                     <div class="form-group">
+                         
+                        <label class="col-sm-2 control-label">Children (Yes/No)</label>                       
+                        <div class="col-sm-3 ">
+                            <select name="children"  class="form-control" ng-model="newpatient.hasChildren">
+                                <option value="" selected disabled>-</option>
+                                <option value="yes" >Yes</option>
+                                <option value="no" >No</option>
+                            </select>
+                        </div>
+                         
+                        <label class="col-sm-2 control-label">Number</label>
+                        <div class="col-sm-1">
+                            <input type="number" class="form-control" id="no_of_children" name="no_of_children" ng-model="newpatient.numberOfChildren" >
+                        </div>
+                         
+                    </div>
+                     
+					 
+                     <div class="form-group">
+                        <label class="col-sm-2 control-label">Children Contact No</label>
+                        <div class="col-sm-8">
+                            <input type="mobile" class="form-control" id="children_contact_no" name="children_contact_no" placeholder="Children Mobile number" ng-model="newpatient.childrenContact">
+                        </div>
+                     </div>
+                     
                      <div class="form-group">
                          
                         <label class="col-sm-2 control-label">Transplant Waiting List</label>                       
                         <div class="col-sm-8 ">
-                            <select  class="form-control">
+                            <select  class="form-control" ng-model="newpatient.transplantWaitingList">
                                 <option value="" selected disabled>-</option>
                                 <option value="yes" >Yes</option>
                                 <option value="no" >No</option>
@@ -197,13 +169,12 @@
 					 <div class="form-group">
                         <label  class="col-sm-2 control-label">Employement Status</label>
                          <div class="col-sm-8 ">
-                            <select name="employement_status" class="form-control">
+                            <select name="employement_status" class="form-control" ng-model="newpatient.employementStatus">
                                 <option value="" selected disabled>-</option>
                                 <option value="salaried">Salaried</option>
                                 <option value="businessman" >Businessman</option>
 								<option value="professional">Professional</option>
                                 <option value="farmer" >Farmer</option>
-								
                                 <option value="unemployed" >Unemployed</option>
 								<option value="other">Other</option>
                             </select>
@@ -211,18 +182,18 @@
                     </div>
                      
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Office No</label>                        
+                        <label class="col-sm-2 control-label">Office Name</label>                        
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="office_no" name="office_no" placeholder="Office no">
+                            <input type="text" class="form-control" id="office_name" name="office_name" placeholder="Office name" ng-model="newpatient.officeName">
                         </div>
                     </div>
 
                      
                      
                     <div class="form-group">
-                        <label  class="col-sm-2 control-label">Address</label>
+                        <label  class="col-sm-2 control-label">Office Address</label>
                         <div class="col-sm-8">
-                            <textarea class="form-control" id="office_address" name="office_address" rows="3"></textarea>
+                            <textarea class="form-control" id="office_address" name="office_address" rows="3" ng-model="newpatient.officeAddress"></textarea>
                         </div>
                     </div>
                      
@@ -230,24 +201,58 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Viral Market Status</label>                        
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="viral_market_status" name="viral_market_status" placeholder="Viral Market Status">
+                            <input type="text" class="form-control" id="viral_market_status" name="viral_market_status" placeholder="Viral Market Status" ng-model="newpatient.viralMarketStatus">
                         </div>
                     </div>
                      
                      
                      <div class="form-group">
-                        <label  class="col-sm-2 control-label">Person to be contacted in case of Emergency</label>  
-                        <label  class="col-sm-1 control-label">Name</label>                        
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" id="emergency_name" name="emergency_name" placeholder="Name">
+                        <label  class="col-sm-6 control-label">Person to be contacted in case of Emergency</label>  
+					</div>
+					<div class="form-group">
+	
+                        <label  class="col-sm-2 control-label">Contact Name</label>                        
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="emergency_name" name="emergency_name" placeholder="Name" ng-model="newpatient.emergencyContactName">
+                        </div>
+						
+						<label  class="col-sm-2 control-label">Relationship</label>                        
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="emergency_name" name="emergency_name" placeholder="Name" ng-model="newpatient.emergencyContactRelationship">
                         </div>
                          
-                        <label class="col-sm-1 control-label">Mobile No</label>
-                        <div class="col-sm-3">
-                            <input type="mobile" class="form-control" id="emergency_mobile_no" name="emergency_mobile_no" placeholder="Mobile number">
+                        <label class="col-sm-2 control-label">Mobile No</label>
+                        <div class="col-sm-8">
+                            <input type="mobile" class="form-control" id="emergency_mobile_no" name="emergency_mobile_no" placeholder="Mobile number" ng-model="newpatient.emergencyContactMobile">
                         </div>
                     
                      </div>
+					 
+					 <div class="form-group">
+					 <label  class="col-sm-2 control-label">Doctor Name</label>                        
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="doctor_name" name="doctor_name" placeholder="Doctor Name" ng-model="newpatient.doctorName">
+                        </div>
+					</div>
+						
+					<div class="form-group">
+                        <label class="col-sm-3 control-label">Payment Mode</label>
+                         <div class="col-sm-8">
+                            <select required name="payment_mode" class="form-control" ng-model="modeOfPayment">
+                                <option value="" selected>-</option>
+                                <option value="cash" >Cash</option>
+                                <option value="panel" >Panel</option>
+								
+                            </select>
+                        </div>
+                    </div>
+					 
+					 <div class="form-group">
+                        <label  class="col-sm-2 control-label">Other Clinical Details</label>
+                        <div class="col-sm-8">
+                            <textarea  class="form-control" id="other_clinical_details" name="other_clinical_details" rows="2" ng-model="newpatient.otherClinicalDetails"></textarea>
+                        </div>
+                    </div>
                      
             
                     <div class="form-group">
