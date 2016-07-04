@@ -17,13 +17,7 @@ module.exports = function(sequelize, DataTypes) {
               isEmail: true
             }
           },
-          firstName: {
-            type: Sequelize.STRING,
-          },
-          lastName: {
-            type: Sequelize.STRING,
-          },
-          hash: {
+          hashedPassword: {
             type: Sequelize.STRING,
           },
           salt: {
@@ -32,11 +26,11 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     tableName: 'users'
   });
-  passportLocalSequelize.attachToUser(users, {
-    usernameField: 'username',
-    hashField: 'hash',
-    saltField: 'salt'
-});
+//   passportLocalSequelize.attachToUser(users, {
+//     usernameField: 'username',
+//     hashField: 'hash',
+//     saltField: 'salt'
+// });
   return users;
 };
 
