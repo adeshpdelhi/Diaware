@@ -39,6 +39,14 @@ app.use(cookieParser());
 
 app.use(passport.initialize());
 
+app.use(passport.session());
+
+var users = require('./app/models').users;
+app.use(passport.initialize());
+passport.use(new LocalStrategy(users.authenticate()));
+passport.serializeUser(users.serializeUser());
+passport.deserializeUser(users.deserializeUser());
+
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use('/', routes);
