@@ -2,21 +2,15 @@
 
 var fs        = require("fs");
 var path      = require("path");
-var Sequelize = require("sequelize");
+
 var env       = process.env.NODE_ENV || "development";
-var config = require ('../../config/config')
+var db = require('../../config/sequelize');
 //var config    = require(path.join(__dirname, '..', 'config', 'config.json'))[env];
-var sequelize = new Sequelize(config.sequelizeUrl);
+var sequelize = db.sequelize;
+var Sequelize = db.Sequelize;
 
-sequelize
-  .authenticate()
-  .then(function(err) {
-    console.log('Connection to database has been established successfully.');
-  }, function (err) { 
-    console.log('Unable to connect to the database:', err);
-  });
 
-var db = {};
+var dbmodel = {};
 
 fs
   .readdirSync(__dirname)
@@ -25,16 +19,16 @@ fs
   })
   .forEach(function(file) {
     var model = sequelize.import(path.join(__dirname, file));
-    db[model.name] = model;
+    dbmodel[model.name] = model;
   });
 
-Object.keys(db).forEach(function(modelName) {
-  if ("associate" in db[modelName]) {
-    db[modelName].associate(db);
+Object.keys(dbmodel).forEach(function(modelName) {
+  if ("associate" in dbmodel[modelName]) {
+    dbmodel[modelName].associate(dbmodel);
   }
 });
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+dbmodel.sequelize = db.sequelize;
+dbmodel.Sequelize = db.Sequelize;
 
-module.exports = db;
+module.exports = dbmodel;
