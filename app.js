@@ -4,11 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var passport = require('passport');
 var debug = require('debug')('express-example');
 var session = require('express-session')
 // var methodOverride = require('method-override');
-var flash = require('connect-flash');
 //var authenticate = require('./authenticate');
 
 var config = require('./config/config');
@@ -36,13 +34,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
 app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(methodOverride('X-HTTP-Method-Override')); 
-app.use(cookieParser());
+app.use(cookieParser('blOOdyhabanerO:#404'));
 
-app.use(session({ secret: '4564f6s4fdsfdfd', resave: false, saveUninitialized: false }));
-app.use(flash());
-
-var setupPassport = require('./app/setupPassport')
-setupPassport(app)
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use('/', routes);
