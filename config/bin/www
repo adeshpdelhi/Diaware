@@ -29,7 +29,7 @@ app.set('secPort', port+443);
 // server.listen(port);
 
 
-var models = require('../../app/test/models');
+var models = require('../../app/models');
 
 models.sequelize.sync().then(function () {
   var server = http.createServer(app).listen(app.get('port'));
