@@ -206,27 +206,7 @@
                     </div>
                      
                      
-                     <div class="form-group">
-                        <label  class="col-sm-6 control-label">Person to be contacted in case of Emergency</label>  
-					</div>
-					<div class="form-group">
-	
-                        <label  class="col-sm-2 control-label">Contact Name</label>                        
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="emergency_name" name="emergency_name" placeholder="Name" ng-model="newpatient.emergencyContactName">
-                        </div>
-						
-						<label  class="col-sm-2 control-label">Relationship</label>                        
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="emergency_name" name="emergency_name" placeholder="Name" ng-model="newpatient.emergencyContactRelationship">
-                        </div>
-                         
-                        <label class="col-sm-2 control-label">Mobile No</label>
-                        <div class="col-sm-8">
-                            <input type="mobile" class="form-control" id="emergency_mobile_no" name="emergency_mobile_no" placeholder="Mobile number" ng-model="newpatient.emergencyContactMobile">
-                        </div>
-                    
-                     </div>
+                     
 					 
 					 <div class="form-group">
 					 <label  class="col-sm-2 control-label">Doctor Name</label>                        
@@ -236,7 +216,7 @@
 					</div>
 						
 					<div class="form-group">
-                        <label class="col-sm-3 control-label">Payment Mode</label>
+                        <label class="col-sm-2 control-label">Payment Mode</label>
                          <div class="col-sm-8">
                             <select required name="payment_mode" class="form-control" ng-model="modeOfPayment">
                                 <option value="" selected>-</option>
@@ -253,10 +233,37 @@
                             <textarea  class="form-control" id="other_clinical_details" name="other_clinical_details" rows="2" ng-model="newpatient.otherClinicalDetails"></textarea>
                         </div>
                     </div>
+					
+					<div class="form-group">
+                        <label  class="col-sm-5 control-label"><h4><u>Person to be contacted in case of Emergency</u></h4></label>  
+					</div>
+					<div class="form-group">
+	
+                        <label  class="col-sm-2 control-label">Contact Name</label>                        
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="emergency_name" name="emergency_name" placeholder="Name" ng-model="newpatient.emergencyContactName">
+                        </div>
+					</div>
+					
+					<div class="form-group">
+						
+						<label  class="col-sm-2 control-label">Relationship</label>                        
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="emergency_name" name="emergency_name" placeholder="Name" ng-model="newpatient.emergencyContactRelationship">
+                        </div>
+					</div>
+					<div class="form-group">
+                         
+                        <label class="col-sm-2 control-label">Mobile No</label>
+                        <div class="col-sm-8">
+                            <input type="mobile" class="form-control" id="emergency_mobile_no" name="emergency_mobile_no" placeholder="Mobile number" ng-model="newpatient.emergencyContactMobile">
+                        </div>
+                    
+                     </div>
                      
             
                     <div class="form-group">
-                        <div class="col-sm-offset-4 col-sm-10">
+                        <div class="col-sm-offset-1 col-sm-10">
                             <button id="register" type="submit" class="btn btn-primary" ng-click="save_basic_details()">Register</button>
                         </div>
                     </div>
