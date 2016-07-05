@@ -16,7 +16,8 @@
   padding: 20px 0px;
   color: floralwhite;
   position: absolute;
-  background-color: #000000 ;
+  /*background-color: #00C6D7 ;*/
+  background-color:rgb(50, 73, 99);
   bottom: 0px;
   height: 120px;
   width: 100%;
@@ -41,54 +42,62 @@
   top: 0;
 }
 .navbar-inverse {
-  background: #efefef;
+  background:rgb(0, 198, 215);
+  color:  #ffffff;
+  /*background: #efefef;*/
   /*color: #ffffff;*/
 }
 .navbar-inverse .navbar-nav > li >a:hover{
-  color: #1a237e;
+  /*color: #1a237e;*/
+  color: #ffffff;
+  background: rgba(3, 182, 197, 0.68);
 }
 .navbar-inverse .navbar-nav > li >a:focus{
-  color: #1a237e;
+  /*color: #1a237e;*/
+  color: #ffffff;
 }
 .navbar-inverse .navbar-nav > .active > a {
-  background: #1a237e;
+  background: rgba(3, 182, 197, 0.68);
+  border-color: #ffffff;
   color: #ffffff;
 }
 .navbar-inverse .navbar-nav > .active > a:hover {
-  background: #1a237e;
+  background: rgba(3, 182, 197, 0.68);
   color: #ffffff;
 }
 .navbar-inverse .navbar-nav > .active > a:focus {
-  background: #1a237e;
+  background: rgba(3, 182, 197, 0.68);
   color: #ffffff;
 }
 .navbar-inverse .navbar-nav > .open > a {
-  background: #1a237e;
-  color: #0066CC /* ffffff*/
+  background: rgba(3, 182, 197, 0.68);
+  color: #ffffff
 }
 .navbar-inverse .navbar-nav > .open > a:hover {
-  background: #1a237e;
+  background: rgba(3, 182, 197, 0.68);
   color: #ffffff;
 }
 .navbar-inverse .navbar-nav li a {
-    color: blue;
+    color: #ffffff;
 }
 .loggedin li a {
     color: #0066CC;
 }
 .navbar-inverse .navbar-nav > .open > a:focus {
-  background: #1a237e;
+  background: rgba(3, 182, 197, 0.68);
   color: #ffffff;
 }
 .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
-  background-color: #303f9f;
+  background-color: rgba(3, 182, 197, 0.68);
   color: #eeeeee;
 }
 .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover {
-  color: #000000;
+  color: floralwhite;
+  background:rgb(3, 182, 199);
+  border: 1px transparent rgb(238, 238, 238);
 }
 .navbar-inverse .navbar-nav .open .dropdown-menu {
-  background-color: #303f9f;
+  background-color: rgba(3, 182, 197, 0.68);
   color: #eeeeee;
 }
 address {
@@ -104,8 +113,8 @@ body {
 }
 .tab-content {
   /*border-bottom: 1px solid #dddddd;*/
-  border-left: 1px solid #dddddd;
-  border-right: 1px solid #dddddd;
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
   /*padding: 10px;*/
 }
 .affix {
@@ -157,4 +166,14 @@ html {
 
 .navbar-right{
   float: right !important;
+}
+.panel-body{
+  background:rgb(238, 238, 238) !important;
+}
+.panel-heading {
+  background: rgb(5, 41, 99);
+  color:floralwhite;
+}
+.styled {
+  background: #ffffff !important;
 }

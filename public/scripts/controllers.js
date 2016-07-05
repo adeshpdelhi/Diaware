@@ -60,7 +60,6 @@ angular.module('App')
 				$scope.events.push($scope.event);
 				console.log($scope.event);
 				ClinicalEventsFactory.updateEvents($scope.events);
-				 //$scope.events.push($scope.event);
 				$scope.clinicaleventForm.$setPristine();
 				$scope.event = {
 					date:'',
