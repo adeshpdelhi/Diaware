@@ -129,21 +129,15 @@ table.table-fixedheader>tbody {
     overflow-y: scroll;
     /*height: 250px;   */
 }
-.btn-circle {
+.btn-circle.btn-lg {
   width: 30px;
   height: 30px;
-  /*text-align: center;*/
-  padding: 1px 3;
-  font-size: 12px;
-  line-height: 1.428571429;
-  border-radius: 15px;
-}
-.btn-circle.btn-lg {
-  width: 40px;
-  height: 40px;
-  padding: 1px 3px;
-  font-size: 25px;
-  font-weight: 1800px;
+  padding-left:4px;
+  padding-right:3px;
+  padding-top: 2px; 
+  font-size: 22px;
+  font-weight: 120px;
+  color: floralwhite;
   line-height: 1.33;
   border-radius: 25px;
 }
