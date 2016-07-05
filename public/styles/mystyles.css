@@ -41,8 +41,14 @@
   top: 0;
 }
 .navbar-inverse {
-  background: #303f9f;
-  color: #ffffff;
+  background: #efefef;
+  /*color: #ffffff;*/
+}
+.navbar-inverse .navbar-nav > li >a:hover{
+  color: #1a237e;
+}
+.navbar-inverse .navbar-nav > li >a:focus{
+  color: #1a237e;
 }
 .navbar-inverse .navbar-nav > .active > a {
   background: #1a237e;
