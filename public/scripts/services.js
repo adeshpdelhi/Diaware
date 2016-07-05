@@ -237,6 +237,19 @@ angular.module('App')
     };
     return drpDwnFac;
   })
+  
+  .service('ClinicalEventsFactory',function(){
+	  var events=[];
+	  this.addEvent=function(event){
+		  events.push(event);
+	  }
+	  
+	  this.updateEvents = function(event){
+		//console.log("in services.updateEvents:"+ event[0]);
+		events = events.concat(event);
+	  }
+  })
+  
   .service('billFactory',function(){
     var bills =[];
     this.getBills = function(){
