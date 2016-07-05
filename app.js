@@ -6,8 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var debug = require('debug')('express-example');
+var session = require('express-session')
 // var methodOverride = require('method-override');
-
+var flash = require('connect-flash');
 //var authenticate = require('./authenticate');
 
 var config = require('./config/config');
@@ -37,16 +38,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(methodOverride('X-HTTP-Method-Override')); 
 app.use(cookieParser());
 
-app.use(passport.initialize());
+app.use(session({ secret: '4564f6s4fdsfdfd', resave: false, saveUninitialized: false }));
+app.use(flash());
 
-app.use(passport.session());
-
-var users = require('./app/models').users;
-app.use(passport.initialize());
-passport.use(new LocalStrategy(users.authenticate()));
-passport.serializeUser(users.serializeUser());
-passport.deserializeUser(users.deserializeUser());
-
+var setupPassport = require('./app/setupPassport')
+setupPassport(app)
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use('/', routes);
