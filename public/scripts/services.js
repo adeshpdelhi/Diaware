@@ -110,9 +110,9 @@ angular.module('App')
         patientContact:8765432109
       }
     ];
-    // this.getPatients = function(){
-    //   return patients;
-    // };
+    this.getPatients = function(){
+      return patients;
+    };
     this.getPatient = function(id){
       for (var i = patients.length - 1; i >= 0; i--) {
         if(patients[i].patientId == id) 
@@ -120,9 +120,9 @@ angular.module('App')
       }
       return null;
     };
-    this.getPatients = function(){
-      return $resource(baseURL+"registration/:id",null,  {'update':{method:'PUT' }});
-     };
+    // this.getPatients = function(){
+    //   return $resource(baseURL+"registration/:id",null,  {'update':{method:'PUT' }});
+    //  };
   }])
 // use factory/service to interact with the database n inject that in controller
 
