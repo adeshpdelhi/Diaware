@@ -7,9 +7,10 @@
         <ul class="nav navbar-nav">
             <li ng-class="{active: stateis('app.home')}"><a ui-sref="app">
                 <span class="glyphicon glyphicon-home"
-                aria-hidden="true"></span> Home</a></li>
+                aria-hidden="true"></span> Home</a>
+			</li>
 
-                <li ng-class="{active: stateis('app.registration')}" uib-dropdown on-toggle="toggled(open)">
+             <li ng-class="{active: stateis('app.registration')}" uib-dropdown on-toggle="toggled(open)">
                   <a style="cursor: pointer; display: block;" class="simple-dropdown" uib-dropdown-toggle >
                     <span class="glyphicon glyphicon-user"
                     aria-hidden="true"></span> Registration
@@ -22,6 +23,20 @@
                   </li>
               </ul>
           </li>
+		  
+		 <li ng-class="{active: stateis('app.billing')}" uib-dropdown on-toggle="toggled(open)">
+			<a style="cursor: pointer; display: block;" class="simple-dropdown" uib-dropdown-toggle>
+				<span class="glyphicon glyphicon-usd"
+				aria-hidden="true"></span> Billing
+			</a>
+			<ul class="dropdown-menu" uib-dropdown-menu  aria-labelledby="simple-dropdown">
+            <li>
+              <a ui-sref="app.choosePatient({callback:'billing.newbill'})">New Bill</a>
+              <a ui-sref="app.billing.viewbill">View/Edit Bill</a>
+
+			</li>
+			</ul>
+		</li>
 
 
           <li ng-class="{active: stateis('app.dialysis_care_plan')}"><a ui-sref="app.choosePatient({callback:'dialysis_care_plan'})">
@@ -43,19 +58,7 @@
           </ul>
       </li>
 
-      <li ng-class="{active: stateis('app.billing')}" uib-dropdown on-toggle="toggled(open)">
-          <a style="cursor: pointer; display: block;" class="simple-dropdown" uib-dropdown-toggle>
-            <span class="glyphicon glyphicon-usd"
-            aria-hidden="true"></span> Billing
-        </a>
-        <ul class="dropdown-menu" uib-dropdown-menu  aria-labelledby="simple-dropdown">
-            <li>
-              <a ui-sref="app.choosePatient({callback:'billing.newbill'})">New Bill</a>
-              <a ui-sref="app.billing.viewbill">View/Edit Bill</a>
-
-          </li>
-      </ul>
-  </li>
+      
 
 
 </ul>
@@ -63,7 +66,7 @@
     <li ng-show="loggedIn">
         <a>{{centre}}</a>
     </li>
-    <li ng-show="loggedIn">
+    <li class="loggedin" ng-show="loggedIn">
         <a>{{username}}</a>
     </li>
     <li ng-show="loggedIn">

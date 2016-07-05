@@ -3,24 +3,33 @@
   table{
     table-layout: fixed;
     width: 200px;
+    background-color:#FAEBFF;
   }
 
   th, td {
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     overflow: hidden;
     width: 100px;
-  }
-  th, td
-  {
+    height: 40px;
+    padding: 15px;
     text-align : center;
+  }
+  tr:nth-child(even) {background-color: #FCF5FF}
+  tr:hover{
+    background-color: #F5E6FA
+  }
+  th {
+    /*background-color: #4CAF50;*/
+    background-color: #003399;
+
+    color: white;
   }
   body
   {
     line-height: 1.6em;
   }
 
-
-  #box-table-b
+ /* #box-table-b
   {
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
     font-size: 12px;
@@ -47,14 +56,14 @@
     background: #e8edff; 
     border-right: 1px solid #aabcfe;
     border-left: 1px solid #aabcfe;
-    color: #669;
+    color: #669;*/
   }
 </style>
 <div class="container">
-<div class="row">
-    <form class="form-horizontal" role="form">
+  <div class="row row-content">
+    <form class="form-horizontal col-sm-10" role="form">
       <div class="table-responsive">
-        <table id="box-table-b">
+        <table id="box-table-b" class="table table-bordered">
           <thead>
             <tr>
               <th>TIME</th>
@@ -80,10 +89,10 @@
         </table>
       </div>
 
-      <div class="form-group">
-        <div class="col-sm-offset-4 col-sm-8">
-          <button type="submit" class="btn btn-primary">Save</button>
-        </div>
+      <div class="form-group" style="padding-top:50px;"">
+        <!-- <div class="col-sm-push-8 col-sm-2  "> -->
+        <button type="submit" class="btn btn-primary col-sm-push-11 col-sm-1" >Save</button>
+        <!-- </div> -->
       </div>
     </form>
   </div>
