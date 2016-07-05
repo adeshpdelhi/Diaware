@@ -57,9 +57,9 @@ exports.verifyLoggedIn = function(req, res, next){
 		next();
 	else
 	{
-        var err = new Error('Not logged in');
-        err.status = 403;
-        return next(err);
+		var err = new Error('Not logged in');
+		err.status = 403;
+		return next(err);
 	}
 }
 
@@ -70,17 +70,17 @@ exports.verifyAdmin = function(req, res, next){
 				next();
 			else
 			{
-		        var err = new Error('Not an admin');
-		        err.status = 403;
-		        return next(err);
+				var err = new Error('Not an admin');
+				err.status = 403;
+				return next(err);
 			}
 		})
 	}
 	else
 	{
-        var err = new Error('Not even logged in');
-        err.status = 403;
-        return next(err);
+		var err = new Error('Not even logged in');
+		err.status = 403;
+		return next(err);
 	}
 }
 
@@ -91,17 +91,17 @@ exports.verifyManager = function(req, res, next){
 				next();
 			else
 			{
-		        var err = new Error('Not a manager');
-		        err.status = 403;
-		        return next(err);
+				var err = new Error('Not a manager');
+				err.status = 403;
+				return next(err);
 			}
 		})
 	}
 	else
 	{
-        var err = new Error('Not even logged in');
-        err.status = 403;
-        return next(err);
+		var err = new Error('Not even logged in');
+		err.status = 403;
+		return next(err);
 	}
 }
 
@@ -112,17 +112,17 @@ exports.verifyClinical = function(req, res, next){
 				next();
 			else
 			{
-		        var err = new Error('Not a clinical');
-		        err.status = 403;
-		        return next(err);
+				var err = new Error('Not a clinical');
+				err.status = 403;
+				return next(err);
 			}
 		})
 	}
 	else
 	{
-        var err = new Error('Not even logged in');
-        err.status = 403;
-        return next(err);
+		var err = new Error('Not even logged in');
+		err.status = 403;
+		return next(err);
 	}
 }
 
@@ -133,50 +133,16 @@ exports.verifyIncharge = function(req, res, next){
 				next();
 			else
 			{
-		        var err = new Error('Not an incharge');
-		        err.status = 403;
-		        return next(err);
+				var err = new Error('Not an incharge');
+				err.status = 403;
+				return next(err);
 			}
 		})
 	}
 	else
 	{
-        var err = new Error('Not even logged in');
-        err.status = 403;
-        return next(err);
+		var err = new Error('Not even logged in');
+		err.status = 403;
+		return next(err);
 	}
 }
-
-// exports.VerifyOrdinaryUser = function(req, res, next) {
-
-// 	if (!req.signedCookies.username) {
-// 		var authHeader = req.headers.authorization;
-// 		if (!authHeader) {
-// 			var err = new Error('You are not authenticated!');
-// 			err.status = 401;
-// 			next(err);
-// 			return;
-// 		}
-// 		var auth = new Buffer(authHeader.split(' ')[1], 'base64').toString().split(':');
-// 		var user = auth[0];
-// 		var pass = auth[1];
-// 		if (user == 'admin' && pass == 'password') {
-// 			res.cookie('user','admin',{signed: true});
-//             next(); // authorized
-//         } else {
-//         	var err = new Error('You are not authenticated!');
-//         	err.status = 401;
-//         	next(err);
-//         }
-//     }
-//     else {
-//     	if (req.signedCookies.user === 'admin') {
-//     		next();
-//     	}
-//     	else {
-//     		var err = new Error('You are not authenticated!');
-//     		err.status = 401;
-//     		next(err);
-//     	}
-//     }
-// };
