@@ -52,24 +52,100 @@ exports.register = function(req, res){
 	}
 }
 
+exports.verifyLoggedIn = function(req, res, next){
+	if(req.signedCookies.username)
+		next();
+	else
+	{
+        var err = new Error('Not logged in');
+        err.status = 403;
+        return next(err);
+	}
+}
 
-exports.verifyAdmin = function(req){
+exports.verifyAdmin = function(req, res, next){
 	if(req.signedCookies.username){
 		users.findOne({where :{username: req.signedCookies.username}}).then(function(user){
 			if(user.admin==true)
-				return true;
+				next();
 			else
 			{
-	    		return false;
+		        var err = new Error('Not an admin');
+		        err.status = 403;
+		        return next(err);
 			}
 		})
 	}
 	else
 	{
-		return false;
+        var err = new Error('Not even logged in');
+        err.status = 403;
+        return next(err);
 	}
 }
 
+exports.verifyManager = function(req, res, next){
+	if(req.signedCookies.username){
+		users.findOne({where :{username: req.signedCookies.username}}).then(function(user){
+			if(user.manager==true)
+				next();
+			else
+			{
+		        var err = new Error('Not a manager');
+		        err.status = 403;
+		        return next(err);
+			}
+		})
+	}
+	else
+	{
+        var err = new Error('Not even logged in');
+        err.status = 403;
+        return next(err);
+	}
+}
+
+exports.verifyClinical = function(req, res, next){
+	if(req.signedCookies.username){
+		users.findOne({where :{username: req.signedCookies.username}}).then(function(user){
+			if(user.clinical==true)
+				next();
+			else
+			{
+		        var err = new Error('Not a clinical');
+		        err.status = 403;
+		        return next(err);
+			}
+		})
+	}
+	else
+	{
+        var err = new Error('Not even logged in');
+        err.status = 403;
+        return next(err);
+	}
+}
+
+exports.verifyIncharge = function(req, res, next){
+	if(req.signedCookies.username){
+		users.findOne({where :{username: req.signedCookies.username}}).then(function(user){
+			if(user.incharge==true)
+				next();
+			else
+			{
+		        var err = new Error('Not an incharge');
+		        err.status = 403;
+		        return next(err);
+			}
+		})
+	}
+	else
+	{
+        var err = new Error('Not even logged in');
+        err.status = 403;
+        return next(err);
+	}
+}
 
 // exports.VerifyOrdinaryUser = function(req, res, next) {
 

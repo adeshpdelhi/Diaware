@@ -3,13 +3,7 @@ var router = express.Router();
 var auth = require('../../config/auth');
 
 
-router.post('/', function(req, res) {
-    if(auth.verifyAdmin(req) == false)
-    {
-      res.end('Not admin');
-      console.log('not an admin');
-      return;
-    }
+router.post('/', auth.verifyLoggedIn, auth.verifyAdmin, function(req, res) {
     console.log('Admin logged');
     auth.register(req,res);
 });
