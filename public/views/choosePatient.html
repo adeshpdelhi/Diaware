@@ -1,5 +1,5 @@
 <div class="container" ng-controller="ChoosePatientController">
-    <div class="row row-content col-sm-8 col-sm-pull-2 col-sm-push-2">
+    <div class="row row-content col-sm-10 col-sm-pull-1 col-sm-push-1">
         <!-- <div id="Registerbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">  -->
         <div class="panel" >
             <div class="panel-heading">
@@ -12,17 +12,17 @@
                  
                     <div class="form-group" ng-class="{'has-error': choosePatientForm.contactNumber.$error.number || ((choosePatientForm.contactNumber.$error.minlength || choosePatientForm.contactNumber.$error.maxlength) && choosePatientForm.contactNumber.$dirty)}" required>
                         <label for="name" class="col-sm-1 control-label">Name</label>                        
-                        <div class="col-sm-2">
-                            <input  type="text" class="form-control" id="name" name="name" ng-model="patient.patientName" ng-required="!(patient.patientName || patient.patientId || patient.patientContact)">
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="name" name="name" ng-model="patient.patientName" ng-required="!(patient.patientName || patient.patientId || patient.patientContact)">
                         </div>
                         <!-- ng-required="!(patientName || patientID || patientContact) -->
                         <!-- add filter option as well -->
-                        <label class="col-sm-2 control-label">ID Number</label>
+                        <label class="col-sm-1 control-label">ID</label>
                         <div class="col-sm-2">
                             <input  type="number" class="form-control" id="id" name="id" ng-model="patient.patientId">
                         </div>
                         <label for="contactNumber" class="col-sm-2 control-label">Contact Number</label>
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             <input type="number" class="form-control" id="contactNumber" name="contactNumber" ng-model="patient.patientContact" ng-minlength="10" ng-maxlength="10" placeholder="Patient Contact Number">
                             <!-- <span class="help-block" ng-show="billingForm.contactNumber.$error.required || billingForm.contactNumber.$error.number">
                                            Valid phone number is required

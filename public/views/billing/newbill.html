@@ -1,13 +1,13 @@
 <div class="container" ng-controller="NewBillController">
-    <div class="row row-content">
+    <div class="row row-content col-sm-10 col-sm-pull-1 col-sm-push-1">
         <!-- <div id="Registerbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">  -->
-        <div class="panel panel-info" style="text-align:center;">
+        <div class="panel" style="text-align:center;">
             <div class="panel-heading">
                 <div class="panel-title"><b>NEW BILL</b></div>
                 <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
             </div>     
 
-            <div style="padding-top:30px; " class="panel-body bg-warning" >
+            <div style="padding-top:30px; " class="panel-body" >
                 <div class="row col-sm-12">
                     <div class="media">
                         <div class="media-body media-left media-middle">
@@ -40,7 +40,7 @@
                                     <td width="30%">{{ bill.product }}</td>
                                     <td width="15%">{{ bill.quantity }}</td>
                                     <td width="15%">{{ bill.cost }}</td>
-                                    <td width="5%"><button type="button" class="btn btn-danger btn-circle" ng-click="removeEntry(bill.transactionId)" ng-show="!bill.paid"><span class="glyphicon glyphicon-remove"></span></button></td>
+                                    <td width="5%"><button type="button" class="btn btn-danger btn-circle btn-lg" ng-click="removeEntry(bill.transactionId)" ng-show="!bill.paid"><span class="glyphicon glyphicon-remove"></span></button></td>
                                 </tr>    
                                 <!-- <a ui-sref="#" ng-model=""> -->
                             </tbody>
@@ -83,7 +83,7 @@
                             </div>
                         </div>
                         <div ng-show="basicSelectionComplete">
-                            <hr>
+                            <hr style="border-top:1px solid rgb(220,220,220);">
                             <div class="form-group">
                                 <label for="transactionType" class="control-label col-sm-2">Transaction Type</label>
                                 <select ng-model="bill.transactionType" class="col-sm-2" ng-change ="changeState(4)" ng-options = "type.value as type.text for type in transactionTypes" required >
@@ -99,7 +99,7 @@
                                     <span ng-show="billingForm.product.$error.required && !billingForm.product.$pristine" class="help-block">Your First Name is required                     
                                     </span>    
 
-                                    <label for="qty" class="control-label col-sm-2">Quantity</label>
+                                    <label for="qty" class="control-label col-sm-1">Quantity</label>
                                     <div class="col-sm-2">
                                         <input  type="number" name="qty" id="qty" ng-model="bill.quantity" ng-init>    
                                     </div>
@@ -110,7 +110,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary col-sm-2 col-sm-push-10" ng-click="submit()" ng-disabled="billingForm.$invalid">Make Payment</button>
+                                    <button type="submit" class="btn btn-primary col-sm-2 col-sm-push-8" ng-click="submit()" ng-disabled="billingForm.$invalid">Make Payment</button>
                                 </div>
                                 <!-- <p>{{bill.transactionId}}, {{bill.transactionType}}, {{bill.product}}, {{bill.quantity}}, {{bill.cost}}</p> -->
                             </div>
