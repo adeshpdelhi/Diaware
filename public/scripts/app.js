@@ -138,11 +138,20 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap'])
                 }
             })
             .state('app.billing.viewbill',{
-                url:'viewbill',
+                url:'viewbill/',
                 views:{
                     'content@':{
                         templateUrl:'views/billing/viewbill.html',
                         controller:'ViewBillController'
+                    }
+                }
+            })
+            .state('app.billing.viewbill.details',{
+                url:'details',
+                views:{
+                    'content@':{
+                        templateUrl:'views/billing/viewBillDetails.html',
+                        controller:'ViewBillDetailsController'
                     }
                 }
             })

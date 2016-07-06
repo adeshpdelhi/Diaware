@@ -43,32 +43,8 @@ angular.module('App')
         $state.go('app', {}, {reload: true});
     };
 }])
-
 .controller('FooterController', ['$scope', '$state', 'authorize', function ($scope, $state, authorize) {
     $scope.loggedIn = authorize.isLoggedIn();
-}])
-
-.controller('ClinicalEventController',['$scope','patientFactory','ClinicalEventsFactory', '$stateParams','choosePatientFactory', function($scope,patientFactory,ClinicalEventsFactory, $stateParams,choosePatientFactory){
-		$scope.events=[];
-		$scope.event = {
-			date:'',
-			clinicaldetails:"",
-			comments:""
-		};
-		
-		$scope.saveEvent=function(){
-			$scope.events.push($scope.event);
-			console.log($scope.event);
-			ClinicalEventsFactory.updateEvents($scope.events);
-			$scope.clinicaleventForm.$setPristine();
-			$scope.event = {
-				date:'',
-				clinicaldetails:"",
-				comments:""
-	        };
-		};
-		
-
 }])
     .controller('ChoosePatientController',['$scope','patientFactory','choosePatientFactory','$state','$stateParams', function($scope,patientFactory, choosePatientFactory, $state, $stateParams){
         $scope.patient = {
@@ -76,8 +52,15 @@ angular.module('App')
             name:"",
             contact:""
         };
-        var pats= patientFactory.getPatients();
-        $scope.patients = patientFactory.getPatients();
+        patientFactory.getPatients().query(
+            function(response){
+                console.log(response[0]);
+                $scope.patients = response;        
+            },
+            function(response){
+                console.log("Error" + response.status + " " + response.statusText);
+            }
+        );
         $scope.redirect = function(id){
         	choosePatientFactory.setPatient(id);
         	var callback = $stateParams.callback;
@@ -85,42 +68,5 @@ angular.module('App')
         };
     }])
 
- .controller('ViewRegistrationController',['$scope','patientFactory','choosePatientFactory', function($scope, patientFactory, choosePatientFactory){
-        $scope.patient = patientFactory.getPatient(choosePatientFactory.getChosenPatient().id);
-    }])
-
-
- .controller('NewRegistrationController',['$scope','patientFactory', function($scope, patientFactory){
-        $scope.newpatient_basic = {  patientId:'' , name: 'adesh' ,age: '' , DOB: '' , gender: '' , contact: '' , 
-							alternativeContact: '' , location: '' , address: '' , bloodGroup: '' , transplantWaitingList: '' ,
-							maritalStatus: '' , emergencyContactName: '' , emergencyContactRelationship: '' , 
-							emergencyContactMobile: '' , numberOfChildren: '' , childrenContact: '' , employementStatus: '' ,
-							officeName: '' , officeAddress: '' , otherClinicalDetails: '' , modeOfPayment: '' , refferedBy: '',
-                            doctorName: '' , viralMarketStatus: '' , centreId: '' };
-							
-		$scope.newpatient_panel = {panelId:'',patientId:'',panelPermissionDateFrom:'',panelPermissionDateTo:'',totalTmtsPermitted:'',
-									panelPermissionNumber:'',totalTmtsRemaining:'',renewalDate:'',lastModifiedBy:''};
-									
-		//$scope.newpatient_medical = {patientId:'',}
-        $scope.save_basic_details = function(){
-            // patientFactory.getPatients().query(function(patients){
-            //     patients.push($scope.newpatient);
-            //     patients.$save();
-            // });
-            $scope.newpatient.lastModifiedBy = 'adesh pandey';
-            $scope.newpatient.patientId = '123879';
-            patientFactory.getPatients().save($scope.newpatient);
-        };
-    }])
-
-
-  .controller('MonitoringController',['$scope','patientFactory','choosePatientFactory', function($scope, patientFactory, choosePatientFactory){
-       
-        $scope.patient = patientFactory.getPatient(choosePatientFactory.getChosenPatient().id);
-    }])
-	
-	.controller('DialysisCarePlanController',['$scope','patientFactory','choosePatientFactory', function($scope, patientFactory, choosePatientFactory){
-       
-        $scope.patient = patientFactory.getPatient(choosePatientFactory.getChosenPatient().id);
-    }])
+ 
 ;

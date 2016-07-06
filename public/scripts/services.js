@@ -34,8 +34,6 @@ angular.module('App')
   return patFac;
 }])
 
-
-
 .factory('authorize', ['$localStorage', function ($localStorage) {
 	
   var logged_in_user = $localStorage.get('username','');

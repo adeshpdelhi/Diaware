@@ -2,29 +2,32 @@
 
 angular.module('App')
     .controller('NewBillController',['$scope','patientFactory','billFactory', '$stateParams','dropDownFactory','choosePatientFactory', function($scope,patientFactory,billFactory, $stateParams, dropDownFactory,choosePatientFactory){
-        $scope.panelSelected = false;
-      //  $scope.patient = patientFactory.getPatient(parseInt($stateParams.id,10));
-        
-        $scope.patient = patientFactory.getPatient(choosePatientFactory.getChosenPatient().id);
-        $scope.panels = dropDownFactory.getPanels();
-        $scope.transactionTypes =  dropDownFactory.getTransactionTypes();
-        $scope.show = false;
-        $scope.basicSelectionComplete = false;
+    // auto fill panel/cash       
+        $scope.patient = patientFactory.getPatients().get({id:choosePatientFactory.getChosenPatient().id});
+
         $scope.bill = {
             transactionId:'',
-            bedType:""
+            bedType:"",
             transactionType:"",
             ledger:"",
             quantity:1,
             discount:"",
             status:"Pending",
             amount:"",
-            lastModifiedBy:""
-            patientId: $scope.patient.id;
+            lastModifiedBy:"",
+            patientId: $scope.patient.id
         };
+
+
+        $scope.panelSelected = false;
+        $scope.panels = dropDownFactory.getPanels();
+        $scope.transactionTypes =  dropDownFactory.getTransactionTypes();
+        $scope.show = false;
+        $scope.basicSelectionComplete = false;
+        
         $scope.bedSelected = false;
         $scope.changeState = function(i){
-            if(i == 1 && $scope.bed !== "") $scope.bedSelected = true;
+            if(i == 1 && $scope.bill.bedType !== "") $scope.bedSelected = true;
             if(i == 2 ){
                 if($scope.modeOfPayment === "cashless"){
                     $scope.panelSelected = true;
@@ -49,33 +52,46 @@ angular.module('App')
                 }
             }
         };
-
+        var cost = 200; // default prize ... later fetch from cost sheet;
         $scope.bill.quantity = 1 ;
-        $scope.bill.cost = 230;
+        
+        $scope.updateAmount = function(){
+            $scope.bill.amount = $scope.bill.quantity * cost;
+        }
         $scope.bills = [];
-        var trId = 0;
-        var pendingTransactions = false; 
-        $scope.submit = function(){
+        var trId = 0; // fetch from db
+        var pendingTransactions = false;
+        $scope.save = function(){
+
+        } ;
+        $scope.makePayment = function(){
             pendingTransactions = false;
             $scope.bill.transactionId = trId++;
-            $scope.bill.patientId = $scope.patient.patientId;
+            $scope.bill.patientId = $scope.patient.id;
+            $scope.bill.status = "Paid";
             if($scope.bill.transactionType !== "")
                 $scope.bills.push($scope.bill);
             console.log($scope.bill);
-            billFactory.updateBills($scope.bills);
+            for(var i = 0 ; i< $scope.bills.length; i++)
+                billFactory.getBills().save($scope.bills[i]);
 
             for (var i = $scope.bills.length - 1; i >= 0; i--) {
                 $scope.bills[i].paid = true;
             }
             $scope.bill = {
                 transactionId:'',
+                bedType:"",
                 transactionType:"",
-                product:"",
+                ledger:"",
                 quantity:1,
-                cost:230,
-                paid: false,
-                patientId:""
-            }
+                discount:"",
+                status:"Pending",
+                amount:"",
+                lastModifiedBy:"",
+                patientId: $scope.patient.id
+            };
+
+
             $scope.billingForm.$setPristine();
             $scope.panelSelected = false;
             $scope.show = false;
@@ -114,7 +130,7 @@ angular.module('App')
                 cost:230,
                 paid: false,
                 patientId: ""
-            }
+            };
             $scope.billingForm.$setPristine();
             $scope.panelSelected = false;
             $scope.show = false;

@@ -12,7 +12,7 @@
                 <div class="form-group ">
                     <label class="col-sm-3 control-label">ID Number</label>
                     <div class="col-sm-8">
-                        <input type="number" class="form-control" id="id" name="id" placeholder="Enter ID ">
+                        <input type="number" class="form-control" id="id" name="id" placeholder="Enter ID" disabled>
                     </div>
                 </div>
 
@@ -27,14 +27,14 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">DOB</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="dob" name="dob" placeholder="Enter DOB" ng-model="newpatient_basic.DOB">
+                        <input type="date" class="form-control" id="dob" name="dob" placeholder="Enter DOB" ng-model="newpatient_basic.DOB" ng-change="setAge()">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Age</label>
                     <div class="col-sm-8">
-                        <input type="number" class="form-control" id="age" name="age" placeholder="Enter Age" ng-model="newpatient_basic.age">
+                        <input type="number" class="form-control" id="age" name="age" placeholder="Enter Age" ng-model="newpatient_basic.age" disabled>
                     </div>
                 </div>
 
@@ -62,8 +62,8 @@
                     <div class="col-sm-8 ">
                         <select name="gender"  class="form-control" ng-model="newpatient_basic.gender">
                             <option value="" selected disabled>-</option>
-                            <option value="male">Male</option>
-                            <option value="female" >Female</option>
+                            <option value="Male">Male</option>
+                            <option value="Female" >Female</option>
                         </select>
                     </div>
                 </div>
@@ -84,13 +84,13 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Contact No</label>
                     <div class="col-sm-8">
-                        <input type="number" class="form-control" id="mobile_no" name="mobile_no" placeholder="Mobile number" ng-model="newpatient_basic.contact">
+                        <input type="text" class="form-control" id="mobile_no" name="mobile_no" placeholder="Mobile number" ng-model="newpatient_basic.contact">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Alternative Contact No</label>
                     <div class="col-sm-8">
-                        <input type="number" class="form-control" id="alternative_contact_no" name="alternative_contact_no" placeholder="Mobile number" ng-model="newpatient_basic.alternativeContact">
+                        <input type="text" class="form-control" id="alternative_contact_no" name="alternative_contact_no" placeholder="Mobile number" ng-model="newpatient_basic.alternativeContact">
                     </div>
                 </div>
                 <div class="form-group">
@@ -107,7 +107,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Referred By</label>                        
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="referred_by" name="relations" placeholder="Doctor name" ng-model="newpatient_basic.refferedBy">
+                        <input type="text" class="form-control" id="referred_by" name="relations" placeholder="Referred By" ng-model="newpatient_basic.referredBy">
                     </div>
                 </div>
                 <div class="form-group">
@@ -115,21 +115,21 @@
                     <div class="col-sm-3 ">
                         <select name="children"  class="form-control" ng-model="newpatient_basic.hasChildren">
                             <option value="" selected disabled>-</option>
-                            <option value="yes" >Yes</option>
-                            <option value="no" >No</option>
+                            <option value="Yes" >Yes</option>
+                            <option value="No" >No</option>
                         </select>
                     </div>
 
                     <label class="col-sm-3 control-label">Number</label>
-                    <div class="col-sm-1">
-                        <input type="number" class="form-control" id="no_of_children" name="no_of_children" ng-model="newpatient_basic.numberOfChildren" >
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="no_of_children" name="no_of_children" ng-model="newpatient_basic.numberOfChildren" min="0">
                     </div>
 
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Children Contact No</label>
                     <div class="col-sm-8">
-                        <input type="mobile" class="form-control" id="children_contact_no" name="children_contact_no" placeholder="Children Mobile number" ng-model="newpatient_basic.childrenContact">
+                        <input type="text" class="form-control" id="children_contact_no" name="children_contact_no" placeholder="Children Mobile number" ng-model="newpatient_basic.childrenContact">
                     </div>
                 </div>
 
@@ -138,8 +138,8 @@
                     <div class="col-sm-8 ">
                         <select  class="form-control" ng-model="newpatient_basic.transplantWaitingList">
                             <option value="" selected disabled>-</option>
-                            <option value="yes" >Yes</option>
-                            <option value="no" >No</option>
+                            <option value="Yes" >Yes</option>
+                            <option value="No" >No</option>
                         </select>
                     </div>
                 </div>
@@ -174,7 +174,11 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Viral Market Status</label>                        
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="viral_market_status" name="viral_market_status" placeholder="Viral Market Status" ng-model="newpatient_basic.viralMarketStatus">
+                        <select  class="form-control" ng-model="newpatient_basic.viralMarkerStatus">
+                            <option value="" selected disabled>-</option>
+                            <option value="Yes" >Yes</option>
+                            <option value="No" >No</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -189,8 +193,8 @@
                     <div class="col-sm-8">
                         <select required name="payment_mode" class="form-control" ng-model="modeOfPayment">
                             <option value="" selected>-</option>
-                            <option value="cash" >Cash</option>
-                            <option value="panel" >Panel</option>
+                            <option value="Cash" >Cash</option>
+                            <option value="Panel" >Panel</option>
 
                         </select>
                     </div>
@@ -225,11 +229,10 @@
 
                     <label class="col-sm-3 control-label">Mobile No</label>
                     <div class="col-sm-8">
-                        <input type="mobile" class="form-control" id="emergency_mobile_no" name="emergency_mobile_no" placeholder="Mobile number" ng-model="newpatient_basic.emergencyContactMobile">
+                        <input type="text" class="form-control" id="emergency_mobile_no" name="emergency_mobile_no" placeholder="Mobile number" ng-model="newpatient_basic.emergencyContactMobile">
                     </div>
 
                 </div>
-
 
                 <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-10">
