@@ -1,11 +1,6 @@
 /* jshint indent: 2 */
-
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('bills', {
-    patientId: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
+  var bills = sequelize.define('bills', {
     transactionId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -47,4 +42,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     tableName: 'bills'
   });
+  
+  return bills;
 };
+

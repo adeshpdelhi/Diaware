@@ -31,7 +31,7 @@ app.set('secPort', port+443);
 
 var models = require('../../app/models');
 
-models.sequelize.sync().then(function () {
+models.sequelize.sync({force:true}).then(function () {
   var server = http.createServer(app).listen(app.get('port'));
   server.on('error', onError);
   server.on('listening', onListening);
