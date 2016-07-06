@@ -12,7 +12,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    panelPermissionDate: {
+    panelPermissionDateFrom: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+	panelPermissionDateTo: {
       type: DataTypes.DATE,
       allowNull: true
     },

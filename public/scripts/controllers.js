@@ -230,12 +230,17 @@ angular.module('App')
 
 
  .controller('NewRegistrationController',['$scope','patientFactory', function($scope, patientFactory){
-        $scope.newpatient = {  patientId:'' , name: 'adesh' ,age: '' , DOB: '' , gender: '' , contact: '' , 
+        $scope.newpatient_basic = {  patientId:'' , name: 'adesh' ,age: '' , DOB: '' , gender: '' , contact: '' , 
 							alternativeContact: '' , location: '' , address: '' , bloodGroup: '' , transplantWaitingList: '' ,
 							maritalStatus: '' , emergencyContactName: '' , emergencyContactRelationship: '' , 
 							emergencyContactMobile: '' , numberOfChildren: '' , childrenContact: '' , employementStatus: '' ,
 							officeName: '' , officeAddress: '' , otherClinicalDetails: '' , modeOfPayment: '' , refferedBy: '' 
 							, doctorName: '' , viralMarketStatus: '' , centreId: '' };
+							
+		$scope.newpatient_panel = {panelId:'',patientId:'',panelPermissionDateFrom:'',panelPermissionDateTo:'',totalTmtsPermitted:'',
+									panelPermissionNumber:'',totalTmtsRemaining:'',renewalDate:'',lastModifiedBy:''}
+									
+		//$scope.newpatient_medical = {patientId:'',}
         $scope.save_basic_details = function(){
             // patientFactory.getPatients().query(function(patients){
             //     patients.push($scope.newpatient);
