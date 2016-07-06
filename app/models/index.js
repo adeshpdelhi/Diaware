@@ -30,6 +30,7 @@ Object.keys(dbmodel).forEach(function(modelName) {
 
 dbmodel.sequelize = db.sequelize;
 dbmodel.Sequelize = db.Sequelize;
-dbmodel.bills.belongsTo(dbmodel.patientDetails, {as: 'patient'});
+dbmodel.patientDetails.hasMany(dbmodel.bills,{foreignKey:'patientId'});
+dbmodel.bills.belongsTo(dbmodel.patientDetails, {foreignKey: 'patientId'});
 dbmodel.patientDetails.belongsTo(dbmodel.centres,{as:'center'});
 module.exports = dbmodel;

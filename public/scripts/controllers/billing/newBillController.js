@@ -12,12 +12,15 @@ angular.module('App')
         $scope.basicSelectionComplete = false;
         $scope.bill = {
             transactionId:'',
+            bedType:""
             transactionType:"",
-            product:"",
+            ledger:"",
             quantity:1,
-            cost:"",
-            paid:false,
-            patientId: ""
+            discount:"",
+            status:"Pending",
+            amount:"",
+            lastModifiedBy:""
+            patientId: $scope.patient.id;
         };
         $scope.bedSelected = false;
         $scope.changeState = function(i){
