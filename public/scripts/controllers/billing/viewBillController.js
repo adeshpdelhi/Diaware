@@ -1,6 +1,6 @@
 'use strict';
 angular.module('App')
-    .controller('ViewbillController',['$scope','billFactory','patientFactory', function($scope, billFactory, patientFactory){
+    .controller('ViewBillController',['$scope','billFactory','patientFactory', function($scope, billFactory, patientFactory){
         $scope.billsJoinedPatients = billFactory.getBills();
         console.log($scope.billsJoinedPatients[0]);
         var patients = patientFactory.getPatients();
@@ -12,5 +12,6 @@ angular.module('App')
         }
         $scope.redirect = function(){
             // add code to redirect to bill details page
-        }
+        };
     }])
+;

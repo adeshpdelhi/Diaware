@@ -242,27 +242,11 @@ angular.module('App')
 	  var events=[];
 	  this.addEvent=function(event){
 		  events.push(event);
-	  }
+	  };
 	  
 	  this.updateEvents = function(event){
 		//console.log("in services.updateEvents:"+ event[0]);
 		events = events.concat(event);
-	  }
+	  };
   })
-  
-  .service('billFactory',function(){
-    var bills =[];
-    this.getBills = function(){
-      console.log("in services.getBills: "+ bills[0]);
-      return bills;
-    };
-    this.updateBills = function(bill){
-      console.log("in services.updateBills:"+ bill[0]);
-      bills = bills.concat(bill);
-    }
-    this.addBill = function(bill){
-      bills.push(bill);
-    }
-  })
-
-;
+  ;

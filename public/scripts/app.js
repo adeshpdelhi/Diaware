@@ -133,7 +133,7 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap'])
                 views:{
                     'content@':{
                         templateUrl:'views/billing/newbill.html',
-                        controller:'NewbillController'
+                        controller:'NewBillController'
                     }
                 }
             })
@@ -142,7 +142,7 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap'])
                 views:{
                     'content@':{
                         templateUrl:'views/billing/viewbill.html',
-                        controller:'ViewbillController'
+                        controller:'ViewBillController'
                     }
                 }
             })

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('App')
-    .controller('NewbillController',['$scope','patientFactory','billFactory', '$stateParams','dropDownFactory','choosePatientFactory', function($scope,patientFactory,billFactory, $stateParams, dropDownFactory,choosePatientFactory){
+    .controller('NewBillController',['$scope','patientFactory','billFactory', '$stateParams','dropDownFactory','choosePatientFactory', function($scope,patientFactory,billFactory, $stateParams, dropDownFactory,choosePatientFactory){
         $scope.panelSelected = false;
       //  $scope.patient = patientFactory.getPatient(parseInt($stateParams.id,10));
         
@@ -18,10 +18,10 @@ angular.module('App')
             cost:"",
             paid:false,
             patientId: ""
-        }
+        };
         $scope.bedSelected = false;
         $scope.changeState = function(i){
-            if(i == 1 && $scope.bed != "") $scope.bedSelected = true;
+            if(i == 1 && $scope.bed !== "") $scope.bedSelected = true;
             if(i == 2 ){
                 if($scope.modeOfPayment === "cashless"){
                     $scope.panelSelected = true;
@@ -31,8 +31,8 @@ angular.module('App')
                     $scope.panelSelected = false;
                 }
             }
-            if(i == 3 && $scope.panel != "" && $scope.panelSelected) $scope.basicSelectionComplete = true;
-            if(i == 4 && $scope.bill.transactionType != ""){
+            if(i == 3 && $scope.panel !== "" && $scope.panelSelected) $scope.basicSelectionComplete = true;
+            if(i == 4 && $scope.bill.transactionType !== ""){
                 $scope.show= true;
                 switch($scope.bill.transactionType){
                     case "dialysis":$scope.dropDown = dropDownFactory.getDialysis();
@@ -45,10 +45,10 @@ angular.module('App')
                                     break;
                 }
             }
-        }
+        };
 
         $scope.bill.quantity = 1 ;
-        $scope.bill.cost = 230
+        $scope.bill.cost = 230;
         $scope.bills = [];
         var trId = 0;
         var pendingTransactions = false; 
@@ -82,7 +82,7 @@ angular.module('App')
             $scope.bed = "";
             // $scope.bills = [];
 
-        }
+        };
         $scope.check = function(){
             // console.log($scope.bill.transactionType + " " + $scope.bills.length);
             // 
@@ -91,13 +91,13 @@ angular.module('App')
                     if($scope.bill.transactionType === "") return true;
                     else return false;      
                 }
-        }
+        };
         $scope.removeEntry = function(id){
             for (var i = $scope.bills.length - 1; i >= 0; i--) {
                 if($scope.bills[i].transactionId == id)
                     $scope.bills.splice(i,1);
             }
-        }
+        };
         $scope.add = function(){
             pendingTransactions = true;
             $scope.bill.transactionId = trId++;
@@ -119,7 +119,10 @@ angular.module('App')
             $scope.bedSelected = false;
             $scope.modeOfPayment = "";
             $scope.bed = "";
-        }
+        };
+
+    }])    
+    .controller('BillingHomeController',['$scope', function($scope){
 
     }])
     

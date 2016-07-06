@@ -12,7 +12,7 @@ billingRouter.route('/')
     
     console.log('procesing get');
     console.log("sending "+db.bills.findAll());
-    console.log(db.bills.findAll({include: [User]}));
+    console.log(db.bills.findAll({include: [db.patientDetails]}));
     res.end('billingRouter working');
     //res.end(patientDetails.findAll());
 })
