@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 
-var db = require('../models');
+var db = require('../../models');
 // var verify = require('../verify');
 
 var billingRouter = express.Router();
