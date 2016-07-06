@@ -115,7 +115,7 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap'])
                 views:{
                     'content@':{
                         templateUrl:'views/billing/home.html',
-                        controller:'BillingHomeController'
+                        // controller:'BillingHomeController'
                     }
                 }
             })
@@ -133,7 +133,7 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap'])
                 views:{
                     'content@':{
                         templateUrl:'views/billing/newbill.html',
-                        controller:'NewBillController'
+                        controller:'NewbillController'
                     }
                 }
             })
@@ -142,7 +142,7 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap'])
                 views:{
                     'content@':{
                         templateUrl:'views/billing/viewbill.html',
-                        controller:'ViewBillController'
+                        controller:'ViewbillController'
                     }
                 }
             })
