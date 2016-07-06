@@ -48,6 +48,28 @@ angular.module('App')
     $scope.loggedIn = authorize.isLoggedIn();
 }])
 
+.controller('ClinicalEventController',['$scope','patientFactory','ClinicalEventsFactory', '$stateParams','choosePatientFactory', function($scope,patientFactory,ClinicalEventsFactory, $stateParams,choosePatientFactory){
+		$scope.events=[];
+		$scope.event = {
+			date:'',
+			clinicaldetails:"",
+			comments:""
+		}
+		
+			$scope.saveEvent=function(){
+				$scope.events.push($scope.event);
+				console.log($scope.event);
+				ClinicalEventsFactory.updateEvents($scope.events);
+				$scope.clinicaleventForm.$setPristine();
+				$scope.event = {
+					date:'',
+					clinicaldetails:"",
+					comments:""
+		}
+			};
+			
+
+}])
 .controller('NewBillController',['$scope','patientFactory','billFactory', '$stateParams','dropDownFactory','choosePatientFactory', function($scope,patientFactory,billFactory, $stateParams, dropDownFactory,choosePatientFactory){
         $scope.panelSelected = false;
       //  $scope.patient = patientFactory.getPatient(parseInt($stateParams.id,10));
@@ -208,7 +230,17 @@ angular.module('App')
 
 
  .controller('NewRegistrationController',['$scope','patientFactory', function($scope, patientFactory){
-        $scope.newpatient = {   patientId:'' , name: 'adesh' ,age: '' , DOB: '' , gender: '' , contact: '' , alternativeContact: '' , location: '' , address: '' , bloodGroup: '' , transplantWaitingList: '' , maritalStatus: '' , emergencyContactName: '' , emergencyContactRelationship: '' , emergencyContactMobile: '' , numberOfChildren: '' , childrenContact: '' , employementStatus: '' , officeName: '' , officeAddress: '' , otherClinicalDetails: '' , modeOfPayment: '' , refferedBy: '' , doctorName: '' , viralMarketStatus: '' , centreId: '' };
+        $scope.newpatient_basic = {  patientId:'' , name: 'adesh' ,age: '' , DOB: '' , gender: '' , contact: '' , 
+							alternativeContact: '' , location: '' , address: '' , bloodGroup: '' , transplantWaitingList: '' ,
+							maritalStatus: '' , emergencyContactName: '' , emergencyContactRelationship: '' , 
+							emergencyContactMobile: '' , numberOfChildren: '' , childrenContact: '' , employementStatus: '' ,
+							officeName: '' , officeAddress: '' , otherClinicalDetails: '' , modeOfPayment: '' , refferedBy: '' 
+							, doctorName: '' , viralMarketStatus: '' , centreId: '' };
+							
+		$scope.newpatient_panel = {panelId:'',patientId:'',panelPermissionDateFrom:'',panelPermissionDateTo:'',totalTmtsPermitted:'',
+									panelPermissionNumber:'',totalTmtsRemaining:'',renewalDate:'',lastModifiedBy:''}
+									
+		//$scope.newpatient_medical = {patientId:'',}
         $scope.save_basic_details = function(){
             // patientFactory.getPatients().query(function(patients){
             //     patients.push($scope.newpatient);
