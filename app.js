@@ -38,8 +38,8 @@ app.use(cookieParser('blOOdyhabanerO:#404'));
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
-app.use('/', routes);
-app.use('/api',apiRouter);
+app.use('/', routes); // frontend
+app.use('/api',apiRouter); //db
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
