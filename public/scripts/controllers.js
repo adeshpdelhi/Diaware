@@ -211,9 +211,9 @@ angular.module('App')
     }])
     .controller('ChoosePatientController',['$scope','patientFactory','choosePatientFactory','$state','$stateParams', function($scope,patientFactory, choosePatientFactory, $state, $stateParams){
         $scope.patient = {
-            id:null,
-            name:null,
-            contact:null
+            id:"",
+            name:"",
+            contact:""
         }
         var pats= patientFactory.getPatients();
         $scope.patients = patientFactory.getPatients();

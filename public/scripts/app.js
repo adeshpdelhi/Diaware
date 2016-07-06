@@ -114,7 +114,7 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap'])
                 url:"billing/",
                 views:{
                     'content@':{
-                        templateUrl:'views/billing/home.html',
+                        templateUrl:'views/billing/home.html'
                         // controller:'BillingHomeController'
                     }
                 }

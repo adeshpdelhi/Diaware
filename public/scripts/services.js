@@ -96,16 +96,16 @@ angular.module('App')
 .service('patientFactory', ['$resource', 'baseURL', function($resource,baseURL) {
     var patients = [
       {
-        patientId:1,
+        patientId:"JP/16/1",
         patientName:"aishwarya",
         patientContact:1234567890
       },{
-        patientId:2,
+        patientId:"AP/16/2",
         patientName: "adesh",
         patientContact:9876543210
       },
       {
-        patientId:3,
+        patientId:"JP/16/3",
         patientName:"rishabh",
         patientContact:8765432109
       }
