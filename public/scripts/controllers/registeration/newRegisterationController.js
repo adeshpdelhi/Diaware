@@ -1,36 +1,44 @@
 'use strict';
-// var db = require('../../../../app/models');
 angular.module('App')
- .controller('NewRegistrationController',['$scope','patientFactory','authorize', function($scope, patientFactory, authorize){
-        $scope.newpatient_basic = {  id:'' , name: '' ,age: '' , DOB: '' , gender: '' , contact: '' , 
-							alternativeContact: '' , location: '' , address: '' , bloodGroup: '' , transplantWaitingList: '' ,
-							maritalStatus: '' , emergencyContactName: '' , emergencyContactRelationship: '' , 
-							emergencyContactMobile: '' , numberOfChildren: '' , childrenContact: '' , employementStatus: '' ,
-							officeName: '' , officeAddress: '' , otherClinicalDetails: '' , modeOfPayment: '' , refferedBy: '',
-                            doctorName: '' , viralMarketStatus: '' , centreId: '' };
+ 	.controller('NewRegistrationController',['$scope','patientFactory','backendFactory','authorize', function($scope,patientFactory,  backendFactory, authorize){
+ 		var counter = 0;
+ 		var centre = authorize.getCentre();
+        backendFactory.getCentres().get({id:authorize.getCentre()})
+        	.$promise.then(function(data){
+        		counter = data.patientCount;
+       			},function(response){
+       				console.log("Error" + response.status +" " + response.statusText);
+        		}
+        	);
 
-        // $scope.newpatient_basic=;
+        $scope.newpatient_basic = {  id:null , name: null ,age: null , DOB: null , gender: null , contact: null , 
+							alternativeContact: null , location: null , address: null , bloodGroup: null , transplantWaitingList: null ,
+							maritalStatus: null , emergencyContactName: null , emergencyContactRelationship: null , 
+							emergencyContactMobile: null , numberOfChildren: 0 , childrenContact: null , employementStatus: null ,
+							officeName: null , officeAddress: null , otherClinicalDetails: null , modeOfPayment: null , refferedBy: null,
+                            doctorName: null , viralMarketStatus: null , centreId: null };
 
 		var currrentYear = (new Date()).getFullYear();	
+		
 		$scope.setAge = function(){
 			console.log($scope.newpatient_basic.DOB);
-			// var	dobyear = parseInt($scope.newpatient_basic.DOB.split("/")[2]);
 			var dobyear = $scope.newpatient_basic.DOB.getFullYear();
 			console.log(dobyear);
 			$scope.newpatient_basic.age = currrentYear - dobyear;		
 		};
-		// $scope.newpatient_panel = {panelId:'',patientId:'',panelPermissionDateFrom:'',panelPermissionDateTo:'',totalTmtsPermitted:'',
-									// panelPermissionNumber:'',totalTmtsRemaining:'',renewalDate:'',lastModifiedBy:''};
-									
-		var counter = 2; // fetch patient count from db
+											
+        $scope.save_basic_details = function(){ 
 
-        $scope.save_basic_details = function(){ // lastModified by the person logged in
             $scope.newpatient_basic.lastModifiedBy = authorize.getUsername();
             console.log($scope.newpatient_basic.lastModifiedBy);
-			$scope.newpatient_basic.centreId = authorize.getCentre();
+
+			$scope.newpatient_basic.centreId = centre;
 			console.log($scope.newpatient_basic.centreId);
-			$scope.newpatient_basic.id = authorize.getCentre() + "-"+ currrentYear.toString() + "-"+ counter.toString();
+			
+			$scope.newpatient_basic.id = centre + "-"+ currrentYear.toString() + "-"+ counter.toString();
 			console.log($scope.newpatient_basic);
+			backendFactory.getCentres().update({id:centre},{patientCount: counter+1});
+
 			if($scope.newpatient_basic.emergencyContactMobile === "") $scope.newpatient_basic.emergencyContactMobile = null;
 			if($scope.newpatient_basic.contact === "") $scope.newpatient_basic.contact = null;
 			if($scope.newpatient_basic.alternativeContact === "") $scope.newpatient_basic.alternativeContact = null;

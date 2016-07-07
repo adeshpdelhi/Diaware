@@ -1,7 +1,7 @@
 'use strict';
 angular.module('App')
     .controller('ViewBillController',['$scope','billFactory','patientFactory','$state', function($scope, billFactory, patientFactory,$state){
-        $scope.bills = {};
+        $scope.bills = [];
         billFactory.getBills().query(function(response){
             $scope.bills = response;
         });

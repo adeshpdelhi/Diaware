@@ -1,8 +1,10 @@
 'use strict';
 
 angular.module('App')
-    .controller('NewBillController',['$scope','patientFactory','billFactory', '$stateParams','dropDownFactory','choosePatientFactory', function($scope,patientFactory,billFactory, $stateParams, dropDownFactory,choosePatientFactory){
-    // auto fill panel/cash       
+    .controller('NewBillController',['$scope','patientFactory','billFactory', '$stateParams','dropDownFactory','choosePatientFactory','authorize', function($scope,patientFactory,billFactory, $stateParams, dropDownFactory,choosePatientFactory, authorize){
+    // auto fill panel/cash     
+    // add discount autofill from db and editable input box
+    // add other fields to display on top   
         $scope.patient = patientFactory.getPatients().get({id:choosePatientFactory.getChosenPatient().id});
 
         $scope.bill = {
@@ -24,8 +26,8 @@ angular.module('App')
         $scope.transactionTypes =  dropDownFactory.getTransactionTypes();
         $scope.show = false;
         $scope.basicSelectionComplete = false;
-        
         $scope.bedSelected = false;
+        $scope.totalAmount = 0;        
         $scope.changeState = function(i){
             if(i == 1 && $scope.bill.bedType !== "") $scope.bedSelected = true;
             if(i == 2 ){
@@ -57,18 +59,17 @@ angular.module('App')
         
         $scope.updateAmount = function(){
             $scope.bill.amount = $scope.bill.quantity * cost;
-        }
+        };
         $scope.bills = [];
         var trId = 0; // fetch from db
         var pendingTransactions = false;
-        $scope.save = function(){
-
-        } ;
-        $scope.makePayment = function(){
+        $scope.makePayment = function(status){
             pendingTransactions = false;
             $scope.bill.transactionId = trId++;
             $scope.bill.patientId = $scope.patient.id;
-            $scope.bill.status = "Paid";
+            $scope.bill.status = status;
+            $scope.bill.lastModifiedBy = authorize.getUsername();
+
             if($scope.bill.transactionType !== "")
                 $scope.bills.push($scope.bill);
             console.log($scope.bill);
@@ -102,6 +103,7 @@ angular.module('App')
             // $scope.bills = [];
 
         };
+
         $scope.check = function(){
             // console.log($scope.bill.transactionType + " " + $scope.bills.length);
             // 
@@ -121,6 +123,7 @@ angular.module('App')
             pendingTransactions = true;
             $scope.bill.transactionId = trId++;
             $scope.bill.patientId = $scope.patient.patientId;
+            $scope.totalAmount += $scope.bill.amount;
             $scope.bills.push($scope.bill);
             $scope.bill = {
                 transactionId:'',

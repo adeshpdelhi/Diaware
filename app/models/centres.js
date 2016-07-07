@@ -21,6 +21,21 @@ module.exports = function(sequelize, DataTypes) {
     },
     accessLinesAvailable:{
       type:DataTypes.STRING(500),
+      allowNull:true,
+      get:function(){
+        if(this.getDataValue('accessLinesAvailable') != null)
+          return this.getDataValue('accessLinesAvailable').split(',');
+        else return this.getDataValue('accessLinesAvailable');
+      },
+      set:function(val){
+        var value =val[0], split="/";
+        for(var i = 1; i< val.length;i++) 
+          value = value.concat(split,val[i]);
+        this.setDataValue('accessLinesAvailable',value);
+      }
+    },
+    patientCount:{
+      type:DataTypes.INTEGER(11),
       allowNull:true
     }
   }, {

@@ -45,6 +45,9 @@
                                 <!-- <a ui-sref="#" ng-model=""> -->
                             </tbody>
                         </table>
+                        <label class="col-sm-offset-5 col-sm-2">Total Amount</label>
+                        <label class="col-sm-1">{{totalAmount | currency :'&#8377;'}}</label>
+
                     </div>
                     <hr/>
                 </div>
@@ -110,7 +113,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary col-sm-2 col-sm-push-8" ng-click="makePayment()" ng-disabled="billingForm.$invalid">Make Payment</button>
+                                    <button type="submit" class="btn btn-primary col-sm-2 col-sm-push-8" ng-click="makePayment('Paid')" ng-disabled="billingForm.$invalid">Make Payment</button>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary col-sm-2 col-sm-push-8" ng-click="makePayment('Pending')" ng-disabled="billingForm.$invalid">Save</button>
                                 </div>
                                 <!-- <p>{{bill.transactionId}}, {{bill.transactionType}}, {{bill.product}}, {{bill.quantity}}, {{bill.cost}}</p> -->
                             </div>

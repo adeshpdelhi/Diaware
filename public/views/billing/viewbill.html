@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="row row-content ">
+    <div class="row row-content col-sm-10 col-sm-push-1 col-sm-pull-1">
         <div class="panel" style="text-align:center;">
             <div class="panel-heading">
                 <div class="panel-title"><b>View Bill</b></div>
@@ -9,24 +9,18 @@
             <div style="padding-top:30px; text-align:center;" class="panel-body" >
                 <form class="form-horizontal" role="form" name="viewBillForm" id="viewBillForm" novalidate>
                  
-                    <div class="form-group" ng-class="{'has-error': viewBillForm.contactNumber.$error.number || ((viewBillForm.contactNumber.$error.minlength || viewBillForm.contactNumber.$error.maxlength) && viewBillForm.contactNumber.$dirty)}" required>
+                    <div class="form-group" >
                         <label for="name" class="col-sm-1 control-label">Name</label>                        
                         <div class="col-sm-2">
-                            <input  type="text" class="form-control" id="name" name="name" ng-model="patient.name" ng-required="!(patient.name || patient.id || patient.contact)">
+                            <input  type="text" class="form-control" id="name" name="name" ng-model="patient.name" >
                         </div>
-                        <!-- ng-required="!(patientName || patientID || patientContact) -->
-                        <!-- add filter option as well -->
                         <label class="col-sm-2 control-label">ID Number</label>
                         <div class="col-sm-2">
-                            <input  type="number" class="form-control" id="id" name="id" ng-model="patient.id">
+                            <input  type="text" class="form-control" id="id" name="id" ng-model="patient.id">
                         </div>
                         <label for="contactNumber" class="col-sm-2 control-label">Contact Number</label>
                         <div class="col-sm-2">
-                            <input type="number" class="form-control" id="contactNumber" name="contactNumber" ng-model="patient.contact" ng-minlength="10" ng-maxlength="10" placeholder="Patient Contact Number">
-            
-                            <span class="help-block" ng-show="((viewBillForm.contactNumber.$error.minlength || viewBillForm.contactNumber.$error.maxlength) && viewBillForm.contactNumber.$dirty) ">
-                                           Phone number should be 10 digits
-                            </span>
+                            <input type="number" class="form-control" id="contactNumber" name="contactNumber" ng-model="patient.contact" placeholder="Patient Contact Number">
                         </div>  
                     </div>
                     <hr/>
@@ -56,7 +50,6 @@
                                         <th style="text-align:center;" width="9%">Transaction ID</th>
                                         <th style="text-align:center;" width="10%">Patient ID</th>
                                         <th  style="text-align:center;" width="15%">PatientName</th>
-                                        <th  style="text-align:center;" width="10%">Patient Contact</th>
                                         <th  style="text-align:center;" width="15%">Transaction Type</th>
                                         <th  style="text-align:center;" width="20%">Product</th>
                                         <th  style="text-align:center;" width="5%">Qty</th>
@@ -65,23 +58,17 @@
                                     </tr>    
                                 </thead>
                                 <tbody style="max-height:300px;">
-                                <!-- BillFActory -->
-                                
                                 <!-- apply filter left -->
-                                <!-- ng-click="setSelected(patient)" -->
-                                 <!-- ui-sref="app.billing.newbill({id: patient.id})" -->
-                                    <tr ng-repeat = "bill in bills" style="height:2px;cursor: pointer;" class='clickable-row' ng-click="redirect(bill.transactionId)" > 
+                                    <tr ng-repeat = "bill in bills | filter: patient.id | filter: patient.name | filter: patient.contact" style="height:2px;cursor: pointer;" class='clickable-row' ng-click="redirect(bill.transactionId)" > 
                                         <td style="text-align:center;" width="9%">{{bill.transactionId}}</td>
                                         <td style="text-align:center;" width="10%">{{bill.patientDetail.id}}</td>
                                         <td style="text-align:center;" width="15%">{{bill.patientDetail.name}}</td>
-                                        <td style="text-align:center;" width="10%">{{bill.patientDetail.contact}}</td>
                                         <td style="text-align:center;" width="15%">{{bill.transactionType}}</td>
                                         <td style="text-align:center;" width="20%">{{bill.ledger}}</td>
                                         <td style="text-align:center;" width="5%">{{bill.quantity}}</td>
                                         <td style="text-align:center;" width="8%">{{bill.amount}}</td>
                                         <td style="text-align:center;" width="8%">{{bill.status}}</td>
                                     </tr>    
-                                    <!-- <a ui-sref="#" ng-model=""> -->
                                 </tbody>
                             </table>
                         </div>
