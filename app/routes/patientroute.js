@@ -5,8 +5,6 @@ var db = require('../models');
 
 var patientRouter = express.Router();
 
-var panelRouter = require('./PatientDetails/paneldetailroute');
-patientRouter.use('/patients/:id/panelDetails',panelRouter);
 
 patientRouter.use(bodyParser.json());
 //db.patientDetails.create({patientId: '12345', name: 'heya', lastModifiedBy: 'adesh'});

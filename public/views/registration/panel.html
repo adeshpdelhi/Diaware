@@ -13,7 +13,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">Panel</label>
                 <div class="col-sm-8">
-                    <select required name="cash/panel" class="form-control" ng-model="newPatient_Panel.id">
+                    <select required name="cash/panel" class="form-control" ng-model="newPatient_Panel.panelId">
                         <option value="" selected>-</option>
                         <option ng-repeat = "panel in panels" value="{{panel.id}}" >{{panel.name}}</option>
                     </select>
@@ -37,7 +37,7 @@
 
                 <label class="col-sm-1 control-label">To</label>
                 <div class="col-sm-5">
-                    <input required type="date" class="form-control" id="panel_permission_date_to" ng-model="newPatient_Panel.panelPermissionDateFrom" name="panel_permission_date_to" placeholder="">
+                    <input required type="date" class="form-control" id="panel_permission_date_to" ng-model="newPatient_Panel.panelPermissionDateTo" name="panel_permission_date_to" placeholder="">
                 </div>
             </div>
         </div>

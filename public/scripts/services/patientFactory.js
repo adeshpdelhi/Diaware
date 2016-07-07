@@ -5,6 +5,7 @@ angular.module('App')
       	return $resource(baseURL+"patients/:id",null,  {'update':{method:'PUT' }});
     };
     this.getPatientPanels = function(id){
+    	console.log(id);
     	return $resource(baseURL+"patients/:id/panelDetails/:panelId",{id:id},{
     		'update':{method:'PUT'}
     	}); 

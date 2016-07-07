@@ -13,4 +13,7 @@ apiRouter.use('/bills',billingRouter);
 apiRouter.use('/centres',centreRouter);
 apiRouter.use('/panels',panelRouter);
 
+var panelRouter = require('./PatientDetails/paneldetailroute');
+apiRouter.use('/patients/:id/panelDetails',panelRouter);
+
 module.exports = apiRouter;
