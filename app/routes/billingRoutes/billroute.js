@@ -30,7 +30,7 @@ billingRouter.route('/')
 billingRouter.route('/:id')
 .get(function(req,res,next){
     console.log('procesing get');
-    db.bills.findOne({where:{transactionId:req.params.id}},{include:[db.patientDetails]}).then(function(bill){
+    db.bills.find({where:{transactionId: parseInt(req.params.id,10)},include:[db.patientDetails]}).then(function(bill){
         console.log(JSON.stringify(bill));
         res.json(bill);
     });
@@ -39,7 +39,16 @@ billingRouter.route('/:id')
 
 })
 .put(function(req,res,next){
+	console.log(req.body);
+	db.bills.update(
+	req.body, {where:{transactionId:parseInt(req.params.id,10)}}
+	)
+	.then(function (result) { 
+		console.log(JSON.stringify(result));
+		res.end("successfully updated")
+	}, function(rejectedPromiseError){
 
+	});
 })
 ;
 

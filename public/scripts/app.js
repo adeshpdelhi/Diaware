@@ -1,5 +1,5 @@
 'use strict';
-
+//add resolve objects
 angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap'])
 .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -147,11 +147,16 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap'])
                 }
             })
             .state('app.billing.viewbill.details',{
-                url:'details',
+                url:'details/:id',
                 views:{
                     'content@':{
                         templateUrl:'views/billing/viewBillDetails.html',
-                        controller:'ViewBillDetailsController'
+                        controller:'ViewBillDetailsController',
+                        resolve:{
+                            bill:['$stateParams','billFactory', function($stateParams,billFactory){
+                                return billFactory.getBills().get({id:parseInt($stateParams.id)})
+                            }]
+                        }
                     }
                 }
             })

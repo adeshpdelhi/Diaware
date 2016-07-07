@@ -1,3 +1,41 @@
-<div>
-	<p>View bill detials </p>
+<div class="container">
+    <div class="row row-content col-sm-6 col-sm-push-3 col-sm-pull-3 ">
+
+        <div class="panel" style="text-align:center;" >
+            <div class="panel-heading">
+                <div class="panel-title"><b>Bill Details</b></div>
+                <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
+            </div>     
+
+            <div style="padding-top:30px; text-align:center;" class="panel-body" >
+				<div class="media">
+	                <div class="media-body media-left media-middle">
+	                    <label>PATIENT ID: {{bill.patientDetail.id}}</label>
+	                </div>
+	                <div class="media-right">
+	                    <a href="#"><img class="media-object img-thumbnail" height ="100" width ="100" src="images/person-default.png" alt="defaultPerson"/></a>
+	                </div>
+	            </div>	 
+	            
+	            <div> 
+	            	<ul  class="list-unstyled" ng-repeat="(key,value) in bill.patientDetail" ng-if="key=='name' ||key=='contact'||key=='alternativeContact'||key=='address'||key=='gender'">
+	                	<li class="row">
+	                		<label class="text-uppercase col-sm-6">{{key}}:</label>
+	                		<label class="text-capitalize col-sm-4">{{value}}</label>
+	                	</li>
+	                </ul>	
+                </div>           
+                <hr style="border-top:1px solid rgb(225,225,225);">
+                <ul  class="list-unstyled" ng-repeat="(key,value) in bill" ng-if="key!='patientDetail' && key != 'patientId'">
+                	<li class="row">
+                		<label class="text-uppercase col-sm-6">{{key}}:</label>
+                		<label class="text-capitalize col-sm-4" ng-if="key != 'amount' && key != 'createdAt' && key !='updatedAt'">{{value}}</label>
+                		<label class="text-capitalize col-sm-4" ng-if="key == 'amount'">{{value| currency:'&#8377;' }}</label>
+                		<label class="col-sm-4" ng-if="key == 'createdAt'|| key =='updatedAt'">{{value|date}}
+                	</li>
+                </ul>   
+                <button class="row col-sm-offset-9 col-sm-2 btn btn-primary" ng-if="bill.status=='Pending'" ng-click="updateStatus()">Paid</button>
+            </div>
+        </div>
+    </div>
 </div>

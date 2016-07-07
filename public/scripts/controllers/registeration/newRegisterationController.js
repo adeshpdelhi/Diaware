@@ -26,14 +26,16 @@ angular.module('App')
 
         $scope.save_basic_details = function(){ // lastModified by the person logged in
             $scope.newpatient_basic.lastModifiedBy = authorize.getUsername();
+            console.log($scope.newpatient_basic.lastModifiedBy);
 			$scope.newpatient_basic.centreId = authorize.getCentre();
+			console.log($scope.newpatient_basic.centreId);
 			$scope.newpatient_basic.id = authorize.getCentre() + "-"+ currrentYear.toString() + "-"+ counter.toString();
 			console.log($scope.newpatient_basic);
 			if($scope.newpatient_basic.emergencyContactMobile === "") $scope.newpatient_basic.emergencyContactMobile = null;
 			if($scope.newpatient_basic.contact === "") $scope.newpatient_basic.contact = null;
 			if($scope.newpatient_basic.alternativeContact === "") $scope.newpatient_basic.alternativeContact = null;
 			if($scope.newpatient_basic.childrenContact === "") $scope.newpatient_basic.childrenContact = null;
-
+			console.log($scope.newpatient_basic);
             patientFactory.getPatients().save($scope.newpatient_basic);
         };
     }])
