@@ -19,3 +19,5 @@ can set validation in db for accessUsed iin Pre as well
 
 set values false and true in db
 
+
+add validations/ sanity checks in registration

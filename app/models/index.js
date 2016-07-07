@@ -32,5 +32,14 @@ dbmodel.sequelize = db.sequelize;
 dbmodel.Sequelize = db.Sequelize;
 dbmodel.patientDetails.hasMany(dbmodel.bills,{foreignKey:'patientId'});
 dbmodel.bills.belongsTo(dbmodel.patientDetails, {foreignKey: 'patientId'});
-dbmodel.patientDetails.belongsTo(dbmodel.centres,{as:'center'});
+
+dbmodel.centres.hasMany(dbmodel.patientDetails,{foreignKey:'centreId'});
+dbmodel.patientDetails.belongsTo(dbmodel.centres,{foreignKey:'centreId'});
+
+dbmodel.panels.hasMany(dbmodel.panelDetails,{foreignKey:'panelId'});
+dbmodel.panelDetails.belongsTo(dbmodel.panels,{foreignKey:'panelId'});
+
+dbmodel.patientDetails.hasOne(dbmodel.panelDetails,{foreignKey:'patientId'});
+dbmodel.panelDetails.belongsTo(dbmodel.patientDetails,{foreignKey:'patientId'});
+
 module.exports = dbmodel;

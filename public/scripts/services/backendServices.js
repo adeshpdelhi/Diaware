@@ -4,5 +4,8 @@ angular.module('App')
 		this.getCentres = function(){
       		return $resource(baseURL+"centres/:id",null,  {'update':{method:'PUT' }});
      	};
+     	this.getPanels = function(){
+     		return $resource(baseURL+"panels/:panelId", null,{'update':{method:'PUT'}});
+     	}
   }])
 ;

@@ -1,6 +1,7 @@
 'use strict';
 angular.module('App')
  	.controller('NewRegistrationController',['$scope','patientFactory','backendFactory','authorize', function($scope,patientFactory,  backendFactory, authorize){
+ 		$scope.showPanel = false;
  		var counter = 0;
  		var centre = authorize.getCentre();
         backendFactory.getCentres().get({id:authorize.getCentre()})
@@ -28,7 +29,9 @@ angular.module('App')
 		};
 											
         $scope.save_basic_details = function(){ 
-
+        	console.log($scope.newpatient_basic.modeOfPayment);
+        	if($scope.newpatient_basic.modeOfPayment == 'Panel') 
+        		$scope.showPanel = true;
             $scope.newpatient_basic.lastModifiedBy = authorize.getUsername();
             console.log($scope.newpatient_basic.lastModifiedBy);
 

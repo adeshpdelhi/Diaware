@@ -1,1 +1,0 @@
-add checks in sequelize 

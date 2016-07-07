@@ -30,7 +30,6 @@ centreRouter.route('/:id')
     console.log('procesing get');
     db.centres.findOne({where:{id:req.params.id}}).then(function(centre){
         console.log(JSON.stringify(centre));
-        console.log('fuckup');
         // res.json(centre);
         res.json(centre);
     });

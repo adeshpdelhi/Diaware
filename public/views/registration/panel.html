@@ -1,5 +1,5 @@
 
-<div id="Registerbox" style="margin-top:20px;" class="mainbox col-sm-12">                    
+<div id="Registerbox" style="margin-top:20px;" class="mainbox col-sm-12" ng-controller="PanelController">             
     <div class="panel" >
         <div class="panel-heading">
             <div class="panel-title"><b>Panel Details</b></div>
@@ -7,39 +7,37 @@
         </div>     
         <div style="padding-top:30px" class="panel-body" >
 
-         <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form">
 
 
             <div class="form-group">
-                <label class="col-sm-3 control-label">Cash/Panel</label>
+                <label class="col-sm-3 control-label">Panel</label>
                 <div class="col-sm-8">
-                    <select required name="cash/panel" class="form-control">
+                    <select required name="cash/panel" class="form-control" ng-model="newPatient_Panel.id">
                         <option value="" selected>-</option>
-                        <option value="cash" >Cash</option>
-                        <option value="govt-panel" >Govt-Panel</option>
-                        <option value="tpa" >TPA</option>
+                        <option ng-repeat = "panel in panels" value="{{panel.id}}" >{{panel.name}}</option>
                     </select>
                 </div>
             </div>
 			
 			<div class="form-group">
-         <label class="col-xs-12 col-sm-3 control-label">Panel Permission No</label>
-         <div class="col-xs-5 col-sm-4 col-md-8">
-            <input required type="number" class="form-control" id="panel_permission_no" ng-model="newpatient_panel.panelPermissionNumber" name="panel_permission_no" placeholder="No of Treatments Remaining">
-        </div>
-		</div>
-			
+                <label class="col-xs-12 col-sm-3 control-label">Panel Permission No</label>
+                <div class="col-xs-5 col-sm-4 col-md-8">
+                    <input required type="number" class="form-control" id="panel_permission_no" ng-model="newPatient_Panel.panelPermissionNumber" name="panel_permission_no" placeholder="Panel Permission Number">
+                </div>
+                </div>
+	
             <div class="form-group">
                 <label class="col-sm-3 control-label">Panel Permission Date</label>
                 <div class="col-sm-9">
                   <label class="col-sm-1 control-label">From</label>
                   <div class="col-sm-5">
-                    <input required type="date" class="form-control" id="panel_permission_date_from" ng-model="newpatient_panel.panelPermissionDateFrom" name="panel_permission_date_from" placeholder="">
+                    <input required type="date" class="form-control" id="panel_permission_date_from" ng-model="newPatient_Panel.panelPermissionDateFrom" name="panel_permission_date_from" placeholder="">
                 </div>
 
                 <label class="col-sm-1 control-label">To</label>
                 <div class="col-sm-5">
-                    <input required type="date" class="form-control" id="panel_permission_date_to" ng-model="newpatient_panel.panelPermissionDateFrom" name="panel_permission_date_to" placeholder="">
+                    <input required type="date" class="form-control" id="panel_permission_date_to" ng-model="newPatient_Panel.panelPermissionDateFrom" name="panel_permission_date_to" placeholder="">
                 </div>
             </div>
         </div>
@@ -47,26 +45,26 @@
         <div class="form-group">
          <label class="col-xs-12 col-sm-3 control-label">Total Treatments Allowed</label>
          <div class="col-xs-5 col-sm-4 col-md-8">
-            <input required type="number" class="form-control" id="total_treatments_allowed" ng-model="newpatient_panel.totalTmtsPermitted" name="total_treatments_allowed" placeholder="No of Treatments">
+            <input required type="number" class="form-control" id="total_treatments_allowed" ng-model="newPatient_Panel.totalTmtsPermitted" name="total_treatments_allowed" placeholder="No of Treatments">
         </div>
     </div>
 	
 	<div class="form-group">
          <label class="col-xs-12 col-sm-3 control-label">Total Treatments Remaining</label>
          <div class="col-xs-5 col-sm-4 col-md-8">
-            <input required type="number" class="form-control" id="total_treatments_remaining" ng-model="newpatient_panel.totalTmtsRemaining" name="total_treatments_remaining" placeholder="No of Treatments Remaining">
+            <input required type="number" class="form-control" id="total_treatments_remaining" ng-model="newPatient_Panel.totalTmtsRemaining" name="total_treatments_remaining" placeholder="No of Treatments Remaining">
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-xs-12 col-sm-3 control-label">Renewal Date</label>
         <div class="col-xs-5 col-sm-4 col-md-8">
-            <input required type="date" class="form-control" id="renewal_date" name="renewal_date" ng-model="newpatient_panel.renewalDate" placeholder="">
+            <input required type="date" class="form-control" id="renewal_date" name="renewal_date" ng-model="newPatient_Panel.renewalDate" placeholder="">
         </div>
     </div>
     <div class="form-group">
     <div class="col-sm-offset-5 col-sm-10">
-            <button type="submit" class="btn btn-primary" id="panel_save">Save</button>
+            <button type="submit" class="btn btn-primary" id="panel_save" ng-click="panelSave()">Save</button>
         </div>
     </div>
 
