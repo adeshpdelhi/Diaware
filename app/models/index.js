@@ -75,6 +75,7 @@ dbmodel.monitoringChartPreBasic.hasOne(dbmodel.monitoringChartPreBasicMedical,{f
 dbmodel.monitoringChartPreBasic.hasOne(dbmodel.monitoringChartPreMachineFinalCheck,{foreignKey:'preBasicId'});
 dbmodel.monitoringChartPreBasic.hasOne(dbmodel.monitoringChartPreAssessment,{foreignKey:'preBasicId'});
 dbmodel.monitoringChartPreBasic.hasOne(dbmodel.monitoringChartPreAccessAssessment,{foreignKey:'preBasicId'});
+//add the other half
 
 dbmodel.shifts.hasOne(dbmodel.weekDaySlots,{as:'shift1',foreignKey:'shift1Id'});
 dbmodel.shifts.hasOne(dbmodel.weekDaySlots,{as:'shift2',foreignKey:'shift2Id'});

@@ -15,13 +15,15 @@
   margin: 0px auto;
   padding: 20px 0px;
   color: floralwhite;
-  position: absolute;
-  /*background-color: #00C6D7 ;*/
+  position: fixed;
+  /*background-color: #f5f5f5 ;*/
   background-color:rgb(50, 73, 99);
   bottom: 0px;
   height: 120px;
   width: 100%;
   overflow: hidden;
+  z-index: -2;
+  display: block;
 }
 .jumbotron {
   margin: 0px auto;

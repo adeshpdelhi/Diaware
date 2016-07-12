@@ -6,34 +6,6 @@ module.exports = function(sequelize, DataTypes) {
     	allownull:false,
     	primaryKey:true
     },
-    OPDTotalNegativeMachines:{
-    	type:DataTypes.INTEGER(11),
-    	allownull:false,
-    	validate:{
-    		min:0
-    	}
-    },
-    OPDTotalCPositiveMachines:{
-    	type:DataTypes.INTEGER(11),
-    	allownull:true,
-    	validate:{
-    		min:0
-    	}	
-    },
-    OPDTotalBPositiveMachines:{
-    	type:DataTypes.INTEGER(11),
-    	allownull:true,
-    	validate:{
-    		min:0
-    	}
-    },
-    OPDTotalHIVMachines:{
-    	type:DataTypes.INTEGER(11),
-    	allownull:true,
-    	validate:{
-    		min:0
-    	}
-    },
     OPDAvailableNegativeMachines:{
     	type:DataTypes.INTEGER(11),
     	allownull:false,
@@ -62,14 +34,36 @@ module.exports = function(sequelize, DataTypes) {
     		min:0
     	}
     },
-    IPD_ICU_TotalMachines:{
+    
+    // IPD_ICUAvailableMachines:{
+    // 	type:DataTypes.INTEGER(11),
+    // 	allownull:true,
+    // 	validate:{
+    // 		min:0
+    // 	}
+    // },
+    IPD_ICUAvailableNegativeMachines:{
     	type:DataTypes.INTEGER(11),
     	allownull:true,
     	validate:{
     		min:0
     	}
     },
-    IPD_ICU_AvailableMachines:{
+    IPD_ICUAvailableBPositiveMachines:{
+    	type:DataTypes.INTEGER(11),
+    	allownull:true,
+    	validate:{
+    		min:0
+    	}
+    },
+    IPD_ICUAvailableCPositiveMachines:{
+    	type:DataTypes.INTEGER(11),
+    	allownull:true,
+    	validate:{
+    		min:0
+    	}
+    },
+    IPD_ICUAvailableHIVMachines:{
     	type:DataTypes.INTEGER(11),
     	allownull:true,
     	validate:{

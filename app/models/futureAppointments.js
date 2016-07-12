@@ -54,3 +54,9 @@ module.exports = function(sequelize, DataTypes) {
     // }
   });
 };
+// muje lag rha hai ki umm ye table redundant hai ... saari appointments shift patients mein stoer ho skti hain
+//nhi ...ye chahiye hoga coz ismein ek period ka stored hain appointments.... but umm column toh almost same hai :/
+//refer karwa loon kya?
+// baad mein sochte hain .... waise toh ye bhi theek hi lag rha hai ... yahi rehne dete hain phir
+// a table for all future appointments and a table for past Attended appointments of maybe past 2-3 months ... usse zyada koi dekhega nhi kabhi :P
+

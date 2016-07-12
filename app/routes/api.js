@@ -9,8 +9,8 @@ var panelRouter = require('./panelroute');
 var dropDownRouter = require('./dropdownsroute');
 var monitoringRouter = require('./monitoringRoute');
 
-// var scheduleRouter = require('./appointment/scheduleroute');
-// apiRouter.use('/:centerId/schedulePatient',scheduleRouter);
+var scheduleRouter = require('./appointment/scheduleroute');
+apiRouter.use('/:centreId/schedulePatient',scheduleRouter);
 
 apiRouter.use('/:centreId/patients',registrationRouter);
 apiRouter.use('/users',usersRouter);

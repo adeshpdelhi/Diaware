@@ -46,6 +46,69 @@ module.exports = function(sequelize, DataTypes) {
         min:1,
         max:6
       }
+    },
+    OPDTotalNegativeMachines:{
+      type:DataTypes.INTEGER(11),
+      allownull:false,
+      validate:{
+        min:0
+      }
+    },
+    OPDTotalCPositiveMachines:{
+      type:DataTypes.INTEGER(11),
+      allownull:true,
+      validate:{
+        min:0
+      } 
+    },
+    OPDTotalBPositiveMachines:{
+      type:DataTypes.INTEGER(11),
+      allownull:true,
+      validate:{
+        min:0
+      }
+    },
+    OPDTotalHIVMachines:{
+      type:DataTypes.INTEGER(11),
+      allownull:true,
+      validate:{
+        min:0
+      }
+    },
+    // IPD_ICUTotalMachines:{
+    //  type:DataTypes.INTEGER(11),
+    //  allownull:true,
+    //  validate:{
+    //    min:0
+    //  }
+    // },
+    IPD_ICUTotalNegativeMachines:{
+      type:DataTypes.INTEGER(11),
+      allownull:true,
+      validate:{
+        min:0
+      }
+    },
+    IPD_ICUTotalCPositiveMachines:{
+      type:DataTypes.INTEGER(11),
+      allownull:true,
+      validate:{
+        min:0
+      } 
+    },
+    IPD_ICUTotalBPositiveMachines:{
+      type:DataTypes.INTEGER(11),
+      allownull:true,
+      validate:{
+        min:0
+      }
+    },
+    IPD_ICUTotalHIVMachines:{
+      type:DataTypes.INTEGER(11),
+      allownull:true,
+      validate:{
+        min:0
+      }
     }
   }, {
     tableName: 'centres'

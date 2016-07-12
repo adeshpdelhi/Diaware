@@ -7,6 +7,9 @@ https://dev.mysql.com/downloads/mysql/
 http://dev.mysql.com/doc/refman/5.7/en/upgrading.html 
 
 
+usermanagement(admin): 
+	ask for number of machines in a centre of each type - add hook - which inserts into weekDaySlots and shifts table 
+	-- add number of Machines of each type in centre Table
 
 notes
 *add relation between patientDetail and User
@@ -14,6 +17,7 @@ notes
 *link every table with user **
 add editable rights on user to admin only using passport 
 
+add active and inactive state of patient and a corresponding hook - patient inactive shift to inactive patients table
 
 pre dialysis
 fetch last post hd weight from db ....
@@ -43,11 +47,15 @@ add units where ever required
 add Decimal(10,3) to all models whereever Decimal else number of decimal places assumed = 0 - equivalent to integer 
 
 
+add alerts success on successful save
+
 
 when a schedule of a patient gets fixed ... insert his appointments for the 1st one month/week (to be in line with the event scheduler)
 
 add ng-cloak to each template
 
+
+make changes in bill db - have a billID - for an item purchase in one bill and transaction Id = one whole bill having n items - assigned at the time of the purchase(make payMent) - can be a string of patientID + timestamp or make patientID + timestamp + billID unique = primary key
 
 
 scheduling a task sql
