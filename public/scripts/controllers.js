@@ -34,7 +34,7 @@ angular.module('App')
 .controller('HeaderController', ['$scope', '$state', 'authorize', function ($scope, $state, authorize) {
     $scope.stateis = function(curstate) {
        return $state.includes(curstate);  
-    };
+    }; 
     $scope.loggedIn = authorize.isLoggedIn();
     $scope.username = authorize.getUsername();
     $scope.centre = authorize.getCentre();
@@ -46,13 +46,13 @@ angular.module('App')
 .controller('FooterController', ['$scope', '$state', 'authorize', function ($scope, $state, authorize) {
     $scope.loggedIn = authorize.isLoggedIn();
 }])
-    .controller('ChoosePatientController',['$scope','patientFactory','choosePatientFactory','$state','$stateParams', function($scope,patientFactory, choosePatientFactory, $state, $stateParams){
+    .controller('ChoosePatientController',['$scope','patientFactory','choosePatientFactory','$state','$stateParams','authorize', function($scope,patientFactory, choosePatientFactory, $state, $stateParams,authorize){
         $scope.patient = {
             id:"",
             name:"",
             contact:""
         };
-        patientFactory.getPatients().query(
+        patientFactory.getPatients(authorize.getCentre()).query(
             function(response){
                 console.log(response[0]);
                 $scope.patients = response;        

@@ -1,8 +1,8 @@
 'use strict';
 angular.module('App')
-    .controller('ViewBillController',['$scope','billFactory','patientFactory','$state', function($scope, billFactory, patientFactory,$state){
+    .controller('ViewBillController',['$scope','billFactory','patientFactory','$state','authorize', function($scope, billFactory, patientFactory,$state,authorize){
         $scope.bills = [];
-        billFactory.getBills().query(function(response){
+        billFactory.getBills(authorize.getCentre()).query(function(response){
             $scope.bills = response;
         });
         $scope.redirect = function(id){

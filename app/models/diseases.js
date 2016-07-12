@@ -1,5 +1,5 @@
 /* jshint indent: 2 */
-
+//didnt use yet
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('diseases', {
     diseaseName: {

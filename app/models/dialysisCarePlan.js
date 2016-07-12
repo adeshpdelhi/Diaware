@@ -4,7 +4,11 @@ module.exports = function(sequelize, DataTypes) {
   return sequelize.define('dialysisCarePlan', {
     patientId: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      references:{
+        model:'patientDetails',
+        key:'id'
+      }
     },
     carePlanId: {
       type: DataTypes.INTEGER(11),
@@ -29,20 +33,23 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     BFR: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.DECIMAL,
       allowNull: true
     },
     DFR: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.DECIMAL,
       allowNull: true
     },
     UFR: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.DECIMAL,
       allowNull: true
     },
     heparinFree: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:[['Yes','No']]
+      }
     },
     heparinDosageBolus: {
       type: DataTypes.INTEGER(11),

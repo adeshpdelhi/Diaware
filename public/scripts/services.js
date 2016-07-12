@@ -3,23 +3,110 @@
 angular.module('App')
 .constant("baseURL","https://localhost:3443/api/")
 .factory('$localStorage', ['$window', function ($window) {
-    return {
-        store: function (key, value) {
-            $window.localStorage[key] = value;
-        },
-        get: function (key, defaultValue) {
-            return $window.localStorage[key] || defaultValue;
-        },
-        remove: function (key) {
-            $window.localStorage.removeItem(key);
-        },
-        storeObject: function (key, value) {
-            $window.localStorage[key] = JSON.stringify(value);
-        },
-        getObject: function (key, defaultValue) {
-            return JSON.parse($window.localStorage[key] || defaultValue);
+  return {
+    store: function (key, value) {
+      $window.localStorage[key] = value;
+    },
+    get: function (key, defaultValue) {
+      return $window.localStorage[key] || defaultValue;
+    },
+    remove: function (key) {
+      $window.localStorage.removeItem(key);
+    },
+    storeObject: function (key, value) {
+      $window.localStorage[key] = JSON.stringify(value);
+    },
+    getObject: function (key, defaultValue) {
+      return JSON.parse($window.localStorage[key] || defaultValue);
+    }
+  };
+}])
+.service('authorize', ['$localStorage', function ($localStorage) {
+
+  var logged_in_user = $localStorage.get('username','');
+  var logged_in_centre = $localStorage.get('centre','');
+  var logged_in = false;
+  if(logged_in_user !== ''){
+    logged_in = true;
+  }
+  // var users = [];
+  // userFactory.getUsers().query(function(response){
+  //   users =response;
+  // });
+  var users =  [
+  {
+    username: "rishabh",
+    password : "12345",
+    centres : ["JP","CH","JP1"]
+  },
+  {
+    username: "admin",
+    password : "admin",
+    centres : ["JP","CH","AP","SP","JP1"]
+  }
+  ];
+
+  this.doAuth = function(username,password){
+      for(var i=0;i<users.length;i++){
+        if(users[i].username == username && users[i].password == password){
+          logged_in_user=username;
+          logged_in=true;
+          $localStorage.store('username',users[i].username);
+          return users[i].centres;
         }
+      }
+      return false;
     };
+  this.getUsername = function(){
+      return logged_in_user;
+    };
+  this.setCentre = function(centre){
+      $localStorage.store('centre', centre);
+      logged_in_centre = centre;
+    };
+  this.getCentre = function(centre){
+      return logged_in_centre;
+    };
+  this.isLoggedIn = function(){
+      // console.log("Logged in: "+logged_in+" "+logged_in_centre);
+      return logged_in;
+    };
+  this.logout = function(){
+      logged_in=false;
+      logged_in_user='';
+      logged_in_centre='';
+      $localStorage.store('username','');
+      $localStorage.store('centre','');
+    };
+}])
+.service('centreDetails', ['$localStorage','backendFactory', function ($localStorage,backendFactory) {
+  var centre = $localStorage.get('centre','');
+  var validLoggedIn = true;
+  if(centre == '')
+    validLoggedIn = false;
+
+  var centreDetails ={};
+  if(validLoggedIn){
+    console.log('fetching from databaseCentres all the centreDetails');
+    backendFactory.getCentres().get({id:centre}).$promise.then(function(response){
+      centreDetails = response;
+      console.log(centreDetails);
+    });
+  }
+  this.getCentreAvailableAccessLines = function(){
+    return centreDetails.availableAccessLines;
+  }
+  this.getCentreShiftsPerDay = function(){
+    return centreDetails.noOfShiftsPerDay;
+  }
+  this.getCentreLocation = function(){
+    return centreDetails.location;
+  };
+  this.getCentreId = function(){
+    return centreDetails.id;
+  };
+
+  
 }])
 .factory('choosePatientFactory',['$localStorage', function($localStorage){
   var patFac = {};
@@ -33,184 +120,4 @@ angular.module('App')
   };
   return patFac;
 }])
-
-.factory('authorize', ['$localStorage', function ($localStorage) {
-	
-  var logged_in_user = $localStorage.get('username','');
-  var logged_in_centre = $localStorage.get('centre','');
-  var logged_in = false;
-  if(logged_in_user !== ''){
-    logged_in = true;
-  }
-    var users =  [
-      {
-        username: "rishabh",
-        password : "12345",
-        centres : ["JP","CH"]
-      },
-      {
-        username: "admin",
-        password : "admin",
-        centres : ["JP","CH","AP","SP"]
-      }
-    ];
-    return {
-      doAuth : function(username,password){
-        for(var i=0;i<users.length;i++){
-          if(users[i].username == username && users[i].password == password){
-              logged_in_user=username;
-              logged_in=true;
-              $localStorage.store('username',users[i].username);
-              return users[i].centres;
-          }
-        }
-      return false;
-      },
-      getUsername : function(){
-        return logged_in_user;
-      },
-      setCentre : function(centre){
-        $localStorage.store('centre', centre);
-        logged_in_centre = centre;
-      },
-      getCentre : function(centre){
-          return logged_in_centre;
-      },
-      isLoggedIn : function(){
-        console.log("Logged in: "+logged_in+" "+logged_in_centre);
-        return logged_in;
-      },
-      logout : function(){
-        logged_in=false;
-        logged_in_user='';
-        logged_in_centre='';
-        $localStorage.store('username','');
-        $localStorage.store('centre','');
-
-      }
-    };
-}])
-  .factory('dropDownFactory', function(){
-    // use separate factory maybe then like panelFactory .... or directly interact with db
-    var drpDwnFac = {};
-    var panels = [
-      {
-        value:"cghs",
-        text:'CGHS'
-      },
-      {
-        value:"panel1",
-        text:'PANEL1'
-      },
-      {
-        value:'panel2',
-        text:"PANEL2"
-      }
-    ];
-    var transactionTypes = [
-      {
-        value:"dialysis",
-        text:"Dialysis"
-      },
-      {
-        value:"procedure",
-        text:"Procedure"  
-      },
-      {
-        value:"pharmacy",
-        text:"Pharmacy"
-      },
-      {
-        value:"consumable",
-        text:"Consumable"
-      }
-    ];
-    var dialysisTypes = [
-      {
-        value:'dialysis1',
-        text:"Dialysis1"
-      },
-      {
-        value:'dialysis2',
-        text:"Dialysis2"
-      },
-      {
-        value:'dialysis3',
-        text:'Dialysis3'
-      }
-    ];
-    var proceTypes = [
-      {
-        value:'procedure1',
-        text:"procedure1"
-      },
-      {
-        value:'procedure2',
-        text:"procedure2"
-      },
-      {
-        value:'procedure3',
-        text:'procedure3'
-      }
-    ];
-    var pharmacyTypes = [
-      {
-        value:'pharmacy1',
-        text:"pharmacy1"
-      },
-      {
-        value:'pharmacy2',
-        text:"pharmacy2"
-      },
-      {
-        value:'pharmacy3',
-        text:'pharmacy3'
-      }
-    ];
-    var consumableTypes = [
-      {
-        value:'consumable1',
-        text:"consumable1"
-      },
-      {
-        value:'consumable2',
-        text:"consumable2"
-      },
-      {
-        value:'consumable3',
-        text:'consumable3'
-      }
-    ];
-    drpDwnFac.getDialysis = function(){
-      return dialysisTypes;
-    };
-    drpDwnFac.getProcedures = function(){
-      return proceTypes;
-    };
-    drpDwnFac.getPharmacy = function(){
-      return pharmacyTypes;
-    };
-    drpDwnFac.getConsumables = function(){
-      return consumableTypes;
-    };
-    drpDwnFac.getPanels = function(){
-      return panels;
-    };
-    drpDwnFac.getTransactionTypes = function(){
-      return transactionTypes;
-    };
-    return drpDwnFac;
-  })
-  
-  .service('ClinicalEventsFactory',function(){
-	  var events=[];
-	  this.addEvent=function(event){
-		  events.push(event);
-	  };
-	  
-	  this.updateEvents = function(event){
-		//console.log("in services.updateEvents:"+ event[0]);
-		events = events.concat(event);
-	  };
-  })
-  ;
+;

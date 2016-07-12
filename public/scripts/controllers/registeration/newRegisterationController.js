@@ -47,7 +47,7 @@ angular.module('App')
 			if($scope.newpatient_basic.alternativeContact === "") $scope.newpatient_basic.alternativeContact = null;
 			if($scope.newpatient_basic.childrenContact === "") $scope.newpatient_basic.childrenContact = null;
 			console.log($scope.newpatient_basic);
-            patientFactory.getPatients().save($scope.newpatient_basic);
+            patientFactory.getPatients(centre).save($scope.newpatient_basic);
         };
     }])
 ;

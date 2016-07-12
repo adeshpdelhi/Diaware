@@ -1,0 +1,58 @@
+<!-- 
+<style type="text/css">
+	.datepickerdemoBasicUsage {
+  /** Demo styles for mdCalendar. */ }
+  .datepickerdemoBasicUsage md-content {
+    padding-bottom: 200px; }
+  .datepickerdemoBasicUsage .validation-messages {
+    font-size: 12px;
+    color: #dd2c00;
+    margin: 10px 0 0 25px; }
+
+</style>
+<div>
+<div ng-controller="AppCtrl" style='padding: 40px;' ng-cloak>
+  <md-content>
+  <h4>With ngMessages</h4>
+  <form name="myForm">
+      <md-datepicker name="dateField" ng-model="myDate" md-placeholder="Enter date"
+          required md-min-date="minDate" md-max-date="maxDate"
+          md-date-filter="onlyWeekendsPredicate"></md-datepicker>
+      <div class="validation-messages" ng-messages="myForm.dateField.$error">
+        <div ng-message="valid">The entered value is not a date!</div>
+        <div ng-message="required">This date is required!</div>
+        <div ng-message="mindate">Date is too early!</div>
+        <div ng-message="maxdate">Date is too late!</div>
+        <div ng-message="filtered">Only weekends are allowed!</div>
+      </div>
+    </form>
+    <h4>Standard date-picker</h4>
+    <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+    <h4>Opening the calendar when the input is focused</h4>
+    <md-datepicker ng-model="myDate" md-placeholder="Enter date"
+      md-open-on-focus></md-datepicker>
+  </md-content>
+</div>
+</div>
+
+
+ -->
+<!-- <div class="container">
+	<div class="row row-content col-sm-10 col-sm-pull-1 col-sm-push-1">
+		<div class="panel" style="text-align:center;">
+			<div class="panel-heading">
+				<div class="panel-title">ViewAppointments</div>
+			</div>
+			<div class="panel-body">
+				<form class="form-horizontal" role="form">
+					<div class="form-group col-sm-12">
+						<label class="col-sm-2 control-label">
+							PatientID
+						</label>	
+						<input type="text" name="patientID" ng-model="">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div> -->

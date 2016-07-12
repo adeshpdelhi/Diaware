@@ -1,70 +1,78 @@
 
-     <div id="Registerbox" style="margin-top:20px;" class="mainbox col-sm-12">                    
-            <div class="panel" >
-                    <div class="panel-heading">
-                        <div class="panel-title"><b>Other Details</b></div>
-                        <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
-                    </div>     
+<div id="Registerbox" style="margin-top:20px;" class="mainbox col-sm-12" ng-controller="OtherController">                    
+    <div class="panel" >
+        <div class="panel-heading">
+            <div class="panel-title"><b>Other Details</b></div>
+            <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
+        </div>     
 
-                    <div style="padding-top:30px" class="panel-body bg-warning" >
-           
-            
-                
-                 <form class="form-horizontal" role="form">
-                
-                    <div class="form-group">
-                        <label class="col-xs-12 col-sm-3 control-label">PAN Card No</label>
-                        <div class="col-xs-5 col-sm-4 col-md-8">
-                            <input type="number" class="form-control" id="pan_card_no" name="pan_card_no" placeholder="PAN Card No">
-                        </div>
+        <div style="padding-top:30px" class="panel-body" >
+            <form class="form-horizontal" role="form" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 control-label">PAN Card No</label>
+                    <div class="col-xs-12 col-sm-6 ">
+                        <input type="number" class="form-control" id="pan_card_no" name="pan_card_no" ng-model="newPatient_Others.PAN" placeholder="PAN Card No">
                     </div>
-                     
-                     
-                     
-                    <div class="form-group">
-                        <label  class="col-xs-12 col-sm-3 control-label">Aadhar No</label>
-                        <div class="col-xs-5 col-sm-4 col-md-8">
-                            <input  type="number" class="form-control" id="aadhar_no" name="aadhar_no" placeholder="Aadhar number">
-                        </div>
+                    <input type="file" name="PANData" class="col-sm-2" id="PANData" onchange="angular.element(this).scope().saveFile(this)"/>
+                    <!-- <button class="btn btn-primary col-xs-12 col-sm-2" ng-click="saveDocument()">Upload</button> -->
+                </div>
+                <div class="form-group">
+                    <label  class="col-xs-12 col-sm-3 control-label">Aadhar No</label>
+                    <div class="col-xs-5 col-sm-6 ">
+                        <input  type="number" class="form-control" id="aadhar_no" name="aadhar_no" ng-model="newPatient_Others.aadhar" placeholder="Aadhar number">
                     </div>
-					
-					 <div class="form-group">
-                        <label  class="col-xs-12 col-sm-3 control-label">Passport No</label>
-                        <div class="col-xs-5 col-sm-4 col-md-8">
-                            <input  type="number" class="form-control" id="passport_no" name="passport_no" placeholder="Passport number">
-                        </div>
+                    <input type="file" name="aadharData" class="col-sm-2" id="aadharData" onchange="angular.element(this).scope().saveFile(this)"/>
+
+
+                </div>
+
+                <div class="form-group">
+                    <label  class="col-xs-12 col-sm-3 control-label">Passport No</label>
+                    <div class="col-xs-5 col-sm-6 ">
+                        <input  type="number" class="form-control" id="passport_no" name="passport_no" ng-model="newPatient_Others.passport" placeholder="Passport number">
                     </div>
-					
-					<div class="form-group">
-                        <label  class="col-xs-12 col-sm-3 control-label">Other Card No 1</label>
-                        <div class="col-xs-5 col-sm-4 col-md-8">
-                            <input  type="number" class="form-control" id="other_card1_no" name="other_card1_no" placeholder="">
-                        </div>
+                    <input type="file" name="passportData" class="col-sm-2" id="passportData" onchange="angular.element(this).scope().saveFile(this)"/>
+
+                </div>
+
+                <div class="form-group">
+                    <label  class="col-xs-12 col-sm-3 control-label">Other Card No 1</label>
+                    <div class="col-xs-5 col-sm-6 ">
+                        <input  type="number" class="form-control" id="other_card1_no" ng-model="newPatient_Others.otherCard1" name="other_card1_no" placeholder="">
                     </div>
-					
-					<div class="form-group">
-                        <label  class="col-xs-12 col-sm-3 control-label">Other Card No 2</label>
-                        <div class="col-xs-5 col-sm-4 col-md-8">
-                            <input required type="number" class="form-control" id="other_card2_no" name="other_card2_no" placeholder="">
-                        </div>
+                    <input type="file" name="otherCard1Data" class="col-sm-2" id="otherCard1Data" onchange="angular.element(this).scope().saveFile(this)"/>
+
+                    
+                </div>
+
+                <div class="form-group">
+                    <label  class="col-xs-12 col-sm-3 control-label">Other Card No 2</label>
+                    <div class="col-xs-5 col-sm-6 ">
+                        <input required type="number" class="form-control" id="other_card2_no" ng-model="newPatient_Others.otherCard2" name="other_card2_no" placeholder="">
                     </div>
-					
-					<div class="form-group">
-                        <label  class="col-xs-12 col-sm-3 control-label">Other Card No 3</label>
-                        <div class="col-xs-5 col-sm-4 col-md-8">
-                            <input required type="number" class="form-control" id="other_card3_no" name="other_card3_no" placeholder="">
-                        </div>
+                    <input type="file" name="otherCard2Data" class="col-sm-2" id="otherCard2Data" onchange="angular.element(this).scope().saveFile(this)"/>
+
+                </div>
+
+                <div class="form-group">
+                    <label  class="col-xs-12 col-sm-3 control-label">Other Card No 3</label>
+                    <div class="col-xs-5 col-sm-6 ">
+                        <input required type="number" class="form-control" id="other_card3_no" ng-model="newPatient_Others.otherCard3" name="other_card3_no" placeholder="">
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-4 col-sm-10">
-                            <button type="submit" class="btn btn-primary" id="panel_save">Save</button>
-                        </div>
+                    <input type="file" name="otherCard3Data" class="col-sm-2" id="otherCard3Data" onchange="angular.element(this).scope().saveFile(this)"/>
+
+                    
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-5 col-sm-2">
+                        <button type="submit" class="btn btn-primary" id="panel_save" ng-click="saveOtherDetails()">Save</button>
                     </div>
-               </form>
-            </div>
-         </div>
+                </div>
+            </form>
+        </div>
     </div>
-    
-                
-                
-   
+</div>
+
+
+

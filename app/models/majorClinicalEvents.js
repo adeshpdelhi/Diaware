@@ -4,23 +4,27 @@ module.exports = function(sequelize, DataTypes) {
   return sequelize.define('majorClinicalEvents', {
     patientId: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      references:{
+        model: 'patientDetails',
+        key: 'id'
+      }
     },
-    eventId: {
+    id: {
       type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    eventDetails: {
+    details: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    eventDate: {
+    date: {
       type: DataTypes.DATE,
       allowNull: true
     },
-    eventComment: {
+    comments: {
       type: DataTypes.STRING,
       allowNull: true
     },

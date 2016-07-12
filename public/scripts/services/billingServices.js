@@ -6,8 +6,8 @@ angular.module('App')
         // $resource(baseURL+"bills/:id",null,  {'update':{method:'PUT' }}).query(function(resp){
         //     bills = resp;    
         // });
-        this.getBills = function(){
-          return $resource(baseURL+"bills/:id",null,  {'update':{method:'PUT' }});
+        this.getBills = function(centreId){
+          return $resource(baseURL+":centreId/bills/:id",{centreId:centreId},  {'update':{method:'PUT' }});
         };
         // this.getBill = function(id){
         //     return bills[id];

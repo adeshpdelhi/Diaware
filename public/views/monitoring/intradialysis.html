@@ -29,6 +29,15 @@
     line-height: 1.6em;
   }
 
+[contenteditable] {
+  /*border: 1px solid #00339A;*/
+  /*background-color: white;*/
+  min-height: 25px;
+}
+/*
+.ng-invalid {
+  border: 1px solid red;
+}*/
 /* #box-table-b
 {
 font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
@@ -57,16 +66,17 @@ background: #e8edff;
 border-right: 1px solid #aabcfe;
 border-left: 1px solid #aabcfe;
 color: #669;*/
-}
+/*}*/
 </style>
 <div class="container">
-  <div class="row row-content">
-    <form class="form-horizontal col-sm-9" role="form">
+  <div class="row row-content" ng-controller="MonitoringIntraController" >
+    <form class="form-horizontal col-sm-9" role="form" ng-submit="saveIntra()">
       <div class="table-responsive">
         <table id="box-table-b" class="table table-bordered">
           <thead>
             <tr>
-              <th style="width:30%">TIME</th>
+              <th style="width:20%">S.No</th>
+              <th style="width:40%">TIME <small style="color:gray;">(in mins)</small></th>
               <th style="width:25%">BP</th>
               <th style="width:25%">PR</th>
               <th style="width:25%">AP</th>
@@ -80,11 +90,73 @@ color: #669;*/
             </tr>
           </thead>
           <tbody>
-            <tr><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td></tr>
-            <tr><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td></tr>
-            <tr><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td></tr>
-            <tr><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td></tr>
-            <tr><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td><td><div contenteditable></div></td></tr>
+          <tr ng-repeat="i in [1,2,3,4,5,6,7,8]" ng-init="func($index)">
+              <td >
+              {{intraTable[$index].entryNumber}}
+              </td>
+              <td >
+                <div contenteditable valid-number ng-model="intraTable[$index].entryTime">
+                </div>
+              </td>
+              <td>
+                <div contenteditable valid-number ng-model="intraTable[$index].bp">
+                
+                </div>
+              </td>
+              <td>
+                <div contenteditable valid-number ng-model="intraTable[$index].pr">
+                
+                </div>
+              </td>
+              <td>
+                <div contenteditable  valid-number ng-model="intraTable[$index].ap">
+                
+
+                </div>
+              </td>
+              <td>
+                <div contenteditable valid-number ng-model="intraTable[$index].vp">
+                
+
+                </div>
+              </td>
+              <td>
+                <div contenteditable  valid-number ng-model="intraTable[$index].tmp">
+                
+
+                </div>
+              </td>
+              <td>
+                <div contenteditable  valid-number ng-model="intraTable[$index].ufr">
+                
+
+                </div>
+              </td>
+              <td>
+                <div contenteditable valid-number ng-model="intraTable[$index].totalUF">
+
+                
+                </div>
+              </td>
+              <td>
+                <div contenteditable valid-number ng-model="intraTable[$index].bfr">
+                
+
+                </div>
+              </td>
+              <td>
+                <div contenteditable valid-number ng-model="intraTable[$index].ebf">
+                
+
+                </div>
+              </td>
+              <td>
+                <div contenteditable ng-model="intraTable[$index].remarks">
+                
+
+                </div>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>

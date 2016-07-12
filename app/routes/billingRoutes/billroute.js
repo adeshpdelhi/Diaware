@@ -4,14 +4,21 @@ var bodyParser = require('body-parser');
 var db = require('../../models');
 // var verify = require('../verify');
 
-var billingRouter = express.Router();
+var billingRouter = express.Router({mergeParams:true});
 billingRouter.use(bodyParser.json());
 //db.patientDetails.create({patientId: '12345', name: 'heya', lastModifiedBy: 'adesh'});
 billingRouter.route('/')
 .get(function (req, res, next) {
     	// console.log(JSON.stringify(bills));
     console.log('procesing get');
-    db.bills.findAll({include: [db.patientDetails]}).then(function(bills){
+    db.bills.findAll({
+    	include: [{
+    		model:db.patientDetails,
+    		where:{
+    			centreId:req.params.centreId
+    		}
+    	}]
+    }).then(function(bills){
     	console.log(JSON.stringify(bills));
 	    res.json(bills);
     });
@@ -20,8 +27,10 @@ billingRouter.route('/')
 .post(function (req, res, next) {
 	console.log('processing post : '+ req.body);
 	// res.json(req.body);
-    db.bills.build(req.body).save();
-    res.end('billingRouter working');
+    db.bills.build(req.body).save().then(function(result){
+    	res.json(result);
+    });	
+    // res.end('billingRouter working');
 })
 .delete(function(req,res,next){
     
@@ -30,7 +39,17 @@ billingRouter.route('/')
 billingRouter.route('/:id')
 .get(function(req,res,next){
     console.log('procesing get');
-    db.bills.find({where:{transactionId: parseInt(req.params.id,10)},include:[db.patientDetails]}).then(function(bill){
+    db.bills.find({
+    	where:{
+    		transactionId: parseInt(req.params.id,10)
+    	},
+    	include:[{
+    		model:db.patientDetails,
+    		where:{
+    			centreId:req.params.centreId
+    		}
+    	}]
+    }).then(function(bill){
         console.log(JSON.stringify(bill));
         res.json(bill);
     });

@@ -12,7 +12,7 @@
                     <div class="media">
                         <div class="media-body media-left media-middle">
                             <label class="col-sm-4">PATIENT ID: {{patient.id}}</label>
-                            <label class="col-sm-4">NAME: {{patient.name.charAt(0).toUpperCase() + patient.name.slice(1)}}</label>
+                            <label class="col-sm-4 text-capitalize">NAME: {{patient.name}}</label>
                             <label class="col-sm-4">CONTACT: {{patient.contact}}</label>
                         <!-- add other details like default panel -->
                         </div>
@@ -35,12 +35,12 @@
                             </thead>
                             <tbody >
                                 <tr ng-repeat = "bill in bills" style="height:2px;" >
-                                    <td width="10%" >{{ bill.transactionId }}</td>
+                                    <td width="10%" >{{ bill.id }}</td>
                                     <td width="25%" >{{ bill.transactionType }}</td>
                                     <td width="30%">{{ bill.ledger }}</td>
                                     <td width="15%">{{ bill.quantity }}</td>
                                     <td width="15%">{{ bill.amount }}</td>
-                                    <td width="5%"><button type="button" class="btn btn-danger btn-circle btn-lg" ng-click="removeEntry(bill.transactionId)" ng-show="!bill.paid"><span class="glyphicon glyphicon-remove"></span></button></td>
+                                    <td width="5%"><button type="button" class="btn btn-danger btn-circle btn-lg" ng-click="removeEntry(bill.id)" ng-show="!bill.saved"><span class="glyphicon glyphicon-remove"></span></button></td>
                                 </tr>    
                                 <!-- <a ui-sref="#" ng-model=""> -->
                             </tbody>
@@ -79,7 +79,7 @@
                         <div ng-if="panelSelected">
                             <div class="form-group">
                                 <label for="panel" class="control-label col-sm-2"> Panel</label>
-                                <select ng-model = "panel" class="col-sm-2" ng-change = changeState(3) ng-options="panel.value as panel.text for panel in panels">
+                                <select ng-model = "panel" class="col-sm-2" ng-change = changeState(3) ng-options="panel.id as panel.name for panel in panels">
                                 <!-- set defualt option as default panel already set in patient basic details-->
                                 </select>
 
@@ -89,17 +89,17 @@
                             <hr style="border-top:1px solid rgb(220,220,220);">
                             <div class="form-group">
                                 <label for="transactionType" class="control-label col-sm-2">Transaction Type</label>
-                                <select ng-model="bill.transactionType" class="col-sm-2" ng-change ="changeState(4)" ng-options = "type.value as type.text for type in transactionTypes" required >
+                                <select ng-model="bill.transactionType" class="col-sm-2" ng-change ="changeState(4)" ng-options = "type.transactionType as type.transactionType for type in transactionTypes" required >
                                     
                                 </select>
                                 <button type="button" class="btn btn-success btn-circle btn-lg col-sm-push-5" ng-click="add()" ng-disabled="billingForm.$invalid"><span class="glyphicon glyphicon-plus"></span></button>
                             </div>
                             <div ng-if = "show">
                                 <div class="form-group" ng-class="{'has-error':billingForm.product.$error.required && !billingForm.product.$pristine}">
-                                    <label for="product" class="control-label col-sm-2">{{bill.transactionType.charAt(0).toUpperCase() + bill.transactionType.slice(1)}}</label>
-                                    <select ng-model="bill.ledger" class="col-sm-2" ng-change ="changeState(4)" ng-options = "item.value as item.text for item in dropDown" id = "product" name="product" required>
+                                    <label for="product" class="control-label col-sm-2 text-capitalize">{{bill.transactionType}}</label>
+                                    <select ng-model="bill.ledger" class="col-sm-2" ng-change ="changeState(4)" ng-options = "item.type as item.type for item in dropDown" id = "product" name="product" required>
                                     </select>
-                                    <span ng-show="billingForm.product.$error.required && !billingForm.product.$pristine" class="help-block">Your First Name is required                     
+                                    <span ng-show="billingForm.product.$error.required && !billingForm.product.$pristine" class="help-block">Ledger Name is required                      
                                     </span>    
 
                                     <label for="qty" class="control-label col-sm-1">Quantity</label>
@@ -118,7 +118,7 @@
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary col-sm-2 col-sm-push-8" ng-click="makePayment('Pending')" ng-disabled="billingForm.$invalid">Save</button>
                                 </div>
-                                <!-- <p>{{bill.transactionId}}, {{bill.transactionType}}, {{bill.product}}, {{bill.quantity}}, {{bill.cost}}</p> -->
+                                <!-- <p>{{bill.id}}, {{bill.transactionType}}, {{bill.product}}, {{bill.quantity}}, {{bill.cost}}</p> -->
                             </div>
                         </div>
                     </div>

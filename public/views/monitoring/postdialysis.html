@@ -1,75 +1,75 @@
-<div class="container">
+<div class="container" ng-controller="MonitoringPostController" >
   <div class="row">
-    <div class="col-sm-9 " style="padding-top:30px;">
+    <div class="col-sm-7 col-sm-push-1 col-sm-pull-1 " style="padding-top:30px;">
       <div class="panel" >
         <div class="panel-heading">
           <div class="panel-title"><b>Post Dialysis</b></div>
           <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
         </div>     
         <div style="padding-top:30px" class="panel-body" >
-          <form class="form-horizontal" role="form">
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Name</label>                        
-              <div class="col-sm-8">
-                <input required type="text" class="form-control" id="name" name="name"  >
+          <form class="form-horizontal" role="form" ng-submit="savePost()">
+            <!-- <div class="form-group">
+              <label class="col-sm-4 control-label">Name</label>                        
+              <div class="col-sm-7">
+                <input required type="text" class="form-control" id="name" name="name" ng-model=disabled >
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">ID Number</label>
-              <div class="col-sm-8">
+              <label class="col-sm-4 control-label">ID Number</label>
+              <div class="col-sm-7">
                 <input required type="number" class="form-control" id="id" name="id" >
               </div>
-            </div>
+            </div> -->
             <div class="form-group">
-              <label class="col-xs-12 col-sm-3 control-label">Post Weight</label>
-              <div class="col-sm-8">
-                <input required type="number" class="form-control" id="post_weight" name="post_weight" placeholder="Post Weight">
+              <label class="col-xs-12 col-sm-4 control-label">Post Weight</label>
+              <div class="col-sm-7">
+                <input required type="number" class="form-control" id="post_weight" name="post_weight" placeholder="Post Weight" ng-model="post.postWeight" step="any" min="0">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-xs-12 col-sm-3 control-label">Weight Loss</label>
-              <div class="col-sm-8">
-                <input required type="number" class="form-control" id="weight_loss" name="weight_loss" placeholder="Weight Loss">
+              <label class="col-xs-12 col-sm-4 control-label">Weight Loss</label>
+              <div class="col-sm-7">
+                <input required type="number" class="form-control" id="weight_loss" name="weight_loss" placeholder="Weight Loss" ng-model="post.weightLoss" step="any" min="0">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-xs-12 col-sm-3 control-label">UF Reading</label>
-              <div class="col-sm-8">
-                <input required type="number" class="form-control" id="uf_reading" name="uf_reading" placeholder="UF Reading">
+              <label class="col-xs-12 col-sm-4 control-label">UF Reading</label>
+              <div class="col-sm-7">
+                <input required type="number" class="form-control" id="uf_reading" name="uf_reading" placeholder="UF Reading" ng-model="post.UFReading" step="any" min="0">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">BP (sitting)</label>
-              <div class="col-sm-8" >
-                <select id="bp_sitting" name="bp_sitting">                    
+              <label class="col-sm-4 control-label">BP (sitting)</label>
+              <div class="col-sm-7" >
+                <select id="bp_sitting" name="bp_sitting" ng-model="post.BPSitting">                    
                   <option ng-repeat="n in [].constructor(51) track by $index"  >{{5*$index}}</option>
                 </select>
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">BP (standing)</label>
-              <div class="col-sm-8" >
-                <select id="bp_standing" name="bp_standing">                    
+              <label class="col-sm-4 control-label">BP (standing)</label>
+              <div class="col-sm-7" >
+                <select id="bp_standing" name="bp_standing" ng-model="post.BPStanding">                    
                   <option ng-repeat="n in [].constructor(51) track by $index"  >{{5*$index}}</option>
                 </select>
               </div>
             </div>
             <div class="form-group">
-              <label class="col-xs-12 col-sm-3 control-label">Temperature</label>
-              <div class="col-sm-8">
-                <input required type="number" class="form-control" id="temperature" name="temperature" placeholder="Temperature">
+              <label class="col-xs-12 col-sm-4 control-label">Temperature</label>
+              <div class="col-sm-7">
+                <input required type="number" class="form-control" id="temperature" name="temperature" placeholder="Temperature" ng-model="post.temperature" step="any" min="0">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-xs-12 col-sm-3 control-label">Pulse</label>
-              <div class="col-sm-8">
-                <input required type="number" class="form-control" id="pulse" name="pulse" placeholder="pulse">
+              <label class="col-xs-12 col-sm-4 control-label">Pulse</label>
+              <div class="col-sm-7">
+                <input required type="number" class="form-control" id="pulse" name="pulse" placeholder="pulse" ng-model="post.pulse" step="any" min="0">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">Symptomatic Hypotension</label>                       
-              <div class="col-sm-8 ">
-                <select name="symptomatic_hypotension" required class="form-control">
+              <label class="col-sm-4 control-label">Symptomatic Hypotension</label>                       
+              <div class="col-sm-7 ">
+                <select name="symptomatic_hypotension" required class="form-control" ng-model="post.symptomaticHypotension">
                   <option value="" selected disabled>-</option>
                   <option value="Yes" >Yes</option>
                   <option value="No" >No</option>
@@ -77,10 +77,10 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label"> Prolonged Bleeding
+              <label class="col-sm-4 control-label"> Prolonged Bleeding
               </label>                       
-              <div class="col-sm-8 ">
-                <select name="prolonged_bleeding" required class="form-control">
+              <div class="col-sm-7 ">
+                <select name="prolonged_bleeding" required class="form-control" ng-model="post.prolongedBleeding">
                   <option value="" selected disabled>-</option>
                   <option value="Yes" >Yes</option>
                   <option value="No" >No</option>
@@ -88,9 +88,9 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">Bruit / Thrill (AVF / AVG) </label>                       
-              <div class="col-sm-8 ">
-                <select name="bruit_thrill_(AVF/AVG) " required class="form-control">
+              <label class="col-sm-4 control-label">Bruit / Thrill (AVF / AVG) </label>                       
+              <div class="col-sm-7 ">
+                <select name="bruit_thrill_(AVF/AVG) " required class="form-control" ng-model="post.bruit">
                   <option value="" selected disabled>-</option>
                   <option value="Yes" >Yes</option>
                   <option value="No" >No</option>
@@ -98,68 +98,68 @@
               </div>
             </div>
             <div class="form-group">
-              <label  class="col-sm-3 control-label">Patient Subjective Statement</label>
-              <div class="col-sm-8">
-                <input required class="form-control" id="patient_subjective_statement" name="patient_subjective_statement" placeholder="Patient Subjective Statement">
+              <label  class="col-sm-4 control-label">Patient Subjective Statement</label>
+              <div class="col-sm-7">
+                <input required class="form-control" id="patient_subjective_statement" name="patient_subjective_statement" placeholder="Patient Subjective Statement" ng-model="post.subjectiveStatement">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">Cardiac Status</label>                        
-              <div class="col-sm-8">
-                <input required type="text" class="form-control" id="cardiac_status" name="cardiac_status" placeholder="Cardiac Status">
+              <label class="col-sm-4 control-label">Cardiac Status</label>                        
+              <div class="col-sm-7">
+                <input required type="text" class="form-control" id="cardiac_status" name="cardiac_status" placeholder="Cardiac Status" ng-model="post.cardiacStatus">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">Respiratory Status</label>                        
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="respiratory_status" name="respiratory_status" placeholder="Respiratory Status">
+              <label class="col-sm-4 control-label">Respiratory Status</label>                        
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="respiratory_status" name="respiratory_status" placeholder="Respiratory Status" ng-model="post.respiratoryStatus">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">Mental Status</label>                        
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="mental_status" name="mental_status" placeholder="Mental Status">
+              <label class="col-sm-4 control-label">Mental Status</label>                        
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="mental_status" name="mental_status" placeholder="Mental Status" ng-model="post.mentalStatus">
               </div>
             </div>
             <div class="form-group">
-              <label  class="col-xs-12 col-sm-3 control-label">Ambulatory Status</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="ambulatory_status" name="ambulatory_status" placeholder="Ambulatory Status">
+              <label  class="col-xs-12 col-sm-4 control-label">Ambulatory Status</label>
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="ambulatory_status" name="ambulatory_status" placeholder="Ambulatory Status" ng-model="post.ambulatoryStatus">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">Kt/V Achieved</label>                        
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="kt/v_achieved" name="kt/v_achieved" placeholder="Kt/V Achieved">
+              <label class="col-sm-4 control-label">Kt/V Achieved</label>                        
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="kt/v_achieved" name="kt/v_achieved" placeholder="Kt/V Achieved" ng-model="post.KtVAchieved">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-xs-12 col-sm-3 control-label">EPO Dosage</label>
-              <div class="col-sm-8 ">
-                <input type="number" class="form-control" id="epo_dosage" name="epo_dosage" placeholder="EPO Dosage">
+              <label class="col-xs-12 col-sm-4 control-label">EPO Dosage</label>
+              <div class="col-sm-7 ">
+                <input type="number" class="form-control" id="epo_dosage" name="epo_dosage" placeholder="EPO Dosage" ng-model="post.EPODosage" step="any" min="0">
               </div>
             </div>
             <div class="form-group">
-              <label  class="col-xs-12 col-sm-3 control-label">EPO Given By</label>
-              <div class="col-sm-8 ">
-                <input type="text" class="form-control" id="epo_given_by" name="epo_given_by" placeholder="EPO Given By">
+              <label  class="col-xs-12 col-sm-4 control-label">EPO Given By</label>
+              <div class="col-sm-7 ">
+                <input type="text" class="form-control" id="epo_given_by" name="epo_given_by" placeholder="EPO Given By" ng-model="post.EPOGivenBy">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">EPO Supply</label>
-              <div class="col-sm-8">
+              <label class="col-sm-4 control-label">EPO Supply</label>
+              <div class="col-sm-7">
                 <label class="radio-inline">
-                  <input type="radio" name="epo_supply" value="internal">Internal
+                  <input type="radio" name="epo_supply" value="Internal" ng-model="post.EPOSupply">Internal
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="epo_supply"  value="external">External
+                  <input type="radio" name="epo_supply"  value="External" ng-model="post.EPOSupply">External
                 </label>
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">Blood Transfusion  </label>                       
-              <div class="col-sm-8 ">
-                <select name="blood_transfusion" required class="form-control">
+              <label class="col-sm-4 control-label">Blood Transfusion  </label>                       
+              <div class="col-sm-7 ">
+                <select name="blood_transfusion" required class="form-control" ng-model="post.bloodTransfusion">
                   <option value="" selected disabled>-</option>
                   <option value="Yes" >Yes</option>
                   <option value="No" >No</option>
@@ -167,31 +167,31 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">Number of Units</label>                        
-              <div class="col-sm-8">
-                <input type="number" class="form-control" id="number_of_units" name="number_of_units" placeholder="Number of Units">
+              <label class="col-sm-4 control-label">Number of Units</label>                        
+              <div class="col-sm-7">
+                <input type="number" class="form-control" id="number_of_units" name="number_of_units" placeholder="Number of Units" ng-model="post.numberOfUnits">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">Blood Bank Name</label>                        
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="blood_bank_name" name="blood_bank_name" placeholder="Blood Bank Name">
+              <label class="col-sm-4 control-label">Blood Bank Name</label>                        
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="blood_bank_name" name="blood_bank_name" placeholder="Blood Bank Name" ng-model="post.bloodBankName">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">Concluded By</label>                        
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="concluded_by" name="concluded_by" placeholder="Concluded By">
+              <label class="col-sm-4 control-label">Concluded By</label>                        
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="concluded_by" name="concluded_by" placeholder="Concluded By" ng-model="post.concludedBy">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">Any Other Comments</label>                        
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="any_other_comments" name="any_other_comments" placeholder="Any Other Comments">
+              <label class="col-sm-4 control-label">Any Other Comments</label>                        
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="any_other_comments" name="any_other_comments" placeholder="Any Other Comments" ng-model="post.anyOtherComments">
               </div>
             </div>
             <div class="form-group">
-              <div class="col-sm-offset-8 col-sm-2">
+              <div class="col-sm-offset-7 col-sm-2">
                 <button id="postdia_save" type="submit" class="btn btn-primary">Save</button>
               </div>
             </div>

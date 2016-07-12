@@ -6,39 +6,31 @@
         </div>     
 
         <div style="padding-top:30px" class="panel-body bg-warning" >
-
-
             <div class="table-responsive ">
                 <table id="currentBillTable" class="table table-striped table-fixedheader table-bordered" >
                     <thead>
                         <tr>
                             <th style="text-align:center;" width="15%">Date</th>
                             <th style="text-align:center;" width="25%">Clinical Details</th>
-                            <th  style="text-align:center;" width="25%">Comments</th>
-
+                            <th style="text-align:center;" width="25%">Comments</th>
+                            <th style="text-align:center;" width="5%">&nbsp;</th>
                         </tr>    
                     </thead>
                     <tbody >
                         <tr ng-repeat = "event in events" style="height:2px;" >
                             <td width="10%" >{{event.date}}</td>
-                            <td width="25%" >{{event.clinicaldetails}}</td>
+                            <td width="25%" >{{event.details}}</td>
                             <td width="25%">{{event.comments}}</td>
-
-                            <!--<td width="5%"><button type="button" class="btn btn-danger btn-circle" ><span class="glyphicon glyphicon-remove"></span></button></td>-->
+                            <td style="text-align:center;" width="5%"><button class="btn btn-danger" ng-click="removeEvent(event.ID)"><span class="glyphicon glyphicon-remove"></span></button></td>
                         </tr>    
-                        <!-- <a ui-sref="#" ng-model=""> -->
                     </tbody>
                 </table>
             </div>
-
-
             <form class="form-horizontal" name="clinicaleventForm">
-
                 <div class="form-group">
-
                     <label class="col-sm-2 control-label">Clinical Detail</label>                        
                     <div class="col-sm-8">
-                        <textarea  class="form-control" id="clinical_detail" name="clinical_detail" rows="3" placeholder="Clinical detail" ng-model="event.clinicaldetails"></textarea>
+                        <textarea  class="form-control" id="clinical_detail" name="clinical_detail" rows="3" placeholder="Clinical detail" ng-model="event.details"></textarea>
                     </div>
                 </div>
 
@@ -57,9 +49,11 @@
                     </div>
                 </div>
                 <div style="margin-top:20px" class="form-group">
-                    <div class="col-sm-12 col-sm-offset-5">
-                        <a id="clinical_events_save" class="btn btn-primary" ng-click="saveEvent()">Save</a>
-
+                    <div class="col-sm-1 col-sm-offset-8">
+                        <a id="clinical_events_add" class="btn btn-success" ng-click="addEvent()">Add</a>
+                    </div>
+                    <div class="col-sm-1">
+                        <a id="clinical_events_save" class="btn btn-primary" ng-click="saveEvents()">Save</a>
                     </div>
                 </div>
             </form>     

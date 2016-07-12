@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 
 var db = require('../../models');
 
-var panelRouter = express.Router();
+var panelRouter = express.Router({mergeParams:true});
 
 panelRouter.use(bodyParser.json());
 
@@ -13,6 +13,10 @@ panelRouter.use(bodyParser.json());
 //                 id:req.params.id
 //             }
 //         ]
+
+// can add route to fetch all patients panels ie /api/panelDetails
+// or can add route to fetch list of patients under one panel usind route - /api/panels/
+
 panelRouter.route('/')
 .get(function (req, res, next) {
     
@@ -29,8 +33,10 @@ panelRouter.route('/')
 })
 .post(function (req, res, next) {
 	console.log('processing post : '+ req.body);
-    db.panelDetails.build(req.body).save();
-    res.end('panelRouter working'); // send status code
+    db.panelDetails.build(req.body).save().then(function(result){
+        res.json(result);
+    // res.end('panelRouter working'); // send status code
+    });
 })
 .delete(function(req,res,next){
     
@@ -65,7 +71,9 @@ panelRouter.route('/:panelId')
     )
     .then(function (result) { 
         console.log(JSON.stringify(result));
-        res.end("successfully updated")
+        res.json(result);
+        
+        // res.end("successfully updated")
     }, function(rejectedPromiseError){
     
     });

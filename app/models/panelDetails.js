@@ -1,7 +1,25 @@
 /* jshint indent: 2 */
-
+var db = require('./');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('panelDetails', {
+    patientId:{
+      type: DataTypes.STRING,
+      allowNull: false,
+      primaryKey: true,
+      references:{
+        model: 'patientDetails',
+        key: 'id'
+      }
+    },
+    panelId:{
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      primaryKey: true,
+      references:{
+        model: 'panels',
+        key: 'id'
+      }
+    },
     panelPermissionDateFrom: {
       type: DataTypes.DATE,
       allowNull: true

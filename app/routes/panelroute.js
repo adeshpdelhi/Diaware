@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 
 var db = require('../models');
 
-var panelRouter = express.Router();
+var panelRouter = express.Router({mergeParams:true});
 
 panelRouter.use(bodyParser.json());
 
@@ -25,8 +25,10 @@ panelRouter.route('/')
 })
 .post(function (req, res, next) {
 	console.log('processing post : '+ req.body);
-    db.panels.build(req.body).save();
-    res.end('panelRouter working'); // send status code
+    db.panels.build(req.body).save().then(function(result){
+        res.json(result);
+    // res.end('panelRouter working'); // send status code
+    });
 })
 .delete(function(req,res,next){
     
@@ -59,7 +61,7 @@ panelRouter.route('/:panelId')
     )
     .then(function (result) { 
         console.log(JSON.stringify(result));
-        res.end("successfully updated")
+        res.json(result);
     }, function(rejectedPromiseError){
     
     });

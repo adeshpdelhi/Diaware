@@ -27,8 +27,8 @@
 
   }
 </style>
-<div id="regclass" class="container" style="text-align:center; width: 100% ">
-    <div class="row row-content col-sm-10 col-sm-pull-1 col-sm-push-1" ng-init="tab=1">
+<div id="regclass" class="container" style="text-align:center; width: 100%; overflow:hidden;">
+    <div class="row row-content col-sm-10 col-sm-push-1 col-sm-pull-1 " ng-init="tab=1">
         <div class="col-xs-12">
             <ul ng-init="tab = 1" class="nav nav-tabs tab-list" >
                 <li ng-class="{active:tab===1}"> 
@@ -45,6 +45,10 @@
             <div class="tab-content" >
                 <div class="panel panel-info" style="text-align:center;">   
                     <div style="padding-top:30px; " class="panel-body styled " style="background-color:#ffffff ;">
+                        <div class="row">
+                          <label class="col-sm-3 text-capitalize" style="font-size:17px; font-weight:150px; font-family:times;color:rgb(5, 41, 110);">PatientID: {{patient.id}} </label>
+                          <label class="col-sm-9 text-capitalize" style="font-size:17px; font-weight:150px; font-family:times; text-align: left; color:rgb(5, 41, 110)">Patient Name: {{patient.name}}</label>
+                        </div>
                         <div ng-include="'views/monitoring/predialysis.html'" ng-show="tab === 1"></div>
                         <div ng-include="'views/monitoring/intradialysis.html'" ng-show="tab === 2"></div>
                         <div ng-include="'views/monitoring/postdialysis.html'" ng-show="tab === 3"></div>

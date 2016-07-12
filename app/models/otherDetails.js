@@ -2,10 +2,14 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('otherDetails', {
-    patientId: {
+    patientId:{
       type: DataTypes.STRING,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      references:{
+        model: 'patientDetails',
+        key: 'id'
+      }
     },
     PAN: {
       type: DataTypes.STRING,

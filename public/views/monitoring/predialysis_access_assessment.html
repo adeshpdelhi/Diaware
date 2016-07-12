@@ -1,83 +1,83 @@
-<form class="form-horizontal" role="form">
-<div class="form-group">
-<label class="col-sm-3 control-label">Bruit/Thrill </label>
-   <div class="col-sm-8">
-	<label class="radio-inline">
-	  <input type="radio" name="bruit/thrill" value="good">Good
-	</label>
-	<label class="radio-inline">
-	  <input type="radio" name="bruit/thrill"  value="fair">Fair
-	</label>
-	<label class="radio-inline">
-	  <input type="radio" name="bruit/thrill" value="poor">Poor
-	</label>
-	<label class="radio-inline">
-	  <input type="radio" name="bruit/thrill"  value="absent">Absent
-	</label>
-	   </div>
-</div>
-
-<div class="form-group">
-        <label class="col-xs-12 col-sm-3 control-label">Any abnormality noticed</label>
+<form class="form-horizontal" role="form" ng-controller="MonitoringPreAccessAssessmentController" ng-submit="saveAccessAssessment()">
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Bruit/Thrill </label>
         <div class="col-sm-8">
-            <input required type="text" class="form-control" id="any_abnormality_noticed" name="any_abnormality_noticed" placeholder="Any abnormality noticed">
+            <label class="radio-inline">
+                <input type="radio" name="bruit/thrill" value="Good" ng-model="accessAssessment.bruit">Good
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="bruit/thrill"  value="Fair" ng-model="accessAssessment.bruit">Fair
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="bruit/thrill" value="Poor" ng-model="accessAssessment.bruit">Poor
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="bruit/thrill"  value="Absent" ng-model="accessAssessment.bruit" >Absent
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-12 col-sm-4 col-sm-pull-1 control-label">Any abnormality noticed</label>
+        <div class="col-sm-8 col-sm-pull-1">
+            <input required type="text" class="form-control" id="any_abnormality_noticed" name="any_abnormality_noticed" placeholder="Any abnormality noticed" ng-model="accessAssessment.anyAbnormality">
         </div>
     </div>
 
 
- <div class="form-group">
-         
-        <label class="col-sm-3 control-label">Signs of access Infection</label>                       
-        <div class="col-sm-8 ">
-            <select name="signs_of_access_infection" required class="form-control">
+    <div class="form-group">
+
+    <label class="col-sm-4 col-sm-pull-1 control-label">Signs of access Infection</label>              
+        <div class="col-sm-8 col-sm-pull-1">
+            <select name="signs_of_access_infection" required class="form-control" ng-model="accessAssessment.signOfAccessInfection">
                 <option value="" selected disabled>-</option>
-                <option value="yes" >Yes</option>
-                <option value="no" >No</option>
+                <option value="Yes" >Yes</option>
+                <option value="No" >No</option>
             </select>
         </div>
-		</div>
-		
-		
-		
-		<div class="form-group">
-<label class="col-sm-3 control-label">Cannulation </label>
-   <div class="col-sm-8">
-	<label class="radio-inline">
-	  <input type="radio" name="cannulation" value="no_problem">No Problem
-	</label>
-	<label class="radio-inline">
-	  <input type="radio" name="cannulation"  value="re-attempted/inserted_X_(1)_or_(2)">Re- attempted / inserted X (1) or (2)
-	</label>
-	
-	   </div>
-</div>
-		
-		
-		
-		<div class="form-group">
-         
-        <label class="col-sm-3 control-label">Central Line Status</label>                       
-        <div class="col-sm-8 ">
-            <select name="central_line_status" required class="form-control">
+    </div>
+
+
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Cannulation </label>
+        <div class="col-sm-8">
+            <label class="radio-inline">
+                <input type="radio" name="cannulation" value="no_problem" ng-model="accessAssessment.cannulation">No Problem
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="cannulation"  value="re-attempted/inserted_X_(1)_or_(2)" ng-model="accessAssessment.cannulation">Re- attempted / inserted X (1) or (2)
+            </label>
+
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+
+        <label class="col-sm-4 col-sm-pull-1 control-label">Central Line Status</label>                       
+        <div class="col-sm-8 col-sm-pull-1">
+            <select name="central_line_status" required class="form-control" ng-model="accessAssessment.centralLineStatus">
                 <option value="" selected disabled>-</option>
-                <option value="normal_flow" >Normal flow</option> 
-                <option value="reverse_flow" >Reverse flow</option>
+                <option value="NormalFlow" >Normal flow</option> 
+                <option value="ReverseFlow" >Reverse flow</option>
             </select>
         </div>
-		</div>
-		
+    </div>
+
 
     <div class="form-group">
         <label class="col-xs-12 col-sm-3 control-label">Commenced By</label>
         <div class="col-sm-8">
-            <input required type="text" class="form-control" id="commenced_by" name="commenced_by" placeholder="Commenced By">
+            <input required type="text" class="form-control" id="commenced_by" name="commenced_by" placeholder="Commenced By" ng-model="accessAssessment.commencedBy">
         </div>
     </div>
-	
-	<div class="form-group">
+
+    <div class="form-group">
         <label class="col-xs-12 col-sm-3 control-label">Assissted By</label>
         <div class="col-sm-8">
-            <input required type="text" class="form-control" id="assissted_by" name="assissted_by" placeholder="Assissted By">
+            <input required type="text" class="form-control" id="assissted_by" name="assissted_by" placeholder="Assissted By" ng-model="accessAssessment.assistedBy">
         </div>
     </div>
     <div class="form-group">

@@ -1,11 +1,73 @@
 -- drop database diaware;
 -- create database diaware;
 use diaware;
-insert into centres (id, name,location,maxPatients, patientCount) values('JP1',"Apex Jaipur","malviya nagar",50,2);
+insert into centres (id, name,location,maxPatients,accessLinesAvailable, patientCount,noOfShiftsPerDay) values('JP1',"Apex Jaipur","malviya nagar",50,"femoral,fistoral,IJ,central",2,3);
 insert into patientDetails (id,name,contact,lastModifiedBy,centreId) values("JP1-2016-1","adesh","987654321","aish", "JP1");
 insert into bills(transactionId,status,amount,lastModifiedBy,patientId) values(1,"Paid",26.89,"aish","JP1-2016-1");
-insert into centres( id, name,location,maxPatients, patientCount) values("CH","chandigarh","chandigarh",50,1);
+insert into centres( id, name,location,maxPatients,accessLinesAvailable, patientCount,noOfShiftsPerDay) values("CH","chandigarh","chandigarh",50,"femoral,fistoral,IJ",1,4);
 insert into panels (id, name, details) values(1,"cghs","govt");
 insert into panels (id, name, details) values(2,"bahmas","govt");
 insert into panels (id, name, details) values(3,"xxx","govt");
+insert into panelDetails(patientId,panelId,panelPermissionNumber,lastModifiedBy) values("JP1-2016-1",1,284883,"aish");
+insert into medicalHistory(patientId,diseaseName,diseasePresent,lastModifiedBy) values("JP1-2016-1","xxx","Yes","aish");
+insert into otherDetails(patientId,PAN,	aadhar,lastModifiedBy) values("JP1-2016-1","JP3382893","JP-29282HJ2","aish");
+insert into majorClinicalEvents(patientId, lastModifiedBy, details) values('JP1-2016-1',"aish","a");
+insert into dialyzateTypes(dialyzateType) value ("dialyzatetype1");
+insert into dialyzateTypes(dialyzateType) value ("dialyzatetype2");
+insert into dialyzateTypes(dialyzateType) value ("dialyzatetype3");
+insert into dialysisTypes(dialysisType) value ("dialysistype1");
+insert into dialysisTypes(dialysisType) value ("dialysistype2");
+insert into dialysisTypes(dialysisType) value ("dialysistype3");
+insert into transactionTypes(transactionType) value ("Dialysis");
+insert into transactionTypes(transactionType) value ("Pharmacy");
+insert into transactionTypes(transactionType) value ("Consumable");
+insert into transactionTypes(transactionType) value ("Procedure");
+insert into pharmacyTypes(pharmacyType) value ("pharmacytype1");
+insert into pharmacyTypes(pharmacyType) value ("pharmacytype2");
+insert into pharmacyTypes(pharmacyType) value ("pharmacytype3");
+insert into procedureTypes(procedureType) value ("proceduretype1");
+insert into procedureTypes(procedureType) value ("proceduretype2");
+insert into procedureTypes(procedureType) value ("proceduretype3");
+insert into consumableTypes(consumableType) value ("consumabletype1");
+insert into consumableTypes(consumableType) value ("consumabletype2");
+insert into consumableTypes(consumableType) value ("consumabletype3");
+insert into monitoringChartPreBasic(patientId,monitoringDate,machineNumber,bedNumber,lastModifiedBy) values("JP1-2016-1", "12-30-2016",1,1,"aish");
+insert into monitoringChartPreBasicMedical(preBasicId,patientId,dialyzerName,dialyzerType,accessUsed,lastModifiedBy) values(1,"JP1-2016-1", "xxx","type1","femoral","aish");
+insert into monitoringChartPreMachineFinalCheck(preBasicId,patientId,machineNumber,machineTestPassed,lastModifiedBy) values(1, "JP1-2016-1",1,"Yes","aish");
+insert into monitoringChartPreAssessment(preBasicId,patientId,preHDWeight,lastPostHDWeight,dryWeight,physicalChestPain,lastModifiedBy) values(1,"JP1-2016-1", 45.5,40.2,40,"Yes","aish");
+insert into monitoringChartPreAccessAssessment(preBasicId,patientId,bruit,anyAbnormality,commencedBy,assistedBy,lastModifiedBy) values(1, "JP1-2016-1","Good","No","adesh","Rishabh","aish");
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("1",6,6);
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("2",6,2);
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("3",6,4);
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("4",6,5);
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("5",6,3);
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("6",6,3);
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("7",6,2);
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("8",6,4);
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("9",6,5);
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("10",6,6);
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("11",6,6);
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("12",6,6);
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("13",6,6);
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("14",6,6);
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("15",6,6);
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("16",6,6);
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("17",6,6);
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("18",6,6);
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("19",6,6);
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("20",6,6);
+insert into shifts(id,OPDTotalNegativeMachines,OPDAvailableNegativeMachines) values("21",6,6);
+insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id) values('JP1',"Monday","1",'2','3');
+insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id) values('JP1',"Tuesday","4",'5','6');
+insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id) values('JP1',"Wednesday","7",'8','9');
+insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id) values('JP1',"Thursday","10",'11','12');
+insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id) values('JP1',"Friday","13",'14','15');
+insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id) values('JP1',"Saturday","18",'17','16');
+insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id) values('JP1',"Sunday","19",'20','21');
+
+
+
+
+
+
 

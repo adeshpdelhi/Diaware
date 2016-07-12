@@ -1,40 +1,40 @@
 
-<div id="Registerbox" style="margin-top:20px;" class="mainbox col-sm-12">                    
+<div id="Registerbox" style="margin-top:20px;" class="mainbox col-sm-12" ng-controller="MedicalController">                    
     <div class="panel" >
         <div class="panel-heading">
             <div class="panel-title"><b>Medical History</b></div>
             <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
         </div>     
 
-        <div style="padding-top:30px" class="panel-body bg-warning" >
-            <form class="form-horizontal" role="form">
+        <div style="padding-top:30px" class="panel-body" >
+            <form class="form-horizontal" role="form" name="medicalForm">
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Diabetes</label>
                     <div class="col-sm-3">
                         <label class="radio-inline">
-                            <input type="radio" name="diabetes_radio" value="Yes">Yes
+                            <input type="radio" name="diabetes_radio" value="Yes" ng-model="newPatient_Medical.diabetes">Yes
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="diabetes_radio"  value="No">No
+                            <input type="radio" name="diabetes_radio"  value="No" ng-model="newPatient_Medical.diabetes">No
                         </label>
                     </div>
                     <div class="col-sm-6">
-                        <input required type="text" class="form-control" id="diabetes_comments" name="diabetes_comments" placeholder="Comments">
+                        <input required type="text" class="form-control" id="diabetes_comments" name="diabetes_comments" ng-model="newPatient_Medical.diabetesComments" placeholder="Comments">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Hypertension</label>
                     <div class="col-sm-3">
                         <label class="radio-inline">
-                            <input type="radio" name="hypertension_radio"  value="Yes">Yes
+                            <input type="radio" name="hypertension_radio"  value="Yes" ng-model="newPatient_Medical.hypertension">Yes
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="hypertension_radio"  value="No">No
+                            <input type="radio" name="hypertension_radio"  value="No" ng-model="newPatient_Medical.hypertension">No
                         </label>
                     </div>
                     <div class="col-sm-6">
 
-                        <input required type="text" class="form-control" id="hypertension_comments" name="hypertension_comments" placeholder="Comments">
+                        <input required type="text" class="form-control" id="hypertension_comments" name="hypertension_comments" ng-model="newPatient_Medical.hypertensionComments" placeholder="Comments">
 
                     </div>
 
@@ -44,15 +44,16 @@
                     <label class="col-sm-3 control-label">Coronary Artery Disease</label>
                     <div class="col-sm-3">
                         <label class="radio-inline">
-                            <input type="radio" name="coronary_artery_disease_radio"  value="Yes">Yes
+                            <input type="radio" name="coronary_artery_disease_radio"  value="Yes" ng-model="newPatient_Medical.coronaryArteryDisease">Yes
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="coronary_artery_disease_radio"  value="No">No
+                            <input type="radio" name="coronary_artery_disease_radio"  value="No" ng-model="newPatient_Medical.coronaryArteryDisease">No
                         </label>
                     </div>
                     <div class="col-sm-6">
 
-                        <input required type="text" class="form-control" id="coronary_artery_disease_radio_comments" name="coronary_artery_disease_radio_comments" placeholder="Comments">
+                        <input required type="text" class="form-control" id="coronary_artery_disease_radio_comments" name="coronary_artery_disease_radio_comments" 
+                        ng-model="newPatient_Medical.coronaryArteryDiseaseComments" placeholder="Comments">
 
                     </div>
 
@@ -61,15 +62,16 @@
                     <label class="col-sm-3 control-label">Peripheral Neuropathy</label>
                     <div class="col-sm-3">
                         <label class="radio-inline">
-                            <input type="radio" name="peripheral_neuropathy_radio"  value="Yes">Yes
+                            <input type="radio" name="peripheral_neuropathy_radio"  value="Yes" ng-model="newPatient_Medical.peripheralNeuropathy">Yes
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="peripheral_neuropathy_radio"  value="No">No
+                            <input type="radio" name="peripheral_neuropathy_radio"  value="No" ng-model="newPatient_Medical.peripheralNeuropathy">No
                         </label>
                     </div>
                     <div class="col-sm-6">
 
-                        <input required type="text" class="form-control" id="peripheral_neuropathy_comments" name="peripheral_neuropathy_comments" placeholder="Comments">
+                        <input required type="text" class="form-control" id="peripheral_neuropathy_comments" name="peripheral_neuropathy_comments" 
+                        ng-model="newPatient_Medical.peripheralNeuropathyComments" placeholder="Comments">
 
                     </div>
 
@@ -78,15 +80,16 @@
                     <label class="col-sm-3 control-label">RatiNopathy/Vision</label>
                     <div class="col-sm-3">
                         <label class="radio-inline">
-                            <input type="radio" name="ratinopathy/vision_radio"  value="Yes">Yes
+                            <input type="radio" name="ratinopathy_radio"  value="Yes" ng-model="newPatient_Medical.ratinopathy">Yes
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="ratinopathy/vision_radio"  value="No">No
+                            <input type="radio" name="ratinopathy_radio"  value="No" ng-model="newPatient_Medical.ratinopathy">No
+
                         </label>
                     </div>
                     <div class="col-sm-6">
 
-                        <input required type="text" class="form-control" id="ratiNopathy/vision_comments" name="ratiNopathy/vision_comments" placeholder="Comments">
+                        <input required type="text" class="form-control" id="ratiNopathy_comments" name="ratiNopathy_comments" ng-model="newPatient_Medical.ratinopathyComments" placeholder="Comments">
 
                     </div>
 
@@ -96,15 +99,16 @@
                     <label class="col-sm-3 control-label">Cerebrovascular Disease</label>
                     <div class="col-sm-3">
                         <label class="radio-inline">
-                            <input type="radio" name="cerebrovascular_disease_radio"  value="Yes">Yes
+                            <input type="radio" name="cerebrovascular_disease_radio"  value="Yes" ng-model="newPatient_Medical.cerebrovascularDiseasen">Yes
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="cerebrovascular_disease_radio"  value="No">No
+                            <input type="radio" name="cerebrovascular_disease_radio"  value="No" ng-model="newPatient_Medical.cerebrovascularDisease">No
                         </label>
                     </div>
                     <div class="col-sm-6">
 
-                        <input required type="text" class="form-control" id="cerebrovascular_disease_comments" name="cerebrovascular_disease_comments" placeholder="Comments">
+                        <input required type="text" class="form-control" id="cerebrovascular_disease_comments" name="cerebrovascular_disease_comments" 
+                        ng-model="newPatient_Medical.cerebrovascularDiseaseComments" placeholder="Comments">
 
                     </div>
 
@@ -113,15 +117,16 @@
                     <label class="col-sm-3 control-label">Respiratory Disease</label>
                     <div class="col-sm-3">
                         <label class="radio-inline">
-                            <input type="radio" name="respiratory_disease_radio"  value="Yes">Yes
+                            <input type="radio" name="respiratory_disease_radio"  value="Yes" ng-model="newPatient_Medical.respiratoryDisease">Yes
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="respiratory_disease_radio"  value="No">No
+                            <input type="radio" name="respiratory_disease_radio"  value="No" ng-model="newPatient_Medical.respiratoryDisease">No
                         </label>
                     </div>
                     <div class="col-sm-6">
 
-                        <input required type="text" class="form-control" id="respiratory_disease_comments" name="respiratory_disease_comments" placeholder="Comments">
+                        <input required type="text" class="form-control" id="respiratory_disease_comments" name="respiratory_disease_comments" 
+                        ng-model="newPatient_Medical.respiratoryDiseaseComments" placeholder="Comments">
                     </div>
                 </div>
 
@@ -129,37 +134,34 @@
                     <label class="col-sm-3 control-label">Malignancy</label>
                     <div class="col-sm-3">
                         <label class="radio-inline">
-                            <input type="radio" name="malignancy_radio"  value="Yes">Yes
+                            <input type="radio" name="malignancy_radio"  value="Yes" ng-model="newPatient_Medical.malignancy">Yes
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="malignancy_radio"  value="No">No
+                            <input type="radio" name="malignancy_radio"  value="No" ng-model="newPatient_Medical.malignancy">No
                         </label>
                     </div>
                     <div class="col-sm-6">
 
-                        <input required type="text" class="form-control" id="malignancy_comments" name="malignancy_comments" placeholder="Comments">
+                        <input required type="text" class="form-control" id="malignancy_comments" name="malignancy_comments" 
+                        ng-model="newPatient_Medical.malignancyComments" placeholder="Comments">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">HaemoglobiNopathy</label>
                     <div class="col-sm-3">
                         <label class="radio-inline">
-<<<<<<< HEAD
-                            <input type="radio" name="haemoglobinopathy_radio"  value="Yes">Yes
+
+                            <input type="radio" name="haemoglobinopathy_radio"  value="Yes" ng-model="newPatient_Medical.haemoglobiNopathy">Yes
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="haemoglobinopathy_radio"  value="No">No
-=======
-                            <input type="radio" name="haemoglobiNopathy_radio"  value="Yes">Yes
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="haemoglobiNopathy_radio"  value="No">No
->>>>>>> 6ba1d020174f9f8de04b3ad83feb61f193fc2903
+                            <input type="radio" name="haemoglobinopathy_radio"  value="No" ng-model="newPatient_Medical.haemoglobiNopathy">No
+
                         </label>
                     </div>
                     <div class="col-sm-6">
 
-                        <input required type="text" class="form-control" id="haemoglobiNopathy_comments" name="haemoglobiNopathy_comments" placeholder="Comments">
+                        <input required type="text" class="form-control" id="haemoglobiNopathy_comments" name="haemoglobiNopathy_comments"
+                        ng-model="newPatient_Medical.haemoglobiNopathyComments" placeholder="Comments">
 
                     </div>
 
@@ -169,15 +171,16 @@
                     <label class="col-sm-3 control-label">Peripheral Vascular Disease</label>
                     <div class="col-sm-3">
                         <label class="radio-inline">
-                            <input type="radio" name="peripheral_vascular_disease_radio"  value="Yes">Yes
+                            <input type="radio" name="peripheral_vascular_disease_radio"  value="Yes" ng-model="newPatient_Medical.peripheralVascularDisease">Yes
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="peripheral_vascular_disease_radio"  value="No">No
+                            <input type="radio" name="peripheral_vascular_disease_radio"  value="No" ng-model="newPatient_Medical.peripheralVascularDisease">No
                         </label>
                     </div>
                     <div class="col-sm-6">
 
-                        <input required type="text" class="form-control" id="peripheral_vascular_disease_comments" name="peripheral_vascular_disease_comments" placeholder="Comments">
+                        <input required type="text" class="form-control" id="peripheral_vascular_disease_comments" name="peripheral_vascular_disease_comments" 
+                        ng-model="newPatient_Medical.peripheralVascularDiseaseComments" placeholder="Comments">
 
                     </div>
 
@@ -186,15 +189,16 @@
                     <label class="col-sm-3 control-label">Hepatitis B</label>
                     <div class="col-sm-3">
                         <label class="radio-inline">
-                            <input type="radio" name="hepatitis_b_radio"  value="Yes">Yes
+                            <input type="radio" name="hepatitis_b_radio"  value="Yes" ng-model="newPatient_Medical.hepatitisB">Yes
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="hepatitis_b_radio"  value="No">No
+                            <input type="radio" name="hepatitis_b_radio"  value="No" ng-model="newPatient_Medical.hepatitisB">No
                         </label>
                     </div>
                     <div class="col-sm-6">
 
-                        <input required type="text" class="form-control" id="hepatitis_b_comments" name="hepatitis_b_comments" placeholder="Comments">
+                        <input required type="text" class="form-control" id="hepatitis_b_comments" name="hepatitis_b_comments" 
+                        ng-model="newPatient_Medical.hepatitisBComments"    placeholder="Comments">
 
                     </div>
 
@@ -205,15 +209,16 @@
                     <label class="col-sm-3 control-label">Hepatitis C</label>
                     <div class="col-sm-3">
                         <label class="radio-inline">
-                            <input type="radio" name="hepatitis_c_radio"  value="Yes">Yes
+                            <input type="radio" name="hepatitis_c_radio"  value="Yes" ng-model="newPatient_Medical.hepatitisC">Yes
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="hepatitis_c_radio"  value="No">No
+                            <input type="radio" name="hepatitis_c_radio"  value="No" ng-model="newPatient_Medical.hepatitisC">No
                         </label>
                     </div>
                     <div class="col-sm-6">
 
-                        <input required type="text" class="form-control" id="hepatitis_c_comments" name="hepatitis_c_comments" placeholder="Comments">
+                        <input required type="text" class="form-control" id="hepatitis_c_comments" name="hepatitis_c_comments"
+                        ng-model="newPatient_Medical.hepatitisCComments" placeholder="Comments">
 
                     </div>
 
@@ -223,15 +228,15 @@
                     <label class="col-sm-3 control-label">HIV</label>
                     <div class="col-sm-3">
                         <label class="radio-inline">
-                            <input type="radio" name="hiv_radio"  value="Yes">Yes
+                            <input type="radio" name="hiv_radio"  value="Yes" ng-model="newPatient_Medical.HIV"> Yes
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="hiv_radio"  value="No">No
+                            <input type="radio" name="hiv_radio"  value="No" ng-model="newPatient_Medical.HIV">No
                         </label>
                     </div>
                     <div class="col-sm-6">
 
-                        <input required type="text" class="form-control" id="hiv_comments" name="hiv_comments" placeholder="Comments">
+                        <input required type="text" class="form-control" id="hiv_comments" name="hiv_comments" ng-model="newPatient_Medical.HIVComments" placeholder="Comments">
 
                     </div>
 
@@ -242,51 +247,71 @@
                     <label class="col-sm-3 control-label">Malnutrition</label>
                     <div class="col-sm-3">
                         <label class="radio-inline">
-                            <input type="radio" name="malnutrition_radio"  value="Yes">Yes
+                            <input type="radio" name="malnutrition_radio"  value="Yes" ng-model="newPatient_Medical.malnutrition">Yes
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="malnutrition_radio"  value="No">No
+                            <input type="radio" name="malnutrition_radio"  value="No" ng-model="newPatient_Medical.malnutrition">No
                         </label>
                     </div>
                     <div class="col-sm-6">
 
-                        <input required type="text" class="form-control" id="malnutrition_comments" name="malnutrition_comments" placeholder="Comments">
+                        <input required type="text" class="form-control" id="malnutrition_comments" name="malnutrition_comments" 
+                        ng-model="newPatient_Medical.malnutritionComments" placeholder="Comments">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Drug alergy</label>
                     <div class="col-sm-3">
                         <label class="radio-inline">
-                            <input type="radio" name="drug_alergy_radio"  value="Yes">Yes
+                            <input type="radio" name="drug_alergy_radio"  value="Yes" ng-model="newPatient_Medical.drugAllergy">Yes
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="drug_alergy_radio"  value="No">No
+                            <input type="radio" name="drug_alergy_radio"  value="No" ng-model="newPatient_Medical.drugAllergy">No
                         </label>
                     </div>
                     <div class="col-sm-6">
 
-                        <input required type="text" class="form-control" id="drug_alergy_comments" name="drug_alergy_comments" placeholder="Comments">
+                        <input required type="text" class="form-control" id="drug_alergy_comments" name="drug_alergy_comments"
+                        ng-model="newPatient_Medical.drugAllergyComments" placeholder="Comments">
                     </div>
 
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Others</label>
-                    <div class="col-sm-3">
-                        <label class="radio-inline">
-                            <input type="radio" name="others_radio"  value="Yes">Yes
+                <div class="form-group" ng-repeat="other in others">
+                    <label class="col-sm-3 control-label text-capitalize">{{other.diseaseName}} {{other.diseasePresent}}</label>
+                    <div class="col-sm-3" ng-init>
+                        <label class="radio-inline" >
+                            <input type="radio" name="others_radio"  value="Yes" ng-model="other.diseasePresent">Yes
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="others_radio"  value="No">No
+                            <input type="radio" name="others_radio"  value="No" ng-model="other.diseasePresent">No
                         </label>
                     </div>
                     <div class="col-sm-6">
-                        <input required type="text" class="form-control" id="others_comments" name="others_comments" placeholder="Comments">
+                        <input required type="text" class="form-control" id="others_comments" name="others_comments" 
+                        ng-model="other.doctorComments" placeholder="Comments">
                     </div>
+                </div>
+                <hr style="border-top:1px solid rgb(225,225,225);" />    
+                <div class="form-group" ng-form="otherForm">
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">Others Diseases Happened to Patient in Past </label>
+                        <div class="col-sm-5">
+                            <input required type="text" class="form-control" id="others_name" name="others_name" 
+                            ng-model="other.diseaseName" placeholder="Name Of Disease/Description">
+                        </div>
+                    </div>
+                    <div class=" form-group ">
+                        <div class="col-sm-9 col-sm-push-1 col-sm-pull-1">
+                            <input required type="text" class="form-control" id="others_comments" name="others_comments" 
+                        ng-model="other.doctorComments" placeholder="Comments">
+                        </div>
+                        <button id="medical_history_save col-sm-2 col-sm-pull-1" class="btn btn-success" ng-click="addOthers()">Add Others</button> 
+                    </div>
+                    <hr style="border-top:1px solid rgb(225,225,225); padding-top:25px;" />    
                 </div>
                 <div class="form-group">                   
                     <div class="col-sm-offset-5 col-sm-10">
-                        <center><a id="medical_history_save" href="#" class="btn btn-primary">Save</a></center>
-
+                        <button id="medical_history_save" class="btn btn-primary" ng-click="saveMedical()">Save</button> 
                     </div>
                 </div>
             </form>

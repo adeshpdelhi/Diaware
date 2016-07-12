@@ -1,6 +1,6 @@
 'use strict';
 //add resolve objects
-angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap'])
+angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMaterial', 'ngMessages'])
 .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
             // route for the home page
@@ -153,10 +153,42 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap'])
                         templateUrl:'views/billing/viewBillDetails.html',
                         controller:'ViewBillDetailsController',
                         resolve:{
-                            bill:['$stateParams','billFactory', function($stateParams,billFactory){
-                                return billFactory.getBills().get({id:parseInt($stateParams.id)})
+                            bill:['$stateParams','billFactory','authorize', function($stateParams,billFactory,authorize){
+                                return billFactory.getBills(authorize.getCentre()).get({id:parseInt($stateParams.id)})
                             }]
                         }
+                    }
+                }
+            })
+            .state('app.admin',{
+                url:"admin",
+                views:{
+                    'content@':{
+                        templateUrl:'views/admin/editDataBase.html',
+                        controller:'DataBaseController'
+                    }
+                }
+            })
+            .state('app.appointment',{
+                url:"appointment/",
+                views:{
+                    'content@':{
+                        templateUrl:'views/appointments/appointment.html',
+                        controller:'AppointmentController',
+                        resolve:{
+                            patient:['authorize','patientFactory','choosePatientFactory', function(authorize,patientFactory,choosePatientFactory){
+                                return patientFactory.getPatients(authorize.getCentre()).get({id:choosePatientFactory.getChosenPatient().id});
+                            }]
+                        }
+                    }
+                }
+            })
+            .state('app.appointment.viewAppointments',{
+                url:"viewAppointments",
+                views:{
+                    'content@':{
+                        templateUrl:'views/appointments/viewAppointment.html',
+                        controller:'ViewAppointmentsController'
                     }
                 }
             })

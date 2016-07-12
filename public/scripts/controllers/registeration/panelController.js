@@ -20,7 +20,7 @@ angular.module('App')
 			$scope.newPatient_Panel.lastModifiedBy = $scope.newpatient_basic.lastModifiedBy;
 			$scope.newPatient_Panel.patientId = $scope.newpatient_basic.id; 
 			console.log($scope.newPatient_Panel);
-			patientFactory.getPatientPanels($scope.newPatient_Panel.patientId).save($scope.newPatient_Panel);
+			patientFactory.getPatientPanels($scope.newPatient_Panel.patientId,authorize.getCentre()).save($scope.newPatient_Panel);
 		};
 
 }])

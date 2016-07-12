@@ -37,6 +37,15 @@ module.exports = function(sequelize, DataTypes) {
     patientCount:{
       type:DataTypes.INTEGER(11),
       allowNull:true
+    },
+    noOfShiftsPerDay:{
+      type:DataTypes.INTEGER(11),
+      allowNull:false,
+      default:3,
+      validate:{
+        min:1,
+        max:6
+      }
     }
   }, {
     tableName: 'centres'

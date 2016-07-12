@@ -1,13 +1,13 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('transactionType', {
-    type: {
+  return sequelize.define('dialysisTypes', {
+    dialysisType: {
       type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true
     }
   }, {
-    tableName: 'transactionType'
+    tableName: 'dialysisTypes'
   });
 };
