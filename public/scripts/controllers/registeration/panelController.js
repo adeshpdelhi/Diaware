@@ -12,6 +12,7 @@ angular.module('App')
 			renewalDate:null,
 			lastModifiedBy:null
 		};
+		$scope.showalert_panel=false;
 		backendFactory.getPanels().query(function(response){
 			$scope.panels = response;
 			console.log(response);
@@ -21,6 +22,7 @@ angular.module('App')
 			$scope.newPatient_Panel.patientId = $scope.newpatient_basic.id; 
 			console.log($scope.newPatient_Panel);
 			patientFactory.getPatientPanels($scope.newPatient_Panel.patientId,authorize.getCentre()).save($scope.newPatient_Panel);
+			$scope.showalert_panel=true;
 		};
 
 }])

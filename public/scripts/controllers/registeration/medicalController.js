@@ -35,6 +35,7 @@ angular.module('App')
 		// others:null,
 		// othersComments:null
 	};
+	$scope.showalert_medical=false;
 	var medicalHistory= {
 		patientId:$scope.newpatient_basic,
 		diseaseName:null,
@@ -51,6 +52,7 @@ angular.module('App')
 		lastModifiedBy:null
 	};
 	$scope.addOthers = function(){
+		$scope.showalert_medical=false;
 		$scope.other.patientId = $scope.newpatient_basic.id;
 		$scope.other.lastModifiedBy = $scope.newpatient_basic.lastModifiedBy;
 		$scope.others.push($scope.other);
@@ -64,6 +66,7 @@ angular.module('App')
 		$scope.otherForm.$setPristine();
 	}
 	var saveOthers = function(){
+		$scope.showalert_medical=false;
 		for(var i = 0; i< $scope.others.length;i++){
 			console.log($scope.others[i]);
 				patientFactory.getPatientMedicalHistory($scope.others[i].patientId,authorize.getCentre()).save($scope.others[i]);
@@ -101,6 +104,7 @@ angular.module('App')
 			i++;
 		}
 		saveOthers();
+		$scope.showalert_medical=true;
 	}
 
 }])

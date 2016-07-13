@@ -1,6 +1,7 @@
 'use strict';
 angular.module('App')
 .controller('ClinicalEventController',['$scope','patientFactory', 'authorize', function($scope,patientFactory,authorize){
+		$scope.showalert_events=false;
 		$scope.events=[];
 		$scope.event = {
 			ID:null,
@@ -11,6 +12,7 @@ angular.module('App')
 		};
 		var cnt = 0;
 		$scope.addEvent = function(){
+			$scope.showalert_events=false;
 			$scope.event.ID = cnt++;
 			$scope.event.patientId = $scope.newpatient_basic.id;
 			$scope.event.lastModifiedBy = $scope.newpatient_basic.lastModifiedBy;
@@ -26,6 +28,7 @@ angular.module('App')
 	        };
 		}
 		$scope.removeEvent = function(id){
+			$scope.showalert_events=false;
 		    for (var i = $scope.events.length - 1; i >= 0; i--) {
                 if($scope.events[i].ID == id){
                 	if($scope.events[i].saved)
@@ -71,7 +74,9 @@ angular.module('App')
 				comments:"",
 				saved:false
 	        };
+			$scope.showalert_events=true;
 		};
+		
 		
 
 }])

@@ -18,6 +18,7 @@ angular.module('App')
 			otherCard3Data:null,
 			lastModifiedBy:null
 		};
+		$scope.showalert_others=false;
 		$scope.saveOtherDetails = function(){
 			console.log("hello"+$scope.newPatient_Others.PANData);
 			$scope.newPatient_Others.patientId = $scope.newpatient_basic.id;
@@ -26,6 +27,7 @@ angular.module('App')
 			console.log($scope.newPatient_Others.patientId);
 			console.log($scope.newPatient_Others);
 			patientFactory.getPatientOtherDetails($scope.newPatient_Others.patientId,authorize.getCentre()).save($scope.newPatient_Others);
+			$scope.showalert_others=true;
 		};
 		$scope.saveFile = function(element){
 			// var reader = new FileReader();
