@@ -66,8 +66,8 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                 url:'view',
                 views: {
                     'content@': {
-                        templateUrl : 'views/registration/viewregister.html',
-                        controller : 'ViewRegistrationController'
+                        templateUrl : 'views/registration/ViewRegistration/view.html',
+                        controller : 'NewRegistrationController'
                     }
                 }
 
