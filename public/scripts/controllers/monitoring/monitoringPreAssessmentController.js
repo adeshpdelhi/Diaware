@@ -35,6 +35,7 @@ angular.module('App')
 		generalComments:null,
 		lastModifiedBy:null
 	};
+	$scope.showalert_predialysis_assessment=false;
     $scope.$watch('assessment.preHDWeight',function(newVal1, oldval1){
 			$scope.$watch('assessment.lastPostHDWeight',function(newVal2,oldval2){
 				console.log(newVal1 +" " + newVal2);
@@ -52,7 +53,16 @@ angular.module('App')
 		$scope.assessment.preBasicId = $scope.basic.preBasicId;
 		$scope.assessment.lastModifiedBy = authorize.getUsername();
 		console.log($scope.assessment);
-		monitoringChartFactory.getPreAssessments($scope.basic.preBasicId).save($scope.assessment);
+		monitoringChartFactory.getPreAssessments($scope.basic.preBasicId).save($scope.assessment).$promise.then(function(response){
+			$scope.showalert_predialysis_assessment=true;
+			},function(response){
+				$scope.showalert_predialysis_assessment=false;
+				console.log(response);
+			}
+			
+			);;
+		//$scope.showalert_predialysis_assessment=true;
+
 	};
 }])
 ;

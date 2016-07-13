@@ -67,7 +67,7 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                 views: {
                     'content@': {
                         templateUrl : 'views/registration/ViewRegistration/view.html',
-                        controller : 'NewRegistrationController'
+                        controller : 'ViewRegistrationController'
                     }
                 }
 
@@ -104,8 +104,8 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                 url:'view',
                 views: {
                     'content@': {
-                        templateUrl : 'views/monitoring/viewmonitoringchart.html',
-                        controller : 'MonitoringController'
+                        templateUrl : 'views/monitoring/ViewMonitoringChart/viewmonitoringchart.html',
+                        controller : 'ViewMonitoringController'
                     }
                 }
 
