@@ -1,6 +1,6 @@
 'use strict';
 //add resolve objects
-angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMaterial', 'ngMessages'])
+angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMaterial', 'ngMessages','ngCookies'])
 .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
             // route for the home page

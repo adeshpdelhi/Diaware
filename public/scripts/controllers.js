@@ -2,19 +2,25 @@
 
 angular.module('App')
 
-.controller('LoginController', ['$scope', 'authorize', '$state', function ($scope, authorize, $state) {
+.controller('LoginController', ['$scope', 'authorize', '$state', 'backendFactory', function ($scope, authorize, $state, backendFactory) {
     
     $scope.credentials = {username: "", password: "", centre: ""};
     $scope.display_centre = false;
     $scope.doLogin = function(){
-        if(authorize.doAuth($scope.credentials.username,$scope.credentials.password)){
-            var tempcentres = authorize.doAuth($scope.credentials.username,$scope.credentials.password);
+        authorize.doAuth($scope.credentials.username,$scope.credentials.password, function(user){
+        //console.log ('success is '+success);
+        if(user !=null){
+            console.log('successful login in controller');
+            var tempcentres = user.centres;
             $scope.channels=[];
             for(var i = 0; i<tempcentres.length; i++ ){
                 $scope.channels.push({value: tempcentres[i], label: tempcentres[i]});
             }
             $scope.display_centre=true;
         }
+        else
+            alert('Login failed');
+        });
     };
     $scope.chooseCentre = function(){
         authorize.setCentre($scope.credentials.centre);

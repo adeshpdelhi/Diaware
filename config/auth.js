@@ -3,25 +3,42 @@ var crypto = require('crypto');
 exports.login = function(req, res){
 	if(req.body.username != null && req.body.username != '' && req.body.password != null && req.body.password != ''){
 		users.findOne({where :{username: req.body.username}}).then(function(user){
-			var hashedPassword = crypto.createHash('md5').update(req.body.password).digest("hex");
-			if(user.hashedPassword == hashedPassword){
-				res.cookie('username',req.body.username,{signed: true});
-				res.end('Login successful for '+req.body.username);
+			if(user == null)
+			{
+				res.status(401);
+				res.end('No user with that username');
+				console.log('No user with that username');
+				
 			}
 			else{
-				res.end('Wrong credentials');
-				res.status = 401;
+				var hashedPassword = crypto.createHash('md5').update(req.body.password).digest("hex");
+				if(user.hashedPassword == hashedPassword){
+					res.cookie('username',req.body.username,{signed: true});
+					res.cookie('usernamelocal',req.body.username);
+					res.status(200);
+					res.end('success');
+					console.log(req.body.username+' logged in');
+					
+				}
+				else{
+					res.status(401);
+					res.end('Wrong credentials');
+					console.log('Wrong credentials');
+					
+				}
 			}
 		})
 	}
 	else{
+		console.log('Enter username and password');
+		res.status(401);
 		res.end('Enter username and password');
-		res.status = 401;
 	}
 }
 exports.logout = function(req, res){
 	if(req.signedCookies.username){
 		res.cookie('username','');
+		res.cookie('usernamelocal','');
 		res.end(req.signedCookies.username+' logged out. Bye!');
 	}
 	else{
@@ -47,8 +64,8 @@ exports.register = function(req, res){
 	else
 	{
 		console.log('Enter all details');
-		res.end('Enter all details');
 		res.status = 401;
+		res.end('Enter all details');
 	}
 }
 
