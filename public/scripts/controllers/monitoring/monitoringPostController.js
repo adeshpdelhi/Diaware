@@ -31,6 +31,7 @@ angular.module('App')
         	anyOtherComments:null,
         	lastModifiedBy:null
         };
+		$scope.showalert_postdialysis=false;
         $scope.$watch('post.postWeight',function(newVal, oldVal){
         	$scope.post.weightLoss = $scope.preHDWeight - $scope.post.postWeight;
         })
@@ -40,7 +41,18 @@ angular.module('App')
     		$scope.post.lastModifiedBy = authorize.getUsername();
     		console.log($scope.post);
     		console.log($scope.patient.id);
-    		monitoringChartFactory.getPost($scope.patient.id).save($scope.post);
+    		monitoringChartFactory.getPost($scope.patient.id).save($scope.post).$promise.then(function(response){
+				
+				$scope.showalert_postdialysis=true;
+			
+			},
+			function(response){
+				$scope.showalert_postdialysis=false;
+				console.log(response);
+			}
+			
+			);
+			
         };
 
     }])

@@ -16,6 +16,7 @@ angular.module('App')
 		NSFlushingVolume: null,
 		lastModifiedBy: null
 	};
+	$scope.showalert_predialysis_basic_medical=false;
 	$scope.showCentralLine = false;
 	backendFactory.getCentres().get({id:authorize.getCentre()}).$promise.then(function(response){
 		$scope.accessLinesAvailable = response.accessLinesAvailable;
@@ -25,7 +26,15 @@ angular.module('App')
 		$scope.basicMedical.preBasicId = $scope.basic.preBasicId;
 		$scope.basicMedical.lastModifiedBy = authorize.getUsername();
 		console.log($scope.basicMedical);
-		monitoringChartFactory.getPreBasicMedicals($scope.basic.patientId).save($scope.basicMedical);
+		monitoringChartFactory.getPreBasicMedicals($scope.basic.patientId).save($scope.basicMedical).$promise.then(function(response){
+			$scope.showalert_predialysis_basic_medical=true;
+			},function(response){
+				$scope.showalert_predialysis_basic_medical=false;
+				console.log(response);
+			}
+			
+			);
+		//$scope.showalert_predialysis_basic_medical=true;
 	};
 }])
 ;
