@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="row row-content">
+        <div class="panel panel-info">
+            <div class="panel-body" style="text-align:center;">
+                <h2>Add a new user</h2>
+                <form>
+                <div class="form-group ">
+                    <label class="col-sm-4 control-label">User Name</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="newuser.username">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label class="col-sm-4 control-label">Password</label>
+                    <div class="col-sm-8">
+                        <input type="password" class="form-control" ng-model="newuser.password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Centres</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="newuser.centres">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 control-label">Roles</label>
+                    <div class="col-sm-8">
+                        <label class="checkbox-inline"><input type="checkbox" value="true" ng-model="newuser.admin">Admin</label>
+                        <label class="checkbox-inline"><input type="checkbox" value="true" ng-model="newuser.incharge">Incharge</label>
+                        <label class="checkbox-inline"><input type="checkbox" value="true" ng-model="newuser.manager">Manager</label>
+                        <label class="checkbox-inline"><input type="checkbox" value="true" ng-model="newuser.clinical">Clinical</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-10">
+                        <button id="register" type="submit" class="btn btn-primary" ng-click="addUser()">Add</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>   
+      
+    </div>
+</div>
