@@ -28,51 +28,29 @@ angular.module('App')
   var logged_in = false;
   var logged_in_user = '';
   var logged_in_centre = '';
+  var logged_in_user_object={};
+
   logged_in_user = $cookies.get('usernamelocal');
+  var users = $resource(baseURL+"users/:username",null,  {'update':{method:'PUT' }});
   if(logged_in_user!=null && logged_in_user!='')
   {
     logged_in=true;
     logged_in_centre = $localStorage.get('centrelocal','');
   }
-  // if(logged_in_user !== ''){
-  //   logged_in = true;
-  // }
-  // var users = [];
-  // userFactory.getUsers().query(function(response){
-  //   users =response;
-  // });
-  // var users =  [
-  // {
-  //   username: "rishabh",
-  //   password : "12345",
-  //   centres : ["JP","CH","JP1"]
-  // },
-  // {
-  //   username: "admin",
-  //   password : "admin",
-  //   centres : ["JP","CH","AP","SP","JP1"]
-  // }
-  // ];
-  var users = $resource(baseURL+"users/:username",null,  {'update':{method:'PUT' }});
+  if(logged_in== true){
+    users.get({username: logged_in_user})
+                          .$promise.then(function(user){
+                              //$localStorage.store('centrelocal',username);
+                            logged_in_user_object=user;
+                            console.log('saved user obj retrieval successful');
+                            },function(response){
+                              console.log("Error" + response.status +" " + response.statusText);
+                              console.log('failed to get saved user');
+                            }
+                          );
+    }
+
   this.doAuth = function(username,password,next){
-
-          //   users.login({username: username, password:password}).$promise.then(function(response){
-          //         if(response=='success'){
-          //              logged_in_user=username;
-          //              logged_in=true;
-          // //             $localStorage.store('username',username);
-          //              console.log('successful login in services :'+logged_in);
-          //              return true;
-          //        }
-          //       else
-          //         {
-          //             alert('login failed '+ response);
-          //             console.log('failed login '+response);
-          //             return false;
-          //         }
-
-
-          //      }); 
 
           $http({
             method: 'POST',
@@ -87,6 +65,7 @@ angular.module('App')
                        users.get({username: username})
                         .$promise.then(function(user){
                             //$localStorage.store('centrelocal',username);
+                            logged_in_user_object=user;
                           next(user);
                           },function(response){
                             console.log("Error" + response.status +" " + response.statusText);
@@ -107,15 +86,6 @@ angular.module('App')
                  }
             });
 
-      // for(var i=0;i<users.length;i++){
-      //   if(users[i].username == username && users[i].password == password){
-      //     logged_in_user=username;
-      //     logged_in=true;
-      //     $localStorage.store('username',users[i].username);
-      //     return users[i].centres;
-      //   }
-      // }
-      // return false;
     };
     this.getUsers = function(){
         return users;
@@ -123,6 +93,9 @@ angular.module('App')
   this.getUsername = function(){
       return logged_in_user;
     };
+    this.getActiveUser = function(next){
+      return logged_in_user_object;
+    }
   this.setCentre = function(centre){
         $localStorage.store('centrelocal', centre);
         logged_in_centre = centre;

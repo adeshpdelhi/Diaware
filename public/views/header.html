@@ -99,7 +99,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li ng-show="loggedIn">
-                    <a>{{centre}}</a>
+                    <a ng-click="chooseCentreOpen()" style="cursor: pointer;">{{centre}}</a>
                 </li>
                 <li class="loggedin" ng-show="loggedIn">
                     <a>{{username}}</a>
