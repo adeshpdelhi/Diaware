@@ -47,7 +47,7 @@ exports.logout = function(req, res){
 }
 exports.register = function(req, res){
 	console.log("registering for "+req.body.username+" "+crypto.createHash('md5').update(req.body.password).digest("hex"));
-	if(req.body.username !=null && req.body.password !=null && req.body.centre !=null && req.body.admin !=null && req.body.incharge !=null && req.body.manager !=null && req.body.clinical !=null)
+	if(req.body.username !=null && req.body.password !=null && req.body.centres !=null && req.body.admin !=null && req.body.incharge !=null && req.body.manager !=null && req.body.clinical !=null)
 	{
 		users.findOne({where: {username: req.body.username}}).then(function(user){
 			if(user !=null){
@@ -56,7 +56,7 @@ exports.register = function(req, res){
 			}
 			else
 			{
-				users.create({username: req.body.username, hashedPassword: crypto.createHash('md5').update(req.body.password).digest("hex"), centre: req.body.centre, admin: req.body.admin, incharge: req.body.incharge, manager: req.body.manager, clinical: req.body.clinical});
+				users.create({username: req.body.username, hashedPassword: crypto.createHash('md5').update(req.body.password).digest("hex"), centres: req.body.centres, admin: req.body.admin, incharge: req.body.incharge, manager: req.body.manager, clinical: req.body.clinical});
 				res.end('Successfully added: '+req.body.username);
 			}
 		})

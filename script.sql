@@ -71,4 +71,4 @@ insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id) value
 
 
 
-INSERT INTO `users` (`id`,`username`,`hashedPassword`,`centre`,`admin`,`incharge`,`manager`,`clinical`,`createdAt`,`updatedAt`) VALUES (DEFAULT,'admin','21232f297a57a5a743894a0e4a801fc3','JP1',true,false,true,false,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+INSERT INTO `users` (`id`,`username`,`hashedPassword`,`centres`,`admin`,`incharge`,`manager`,`clinical`,`createdAt`,`updatedAt`) VALUES (DEFAULT,'admin','21232f297a57a5a743894a0e4a801fc3','JP1',true,false,true,false,'2016-07-13 10:48:56','2016-07-13 10:48:56');

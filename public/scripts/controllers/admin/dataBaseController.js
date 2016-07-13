@@ -7,7 +7,7 @@ angular.module('App')
 	$scope.addUser = function(){
 		console.log($scope.newuser);
 		authorize.getUsers().save($scope.newuser).$promise.then(function(response){
-			console.log(response);
+			
 		});
 	};
 }]);
