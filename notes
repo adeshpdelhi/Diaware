@@ -22,6 +22,7 @@ add active and inactive state of patient and a corresponding hook - patient inac
 
 add paranoid:true to each model - no record is deleted from the table
 
+remove update promise ... returns array -expects object ; or change ngresource method
 
 pre dialysis
 fetch last post hd weight from db ....

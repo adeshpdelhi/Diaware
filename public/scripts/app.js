@@ -121,7 +121,12 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                 views: {
                     'content@': {
                         templateUrl : 'views/monitoring/ViewMonitoringChart/viewmonitoringchart.html',
-                        controller : 'ViewMonitoringController'
+                        controller : 'ViewMonitoringController',
+                        resolve:{
+                            chosenPatientId:['choosePatientFactory', function(choosePatientFactory){
+                                return choosePatientFactory.getChosenPatient().id;
+                            }]
+                        }
                     }
                 }
 

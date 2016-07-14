@@ -7,8 +7,11 @@
 
         <div style="padding-top:30px" class="panel-body">    
  -->
-            <div style="padding-top:30px;" class="panel-body">	 
-			<div class="table-responsive ">
+            <div style="padding-top:30px;" class="panel-body">
+            <div class="alert alert-success" ng-show="updatedPreBasic">
+                Updated Successfully!
+            </div>   	 
+			<div class="table-responsive">
                 <table id="viewpatient_basicdetail" class="table table-striped table-fixedheader table-bordered" >
                    
                     <tbody >
@@ -24,7 +27,7 @@
 			<form>
 			<div class="form-group">
                     <div class="col-sm-offset-4 col-sm-10">
-                        <button id="edit" type="submit" class="btn btn-primary" ng-click="edit_predialysis_basic()">Edit</button>
+                        <button id="edit" type="submit" class="btn btn-primary" ng-show="isEditable()" ng-click="editingPreBasic?savePreBasic():(editingPreBasic = true)">{{editingPreBasic?'Update':'Edit'}}</button>
                     </div>
                 </div>
            </form>

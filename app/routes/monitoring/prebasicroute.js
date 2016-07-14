@@ -43,7 +43,8 @@ preBasicRouter.route('/')
     db.monitoringChartPreBasic.findAll({
         where:{
             patientId:req.params.id
-        }
+        },
+        order:[['monitoringDate','DESC']]
     }).then(function(preBasics){
     	console.log(JSON.stringify(preBasics));
     	res.json(preBasics);
@@ -65,6 +66,34 @@ preBasicRouter.route('/')
 preBasicRouter.route('/:preBasicId')
 .get(function(req,res,next){
     console.log('procesing get');
+    if(req.query.fullChart){
+        db.monitoringChartPreBasic.find({
+            where:{
+                preBasicId:parseInt(req.params.preBasicId,10),
+                patientId:req.params.id
+            },
+            include:[{
+                model:db.patientDetails
+            },{
+                model:db.monitoringChartPreBasicMedical
+            },{
+                model:db.monitoringChartPreMachineFinalCheck
+            },{
+                model:db.monitoringChartPreAssessment
+            },{
+                model:db.monitoringChartPreAccessAssessment
+            },{
+                model:db.monitoringChartIntra
+            },{
+                model:db.monitoringChartPost
+            }]
+            // order:[['monitoringDate','DESC']]
+        }).then(function(preBasic){
+            console.log(JSON.stringify(preBasic));
+            res.json(preBasic);
+        });    
+        return;
+    }
     db.monitoringChartPreBasic.findOne({
         where:{
             preBasicId:parseInt(req.params.preBasicId,10),

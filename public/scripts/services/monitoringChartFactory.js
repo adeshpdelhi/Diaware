@@ -2,7 +2,9 @@
 angular.module('App')
 	.service('monitoringChartFactory', ['$resource', 'baseURL', function($resource,baseURL) {
     this.getPreBasic = function(id){
-      	return $resource(baseURL+"monitoringChart/:id/pre/basic/:preBasicId",{id:id},  {'update':{method:'PUT' }});
+      	return $resource(baseURL+"monitoringChart/:id/pre/basic/:preBasicId",{id:id},  {
+            'update':{method:'PUT' }
+        });
     };
     this.getPreBasicMedicals = function(id){
     	console.log(id);

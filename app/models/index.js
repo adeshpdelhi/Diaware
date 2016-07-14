@@ -76,7 +76,7 @@ dbmodel.monitoringChartPreBasic.hasOne(dbmodel.monitoringChartPreAssessment,{for
 dbmodel.monitoringChartPreBasic.hasOne(dbmodel.monitoringChartPreAccessAssessment,{foreignKey:'preBasicId'});
 dbmodel.monitoringChartPreBasic.hasOne(dbmodel.monitoringChartIntra,{foreignKey:'intraId'});
 dbmodel.monitoringChartPreBasic.hasOne(dbmodel.monitoringChartPost,{foreignKey:'postId'});
-//add the other half
+//add the other half - not needed :P
 
 dbmodel.shifts.hasOne(dbmodel.weekDaySlots,{as:'shift1',foreignKey:'shift1Id'});
 dbmodel.shifts.hasOne(dbmodel.weekDaySlots,{as:'shift2',foreignKey:'shift2Id'});

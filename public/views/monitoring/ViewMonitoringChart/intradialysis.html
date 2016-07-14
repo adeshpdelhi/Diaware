@@ -70,6 +70,9 @@ color: #669;*/
 </style>
 <div class="container">
   <div class="row row-content" ng-controller="MonitoringIntraController" >
+  <div class="alert alert-success" ng-show="updatedIntra">
+      Updated Successfully!
+  </div>   
     <form class="form-horizontal col-sm-9" role="form" ng-submit="saveIntra()">
       <div class="table-responsive">
         <table id="box-table-b" class="table table-bordered" ng-if="patientChart.monitoringChartIntra.length!=0">
@@ -95,7 +98,7 @@ color: #669;*/
 
       <div class="form-group" style="padding-top:30px;"">
         <!-- <div class="col-sm-push-8 col-sm-2  "> -->
-        <button type="submit" class="btn btn-primary col-sm-push-11 col-sm-1" ngclick="edit_intradialysis()">Edit</button>
+        <button type="submit" class="btn btn-primary col-sm-push-11 col-sm-1" ngclick="editingIntra?saveIntra(): (editingIntra = true)" ng-show="isEditable()">{{editingIntra?'Update':'Edit'}}</button>
         <!-- </div> -->
       </div>
     </form>
