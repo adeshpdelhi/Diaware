@@ -148,7 +148,7 @@ angular.module('App')
     };
 }])
 .service('centreDetails', ['$localStorage','backendFactory', function ($localStorage,backendFactory) {
-  var centre = $localStorage.get('centre','');
+  var centre = $localStorage.get('centrelocal','');
   var validLoggedIn = true;
   if(centre == '')
     validLoggedIn = false;
