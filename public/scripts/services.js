@@ -59,12 +59,12 @@ angular.module('App')
                           );
     }
 
-  this.doAuth = function(username,password,next){
+  this.doAuth = function(username,password,rememberme,next){
 
           $http({
             method: 'POST',
             url: baseURL+'users/login',
-            data: {username: username, password: password}
+            data: {username: username, password: password, rememberme: rememberme}
           }).then(function successCallback(response) {
                 if(response.status==200){
                        logged_in_user=username;
