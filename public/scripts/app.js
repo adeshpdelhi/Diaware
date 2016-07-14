@@ -132,11 +132,33 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
             })
 
             .state('app.inventory.inventory_identing', {
-                url:'new',
+                url:'Inventory_Identing',
                 views: {
                     'content@': {
                         templateUrl : 'views/inventory/inventoryIdenting.html',
                         controller  : 'InventoryIdentingController'        
+                    }
+                }
+
+            })
+			
+			.state('app.inventory.issue_stock', {
+                url:'Issue_Stock',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/issueStock.html',
+                        controller  : 'IssueStockController'        
+                    }
+                }
+
+            })
+			
+			.state('app.inventory.treatment_inventory', {
+                url:'Treatment_Inventory_Consumption',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/treatmentInventory.html',
+                        controller  : 'TreatmentInventoryController'        
                     }
                 }
 
