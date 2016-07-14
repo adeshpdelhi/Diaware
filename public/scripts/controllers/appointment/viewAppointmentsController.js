@@ -6,6 +6,7 @@ angular.module('App')
         appointmentFactory.getFutureAppointments(authorize.getCentre()).query(function(response){
             $scope.past = false;    
             $scope.all = true;
+            $scope.today = false;
             $scope.appointments = response;
             if(response.$status == 206){
                 console.log("set marked");
