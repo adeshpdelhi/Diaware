@@ -57,9 +57,10 @@ angular.module('App')
 		// console.log(val + typeof(val));
 		return (Object.keys(val).length === 0);
 	};
-	$scope.unbook = function(id, index){
+	$scope.unbook = function(day, index){
 		for (var i = $scope.objs.length - 1; i >= 0; i--) {
-			if($scope.objs[i].shiftId == id && $scope.objs[i].patientId == $scope.patient.id)
+			console.log($scope.objs[i].day + ' ' + day + " "+ $scope.objs[i].patientId+" "+ $scope.patient.id);
+			if($scope.objs[i].day == day && $scope.objs[i].patientId == $scope.patient.id)
 				$scope.objs.splice(i,1);
 		}
 		$scope['saved_'+index] = false;

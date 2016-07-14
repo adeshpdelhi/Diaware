@@ -44,7 +44,6 @@ angular.module('App')
     $scope.loggedIn = authorize.isLoggedIn();
     $scope.username = authorize.getUsername();
     $scope.centre = authorize.getCentre();
-
     $scope.credentials={};
     $scope.chooseCentreOpen = function(){
         var user = authorize.getActiveUser();
@@ -66,11 +65,44 @@ angular.module('App')
           }
         });
     };
-
+    $scope.changePasswordOpen = function(){
+            var user = authorize.getActiveUser();
+            var modalInstance = $uibModal.open({
+              templateUrl: 'views/changePasswordModal.html',
+              controller: 'ChangePasswordModalController',
+              size:'sm' 
+            });
+        };
 
     $scope.logout = function(){
         authorize.logout();
         $state.go('app', {}, {reload: true});
+    };
+}])
+
+.controller('ChangePasswordModalController', ['$scope', '$state', 'authorize', '$uibModalInstance', function ($scope, $state, authorize, $uibModalInstance) {
+
+    $scope.user= authorize.getActiveUser();
+    $scope.changePassword = function(){
+        if($scope.oldpassword==null || $scope.newpassword==null ||$scope.oldpassword=='' || $scope.newpassword=='')
+            {   
+                console.log('not all fields specified');
+                return;
+            }
+            // if(crypto.createHash('md5').update($scope.oldpassword).digest("hex")!=$scope.user.password){
+            //     alert('wrong old password');
+            //     return;
+            // }
+        authorize.getUsers().update({username:$scope.user.username},{oldpassword: $scope.oldpassword, newpassword:$scope.newpassword}).$promise.catch(function(response) {
+                alert('wrong old password');
+                return;
+            }).then(function() {
+                alert('password changed successfully');
+            });;
+        $uibModalInstance.close();
+        console.log('updated');
+
+//        $state.go('app.home', {}, {reload: true});
     };
 }])
 
@@ -87,6 +119,8 @@ angular.module('App')
 //        $state.go('app.home', {}, {reload: true});
     };
 }])
+
+
 
 .controller('FooterController', ['$scope', '$state', 'authorize', function ($scope, $state, authorize) {
     $scope.loggedIn = authorize.isLoggedIn();

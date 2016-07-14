@@ -171,6 +171,19 @@ html {
 .panel-body{
   background:rgb(238, 238, 238) !important;
 }
+.panel {
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+.panel-default {
+    border-color: #ddd;
+}
+.panel-info{
+  border-color:#bce8f1; 
+}
 .panel-heading {
   background: rgb(5, 41, 99);
   color:floralwhite;

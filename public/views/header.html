@@ -122,7 +122,7 @@
                         <li>
                             <a ui-sref="app.admin.editdatabase">Edit Database</a>
                             <a ui-sref="app.admin.adduser">Add User</a>
-
+                            <a ui-sref="app.admin.viewuser">View Users</a>
                         </li>
                     </ul>
                 </li>
@@ -133,7 +133,7 @@
                     <a ng-click="chooseCentreOpen()" style="cursor: pointer;">{{centre}}</a>
                 </li>
                 <li class="loggedin" ng-show="loggedIn">
-                    <a style="cursor: default;">{{username}}</a>
+                    <a ng-click="changePasswordOpen()" style="cursor: pointer;">{{username}}</a>
                 </li>
                 <li ng-show="loggedIn">
                     <a ng-click="logout()" style="cursor: pointer;">

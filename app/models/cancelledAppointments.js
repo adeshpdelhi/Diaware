@@ -2,7 +2,7 @@
 //of the past year maybe
 // make a trigger to shift the appointment automatically once marked attended
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('attendedAppointments', {
+  return sequelize.define('cancelledAppointments', {
     centreId:{
       type:DataTypes.STRING,
       allownull:true,
@@ -58,13 +58,12 @@ module.exports = function(sequelize, DataTypes) {
             throw new Error('Only Attended appointments can be shifted here');
           }
         }
+      },
+      set:function(){
+        this.setDataValue(attended,false);
       }
-    },
-    cancelled:{
-      type:DataTypes.BOOLEAN,
-      allownull:null
     }
   }, {
-    tableName: 'attendedAppointments'
+    tableName: 'cancelledAppointments'
   });
 };

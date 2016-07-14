@@ -22,18 +22,36 @@
                         <input type="text" class="form-control" ng-model="newuser.centres">
                     </div>
                 </div>
+                <div class="form-group">
+                        <label class="col-sm-3 control-label">Centre</label>
+                        <div class="col-xs-6">
+                        <select class="form-control"
+                           ng-options="channel.value as channel.label for channel in channels" ng-model="newuser.centre" ng-change="centrechanged()">
+                            <option value="" disabled></option>
+                        </select>
+                 		</div>
+                 </div>
                 <div class="form-group row">
                     <label class="col-sm-4 control-label">Roles</label>
                     <div class="col-sm-8">
+                    	<div ng-show="activeUser.admin ">
                         <label class="checkbox-inline"><input type="checkbox" value="true" ng-model="newuser.admin">Admin</label>
                         <label class="checkbox-inline"><input type="checkbox" value="true" ng-model="newuser.incharge">Incharge</label>
+                        </div>
+                        <div ng-show="activeUser.incharge || activeUser.admin">
                         <label class="checkbox-inline"><input type="checkbox" value="true" ng-model="newuser.manager">Manager</label>
                         <label class="checkbox-inline"><input type="checkbox" value="true" ng-model="newuser.clinical">Clinical</label>
+                        </div>
+                        <div ng-show="!(activeUser.incharge || activeUser.admin)">
+                        You don't have rights to add.
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-10">
-                        <button id="register" type="submit" class="btn btn-primary" ng-click="addUser()">Add</button>
+                    	<div ng-show="activeUser.admin || activeUser.incharge">
+                        	<button id="register" type="submit" class="btn btn-primary" ng-click="addUser()">Add</button>
+                        </div>
                     </div>
                 </div>
                 </form>

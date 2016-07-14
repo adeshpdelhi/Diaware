@@ -65,10 +65,19 @@ insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id) value
 insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id) values('JP1',"Saturday","18",'17','16');
 insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id) values('JP1',"Sunday","19",'20','21');
 
+CREATE EVENT addNextWeeksAppointments
+  ON SCHEDULE
+    EVERY 1 DAY
+    STARTS '2016-07-14 01:10:00' ON COMPLETION PRESERVE ENABLE 
+  DO
+    INSERT INTO futureAppointments (centreId, shiftPatientsId,date,dayOfTheWeek,patientId,shiftNumber)
+    -- OUTPUT inserted.Id, inserted.ColumnA, inserted.ColumnB
+    SELECT  S.id as shiftPatientsId, S.patientId as patientId, P.centreId as centreId, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 7 DAY) as date, S.dayOfTheWeek  as dayOfTheWeek, S.shiftNumber as shiftNumber
+    FROM    shiftPatients as S join patientDetails as P 
+    WHERE S.patientId == P.id and S.dayOfTheWeek == DAYNAME(DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 7 DAY));
 
 
 
 
 
-
-INSERT INTO `users` (`id`,`username`,`hashedPassword`,`centres`,`admin`,`incharge`,`manager`,`clinical`,`createdAt`,`updatedAt`) VALUES (DEFAULT,'admin','21232f297a57a5a743894a0e4a801fc3','JP1',true,false,true,false,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+INSERT INTO `users` (`id`,`username`,`hashedPassword`,`centres`,`admin`,`incharge`,`manager`,`clinical`,`createdAt`,`updatedAt`) VALUES (DEFAULT,'admin','21232f297a57a5a743894a0e4a801fc3','JP1,CH',true,false,true,false,'2016-07-13 10:48:56','2016-07-13 10:48:56');
