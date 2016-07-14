@@ -28,7 +28,7 @@ angular.module('App')
 }])
 
 .controller('EditStaffModalController', ['$scope', '$state', 'authorize', '$uibModalInstance', 'user', function ($scope, $state, authorize, $uibModalInstance, user) {
-
+	$scope.activeUser = authorize.getActiveUser();
     $scope.user = user;
     var tempcentres = authorize.getActiveUser().centres;
 	$scope.channels=[];

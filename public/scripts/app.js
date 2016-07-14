@@ -126,6 +126,23 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                 }
 
             })
+			
+			.state('app.inventory', {
+                url:'inventory/',
+            })
+
+            .state('app.inventory.inventory_identing', {
+                url:'new',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/inventoryIdenting.html',
+                        controller  : 'InventoryIdentingController'        
+                    }
+                }
+
+            })
+			
+			
             .state('app.billing',{
                 url:"billing/",
                 views:{

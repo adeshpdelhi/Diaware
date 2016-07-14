@@ -2,8 +2,8 @@
 
 angular.module('App')
 .controller('AddUserController',['$scope','authorize', function ($scope, authorize) {
-
-	$scope.newuser={centre:'', centres:'', admin:false,manager:false,incharge:false, clinical:false};
+	$scope.activeUser = authorize.getActiveUser();
+	$scope.newuser={username: null, password: null, centre:'', centres:'', admin:false,manager:false,incharge:false, clinical:false};
 	var tempcentres = authorize.getActiveUser().centres;
 	$scope.channels=[];
 	for(var i = 0; i<tempcentres.length; i++ ){

@@ -54,7 +54,7 @@
 				<li ng-class="{active: stateis('app.dialysis_care_plan')}" uib-dropdown on-toggle="toggled(open)">
                     <a style="cursor: pointer; display: block;" class="simple-dropdown" uib-dropdown-toggle >
                         <span class="glyphicon glyphicon-user"
-                        aria-hidden="true"></span> Dialysis Care Plan
+                        aria-hidden="true"></span> Care Plan
                     </a>
                     <ul class="dropdown-menu" uib-dropdown-menu  aria-labelledby="simple-dropdown">
                         <li>
@@ -90,6 +90,21 @@
                     </ul>
                 </li>
 
+				
+				<li ng-class="{active: stateis('app.inventory')}" uib-dropdown on-toggle="toggled(open)">
+                    <a style="cursor: pointer; display: block;" class="simple-dropdown" uib-dropdown-toggle>
+                        <span class="glyphicon glyphicon-list-alt"
+                        aria-hidden="true"></span> Inventory
+                    </a>
+                    <ul class="dropdown-menu" uib-dropdown-menu  aria-labelledby="simple-dropdown">
+                        <li>
+                            <a ui-sref="app.inventory.inventory_identing">Inventory Identing</a>
+                           
+
+                        </li>
+                    </ul>
+                </li>
+				
                 <!-- <li ng-class="{active: stateis('app.admin')}">
                     <a ui-sref="app.admin">
                         <span class="glyphicon glyphicon-folder-open"
@@ -118,7 +133,7 @@
                     <a ng-click="chooseCentreOpen()" style="cursor: pointer;">{{centre}}</a>
                 </li>
                 <li class="loggedin" ng-show="loggedIn">
-                    <a style="cursor: default;">{{username}}</a>
+                    <a ng-click="changePasswordOpen()" style="cursor: pointer;">{{username}}</a>
                 </li>
                 <li ng-show="loggedIn">
                     <a ng-click="logout()" style="cursor: pointer;">
