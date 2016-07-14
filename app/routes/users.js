@@ -53,7 +53,8 @@ router.put('/:username', function(req, res) {
             else
                 {
                     console.log('incorrect old password');
-                    res.status=401;
+                    res.status(401);
+                    res.end('wrong old password');
                 }
         }
     });

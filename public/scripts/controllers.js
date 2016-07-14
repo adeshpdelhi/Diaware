@@ -89,8 +89,16 @@ angular.module('App')
                 console.log('not all fields specified');
                 return;
             }
-
-        authorize.getUsers().update({username:$scope.user.username},{oldpassword: $scope.oldpassword, newpassword:$scope.newpassword});
+            // if(crypto.createHash('md5').update($scope.oldpassword).digest("hex")!=$scope.user.password){
+            //     alert('wrong old password');
+            //     return;
+            // }
+        authorize.getUsers().update({username:$scope.user.username},{oldpassword: $scope.oldpassword, newpassword:$scope.newpassword}).$promise.catch(function(response) {
+                alert('wrong old password');
+                return;
+            }).then(function() {
+                alert('password changed successfully');
+            });;
         $uibModalInstance.close();
         console.log('updated');
 
