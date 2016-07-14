@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('App')
-.constant("baseURL","https://192.168.58.241:3443/api/")
+.constant("baseURL","https://localhost:3443/api/")
 .factory('$localStorage', ['$window', function ($window) {
   return {
     store: function (key, value) {
@@ -109,7 +109,8 @@ angular.module('App')
         $localStorage.store('centrelocal', centre);
         logged_in_centre = centre;
     };
-  this.getCentre = function(centre){
+  this.getCentre = function(){
+    console.log('centre is '+logged_in_centre);
       return logged_in_centre;
     };
   this.isLoggedIn = function(){
@@ -147,7 +148,7 @@ angular.module('App')
     };
 }])
 .service('centreDetails', ['$localStorage','backendFactory', function ($localStorage,backendFactory) {
-  var centre = $localStorage.get('centre','');
+  var centre = $localStorage.get('centrelocal','');
   var validLoggedIn = true;
   if(centre == '')
     validLoggedIn = false;
