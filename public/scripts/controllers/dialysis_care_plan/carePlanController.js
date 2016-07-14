@@ -7,6 +7,7 @@ angular.module('App')
         backendFactory.getCentres().get({id:authorize.getCentre()}).$promise.then(function(response){
         	$scope.accessLinesAvailable = response.accessLinesAvailable;	
         });
+		$scope.showalert_dialysis_care_plan=false;
         console.log($scope.patient);
         $scope.carePlan ={
         	patientId: null,
@@ -34,7 +35,14 @@ angular.module('App')
         	$scope.carePlan.patientId = $scope.patient.id;
         	console.log("id "+ $scope.carePlan.patientId);
         	$scope.carePlan.lastModifiedBy = authorize.getUsername();
-        	patientFactory.getPatientCarePlans($scope.carePlan.patientId, authorize.getCentre()).save($scope.carePlan);
+        	patientFactory.getPatientCarePlans($scope.carePlan.patientId, authorize.getCentre()).save($scope.carePlan).$promise.then(function(response){
+				$scope.showalert_dialysis_care_plan=true;			
+			},function(response){
+					$scope.showalert_dialysis_care_plan=false;
+				console.log(response);
+			}
+			
+			);		
         }
 
     }])
