@@ -2,6 +2,7 @@
 angular.module('App')
  	.controller('NewRegistrationController',['$scope','patientFactory','backendFactory','authorize', function($scope,patientFactory,  backendFactory, authorize){
  		$scope.showPanel = false;
+		$scope.showalert_basic_details = false;
  		var counter = 0;
  		var centre = authorize.getCentre();
         backendFactory.getCentres().get({id:authorize.getCentre()})
@@ -38,6 +39,7 @@ angular.module('App')
 			$scope.newpatient_basic.centreId = centre;
 			console.log($scope.newpatient_basic.centreId);
 			
+			
 			$scope.newpatient_basic.id = centre + "-"+ currrentYear.toString() + "-"+ counter.toString();
 			console.log($scope.newpatient_basic);
 			backendFactory.getCentres().update({id:centre},{patientCount: counter+1});
@@ -47,7 +49,16 @@ angular.module('App')
 			if($scope.newpatient_basic.alternativeContact === "") $scope.newpatient_basic.alternativeContact = null;
 			if($scope.newpatient_basic.childrenContact === "") $scope.newpatient_basic.childrenContact = null;
 			console.log($scope.newpatient_basic);
-            patientFactory.getPatients(centre).save($scope.newpatient_basic);
+            patientFactory.getPatients(centre).save($scope.newpatient_basic).$promise.then(function(response){
+			$scope.showalert_basic_details=true;
+			},function(response){
+			$scope.showalert_basic_details=false;
+				console.log(response);
+			}
+			
+			);
+			//$scope.showalert_basic_details=true;
+			
         };
     }])
 ;

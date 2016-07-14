@@ -1,0 +1,64 @@
+<style>
+    .nav-tabs >li>a {
+      margin-right:6px;
+      margin-bottom: 3px;
+      /*color:#808080;*/
+      color: rgb(5, 41, 99);
+      /*background:#ffffff;*/
+      /*background: #99FF70;  */
+      font-size: 125%; 
+  }
+  .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+      /*color: #fff;*/
+      /*background-color: #0FA833;*/
+      /*border: 1px solid #006600;*/
+      border: 1px solid rgb(0, 198, 215);
+      border-bottom: 1px solid #fff;
+      
+      font-size: 125%;
+  }
+  .nav-tabs > li > a:hover{
+      /*background-color: #0DCF0D !important;*/
+      background-color:rgb(238, 238, 238);
+      border: medium none;
+      color:rgb(5, 41, 99);
+
+      font-size: 125%;
+
+  }
+</style>
+<div id="regclass" class="container"  style="text-align:center; width: 100% ">
+	<div class="row row-content col-sm-8 col-sm-push-2 col-sm-pull-2" ng-init="tab=1">
+        <div class="col-xs-12">
+            <ul ng-init="tab = 1" class="nav nav-tabs tab-list" >
+                <li ng-class="{active:tab===1}"> 
+                    <a href ng-click="tab = 1">Basic Details</a>    
+                </li>
+                <li ng-show="showPanel" ng-class="{active:tab===2}" > 
+                    <a href ng-click="tab = 2">Panel</a> 
+                </li>
+                <li ng-class="{active:tab===3}"> 
+                    <a href ng-click="tab = 3">Medical history</a> 
+                </li>
+                <li ng-class="{active:tab===4}"> 
+                    <a href ng-click="tab = 4">Clinical Events</a> 
+                </li>
+                <li ng-class="{active:tab===5}"> 
+                    <a href ng-click="tab = 5">Other Details</a> 
+                </li>
+                <br><br>
+            </ul>
+            <div class="tab-content" >
+                <div class="panel panel-info" style="text-align:center;">   
+                    <div style="padding-top:30px; " class="panel-body styled" style="background-color:#ffffff ;" >
+                        <div ng-include="'views/registration/basic_details.html'" ng-show="tab === 1"></div> 
+                        <div ng-include="'views/registration/panel.html'" ng-show="tab === 2"></div> 
+                        <div ng-include="'views/registration/medical_history.html'" ng-show="tab === 3"></div>
+                        <div ng-include="'views/registration/clinical_events.html'" ng-show="tab === 4"></div>
+                        <div ng-include="'views/registration/others.html'" ng-show="tab === 5"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

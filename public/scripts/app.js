@@ -1,6 +1,6 @@
 'use strict';
 //add resolve objects
-angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMaterial', 'ngMessages'])
+angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMaterial', 'ngMessages','ngCookies'])
 .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
             // route for the home page
@@ -66,19 +66,35 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                 url:'view',
                 views: {
                     'content@': {
-                        templateUrl : 'views/registration/viewregister.html',
+                        templateUrl : 'views/registration/ViewRegistration/view.html',
                         controller : 'ViewRegistrationController'
                     }
                 }
 
             })
+			
+			
+			.state('app.dialysis_care_plan', {
+                url:'dialysis_care_plan/',
+            })
 
-            .state('app.dialysis_care_plan', {
-                url:'dialysis_care_plan',
+            .state('app.dialysis_care_plan.new', {
+                url:'new',
                 views: {
                     'content@': {
                         templateUrl : 'views/dialysis_care_plan/dialysis_care_plan.html',
                         controller  : 'DialysisCarePlanController'        
+                    }
+                }
+
+            })
+			
+			 .state('app.dialysis_care_plan.view', {
+                url:'view',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/dialysis_care_plan/ViewDialysisCarePlan/view_dialysis_care_plan.html',
+                        controller  : 'ViewDialysisCarePlanController'        
                     }
                 }
 
@@ -104,8 +120,8 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                 url:'view',
                 views: {
                     'content@': {
-                        templateUrl : 'views/monitoring/viewmonitoringchart.html',
-                        controller : 'MonitoringController'
+                        templateUrl : 'views/monitoring/ViewMonitoringChart/viewmonitoringchart.html',
+                        controller : 'ViewMonitoringController'
                     }
                 }
 
@@ -161,11 +177,37 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                 }
             })
             .state('app.admin',{
-                url:"admin",
+                url:"admin/",
+                views:{
+                    'content@':{
+                        template:'views/admin/editDataBase.html',
+                    }
+                }
+            })
+            .state('app.admin.editdatabase',{
+                url:"editdatabase",
                 views:{
                     'content@':{
                         templateUrl:'views/admin/editDataBase.html',
                         controller:'DataBaseController'
+                    }
+                }
+            })
+            .state('app.admin.adduser',{
+                url:"adduser",
+                views:{
+                    'content@':{
+                        templateUrl:'views/admin/addUser.html',
+                        controller:'AddUserController'
+                    }
+                }
+            })
+            .state('app.admin.viewuser',{
+                url:"viewuser",
+                views:{
+                    'content@':{
+                        templateUrl:'views/admin/viewUser.html',
+                        controller:'ViewUserController'
                     }
                 }
             })

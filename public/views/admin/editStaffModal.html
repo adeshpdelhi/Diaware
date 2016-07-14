@@ -1,0 +1,42 @@
+        <div class="modal-header">
+            <h3 class="modal-title">Choose Centre</h3>
+        </div>
+        <div class="modal-body"> 
+            <form>
+                <div class="form-group ">
+                    <label class="col-sm-4 control-label">User Name</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="user.username" disabled>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Centres</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="user.centres">
+                    </div>
+                </div>
+                <div class="form-group">
+                        <label class="col-sm-3 control-label">Centre</label>
+                        <div class="col-xs-6">
+                        <select class="form-control"
+                           ng-options="channel.value as channel.label for channel in channels" ng-model="user.centre" ng-change="centrechanged()">
+                            <option value="" disabled></option>
+                        </select>
+                        </div>
+                 </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 control-label">Roles</label>
+                    <div class="col-sm-8">
+                        <label class="checkbox-inline"><input type="checkbox" value="true" ng-model="user.admin">Admin</label>
+                        <label class="checkbox-inline"><input type="checkbox" value="true" ng-model="user.incharge">Incharge</label>
+                        <label class="checkbox-inline"><input type="checkbox" value="true" ng-model="user.manager">Manager</label>
+                        <label class="checkbox-inline"><input type="checkbox" value="true" ng-model="user.clinical">Clinical</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-10">
+                        <button id="register" type="submit" class="btn btn-primary" ng-click="updateStaff()">Update</button>
+                    </div>
+                </div>
+            </form>
+        </div>

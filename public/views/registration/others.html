@@ -49,7 +49,7 @@
                 <div class="form-group">
                     <label  class="col-xs-12 col-sm-3 control-label">Other Card No 2</label>
                     <div class="col-xs-5 col-sm-6 ">
-                        <input required type="number" class="form-control" id="other_card2_no" ng-model="newPatient_Others.otherCard2" name="other_card2_no" placeholder="">
+                        <input  type="number" class="form-control" id="other_card2_no" ng-model="newPatient_Others.otherCard2" name="other_card2_no" placeholder="">
                     </div>
                     <input type="file" name="otherCard2Data" class="col-sm-2" id="otherCard2Data" onchange="angular.element(this).scope().saveFile(this)"/>
 
@@ -58,7 +58,7 @@
                 <div class="form-group">
                     <label  class="col-xs-12 col-sm-3 control-label">Other Card No 3</label>
                     <div class="col-xs-5 col-sm-6 ">
-                        <input required type="number" class="form-control" id="other_card3_no" ng-model="newPatient_Others.otherCard3" name="other_card3_no" placeholder="">
+                        <input type="number" class="form-control" id="other_card3_no" ng-model="newPatient_Others.otherCard3" name="other_card3_no" placeholder="">
                     </div>
                     <input type="file" name="otherCard3Data" class="col-sm-2" id="otherCard3Data" onchange="angular.element(this).scope().saveFile(this)"/>
 
@@ -69,6 +69,13 @@
                         <button type="submit" class="btn btn-primary" id="panel_save" ng-click="saveOtherDetails()">Save</button>
                     </div>
                 </div>
+				
+			<div class="form-group">
+					<div class="alert alert-success alert-dismissable" ng-show="showalert_others">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						Details Saved Successfully.
+					</div>
+				</div>
             </form>
         </div>
     </div>

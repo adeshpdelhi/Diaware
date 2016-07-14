@@ -2,7 +2,7 @@
 <div class="form-group row">
 	<label class="col-sm-3 control-label">Dialyzer Name</label>                        
 	<div class="col-sm-7">
-		<input required type="text" class="form-control" id="dialyzer_name" name="dialyzer_name" ng-model="basicMedical.dialyzerName">
+		<input  type="text" class="form-control" id="dialyzer_name" name="dialyzer_name" ng-model="basicMedical.dialyzerName">
 	</div>
 </div>
 <div class="form-group row">
@@ -17,7 +17,7 @@
 <div class="form-group row">
     <label class="col-sm-3 control-label">Access Used</label>
      <div class="col-sm-7">
-        <select name="access_used" required class="form-control" ng-model="basicMedical.accessUsed">
+        <select name="access_used"  class="form-control" ng-model="basicMedical.accessUsed">
             <option disabled value="" selected></option>
             <option  ng-repeat="access in accessLinesAvailable" value="{{access}}" class="text-capitalize">{{access}}</option>
         </select>
@@ -61,19 +61,19 @@
 <div class="form-group row">
 	<label class="col-sm-3 control-label">Bolus Amount</label>                        
 	<div class="col-sm-7">
-		<input required type="number" class="form-control" id="bolus_amount" name="bolus_amount" ng-model="basicMedical.bolusAmount">
+		<input  type="number" class="form-control" id="bolus_amount" name="bolus_amount" ng-model="basicMedical.bolusAmount">
 	</div>
 </div>
 <div class="form-group row">
 	<label class="col-sm-3 control-label">Hourly Heparin</label>
 	<div class="col-sm-7">
-		<input required type="number" class="form-control" id="hourly_heparin" name="hourly_heparin" ng-model="basicMedical.hourlyHeparin">
+		<input  type="number" class="form-control" id="hourly_heparin" name="hourly_heparin" ng-model="basicMedical.hourlyHeparin">
 	</div>
 </div>
 <div class="form-group row">
 	<label class="col-sm-4 col-sm-pull-1 control-label">Heparin Stop Before</label>       
 	<div class="col-sm-7 col-sm-pull-1">
-		<input required type="text" class="form-control" id="heparin_stop_before" name="heparin_stop_before" ng-model="basicMedical.heparinStopPBefore" >
+		<input  type="text" class="form-control" id="heparin_stop_before" name="heparin_stop_before" ng-model="basicMedical.heparinStopPBefore" >
 		<span class="help-block">(HH:MM) 24 hr format</span>
 	</div>
 </div>
@@ -81,13 +81,13 @@
 <div class="form-group row">
 	<label class="col-sm-4 col-sm-pull-1 control-label">N.S. Flushing Frequeny</label>                        
 	<div class="col-sm-7 col-sm-pull-1">
-		<input required type="number" class="form-control" id="ns_flushing_frequency" name="ns_flushing_frequency"  ng-model="basicMedical.NSFlushingFrequency" >
+		<input  type="number" class="form-control" id="ns_flushing_frequency" name="ns_flushing_frequency"  ng-model="basicMedical.NSFlushingFrequency" >
 	</div>
 </div>
 <div class="form-group row">
 	<label class="col-sm-4 col-sm-pull-1 control-label">N.S. Flushing Volume</label>
 	<div class="col-sm-7 col-sm-pull-1">
-		<input required type="number" class="form-control" id="ns_flushing_volume" name="ns_flushing_volume" ng-model="basicMedical.NSFlushingVolume">
+		<input  type="number" class="form-control" id="ns_flushing_volume" name="ns_flushing_volume" ng-model="basicMedical.NSFlushingVolume">
 	</div>
 </div>
 
@@ -96,4 +96,10 @@
         <button type="submit" class="btn btn-primary">Save</button>
     </div>
 </div>
+<div class="form-group">
+					<div class="alert alert-success alert-dismissable" ng-show="showalert_predialysis_basic_medical">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						Details Saved Successfully.
+					</div>
+				</div>
 </form>

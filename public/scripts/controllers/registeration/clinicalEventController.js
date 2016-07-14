@@ -1,6 +1,7 @@
 'use strict';
 angular.module('App')
 .controller('ClinicalEventController',['$scope','patientFactory', 'authorize', function($scope,patientFactory,authorize){
+		$scope.showalert_events=false;
 		$scope.events=[];
 		$scope.event = {
 			ID:null,
@@ -11,6 +12,7 @@ angular.module('App')
 		};
 		var cnt = 0;
 		$scope.addEvent = function(){
+			$scope.showalert_events=false;
 			$scope.event.ID = cnt++;
 			$scope.event.patientId = $scope.newpatient_basic.id;
 			$scope.event.lastModifiedBy = $scope.newpatient_basic.lastModifiedBy;
@@ -26,6 +28,7 @@ angular.module('App')
 	        };
 		}
 		$scope.removeEvent = function(id){
+			$scope.showalert_events=false;
 		    for (var i = $scope.events.length - 1; i >= 0; i--) {
                 if($scope.events[i].ID == id){
                 	if($scope.events[i].saved)
@@ -52,11 +55,20 @@ angular.module('App')
 					console.log("i" + i);
 					console.log("x:outside " + x);
 					patientFactory.getPatientMajorClinicalEvents($scope.newpatient_basic.id,authorize.getCentre()).save($scope.events[i]).$promise.then(function(response){
+						$scope.showalert_events=true;
 						console.log($scope.events[x]);
 						$scope.events[x].id = response.id;
 						console.log("x:inside " + x);
 						x++;
-					});	
+					},
+					
+					function(response){
+						$scope.showalert_events=false;
+						console.log(response);
+					}
+					
+					
+					);	
 				}
 				else x++;
 			}
@@ -71,7 +83,9 @@ angular.module('App')
 				comments:"",
 				saved:false
 	        };
+			
 		};
+		
 		
 
 }])

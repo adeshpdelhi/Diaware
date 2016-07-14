@@ -2,6 +2,7 @@
 angular.module('App')
 .controller('MonitoringIntraController',['$scope','patientFactory','choosePatientFactory','authorize','monitoringChartFactory', function($scope, patientFactory, choosePatientFactory, authorize,monitoringChartFactory){
         $scope.intraTable = [];
+		$scope.showalert_intradialysis=false;
         $scope.func = function(id){
             var intra = {
                 patientId:$scope.patient.id,
@@ -32,7 +33,15 @@ angular.module('App')
                 $scope.intraTable[i].intraId = $scope.basic.preBasicId;
                 console.log($scope.intraTable[i]);
             }
-    		monitoringChartFactory.getIntra($scope.patient.id).save($scope.intraTable);
+    		monitoringChartFactory.getIntra($scope.patient.id).save($scope.intraTable).$promise.then(function(response){
+			$scope.showalert_intradialysis=true;
+			},function(response){
+				$scope.showalert_intradialysis=false;
+				console.log(response);
+			}
+			
+			);
+
         };
 
     }])

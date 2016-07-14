@@ -1,0 +1,34 @@
+<div id="Registerbox" style="margin-top:20px;" class="mainbox col-sm-12">                    
+    <div class="panel" >
+        <div class="panel-heading">
+            <div class="panel-title"><b>Patient Medical History</b></div>
+            <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
+        </div>    
+
+            <div style="padding-top:30px; text-align:center;" class="panel-body" >	 
+	            
+	            <div class="table-responsive ">
+                <table id="viewpatient_basicdetail" class="table table-striped table-fixedheader table-bordered" >
+                   
+                    <tbody >
+                        <tr ng-repeat = " (key,value) in patient" style="height:2px;" >
+                            <td width="10%" >{{key}}</td>
+                            <td width="25%" >{{value}}</td>
+                        </tr>    
+                    </tbody>
+                </table>
+            </div>
+			
+			<form>
+			<div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-10">
+                        <button id="edit" type="submit" class="btn btn-primary" ng-click="edit_medical()">Edit</button>
+                    </div>
+                </div>
+           </form>
+                   
+                <hr style="border-top:1px solid rgb(225,225,225);">
+                </div>
+        </div>
+    </div>
+</div>
