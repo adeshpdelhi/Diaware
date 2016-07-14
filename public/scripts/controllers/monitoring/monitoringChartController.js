@@ -24,15 +24,14 @@ angular.module('App')
     		$scope.basic.lastModifiedBy = authorize.getUsername();
     		console.log($scope.basic);
     		console.log($scope.patient.id);
-    		monitoringChartFactory.getPreBasic($scope.patient.id).save($scope.basic).$promise.then(function(response){
-				$scope.basic.preBasicId=response.preBasicId;
-				$scope.showalert_predialysis_basic=true;
-			},function(response){
-				$scope.showalert_predialysis_basic=false;
-				console.log(response);
-			}
-			
-			);
+    		monitoringChartFactory.getPreBasic($scope.patient.id).save($scope.basic).$promise.then(
+                function(response){
+    				$scope.basic.preBasicId=response.preBasicId;
+    				$scope.showalert_predialysis_basic=true;
+    			},function(response){
+    				$scope.showalert_predialysis_basic=false;
+    				console.log(response);
+    			});
 			
         };
 

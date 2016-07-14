@@ -39,7 +39,6 @@ patientRouter.route('/')
 	console.log('processing post : '+ req.body);
     db.patientDetails.build(req.body).save().then(function(result){
         res.json(result);
-        res.status(200);
     // res.end('patientRouter working'); // send status code
     });
 })
@@ -50,6 +49,28 @@ patientRouter.route('/')
 patientRouter.route('/:id')
 .get(function(req,res,next){
     console.log('procesing get');
+    if(req.query.fullDetails){
+        db.patientDetails.find({
+            where:{
+                id:req.params.id,
+                centreId:req.params.centreId
+            },
+            include:[{
+                model:db.panelDetails
+            },{
+                model:db.otherDetails
+            },{
+                model:db.medicalHistory
+            },{
+                model:db.majorClinicalEvents
+            }]
+            // order: [['updatedAt', 'DESC']]
+        }).then(function(patient){
+            console.log(JSON.stringify(patient));
+            res.json(patient);
+        });    
+        return;
+    }
     db.patientDetails.findOne({
         where:{
             id:req.params.id,
@@ -64,34 +85,7 @@ patientRouter.route('/:id')
 
 })
 .put(function(req,res,next){
-    console.log(req.body);
-    // db.patientDetails.update(
-    // req.body, {where:{id:req.params.id}}
-    // )
-    // .then(function (result) { 
-    //     console.log(JSON.stringify(result));
-    //     res.status(200);
-    //     res.end("successfully updated");
-    //     console.log('updated successfully');
-    // }, function(rejectedPromiseError){
-    //     res.status(500);
-    //     res.end('error');
-    //     console.log('cannot update');
-    // });
-    db.patientDetails.find({ where: {id:req.params.id} }).then(function(patient){
-      if (patient) { // if the record exists in the db
-        patient.updateAttributes(req.body).then(function (result) { 
-                            console.log(JSON.stringify(result));
-                            res.status(200);
-                            res.end("successfully updated");
-                            console.log('updated successfully');
-                    }, function(rejectedPromiseError){
-                            res.status(400);
-                            res.end('error');
-                            console.log('cannot update: '+rejectedPromiseError);
-                    });
-      }
-    })
+
 })
 ;
 

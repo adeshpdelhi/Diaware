@@ -1,7 +1,7 @@
 -- drop database diaware;
 -- create database diaware;
 use diaware;
--- insert into centres (id, name,location,maxPatients,accessLinesAvailable, patientCount,noOfShiftsPerDay,OPDTotalNegativeMachines) values('JP1',"Apex Jaipur","malviya nagar",50,"femoral,fistoral,IJ,central",2,3,10);
+insert into centres (id, name,location,maxPatients,accessLinesAvailable, patientCount,noOfShiftsPerDay,OPDTotalNegativeMachines) values('JP1',"Apex Jaipur","malviya nagar",50,"femoral,fistoral,IJ,central",2,3,10);
 insert into patientDetails (id,name,contact,lastModifiedBy,centreId) values("JP1-2016-1","adesh","987654321","aish", "JP1");
 insert into bills(transactionId,status,amount,lastModifiedBy,patientId) values(1,"Paid",26.89,"aish","JP1-2016-1");
 insert into centres( id, name,location,maxPatients,accessLinesAvailable, patientCount,noOfShiftsPerDay,OPDTotalNegativeMachines) values("CH","chandigarh","chandigarh",50,"femoral,fistoral,IJ",1,4,15);
@@ -31,7 +31,7 @@ insert into procedureTypes(procedureType) value ("proceduretype3");
 insert into consumableTypes(consumableType) value ("consumabletype1");
 insert into consumableTypes(consumableType) value ("consumabletype2");
 insert into consumableTypes(consumableType) value ("consumabletype3");
-insert into monitoringChartPreBasic(patientId,monitoringDate,machineNumber,bedNumber,lastModifiedBy) values("JP1-2016-1", "12-30-2016",1,1,"aish");
+insert into monitoringChartPreBasic(patientId,monitoringDate,machineNumber,bedNumber,lastModifiedBy) values("JP1-2016-1", "2016-07-14",1,1,"aish");
 insert into monitoringChartPreBasicMedical(preBasicId,patientId,dialyzerName,dialyzerType,accessUsed,lastModifiedBy) values(1,"JP1-2016-1", "xxx","type1","femoral","aish");
 insert into monitoringChartPreMachineFinalCheck(preBasicId,patientId,machineNumber,machineTestPassed,lastModifiedBy) values(1, "JP1-2016-1",1,"Yes","aish");
 insert into monitoringChartPreAssessment(preBasicId,patientId,preHDWeight,lastPostHDWeight,dryWeight,physicalChestPain,lastModifiedBy) values(1,"JP1-2016-1", 45.5,40.2,40,"Yes","aish");
@@ -65,16 +65,16 @@ insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id) value
 insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id) values('JP1',"Saturday","18",'17','16');
 insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id) values('JP1',"Sunday","19",'20','21');
 
-CREATE EVENT addNextWeeksAppointments
-  ON SCHEDULE
-    EVERY 1 DAY
-    STARTS '2016-07-14 01:10:00' ON COMPLETION PRESERVE ENABLE 
-  DO
-    INSERT INTO futureAppointments (centreId, shiftPatientsId,date,dayOfTheWeek,patientId,shiftNumber)
-    -- OUTPUT inserted.Id, inserted.ColumnA, inserted.ColumnB
-    SELECT  S.id as shiftPatientsId, S.patientId as patientId, P.centreId as centreId, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 7 DAY) as date, S.dayOfTheWeek  as dayOfTheWeek, S.shiftNumber as shiftNumber
-    FROM    shiftPatients as S join patientDetails as P 
-    WHERE S.patientId == P.id and S.dayOfTheWeek == DAYNAME(DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 7 DAY));
+-- CREATE EVENT addNextWeeksAppointments
+--   ON SCHEDULE
+--     EVERY 1 DAY
+--     STARTS '2016-07-14 01:10:00' ON COMPLETION PRESERVE ENABLE 
+--   DO
+--     INSERT INTO futureAppointments (centreId, shiftPatientsId,date,dayOfTheWeek,patientId,shiftNumber)
+--     -- OUTPUT inserted.Id, inserted.ColumnA, inserted.ColumnB
+--     SELECT  S.id as shiftPatientsId, S.patientId as patientId, P.centreId as centreId, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 7 DAY) as date, S.dayOfTheWeek  as dayOfTheWeek, S.shiftNumber as shiftNumber
+--     FROM    shiftPatients as S join patientDetails as P 
+--     WHERE S.patientId == P.id and S.dayOfTheWeek == DAYNAME(DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 7 DAY));
 
 
 

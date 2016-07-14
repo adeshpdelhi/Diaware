@@ -19,6 +19,10 @@ add editable rights on user to admin only using passport
 
 add active and inactive state of patient and a corresponding hook - patient inactive shift to inactive patients table
 
+
+add paranoid:true to each model - no record is deleted from the table
+
+
 pre dialysis
 fetch last post hd weight from db ....
 -----done-----calculate actual weight loss = prehdwieght-posthdweight - would be calculated only after filling post dia
