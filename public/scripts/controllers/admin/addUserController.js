@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('App')
-.controller('DataBaseController',['$scope','authorize', function ($scope, authorize) {
+.controller('AddUserController',['$scope','authorize', function ($scope, authorize) {
 
 	$scope.newuser={admin:false,manager:false,incharge:false, clinical:false};
 	$scope.addUser = function(){

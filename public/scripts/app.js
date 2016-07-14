@@ -1,6 +1,6 @@
 'use strict';
 //add resolve objects
-angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMaterial', 'ngMessages'])
+angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMaterial', 'ngMessages','ngCookies'])
 .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
             // route for the home page
@@ -161,11 +161,28 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                 }
             })
             .state('app.admin',{
-                url:"admin",
+                url:"admin/",
+                views:{
+                    'content@':{
+                        template:'views/admin/editDataBase.html',
+                    }
+                }
+            })
+            .state('app.admin.editdatabase',{
+                url:"editdatabase",
                 views:{
                     'content@':{
                         templateUrl:'views/admin/editDataBase.html',
                         controller:'DataBaseController'
+                    }
+                }
+            })
+            .state('app.admin.adduser',{
+                url:"adduser",
+                views:{
+                    'content@':{
+                        templateUrl:'views/admin/addUser.html',
+                        controller:'AddUserController'
                     }
                 }
             })

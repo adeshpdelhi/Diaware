@@ -12,8 +12,20 @@ module.exports = function(sequelize, DataTypes) {
           hashedPassword: {
             type: DataTypes.STRING
           },
-          centre: {
-            type: DataTypes.STRING
+          centres:{
+            type:DataTypes.STRING(500),
+            allowNull:true,
+            get:function(){
+              if(this.getDataValue('centres') != null)
+                return this.getDataValue('centres').split(',');
+              else return this.getDataValue('centres');
+            },
+            set:function(val){
+              var value =val.split(',')[0], split=",";
+              for(var i = 1; i< val.split(',').length;i++) 
+                value = value.concat(split,val.split(',')[i]);
+              this.setDataValue('centres',value);
+            }
           },
           admin: {
             type: DataTypes.BOOLEAN
@@ -29,19 +41,19 @@ module.exports = function(sequelize, DataTypes) {
           }
           //add which centres he has authority of (',' separated list)
           /* use this code to get array of all the centers user has access to
-              accessLinesAvailable:{
+              centre:{
                 type:DataTypes.STRING(500),
                 allowNull:true,
                 get:function(){
-                  if(this.getDataValue('accessLinesAvailable') != null)
-                    return this.getDataValue('accessLinesAvailable').split(',');
-                  else return this.getDataValue('accessLinesAvailable');
+                  if(this.getDataValue('centre') != null)
+                    return this.getDataValue('centre').split(',');
+                  else return this.getDataValue('centre');
                 },
                 set:function(val){
                   var value =val[0], split="/";
                   for(var i = 1; i< val.length;i++) 
                     value = value.concat(split,val[i]);
-                  this.setDataValue('accessLinesAvailable',value);
+                  this.setDataValue('centre',value);
                 }
           },
           */

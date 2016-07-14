@@ -74,21 +74,35 @@
                     </ul>
                 </li>
 
-                <li ng-class="{active: stateis('app.admin')}">
+                <!-- <li ng-class="{active: stateis('app.admin')}">
                     <a ui-sref="app.admin">
                         <span class="glyphicon glyphicon-folder-open"
                         aria-hidden="true">
                         </span> Admin
                     </a>
+                </li> -->
+
+                <li ng-class="{active: stateis('app.admin')}" uib-dropdown on-toggle="toggled(open)">
+                    <a style="cursor: pointer; display: block;" class="simple-dropdown" uib-dropdown-toggle>
+                        <span class="glyphicon glyphicon-folder-open"
+                        aria-hidden="true"></span> Admin
+                    </a>
+                    <ul class="dropdown-menu" uib-dropdown-menu  aria-labelledby="simple-dropdown">
+                        <li>
+                            <a ui-sref="app.admin.editdatabase">Edit Database</a>
+                            <a ui-sref="app.admin.adduser">Add User</a>
+
+                        </li>
+                    </ul>
                 </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <li ng-show="loggedIn">
-                    <a>{{centre}}</a>
+                    <a ng-click="chooseCentreOpen()" style="cursor: pointer;">{{centre}}</a>
                 </li>
                 <li class="loggedin" ng-show="loggedIn">
-                    <a>{{username}}</a>
+                    <a style="cursor: default;">{{username}}</a>
                 </li>
                 <li ng-show="loggedIn">
                     <a ng-click="logout()" style="cursor: pointer;">
