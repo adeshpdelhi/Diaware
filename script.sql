@@ -1,7 +1,7 @@
 -- drop database diaware;
 -- create database diaware;
 use diaware;
-insert into centres (id, name,location,maxPatients,accessLinesAvailable, patientCount,noOfShiftsPerDay,OPDTotalNegativeMachines) values('JP1',"Apex Jaipur","malviya nagar",50,"femoral,fistoral,IJ,central",2,3,10);
+-- insert into centres (id, name,location,maxPatients,accessLinesAvailable, patientCount,noOfShiftsPerDay,OPDTotalNegativeMachines) values('JP1',"Apex Jaipur","malviya nagar",50,"femoral,fistoral,IJ,central",2,3,10);
 insert into patientDetails (id,name,contact,lastModifiedBy,centreId) values("JP1-2016-1","adesh","987654321","aish", "JP1");
 insert into bills(transactionId,status,amount,lastModifiedBy,patientId) values(1,"Paid",26.89,"aish","JP1-2016-1");
 insert into centres( id, name,location,maxPatients,accessLinesAvailable, patientCount,noOfShiftsPerDay,OPDTotalNegativeMachines) values("CH","chandigarh","chandigarh",50,"femoral,fistoral,IJ",1,4,15);
