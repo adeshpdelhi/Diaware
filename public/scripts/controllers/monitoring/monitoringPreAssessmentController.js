@@ -60,7 +60,7 @@ angular.module('App')
 				console.log(response);
 			}
 			
-			);;
+			);
 		//$scope.showalert_predialysis_assessment=true;
 
 	};

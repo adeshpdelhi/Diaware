@@ -26,8 +26,16 @@ angular.module('App')
 
 			console.log($scope.newPatient_Others.patientId);
 			console.log($scope.newPatient_Others);
-			patientFactory.getPatientOtherDetails($scope.newPatient_Others.patientId,authorize.getCentre()).save($scope.newPatient_Others);
-			$scope.showalert_others=true;
+			patientFactory.getPatientOtherDetails($scope.newPatient_Others.patientId,authorize.getCentre()).save($scope.newPatient_Others).$promise.then(function(response){
+		$scope.showalert_others=true;
+			},function(response){
+		$scope.showalert_others=false;
+				console.log(response);
+			}
+			
+			);			//$scope.showalert_basic_details=true;
+;
+			//$scope.showalert_others=true;
 		};
 		$scope.saveFile = function(element){
 			// var reader = new FileReader();

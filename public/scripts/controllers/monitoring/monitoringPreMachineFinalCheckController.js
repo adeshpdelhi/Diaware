@@ -29,7 +29,7 @@ angular.module('App')
 				console.log(response);
 			}
 			
-			);;
+			);
 		//$scope.showalert_predialysis_machine_final_check=true;
 	}
 }])

@@ -55,11 +55,20 @@ angular.module('App')
 					console.log("i" + i);
 					console.log("x:outside " + x);
 					patientFactory.getPatientMajorClinicalEvents($scope.newpatient_basic.id,authorize.getCentre()).save($scope.events[i]).$promise.then(function(response){
+						$scope.showalert_events=true;
 						console.log($scope.events[x]);
 						$scope.events[x].id = response.id;
 						console.log("x:inside " + x);
 						x++;
-					});	
+					},
+					
+					function(response){
+						$scope.showalert_events=false;
+						console.log(response);
+					}
+					
+					
+					);	
 				}
 				else x++;
 			}
@@ -74,7 +83,7 @@ angular.module('App')
 				comments:"",
 				saved:false
 	        };
-			$scope.showalert_events=true;
+			
 		};
 		
 		

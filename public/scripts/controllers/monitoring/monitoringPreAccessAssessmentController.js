@@ -25,7 +25,7 @@ angular.module('App')
 				console.log(response);
 			}
 			
-			);;
+			);
 		//$scope.showalert_predialysis_access_assessment=true;
 
 	};

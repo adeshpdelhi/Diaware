@@ -92,7 +92,14 @@ angular.module('App')
 				medicalHistory.doctorComments = value;
 				console.log(medicalHistory.patientId);
 				console.log(medicalHistory);
-				patientFactory.getPatientMedicalHistory(medicalHistory.patientId,authorize.getCentre()).save(medicalHistory);
+				patientFactory.getPatientMedicalHistory(medicalHistory.patientId,authorize.getCentre()).save(medicalHistory).$promise.then(function(response){
+					$scope.showalert_medical=true;
+			},function(response){
+					$scope.showalert_medical=false;
+					console.log(response);
+			}
+			
+			);;
 				medicalHistory= {
 					patientId:$scope.newpatient_basic.id,
 					diseaseName:null,
@@ -104,7 +111,7 @@ angular.module('App')
 			i++;
 		}
 		saveOthers();
-		$scope.showalert_medical=true;
+		//$scope.showalert_medical=true;
 	}
 
 }])

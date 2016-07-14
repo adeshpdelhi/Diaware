@@ -21,8 +21,15 @@ angular.module('App')
 			$scope.newPatient_Panel.lastModifiedBy = $scope.newpatient_basic.lastModifiedBy;
 			$scope.newPatient_Panel.patientId = $scope.newpatient_basic.id; 
 			console.log($scope.newPatient_Panel);
-			patientFactory.getPatientPanels($scope.newPatient_Panel.patientId,authorize.getCentre()).save($scope.newPatient_Panel);
-			$scope.showalert_panel=true;
+			patientFactory.getPatientPanels($scope.newPatient_Panel.patientId,authorize.getCentre()).save($scope.newPatient_Panel).$promise.then(function(response){
+		$scope.showalert_panel=true;
+			},function(response){
+		$scope.showalert_panel=false;
+				console.log(response);
+			}
+			
+			);
+			//$scope.showalert_panel=true;
 		};
 
 }])
