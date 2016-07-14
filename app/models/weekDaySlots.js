@@ -13,7 +13,10 @@ module.exports = function(sequelize, DataTypes) {
     dayOfTheWeek:{
     	type:DataTypes.STRING,
     	allownull:false,
-    	primaryKey:true
+    	primaryKey:true,
+    	validate:{
+	        isIn:[['','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']]
+    	}
     },
     shift1Id:{
     	type:DataTypes.STRING,

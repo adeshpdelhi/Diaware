@@ -11,6 +11,8 @@ var monitoringRouter = require('./monitoringRoute');
 
 var scheduleRouter = require('./appointment/scheduleroute');
 apiRouter.use('/:centreId/schedulePatient',scheduleRouter);
+var appointmentRouter = require('./appointment/appointmentroute');
+apiRouter.use('/:centreId',appointmentRouter);
 
 apiRouter.use('/:centreId/patients',registrationRouter);
 apiRouter.use('/users',usersRouter);

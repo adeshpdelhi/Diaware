@@ -69,7 +69,8 @@
 
 					    					<button type="button" class="btn btn-primary" id="button_{{$parent.$index}}" ng-click="book(shiftValue.id,shiftKey,$parent.$index,key)" ng-show="!saved($parent.$index)">Book</button>
 				    					</div>
-				    					<button type="button" class="btn btn-primary" ng-click="unbook(shiftValue.id,$parent.$index)" ng-show="saved($parent.$index)">UnBook</button>
+				    					<p>{{key}}</p>
+				    					<button type="button" class="btn btn-primary" ng-click="unbook(key,$parent.$index)" ng-show="saved($parent.$index)">UnBook</button>
 				    				</md-card-content>
 				    			</md-card>
 				    		</div>

@@ -75,11 +75,16 @@ scheduleRouter.route('/')
 .post(function (req, res, next) {
 	console.log('processing post : '+ req.body);
 	// res.json(req.body);
-	var insertedData;
-    db.shiftPatients.bulkCreate(req.body.shiftPatients).then(function(results){
-    	console.log(JSON.stringify(results));
-    	insertedData = JSON.parse(JSON.stringify(results));
-    });	
+	var insertedData=[];
+    for(var i =0;i<req.body.shiftPatients.length;i++){
+        db.shiftPatients.build(req.body.shiftPatients[i]).save().then(function(result){
+            insertedData.push(JSON.parse(JSON.stringify(result)));
+        });    
+    }
+    // db.shiftPatients.bulkCreate(req.body.shiftPatients).then(function(results){
+    // 	console.log(JSON.stringify(results));
+    // 	insertedData = JSON.parse(JSON.stringify(results));
+    // });	
     var modifiedRows = [];
     for(key in req.body.update){
     	var object ={};

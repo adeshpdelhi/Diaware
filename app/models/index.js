@@ -58,7 +58,7 @@ dbmodel.otherDetails.belongsTo(dbmodel.patientDetails,{foreignKey:'patientId'});
 
 //relation between patient and his medical history
 dbmodel.patientDetails.hasMany(dbmodel.medicalHistory,{foreignKey:'patientId'});
-dbmodel.otherDetails.belongsTo(dbmodel.patientDetails,{foreignKey:'patientId'});
+dbmodel.medicalHistory.belongsTo(dbmodel.patientDetails,{foreignKey:'patientId'});
 
 //relation between patient and clinical events
 dbmodel.patientDetails.hasMany(dbmodel.majorClinicalEvents,{foreignKey:'patientId'});
@@ -90,5 +90,18 @@ dbmodel.weekDaySlots.belongsTo(dbmodel.shifts,{as:'shift3',foreignKey:'shift3Id'
 dbmodel.weekDaySlots.belongsTo(dbmodel.shifts,{as:'shift4',foreignKey:'shift4Id'});
 dbmodel.weekDaySlots.belongsTo(dbmodel.shifts,{as:'shift5',foreignKey:'shift5Id'});
 dbmodel.weekDaySlots.belongsTo(dbmodel.shifts,{as:'shift6',foreignKey:'shift6Id'});
+
+dbmodel.shiftPatients.hasMany(dbmodel.futureAppointments,{foreignKey:'shiftPatientsId'});
+dbmodel.futureAppointments.belongsTo(dbmodel.shiftPatients,{foreignKey:'shiftPatientsId'});
+
+dbmodel.shiftPatients.hasMany(dbmodel.attendedAppointments,{foreignKey:'shiftPatientsId'});
+dbmodel.attendedAppointments.belongsTo(dbmodel.shiftPatients,{foreignKey:'shiftPatientsId'});
+
+// dbmodel.shiftPatients.belongsTo()
+
+dbmodel.patientDetails.hasMany(dbmodel.futureAppointments,{foreignKey:'patientId'});
+dbmodel.futureAppointments.belongsTo(dbmodel.patientDetails,{foreignKey:'patientId'});
+dbmodel.patientDetails.hasMany(dbmodel.attendedAppointments,{foreignKey:'patientId'});
+dbmodel.futureAppointments.belongsTo(dbmodel.patientDetails,{foreignKey:'patientId'});
 
 module.exports = dbmodel;
