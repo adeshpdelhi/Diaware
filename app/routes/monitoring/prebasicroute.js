@@ -12,7 +12,33 @@ preBasicRouter.use(bodyParser.json());
 
 preBasicRouter.route('/')
 .get(function (req, res, next) {
-    
+    if(req.query.fullChartLatest){
+        db.monitoringChartPreBasic.find({
+            where:{
+                patientId:req.params.id
+            },
+            include:[{
+                model:db.patientDetails
+            },{
+                model:db.monitoringChartPreBasicMedical
+            },{
+                model:db.monitoringChartPreMachineFinalCheck
+            },{
+                model:db.monitoringChartPreAssessment
+            },{
+                model:db.monitoringChartPreAccessAssessment
+            },{
+                model:db.monitoringChartIntra
+            },{
+                model:db.monitoringChartPost
+            }],
+            order:[['monitoringDate','DESC']]
+        }).then(function(preBasic){
+            console.log(JSON.stringify(preBasic));
+            res.json(preBasic);
+        });    
+        return;
+    }
     console.log('procesing get');
     db.monitoringChartPreBasic.findAll({
         where:{

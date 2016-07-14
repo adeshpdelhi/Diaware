@@ -7,6 +7,8 @@ angular.module('App')
  		var centre = authorize.getCentre();
         backendFactory.getCentres().get({id:authorize.getCentre()})
         	.$promise.then(function(data){
+        		console.log(data);
+        		console.log(data.count);
         		counter = data.patientCount;
        			},function(response){
        				console.log("Error" + response.status +" " + response.statusText);
@@ -49,14 +51,13 @@ angular.module('App')
 			if($scope.newpatient_basic.alternativeContact === "") $scope.newpatient_basic.alternativeContact = null;
 			if($scope.newpatient_basic.childrenContact === "") $scope.newpatient_basic.childrenContact = null;
 			console.log($scope.newpatient_basic);
+            
             patientFactory.getPatients(centre).save($scope.newpatient_basic).$promise.then(function(response){
-			$scope.showalert_basic_details=true;
-			},function(response){
-			$scope.showalert_basic_details=false;
-				console.log(response);
-			}
-			
-			);
+					$scope.showalert_basic_details=true;
+				},function(response){
+					$scope.showalert_basic_details=false;
+					console.log(response);
+				});
 			//$scope.showalert_basic_details=true;
 			
         };

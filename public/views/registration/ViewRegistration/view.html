@@ -49,8 +49,12 @@
                 <br><br>
             </ul>
             <div class="tab-content" >
-                <div class="panel panel-info" style="text-align:center;">   
+                <div class="panel panel-info" style="text-align:center;">  
                     <div style="padding-top:30px; " class="panel-body styled" style="background-color:#ffffff ;" >
+                        <div class="row">
+                          <label class="col-sm-4 text-capitalize" style="font-size:17px; font-weight:150px; font-family:times;color:rgb(5, 41, 110);">PatientID: {{patient.id}} </label>
+                          <label class="col-sm-8 text-capitalize" style="font-size:17px; font-weight:150px; font-family:times; text-align: left; color:rgb(5, 41, 110)">Patient Name: {{patient.name}}</label>
+                        </div>
                         <div ng-include="'views/registration/ViewRegistration/basic_details.html'" ng-show="tab === 1"></div> 
                         <div ng-include="'views/registration/ViewRegistration/panel.html'" ng-show="tab === 2"></div> 
                         <div ng-include="'views/registration/ViewRegistration/medical_history.html'" ng-show="tab === 3"></div>
