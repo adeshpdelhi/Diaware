@@ -186,6 +186,15 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                     }
                 }
             })
+            .state('app.admin.viewuser',{
+                url:"viewuser",
+                views:{
+                    'content@':{
+                        templateUrl:'views/admin/viewUser.html',
+                        controller:'ViewUserController'
+                    }
+                }
+            })
             .state('app.appointment',{
                 url:"appointment/",
                 views:{

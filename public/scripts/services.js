@@ -21,6 +21,14 @@ angular.module('App')
     }
   };
 }])
+.factory('staffFactory', ['baseURL','$resource', function (baseURL, $resource) {
+  var centreStaff = $resource(baseURL+"users/manage/:centreId",null,  {'update':{method:'PUT' }, 'getFiltered': {method:'GET', isArray: true}});
+  return {
+    getCentreStaff : function(){
+      return centreStaff;
+    }
+  };
+}])
 .service('authorize', ['$localStorage','baseURL', '$http', '$cookies', '$resource', function ($localStorage, baseURL, $http, $cookies, $resource) {
 
   // var logged_in_user = $localStorage.get('username','');
@@ -36,13 +44,14 @@ angular.module('App')
   {
     logged_in=true;
     logged_in_centre = $localStorage.get('centrelocal','');
+    console.log('login detected');
   }
   if(logged_in== true){
     users.get({username: logged_in_user})
                           .$promise.then(function(user){
                               //$localStorage.store('centrelocal',username);
                             logged_in_user_object=user;
-                            console.log('saved user obj retrieval successful');
+                            console.log('saved user obj retrieval successful. '+logged_in_user_object.username+' logged in');
                             },function(response){
                               console.log("Error" + response.status +" " + response.statusText);
                               console.log('failed to get saved user');
