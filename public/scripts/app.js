@@ -72,13 +72,29 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                 }
 
             })
+			
+			
+			.state('app.dialysis_care_plan', {
+                url:'dialysis_care_plan/',
+            })
 
-            .state('app.dialysis_care_plan', {
-                url:'dialysis_care_plan',
+            .state('app.dialysis_care_plan.new', {
+                url:'new',
                 views: {
                     'content@': {
                         templateUrl : 'views/dialysis_care_plan/dialysis_care_plan.html',
                         controller  : 'DialysisCarePlanController'        
+                    }
+                }
+
+            })
+			
+			 .state('app.dialysis_care_plan.view', {
+                url:'view',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/dialysis_care_plan/ViewDialysisCarePlan/view_dialysis_care_plan.html',
+                        controller  : 'ViewDialysisCarePlanController'        
                     }
                 }
 

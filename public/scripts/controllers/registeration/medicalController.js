@@ -73,6 +73,8 @@ angular.module('App')
 		}
 	};
 	$scope.saveMedical= function(){
+		$scope.showalert_medical=false;
+
 		var i = 0;
 		console.log($scope.newPatient_Medical);
 		for (key in $scope.newPatient_Medical ){
