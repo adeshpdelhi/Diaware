@@ -169,6 +169,17 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
 
             })
 			
+			.state('app.inventory.add_vendor', {
+                url:'Add_Vendor',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/addVendor.html',
+                        controller  : 'AddVendorController'        
+                    }
+                }
+
+            })
+			
 			
             .state('app.billing',{
                 url:"billing/",

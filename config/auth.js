@@ -13,8 +13,15 @@ exports.login = function(req, res){
 			else{
 				var hashedPassword = crypto.createHash('md5').update(req.body.password).digest("hex");
 				if(user.hashedPassword == hashedPassword){
-					res.cookie('username',req.body.username,{signed: true});
-					res.cookie('usernamelocal',req.body.username);
+					if(req.body.rememberme == true){
+						res.cookie('username',req.body.username,{signed: true, maxAge: 360000000});
+						res.cookie('usernamelocal',req.body.username, {maxAge: 360000000});
+					}	
+					else
+					{
+						res.cookie('username',req.body.username,{signed: true});
+						res.cookie('usernamelocal',req.body.username);
+					}
 					res.status(200);
 					res.end('success');
 					console.log(req.body.username+' logged in');

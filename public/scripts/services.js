@@ -59,42 +59,40 @@ angular.module('App')
         );
     }
 
-    this.doAuth = function(username,password,next){
-
+  this.doAuth = function(username,password,rememberme,next){
         $http({
             method: 'POST',
             url: baseURL+'users/login',
-            data: {username: username, password: password}
-        }).then(function successCallback(response) {
-            if(response.status==200){
-                logged_in_user=username;
-                logged_in=true;
-            // $localStorage.store('username',username);
-            console.log('successful login in services :'+logged_in);
-            users.get({username: username})
-            .$promise.then(function(user){
-                // $localStorage.store('centrelocal',username);
-                logged_in_user_object=user;
-                next(user);
-            },function(response){
-                console.log("Error" + response.status +" " + response.statusText);
-                next(null);
-            }
-            );
-
-        }
-        else
-        {
-            // alert('login failed services');
-            next(null);
-        }
-    }, function errorCallback(response) {
-        {
-            // alert('login failed services');
-            next(null);
-        }
-    });
-
+            data: {username: username, password: password, rememberme: rememberme}
+          }).then(function successCallback(response) {
+                if(response.status==200){
+                       logged_in_user=username;
+                       logged_in=true;
+          //             $localStorage.store('username',username);
+                       console.log('successful login in services :'+logged_in);
+                       users.get({username: username})
+                        .$promise.then(function(user){
+                            //$localStorage.store('centrelocal',username);
+                            logged_in_user_object=user;
+                          next(user);
+                          },function(response){
+                            console.log("Error" + response.status +" " + response.statusText);
+                            next(null);
+                          }
+                        );
+                       
+                }
+                else
+                 {
+                    //alert('login failed services');
+                    next(null);
+                 }
+            }, function errorCallback(response) {
+                  {
+                    //alert('login failed services');
+                    next(null);
+                 }
+            });
     };
     this.getUsers = function(){
         return users;

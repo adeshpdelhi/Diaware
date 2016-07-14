@@ -6,8 +6,9 @@ angular.module('App')
     
     $scope.credentials = {username: "", password: "", centre: ""};
     $scope.display_centre = false;
+    $scope.rememberme=false;
     $scope.doLogin = function(){
-        authorize.doAuth($scope.credentials.username,$scope.credentials.password, function(user){
+        authorize.doAuth($scope.credentials.username,$scope.credentials.password,$scope.rememberme, function(user){
         //console.log ('success is '+success);
         if(user !=null){
             console.log('successful login in controller');
