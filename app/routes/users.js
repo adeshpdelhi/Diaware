@@ -26,38 +26,50 @@ router.post('/login', function(req, res) {
 });
 
 router.put('/:username', function(req, res) {
-    users.findOne({where:{username:req.params.username}}).then(function(user){
-        if(user!=null){
-            if(user.hashedPassword == crypto.createHash('md5').update(req.body.oldpassword).digest("hex")){
-                 console.log('correct old password');
-                //  users.update(
-                //     { //hashedPassword: crypto.createHash('md5').update(req.body.newpassword).digest("hex")
-                // },
-                //         {where:{username:req.params.username}}
-                //     )
-                //     .then(function (result) { 
-                //         console.log(JSON.stringify(result));
-                //         res.end("successfully updated")
-                //     }, function(rejectedPromiseError){
-
-                //     });
-                user.updateAttributes({
-                  hashedPassword: crypto.createHash('md5').update(req.body.newpassword).digest("hex")
-                }).then(function (result) { 
-                        console.log(JSON.stringify(result));
-                        res.end("successfully updated")
-                    }, function(rejectedPromiseError){
-
-                    });
-            }
-            else
-                {
-                    console.log('incorrect old password');
-                    res.status(401);
-                    res.end('wrong old password');
+    if(req.body.oldpassword!=null)
+    {users.findOne({where:{username:req.params.username}}).then(function(user){
+            if(user!=null){
+                if(user.hashedPassword == crypto.createHash('md5').update(req.body.oldpassword).digest("hex")){
+                     console.log('correct old password');
+                    //  users.update(
+                    //     { //hashedPassword: crypto.createHash('md5').update(req.body.newpassword).digest("hex")
+                    // },
+                    //         {where:{username:req.params.username}}
+                    //     )
+                    //     .then(function (result) { 
+                    //         console.log(JSON.stringify(result));
+                    //         res.end("successfully updated")
+                    //     }, function(rejectedPromiseError){
+    
+                    //     });
+                    user.updateAttributes({
+                      hashedPassword: crypto.createHash('md5').update(req.body.newpassword).digest("hex")
+                    }).then(function (result) { 
+                            console.log(JSON.stringify(result));
+                            res.end("successfully updated")
+                        }, function(rejectedPromiseError){
+    
+                        });
                 }
-        }
+                else
+                    {
+                        console.log('incorrect old password');
+                        res.status(401);
+                        res.end('wrong old password');
+                    }
+            }
+        });}
+    else{
+            users.update(
+    req.body, {where:{username:req.params.username}}
+    )
+    .then(function (result) { 
+        console.log(JSON.stringify(result));
+        res.end("successfully updated")
+    }, function(rejectedPromiseError){
+
     });
+    }
 });
 
 // router.put('/:username', function(req,res){

@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
 app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(methodOverride('X-HTTP-Method-Override')); 
-app.use(cookieParser('blOOdyhabanerO:#404'));
+app.use(cookieParser('#h4865sBHkL%?'));
 
 app.use(express.static(path.join(__dirname, 'dist')));
 

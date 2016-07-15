@@ -46,6 +46,7 @@ angular.module('App')
     $scope.username = authorize.getUsername();
     $scope.centre = authorize.getCentre();
     $scope.credentials={};
+    $scope.role = authorize.getRole();
     $scope.chooseCentreOpen = function(){
         var user = authorize.getActiveUser();
         var tempcentres = user.centres;

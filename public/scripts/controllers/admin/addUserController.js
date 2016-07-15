@@ -12,7 +12,9 @@ angular.module('App')
 	$scope.addUser = function(){
 		console.log($scope.newuser);
 		var tempcentres = authorize.getActiveUser().centres;
-		var newcentres =$scope.newuser.centres.split(',');
+		if(!($scope.newuser.centres.constructor === Array))
+    		$scope.newuser.centres = $scope.newuser.centres.split(',');
+		var newcentres =$scope.newuser.centres;
 		for(var i=0; i<newcentres.length; i++){
 			var flag=false;
 			for(var j = 0; j<tempcentres.length; j++ ){
@@ -31,8 +33,15 @@ angular.module('App')
 	};
 	$scope.centrechanged = function(){
 		console.log('change detected: contained? '+$scope.newuser.centres.includes($scope.newuser.centre)+ ' '+$scope.newuser.centres+' '+$scope.newuser.centre);
-		if($scope.newuser.centres.includes($scope.newuser.centre) == false){
-			if($scope.newuser.centres.length!=0)
+		if(!($scope.newuser.centres.constructor === Array))
+    		$scope.newuser.centres = $scope.newuser.centres.split(',');
+		var flag= false;
+		for(var i=0; i<$scope.newuser.centres.length; i++){
+			if($scope.newuser.centre == $scope.newuser.centres[i])
+				flag = true;
+		}
+		if(flag == false){
+			if($scope.newuser.centres!='')
 				$scope.newuser.centres= $scope.newuser.centres+','+$scope.newuser.centre;
 			else
 				$scope.newuser.centres=$scope.newuser.centre;

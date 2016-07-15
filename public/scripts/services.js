@@ -37,13 +37,14 @@ angular.module('App')
     var logged_in_user = '';
     var logged_in_centre = '';
     var logged_in_user_object={};
-
+    var logged_in_role = '';
     logged_in_user = $cookies.get('usernamelocal');
     var users = $resource(baseURL+"users/:username",null,  {'update':{method:'PUT' }});
     if(logged_in_user!=null && logged_in_user!='')
     {
         logged_in=true;
         logged_in_centre = $localStorage.get('centrelocal','');
+        logged_in_role = $localStorage.getObject('rolelocal','{}');
         console.log('login detected');
     }
     if(logged_in== true){
@@ -74,6 +75,9 @@ angular.module('App')
                         .$promise.then(function(user){
                             //$localStorage.store('centrelocal',username);
                             logged_in_user_object=user;
+                            var rolelocal = {admin: user.admin, manager: user.manager, incharge: user.incharge, clinical: user.clinical}
+                            $localStorage.storeObject('rolelocal',rolelocal);
+                            logged_in_role = rolelocal;
                           next(user);
                           },function(response){
                             console.log("Error" + response.status +" " + response.statusText);
@@ -96,6 +100,10 @@ angular.module('App')
     };
     this.getUsers = function(){
         return users;
+    }
+    this.getRole = function(){
+        console.log(logged_in_role);
+        return logged_in_role;
     }
     this.getUsername = function(){
         return logged_in_user;
@@ -128,6 +136,7 @@ angular.module('App')
                 logged_in_user='';
                 logged_in=false;
                 $localStorage.store('centrelocal', '');
+                $localStorage.storeObject('rolelocal','');
             // $localStorage.store('username',username);
             }
             else
