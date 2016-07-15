@@ -165,6 +165,146 @@ width: 700px;
             </div>
 
 
+
+            <div ng-show="!showForm && table =='DialysisTypes'">
+                <div class="table-responsive ">
+                    <table class="table table-striped table-fixedheader table-bordered" style="width:70%; float:center;">
+                        <thead>
+                            <tr>
+                                <th  style="text-align:center;" width="100%">Dialysis Type</th>
+                            </tr>    
+                        </thead>
+                        <tbody style="max-height:300px;">
+                        <!-- apply filter left -->
+                            <tr ng-repeat = "dialysisType in dialysisTypes" style="height:2px;"> 
+                                <td width="90%">{{ dialysisType.dialysisType }}</td>
+                                <td width="10%" ng-click="deleteDialysisType(dialysisType.dialysisType)"><span class="glyphicon glyphicon-remove"></span></td>
+                            </tr>    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row" ng-show="showForm == true && table == 'DialysisTypes'">
+                <form class="form form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Dialysis Type</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" ng-model="dialysisType.dialysisType">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-10">
+                            <button type="submit" class="btn btn-primary" ng-click="addDialysisType()">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div ng-show="!showForm && table =='ConsumableTypes'">
+                <div class="table-responsive ">
+                    <table class="table table-striped table-fixedheader table-bordered" style="width:70%; float:center;">
+                        <thead>
+                            <tr>
+                                <th  style="text-align:center;" width="100%">Consumable Type</th>
+                            </tr>    
+                        </thead>
+                        <tbody style="max-height:300px;">
+                        <!-- apply filter left -->
+                            <tr ng-repeat = "consumableType in consumableTypes" style="height:2px;"> 
+                                <td width="90%">{{ consumableType.consumableType }}</td>
+                                <td width="10%" ng-click="deleteConsumableType(consumableType.consumableType)"><span class="glyphicon glyphicon-remove"></span></td>
+                            </tr>    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row" ng-show="showForm == true && table == 'ConsumableTypes'">
+                <form class="form form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Consumable Type</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" ng-model="consumableType.consumableType">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-10">
+                            <button type="submit" class="btn btn-primary" ng-click="addConsumableType()">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <div ng-show="!showForm && table =='ProcedureTypes'">
+                <div class="table-responsive ">
+                    <table class="table table-striped table-fixedheader table-bordered" style="width:70%; float:center;">
+                        <thead>
+                            <tr>
+                                <th  style="text-align:center;" width="100%">Procedure Type</th>
+                            </tr>    
+                        </thead>
+                        <tbody style="max-height:300px;">
+                        <!-- apply filter left -->
+                            <tr ng-repeat = "procedureType in procedureTypes" style="height:2px;"> 
+                                <td width="90%">{{ procedureType.procedureType }}</td>
+                                <td width="10%" ng-click="deleteProcedureType(procedureType.procedureType)"><span class="glyphicon glyphicon-remove"></span></td>
+                            </tr>    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row" ng-show="showForm == true && table == 'ProcedureTypes'">
+                <form class="form form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Procedure Type</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" ng-model="procedureType.procedureType">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-10">
+                            <button type="submit" class="btn btn-primary" ng-click="addProcedureType()">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <div ng-show="!showForm && table =='PharmacyTypes'">
+                <div class="table-responsive ">
+                    <table class="table table-striped table-fixedheader table-bordered" style="width:70%; float:center;">
+                        <thead>
+                            <tr>
+                                <th  style="text-align:center;" width="100%">Pharmacy Type</th>
+                            </tr>    
+                        </thead>
+                        <tbody style="max-height:300px;">
+                        <!-- apply filter left -->
+                            <tr ng-repeat = "pharmacyType in pharmacyTypes" style="height:2px;"> 
+                                <td width="90%">{{ pharmacyType.pharmacyType }}</td>
+                                <td width="10%" ng-click="deletePharmacyType(pharmacyType.pharmacyType)"><span class="glyphicon glyphicon-remove"></span></td>
+                            </tr>    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row" ng-show="showForm == true && table == 'PharmacyTypes'">
+                <form class="form form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Pharmacy Type</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" ng-model="pharmacyType.pharmacyType">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-10">
+                            <button type="submit" class="btn btn-primary" ng-click="addPharmacyType()">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+
             </div>
         </div>
     </div>
