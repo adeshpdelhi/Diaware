@@ -62,9 +62,11 @@ panelRouter.route('/:panelId')
     .then(function (result) { 
         console.log('success panel update');
         res.status(200);
+        res.end('saved');
     }, function(rejectedPromiseError){
         console.log('failed panel update');
         res.status(400);
+        res.end('failed update')
     });
 })
 ;
