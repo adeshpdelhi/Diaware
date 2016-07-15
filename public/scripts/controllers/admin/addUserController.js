@@ -31,10 +31,11 @@ angular.module('App')
 		}
 		console.log('adding');
 		authorize.getUsers().save($scope.newuser).$promise.then(function(response){
-			$scope.showalert_add_user=true;
-			$scope.addUserForm.$setPristine();
-			$scope.newuser={username: null, password: null, centre:'', centres:'', admin:false,manager:false,incharge:false, clinical:false};
 
+			if(response!=null)
+				alert('Added');
+			else
+				alert('Failed');
 
 		});
 	};
