@@ -29,6 +29,10 @@ angular.module('App')
 		}
 		console.log('adding');
 		authorize.getUsers().save($scope.newuser).$promise.then(function(response){
+			if(response!=null)
+				alert('Added');
+			else
+				alert('Failed');
 		});
 	};
 	$scope.centrechanged = function(){
