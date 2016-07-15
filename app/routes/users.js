@@ -31,17 +31,6 @@ router.put('/:username', function(req, res) {
             if(user!=null){
                 if(user.hashedPassword == crypto.createHash('md5').update(req.body.oldpassword).digest("hex")){
                      console.log('correct old password');
-                    //  users.update(
-                    //     { //hashedPassword: crypto.createHash('md5').update(req.body.newpassword).digest("hex")
-                    // },
-                    //         {where:{username:req.params.username}}
-                    //     )
-                    //     .then(function (result) { 
-                    //         console.log(JSON.stringify(result));
-                    //         res.end("successfully updated")
-                    //     }, function(rejectedPromiseError){
-    
-                    //     });
                     user.updateAttributes({
                       hashedPassword: crypto.createHash('md5').update(req.body.newpassword).digest("hex")
                     }).then(function (result) { 

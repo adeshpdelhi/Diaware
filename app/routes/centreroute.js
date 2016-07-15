@@ -17,8 +17,18 @@ centreRouter.route('/')
     
 })
 .post(function (req, res, next) {
-	console.log('processing post : '+ req.body);
     db.centres.build(req.body).save();
+    db.users.findAll({where:{admin:true}}).then(function(admins){
+        console.log(admins);
+        for(var i=0;i<admins.length;i++){
+            if(admins[i].centres.length>0)
+                admins[i].centres=admins[i].centres.concat(req.body.id);
+            else
+                admins[i].centres = [req.body.id];
+             admins[i].save({fields: ['centres']});
+        }
+    });
+    res.status(200);
     res.end('centreRouter working'); // send status code
 })
 .delete(function(req,res,next){
