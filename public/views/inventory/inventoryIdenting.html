@@ -21,7 +21,7 @@
                             <th style="text-align:center;" width="15%">Item Name</th>
                             <th style="text-align:center;" width="25%">Usage Type</th>
                             <th style="text-align:center;" width="25%">Brand Name</th>
-							<th style="text-align:center;" width="15%">Quantity required</th>
+							<th style="text-align:center;" width="15%">Quantity </th>
                             <th style="text-align:center;" width="25%">Available Quantity</th>
                             <th style="text-align:center;" width="25%">Quantity type</th>
 							
@@ -29,7 +29,7 @@
                         </tr>    
                     </thead>
                     <tbody >
-                        <tr ng-repeat = "item in items" style="height:2px;" >
+                        <tr ng-repeat = "item in treatmentIndentingItems" style="height:2px;" >
                             <td width="10%" >{{item.itemName}}</td>
                             <td width="25%" >{{item.itemName}}</td>
                             <td width="25%">{{item.usageType}}</td>
@@ -52,7 +52,7 @@
                    <div class="form-group">
                         <label  class="col-sm-3 control-label">Item name</label>
                          <div class="col-sm-8 ">
-                            <select name="item_name" class="form-control" ng-model="item.itemName">
+                            <select name="item_name" class="form-control" ng-model="treatmentIndentingItem.itemName">
                                 <option value="" selected disabled>-</option>
                                 <option value="item1">Item1</option>
                                 <option value="item2" >Item2</option>
@@ -63,7 +63,7 @@
 					<div class="form-group">
                         <label  class="col-sm-3 control-label">Usage type</label>
                          <div class="col-sm-8 ">
-                            <select name="usage_type" class="form-control" ng-model="item.usageType">
+                            <select name="usage_type" class="form-control" ng-model="treatmentIndentingItem.usageType">
                                 <option value="" selected disabled>-</option>
                                 <option value="treatment_specific">Treatment Specific</option>
                                 <option value="general_stock" >General Stock</option>
@@ -76,7 +76,7 @@
 					<div class="form-group">
                         <label  class="col-sm-3 control-label">Brand name</label>
                          <div class="col-sm-8 ">
-                            <select name="brand_name" required class="form-control" ng-model="item.brandName">
+                            <select name="brand_name"  class="form-control" ng-model="treatmentIndentingItem.brandName">
                                 <option value="" selected disabled>-</option>
                                 <option value="brand1">brand1</option>
                                 <option value="brand2" >brand2</option>
@@ -87,23 +87,23 @@
                      
                      
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">Quantity Required</label>
+                        <label class="col-sm-3 control-label">Quantity </label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="quantity_required" ng-model="item.quantityRequired" name="quantity_required" placeholder="Enter Quantity Required">
+                            <input type="text" class="form-control" id="quantity_required" ng-model="treatmentIndentingItem.quantityRequired" placeholder="Enter Quantity ">
                         </div>
                     </div>
 					
 					 <div class="form-group">
                         <label class="col-sm-3 control-label">Available Quantity</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="available_quantity" name="available_quantity" ng-model="item.availableQuantity" placeholder="">
+                            <input type="text" class="form-control" ng-model="treatmentIndentingItem.availableQuantity" placeholder="">
                         </div>
                     </div>
 					
 					<div class="form-group">
                         <label  class="col-sm-3 control-label">Quantity type</label>
                          <div class="col-sm-8 ">
-                            <select name="quantity_type" class="form-control" ng-model="item.quantityType">
+                            <select name="quantity_type" class="form-control" ng-model="treatmentIndentingItem.quantityType">
                                 <option value="" selected disabled>-</option>
                                 <option value="pairs">pairs</option>
                                 <option value="cans" >cans</option>
@@ -126,7 +126,7 @@
 					<div class="form-group">
                         <label  class="col-sm-3 control-label">Stock order To</label>
                          <div class="col-sm-8 ">
-                            <select name="brand_name" required class="form-control">
+                            <select name="brand_name"  class="form-control" ng-model="treatmentIndenting.stockOrderTo"">
                                 <option value="" selected disabled>-</option>
                                 <option value="corporate_office">Corporate office</option>
                                 <option value="vendor2" >Vendor1</option>
@@ -140,14 +140,14 @@
                      <div class="form-group">
                         <label class="col-sm-3 control-label">Indent Request Date</label>
                         <div class="col-sm-8">
-                            <input required type="date" class="form-control" id="indent_request_date" name="indent_request_date" placeholder="">
+                            <input  type="date" class="form-control" ng-model="treatmentIndenting.identRequestDate" placeholder="">
                         </div>
                     </div>
 					
 					<div class="form-group">
                         <label class="col-sm-3 control-label">Stock Required by Date</label>
                         <div class="col-sm-8">
-                            <input required type="date" class="form-control" id="stock_required_by_date" name="stock_required_by_date" placeholder="Enter Stock Delivery Date ">
+                            <input  type="date" class="form-control" id="stock_required_by_date" ng-model="treatmentIndenting.StockRequiredByDate" placeholder="Enter Stock Delivery Date ">
                         </div>
                     </div>
                      
