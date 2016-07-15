@@ -147,6 +147,17 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
 
             })
 			
+			.state('app.inventory.stock_received', {
+                url:'Stock_Received',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/stockReceived.html',
+                        controller  : 'StockReceivedController'        
+                    }
+                }
+
+            })
+			
 			.state('app.inventory.issue_stock', {
                 url:'Issue_Stock',
                 views: {

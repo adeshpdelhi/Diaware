@@ -4,8 +4,8 @@ angular.module('App')
 	
 	
 	$scope.showalert_inventory_identing=false;
-		$scope.items=[];
-		$scope.item = {
+		$scope.treatmentIndentingItems=[];
+		$scope.treatmentIndentingItem = {
 			ID:null,
 			itemName:null,
 			usageType:null,
@@ -22,12 +22,12 @@ angular.module('App')
 			//$scope.item.ID = cnt++;
 			//$scope.event.patientId = $scope.newpatient_basic.id;
 			//$scope.item.lastModifiedBy = $scope.newpatient_basic.lastModifiedBy;
-			$scope.items.push($scope.item);
-			console.log($scope.item);
+			$scope.treatmentIndentingItems.push($scope.treatmentIndentingItem);
+			console.log($scope.treatmentIndentingItem);
 			//$scope.item.saved:true;
 			$scope.inventoryIdentingForm.$setPristine();
 			
-			$scope.item = {
+			$scope.treatmentIndentingItem = {
 				ID:null,
 				itemName:null,
 				usageType:null,
