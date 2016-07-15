@@ -5,6 +5,7 @@ angular.module('App')
 
 	$scope.panel={};
 	$scope.dialyzateType={};
+	$scope.transactionType={};
 	$scope.shouldShowForm = false;
 	$scope.displayList = function(){
 		console.log($scope.table);
@@ -12,6 +13,8 @@ angular.module('App')
 			$scope.showPanels();
 		if($scope.table == 'DialyzateTypes')
 			$scope.showDialyzateTypes();
+		if($scope.table == 'TransactionTypes')
+			$scope.showTransactionTypes();
 	};
 	$scope.addPanel = function(){
 		console.log($scope.panel);
@@ -79,11 +82,37 @@ angular.module('App')
 				});
 	};
 
-	$scope.updateDialyzateTypeList = function(){
-
-	}
 	$scope.deleteDialyzateType = function(dialyzateType){
 		backendFactory.getDialyzateTypes().delete({dialyzateType:dialyzateType});
 		$scope.showDialyzateTypes();
 	}
+
+	
+
+
+	$scope.addTransactionType = function(){
+		console.log($scope.transactionType);
+		backendFactory.getTransactionTypes().save($scope.transactionType).$promise.then(function(response){
+						alert('TransactionType saved');
+						$scope.showTransactionTypes();
+						$scope.showForm=false;
+				},function(response){
+					alert('transactionType save failed!');
+				});
+	};
+
+	$scope.showTransactionTypes = function(){
+		console.log('showing transactionType');
+		backendFactory.getTransactionTypes().query().$promise.then(function(response){
+					$scope.transactionTypes=response;
+				},function(response){
+					alert('transactionTypes retrieval failed!');
+				});
+	};
+
+	$scope.deleteTransactionType = function(transactionType){
+		backendFactory.getTransactionTypes().delete({transactionType:transactionType});
+		$scope.showTransactionTypes();
+	}
+
 }]);
