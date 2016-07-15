@@ -4,10 +4,14 @@ angular.module('App')
 .controller('DataBaseController',['$scope','authorize','backendFactory', function ($scope, authorize,backendFactory) {
 
 	$scope.panel={};
+	$scope.dialyzateType={};
 	$scope.shouldShowForm = false;
 	$scope.displayList = function(){
 		console.log($scope.table);
-		$scope.showPanels();
+		if($scope.table == 'Panels' )
+			$scope.showPanels();
+		if($scope.table == 'DialyzateTypes')
+			$scope.showDialyzateTypes();
 	};
 	$scope.addPanel = function(){
 		console.log($scope.panel);
@@ -53,4 +57,33 @@ angular.module('App')
 					alert('Panels retrieval failed!');
 				});
 	};
+
+
+	$scope.addDialyzateType = function(){
+		console.log($scope.dialyzateType);
+		backendFactory.getDialyzateTypes().save($scope.dialyzateType).$promise.then(function(response){
+						alert('DialyzateType saved');
+						$scope.showDialyzateTypes();
+						$scope.showForm=false;
+				},function(response){
+					alert('dialyzateType save failed!');
+				});
+	};
+
+	$scope.showDialyzateTypes = function(){
+		console.log('showing dialyzateType');
+		backendFactory.getDialyzateTypes().query().$promise.then(function(response){
+					$scope.dialyzateTypes=response;
+				},function(response){
+					alert('dialyzateTypes retrieval failed!');
+				});
+	};
+
+	$scope.updateDialyzateTypeList = function(){
+
+	}
+	$scope.deleteDialyzateType = function(dialyzateType){
+		backendFactory.getDialyzateTypes().delete({dialyzateType:dialyzateType});
+		$scope.showDialyzateTypes();
+	}
 }]);
