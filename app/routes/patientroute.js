@@ -85,7 +85,20 @@ patientRouter.route('/:id')
 
 })
 .put(function(req,res,next){
-
+    db.patientDetails.find({ where: {id:req.params.id} }).then(function(patient){
+       if (patient) { // if the record exists in the db
+         patient.updateAttributes(req.body).then(function (result) { 
+                             console.log(JSON.stringify(result));
+                             res.status(200);
+                             res.end("successfully updated");
+                             console.log('updated successfully');
+                     }, function(rejectedPromiseError){
+                             res.status(400);
+                             res.end('error');
+                             console.log('cannot update: '+rejectedPromiseError);
+                     });
+       }
+     })
 })
 ;
 
