@@ -2,6 +2,7 @@
 
 angular.module('App')
 .controller('AddUserController',['$scope','authorize', function ($scope, authorize) {
+	$scope.showalert_add_user=false;
 	$scope.activeUser = authorize.getActiveUser();
 	$scope.newuser={username: null, password: null, centre:'', centres:'', admin:false,manager:false,incharge:false, clinical:false};
 	var tempcentres = authorize.getActiveUser().centres;
@@ -10,6 +11,7 @@ angular.module('App')
 	    $scope.channels.push({value: tempcentres[i], label: tempcentres[i]});
 	}
 	$scope.addUser = function(){
+			$scope.showalert_add_user=false;
 		console.log($scope.newuser);
 		var tempcentres = authorize.getActiveUser().centres;
 		if(!($scope.newuser.centres.constructor === Array))
@@ -29,6 +31,11 @@ angular.module('App')
 		}
 		console.log('adding');
 		authorize.getUsers().save($scope.newuser).$promise.then(function(response){
+			$scope.showalert_add_user=true;
+			$scope.addUserForm.$setPristine();
+			$scope.newuser={username: null, password: null, centre:'', centres:'', admin:false,manager:false,incharge:false, clinical:false};
+
+
 		});
 	};
 	$scope.centrechanged = function(){

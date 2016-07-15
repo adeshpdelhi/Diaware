@@ -277,6 +277,17 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                     }
                 }
             })
+			
+			.state('app.admin.addcentre',{
+                url:"addcentre",
+                views:{
+                    'content@':{
+                        templateUrl:'views/admin/addCentre.html',
+                        controller:'AddCentreController'
+                    }
+                }
+            })
+			
             .state('app.appointment',{
                 url:"appointment/",
                 views:{

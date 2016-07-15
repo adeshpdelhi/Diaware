@@ -1,62 +1,65 @@
 <div class="container">
+  <div class="col-sm-8 col-sm-offset-2">
     <div class="row row-content">
         <div class="panel panel-info">
             <div class="panel-body" style="text-align:center;">
-                <h2>Add a new user</h2>
-                <form>
+                <p><h2>Add New User</h2></p>
+                <form class="form-horizontal" name="addUserForm" role="form">
                 <div class="form-group ">
                     <label class="col-sm-4 control-label">User Name</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-4">
                         <input type="text" class="form-control" ng-model="newuser.username">
                     </div>
                 </div>
-                <div class="form-group ">
+                <div class="form-group">
                     <label class="col-sm-4 control-label">Password</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-4">
                         <input type="password" class="form-control" ng-model="newuser.password">
                     </div>
                 </div>
+				
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Centres</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-4">
                         <input type="text" class="form-control" ng-model="newuser.centres">
                     </div>
-                </div>
-                <div class="form-group">
-                        <label class="col-sm-3 control-label">Centre</label>
-                        <div class="col-xs-6">
+					<div class="col-sm-2">
                         <select class="form-control"
                            ng-options="channel.value as channel.label for channel in channels" ng-model="newuser.centre" ng-change="centrechanged()">
                             <option value="" disabled></option>
                         </select>
                  		</div>
-                 </div>
+                </div>
+				
+             
                 <div class="form-group row">
                     <label class="col-sm-4 control-label">Roles</label>
                     <div class="col-sm-8">
-                    	<div ng-show="activeUser.admin ">
+                    	<div>
                         <label class="checkbox-inline"><input type="checkbox" value="true" ng-model="newuser.admin">Admin</label>
                         <label class="checkbox-inline"><input type="checkbox" value="true" ng-model="newuser.incharge">Incharge</label>
-                        </div>
-                        <div ng-show="activeUser.incharge || activeUser.admin">
                         <label class="checkbox-inline"><input type="checkbox" value="true" ng-model="newuser.manager">Manager</label>
                         <label class="checkbox-inline"><input type="checkbox" value="true" ng-model="newuser.clinical">Clinical</label>
                         </div>
-                        <div ng-show="!(activeUser.incharge || activeUser.admin)">
-                        You don't have rights to add.
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-offset-4 col-sm-10">
-                    	<div ng-show="activeUser.admin || activeUser.incharge">
-                        	<button id="register" type="submit" class="btn btn-primary" ng-click="addUser()">Add</button>
-                        </div>
+                    <div class="col-sm-offset-2 col-sm-10">
+                        	<button id="register" type="submit" class="btn btn-primary" ng-click="addUser()">Add User</button>
                     </div>
                 </div>
+				
+				<div class="form-group">
+					<div class="alert alert-success alert-dismissable" ng-show="showalert_add_user">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						User Added Successfully.
+					</div>
+				</div>
+				
                 </form>
             </div>
         </div>   
-      
+      </div>
     </div>
 </div>
