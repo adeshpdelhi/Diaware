@@ -109,12 +109,12 @@ angular.module('App')
         logged_in_centre = centre;
     };
     this.getCentre = function(){
-        console.log('centre is '+logged_in_centre);
+        //console.log('centre is '+logged_in_centre);
         return logged_in_centre;
     };
     this.isLoggedIn = function(){
         console.log("Logged in: "+logged_in+" "+logged_in_centre);
-        console.log('value sent back '+logged_in);
+        //console.log('value sent back '+logged_in);
         return logged_in;
     };
     this.logout = function(){
@@ -133,12 +133,12 @@ angular.module('App')
             }
             else
             {
-                alert('logout failed services');
+                alert('logout failed in services');
                 next(null);
             }
         }, function errorCallback(response) {
             {
-                alert('logout failed services');
+                alert('logout failed in services');
                 next(null);
             }
         });
