@@ -13,7 +13,26 @@ carePlanRouter.use(bodyParser.json());
 
 carePlanRouter.route('/')
 .get(function (req, res, next) {
-    
+    if(req.query.latestPlan){
+        db.dialysisCarePlan.find({
+            include:[{
+                model:db.patientDetails
+                // where:{
+                //     id:req.params.id
+                // }
+            }],
+            where:{
+                patientId:req.params.id
+            },
+            order:[['updatedAt','DESC']],
+            limit:1
+        }).then(function(carePlans){
+            console.log(JSON.stringify(carePlans));
+            res.json(carePlans);
+        });
+        return ;
+    }
+
     console.log('procesing get');
     db.dialysisCarePlan.findAll({
         where:{
@@ -80,6 +99,7 @@ carePlanRouter.route('/:carePlanId')
     })
 })
 .put(function(req,res,next){
+    console.log("processing Update");
     console.log(req.body);
     db.dialysisCarePlan.update(
     req.body, {
@@ -90,10 +110,12 @@ carePlanRouter.route('/:carePlanId')
         }
     )
     .then(function (result) { 
-        console.log(JSON.stringify(result));
-        res.end("successfully updated")
+        // console.log(JSON.stringify(result));
+        res.status(200);
+        res.end("successfully updated");
     }, function(rejectedPromiseError){
-    
+        res.status(400);
+        res.end("Internal Server Error");
     });
 })
 ;

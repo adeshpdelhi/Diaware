@@ -36,10 +36,14 @@ angular.module('App')
         	console.log("id "+ $scope.carePlan.patientId);
         	$scope.carePlan.lastModifiedBy = authorize.getUsername();
         	patientFactory.getPatientCarePlans($scope.carePlan.patientId, authorize.getCentre()).save($scope.carePlan).$promise.then(function(response){
-				$scope.showalert_dialysis_care_plan=true;			
+				$scope.showalert_dialysis_care_plan=true;
+				$scope.message = "Updated Successfully!";			
+				$scope.messageColor = 'success';
 			},function(response){
 					$scope.showalert_dialysis_care_plan=false;
-				console.log(response);
+					console.log(response);
+					$scope.message = "Error: " + response.status + " " +response.statusText + " !";
+					$scope.messageColor = 'danger';
 			}
 			
 			);		
