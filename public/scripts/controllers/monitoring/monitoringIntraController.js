@@ -1,10 +1,10 @@
 'use strict';
 angular.module('App')
 .controller('MonitoringIntraController',['$scope','patientFactory','choosePatientFactory','authorize','monitoringChartFactory', function($scope, patientFactory, choosePatientFactory, authorize,monitoringChartFactory){
-        $scope.intraInit = true;
+        $scope.intraInit = false;
         if(!$scope.view){      
             $scope.intraTable = [];
-            $scope.intraInit = false;
+            $scope.intraInit = true;
         }
         if($scope.intraTable.length == 0){
           console.log("yooooooooooooooooooo");
@@ -59,9 +59,11 @@ angular.module('App')
         };
         $scope.updateIntra = function(){
             $scope.updateIntra = true;
+            var done =false;
             for(var i = 0; i < $scope.intraTable.length; i++ ){
                 if($scope.intraTable[i].new) break;
                 $scope.intraTable[i].lastModifiedBy = authorize.getUsername();
+                console.log($scope.intraTable[i]);
                 monitoringChartFactory.getIntra($scope.patientChart.patientId)
                 .update({
                     intraId : $scope.intraTable[i].intraId, 
@@ -73,8 +75,9 @@ angular.module('App')
                 },function(response){
                     $scope.updateParentValues(false,true,"Error: "+response.status + " " +response.statusText + "!",7);
                 });
-                return; 
+                done = true
             }
+            if(done) return;
             for(var i = 0;i< $scope.intraTable.length;i++){
                 $scope.intraTable[i].intraId = $scope.patientChart.preBasicId;
                 $scope.intraTable[i].lastModifiedBy = authorize.getUsername();

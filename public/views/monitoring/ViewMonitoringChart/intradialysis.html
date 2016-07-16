@@ -1,51 +1,15 @@
 <style>
-
-  table{
-    table-layout: fixed;
-    width: 200px;
-    background-color:#FAEBFF;
-  }
-
-  th, td {
-    /*border: 1px solid black;*/
-    overflow: hidden;
-    width: 100px;
-    height: 40px;
-    /*padding: 15px;*/
-    text-align : center;
-  }
-  tr:nth-child(even) {background-color: #FCF5FF}
-  tr:hover{
-    background-color: #F5E6FA
-  }
-  th {
-    /*background-color: #4CAF50;*/
-    background-color: #003399;
-
-    color: white;
-  }
-  body
-  {
-    line-height: 1.6em;
-  }
-
-  [contenteditable] {
-    /*border: 1px solid #00339A;*/
-    /*background-color: white;*/
-    min-height: 25px;
-  }
-
   #intraTable > table{
     table-layout: fixed;
     width: 820px;
     background-color:#FAEBFF;
-    overflow-x: hidden;
+    /*overflow-x: hidden;*/
   }
 
   th,  td {
     /*border: 1px solid black;*/
     overflow: hidden;
-    /*width: 100px;*/
+    width: 25px;
     height: 40px;
     /*padding: 15px;*/
     text-align : center;
@@ -77,25 +41,24 @@
 </div>
 
 <div class="container" ng-show="!editingIntra">
-  <p>yo</p>
   <div class="row row-content">
-    <div class="alert alert-success" ng-show="updatedIntra">
-      Updated Successfully!
-    </div>   
     <form class="form-horizontal col-sm-9" role="form">
+      <div class="alert alert-success" ng-show="updatedIntra">
+        Updated Successfully!
+      </div>   
+      
       <div class="table-responsive" id="intraTable">
         <table id="intratable" class="table table-bordered" ng-if="patientChart.monitoringChartIntras.length!=0">
           <thead >
             <tr id = "rowHead">
-              <th ng-repeat='(key,value) in patientChart.monitoringChartIntras[0] track by $index' ng-if="key != 'patientId' && key != 'intraId' && key!='entryNumber'" class="text-uppercase" style="text-align:center;"><b>{{key}}</b></th>
+              <th ng-repeat='(key,value) in patientChart.monitoringChartIntras[0] track by $index' ng-if="key != 'patientId' && key != 'intraId'" class="text-uppercase" style="text-align:center;"><b>{{key}}</b></th>
             </tr>
           </thead>
           <tbody id="tableBody">
-            <tr id="row" ng-repeat="intra in patientChart.monitoringChartIntras">
+            <tr id="row" ng-repeat="intra in patientChart.monitoringChartIntras track by $index">
               <td ng-repeat="(key,value) in intra" ng-if="key != 'patientId' && key != 'intraId'">
-                {{value}}
-              </td>
-              
+                {{(key == 'createdAt' || key =='updatedAt')?(value|date:dd-MMMM-YY):value}}
+              </td>             
             </tr>
           </tbody>
         </table>
@@ -103,7 +66,7 @@
 
       <div class="form-group" style="padding-top:30px;">
         <!-- <div class="col-sm-push-8 col-sm-2  "> -->
-        <button type="button" class="btn btn-primary col-sm-push-11 col-sm-1" ng-show="true" ng-click="editing_intradialysis()">Edit</button>
+        <button type="button" class="btn btn-primary col-sm-push-11 col-sm-1" ng-show="isEditable()" ng-click="editing_intradialysis()">Edit</button>
         <!-- </div> -->
       </div>
     </form>
