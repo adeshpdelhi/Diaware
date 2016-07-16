@@ -25,5 +25,8 @@ angular.module('App')
         this.getPharmacyTypes = function(){
             return $resource(baseURL+"dropDowns/pharmacyTypes/:pharmacyType", null,{'update':{method:'PUT'}});
         };
+        this.getDiseases = function(){
+            return $resource(baseURL+"dropDowns/diseases/:diseaseName", null,{'update':{method:'PUT'}});
+        };
   }])
 ;

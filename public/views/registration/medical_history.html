@@ -2,27 +2,82 @@
 <div id="Registerbox" style="margin-top:20px;" class="mainbox col-sm-12" ng-controller="MedicalController">                    
     <div class="panel" >
         <div class="panel-heading">
-            <div class="panel-title"><b>Medical History</b></div>
+            <div class="panel-title"><b>{{editMedical?'Patient Medical History':'Medical History'}}</b></div>
             <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
         </div>     
 
         <div style="padding-top:30px" class="panel-body" >
             <form class="form-horizontal" role="form" name="medicalForm">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Diabetes</label>
+                <div class="form-group" ng-repeat = "(i,medicalHistory) in newPatient_Medical track by $index">
+                    <label class="col-sm-3 control-label text-capitalize">{{regularForm(newPatient_Medical[i].diseaseName)}}</label>
                     <div class="col-sm-3">
                         <label class="radio-inline">
-                            <input type="radio" name="diabetes_radio" value="Yes" ng-model="newPatient_Medical.diabetes">Yes
+                            <input type="radio" name="{{newPatient_Medical[i].diseaseName}}_radio" value="Yes" ng-model="newPatient_Medical[i].diseasePresent">Yes
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="diabetes_radio"  value="No" ng-model="newPatient_Medical.diabetes">No
+                            <input type="radio" name="{{newPatient_Medical[i].diseaseName}}_radio"  value="No" ng-model="newPatient_Medical[i].diseasePresent">No
                         </label>
                     </div>
                     <div class="col-sm-6">
-                        <input  type="text" class="form-control" id="diabetes_comments" name="diabetes_comments" ng-model="newPatient_Medical.diabetesComments" placeholder="Comments">
+                        <input  type="text" class="form-control" id="{{newPatient_Medical[i].diseaseName}}_comments" name="{{newPatient_Medical[i].diseaseName}}_comments" ng-model="newPatient_Medical[i].doctorComments" placeholder="Comments">
                     </div>
                 </div>
-                <div class="form-group">
+                
+                <!-- <div class="form-group" ng-repeat="other in others">
+                    <label class="col-sm-3 control-label text-capitalize">{{other.diseaseName}} {{other.diseasePresent}}</label>
+                    <div class="col-sm-3" ng-init>
+                        <label class="radio-inline" >
+                            <input type="radio" name="others_radio"  value="Yes" ng-model="other.diseasePresent">Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="others_radio"  value="No" ng-model="other.diseasePresent">No
+                        </label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input  type="text" class="form-control" id="others_comments" name="others_comments" 
+                        ng-model="other.doctorComments" placeholder="Comments">
+                    </div>
+                </div> -->
+                <hr style="border-top:1px solid rgb(225,225,225);" />    
+                <div class="form-group" ng-form="otherForm">
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">Others Diseases Happened to Patient in Past </label>
+                        <div class="col-sm-5">
+                            <input  type="text" class="form-control" id="others_name" name="others_name" 
+                            ng-model="other.diseaseName" placeholder="Name Of Disease/Description">
+                        </div>
+                    </div>
+                    <div class=" form-group ">
+                        <div class="col-sm-9 col-sm-push-1 col-sm-pull-1">
+                            <input  type="text" class="form-control" id="others_comments" name="others_comments" 
+                        ng-model="other.doctorComments" placeholder="Comments">
+                        </div>
+                        <button id="medical_history_save col-sm-2 col-sm-pull-1" class="btn btn-success" ng-click="addOthers()">Add Others</button> 
+                    </div>
+                    <hr style="border-top:1px solid rgb(225,225,225); padding-top:25px;" />    
+                </div>
+                <div class="form-group">                   
+                    <div class="col-sm-offset-5 col-sm-10">
+                        <button id="medical_history_save" class="btn btn-primary" ng-click="editMedical?updateMedical():saveMedical()">{{editMedical?'Update':'Save'}}</button> 
+                    </div>
+                </div>
+				
+				<div class="form-group">
+					<div class="alert alert-{{messageColor}} alert-dismissable" ng-show="showalert_medical">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						{{message}}
+					</div>
+				</div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- 
+<div class="form-group">
                     <label class="col-sm-3 control-label">Hypertension</label>
                     <div class="col-sm-3">
                         <label class="radio-inline">
@@ -276,55 +331,5 @@
                     </div>
 
                 </div>
-                <div class="form-group" ng-repeat="other in others">
-                    <label class="col-sm-3 control-label text-capitalize">{{other.diseaseName}} {{other.diseasePresent}}</label>
-                    <div class="col-sm-3" ng-init>
-                        <label class="radio-inline" >
-                            <input type="radio" name="others_radio"  value="Yes" ng-model="other.diseasePresent">Yes
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="others_radio"  value="No" ng-model="other.diseasePresent">No
-                        </label>
-                    </div>
-                    <div class="col-sm-6">
-                        <input  type="text" class="form-control" id="others_comments" name="others_comments" 
-                        ng-model="other.doctorComments" placeholder="Comments">
-                    </div>
-                </div>
-                <hr style="border-top:1px solid rgb(225,225,225);" />    
-                <div class="form-group" ng-form="otherForm">
-                    <div class="form-group">
-                        <label class="col-sm-6 control-label">Others Diseases Happened to Patient in Past </label>
-                        <div class="col-sm-5">
-                            <input  type="text" class="form-control" id="others_name" name="others_name" 
-                            ng-model="other.diseaseName" placeholder="Name Of Disease/Description">
-                        </div>
-                    </div>
-                    <div class=" form-group ">
-                        <div class="col-sm-9 col-sm-push-1 col-sm-pull-1">
-                            <input  type="text" class="form-control" id="others_comments" name="others_comments" 
-                        ng-model="other.doctorComments" placeholder="Comments">
-                        </div>
-                        <button id="medical_history_save col-sm-2 col-sm-pull-1" class="btn btn-success" ng-click="addOthers()">Add Others</button> 
-                    </div>
-                    <hr style="border-top:1px solid rgb(225,225,225); padding-top:25px;" />    
-                </div>
-                <div class="form-group">                   
-                    <div class="col-sm-offset-5 col-sm-10">
-                        <button id="medical_history_save" class="btn btn-primary" ng-click="saveMedical()">Save</button> 
-                    </div>
-                </div>
-				
-				<div class="form-group">
-					<div class="alert alert-success alert-dismissable" ng-show="showalert_medical">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-						Details Saved Successfully.
-					</div>
-				</div>
-            </form>
-        </div>
-    </div>
-</div>
 
-
-
+ -->

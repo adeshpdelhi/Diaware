@@ -7,7 +7,7 @@
           <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
         </div>     
         <div style="padding-top:30px" class="panel-body" >
-          <form class="form-horizontal" role="form" ng-submit="savePost()">
+          <form class="form-horizontal" role="form" ng-submit="editingPost?updatePost():savePost()">
             <!-- <div class="form-group">
               <label class="col-sm-4 control-label">Name</label>                        
               <div class="col-sm-7">
@@ -192,7 +192,7 @@
             </div>
             <div class="form-group">
               <div class="col-sm-offset-7 col-sm-2">
-                <button id="postdia_save" type="submit" class="btn btn-primary">Save</button>
+                <button id="postdia_save" type="submit" class="btn btn-primary">{{editingPost?'Update':'Save'}}</button>
               </div>
             </div>
 			<div class="form-group">

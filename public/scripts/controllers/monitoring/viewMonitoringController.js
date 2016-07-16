@@ -9,7 +9,8 @@ angular.module('App')
 	        });
 		};
 	    $scope.latest();
-
+	    $scope.view = true;
+	    console.log("inside ViewMonitoringController");
 		$scope.listPrevCharts = function(){
 			monitoringChartFactory.getPreBasic(chosenPatientId).query(function(response){
 	        	$scope.prevChartsList = response;
@@ -27,17 +28,23 @@ angular.module('App')
 				$scope.message = "Error: "+ response.status+ " " + response.statusText;
 			})
 		};
+		$scope.$watch('patientChart',function (newVal,oldVal) {
+			if(!$scope.patientChart) $scope.isEditable();
+		});
 		$scope.isEditable = function(){
+			// if($scope.patientChart) return false;
+			var aptDate;
+			aptDate = new Date($scope.patientChart.monitoringDate);			
 			var today = new Date();
-			var aptDate = new Date($scope.patientChart.monitoringDate);
 			today.setHours(0,0,0,0,0);
 			aptDate.setHours(0,0,0,0,0);
 			if(today - aptDate > 2*24*60*60*1000)
 				return false;
-			else return true;
+			else return true;					
 		};
-		$scope.savePreBasic = function(){
+		$scope.updatePreBasic = function(){
 			$scope.updatedPreBasic = true;
+			$scope.editingPreBasic = false;
 			$scope.patientChart.lastModifiedBy = authorize.getUsername();
 			monitoringChartFactory.getPreBasic(chosenPatientId).update({
 				preBasicId:$scope.patientChart.preBasicId
@@ -46,97 +53,80 @@ angular.module('App')
 				console.log(response);
 			});	
 		};
-		$scope.savePreBasicMedical = function(){
-			$scope.updatedPreBasicMedical = true;
-			$scope.patientChart.monitoringChartPreBasicMedical.lastModifiedBy = authorize.getUsername();
-			monitoringChartFactory.getPreBasicMedical(chosenPatientId).update({
-				preBasicId:$scope.patientChart.monitoringChartPreBasicMedical.preBasicId
-			},$scope.patientChart.monitoringChartPreBasicMedical)
-			.$promise.then(function(response){
-				console.log(response);
-			});
-		};
-		$scope.savePreMachineFinalCheck = function(){
-			$scope.updatedPreMachineFinalCheck = true;
-			$scope.patientChart.monitoringChartPreMachineFinalCheck.lastModifiedBy = authorize.getUsername();
-			monitoringChartFactory.getPreMachineFinalChecks(chosenPatientId).update({
-				preBasicId:$scope.patientChart.monitoringChartPreMachineFinalCheck.preBasicId
-			},$scope.patientChart.monitoringChartPreMachineFinalCheck)
-			.$promise.then(function(response){
-				console.log(response);
-			});	
-		};
-		$scope.savePreAccessAssessment = function(){
-			$scope.updatedPreAccessAssessment = true;
-			$scope.patientChart.monitoringChartPreAccessAssessment.lastModifiedBy = authorize.getUsername();
-			monitoringChartFactory.getPreAccessAssessments(chosenPatientId).update({
-				preBasicId:$scope.patientChart.monitoringChartPreAccessAssessment.preBasicId
-			},$scope.patientChart.monitoringChartPreAccessAssessment)
-			.$promise.then(function(response){
-				console.log(response);
-			});	
-		};
-		$scope.savePreAssessment = function(){
-			$scope.updatedPreAssessment = true;
-			$scope.patientChart.monitoringChartPreAssessment.lastModifiedBy = authorize.getUsername();
-			monitoringChartFactory.getPreAssessments(chosenPatientId).update({
-				preBasicId:$scope.patientChart.monitoringChartPreAssessment.preBasicId
-			},$scope.patientChart.monitoringChartPreAssessment)
-			.$promise.then(function(response){
-				console.log(response);
-			});	
-		};
-		$scope.saveIntra = function(){
-			$scope.updateIntra = true;
-			for(var i = 0; i < $scope.patientChart.monitoringChartIntra.length; i++ ){
-				$scope.patientChart.monitoringChartIntra[i].lastModifiedBy = authorize.getUsername();
-				
-				monitoringChartFactory.getIntra(chosenPatientId)
-				.update({
-					intraId : $scope.patientChart.monitoringChartIntra[i].intraId, 
-					entryNumber : $scope.patientChart.monitoringChartIntra[i].entryNumber
-				},$scope.patientChart.monitoringChartIntra[i])
-				.$promise.then(function(response){
-					console.log(response);
-				});	
+		
+		$scope.updateParentValues = function(editing,alert,message,value){
+			if(value == 2){
+				$scope.editingPreBasicMedical = editing;
+				$scope.updatedPreBasicMedical = alert;
+				$scope.message = message;
 			}
+			if(value == 3){
+				$scope.editingPreMachineFinalCheck = editing;
+				$scope.updatedPreMachineFinalCheck = alert;
+				$scope.message = message;
+			}
+			if(value == 4){
+				$scope.editingPreAccessAssessment = editing;
+				$scope.updatedPreAccessAssessment = alert;
+				$scope.message = message;
+			}
+			if(value == 5){
+				$scope.editingPreAssessment = editing;
+				$scope.updatedPreAssessment = alert;
+				$scope.message = message;
+			}
+			if(value == 6){
+				$scope.editingPost = editing;
+				$scope.updatedPost = alert;
+				$scope.message = message;
+			}
+			if(value == 7){
+				$scope.editingIntra = editing;
+				$scope.updatedIntra = alert;
+				$scope.message = message;
+			}
+		} ;
+		
+		$scope.$watch('patientChart.patientId',function (newVal,oldVal) {
+			if($scope.patientChart){
+				$scope.post = $scope.patientChart.monitoringChartPost;
+				$scope.intraTable = $scope.patientChart.monitoringChartIntras;
+				console.log($scope.intraTable.length + "ggggggggggggggggggggggggggggggggggggggggggs");	
+				$scope.accessAssessment = $scope.patientChart.monitoringChartPreAccessAssessment;	
+				$scope.assessment = $scope.patientChart.monitoringChartPreAssessment;
+				$scope.machineCheck = $scope.patientChart.monitoringChartPreMachineFinalCheck;
+				$scope.basicMedical = $scope.patientChart.monitoringChartPreBasicMedical;
+				$scope.patientChart.monitoringDate = new Date($scope.patientChart.monitoringDate);
+				$scope.basic = $scope.patientChart;	
+			}
+		});
+		
+		$scope.editing_postdialysis = function(){
+			$scope.editingPost = true;
 		};
-		$scope.savePost = function(){
-			$scope.updatedPost = true;
-			$scope.patientChart.monitoringChartPost.lastModifiedBy = authorize.getUsername();
 
-			monitoringChartFactory.getPost(chosenPatientId).update({
-				postId:$scope.patientChart.monitoringChartPost.postId
-			},$scope.patientChart.monitoringChartPost)
-			.$promise.then(function(response){
-				console.log(response);
-			});
+		$scope.editing_intradialysis = function(){
+			$scope.editingIntra = true;
+			console.log("entered");
+		};
+		$scope.editing_predialysis_access_accessment = function(){
+			$scope.editingPreAccessAssessment = true;
+		};
+		$scope.editing_predialysis_assessment = function(){
+			$scope.editingPreAssessment = true;
+			console.log($scope.assessment);
+		};
+		$scope.editing_predialysis_machine_final_check = function(){
+			$scope.editingPreMachineFinalCheck = true;
 		};
 
-		// $scope.edit_postdialysis = function(){
-		// 	$scope.editingPost = true;
-			
-		// };
+		$scope.editing_predialysis_basic_medical = function(){
+			$scope.editingPreBasicMedical = true;
+		};
 
-		// $scope.edit_intradialysis = function(){
+		$scope.editing_predialysis_basic = function(){
+			$scope.editingPreBasic = true;
 			
-		// };
-		// $scope.edit_predialysis_access_accessment = function(){
-			
-		// };
-		// $scope.edit_predialysis_accessment = function(){
-			
-		// };
-		// $scope.edit_predialysis_machine_final_check = function(){
-			
-		// };
-
-		// $scope.edit_predialysis_basic_medical = function(){
-				
-		// };
-
-		// $scope.edit_predialysis_basic = function(){
-			
-		// };
+		};
     }])
 ;

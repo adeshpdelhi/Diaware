@@ -31,6 +31,13 @@ intraRouter.route('/')
     //     res.json(result);
     // // res.end('intraRouter working'); // send status code
     // });
+    if(req.query.single){
+        db.monitoringChartIntra.build(req.body).save().then(function(response){
+            console.log(JSON.stringify(response));
+            res.json(response);
+        });    
+        return;
+    }
     db.monitoringChartIntra.bulkCreate(req.body).then(function(response){
         console.log(JSON.stringify(response));
         res.json({intra:JSON.parse(JSON.stringify(response))});
@@ -72,11 +79,12 @@ intraRouter.route('/:intraId')
     )
     .then(function (result) { 
         console.log(JSON.stringify(result));
-        res.json(result);
-        
-        // res.end("successfully updated")
+        // res.json(result);
+        res.status(200);
+        res.end("successfully updated")
     }, function(rejectedPromiseError){
-    
+        res.status(500);
+        res.end("Internal Server Error");
     });
 })
 ;

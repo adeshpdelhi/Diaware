@@ -1,12 +1,18 @@
 <div id="Registerbox" style="margin-top:20px;" class="mainbox col-sm-12">                    
-    <div class="panel" >
+    <div ng-show="editClinical">
+        <div ng-include="'views/registration/clinical_events.html'"></div> 
+    </div>
+    <div class="panel" ng-show="!editClinical" >
         <div class="panel-heading">
             <div class="panel-title"><b>Patient Clinical Events</b></div>
             <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
         </div>      
 
             <div style="padding-top:30px; text-align:center;" class="panel-body" >	 
-	            
+	            <div class="alert alert-success" ng-show="showAlertClincial">
+                    {{message}}
+                </div>
+
 	            <div class="table-responsive ">
                 <table id="viewpatient_basicdetail" class="table table-striped table-fixedheader table-bordered" ng-if="patient.majorClinicalEvents.length != 0">
                     <thead>
@@ -22,8 +28,8 @@
 			
 			<form>
 			<div class="form-group">
-                    <div class="col-sm-offset-4 col-sm-10">
-                        <button id="edit" type="submit" class="btn btn-primary" ng-click="edit_events()">Edit</button>
+                    <div class="col-sm-offset-4 col-sm-10" ng-show="!editClinical">
+                        <button id="edit" type="submit" class="btn btn-primary" ng-click="editClinicalEvents()">Edit</button>
                     </div>
                 </div>
            </form>

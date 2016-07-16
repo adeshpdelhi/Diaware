@@ -19,6 +19,9 @@ angular.module('App')
         	lastModifiedBy:null
         };
         $scope.preHDWeight=0;
+        $scope.setPreHDWeight  = function (val) {
+            $scope.preHDWeight = val;
+        };
         $scope.savePreBasic = function(){
         	$scope.basic.patientId = $scope.patient.id;
     		$scope.basic.lastModifiedBy = authorize.getUsername();

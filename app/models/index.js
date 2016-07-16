@@ -74,8 +74,9 @@ dbmodel.monitoringChartPreBasic.hasOne(dbmodel.monitoringChartPreBasicMedical,{f
 dbmodel.monitoringChartPreBasic.hasOne(dbmodel.monitoringChartPreMachineFinalCheck,{foreignKey:'preBasicId'});
 dbmodel.monitoringChartPreBasic.hasOne(dbmodel.monitoringChartPreAssessment,{foreignKey:'preBasicId'});
 dbmodel.monitoringChartPreBasic.hasOne(dbmodel.monitoringChartPreAccessAssessment,{foreignKey:'preBasicId'});
-dbmodel.monitoringChartPreBasic.hasOne(dbmodel.monitoringChartIntra,{foreignKey:'intraId'});
+dbmodel.monitoringChartPreBasic.hasMany(dbmodel.monitoringChartIntra,{foreignKey:'intraId'});
 dbmodel.monitoringChartPreBasic.hasOne(dbmodel.monitoringChartPost,{foreignKey:'postId'});
+dbmodel.monitoringChartPost.belongsTo(dbmodel.monitoringChartPreBasic,{foreignKey:'postId'});
 //add the other half - not needed :P
 
 dbmodel.shifts.hasOne(dbmodel.weekDaySlots,{as:'shift1',foreignKey:'shift1Id'});

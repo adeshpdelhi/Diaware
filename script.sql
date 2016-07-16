@@ -81,3 +81,22 @@ insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id) value
 
 
 INSERT INTO `users` (`id`,`username`,`hashedPassword`,`centres`,`admin`,`incharge`,`manager`,`clinical`,`createdAt`,`updatedAt`) VALUES (DEFAULT,'admin','21232f297a57a5a743894a0e4a801fc3','JP1,CH',true,false,true,false,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+
+insert into diseases(diseaseName) values('diabetes');
+insert into diseases(diseaseName) values('hypertension');
+insert into diseases(diseaseName) values('coronaryArteryDisease');
+insert into diseases(diseaseName) values('peripheralNeuropathy');
+insert into diseases(diseaseName) values('ratinopathy/Vision');
+insert into diseases(diseaseName) values('cerebrovascularDisease');
+insert into diseases(diseaseName) values('respiratoryDisease');
+insert into diseases(diseaseName) values('malignancy');
+insert into diseases(diseaseName) values('haemoglobiNopathy');
+insert into diseases(diseaseName) values('peripheralVascularDisease');
+insert into diseases(diseaseName) values('hepatitisB');
+insert into diseases(diseaseName) values('hepatitisC');
+insert into diseases(diseaseName) values('HIV');
+insert into diseases(diseaseName) values('malnutrition');
+insert into diseases(diseaseName) values('drugAllergy');
+
+

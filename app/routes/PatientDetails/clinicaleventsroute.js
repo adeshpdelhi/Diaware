@@ -98,7 +98,7 @@ clinicalEventRouter.route('/:clinicalEventId')
     db.majorClinicalEvents.update(
     req.body, {
             where:{
-            id:parseInt(req.params.clinicalEventId,10),            
+                id:parseInt(req.params.clinicalEventId,10),            
                 // eventDetails:req.params.clinicalEvent,
                 patientId:req.params.id
             }
@@ -106,10 +106,12 @@ clinicalEventRouter.route('/:clinicalEventId')
     )
     .then(function (result) { 
         console.log(JSON.stringify(result));
-        res.json(result);
+        // res.json(result);
+        res.status(200);
         res.end("successfully deleted")
     }, function(rejectedPromiseError){
-    
+        res.status(500);
+        res.end("Internal Server Error");
     });
 })
 ;

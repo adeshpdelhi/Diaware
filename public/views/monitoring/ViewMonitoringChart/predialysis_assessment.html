@@ -1,12 +1,9 @@
-<div id="Registerbox" style="margin-top:20px;" class="mainbox col-sm-12">                    
-    <!-- <div class="panel" >
-        <div class="panel-heading">
-            <div class="panel-title"><b>Predialysis Assessment</b></div>
-            <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
-        </div>     
+<div ng-show="editingPreAssessment">
+    <div ng-include="'views/monitoring/predialysis_assessment.html'"></div> 
+</div>
+<div id="Registerbox" style="margin-top:20px;" class="mainbox col-sm-12" ng-show="!editingPreAssessment">                    
+    
 
-        <div style="padding-top:30px" class="panel-body">    
- -->
             <div style="padding-top:30px;" class="panel-body">	
             <div class="alert alert-success" ng-show="updatedPreAssessment">
                 Updated Successfully!
@@ -25,7 +22,7 @@
 			<form>
 			<div class="form-group">
                     <div class="col-sm-offset-4 col-sm-10">
-                        <button id="edit" type="submit" class="btn btn-primary" ng-click="editingPreAssessment?savePreAssessment():(editingPreAssessment = true)" ng-show="isEditable()">{{editingPreAssessment?'Update':'Edit'}}</button>
+                        <button id="edit" type="submit" class="btn btn-primary" ng-click="editing_predialysis_assessment()" ng-show="isEditable()">Edit</button>
                     </div>
                 </div>
            </form>

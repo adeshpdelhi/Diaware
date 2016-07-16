@@ -180,6 +180,37 @@ dropDownRouter.route('/pharmacyTypes/:pharmacyType')
 });
 
 
+
+
+dropDownRouter.route('/diseases')
+.get(function (req, res, next) {
+    
+    console.log('procesing get');
+    db.diseases.findAll().then(function(diseases){
+        console.log(JSON.stringify(diseases));
+        res.json(diseases);
+    });
+    
+})
+.post(function (req, res, next) {
+    console.log('processing post : '+ req.body);
+    db.diseases.build(req.body).save().then(function(result){
+        res.json(result);
+    // res.end('dropDownRouter working'); // send status code
+    });
+});
+
+dropDownRouter.route('/diseases/:diseaseName')
+.delete(function(req,res,next){
+    db.diseases.destroy({
+        where:{diseaseName:req.params.diseaseName}
+    }).then(function(result){
+        res.json(result);
+    })    
+});
+
+
+
 // dropDownRouter.route('/:dropDownId')
 // .get(function(req,res,next){
 //     console.log('procesing get');

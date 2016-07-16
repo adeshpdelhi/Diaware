@@ -1,4 +1,4 @@
-<form class="form-horizontal" role="form" ng-controller="MonitoringPreAccessAssessmentController" ng-submit="saveAccessAssessment()">
+<form class="form-horizontal" role="form" ng-controller="MonitoringPreAccessAssessmentController" ng-submit="editingPreAccessAssessment?updatePreAccessAssessment():saveAccessAssessment()">
     <div class="form-group">
         <label class="col-sm-3 control-label">Bruit/Thrill </label>
         <div class="col-sm-8">
@@ -82,7 +82,7 @@
     </div>
     <div class="form-group">
         <div class="col-sm-offset-8 col-sm-2">
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">{{editingPreAccessAssessment?'Update':'Save'}}</button>
         </div>
     </div>
 	<div class="form-group">

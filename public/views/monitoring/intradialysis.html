@@ -1,40 +1,5 @@
-<style>
-
-  table{
-    table-layout: fixed;
-    width: 200px;
-    background-color:#FAEBFF;
-  }
-
-  th, td {
-    /*border: 1px solid black;*/
-    overflow: hidden;
-    width: 100px;
-    height: 40px;
-    /*padding: 15px;*/
-    text-align : center;
-  }
-  tr:nth-child(even) {background-color: #FCF5FF}
-  tr:hover{
-    background-color: #F5E6FA
-  }
-  th {
-    /*background-color: #4CAF50;*/
-    background-color: #003399;
-
-    color: white;
-  }
-  body
-  {
-    line-height: 1.6em;
-  }
-
-[contenteditable] {
-  /*border: 1px solid #00339A;*/
-  /*background-color: white;*/
-  min-height: 25px;
-}
-/*
+<style type="text/css">
+  /*
 .ng-invalid {
   border: 1px solid red;
 }*/
@@ -67,30 +32,69 @@ border-right: 1px solid #aabcfe;
 border-left: 1px solid #aabcfe;
 color: #669;*/
 /*}*/
+
 </style>
 <div class="container">
   <div class="row row-content" ng-controller="MonitoringIntraController" >
-    <form class="form-horizontal col-sm-9" role="form" ng-submit="saveIntra()">
-      <div class="table-responsive">
-        <table id="box-table-b" class="table table-bordered">
+    <form class="form-horizontal col-sm-9" role="form" ng-submit="editingIntra?updateIntra():saveIntra()">
+      <style>
+
+        #intraTable > table{
+          table-layout: fixed;
+          width: 820px;
+          background-color:#FAEBFF;
+          overflow-x: hidden;
+        }
+
+         th,  td {
+          /*border: 1px solid black;*/
+          overflow: hidden;
+          /*width: 100px;*/
+          height: 40px;
+          /*padding: 15px;*/
+          text-align : center;
+        }
+        #row tr:nth-child(even) {background-color: #FCF5FF}
+        #row tr:hover{
+          background-color: #F5E6FA
+        }
+        #rowHead > th {
+          /*background-color: #4CAF50;*/
+          background-color: #003399;
+
+          color: white;
+        }
+        #tableBody body
+        {
+          line-height: 1.6em;
+        }
+
+        [contenteditable] {
+          /*border: 1px solid #00339A;*/
+          /*background-color: white;*/
+          min-height: 25px;
+        }
+      </style>
+      <div class="table-responsive" id = intraTable>
+        <table id="intratable" class="table table-bordered">
           <thead>
-            <tr>
-              <th style="width:20%">S.No</th>
-              <th style="width:40%">TIME <small style="color:gray;">(in mins)</small></th>
-              <th style="width:25%">BP</th>
-              <th style="width:25%">PR</th>
-              <th style="width:25%">AP</th>
-              <th style="width:25%">VP</th>
-              <th style="width:25%">TMP</th>
-              <th style="width:25%">UFR</th>
-              <th style="width:40%">TOTAL UF</th>
-              <th style="width:25%">BFR</th>
-              <th style="width:25%">EBF</th>
-              <th style="width:50%">Remarks</th>
+            <tr id = "rowHead">
+              <th style="width:1%">S.No</th>
+              <th style="width:20px">TIME <small style="color:gray;">(in mins)</small></th>
+              <th style="width:10px">BP</th>
+              <th style="width:15px">PR</th>
+              <th style="width:15px">AP</th>
+              <th style="width:15px">VP</th>
+              <th style="width:15px">TMP</th>
+              <th style="width:15px">UFR</th>
+              <th style="width:15px">TOTAL UF</th>
+              <th style="width:15px">BFR</th>
+              <th style="width:15px">EBF</th>
+              <th style="width:30px">Remarks</th>
             </tr>
           </thead>
-          <tbody>
-          <tr ng-repeat="i in [1,2,3,4,5,6,7,8]" ng-init="func($index)">
+          <tbody id = "tableBody">
+          <tr id="row" ng-repeat="i in [1,2,3,4,5,6,7,8]" ng-init="(view && !intraInit )?'':func($index)">
               <td >
               {{intraTable[$index].entryNumber}}
               </td>
@@ -163,7 +167,7 @@ color: #669;*/
 
       <div class="form-group" style="padding-top:30px;"">
         <!-- <div class="col-sm-push-8 col-sm-2  "> -->
-        <button type="submit" class="btn btn-primary col-sm-push-11 col-sm-1" >Save</button>
+        <button type="submit" class="btn btn-primary col-sm-push-11 col-sm-1" >{{editingIntra?'Update':'Save'}}</button>
         <!-- </div> -->
       </div>
 	  

@@ -1,27 +1,35 @@
 'use strict';
 angular.module('App')
-.controller('MonitoringPreAccessAssessmentController',['$scope','authorize','backendFactory','monitoringChartFactory', function($scope,authorize,backendFactory,monitoringChartFactory){$scope.accessAssessment = {
-		preBasicId:null,
-		bruit:null,
-		anyAbnormality:null,
-		signOfAccessInfection:null,
-		cannulation:null,
-		centralLineStatus:null,
-		commencedBy:null,
-		assistedBy:null,
-		lastModifiedBy:null
-	};
-		$scope.showalert_predialysis_access_assessment=false;
+.controller('MonitoringPreAccessAssessmentController',['$scope','authorize','backendFactory','monitoringChartFactory', function($scope,authorize,backendFactory,monitoringChartFactory){
+	if(!$scope.view || !$scope.accessAssessment){
+		$scope.accessAssessment = {
+			preBasicId:null,
+			bruit:null,
+			anyAbnormality:null,
+			signOfAccessInfection:null,
+			cannulation:null,
+			centralLineStatus:null,
+			commencedBy:null,
+			assistedBy:null,
+			lastModifiedBy:null,
+			new:true
+		};
+	}
+	$scope.showalert_predialysis_access_assessment=false;
 
 	$scope.saveAccessAssessment = function(){
 		$scope.accessAssessment.patientId = $scope.basic.patientId;
 		$scope.accessAssessment.preBasicId = $scope.basic.preBasicId;
 		$scope.accessAssessment.lastModifiedBy = authorize.getUsername();
 		console.log($scope.accessAssessment);
-		monitoringChartFactory.getPreAccessAssessments($scope.basic.preBasicId).save($scope.accessAssessment).$promise.then(function(response){
+		monitoringChartFactory.getPreAccessAssessments($scope.basic.patientId).save($scope.accessAssessment).$promise.then(function(response){
 			$scope.showalert_predialysis_access_assessment=true;
+			$scope.message = "Saved Successfully!";
+			$scope.messageColor = 'success';
 			},function(response){
 				$scope.showalert_predialysis_access_assessment=false;
+				$scope.message = "Error: " + response.status + " " + response.statusText+"!";
+				$scope.messageColor='danger';
 				console.log(response);
 			}
 			
@@ -29,6 +37,34 @@ angular.module('App')
 		//$scope.showalert_predialysis_access_assessment=true;
 
 	};
+
+		$scope.updatePreAccessAssessment = function(){
+			$scope.updatedPreAccessAssessment = true;
+			$scope.accessAssessment.lastModifiedBy = authorize.getUsername();
+			if(!$scope.accessAssessment.new){
+				monitoringChartFactory.getPreAccessAssessments($scope.patientChart.patientId).update({
+					preBasicId:$scope.accessAssessment.preBasicId
+				},$scope.accessAssessment)
+				.$promise.then(function(response){
+					console.log(response);
+					$scope.updateParentValues(false,true,"Updated Successfully!",4);
+				},function(response){
+					$scope.updateParentValues(false,true,"Error: " + response.status + " " + response.statusText+"!",4);
+				});
+			}else{
+				$scope.accessAssessment.patientId = $scope.patientChart.patientId;
+				$scope.accessAssessment.preBasicId = $scope.patientChart.preBasicId;
+				console.log($scope.accessAssessment);
+				monitoringChartFactory.getPreAccessAssessments($scope.patientChart.preBasicId).save($scope.accessAssessment).$promise.then(function(response){
+						console.log(response);
+						$scope.updateParentValues(false,true,"Updated Successfully!",4);
+					},function(response){
+						$scope.updateParentValues(false,true,"Error: " + response.status + " " + response.statusText+"!",4);
+						
+					});	
+					
+			}
+		};
 
 }])
 ;

@@ -1,44 +1,38 @@
-<form class="form-horizontal" role="form" ng-submit="savePreBasic()">
+<style type="text/css">
+    .datepickerdemoBasicUsage {
+    	/*width: 800px;*/
+        /*padding-left:-50px;  */
+    }
+    .datepickerdemoBasicUsage md-content {
+        /*padding-bottom: 200px; */
+        background: rgb(238,238,238);
+    }
+    .datepickerdemoBasicUsage .validation-messages {
+        font-size: 12px;
+        color: #dd2c00;
+        margin: 10px 0 0 25px; 
+    } 
+    md-datepicker.md-default-theme, md-datepicker, md-content{
+        background: rgb(238,238,238);
+        overflow: hidden;
+        /*width: 400px;*/
+    }
+</style>
+<form class="form-horizontal" role="form" id="basicForm" name="basicForm" ng-submit="editingPreBasic?updatePreBasic():savePreBasic()">
 	<div class="form-group row">
 		<label class="col-sm-2 control-label">Date</label>                        
 		<div class="col-sm-8">
-		<input type="date" class="form-control" id="date" name="date" ng-model="basic.monitoringDate">
+		<md-content flex layout="row">
+		    <md-datepicker name="date" flex ng-model="basic.monitoringDate" md-placeholder="Enter date">
+		    </md-datepicker>
+		    <div class="validation-messages" ng-messages="basicForm.dateTo.$error">
+		        <div ng-message="valid" class="text-danger" >The entered value is not a date!</div>
+		    </div>
+		</md-content>
+		<!-- <input type="date" class="form-control" id="date" name="date" ng-model="basic.monitoringDate"> -->
 		</div>
 		
 	</div>
-
-	<!-- <div class="form-group row">
-		<label class="col-sm-2 control-label">Name</label>                        
-		<div class="col-sm-8">
-			<input type="text" class="form-control" id="name" name="name" ng-model="patient.name" disabled>
-		</div>
-	</div>
-
-
-	<div class="form-group row">
-		<label class="col-sm-2 control-label">ID</label>
-		<div class="col-sm-8">
-			<input type="text" class="form-control" id="id" name="id" ng-model="patient.id" disabled>
-		</div>
-	</div>
- --><!-- 
-	<div class="form-group row">
-		<label class="col-sm-2 control-label">Age</label>
-		<div class="col-sm-8">
-			<input type="number" class="form-control" id="age" name="age" ng-model="patient.age" disabled>
-		</div>
-	</div>	
-	
-	<div class="form-group row">
-		<label class="col-sm-2 control-label">Gender</label>
-		<div class="col-sm-8">
-			<select name="gender" class="form-control" ng-model="patient.gender" disabled>
-				<option disabled value="" selected></option>
-				<option value="male">Male</option>
-				<option value="female">Female</option>
-			</select>
-		</div>
-	</div> -->
 	<div class="form-group row">
 		<label class="col-sm-2 control-label">Machine#</label>                        
 		<div class="col-sm-8">
@@ -61,7 +55,7 @@
 	<div class="form-group row">
 		<label class="col-sm-4  col-sm-pull-2 control-label">Prescribed Duration</label>                        
 		<div class="col-sm-8 col-sm-pull-2">
-			<input type="number" class="form-control" id="prescribed_duration" name="prescribed_duration" ng-model="basic.prescribedDuration" min="0" <!-- placeholder="Prescribed Duration" --> >
+			<input type="number" class="form-control" id="prescribed_duration" name="prescribed_duration" ng-model="basic.prescribedDuration" min="0" placeholder="Prescribed Duration" >
 		</div>
 	</div>
 	<div class="form-group row">
@@ -81,7 +75,7 @@
 	</div>
 	<div class="form-group">
 		<div class="col-sm-offset-8 col-sm-2">
-			<button type="submit" class="btn btn-primary">Save</button>
+			<button type="submit" class="btn btn-primary">{{editingPreBasic?'Update':'Save'}}</button>
 		</div>
 	</div>
 	<div class="form-group">

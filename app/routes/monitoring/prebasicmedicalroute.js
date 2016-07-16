@@ -64,11 +64,12 @@ preBasicMedicalRouter.route('/:preBasicId')
     )
     .then(function (result) { 
         console.log(JSON.stringify(result));
-        res.json(result);
-        
-        // res.end("successfully updated")
+        // res.json(result);
+        res.status(200);
+        res.end("successfully updated")
     }, function(rejectedPromiseError){
-    
+        res.status(500);
+        res.end("Internal Server Error");
     });
 })
 ;

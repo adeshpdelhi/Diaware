@@ -61,39 +61,40 @@ medicalRouter.route('/')
 });
 
 
-// medicalRouter.route('/:medicalId')
-// .get(function(req,res,next){
-//     console.log('procesing get');
-//     db.medicalHistory.findOne({
-//         where:{
-//             medicalId:parseInt(req.params.medicalId,10),
-//             patientId:req.params.id
-//         }
-//     }).then(function(medical){
-//         console.log(JSON.stringify(medical));
-//         res.json(medical);
-//     });
-// })
-// .delete(function(req,res,next){
+medicalRouter.route('/:diseaseName')
+.get(function(req,res,next){
+    console.log('procesing get');
+    db.medicalHistory.findOne({
+        where:{
+            diseaseName:req.params.diseaseName,
+            patientId:req.params.id
+        }
+    }).then(function(medical){
+        console.log(JSON.stringify(medical));
+        res.json(medical);
+    });
+})
+.delete(function(req,res,next){
 
-// })
-// .put(function(req,res,next){
-//     console.log(req.body);
-//     db.medicalHistory.update(
-//     req.body, {
-//             where:{
-//                 medicalId:parseInt(req.params.medicalId,10),
-//                 patientId:req.params.id
-//             }
-//         }
-//     )
-//     .then(function (result) { 
-//         console.log(JSON.stringify(result));
-//         res.end("successfully updated")
-//     }, function(rejectedPromiseError){
-    
-//     });
-// })
+})
+.put(function(req,res,next){
+    console.log(req.body);
+    db.medicalHistory.update(
+    req.body, {
+            where:{
+                diseaseName:req.params.diseaseName,
+                patientId:req.params.id
+            }
+        }
+    ).then(function (result) {
+        res.status(200); 
+        // console.log(JSON.stringify(result));
+        res.end("successfully updated");
+    }, function(rejectedPromiseError){
+        res.status(500)
+        res.end('Internal Server Error');
+    });
+})
 ;
 
 module.exports = medicalRouter;

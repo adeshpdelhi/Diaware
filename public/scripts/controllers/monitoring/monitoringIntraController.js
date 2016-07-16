@@ -1,12 +1,20 @@
 'use strict';
 angular.module('App')
 .controller('MonitoringIntraController',['$scope','patientFactory','choosePatientFactory','authorize','monitoringChartFactory', function($scope, patientFactory, choosePatientFactory, authorize,monitoringChartFactory){
-        $scope.intraTable = [];
+        $scope.intraInit = true;
+        if(!$scope.view){      
+            $scope.intraTable = [];
+            $scope.intraInit = false;
+        }
+        if($scope.intraTable.length == 0){
+          console.log("yooooooooooooooooooo");
+          $scope.intraInit = true;  
+        } 
 		$scope.showalert_intradialysis=false;
         $scope.func = function(id){
             var intra = {
-                patientId:$scope.patient.id,
-                intraId:$scope.basic.preBasicId,
+                patientId:$scope.view?$scope.patientChart.patientId:$scope.basic.id,
+                intraId:$scope.view?$scope.patientChart.preBasicId:$scope.basic.preBasicId,
                 entryNumber:id,
                 entryTime:null,
                 bp:null,
@@ -19,28 +27,65 @@ angular.module('App')
                 bfr:null,
                 ebf:null,
                 remarks:null,
-                lastModifiedBy:authorize.getUsername()
+                lastModifiedBy:authorize.getUsername(),
+                new:true
             };
+            console.log("hhehehehe");
+            console.log(intra.entryNumber);
             console.log(intra.intraId);
             $scope.intraTable.push(intra);
         };
 
-        $scope.$watch('intraTable[1].entryTime',function(newval,oldval){
-            console.log(newval);
-        });
+        // $scope.$watch('intraTable[1].entryTime',function(newval,oldval){
+        //     console.log(newval);
+        // });
         $scope.saveIntra = function(){
             for(var i = 0;i< $scope.intraTable.length;i++){
+                $scope.intraTable[i].intraId = $scope.basic.patientId;
                 $scope.intraTable[i].intraId = $scope.basic.preBasicId;
                 console.log($scope.intraTable[i]);
             }
-    		monitoringChartFactory.getIntra($scope.patient.id).save($scope.intraTable).$promise.then(function(response){
-			$scope.showalert_intradialysis=true;
-			},function(response){
+    		monitoringChartFactory.getIntra($scope.basic.patientId).save($scope.intraTable).$promise.then(function(response){
+			    $scope.showalert_intradialysis=true;
+			    $scope.message="Saved Successfully!";
+                $scope.messageColor = 'success'; 
+            },function(response){
 				$scope.showalert_intradialysis=false;
 				console.log(response);
-			}
-			
-			);
+                $scope.message="Error: "+response.status + " " +response.statusText + "!";
+                $scope.messageColor = 'danger';
+			});
+
+        };
+        $scope.updateIntra = function(){
+            $scope.updateIntra = true;
+            for(var i = 0; i < $scope.intraTable.length; i++ ){
+                if($scope.intraTable[i].new) break;
+                $scope.intraTable[i].lastModifiedBy = authorize.getUsername();
+                monitoringChartFactory.getIntra($scope.patientChart.patientId)
+                .update({
+                    intraId : $scope.intraTable[i].intraId, 
+                    entryNumber : $scope.intraTable[i].entryNumber
+                },$scope.intraTable[i])
+                .$promise.then(function(response){
+                    console.log(response);
+                    $scope.updateParentValues(false,true,"Updated Successfully!",7);
+                },function(response){
+                    $scope.updateParentValues(false,true,"Error: "+response.status + " " +response.statusText + "!",7);
+                });
+                return; 
+            }
+            for(var i = 0;i< $scope.intraTable.length;i++){
+                $scope.intraTable[i].intraId = $scope.patientChart.preBasicId;
+                $scope.intraTable[i].lastModifiedBy = authorize.getUsername();
+                console.log($scope.intraTable[i]);
+            }
+            monitoringChartFactory.getIntra($scope.patientChart.patientId).save($scope.intraTable).$promise.then(function(response){
+                $scope.updateParentValues(false,true,"Updated Successfully!",7);
+                console.log(response);
+            },function(response){
+                $scope.updateParentValues(false,true,"Error: "+response.status + " "+ response.statusText + "!",7);    
+            });
 
         };
 

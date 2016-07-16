@@ -29,66 +29,71 @@
     line-height: 1.6em;
   }
 
-[contenteditable] {
-  /*border: 1px solid #00339A;*/
-  /*background-color: white;*/
-  min-height: 25px;
-}
-/*
-.ng-invalid {
-  border: 1px solid red;
-}*/
-/* #box-table-b
-{
-font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-font-size: 12px;
-margin: 45px;
-width: 480px;
-text-align: center;
-border-collapse: collapse;
-border-top: 7px solid #9baff1;
-border-bottom: 7px solid #9baff1;
-}
-#box-table-b th
-{
-font-size: 13px;
-font-weight: normal;
-padding: 8px;
-background: #e8edff;
-border-right: 1px solid #9baff1;
-border-left: 1px solid #9baff1;
-color: #039;
-}
-#box-table-b td
-{
-padding: 8px;
-background: #e8edff; 
-border-right: 1px solid #aabcfe;
-border-left: 1px solid #aabcfe;
-color: #669;*/
-/*}*/
+  [contenteditable] {
+    /*border: 1px solid #00339A;*/
+    /*background-color: white;*/
+    min-height: 25px;
+  }
+
+  #intraTable > table{
+    table-layout: fixed;
+    width: 820px;
+    background-color:#FAEBFF;
+    overflow-x: hidden;
+  }
+
+  th,  td {
+    /*border: 1px solid black;*/
+    overflow: hidden;
+    /*width: 100px;*/
+    height: 40px;
+    /*padding: 15px;*/
+    text-align : center;
+  }
+  #row tr:nth-child(even) {background-color: #FCF5FF}
+  #row tr:hover{
+    background-color: #F5E6FA
+  }
+  #rowHead > th {
+    /*background-color: #4CAF50;*/
+    background-color: #003399;
+
+    color: white;
+  }
+  #tableBody body
+  {
+    line-height: 1.6em;
+  }
+
+  [contenteditable] {
+    /*border: 1px solid #00339A;*/
+    /*background-color: white;*/
+    min-height: 25px;
+  }
+
 </style>
-<div class="container">
-  <div class="row row-content" ng-controller="MonitoringIntraController" >
-  <div class="alert alert-success" ng-show="updatedIntra">
+<div ng-show="editingIntra">
+  <div ng-include="'views/monitoring/intradialysis.html'"></div> 
+</div>
+
+<div class="container" ng-show="!editingIntra">
+  <p>yo</p>
+  <div class="row row-content">
+    <div class="alert alert-success" ng-show="updatedIntra">
       Updated Successfully!
-  </div>   
-    <form class="form-horizontal col-sm-9" role="form" ng-submit="saveIntra()">
-      <div class="table-responsive">
-        <table id="box-table-b" class="table table-bordered" ng-if="patientChart.monitoringChartIntra.length!=0">
-          <thead>
-            <tr>
-              <th ng-repeat='(key,value) in patientChart.monitoringChartIntra[0]' class="text-uppercase" style="text-align:center;"><b>{{key}}</b></th>
+    </div>   
+    <form class="form-horizontal col-sm-9" role="form">
+      <div class="table-responsive" id="intraTable">
+        <table id="intratable" class="table table-bordered" ng-if="patientChart.monitoringChartIntras.length!=0">
+          <thead >
+            <tr id = "rowHead">
+              <th ng-repeat='(key,value) in patientChart.monitoringChartIntras[0] track by $index' ng-if="key != 'patientId' && key != 'intraId' && key!='entryNumber'" class="text-uppercase" style="text-align:center;"><b>{{key}}</b></th>
             </tr>
           </thead>
-          <tbody>
-          <tr ng-repeat="intra in patientChart.monitoringChartIntra" ng-init="func($index)">
-              <td >
-              {{intra.entryNumber}}
-              </td>
+          <tbody id="tableBody">
+            <tr id="row" ng-repeat="intra in patientChart.monitoringChartIntras">
               <td ng-repeat="(key,value) in intra" ng-if="key != 'patientId' && key != 'intraId'">
-                <div contenteditable valid-number class='text-capitalize' ng-model="value">
-                </div>
+                {{value}}
               </td>
               
             </tr>
@@ -96,9 +101,9 @@ color: #669;*/
         </table>
       </div>
 
-      <div class="form-group" style="padding-top:30px;"">
+      <div class="form-group" style="padding-top:30px;">
         <!-- <div class="col-sm-push-8 col-sm-2  "> -->
-        <button type="submit" class="btn btn-primary col-sm-push-11 col-sm-1" ngclick="editingIntra?saveIntra(): (editingIntra = true)" ng-show="isEditable()">{{editingIntra?'Update':'Edit'}}</button>
+        <button type="button" class="btn btn-primary col-sm-push-11 col-sm-1" ng-show="true" ng-click="editing_intradialysis()">Edit</button>
         <!-- </div> -->
       </div>
     </form>

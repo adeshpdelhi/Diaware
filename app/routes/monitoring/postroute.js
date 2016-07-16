@@ -12,7 +12,27 @@ postRouter.use(bodyParser.json());
 
 postRouter.route('/')
 .get(function (req, res, next) {
-    
+    if(req.query.secLastMonitoringDate){
+        db.monitoringChartPost.findAll({
+            include:[{
+                model:db.monitoringChartPreBasic,
+                where:{
+                    monitoringDate:{
+                        $lt: req.query.date
+                    }
+                },
+                order:[['monitoringDate','DESC']]
+            }],
+            where:{
+                patientId:req.params.id
+            },
+            limit:1
+        }).then(function(posts){
+            console.log(JSON.stringify(posts));
+            res.json(posts);
+        });
+        return;    
+    }
     console.log('procesing get');
     db.monitoringChartPost.findAll({
         where:{
@@ -64,11 +84,12 @@ postRouter.route('/:postId')
     )
     .then(function (result) { 
         console.log(JSON.stringify(result));
-        res.json(result);
-        
-        // res.end("successfully updated")
+        // res.json(result);
+        res.status(200);
+        res.end("successfully updated")
     }, function(rejectedPromiseError){
-    
+        res.status(500);
+        res.end("Internal Server Error");
     });
 })
 ;

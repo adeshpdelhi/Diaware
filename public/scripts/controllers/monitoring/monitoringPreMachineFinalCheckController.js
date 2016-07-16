@@ -1,20 +1,23 @@
 'use strict';
 angular.module('App')
 .controller('MonitoringPreMachineFinalCheckController',['$scope','authorize','backendFactory','monitoringChartFactory', function($scope,authorize,backendFactory,monitoringChartFactory){
-	$scope.machineCheck = {
-		preBasicId:null,
-		machineNumber:null,
-		machineTestPassed:null,
-		machineTestCheckedBy:null,
-		airDetector:null,
-		alarmLimits:null,
-		dialysateFlowRate:null,
-		dialysisCounterCurrentFlow:null,
-		dialysateTemperature:null,
-		conductivity:null,
-		partAConcentrationCombination:null,
-		lastModifiedBy:null
-	};
+	if(!$scope.view || !$scope.machineCheck){
+		$scope.machineCheck = {
+			preBasicId:null,
+			machineNumber:null,
+			machineTestPassed:null,
+			machineTestCheckedBy:null,
+			airDetector:null,
+			alarmLimits:null,
+			dialysateFlowRate:null,
+			dialysisCounterCurrentFlow:null,
+			dialysateTemperature:null,
+			conductivity:null,
+			partAConcentrationCombination:null,
+			lastModifiedBy:null,
+			new:true
+		};
+	}
 	$scope.showalert_predialysis_machine_final_check=false;
 	$scope.saveMachineCheck = function(){
 		$scope.machineCheck.patientId = $scope.basic.patientId;
@@ -22,7 +25,7 @@ angular.module('App')
 		$scope.machineCheck.lastModifiedBy = authorize.getUsername();
 		$scope.machineCheck.machineNumber = $scope.basic.machineNumber;
 		console.log($scope.machineCheck);
-		monitoringChartFactory.getPreMachineFinalChecks($scope.basic.preBasicId).save($scope.machineCheck).$promise.then(function(response){
+		monitoringChartFactory.getPreMachineFinalChecks($scope.basic.patientId).save($scope.machineCheck).$promise.then(function(response){
 			$scope.showalert_predialysis_machine_final_check=true;
 			},function(response){
 				$scope.showalert_predialysis_machine_final_check=false;
@@ -31,6 +34,34 @@ angular.module('App')
 			
 			);
 		//$scope.showalert_predialysis_machine_final_check=true;
-	}
+	};;
+	$scope.updatePreMachineFinalCheck = function(){
+			$scope.updatedPreMachineFinalCheck = true;
+			$scope.machineCheck.lastModifiedBy = authorize.getUsername();
+			if(!$scope.machineCheck.new){
+				monitoringChartFactory.getPreMachineFinalChecks($scope.patientChart.patientId).update({
+					preBasicId:$scope.machineCheck.preBasicId
+				},$scope.machineCheck)
+				.$promise.then(function(response){
+					console.log(response);
+					$scope.updateParentValues(false,true,"Updated Successfully!",3);
+				},function(response){
+					$scope.updateParentValues(false,true,"Error: "+ response.status + " " +response.statusText+"!",3);
+				});	
+			}
+			else{
+				$scope.machineCheck.patientId = $scope.patientChart.patientId;
+				$scope.machineCheck.preBasicId = $scope.patientChart.preBasicId;
+				$scope.machineCheck.machineNumber = $scope.patientChart.machineNumber;				
+				monitoringChartFactory.getPreMachineFinalChecks($scope.patientChart.patientId).save($scope.machineCheck).$promise.then(function(response){
+						console.log(response);
+						$scope.updateParentValues(false,true,"Updated Successfully!",3);
+					},function(response){
+						$scope.updateParentValues(false,true,"Error: "+ response.status + " " +response.statusText+"!",3);
+					});
+			}
+
+		};
+
 }])
 ;

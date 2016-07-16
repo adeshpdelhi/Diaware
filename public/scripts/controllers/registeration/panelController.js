@@ -1,22 +1,34 @@
 'use strict';
 angular.module('App')
 .controller('PanelController',['$scope','patientFactory','backendFactory','authorize', function($scope,patientFactory,backendFactory,authorize){
-		$scope.newPatient_Panel = { 
-			patientId: $scope.newpatient_basic.id,
-			panelId:null, 
-			panelPermissionDateFrom:null,
-			panelPermissionDateTo:null,
-			panelPermissionNumber:null,
-			totalTmtsPermitted:null,
-			totalTmtsRemaining:null,
-			renewalDate:null,
-			lastModifiedBy:null
-		};
+		if(!$scope.view){
+			$scope.newPatient_Panel = { 
+				patientId: $scope.newpatient_basic.id,
+				panelId:null, 
+				panelPermissionDateFrom:null,
+				panelPermissionDateTo:null,
+				panelPermissionNumber:null,
+				totalTmtsPermitted:null,
+				totalTmtsRemaining:null,
+				renewalDate:null,
+				lastModifiedBy:null
+			};	
+		}
 		$scope.showalert_panel=false;
 		backendFactory.getPanels().query(function(response){
 			$scope.panels = response;
 			console.log(response);
 		});
+		$scope.updatePanels = function(){
+			$scope.newPatient_Panel.lastModifiedBy = authorize.getUsername();
+			patientFactory.getPatientPanels($scope.newPatient_Panel.patientId,authorize.getCentre()).update($scope.newPatient_Panel)
+			.$promise.then(function(response){
+				console.log(response);
+				$scope.updateMyValuesFromPanel(false,true,"Successfully Updated!");
+			},function(response){
+				$scope.updateMyValuesFromPanel(false,true,"Error: " + response.status+ " "+ response.statusText + "!");
+			});
+		};
 		$scope.panelSave = function(){
 			$scope.newPatient_Panel.lastModifiedBy = $scope.newpatient_basic.lastModifiedBy;
 			$scope.newPatient_Panel.patientId = $scope.newpatient_basic.id; 

@@ -18,7 +18,7 @@ angular.module('App')
     };
     this.getPatientMedicalHistory = function(id,centreId){
 		  console.log(id);
-    	return $resource(baseURL+":centreId/patients/:id/medicalHistory",{id:id,centreId:centreId},{
+    	return $resource(baseURL+":centreId/patients/:id/medicalHistory/:diseaseName",{id:id,centreId:centreId},{
     		'update':{method:'PUT'}
     	}); 
     };
