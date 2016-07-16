@@ -1,16 +1,35 @@
+<div id="confirmationModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>                     
+                <h4 class="modal-title">Confirm Cancellation </h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <p>Are you sure you want to cancel the Bill: Transaction ID - {{bill.billId}} of patient :{{bill.patientId}}) created on date: {{bill.createdAt |date:EEEE-dd-MMMM-YY}}?</p>
+                    <button type="submit" class="btn btn-warning btn-sm" ng-click="cancelBill()" data-dismiss="modal">Confirm</button>
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row row-content col-sm-6 col-sm-push-3 col-sm-pull-3 ">
 
         <div class="panel" style="text-align:center;" >
             <div class="panel-heading">
-                <div class="panel-title"><b>Bill Details</b></div>
-                <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
+                <h4 class="panel-title"><b>Bill Details</b></h4>
+                <button class="col-sm-2 btn btn-danger pull-right" ng-if="isCancellable()" data-toggle="modal" data-target="#confirmationModal">Cancel</button>
+
             </div>     
 
             <div style="padding-top:30px; text-align:center;" class="panel-body" >
 				<div class="media">
 	                <div class="media-body media-left media-middle">
-	                    <label>PATIENT ID: {{bill.patientDetail.id}}</label>
+	                    <label>PATIENT ID: {{bill.patientId}}</label>
 	                </div>
 	                <div class="media-right">
 	                    <a href="#"><img class="media-object img-thumbnail" height ="100" width ="100" src="images/person-default.png" alt="defaultPerson"/></a>
@@ -26,15 +45,39 @@
 	                </ul>	
                 </div>           
                 <hr style="border-top:1px solid rgb(225,225,225);">
-                <ul  class="list-unstyled" ng-repeat="(key,value) in bill" ng-if="key!='patientDetail' && key != 'patientId'">
+                <div class="table-responsive col-sm-12 ">
+                    <table id="resultTable" class="table table-fixedheader table-bordered" >
+                        <thead>
+                            <tr>
+                                <th style="text-align:center;" width="9%">S.NO</th>
+                                <th style="text-align:center;" width="10%">Transaction Type</th>
+                                <th  style="text-align:center;" width="25%">Ledger</th>
+                                <th  style="text-align:center;" width="7%">Quantity</th>
+                                <th  style="text-align:center;" width="15%">Amount</th>
+                            </tr>    
+                        </thead>
+                        <tbody style="max-height:300px;">
+                        <!-- apply filter left -->
+                            <tr ng-repeat = "item in bill.bills " style="height:2px;cursor: pointer;" >
+                                <td style="text-align:center;">{{item.transactionId}}</td>
+                                <td style="text-align:center;">{{item.transactionType}}</td>
+                                <td style="text-align:center;">{{item.ledger}}</td>
+                                <td style="text-align:center;">{{item.quantity}}</td>
+                                <td style="text-align:center;">{{item.amount|currency :'&#8377;'}}</td>
+                            </tr>    
+                        </tbody>
+                    </table>
+                </div>                
+                <hr style="border-top:1px solid rgb(225,225,225);">
+                <ul  class="list-unstyled" ng-repeat="(key,value) in bill" ng-if="key!='patientDetail' && key != 'patientId' && key != 'bills'">
                 	<li class="row">
                 		<label class="text-uppercase col-sm-6">{{key}}:</label>
-                		<label class="text-capitalize col-sm-4" ng-if="key != 'amount' && key != 'createdAt' && key !='updatedAt'">{{value}}</label>
-                		<label class="text-capitalize col-sm-4" ng-if="key == 'amount'">{{value| currency:'&#8377;' }}</label>
+                		<label class="text-capitalize col-sm-4" ng-if="key != 'totalAmount' && key!='payableAmount' && key !='patientPayableAmount' && key != 'createdAt' && key !='updatedAt'">{{value}}</label>
+                		<label class="text-capitalize col-sm-4" ng-if="key == 'totalAmount' || key=='payableAmount' || key =='patientPayableAmount'">{{value| currency:'&#8377;' }}</label>
                 		<label class="col-sm-4" ng-if="key == 'createdAt'|| key =='updatedAt'">{{value|date}}
                 	</li>
                 </ul>   
-                <button class="row col-sm-offset-9 col-sm-2 btn btn-primary" ng-if="bill.status=='Pending'" ng-click="updateStatus()">Paid</button>
+                <button class="row col-sm-offset-9 col-sm-2 btn btn-primary" ng-if="bill.status!='FullPaid'" ng-click="updateStatus()">Paid</button>
             </div>
         </div>
     </div>

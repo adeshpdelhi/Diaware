@@ -236,7 +236,7 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                         controller:'ViewBillDetailsController',
                         resolve:{
                             bill:['$stateParams','billFactory','authorize', function($stateParams,billFactory,authorize){
-                                return billFactory.getBills(authorize.getCentre()).get({id:parseInt($stateParams.id)})
+                                return billFactory.getBills(authorize.getCentre()).get({billId:parseInt($stateParams.id)})
                             }]
                         }
                     }

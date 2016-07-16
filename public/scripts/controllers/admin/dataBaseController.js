@@ -127,6 +127,30 @@ angular.module('App')
 		$scope.showTransactionTypes();
 	}
 
+	// $scope.addLedgerType = function(){
+	// 	console.log($scope.dialysisType);
+	// 	backendFactory.getLedgers().save($scope.dialysisType).$promise.then(function(response){
+	// 					alert('DialysisType saved');
+	// 					$scope.showDialysisTypes();
+	// 					$scope.showForm=false;
+	// 			},function(response){
+	// 				alert('dialysisType save failed!');
+	// 			});
+	// };
+
+	// $scope.showDialysisTypes = function(){
+	// 	console.log('showing dialysisType');
+	// 	backendFactory.getDialysisTypes().query().$promise.then(function(response){
+	// 				$scope.dialysisTypes=response;
+	// 			},function(response){
+	// 				alert('dialysisTypes retrieval failed!');
+	// 			});
+	// };
+
+	// $scope.deleteDialysisType = function(dialysisType){
+	// 	backendFactory.getDialysisTypes().delete({dialysisType:dialysisType});
+	// 	$scope.showDialysisTypes();
+	// }
 
 	$scope.addDialysisType = function(){
 		console.log($scope.dialysisType);

@@ -19,7 +19,18 @@ panelRouter.use(bodyParser.json());
 
 panelRouter.route('/')
 .get(function (req, res, next) {
-    
+    if(req.query.active){
+        db.panelDetails.findAll({
+            where:{
+                patientId:req.params.id,
+                active:true
+            },include:[db.panels]
+        }).then(function(panels){
+            console.log(JSON.stringify(panels));
+            res.json(panels);
+        });
+        return;    
+    }
     console.log('procesing get');
     db.panelDetails.findAll({
         where:{

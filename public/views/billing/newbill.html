@@ -8,117 +8,126 @@
             </div>     
 
             <div style="padding-top:30px; " class="panel-body" >
-                <div class="row col-sm-12">
-                    <div class="media">
-                        <div class="media-body media-left media-middle">
-                            <label class="col-sm-4">PATIENT ID: {{patient.id}}</label>
-                            <label class="col-sm-4 text-capitalize">NAME: {{patient.name}}</label>
-                            <label class="col-sm-4">CONTACT: {{patient.contact}}</label>
-                        <!-- add other details like default panel -->
-                        </div>
-                        <div class="media-right">
-                            <a href="#"><img class="media-object img-thumbnail" height ="100" width ="100" src="images/person-default.png" alt="defaultPerson"/></a>
-                        </div>
-                    </div>
-                    <hr/>
-                    <div class="table-responsive ">
-                        <table id="currentBillTable" class="table table-striped table-fixedheader table-bordered" >
-                            <thead>
-                                <tr>
-                                    <th style="text-align:center;" width="15%">Transaction ID</th>
-                                    <th style="text-align:center;" width="25%">Transaction Type</th>
-                                    <th  style="text-align:center;" width="30%">Ledger</th>
-                                    <th  style="text-align:center;" width="10%">Quantity</th>
-                                    <th  style="text-align:center;" width="15%">Price (in Rs)</th>
-                                    <th  style="text-align:center;" width="5%">&nbsp;</th>
-                                </tr>    
-                            </thead>
-                            <tbody >
-                                <tr ng-repeat = "bill in bills" style="height:2px;" >
-                                    <td width="10%" >{{ bill.id }}</td>
-                                    <td width="25%" >{{ bill.transactionType }}</td>
-                                    <td width="30%">{{ bill.ledger }}</td>
-                                    <td width="15%">{{ bill.quantity }}</td>
-                                    <td width="15%">{{ bill.amount }}</td>
-                                    <td width="5%"><button type="button" class="btn btn-danger btn-circle btn-lg" ng-click="removeEntry(bill.id)" ng-show="!bill.saved"><span class="glyphicon glyphicon-remove"></span></button></td>
-                                </tr>    
-                                <!-- <a ui-sref="#" ng-model=""> -->
-                            </tbody>
-                        </table>
-                        <label class="col-sm-offset-5 col-sm-2">Total Amount</label>
-                        <label class="col-sm-1">{{totalAmount | currency :'&#8377;'}}</label>
-
-                    </div>
-                    <hr/>
-                </div>
                 <form class="form-horizontal" role="form" name="billingForm" id="billingForm" novalidate>
-                    <!-- add ng models and ng-show etc-->
-                    <!-- set valid patient Selected to true in setSelected function -->
-                    <p style="font-size:135%;font-weight:bold; color:gray; font-family:'lucida console';">PAYMENT SECTION</p>
-                    <div style="text-align:center;">
+                    <div class="alert alert-{{messageColor}}" ng-show="alert">
+                        {{message}}
+                    </div>
+                    <div class="row col-sm-12">
+                        <div class="media">
+                            <div class="media-body media-left media-middle">
+                                <label class="col-sm-4">PATIENT ID: {{patient.id}}</label>
+                                <label class="col-sm-4 text-capitalize">NAME: {{patient.name}}</label>
+                                <label class="col-sm-4">CONTACT: {{patient.contact}}</label>
+                            <!-- add other details like default panel -->
+                            </div>
+                            <div class="media-right">
+                                <a href="#"><img class="media-object img-thumbnail" height ="100" width ="100" src="images/person-default.png" alt="defaultPerson"/></a>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="table-responsive ">
+                            <button class="col-sm-2 pull-right btn btn-success"  ng-show="bill.saved" ng-click="reinit()">New Bill</button>
+                            <table id="currentBillTable" class="table table-striped table-fixedheader table-bordered" >
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:center;" width="15%">Transaction ID</th>
+                                        <th style="text-align:center;" width="25%">Transaction Type</th>
+                                        <th  style="text-align:center;" width="30%">Ledger</th>
+                                        <th  style="text-align:center;" width="10%">Quantity</th>
+                                        <th  style="text-align:center;" width="15%">Price (in Rs)</th>
+                                        <th  style="text-align:center;" width="5%">&nbsp;</th>
+                                    </tr>    
+                                </thead>
+                                <tbody >
+                                    <tr ng-repeat = "item in bill.subItems" style="height:2px;" >
+                                        <td width="10%" >{{ item.transactionId }}</td>
+                                        <td width="25%" >{{ item.transactionType }}</td>
+                                        <td width="30%">{{ item.ledger }}</td>
+                                        <td width="15%">{{ item.quantity }}</td>
+                                        <td width="15%">{{ item.amount }}</td>
+                                        <td width="5%"><button type="button" class="btn btn-danger btn-circle btn-lg" ng-click="removeEntry(item.transactionId)" ng-show="!bill.saved"><span class="glyphicon glyphicon-remove"></span></button></td>
+                                    </tr>    
+                                    <!-- <a ui-sref="#" ng-model=""> -->
+                                </tbody>
+                            </table>
+                            <label class="col-sm-offset-5 col-sm-2">Total Amount</label>
+                            <label class="col-sm-2">{{bill.totalAmount | currency :'&#8377;'}}</label>
+                            
+                            <button type="submit" class="btn btn-primary col-sm-3" ng-click="makePayment()" ng-disabled=" !payable() || bill.saved">Make Payment/Save</button>
+
+                        </div>
+                        <hr/>
+                    </div>
+            
+                    <!-- <p style="font-size:135%;font-weight:bold; color:gray; font-family:'lucida console';">PAYMENT SECTION</p> -->
+                    <div style="text-align:center;" ng-show="!bill.saved">
                         <div class="form-group">
-                            <label for="bed" class="col-sm-2 control-label">IPD/OPD/ICU</label>
-                            <select id="bed" name="bed" ng-model="bill.bedType" class="col-sm-2" ng-change = "changeState(1)" placeholder="please select one option">
-                                <option value=""selected >-</option>
+                            <label for="bed" class="col-sm-3 control-label" data-toggle="tooltip" title="IPD/OPD/ICU" data-placement="top">Appointment Type</label>
+                            <select id="bill.appointmentType" name="appointmentType" ng-model="bill.appointmentType" class="col-sm-3" ng-change = "changeState(1)">
+                                <option value="" selected disabled >-</option>
                                 <option value="OPD">OPD</option>
                                 <option value="IPD">IPD</option>
                                 <option value="ICU">ICU</option>
                             </select>
-                            <button type="submit" class="btn btn-primary col-sm-2 col-sm-push-5" ng-click="makePayment()" ng-show="check()">Make Payment</button>
                         </div>
-                        <div class="form-group" ng-show="bedSelected">
-                            <label for="modeOfPayment" class="col-sm-2 control-label">Mode of Payment</label>
-                            <select ng-model="modeOfPayment" class="col-sm-2" ng-change = "changeState(2)">
-                                <option value="" selected> - </option>
+                        <div class="form-group" ng-show="appointmentTypeSelected">
+                            <label for="modeOfPayment" class="col-sm-3 control-label">Mode of Payment</label>
+                            <select ng-model="bill.modeOfPayment" class="col-sm-3" ng-change = "changeState(2)">
+                                <option value="" selected disabled>-</option>
                                 <option value="cash">CASH</option>
                                 <option value="cashless">CASHLESS/PANEL</option>
                             </select>
-                            <!-- <p>{{modeOfPayment}} {{panelSelected}} {{basicSelectionComplete}}</p> -->
                         </div>
-                            <!-- ng-options="operator.value as operator.displayName for operator in operators" -->
-                        <div ng-if="panelSelected">
-                            <div class="form-group">
-                                <label for="panel" class="control-label col-sm-2"> Panel</label>
-                                <select ng-model = "panel" class="col-sm-2" ng-change = changeState(3) ng-options="panel.id as panel.name for panel in panels">
-                                <!-- set defualt option as default panel already set in patient basic details-->
-                                </select>
-
+                        <div class="form-group" ng-show="bill.modeOfPayment !== ''">
+                            <label for="additionalDiscount" class="control-label col-sm-3">Additional Discount (in %)</label>
+                            <div class="col-sm-3">
+                                <input type="number" name="additionalDiscount" id="additionalDiscount" ng-model="bill.additionalDiscount" step="any" min='0'>
                             </div>
                         </div>
-                        <div ng-show="basicSelectionComplete">
+                        <div ng-if="panelSelected">
+                            <div class="form-group">
+                                <label for="panel" class="control-label col-sm-3"> Panel</label>
+                                <select ng-model = "bill.panelId" class="col-sm-3" ng-change = changeState(3) ng-options="panel.panelId as panel.panel.name for panel in panels">
+                                </select>
+                            </div>
+                        </div>
+                        <div ng-show="basicSelectionComplete"> 
+                        <form class="form-horizontal" role="form" id="itemForm" name="itemForm" novalidate>
+
                             <hr style="border-top:1px solid rgb(220,220,220);">
                             <div class="form-group">
                                 <label for="transactionType" class="control-label col-sm-2">Transaction Type</label>
-                                <select ng-model="bill.transactionType" class="col-sm-2" ng-change ="changeState(4)" ng-options = "type.transactionType as type.transactionType for type in transactionTypes" required >
+                                <select ng-model="subItem.transactionType" class="col-sm-2" ng-change ="changeState(4)" ng-options = "type.transactionType as type.transactionType for type in transactionTypes" required >
                                     
                                 </select>
-                                <button type="button" class="btn btn-success btn-circle btn-lg col-sm-push-5" ng-click="add()" ng-disabled="billingForm.$invalid"><span class="glyphicon glyphicon-plus"></span></button>
+                                
                             </div>
                             <div ng-if = "show">
                                 <div class="form-group" ng-class="{'has-error':billingForm.product.$error.required && !billingForm.product.$pristine}">
-                                    <label for="product" class="control-label col-sm-2 text-capitalize">{{bill.transactionType}}</label>
-                                    <select ng-model="bill.ledger" class="col-sm-2" ng-change ="changeState(4)" ng-options = "item.type as item.type for item in dropDown" id = "product" name="product" required>
+                                    <label for="product" class="control-label col-sm-2 text-capitalize">{{subItem.transactionType}}</label>
+                                    <select ng-model="subItem.ledger" class="col-sm-2" ng-change="" ng-options = "ledger.ledgerName as ledger.ledgerName for ledger in ledgers" id = "ledger" name="ledger" required>
                                     </select>
                                     <span ng-show="billingForm.product.$error.required && !billingForm.product.$pristine" class="help-block">Ledger Name is required                      
                                     </span>    
 
                                     <label for="qty" class="control-label col-sm-1">Quantity</label>
                                     <div class="col-sm-2">
-                                        <input  type="number" name="qty" id="qty" ng-model="bill.quantity" ng-init ng-change="updateAmount()">    
+                                        <input  type="number" name="qty" id="qty" ng-model="subItem.quantity">    
                                     </div>
                                     <!-- modify total cost according to quantity .... price of one item to be taken from backend database -->
-                                    <label for="cost" class="control-label col-sm-2">Cost (in Rs)</label>
+                                    <label for="cost" class="control-label col-sm-2">Amount (in Rs)</label>
                                     <div class="col-sm-2">
-                                        <input type="number" name="cost" id="cost" ng-model="bill.amount" disabled>    
+                                        <input type="number" name="cost" id="cost" ng-model="subItem.amount" disabled step="any" min='0'>    
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary col-sm-2 col-sm-push-8" ng-click="makePayment('Paid')" ng-disabled="billingForm.$invalid">Make Payment</button>
+                                    <button type="button" class="btn btn-success btn-circle btn-lg col-sm-push-5" ng-click="add()" ng-disabled="billingForm.$invalid"><span class="glyphicon glyphicon-plus"></span></button>
+                                    <!--  -->
+                                    <!-- <md-button class="md-fab">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </md-button> -->
                                 </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary col-sm-2 col-sm-push-8" ng-click="makePayment('Pending')" ng-disabled="billingForm.$invalid">Save</button>
-                                </div>
-                                <!-- <p>{{bill.id}}, {{bill.transactionType}}, {{bill.product}}, {{bill.quantity}}, {{bill.cost}}</p> -->
+                            </form>
                             </div>
                         </div>
                     </div>

@@ -1,15 +1,20 @@
 /* jshint indent: 2 */
 module.exports = function(sequelize, DataTypes) {
   var bills = sequelize.define('bills', {
+    billId:{
+      type:DataTypes.INTEGER(11),
+      allowNull:false,
+      primaryKey:true,
+      references:{
+        model:'billMaster',
+        key:'billId'
+      }
+    },
     transactionId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    bedType: {
-      type: DataTypes.STRING,
-      allowNull: true
+      primaryKey: true
+      // autoIncrement: true
     },
     transactionType: {
       type: DataTypes.STRING,
@@ -23,20 +28,8 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
-    discount: {
-      type: DataTypes.DECIMAL,
-      allowNull: true
-    },
-    status: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     amount: {
-      type: DataTypes.DECIMAL,
-      allowNull: false
-    },
-    lastModifiedBy: {
-      type: DataTypes.STRING,
+      type: DataTypes.DECIMAL(10,2),
       allowNull: false
     }
   }, {

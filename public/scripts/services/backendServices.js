@@ -13,20 +13,29 @@ angular.module('App')
      	this.getTransactionTypes = function(){
      		return $resource(baseURL+"dropDowns/transactionTypes/:transactionType", null,{'update':{method:'PUT'}});
      	};
-        this.getDialysisTypes = function(){
-            return $resource(baseURL+"dropDowns/dialysisTypes/:dialysisType", null,{'update':{method:'PUT'}});
-        };
-        this.getConsumableTypes = function(){
-            return $resource(baseURL+"dropDowns/consumableTypes/:consumableType", null,{'update':{method:'PUT'}});
-        };
-        this.getProcedureTypes = function(){
-            return $resource(baseURL+"dropDowns/procedureTypes/:procedureType", null,{'update':{method:'PUT'}});
-        };
-        this.getPharmacyTypes = function(){
-            return $resource(baseURL+"dropDowns/pharmacyTypes/:pharmacyType", null,{'update':{method:'PUT'}});
-        };
+        this.getLedgers = function(){
+            return $resource(baseURL+"dropDowns/ledgers/:ledgerType", null,{'update':{method:'PUT'}});
+        };  
+        // this.getDialysisTypes = function(){
+        //     return $resource(baseURL+"dropDowns/dialysisTypes/:dialysisType", null,{'update':{method:'PUT'}});
+        // };
+        // this.getConsumableTypes = function(){
+        //     return $resource(baseURL+"dropDowns/consumableTypes/:consumableType", null,{'update':{method:'PUT'}});
+        // };
+        // this.getProcedureTypes = function(){
+        //     return $resource(baseURL+"dropDowns/procedureTypes/:procedureType", null,{'update':{method:'PUT'}});
+        // };
+        // this.getPharmacyTypes = function(){
+        //     return $resource(baseURL+"dropDowns/pharmacyTypes/:pharmacyType", null,{'update':{method:'PUT'}});
+        // };
         this.getDiseases = function(){
             return $resource(baseURL+"dropDowns/diseases/:diseaseName", null,{'update':{method:'PUT'}});
         };
   }])
 ;
+/*
+,function(rejectedPromiseError){
+        res.status(500);
+        res.end("Internal Server Error");
+    }
+*/

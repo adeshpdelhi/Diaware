@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    bedType: {
+    appointmentType: {
       type: DataTypes.STRING,
       allowNull: true
     },
@@ -29,7 +29,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     cost: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10,2),
       allowNull: true
     },
     lastModifiedBy: {

@@ -31,8 +31,15 @@ Object.keys(dbmodel).forEach(function(modelName) {
 dbmodel.sequelize = db.sequelize;
 dbmodel.Sequelize = db.Sequelize;
 //relations between bill and patient
-dbmodel.patientDetails.hasMany(dbmodel.bills,{foreignKey:'patientId'});
-dbmodel.bills.belongsTo(dbmodel.patientDetails, {foreignKey: 'patientId'});
+// dbmodel.patientDetails.hasMany(dbmodel.bills,{foreignKey:'patientId'});
+// dbmodel.bills.belongsTo(dbmodel.patientDetails, {foreignKey: 'patientId'});
+
+dbmodel.patientDetails.hasMany(dbmodel.billMaster,{foreignKey:'patientId'});
+dbmodel.billMaster.belongsTo(dbmodel.patientDetails, {foreignKey: 'patientId'});
+
+dbmodel.billMaster.hasMany(dbmodel.bills,{foreignKey:'billId'});
+dbmodel.bills.belongsTo(dbmodel.billMaster,{foreignKey:'billId'});
+
 //relation between centre and patients - one centre has many patients
 dbmodel.centres.hasMany(dbmodel.patientDetails,{foreignKey:'centreId'});
 dbmodel.patientDetails.belongsTo(dbmodel.centres,{foreignKey:'centreId'});

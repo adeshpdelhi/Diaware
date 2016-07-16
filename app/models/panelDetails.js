@@ -44,6 +44,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true
     },
+    active:{
+      type:DataTypes.BOOLEAN,
+      allowNull:false,
+      defaultValue:true
+    },
     lastModifiedBy: {
       type: DataTypes.STRING,
       allowNull: false

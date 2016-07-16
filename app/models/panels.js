@@ -23,6 +23,10 @@ module.exports = function(sequelize, DataTypes) {
     details: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+    discount:{
+      type:DataTypes.DECIMAL(10,2),
+      allowNull:true
     }
   }, {
     tableName: 'panels'

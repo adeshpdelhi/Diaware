@@ -2,192 +2,216 @@
 
 angular.module('App')
     .controller('NewBillController',['$scope','patientFactory','billFactory', '$stateParams','choosePatientFactory','authorize','backendFactory', function($scope,patientFactory,billFactory, $stateParams, choosePatientFactory, authorize,backendFactory){
-    // auto fill panel/cash     
-    // add discount autofill from db and editable input box
-    // add other fields to display on top   
-        patientFactory.getPatients(authorize.getCentre()).get({id:choosePatientFactory.getChosenPatient().id}).$promise.then(function(response){
+    // add other fields to display on top 
+        var chosenPatientId = choosePatientFactory.getChosenPatient().id;
+        patientFactory.getPatients(authorize.getCentre()).get({id:chosenPatientId}).$promise.then(function(response){
             $scope.patient = response;
-        });
-        var cost = 200; // default prize ... later fetch from cost sheet;
-        $scope.bill = {
-            id:'',
-            bedType:"",
-            transactionType:"",
-            ledger:"",
-            quantity:1,
-            discount:"",
-            status:"Pending",
-            amount:cost,
-            lastModifiedBy:"",
-            patientId: null,
-            saved: false
-        };
-        $scope.$watch('patient.id',function(newValue,oldValue){
-            $scope.bill.patientId = newValue;
-            console.log(newValue+"Yyyyy");
-        })
+            $scope.bill.patientId = chosenPatientId;
 
-        $scope.panelSelected = false;
-        backendFactory.getPanels().query(function(response){
-            $scope.panels = response;    
         });
+        // backendFactory.getPanels().query(function(response){
+        //     $scope.panels = response;    
+        // });
         backendFactory.getTransactionTypes().query(function(response){
             $scope.transactionTypes = response;    
         });
+        patientFactory.getPatientPanels(chosenPatientId,authorize.getCentre())
+        .query({active:true},function(response){
+            $scope.panels = response;
+        });
+        $scope.bill = {
+            // billId:null,
+            appointmentType:"",
+            modeOfPayment:'',
+            panelId: null,
+            additionalDiscount:0,
+            status:"Pending",
+            totalAmount:0,
+            payableAmount:0,
+            patientPayableAmount:0,
+            amountPending:0,
+            lastModifiedBy:"",
+            patientId: null,
+            saved: false,
+            subItems:[]
+        };
+        $scope.subItem = {
+            // bill
+            transactionId: null,
+            transactionType:null,
+            ledger:null,
+            quantity:1,
+            amount:null
+        };
+
+        $scope.panelSelected = false;
          
         $scope.show = false;
         $scope.basicSelectionComplete = false;
-        $scope.bedSelected = false;
-        $scope.totalAmount = 0;     
-        $scope.dropDown=[];   
-        var dialysisTypes = [];
-        var procedureTypes = [];
-        var pharmacyTypes = [];
-        var consumableTypes = [];
-        backendFactory.getDialysisTypes().query(function(response){
-            for (var i = 0;i<response.length;i++)
-                dialysisTypes.push({type:response[i].dialysisType});    
-            });
-        backendFactory.getProcedureTypes().query(function(response){
-                for (var i = 0;i<response.length;i++)
-                    procedureTypes.push({type:response[i].procedureType});    
-            });
-        backendFactory.getPharmacyTypes().query(function(response){
-                for (var i = 0;i<response.length;i++)
-                    pharmacyTypes.push({type:response[i].pharmacyType});    
-            });
-        backendFactory.getConsumableTypes().query(function(response){
-                for (var i = 0;i<response.length;i++)
-                    consumableTypes.push({type:response[i].consumableType});    
-            });
+        $scope.appointmentTypeSelected = false;
+       
+        var trId = 1; // fetch from db
+
+        $scope.$watch('subItem.quantity',function(newValue,oldValue){
+            if($scope.cost)
+                $scope.subItem.amount = $scope.subItem.quantity * $scope.cost; 
+        });
+        $scope.$watch('subItem.ledger',function (newValue,old) {
+            console.log($scope.subItem.ledger);
+            if($scope.subItem.ledger != null && $scope.subItem.ledger != '' ){
+                for(var i = 0; i < $scope.ledgers.length; i++){
+                    if($scope.subItem.ledger == $scope.ledgers[i].ledgerName){
+                        $scope.cost = $scope.ledgers[i].cost;
+                        $scope.subItem.amount = $scope.cost;
+                    }
+                }
+            }
+        });
+        $scope.$watch('cost',function(newValue,oldValue){
+            console.log("Cost " + $scope.cost);
+        });
         $scope.changeState = function(i){
-            if(i == 1 && $scope.bill.bedType !== "") $scope.bedSelected = true;
+            if(i == 1 && $scope.bill.appointmentType !== "") $scope.appointmentTypeSelected = true;
+        
             if(i == 2 ){
-                if($scope.modeOfPayment === "cashless"){
+                if($scope.bill.modeOfPayment === "cashless"){
                     $scope.panelSelected = true;
                     $scope.basicSelectionComplete = false;
-                }else if($scope.modeOfPayment === "cash") {
+                }else if($scope.bill.modeOfPayment === "cash") {
                     $scope.basicSelectionComplete = true;
                     $scope.panelSelected = false;
+                    $scope.panelDiscount = 0;
                 }
             }
-            if(i == 3 && $scope.panel !== "" && $scope.panelSelected) $scope.basicSelectionComplete = true;
-            if(i == 4 && $scope.bill.transactionType !== ""){
+            if(i == 3 && $scope.bill.panelId !== "" && $scope.panelSelected){
+                for(var i = 0; i < $scope.panels.length;i++){
+                    console.log($scope.bill.panelId+" "+ $scope.panels[i].panelId);
+                    if($scope.bill.panelId == $scope.panels[i].panelId){
+                        $scope.panelDiscount = ($scope.panels[i].panel.discount != null)?($scope.panels[i].panel.discount/100):0; //assuming discount stored in %
+                        console.log($scope.panelDiscount + "panelDiscount" + (($scope.panels[i].panel.discount != null)?($scope.panels[i].panel.discount/100):0));
+                    }
+                        
+                }
+                $scope.basicSelectionComplete = true;
+            } 
+            if(i == 4 && $scope.subItem.transactionType !== ""){
                 $scope.show= true;
-                // $scope.dropDown = [];
-                switch($scope.bill.transactionType){
-                    case "Dialysis":$scope.dropDown = dialysisTypes;
-                                    break;
-                    case "Procedure":$scope.dropDown = procedureTypes;
-                                    break;
-                    case "Pharmacy":$scope.dropDown = pharmacyTypes;
-                                    break;
-                    case "Consumable":$scope.dropDown = consumableTypes;
-                                    break;
-                }
+                backendFactory.getLedgers().query({ledgerType:$scope.subItem.transactionType},function(response){
+                    $scope.ledgers = response;
+                    $scope.cost = 0;
+                });
             }
         };
-        $scope.bill.quantity = 1 ;
-        $scope.bill.amount = cost;
-        $scope.updateAmount = function(){
-            $scope.bill.amount = $scope.bill.quantity * cost;
-        };
-        $scope.bills = [];
-        var trId = 0; // fetch from db
-        var pendingTransactions = false;
-        $scope.makePayment = function(status){
-            pendingTransactions = false;
-            $scope.bill.id = trId++;
-            $scope.bill.patientId = $scope.patient.id;
-            // $scope.bill.status = status;
-            $scope.bill.lastModifiedBy = authorize.getUsername();
-
-            if($scope.bill.transactionType !== ""){
-                $scope.totalAmount += $scope.bill.amount;
-                $scope.bills.push($scope.bill);
-            }
-            console.log($scope.bill);
-            for(var i = 0 ; i< $scope.bills.length; i++){
-                if(!$scope.bills[i].saved){
-                    $scope.bills[i].status = status;
-                    $scope.bills[i].saved = true;
-                    billFactory.getBills(authorize.getCentre()).save($scope.bills[i]);
-                }
-            }
-
-            // for (var i = $scope.bills.length - 1; i >= 0; i--) {
-            //     $scope.bills[i].paid = true;
-            // }
-            $scope.bill = {
-                id:'',
-                bedType:"",
-                transactionType:"",
-                ledger:"",
+        
+        $scope.add = function(){
+            $scope.subItem.transactionId = trId++;
+            $scope.bill.totalAmount += $scope.subItem.amount;
+            $scope.bill.subItems.push($scope.subItem);
+            $scope.subItem = {
+                // bill
+                transactionId: null,
+                transactionType:null,
+                ledger:null,
                 quantity:1,
-                discount:"",
-                status:"Pending",
-                amount:cost,
-                lastModifiedBy:"",
-                patientId: $scope.patient.id,
-                saved: false
-
+                amount:null
             };
-
-
-            $scope.billingForm.$setPristine();
-            $scope.panelSelected = false;
+            // $scope.billingForm.itemForm.$setPristine();
             $scope.show = false;
-            $scope.basicSelectionComplete = false;
-            $scope.bedSelected = false;
-            $scope.modeOfPayment = "";
-            $scope.bed = "";
-            // $scope.bills = [];
-
         };
-
-        $scope.check = function(){
-            // console.log($scope.bill.transactionType + " " + $scope.bills.length);
-            // 
-            if(!pendingTransactions) return false;
-            else {
-                    if($scope.bill.transactionType === "") return true;
-                    else return false;      
+        $scope.payable = function(){
+            if($scope.bill.subItems.length == 0 || $scope.subItem.transactionType != null)
+                {
+                    console.log("false");
+                    return false;
                 }
+            else {
+                console.log("true");
+                return true;
+            }
         };
         $scope.removeEntry = function(id){
-            for (var i = $scope.bills.length - 1; i >= 0; i--) {
-                if($scope.bills[i].id == id)
-                    $scope.bills.splice(i,1);
+            for (var i = $scope.bill.subItems.length - 1; i >= 0; i--) {
+                if($scope.bill.subItems[i].transactionId == id){
+                    $scope.bill.totalAmount = $scope.bill.totalAmount - $scope.bill.subItems[i].amount;
+                    $scope.bill.subItems.splice(i,1);
+
+                }
             }
         };
-        $scope.add = function(){
-            pendingTransactions = true;
-            $scope.bill.id = trId++;
-            $scope.bill.patientId = $scope.patient.id;
-            $scope.totalAmount += $scope.bill.amount;
-            $scope.bills.push($scope.bill);
-            $scope.bill = {
-                id:'',
-                bedType:"",
-                transactionType:"",
-                ledger:"",
-                quantity:1,
-                discount:"",
-                status:"Pending",
-                amount:cost,
-                lastModifiedBy:"",
-                patientId: $scope.patient.id,
-                saved: false
+        /*
+        
+        */
+        $scope.makePayment = function(status){
+            console.log("entered makePayment");
+            $scope.bill.payableAmount = $scope.bill.totalAmount - ($scope.bill.totalAmount* $scope.bill.additionalDiscount/100); 
+            $scope.bill.patientPayableAmount = $scope.bill.payableAmount - $scope.bill.payableAmount * $scope.panelDiscount;
+            if($scope.bill.patientPayableAmount == 0)
+                $scope.bill.status = 'Pending';
+            if($scope.bill.patientPayableAmount == $scope.bill.payableAmount)
+                $scope.bill.status = 'FullPaid';
+            if($scope.bill.patientPayableAmount > 0 && $scope.bill.patientPayableAmount < $scope.bill.payableAmount)
+                $scope.bill.status = "PartialPaid";
+            $scope.bill.amountPending = $scope.bill.payableAmount - $scope.bill.patientPayableAmount;
+            console.log("amountPending: " + $scope.bill.amountPending +"; payableAmount: " + $scope.bill.payableAmount +"; patientPayableAmount: " +$scope.bill.patientPayableAmount  );
 
+            $scope.bill.patientId = $scope.patient.id;
+            $scope.bill.lastModifiedBy = authorize.getUsername();
+            billFactory.getBills(authorize.getCentre()).save($scope.bill).$promise.then(function (response) {
+                console.log(response);
+                $scope.billId = response.billId;
+                $scope.message = "Successfully made Payment! TransactionId: " + $scope.billId;
+                $scope.alert = true;
+                $scope.messageColor = 'success';
+                $scope.bill.saved = true;
+            },function (response) { 
+                $scope.alert = true;
+                $scope.message = "Error: " + response.status+ " " + response.statusText + "!";
+                $scope.messageColor = 'danger';
+            });
+
+
+
+        };
+
+        $scope.reinit = function(){
+            $scope.bill = {
+                appointmentType:"",
+                modeOfPayment:null,
+                panelId: null,
+                additionalDiscount:null,
+                status:"Pending",
+                totalAmount:0,
+                payableAmount:0,
+                patientPayableAmount:0,
+                amountPending:0,
+                lastModifiedBy:"",
+                patientId: null,
+                saved: false,
+                subItems:[]
             };
+
             $scope.billingForm.$setPristine();
             $scope.panelSelected = false;
             $scope.show = false;
             $scope.basicSelectionComplete = false;
-            $scope.bedSelected = false;
-            $scope.modeOfPayment = "";
-            $scope.bed = "";
+            $scope.appointmentTypeSelected = false;
+            $scope.subItem = {
+            // bill
+                transactionId: null,
+                transactionType:null,
+                ledger:null,
+                quantity:1,
+                amount:null
+            };
+            trId = 1; // fetch from db
+            $scope.alert = false;
+
+
         };
+
+        
+        
+        
 
     }])    
     .controller('BillingHomeController',['$scope', function($scope){

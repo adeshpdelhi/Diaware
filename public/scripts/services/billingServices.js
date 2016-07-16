@@ -7,7 +7,7 @@ angular.module('App')
         //     bills = resp;    
         // });
         this.getBills = function(centreId){
-          return $resource(baseURL+":centreId/bills/:id",{centreId:centreId},  {'update':{method:'PUT' }});
+          return $resource(baseURL+":centreId/bills/:billId",{centreId:centreId},  {'update':{method:'PUT' }});
         };
         // this.getBill = function(id){
         //     return bills[id];
