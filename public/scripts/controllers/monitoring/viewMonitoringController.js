@@ -6,6 +6,15 @@ angular.module('App')
 	    $scope.latest = function(){
 		    monitoringChartFactory.getPreBasic(chosenPatientId).get({fullChartLatest:true}).$promise.then(function(response){
 	        	$scope.patientChart = response;
+	        	$scope.post = $scope.patientChart.monitoringChartPost;
+	        	$scope.intraTable = $scope.patientChart.monitoringChartIntras;
+	        	console.log($scope.intraTable.length + "ggggggggggggggggggggggggggggggggggggggggggs");	
+	        	$scope.accessAssessment = $scope.patientChart.monitoringChartPreAccessAssessment;	
+	        	$scope.assessment = $scope.patientChart.monitoringChartPreAssessment;
+	        	$scope.machineCheck = $scope.patientChart.monitoringChartPreMachineFinalCheck;
+	        	$scope.basicMedical = $scope.patientChart.monitoringChartPreBasicMedical;
+	        	$scope.patientChart.monitoringDate = new Date($scope.patientChart.monitoringDate);
+	        	$scope.basic = $scope.patientChart;	
 	        });
 		};
 	    $scope.latest();
@@ -87,19 +96,11 @@ angular.module('App')
 			}
 		} ;
 		
-		$scope.$watch('patientChart.patientId',function (newVal,oldVal) {
-			if($scope.patientChart){
-				$scope.post = $scope.patientChart.monitoringChartPost;
-				$scope.intraTable = $scope.patientChart.monitoringChartIntras;
-				console.log($scope.intraTable.length + "ggggggggggggggggggggggggggggggggggggggggggs");	
-				$scope.accessAssessment = $scope.patientChart.monitoringChartPreAccessAssessment;	
-				$scope.assessment = $scope.patientChart.monitoringChartPreAssessment;
-				$scope.machineCheck = $scope.patientChart.monitoringChartPreMachineFinalCheck;
-				$scope.basicMedical = $scope.patientChart.monitoringChartPreBasicMedical;
-				$scope.patientChart.monitoringDate = new Date($scope.patientChart.monitoringDate);
-				$scope.basic = $scope.patientChart;	
-			}
-		});
+		// $scope.$watch('patientChart.patientId',function (newVal,oldVal) {
+		// 	if($scope.patientChart){
+				
+		// 	}
+		// });
 		
 		$scope.editing_postdialysis = function(){
 			$scope.editingPost = true;

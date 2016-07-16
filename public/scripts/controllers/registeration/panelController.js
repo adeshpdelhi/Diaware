@@ -14,6 +14,7 @@ angular.module('App')
 				lastModifiedBy:null,
 				new:true
 			};	
+			console.log("yes");
 		}
 		$scope.showalert_panel=false;
 		backendFactory.getPanels().query(function(response){

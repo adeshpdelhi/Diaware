@@ -2,7 +2,7 @@
 'use strict';
 angular.module('App')
 .controller('MonitoringPostController',['$scope','patientFactory','choosePatientFactory','authorize','monitoringChartFactory', function($scope, patientFactory, choosePatientFactory, authorize,monitoringChartFactory){
-        if(!$scope.view || !$scope.post){
+        if(!$scope.view || ($scope.patientChart != null && !$scope.post)){
             $scope.post = {
             	patientId:null,
             	postId:null,

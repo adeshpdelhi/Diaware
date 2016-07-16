@@ -51,12 +51,12 @@
         <table id="intratable" class="table table-bordered" ng-if="patientChart.monitoringChartIntras.length!=0">
           <thead >
             <tr id = "rowHead">
-              <th ng-repeat='(key,value) in patientChart.monitoringChartIntras[0] track by $index' ng-if="key != 'patientId' && key != 'intraId'" class="text-uppercase" style="text-align:center;"><b>{{key}}</b></th>
+              <th ng-repeat='(key,value) in patientChart.monitoringChartIntras[0] track by $index' ng-if="key != 'patientId' && key != 'intraId' && key != 'new'" class="text-uppercase" style="text-align:center;"><b>{{key}}</b></th>
             </tr>
           </thead>
           <tbody id="tableBody">
             <tr id="row" ng-repeat="intra in patientChart.monitoringChartIntras track by $index">
-              <td ng-repeat="(key,value) in intra" ng-if="key != 'patientId' && key != 'intraId'">
+              <td ng-repeat="(key,value) in intra" ng-if="key != 'patientId' && key != 'intraId' && key !='new'">
                 {{(key == 'createdAt' || key =='updatedAt')?(value|date:dd-MMMM-YY):value}}
               </td>             
             </tr>

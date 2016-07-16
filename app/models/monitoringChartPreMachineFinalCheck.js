@@ -41,7 +41,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true,
       validate:{
-        isIn:['Yes','No']
+        isIn:[['Yes','No']]
       }
     },
     machineTestCheckedBy: {
@@ -52,14 +52,14 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true,
       validate:{
-        isIn:['Yes','No']
+        isIn:[['Yes','No']]
       }
     },
     alarmLimits: {
       type: DataTypes.STRING,
       allowNull: true,
       validate:{
-        isIn:['Yes','No']
+        isIn:[['Yes','No']]
       }
     },
     dialysateFlowRate: {
@@ -70,7 +70,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true,
       validate:{
-        isIn:['Yes','No']
+        isIn:[['Yes','No']]
       }
     },
     dialysateTemperature: {

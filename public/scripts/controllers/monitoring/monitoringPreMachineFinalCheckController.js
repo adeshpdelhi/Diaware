@@ -1,7 +1,7 @@
 'use strict';
 angular.module('App')
 .controller('MonitoringPreMachineFinalCheckController',['$scope','authorize','backendFactory','monitoringChartFactory', function($scope,authorize,backendFactory,monitoringChartFactory){
-	if(!$scope.view || !$scope.machineCheck){
+	if(!$scope.view || ($scope.patientChart != null && !$scope.machineCheck)){
 		$scope.machineCheck = {
 			preBasicId:null,
 			machineNumber:null,
