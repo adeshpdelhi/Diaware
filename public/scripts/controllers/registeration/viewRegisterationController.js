@@ -3,14 +3,26 @@ angular.module('App')
 .controller('ViewRegistrationController',['$scope','patientFactory','choosePatientFactory','authorize', function($scope, patientFactory, choosePatientFactory,authorize){
         patientFactory.getPatients(authorize.getCentre()).get({id:choosePatientFactory.getChosenPatient().id,fullDetails:true}).$promise.then(function(response){
         	$scope.patient = response;
+			$scope.newPatient_Medical = $scope.patient.medicalHistories;
+        	$scope.newpatient_basic = $scope.patient;
+			$scope.newpatient_basic.DOB = new Date ( $scope.newpatient_basic.DOB);
         	console.log($scope.patient);
+        	$scope.events = $scope.patient.majorClinicalEvents;
+        	console.log($scope.events);
+        	for(var i = 0; i < $scope.events.length; i++){
+        		$scope.events[i].saved = true;
+        		$scope.events[i].ID = i;
+        	}
+			$scope.newPatient_Others = $scope.patient.otherDetail;
+			$scope.newPatient_Panel = $scope.patient.panelDetail;
+			
+
         });
 		$scope.edit=false;
 		$scope.editBasicDetails = function(){
 			$scope.editBasic = true;
 
-			$scope.newpatient_basic = $scope.patient;
-			$scope.newpatient_basic.DOB = new Date ( $scope.newpatient_basic.DOB);
+			
 		};
 		$scope.view = true;
 		$scope.updateBasicDetails = function(){
@@ -28,14 +40,9 @@ angular.module('App')
 		};
 		$scope.editClinicalEvents = function(){
 			$scope.editClinical = true;
-			$scope.events = $scope.patient.majorClinicalEvents;
-			console.log($scope.events);
-			for(var i = 0; i < $scope.events.length; i++){
-				$scope.events[i].saved = true;
-				$scope.events[i].ID = i;
-			}
+			
 		};
-
+		// $scope.$watch =
 		$scope.updateMyValuesFromClinical = function(editClinical, alert,message){
 			$scope.editClinical = editClinical;
 			$scope.showAlertClinical = alert;
@@ -44,7 +51,6 @@ angular.module('App')
 
 		$scope.editMedicalHistory = function(){
 			$scope.editMedical = true;
-			$scope.newPatient_Medical = $scope.patient.medicalHistories;
 		};	
 
 		$scope.updateMyValuesFromMedical = function(editMedical, alert,message){
@@ -54,7 +60,6 @@ angular.module('App')
 		};
 		$scope.editOtherDetails = function(){
 			$scope.editOthers = true;
-			$scope.newPatient_Others = $scope.patient.otherDetail;
 		};
 
 		$scope.updateMyValuesFromOthers = function(editOthers, alert,message){
@@ -64,7 +69,6 @@ angular.module('App')
 		};
 		$scope.editPanel = function(){
 			$scope.editPanels = true;
-			$scope.newPatient_Panel = $scope.patient.panelDetail;
 		};
 		$scope.updateMyValuesFromPanel = function(editPanels, alert,message){
 			$scope.editPanels = editPanels;

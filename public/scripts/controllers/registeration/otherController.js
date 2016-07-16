@@ -2,7 +2,7 @@
 angular.module('App')
 .controller('OtherController',['$scope','patientFactory','authorize', function($scope, patientFactory,authorize){
 
-		if(!$scope.view || !$scope.newPatient_Others){
+		if(!$scope.view || (!$scope.newPatient_Others && $scope.patient != null)){
 			$scope.newPatient_Others = {
 				patientId:$scope.view?$scope.patient.id:$scope.newpatient_basic.id,
 				aadhar:null,

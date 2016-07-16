@@ -1,7 +1,7 @@
 'use strict';
 angular.module('App')
 .controller('PanelController',['$scope','patientFactory','backendFactory','authorize', function($scope,patientFactory,backendFactory,authorize){
-		if(!$scope.view || !$scope.newPatient_Panel){
+		if(!$scope.view || (!$scope.newPatient_Panel && $scope.patient != null)){
 			$scope.newPatient_Panel = { 
 				patientId: $scope.view?$scope.patient.id:$scope.newpatient_basic.id,
 				panelId:null, 
