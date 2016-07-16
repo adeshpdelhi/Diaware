@@ -1,0 +1,137 @@
+<div class="container">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="row row-content">
+        <div class="panel panel-info">
+            <div class="panel-body" style="text-align:center;">
+                <p><h2>Add New Centre</h2></p>
+                 <form class="form-horizontal" name="addCentreForm" role="form">
+
+                <div class="form-group ">
+                    <label class="col-sm-3 control-label">Centre ID </label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="addCentre.id" placeholder="Enter Centre ID" >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Name</label>                        
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="addCentre.name" placeholder="Enter Name" >
+                    </div>
+                </div>
+				
+				 <div class="form-group">
+                    <label class="col-sm-3 control-label">Location</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="addCentre.location" placeholder="Enter Location" >
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Maximum Patients</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" ng-model="addCentre.maxPatients" placeholder="" >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Access Lines Available</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" ng-model="addCentre.accessLinesAvailable" placeholder=""  >
+                    </div>
+                </div>
+				
+				<div class="form-group">
+                    <label class="col-sm-3 control-label">Patient Count</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" ng-model="addCentre.patientCount" placeholder=""  >
+                    </div>
+                </div>
+				
+				<div class="form-group">
+                    <label class="col-sm-3 control-label">No of Shifts Avalaible</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" ng-model="addCentre.noOfShiftsPerDay" placeholder="" >
+                    </div>
+                </div>
+				 
+
+				 <div class="form-group">
+                    <label class="col-sm-3 control-label">Toatl OPD Negative Machines</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" ng-model="addCentre.OPDTotalNegativeMachines" placeholder=""  >
+                    </div>
+                </div>
+				
+				<div class="form-group">
+                    <label class="col-sm-3 control-label">Total OPD C Negative Machines</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" ng-model="addCentre.OPDTotalCPositiveMachines" placeholder="">
+                    </div>
+                </div>
+				
+				<div class="form-group">
+                    <label class="col-sm-3 control-label">Toatl OPD B Negative Machines</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" ng-model="addCentre.OPDTotalBPositiveMachines" placeholder=""  >
+                    </div>
+                </div>
+				
+				<div class="form-group">
+                    <label class="col-sm-3 control-label">Total OPD HIV Machines</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" ng-model="addCentre.OPDTotalHIVMachines" placeholder=""  >
+                    </div>
+                </div>
+				
+				<div class="form-group">
+                    <label class="col-sm-3 control-label">Total IPD ICU Negative Machines</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" ng-model="addCentre.IPD_ICUTotalNegativeMachines" placeholder=""  >
+                    </div>
+                </div>
+				
+				<div class="form-group">
+                    <label class="col-sm-3 control-label">Total IPD ICU C Positive Machines</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" ng-model="addCentre.IPD_ICUTotalCPositiveMachines" placeholder="" >
+                    </div>
+                </div>
+				
+				<div class="form-group">
+                    <label class="col-sm-3 control-label">Total IPD ICU B Positive Machines</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" ng-model="addCentre.IPD_ICUTotalBPositiveMachines" placeholder=""  >
+                    </div>
+                </div>
+		
+			<div class="form-group">
+                    <label class="col-sm-3 control-label">Total IPD ICU HIV Machines</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" ng-model="addCentre.IPD_ICUTotalHIVMachines" placeholder=""  >
+                    </div>
+                </div>
+			
+               
+
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-10">
+                        <button type="submit" class="btn btn-primary" ng-click="addNewCentre()">Add Centre</button>
+                    </div>
+                </div>
+				
+				<div class="form-group">
+					<div class="alert alert-success alert-dismissable" ng-show="showalert_add_centre">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						Centre Added Successfully.
+					</div>
+				</div>
+
+            </form>
+            </div>
+        </div>   
+      </div>
+    </div>
+</div>

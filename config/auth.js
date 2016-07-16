@@ -64,7 +64,7 @@ exports.register = function(req, res){
 			}
 			else
 			{
-				req.body.centres=req.body.centres.replace(/\s/g, '');
+				//req.body.centres=req.body.centres.replace(/\s/g, '');
 				users.create({username: req.body.username, hashedPassword: crypto.createHash('md5').update(req.body.password).digest("hex"), centres: req.body.centres, admin: req.body.admin, incharge: req.body.incharge, manager: req.body.manager, clinical: req.body.clinical});
 				res.status(200);
 				res.end('Successfully added: '+req.body.username);

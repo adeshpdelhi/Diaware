@@ -9,7 +9,6 @@
                     <span class="glyphicon glyphicon-home"
                     aria-hidden="true"></span> Home</a>
                 </li>
-
                 <li ng-class="{active: stateis('app.registration')}" uib-dropdown on-toggle="toggled(open)">
                     <a style="cursor: pointer; display: block;" class="simple-dropdown" uib-dropdown-toggle >
                         <span class="glyphicon glyphicon-user"
@@ -17,14 +16,13 @@
                     </a>
                     <ul class="dropdown-menu" uib-dropdown-menu  aria-labelledby="simple-dropdown">
                         <li>
-                            <a ui-sref="app.registration.new">New Registration</a>
+                            <a ng-show="role.admin || role.incharge || role.manager" ui-sref="app.registration.new">New Registration</a>
                             <a ui-sref="app.choosePatient({callback:'registration.view'})">View/Edit Registration</a>
 
                         </li>
                     </ul>
                 </li>
-
-                <li ng-class="{active: stateis('app.billing')}" uib-dropdown on-toggle="toggled(open)">
+                <li ng-show="role.admin || role.incharge || role.manager" ng-class="{active: stateis('app.billing')}" uib-dropdown on-toggle="toggled(open)">
                     <a style="cursor: pointer; display: block;" class="simple-dropdown" uib-dropdown-toggle>
                         <span class="glyphicon glyphicon-usd"
                         aria-hidden="true"></span> Billing
@@ -37,21 +35,21 @@
                         </li>
                     </ul>
                 </li>
-                <li ng-class="{active: stateis('app.appointment')}" uib-dropdown on-toggle="toggled(open)">
+                <li  ng-class="{active: stateis('app.appointment')}" uib-dropdown on-toggle="toggled(open)">
                     <a style="cursor: pointer; display: block;" class="simple-dropdown" uib-dropdown-toggle>
                         <span class="glyphicon glyphicon-calendar"
                         aria-hidden="true"></span> Appointment
                     </a>
                     <ul class="dropdown-menu" uib-dropdown-menu  aria-labelledby="simple-dropdown">
                         <li>
-                            <a ui-sref="app.choosePatient({callback:'appointment'})">Register A Patients Schedule</a>
+                            <a ng-show="role.admin || role.incharge || role.manager" ui-sref="app.choosePatient({callback:'appointment'})">Register A Patients Schedule</a>
                             <a ui-sref="app.appointment.viewAppointments">View/Change Appointments</a>
 
                         </li>
                     </ul>
                 </li>
 				
-				<li ng-class="{active: stateis('app.dialysis_care_plan')}" uib-dropdown on-toggle="toggled(open)">
+				<li ng-show="role.admin || role.incharge || role.clinical" ng-class="{active: stateis('app.dialysis_care_plan')}" uib-dropdown on-toggle="toggled(open)">
                     <a style="cursor: pointer; display: block;" class="simple-dropdown" uib-dropdown-toggle >
                         <span class="glyphicon glyphicon-user"
                         aria-hidden="true"></span> Care Plan
@@ -76,7 +74,7 @@
                 </li> -->
 
 
-                <li ng-class="{active: stateis('app.monitoring')}" uib-dropdown on-toggle="toggled(open)">
+                <li ng-show="role.admin || role.incharge || role.clinical" ng-class="{active: stateis('app.monitoring')}" uib-dropdown on-toggle="toggled(open)">
                     <a style="cursor: pointer; display: block;" class="simple-dropdown" uib-dropdown-toggle>
                         <span class="glyphicon glyphicon-list-alt"
                         aria-hidden="true"></span> Monitoring Chart
@@ -91,7 +89,7 @@
                 </li>
 
 				
-				<li ng-class="{active: stateis('app.inventory')}" uib-dropdown on-toggle="toggled(open)">
+				<li ng-show="role.admin || role.incharge || role.manager" ng-class="{active: stateis('app.inventory')}" uib-dropdown on-toggle="toggled(open)">
                     <a style="cursor: pointer; display: block;" class="simple-dropdown" uib-dropdown-toggle>
                         <span class="glyphicon glyphicon-list-alt"
                         aria-hidden="true"></span> Inventory
@@ -99,9 +97,10 @@
                     <ul class="dropdown-menu" uib-dropdown-menu  aria-labelledby="simple-dropdown">
                         <li>
                             <a ui-sref="app.inventory.inventory_identing">Inventory Identing</a>
+							<a ui-sref="app.inventory.stock_received">Stock Received</a>
 							<a ui-sref="app.inventory.issue_stock">Issue Stock</a>
 							<a ui-sref="app.inventory.treatment_inventory">Treatment Inventory Consumption</a>
-							<a ui-sref="app.inventory.add_vendor">Add/View</a>
+							<a ui-sref="app.inventory.add_vendor">Add/View Vendors</a>
 
                            
 
@@ -117,7 +116,7 @@
                     </a>
                 </li> -->
 
-                <li ng-class="{active: stateis('app.admin')}" uib-dropdown on-toggle="toggled(open)">
+                <li ng-show="role.admin || role.incharge" ng-class="{active: stateis('app.admin')}" uib-dropdown on-toggle="toggled(open)">
                     <a style="cursor: pointer; display: block;" class="simple-dropdown" uib-dropdown-toggle>
                         <span class="glyphicon glyphicon-folder-open"
                         aria-hidden="true"></span> Admin
@@ -127,6 +126,7 @@
                             <a ui-sref="app.admin.editdatabase">Edit Database</a>
                             <a ui-sref="app.admin.adduser">Add User</a>
                             <a ui-sref="app.admin.viewuser">View Users</a>
+							 <a ui-sref="app.admin.addcentre">Add Centre</a>
                         </li>
                     </ul>
                 </li>
@@ -136,14 +136,22 @@
                 <li ng-show="loggedIn">
                     <a ng-click="chooseCentreOpen()" style="cursor: pointer;">{{centre}}</a>
                 </li>
-                <li class="loggedin" ng-show="loggedIn">
-                    <a ng-click="changePasswordOpen()" style="cursor: pointer;">{{username}}</a>
-                </li>
-                <li ng-show="loggedIn">
-                    <a ng-click="logout()" style="cursor: pointer;">
-                        <span class="glyphicon glyphicon-log-in"></span> Logout
+				
+				<li uib-dropdown on-toggle="toggled(open)">
+                    <a style="cursor: pointer; display: block;" class="simple-dropdown" uib-dropdown-toggle>
+                         {{username}}
                     </a>
+                    <ul class="dropdown-menu" uib-dropdown-menu  aria-labelledby="simple-dropdown">
+                        <li>
+                            <a ng-click=changePasswordOpen() style="cursor: pointer; display: block;">Change Password</a>
+                            <a ng-click="logout()" style="cursor: pointer; display: block;">LogOut</a>
+
+                        </li>
+                    </ul>
                 </li>
+				
+				
+
             </ul>
         </div>
     </div>
