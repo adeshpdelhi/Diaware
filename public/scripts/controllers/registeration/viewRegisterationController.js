@@ -8,7 +8,9 @@ angular.module('App')
 		$scope.edit=false;
 		$scope.editBasicDetails = function(){
 			$scope.editBasic = true;
+
 			$scope.newpatient_basic = $scope.patient;
+			$scope.newpatient_basic.DOB = new Date ( $scope.newpatient_basic.DOB);
 		};
 		$scope.view = true;
 		$scope.updateBasicDetails = function(){

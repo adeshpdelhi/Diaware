@@ -2,7 +2,7 @@
 angular.module('App')
 .controller('MedicalController',['$scope','patientFactory','authorize','backendFactory', function($scope,patientFactory,authorize,backendFactory){
     var diseases = [];
-	if(!$scope.view){
+	if(!$scope.view || !$scope.newPatient_Medical || $scope.newPatient_Medical.length == 0 ){
 		$scope.newPatient_Medical = [];
 		console.log('yoooo hooooooooo');
 		backendFactory.getDiseases().query(function(response){
@@ -13,7 +13,8 @@ angular.module('App')
  					diseaseName:diseases[i].diseaseName,
  					diseasePresent:null,
  					doctorComments:null,
- 					lastModifiedBy:null
+ 					lastModifiedBy:null,
+ 					new:true
  				};
  				$scope.newPatient_Medical.push(medicalHistory);
  			}

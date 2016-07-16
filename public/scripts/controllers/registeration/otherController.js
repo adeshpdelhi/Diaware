@@ -2,9 +2,9 @@
 angular.module('App')
 .controller('OtherController',['$scope','patientFactory','authorize', function($scope, patientFactory,authorize){
 
-		if(!$scope.view){
+		if(!$scope.view || !$scope.newPatient_Others){
 			$scope.newPatient_Others = {
-				patientId:$scope.newpatient_basic.id,
+				patientId:$scope.view?$scope.patient.id:$scope.newpatient_basic.id,
 				aadhar:null,
 				PAN:null,
 				passport:null,
@@ -17,7 +17,8 @@ angular.module('App')
 				otherCard1Data:null,
 				otherCard2Data:null,
 				otherCard3Data:null,
-				lastModifiedBy:null
+				lastModifiedBy:null,
+				new:true
 			};	
 		}
 		$scope.showalert_others=false;
@@ -40,12 +41,29 @@ angular.module('App')
 		$scope.updateOtherDetails = function(){
 			$scope.newPatient_Others.lastModifiedBy = authorize.getUsername();
 			console.log($scope.newPatient_Others);
-			patientFactory.getPatientOtherDetails($scope.newPatient_Others.patientId,authorize.getCentre()).update($scope.newPatient_Others).$promise.then(function(response){
-				console.log(response);
-				$scope.updateMyValuesFromOthers(false,true,"Updated Successfully!");
-			},function(response){
-				$scope.updateMyValuesFromOthers(false,true,"Error: "+response.status+" "+ response.statusText + "!");
-			});
+			if(!$scope.newPatient_Others.new){
+				patientFactory.getPatientOtherDetails($scope.newPatient_Others.patientId,authorize.getCentre()).update($scope.newPatient_Others)
+				.$promise.then(function(response){
+					console.log(response);
+					$scope.updateMyValuesFromOthers(false,true,"Updated Successfully!");
+				},function(response){
+					$scope.updateMyValuesFromOthers(false,true,"Error: "+response.status+" "+ response.statusText + "!");
+				});
+			}
+			else{
+				$scope.newPatient_Others.patientId = $scope.patient.id;
+				$scope.newPatient_Others.lastModifiedBy = authorize.getUsername();
+
+				console.log($scope.newPatient_Others.patientId);
+				console.log($scope.newPatient_Others);
+				patientFactory.getPatientOtherDetails($scope.newPatient_Others.patientId,authorize.getCentre()).save($scope.newPatient_Others)
+				.$promise.then(function(response){
+					console.log(response);
+					$scope.updateMyValuesFromOthers(false,true,"Updated Successfully!");
+				},function(response){
+					$scope.updateMyValuesFromOthers(false,true,"Error: "+response.status+" "+ response.statusText + "!");
+				});
+			}
 		};
 		$scope.saveFile = function(element){
 			// var reader = new FileReader();

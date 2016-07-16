@@ -2,7 +2,7 @@
 angular.module('App')
 .controller('ClinicalEventController',['$scope','patientFactory', 'authorize', function($scope,patientFactory,authorize){
 		$scope.showalert_events=false;
-		if(!$scope.view)
+		if(!$scope.view || !$scope.events)
 			$scope.events=[];
 		$scope.event = {
 			ID:null,
@@ -68,19 +68,16 @@ angular.module('App')
 					patientFactory.getPatientMajorClinicalEvents($scope.patient.id,authorize.getCentre()).save($scope.events[i])
 					.$promise.then(function(response){
 						$scope.showalert_events=true;
+						$scope.showAlertClinical = true;
+						$scope.message = "Updated Clinical Events Successfully";			
 						console.log($scope.events[x]);
 						$scope.events[x].id = response.id;
 						console.log("x:inside " + x);
 						x++;
-					},
-					
-					function(response){
-						$scope.showalert_events=false;
-						console.log(response);
-					}
-					
-					
-					);	
+					},function(response){
+						$scope.showAlertClinical = true;
+						$scope.message = "Error: " + response.status + " " + response.statusText; 
+					});	
 				}
 				else {
 					$scope.events[i].lastModifiedBy = authorize.getUsername();
@@ -90,6 +87,7 @@ angular.module('App')
 						$scope.showAlertClinical = true;
 						$scope.message = "Updated Clinical Events Successfully";			
 					},function(response){
+						$scope.showAlertClinical = true;
 						$scope.message = "Error: " + response.status + " " + response.statusText; 
 					});
 					x++;
@@ -129,15 +127,10 @@ angular.module('App')
 						$scope.events[x].id = response.id;
 						console.log("x:inside " + x);
 						x++;
-					},
-					
-					function(response){
+					},function(response){
 						$scope.showalert_events=false;
 						console.log(response);
-					}
-					
-					
-					);	
+					});	
 				}
 				else x++;
 			}

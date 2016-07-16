@@ -61,8 +61,7 @@ preBasicMedicalRouter.route('/:preBasicId')
                 patientId:req.params.id
             }
         }
-    )
-    .then(function (result) { 
+    ).then(function (result) { 
         console.log(JSON.stringify(result));
         // res.json(result);
         res.status(200);
