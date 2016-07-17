@@ -100,11 +100,19 @@ dbmodel.weekDaySlots.belongsTo(dbmodel.shifts,{as:'shift4',foreignKey:'shift4Id'
 dbmodel.weekDaySlots.belongsTo(dbmodel.shifts,{as:'shift5',foreignKey:'shift5Id'});
 dbmodel.weekDaySlots.belongsTo(dbmodel.shifts,{as:'shift6',foreignKey:'shift6Id'});
 
-dbmodel.shiftPatients.hasMany(dbmodel.futureAppointments,{foreignKey:'shiftPatientsId'});
+dbmodel.shifts.hasMany(dbmodel.shiftPatients,{foreignKey:'shiftId'});                  //-------\
+dbmodel.shiftPatients.belongsTo(dbmodel.shifts,{foreignKey:'shiftId'});                       // \    
+                                                                                          //       ------- n:m relation b/w shifts and patientDetails
+dbmodel.patientDetails.hasMany(dbmodel.shiftPatients,{foreignKey:'patientId'});              //  / 
+dbmodel.shiftPatients.belongsTo(dbmodel.patientDetails,{foreignKey:'patientId'});      // ------/
+
+
+dbmodel.shiftPatients.hasMany(dbmodel.futureAppointments,{foreignKey:'shiftPatientsId'});       // on many dates
 dbmodel.futureAppointments.belongsTo(dbmodel.shiftPatients,{foreignKey:'shiftPatientsId'});
 
 dbmodel.shiftPatients.hasMany(dbmodel.attendedAppointments,{foreignKey:'shiftPatientsId'});
-dbmodel.attendedAppointments.belongsTo(dbmodel.shiftPatients,{foreignKey:'shiftPatientsId'});
+dbmodel.attendedAppointments.belongsTo(dbmodel.shiftPatients,{foreignKey:'shiftPatientsId'}); // on multiple dates
+
 
 // dbmodel.shiftPatients.belongsTo()
 

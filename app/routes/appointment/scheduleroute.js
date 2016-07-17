@@ -67,6 +67,7 @@ scheduleRouter.route('/')
     			}
     		}
     	}
+        console.log(resp);
     	res.json(resp);
     	// console.log(JSON.stringify(results));
 	    // res.json(results);

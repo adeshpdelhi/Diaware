@@ -110,6 +110,10 @@ module.exports = function(sequelize, DataTypes) {
         min:0
       }
     }
+    // typesOfMachinesAvailable:{
+    //   type:DataTypes.STRING,
+    //   allownull:true
+    // }
   }, {
     tableName: 'centres'
   });

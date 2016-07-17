@@ -49,6 +49,24 @@ patientRouter.route('/')
 patientRouter.route('/:id')
 .get(function(req,res,next){
     console.log('procesing get');
+    if(req.query.getShifts && req.query.getMedicalHistory){
+        db.patientDetails.find({
+            where:{
+                id:req.params.id,
+                centreId:req.params.centreId
+            },
+            include:[{
+                model:db.shiftPatients
+            },{
+                model:db.medicalHistory
+            }]
+            // order: [['updatedAt', 'DESC']]
+        }).then(function(patient){
+            console.log(JSON.stringify(patient));
+            res.json(patient);
+        });    
+        return;
+    }
     if(req.query.fullDetails){
         db.patientDetails.find({
             where:{

@@ -102,7 +102,8 @@ dropDownRouter.route('/ledgers')
         res.status(500);
         res.end("Internal Server Error");
     });
-});
+})
+;
 
 dropDownRouter.route('/ledgers/:ledgerType')
 .get(function(req,res,next){
@@ -121,7 +122,10 @@ dropDownRouter.route('/ledgers/:ledgerType')
 .delete(function(req,res,next){
     var where = {};
     if(req.query.ledgerName) where['ledgerName'] = req.query.ledgerName;
-    where['ledgerType'] = req.query.ledgerType;
+    if(req.query.id) where['id'] = parseInt(req.query.id,10);
+    where['ledgerType'] = req.params.ledgerType;
+    console.log(req.query);
+    console.log(req.params);
     db.ledgerTable.destroy({
         where:where
     }).then(function(result){
@@ -137,7 +141,8 @@ dropDownRouter.route('/ledgers/:ledgerType')
     var where={};
     where['ledgerType'] = req.params.ledgerType;
     if(req.query.ledgerName) where['ledgerName']=req.query.ledgerName;
-    if(req.query.cost) where['cost'] = req.query.cost;
+    if(req.query.cost) where['cost'] = parseFloat(req.query.cost);
+    if(req.query.id) where['id'] = parseInt(req.query.id,10);
     db.ledgerTable.update(req.body,{
         where:where
     }).then(function (result) {

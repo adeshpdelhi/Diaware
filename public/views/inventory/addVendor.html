@@ -1,94 +1,86 @@
+<div class="container" ng-cloak>
+    <div id="Registerbox" style="margin-top:50px;" class="mainbox col-sm-8 col-sm-offset-2">                    
+        <div class="panel" >
+            <div class="panel-heading">
+                <div class="panel-title"><b>Issue Stock</b></div>
+                <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
+            </div>     
+
+            <div style="padding-top:30px" class="panel-body bg-warning" >
+
+
+                <form class="form-horizontal" role="form" name="issueStockForm">
 
 
 
-     <div id="Registerbox" style="margin-top:50px;" class="mainbox col-sm-8 col-sm-offset-2">                    
-            <div class="panel" >
-                    <div class="panel-heading">
-                        <div class="panel-title"><b>Issue Stock</b></div>
-                        <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
-                    </div>     
-
-                    <div style="padding-top:30px" class="panel-body bg-warning" >
-           
-                
-                 <form class="form-horizontal" role="form" name="issueStockForm">
-                   
-				   
-				   
-					  <div class="form-group">
+                    <div class="form-group">
                         <label class="col-sm-3 control-label">Vendor Name</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" placeholder="" ng-model="addVendor.vendorName">
                         </div>
                     </div>	
-					
-					
-					  <div class="form-group">
+
+
+                    <div class="form-group">
                         <label class="col-sm-3 control-label">Address</label>
                         <div class="col-sm-8">
                             <textarea type="text" class="form-control" placeholder="" rows="2" ng-model="addVendor.vendorAddress"></textarea>
                         </div>
                     </div>	
-					
-					<div class="form-group">
+
+                    <div class="form-group">
                         <label class="col-sm-3 control-label">Vendor TIN No.</label>
                         <div class="col-sm-8">
                             <input type="number" class="form-control" placeholder="" ng-model="addVendor.vendorTinNo">
                         </div>
                     </div>	
-					
-					<div class="form-group">
+
+                    <div class="form-group">
                         <label class="col-sm-3 control-label">Vendor Contact Person</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" placeholder="" ng-model="addVendor.vendorContactPerson">
                         </div>
                     </div>	
-				   
-				   <div class="form-group">
+
+                    <div class="form-group">
                         <label class="col-sm-3 control-label">Vendor Contact Person Phone No</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" placeholder="" ng-model="addVendor.vendorContactNo">
                         </div>
                     </div>	
 
-					<div class="form-group">
+                    <div class="form-group">
                         <label class="col-sm-3 control-label">Vendor Introduced By</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" placeholder="" ng-model="addVendor.vendorIndroducedBy">
                         </div>
                     </div>	
 
-					<div class="form-group">
+                    <div class="form-group">
                         <label class="col-sm-3 control-label">Vendor Introduced By - Person Name</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" placeholder="" ng-model="addVendor.vendorIntroducedByPersonName">
                         </div>
                     </div>					
-				   
-				  					
-					
-									
-					
-                     
-                                 
+
                     <div class="form-group">
                         <div class="col-sm-offset-8 col-sm-10">
                             <button id="additem" type="submit" class="btn btn-success" ng-click="saveVendor()">Save Vendor</button>
                         </div>
                     </div>
-					
-					<div class="form-group">
-					<div class="alert alert-success alert-dismissable" ng-show="showalert_add_vendor">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-						Treatment Inventory Saved Successfully.
-					</div>
-				</div>
-                
-               </form>
-                </div>
-         </div>
+
+                    <div class="form-group">
+                        <div class="alert alert-success alert-dismissable" ng-show="showalert_add_vendor">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            Treatment Inventory Saved Successfully.
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
     </div>
-    
-                
-   
-    
+
+</div>
+
+

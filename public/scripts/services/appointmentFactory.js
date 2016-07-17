@@ -6,7 +6,6 @@ angular.module('App')
           return $resource(baseURL+":centreId/schedulePatient",{centreId:centreId},  {
           	'update':{method:'PUT' },
         	query: {method: 'get', isArray: false}
-
           });
         };
         this.getFutureAppointments = function(centreId){

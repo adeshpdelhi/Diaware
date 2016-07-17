@@ -1,6 +1,6 @@
 'use strict';
 angular.module('App')
-.controller('MonitoringPreAssessmentController',['$scope','authorize','backendFactory','monitoringChartFactory', function($scope,authorize,backendFactory,monitoringChartFactory){
+.controller('MonitoringPreAssessmentController',['$scope','authorize','backendFactory','monitoringChartFactory','patientFactory', function($scope,authorize,backendFactory,monitoringChartFactory,patientFactory){
 	if(!$scope.view || ($scope.patientChart != null  && !$scope.assessment)){
 		console.log('executed');
 		$scope.assessment = {
@@ -38,45 +38,99 @@ angular.module('App')
 			lastModifiedBy:null,
 			new: true
 		};
-		console.log("hey" + ($scope.view?"true":"false"));
-		if(!$scope.view){
-			$scope.$watch('basic.patientId',function (newVal,oldval) {
-				if(newVal){
-					console.log("hey"+ ($scope.view?$scope.patientChart.patientId:$scope.basic.patientId));
-					console.log("hey"+ ($scope.view?$scope.patientChart.monitoringDate:$scope.basic.monitoringDate));
-					monitoringChartFactory.getPost($scope.basic.patientId)
-					.query({
-						secLastmonitoringDate:true,
-						date:$scope.basic.monitoringDate
+		$scope.$watch('[basic.patientId,patientChart.patientId]',function(newVal,oldval){
+			if(newVal){
+				$scope.patientId = $scope.view?$scope.patientChart.patientId:$scope.basic.patientId;
+				$scope.monitoringDate = $scope.view?$scope.patientChart.monitoringDate:$scope.basic.monitoringDate;
+			}
+		},true);
+		
+		$scope.$watch('patientId', function(newVal,oldval){
+			if(newVal){
+				console.log("hey"+ $scope.patientId);
+				console.log("hey"+ $scope.monitoringDate);
+				monitoringChartFactory.getPost($scope.patientId)
+				.query({
+					secLastmonitoringDate:true,
+					date:new Date($scope.monitoringDate)
+				},function(response){
+						if(response.length == 0)$scope.assessment.lastPostHDWeight = 0; 
+						else $scope.assessment.lastPostHDWeight = response[0].postWeight;
+						console.log("lastPostHDWeight: "+$scope.assessment.lastPostHDWeight);
 					},function(response){
-							if(response.length == 0)$scope.assessment.lastPostHDWeight = 0; 
-							else $scope.assessment.lastPostHDWeight = response[0].postWeight;
-						},function(response){
-							$scope.showalert_predialysis_assessment = true;
-							$scope.message = " Error: " + response.status  + " " + response.statusText+"!";
-						});
-				}		
-			});
-		}
-		else{
-			$scope.$watch('patientChart.patientId',function (newVal,oldval) {
-				if(newVal){
-					console.log("hey"+ ($scope.view?$scope.patientChart.patientId:$scope.basic.patientId));
-					console.log("hey"+ ($scope.view?$scope.patientChart.monitoringDate:$scope.basic.monitoringDate));
-					monitoringChartFactory.getPost($scope.patientChart.patientId)
-					.query({
-						secLastmonitoringDate:true,
-						date:$scope.patientChart.monitoringDate
-					},function(response){
-							if(response.length == 0)$scope.assessment.lastPostHDWeight = 0; 
-							else $scope.assessment.lastPostHDWeight = response[0].postWeight;
-						},function(response){
-							$scope.showalert_predialysis_assessment = true;
-							$scope.message = " Error: " + response.status  + " " + response.statusText+"!";
-						});
-				}		
-			});	
-		}
+						$scope.showalert_predialysis_assessment = true;
+						$scope.message = " Error: " + response.status  + " " + response.statusText+"!";
+					});
+				patientFactory.getPatientCarePlans($scope.patientId,authorize.getCentre()).get({latestPlan:true})
+				.$promise.then(function(response){
+					if(response.length == 0) $scope.assessment.dryWeight = 0;
+					else $scope.assessment.dryWeight = response.dryWeight;
+					console.log("dryWeight: "+$scope.assessment.lastPostHDWeight);
+
+				},function(response){
+					$scope.showalert_predialysis_assessment = true;
+					$scope.message = " Error: " + response.status  + " " + response.statusText + "!";
+				});
+			}	
+		});
+
+		// console.log("hey" + ($scope.view?"true":"false"));
+		// if(!$scope.view){
+		// 	$scope.$watch('basic.patientId',function (newVal,oldval) {
+		// 		if(newVal){
+		// 			console.log("hey"+ ($scope.view?$scope.patientChart.patientId:$scope.basic.patientId));
+		// 			console.log("hey"+ ($scope.view?$scope.patientChart.monitoringDate:$scope.basic.monitoringDate));
+		// 			monitoringChartFactory.getPost($scope.basic.patientId)
+		// 			.query({
+		// 				secLastmonitoringDate:true,
+		// 				date:$scope.basic.monitoringDate
+		// 			},function(response){
+		// 					if(response.length == 0)$scope.assessment.lastPostHDWeight = 0; 
+		// 					else $scope.assessment.lastPostHDWeight = response[0].postWeight;
+		// 				},function(response){
+		// 					$scope.showalert_predialysis_assessment = true;
+		// 					$scope.message = " Error: " + response.status  + " " + response.statusText+"!";
+		// 				});
+		// 			patientFactory.getPatientCarePlans($scope.basic.patientId,authorize.getCentre()).get({latestPlan:true})
+		// 			.$promise.then(function(response){
+		// 				if(response.length == 0) $scope.assessment.dryWeight = 0;
+		// 				else $scope.assessment.dryWeight = response.dryWeight;
+		// 			},function(response){
+		// 				$scope.showalert_predialysis_assessment = true;
+		// 				$scope.message = " Error: " + response.status  + " " + response.statusText + "!";
+		// 			});
+		// 		}		
+
+		// 	});
+
+		// }
+		// else{
+		// 	$scope.$watch('patientChart.patientId',function (newVal,oldval) {
+		// 		if(newVal){
+		// 			console.log("hey"+ ($scope.view?$scope.patientChart.patientId:$scope.basic.patientId));
+		// 			console.log("hey"+ ($scope.view?$scope.patientChart.monitoringDate:$scope.basic.monitoringDate));
+		// 			monitoringChartFactory.getPost($scope.patientChart.patientId)
+		// 			.query({
+		// 				secLastmonitoringDate:true,
+		// 				date:$scope.patientChart.monitoringDate
+		// 			},function(response){
+		// 					if(response.length == 0)$scope.assessment.lastPostHDWeight = 0; 
+		// 					else $scope.assessment.lastPostHDWeight = response[0].postWeight;
+		// 				},function(response){
+		// 					$scope.showalert_predialysis_assessment = true;
+		// 					$scope.message = " Error: " + response.status  + " " + response.statusText+"!";
+		// 				});
+		// 			patientFactory.getPatientCarePlans($scope.patientChart.patientId,authorize.getCentre()).get({latestPlan:true})
+		// 			.$promise.then(function(response){
+		// 				if(response.length == 0) $scope.assessment.dryWeight = 0;
+		// 				else $scope.assessment.dryWeight = response.dryWeight;
+		// 			},function(response){
+		// 				$scope.showalert_predialysis_assessment = true;
+		// 				$scope.message = " Error: " + response.status  + " " + response.statusText + "!";
+		// 			});
+		// 		}		
+		// 	});	
+		// }
 		
 	}
 	$scope.showalert_predialysis_assessment=false;

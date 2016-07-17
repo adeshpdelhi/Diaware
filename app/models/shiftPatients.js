@@ -53,6 +53,10 @@ module.exports = function(sequelize, DataTypes) {
       type:DataTypes.INTEGER(11),
       allownull:true
     }
+    // active:{
+    //   type:DataTypes.BOOLEAN,
+    //   allownull:false
+    // }
   }, {
     tableName: 'shiftPatients',
     hooks:{

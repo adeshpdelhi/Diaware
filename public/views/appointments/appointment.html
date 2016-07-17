@@ -18,66 +18,86 @@
 				    </div>
 				    <hr style="border-top:1px solid rgb(220,220,220);" />
 				</div>
-				<form class="form-horizontal" role="form" ng-submit="save()">
-					<div class="form-group col-sm-12">
-						<label class="control-label col-sm-4">Choose Appointment Type</label>
-						<select class="col-sm-2" ng-model="appointmentType">
-							<option selected disabled value="">-</option>
-							<option ng-repeat="type in appointmentTypes" value="{{type}}" class="text-capitalize">{{type}}</option>
-						</select>
-					</div>
-					<div class="form-group col-sm-12">
-						<label class="control-label col-sm-4">Choose Treatment Machine</label>
-						<select class="col-sm-2" ng-model="tmtOnMachine" ng-change="dataEntered=true">
-							<option selected disabled value="">-</option>
-							<option ng-repeat="i in machineTypes" value="{{i}}">{{i}}</option>
-						</select>
-					</div>
-					<!-- freq per week not needed anymore ... just a dummy data for now -->
-					<div class="form-group col-sm-12">
-						<label class="control-label col-sm-4">Choose Frequency Per Week</label>
-						<select class="col-sm-2" ng-model="freqPerWeek">
-							<option selected disabled value="">-</option>
-							<option ng-repeat="i in [1,2,3,4,5,6]" value="{{i}}">{{i}}</option>
-						</select>
-					</div>
-					<div class="col-sm-12" ng-show="!dataReceived && dataEntered">
-					    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-				    </div>
-				    <div ng-show="dataReceived">
-				    	<div ng-show="showAlert" class="alert alert-danger" style="padding:10px 0px;">
-				    		<strong>Warning:</strong>Slots booked greater than {{freqPerWeek}}
-				    	</div>
-				    	<div class="" ng-repeat="ob in objs" style="text-align:center;">
-				    		<label class="text-uppercase" style="font-size:18px; font-family:'Times Of Roman';">
-				    			{{ob.day}} <small class="text-capitalize" style="color:rgb(180,180,180); font-size:15px">(Shift: {{ob.shiftNumber}})</small>
-				    		</label>
-				    	</div>
-				    	<div class="form-group">
-				    		<label class="control-label col-sm-12" style="text-align:center; font-size:23px; color:#73ADFF">Choose Days Suitable for Dialysis</label>
-				    		<div class="col-sm-6" ng-repeat="(key,value) in daysData" ng-if="!isEmpty(value)" ng-init = "saved_$index = false">
-				    			<md-card>
-				    				<md-card-title>
-				    					<md-card-title-text style="background-color:#73AD21">
-				    						<span class="md-headline text-uppercase">{{key}}</span>
-				    						<span class="md-subhead">Choose a vacant shift</span>
-				    					</md-card-title-text>
-				    				</md-card-title>
-				    				<md-card-content>
-				    					<div class="col-sm-12" ng-repeat="(shiftKey,shiftValue) in value">
-					    					<label class="control-label text-capitalize" style="text-align:left"> {{shiftKey}}: <br><small style="color:rgb(200,200,200)">Available {{appointmentType}} Machines <br>({{tmtOnMachine}}): {{shiftValue[string]}} <br></small></label>
+				<div class="alert alert-{{messageColor}}" ng-show="saved">
+					{{message}}
+				</div>
+				<div ng-show="scheduled">
+					<p>AppointmentType : {{patientScheduledAppointmentType}}</p>
+					<p>Machine Type : {{patientScheduledMachine}}</p>
+			    	<ul>Chosen Days of the Week:
+		    			<li ng-repeat="schedule in patient.shiftPatients"  style="font-size:18px;">{{schedule.
+		    			day}}
+			    			<small class="text-capitalize" style="color:rgb(180,180,180); font-size:15px">(Shift: {{schedule.shiftNumber}})</small>
+		    			</li>
+		    		</ul>
+		    		<button class="btn btn-success" ng-click="editSchedule()" data-toggle="tooltip" title="Allowed to change only day and/or shifts in week for the same treatmentMachine and appointment Type and frequency per week" data-placement="top">Edit Schedule</button>
+		    		<button class="btn btn-success" ng-click="newSchedule()" data-toggle="tooltip" title="Click if want to delete previous and create new appointment Schedule">New Schedule</button>
+		    		<!-- change/create/add -->
+				</div>
+				<div ng-show="!saved && !scheduled || editSchedule">
+					<form class="form-horizontal" role="form" ng-submit="saveSchedule()">
+						<div class="form-group col-sm-12">
+							<label class="control-label col-sm-4">Choose Appointment Type</label>
+							<select class="col-sm-2" ng-model="appointmentType">
+								<option selected disabled value="">-</option>
+								<option ng-repeat="type in appointmentTypes" value="{{type}}" class="text-capitalize">{{type}}</option>
+							</select>
+						</div>
+						<div class="form-group col-sm-12">
+							<label class="control-label col-sm-4">Choose Treatment Machine</label>
+							<select class="col-sm-2" ng-model="tmtOnMachine" ng-change="dataEntered=true">
+								<option selected disabled value="">-</option>
+								<option ng-repeat="i in machineTypes" value="{{i}}">{{i}}</option>
+							</select>
+						</div>
+						<!-- freq per week not needed anymore ... just a dummy data for now -->
+						<div class="form-group col-sm-12">
+							<label class="control-label col-sm-4">Choose Frequency Per Week</label>
+							<select class="col-sm-2" ng-model="freqPerWeek">
+								<option selected disabled value="">-</option>
+								<option ng-repeat="i in [1,2,3,4,5,6]" value="{{i}}">{{i}}</option>
+							</select>
+						</div>
+						<div class="col-sm-12" ng-show="!dataReceived && dataEntered">
+						    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+					    </div>
+					    <div ng-show="dataReceived">
+					    	<div ng-show="showAlert" class="alert alert-danger" style="padding:10px 0px;">
+					    		<strong>Warning:</strong>Slots booked greater than {{freqPerWeek}}
+					    	</div>			  
+					    	<div class="form-group">
+					    		<label class="control-label col-sm-12" style="text-align:center; font-size:23px; color:#73ADFF">Choose Days Suitable for Dialysis</label>
+					    		<!-- |orderBy:key:false:weekDayComparator" -->
+					    		<div class="col-sm-6" ng-repeat="(key,value) in daysData" ng-if="!isEmpty(value)" ng-init = "saved_$index = false">
+					    			<md-card>
+					    				<md-card-title>
+					    					<md-card-title-text style="background-color:#73AD21">
+					    						<span class="md-headline text-uppercase">{{key}}</span>
+					    						<span class="md-subhead">Choose a vacant shift</span>
+					    					</md-card-title-text>
+					    				</md-card-title>
+					    				<md-card-content>
+					    					<div ng-repeat="(shiftKey,shiftValue) in value">
+						    					<label class="control-label text-capitalize" style="text-align:left"> {{shiftKey}}: <br><small style="color:rgb(200,200,200)">Available {{appointmentType}} Machines <br>({{tmtOnMachine}}): {{shiftValue[string]}} <br></small></label>
 
-					    					<button type="button" class="btn btn-primary" id="button_{{$parent.$index}}" ng-click="book(shiftValue.id,shiftKey,$parent.$index,key)" ng-show="!saved($parent.$index)">Book</button>
-				    					</div>
-				    					<p>{{key}}</p>
-				    					<button type="button" class="btn btn-primary" ng-click="unbook(key,$parent.$index)" ng-show="saved($parent.$index)">UnBook</button>
-				    				</md-card-content>
-				    			</md-card>
-				    		</div>
-				    	</div>
-				    	<button class="col-sm-3 col-offset-7 btn btn-primary" type="submit" ng-show="!showAlert" >Save Patient Schedule</button>
-				    </div>
-				</form>
+						    					<button type="button" class="btn btn-primary" id="button_{{$parent.$index}}" ng-click="book(shiftValue.id,shiftKey,$parent.$index,key)" ng-show="!saved($parent.$index)">Book</button>
+					    					</div>
+					    					<p>{{key}}</p>
+					    					<button type="button" class="btn btn-primary" ng-click="unbook(key,$parent.$index)" ng-show="saved($parent.$index)">UnBook</button>
+					    				</md-card-content>
+					    			</md-card>
+					    		</div>
+					    	</div>
+					    	<ul>Chosen Days of the Week:
+				    			<li ng-repeat="ob in objs"  style="font-size:18px;">{{ob.day}}
+					    			<small class="text-capitalize" style="color:rgb(180,180,180); font-size:15px">(Shift: {{ob.shiftNumber}})</small>
+				    			</li>
+				    		</ul>
+					    	<button class="col-sm-3 col-offset-7 btn btn-primary" type="submit" ng-show="!showAlert" >Save Patient Schedule</button>
+					    </div>
+					</form>
+				</div>
+
 			</div>
 		</div>
 	</div>
@@ -87,5 +107,3 @@
     .replace(/([A-Z])/g, ' $1')
     // uppercase the first character
     .replace(/^./, function(str){ return str.toUpperCase(); }) -->
-<!-- <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out"> -->
-				    				<!--  -->

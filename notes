@@ -9,7 +9,7 @@ http://dev.mysql.com/doc/refman/5.7/en/upgrading.html
 
 usermanagement(admin): 
 	ask for number of machines in a centre of each type - add hook - which inserts into weekDaySlots and shifts table 
-	-- add number of Machines of each type in centre Table
+	----done---- add number of Machines of each type in centre Table
 
 notes
 *add relation between patientDetail and User
@@ -19,22 +19,33 @@ add editable rights on user to admin only using passport
 
 add active and inactive state of patient and a corresponding hook - patient inactive shift to inactive patients table
 
+one time icu/ipd appointment - ignore these by event scheduler
+dont add icu/ipd to shiftpatients - one time event -direct add to list of appointments
+add another option - take direct appointment  by date (of the category of icu/ipd (mostly); but keep it generic)
+unke bolne pe hatayenge
+list of inactive schedules of a patient
+
+
+problem- creating and updating of carePlan both provided; on update prev version of careplan would get deleted as of now... so each time major change in careplan - suggested to create a new careplan forthat patient to have prev version stored; otherwise we need to change update backend
+
+
+
 
 add paranoid:true to each model - no record is deleted from the table
 
-remove update promise ... returns array -expects object ; or change ngresource method
+remove update promise ... returns array -expects object - change put functions everywhere to return only status code
 
 pre dialysis
-fetch last post hd weight from db ....
+-----done-----fetch last post hd weight from db ....
 -----done-----calculate actual weight loss = prehdwieght-posthdweight - would be calculated only after filling post dia
 -----done-----target weight loss = prehdweight - dryweight
-post weight neednt be stored in pre coz post stored in post dia obv
+-----done-----post weight neednt be stored in pre coz post stored in post dia obv
 
 
 ','separated list of access lines in center table  : add validation for the same
 can set validation in db for accessUsed iin Pre as well
 
-medical history could use diseases db and but aise bhi theek hi hai .. making it compulsory to answer for all diseases; as pointed out by Rishabh correctly :D
+-----done-----medical history could use diseases db and but aise bhi theek hi hai .. making it compulsory to answer for all diseases; as pointed out by Rishabh correctly :D
 
 ?????set values false and true in db
 
@@ -45,22 +56,22 @@ and add min = 0 for all numebrs and decimals alike
 
 add validations to all forms
 
-catch sequelize errors and display warning using alert messages in html
+catch sequelize errors and display warning using alert messages in html - add rejectedPromiseError to all .then() functions as second function
 
 add units where ever required
 
 add Decimal(10,3) to all models whereever Decimal else number of decimal places assumed = 0 - equivalent to integer 
 
 
-add alerts success on successful save
+add alerts success on successful save - check if present everywhere
 
 
-when a schedule of a patient gets fixed ... insert his appointments for the 1st one month/week (to be in line with the event scheduler)
+-----done-----when a schedule of a patient gets fixed ... insert his appointments for the 1st one month/week (to be in line with the event scheduler)
 
 add ng-cloak to each template
 
 
-make changes in bill db - have a billID - for an item purchase in one bill and transaction Id = one whole bill having n items - assigned at the time of the purchase(make payMent) - can be a string of patientID + timestamp or make patientID + timestamp + billID unique = primary key
+-----done-----make changes in bill db - have a billID - for an item purchase in one bill and transaction Id = one whole bill having n items - assigned at the time of the purchase(make payMent) - can be a string of patientID + timestamp or make patientID + timestamp + billID unique = primary key
 
 
 scheduling a task sql
