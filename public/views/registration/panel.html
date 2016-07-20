@@ -13,9 +13,9 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">Panel</label>
                 <div class="col-sm-8">
-                    <select name="cash/panel" class="form-control" ng-model="newPatient_Panel.panelId" ng-select="">
+                    <select name="cash/panel" class="form-control" ng-model="newPatient_Panel.panelId" ng-select="" required>
                         <option value="">-</option>
-                        <option ng-repeat = "panel in panels" value="{{panel.id}}" ng-selected = "newPatient_Panel.panelId == panel.id" required>{{panel.name}}</option>
+                        <option ng-repeat = "panel in panels" value="{{panel.id}}" ng-selected = "newPatient_Panel.panelId == panel.id">{{panel.name}}</option>
                     </select>
                 </div>
             </div>

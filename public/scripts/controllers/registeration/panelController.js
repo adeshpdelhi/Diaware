@@ -35,6 +35,7 @@ angular.module('App')
 			console.log(response);
 		});
 		$scope.updatePanels = function(){
+			console.log('value of panel '+$scope.newPatient_Panel.panelId);
 			$scope.newPatient_Panel.lastModifiedBy = authorize.getUsername();
 			if(!$scope.newPatient_Panel.new){
 				patientFactory.getPatientPanels($scope.newPatient_Panel.patientId,authorize.getCentre()).update($scope.newPatient_Panel)
