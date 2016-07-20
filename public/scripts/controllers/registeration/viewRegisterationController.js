@@ -26,6 +26,7 @@ angular.module('App')
 		};
 		$scope.view = true;
 		$scope.updateBasicDetails = function(){
+			console.log('inside update basic Details');
 			$scope.newpatient_basic.lastModifiedBy = authorize.getUsername();
 			$scope.patient = $scope.newpatient_basic;
 			patientFactory.getPatients(authorize.getCentre()).update({

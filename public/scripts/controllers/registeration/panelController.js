@@ -1,6 +1,7 @@
 'use strict';
 angular.module('App')
 .controller('PanelController',['$scope','patientFactory','backendFactory','authorize', function($scope,patientFactory,backendFactory,authorize){
+	$scope.savedOnce = false;
 		if(!$scope.view || (!$scope.newPatient_Panel && $scope.patient != null)){
 			$scope.newPatient_Panel = { 
 				patientId: $scope.view?$scope.patient.id:$scope.newpatient_basic.id,
@@ -50,6 +51,7 @@ angular.module('App')
 			console.log($scope.newPatient_Panel);
 			patientFactory.getPatientPanels($scope.newPatient_Panel.patientId,authorize.getCentre()).save($scope.newPatient_Panel).$promise.then(function(response){
 				$scope.showalert_panel=true;
+				$scope.savedOnce = true;
 			},function(response){
 				$scope.showalert_panel=false;
 				console.log(response);

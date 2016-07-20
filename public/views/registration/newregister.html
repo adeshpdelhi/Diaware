@@ -34,16 +34,16 @@
                 <li ng-class="{active:tab===1}"> 
                     <a href ng-click="tab = 1">Basic Details</a>    
                 </li>
-                <li ng-show="showPanel" ng-class="{active:tab===2}" > 
+                <li ng-show="isRegistered && showPanel" ng-class="{active:tab===2}" > 
                     <a href ng-click="tab = 2">Panel</a> 
                 </li>
-                <li ng-class="{active:tab===3}"> 
+                <li ng-show="isRegistered" ng-class="{active:tab===3}"> 
                     <a href ng-click="tab = 3">Medical history</a> 
                 </li>
-                <li ng-class="{active:tab===4}"> 
+                <li ng-show="isRegistered" ng-class="{active:tab===4}"> 
                     <a href ng-click="tab = 4">Clinical Events</a> 
                 </li>
-                <li ng-class="{active:tab===5}"> 
+                <li ng-show="isRegistered" ng-class="{active:tab===5}"> 
                     <a href ng-click="tab = 5">Other Details</a> 
                 </li>
                 <br><br>

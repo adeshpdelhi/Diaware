@@ -1,6 +1,8 @@
 'use strict';
 angular.module('App')
  	.controller('NewRegistrationController',['$scope','patientFactory','backendFactory','authorize', function($scope,patientFactory,  backendFactory, authorize){
+ 		$scope.isRegistered = false;
+		$scope.savedOnce = false;
  		$scope.showPanel = false;
 		$scope.showalert_basic_details = false;
  		var counter = 0;
@@ -54,6 +56,8 @@ angular.module('App')
             
             patientFactory.getPatients(centre).save($scope.newpatient_basic).$promise.then(function(response){
 					$scope.showalert_basic_details=true;
+					$scope.savedOnce = true;
+					$scope.isRegistered = true;
 				},function(response){
 					$scope.showalert_basic_details=false;
 					console.log(response);

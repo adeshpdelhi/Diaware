@@ -7,19 +7,19 @@
         </div>     
 
         <div style="padding-top:30px" class="panel-body">
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" name="basicDetailsForm" ng-submit="basicDetailsForm.valid && editBasic?updateBasicDetails():save_basic_details()" role="form">
 
-                <div class="form-group ">
+                <!-- <div class="form-group ">
                     <label class="col-sm-3 control-label">ID Number</label>
                     <div class="col-sm-8">
                         <input type="number" class="form-control" id="id" name="id" placeholder="Enter ID" disabled>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Name</label>                        
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" ng-model="newpatient_basic.name">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" ng-model="newpatient_basic.name" required>
                     </div>
                 </div>
 
@@ -191,7 +191,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Payment Mode</label>
                     <div class="col-sm-8">
-                        <select required name="payment_mode" class="form-control" ng-model="newpatient_basic.modeOfPayment">
+                        <select name="payment_mode" class="form-control" ng-model="newpatient_basic.modeOfPayment">
                             <option value="" selected disabled>-</option>
                             <option value="Cash" >Cash</option>
                             <option value="Panel" >Panel</option>
@@ -236,7 +236,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-10">
-                        <button id="register" type="submit" class="btn btn-primary" ng-click="editBasic?updateBasicDetails():save_basic_details()">{{editBasic?'Update':'Register'}}</button>
+                        <button id="register" type="submit" class="btn btn-primary" ng-show="editBasic || !savedOnce">{{editBasic?'Update':'Register'}}</button>
                     </div>
                 </div>
 				
