@@ -8,6 +8,8 @@ var centreRouter = require('./centreroute');
 var panelRouter = require('./panelroute');
 var dropDownRouter = require('./dropdownsroute');
 var monitoringRouter = require('./monitoringRoute');
+var inventoryRouter = require('./inventoryroute');
+
 
 var scheduleRouter = require('./appointment/scheduleroute');
 apiRouter.use('/:centreId/schedulePatient',scheduleRouter);
