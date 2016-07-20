@@ -1,7 +1,7 @@
 'use strict';
 angular.module('App')
-.controller('OtherController',['$scope','patientFactory','authorize', function($scope, patientFactory,authorize){
-
+.controller('OtherController',['$scope','patientFactory','authorize','regularForm', function($scope, patientFactory,authorize, regularForm){
+		$scope.regularForm = regularForm.regularForm;
 		$scope.savedOnce = false;
 		if(!$scope.view || (!$scope.newPatient_Others && $scope.patient != null)){
 			$scope.newPatient_Others = {

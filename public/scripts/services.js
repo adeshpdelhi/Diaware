@@ -30,6 +30,13 @@ angular.module('App')
         }
     };
 }])
+.factory('regularForm',  function () {
+    return {
+        regularForm: function(str){
+            return str.replace(/([A-Z])/g, ' $1').replace(/[^.]/, function(str){ return str.toUpperCase(); });
+        }
+    };
+})
 .service('authorize', ['$localStorage','baseURL', '$http', '$cookies', '$resource', function ($localStorage, baseURL, $http, $cookies, $resource) {
 
     // var logged_in_user = $localStorage.get('username','');
