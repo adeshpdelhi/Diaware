@@ -19,6 +19,7 @@ angular.module('App')
 		};
 	}
 	$scope.showalert_predialysis_machine_final_check=false;
+	$scope.savedOnce=false;
 	$scope.saveMachineCheck = function(){
 		$scope.machineCheck.patientId = $scope.basic.patientId;
 		$scope.machineCheck.preBasicId = $scope.basic.preBasicId;
@@ -27,6 +28,7 @@ angular.module('App')
 		console.log($scope.machineCheck);
 		monitoringChartFactory.getPreMachineFinalChecks($scope.basic.patientId).save($scope.machineCheck).$promise.then(function(response){
 			$scope.showalert_predialysis_machine_final_check=true;
+			$scope.savedOnce=true;
 			},function(response){
 				$scope.showalert_predialysis_machine_final_check=false;
 				console.log(response);

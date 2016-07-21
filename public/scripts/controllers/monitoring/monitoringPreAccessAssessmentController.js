@@ -16,7 +16,7 @@ angular.module('App')
 		};
 	}
 	$scope.showalert_predialysis_access_assessment=false;
-
+	$scope.savedOnce=false;
 	$scope.saveAccessAssessment = function(){
 		$scope.accessAssessment.patientId = $scope.basic.patientId;
 		$scope.accessAssessment.preBasicId = $scope.basic.preBasicId;
@@ -26,6 +26,7 @@ angular.module('App')
 			$scope.showalert_predialysis_access_assessment=true;
 			$scope.message = "Saved Successfully!";
 			$scope.messageColor = 'success';
+			$scope.savedOnce=true;
 			},function(response){
 				$scope.showalert_predialysis_access_assessment=false;
 				$scope.message = "Error: " + response.status + " " + response.statusText+"!";

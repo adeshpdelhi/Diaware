@@ -1,7 +1,8 @@
 'use strict';
 angular.module('App')
-.controller('OtherController',['$scope','patientFactory','authorize', function($scope, patientFactory,authorize){
-
+.controller('OtherController',['$scope','patientFactory','authorize','regularForm', function($scope, patientFactory,authorize, regularForm){
+		$scope.regularForm = regularForm.regularForm;
+		$scope.savedOnce = false;
 		if(!$scope.view || (!$scope.newPatient_Others && $scope.patient != null)){
 			$scope.newPatient_Others = {
 				patientId:$scope.view?$scope.patient.id:$scope.newpatient_basic.id,
@@ -36,6 +37,7 @@ angular.module('App')
 				console.log(response);
 			});			//$scope.showalert_basic_details=true;
 			//$scope.showalert_others=true;
+			$scope.savedOnce=true;
 		};
 
 		$scope.updateOtherDetails = function(){

@@ -1,6 +1,7 @@
 'use strict';
 angular.module('App')
-.controller('ViewRegistrationController',['$scope','patientFactory','choosePatientFactory','authorize', function($scope, patientFactory, choosePatientFactory,authorize){
+.controller('ViewRegistrationController',['$scope','patientFactory','choosePatientFactory','authorize','regularForm', function($scope, patientFactory, choosePatientFactory,authorize, regularForm){
+	$scope.regularForm = regularForm.regularForm;
         patientFactory.getPatients(authorize.getCentre()).get({id:choosePatientFactory.getChosenPatient().id,fullDetails:true}).$promise.then(function(response){
         	$scope.patient = response;
 			$scope.newPatient_Medical = $scope.patient.medicalHistories;
@@ -21,8 +22,6 @@ angular.module('App')
 		$scope.edit=false;
 		$scope.editBasicDetails = function(){
 			$scope.editBasic = true;
-
-			
 		};
 		$scope.view = true;
 		$scope.updateBasicDetails = function(){

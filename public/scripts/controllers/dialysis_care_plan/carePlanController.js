@@ -31,6 +31,7 @@ angular.module('App')
         backendFactory.getDialyzateTypes().query(function(response){
         	$scope.dialyzateTypes = response;
         })
+        $scope.savedOnce = false;
         $scope.saveCarePlan =function(){
         	$scope.carePlan.patientId = $scope.patient.id;
         	console.log("id "+ $scope.carePlan.patientId);
@@ -39,6 +40,7 @@ angular.module('App')
 				$scope.showalert_dialysis_care_plan=true;
 				$scope.message = "Updated Successfully!";			
 				$scope.messageColor = 'success';
+				$scope.savedOnce = true;
 			},function(response){
 					$scope.showalert_dialysis_care_plan=false;
 					console.log(response);

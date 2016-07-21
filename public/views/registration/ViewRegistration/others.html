@@ -1,4 +1,4 @@
-<div id="Registerbox" style="margin-top:20px;" class="mainbox col-sm-12" ng-cloak>                    
+<div id="Registerbox" style="margin-top:20px;" class="mainbox col-sm-8 col-sm-pull-2 col-sm-push-2" ng-cloak>                    
     <div ng-show="editOthers">
         <div ng-include="'views/registration/others.html'"></div> 
     </div>
@@ -17,7 +17,7 @@
                    
                     <tbody >
                         <tr ng-repeat = " (key,value) in patient.otherDetail" ng-if="key != 'patientId'" style="height:2px;" >
-                            <td width="10%" class="text-capitalize"><b>{{key}}</b></td>
+                            <td width="10%" class="text-capitalize"><b>{{regularForm(key)}}</b></td>
                             <td width="25%" >{{value}}</td>
                         </tr>    
                     </tbody>

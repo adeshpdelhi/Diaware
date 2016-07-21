@@ -1,10 +1,10 @@
 'use strict';
 angular.module('App')
 .controller('MedicalController',['$scope','patientFactory','authorize','backendFactory', function($scope,patientFactory,authorize,backendFactory){
+	$scope.savedOnce = false;
     var diseases = [];
 	if(!$scope.view || ( $scope.patient != null && (!$scope.newPatient_Medical || $scope.newPatient_Medical.length == 0)) ){
 		$scope.newPatient_Medical = [];
-		console.log('yoooo hooooooooo');
 		backendFactory.getDiseases().query(function(response){
 			diseases = response;
  			for(var i = 0; i < diseases.length;i++){
@@ -22,9 +22,10 @@ angular.module('App')
 		$scope.others = [];
 	}
 	$scope.showalert_medical=false;
+	$scope.showalert_medicalnew=false;
 	
 	$scope.other = {
-		patientId:null,
+		patientId:$scope.view?$scope.patient.id:$scope.newpatient_basic.id,
 		diseaseName:null,
 		diseasePresent:"Yes",
 		doctorComments:null,
@@ -32,8 +33,15 @@ angular.module('App')
 		new:true
 	};
 	$scope.addOthers = function(){
+		if($scope.other.diseaseName==null || $scope.other.diseaseName.length ==0)
+		{
+			$scope.showalert_medicalnew=true;
+			$scope.messagenew="Enter disease name";
+			$scope.messageNewColor = 'danger';
+			return;
+		}
 		$scope.showalert_medical=false;
-
+		$scope.showalert_medicalnew=false;
 		$scope.other.patientId = $scope.view?$scope.patient.id:$scope.newpatient_basic.id;
 		$scope.other.lastModifiedBy = authorize.getUsername();
 		$scope.newPatient_Medical.push($scope.other);
@@ -58,6 +66,7 @@ angular.module('App')
 			.then(function(response){
 				$scope.message = "Details Saved Successfully!";
 				$scope.messageColor = 'success';
+				$scope.savedOnce = true;
 			},function(response){
 				$scope.message = "Error: " + response.status + " " + response.statusText;
 				$scope.messageColor = 'danger';
@@ -79,10 +88,16 @@ angular.module('App')
 				.then(function(response){
 					$scope.message = "Details Saved Successfully!";
 					$scope.messageColor = 'success';
+					$scope.updateMyValuesFromMedical(false, true,$scope.message);
+					
+					// $scope.showalert_medical = true;
 				},function(response){
 					$scope.message = "Error: " + response.status + " " + response.statusText;
 					$scope.messageColor = 'danger';
 					console.log(response);
+					$scope.updateMyValuesFromMedical(false, true,$scope.message);
+
+					// $scope.showalert_medical = true;
 				});	
 			}
 			else{
@@ -91,14 +106,19 @@ angular.module('App')
 				.then(function(response){
 					$scope.message = "Details Saved Successfully!";
 					$scope.messageColor = 'success';
+					// $scope.showalert_medical = true;
+					$scope.updateMyValuesFromMedical(false, true,$scope.message);
+
 				},function(response){
 					$scope.message = "Error: " + response.status + " " + response.statusText;
 					$scope.messageColor = 'danger';
 					console.log(response);
+					// $scope.showalert_medical = true;
+					$scope.updateMyValuesFromMedical(false, true,$scope.message);
+
 				});
 			}
-			$scope.showalert_medical = true;
-			$scope.updateMyValuesFromMedical(false, $scope.showalert_medical,$scope.message);
+			
 		};
 
 	};

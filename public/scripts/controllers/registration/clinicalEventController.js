@@ -2,6 +2,7 @@
 angular.module('App')
 .controller('ClinicalEventController',['$scope','patientFactory', 'authorize', function($scope,patientFactory,authorize){
 		$scope.showalert_events=false;
+		$scope.savedOnce = false;
 		if(!$scope.view || ($scope.patient != null && (!$scope.events || $scope.events.length == 0)))
 			$scope.events=[];
 		$scope.event = {
@@ -25,7 +26,7 @@ angular.module('App')
 			$scope.event.lastModifiedBy = authorize.getUsername();
 			$scope.events.push($scope.event);
 			console.log($scope.event);
-			$scope.clinicaleventForm.$setPristine();
+			$scope.clinicalEventForm.$setPristine();
 			$scope.event = {
 				ID:null,
 				date:'',
@@ -48,12 +49,13 @@ angular.module('App')
 		};
 		$scope.updateClinical = function(){
 			console.log('in Update Clinical function');
-			if($scope.event.date !== '' || $scope.event.details !== '' || $scope.event.comments !== ''){
+			if($scope.event.details !== '' || $scope.event.comments !== '' || $scope.event.date !== null){
 				if($scope.events.length)
 					$scope.event.ID = $scope.events[$scope.events.length - 1].ID + 1;
 				else $scope.event.ID = 0;
 				$scope.event.patientId = $scope.patient.id;
 				$scope.event.lastModifiedBy = authorize.getUsername();
+				console.log("why are you here");
 				$scope.events.push($scope.event);
 				console.log($scope.event);
 			}
@@ -94,7 +96,7 @@ angular.module('App')
 				}
 			}
 			$scope.updateMyValuesFromClinical(false,$scope.showAlertClinical, $scope.message);
-			$scope.clinicaleventForm.$setPristine();
+			$scope.clinicalEventForm.$setPristine();
 			$scope.event = {
 				ID:null,
 				date:'',
@@ -137,7 +139,8 @@ angular.module('App')
 			for(var i = 0; i<$scope.events.length;i++){
 				console.log($scope.events[i].id + " " + $scope.events[i].saved);
 			}
-			$scope.clinicaleventForm.$setPristine();
+			$scope.clinicalEventForm.$setPristine();
+			$scope.savedOnce = true;
 			$scope.event = {
 				ID:null,
 				date:'',

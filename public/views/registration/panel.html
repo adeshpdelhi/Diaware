@@ -7,15 +7,15 @@
         </div>     
         <div style="padding-top:30px" class="panel-body" >
 
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" name="panelForm" ng-submit="panelForm.$valid && editPanels?updatePanels():panelSave()" role="form">
 
 
             <div class="form-group">
                 <label class="col-sm-3 control-label">Panel</label>
                 <div class="col-sm-8">
-                    <select name="cash/panel" class="form-control" ng-model="newPatient_Panel.panelId" ng-select="">
+                    <select name="cash/panel" class="form-control" ng-model="newPatient_Panel.panelId" ng-select="" required>
                         <option value="">-</option>
-                        <option ng-repeat = "panel in panels" value="{{panel.id}}" ng-selected = "newPatient_Panel.panelId == panel.id" >{{panel.name}}</option>
+                        <option ng-repeat = "panel in panels" value="{{panel.id}}" ng-selected = "newPatient_Panel.panelId == panel.id">{{panel.name}}</option>
                     </select>
                 </div>
             </div>
@@ -64,7 +64,7 @@
     </div>
     <div class="form-group">
     <div class="col-sm-offset-5 col-sm-10">
-            <button type="submit" class="btn btn-primary" id="panel_save" ng-click="editPanels?updatePanels():panelSave()">{{editPanels?'Update':'Save'}}</button>
+            <button type="submit" class="btn btn-primary" id="panel_save" ng-show="editPanels || !savedOnce">{{editPanels?'Update':'Save'}}</button>
         </div>
     </div>
 	

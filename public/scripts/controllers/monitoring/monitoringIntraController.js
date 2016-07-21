@@ -41,7 +41,7 @@ angular.module('App')
         // });
         $scope.saveIntra = function(){
             for(var i = 0;i< $scope.intraTable.length;i++){
-                $scope.intraTable[i].intraId = $scope.basic.patientId;
+                $scope.intraTable[i].patientId = $scope.basic.patientId;
                 $scope.intraTable[i].intraId = $scope.basic.preBasicId;
                 console.log($scope.intraTable[i]);
             }

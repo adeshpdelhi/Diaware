@@ -24,7 +24,7 @@ carePlanRouter.route('/')
             where:{
                 patientId:req.params.id
             },
-            order:[['updatedAt','DESC']],
+            order:[['prescriptionDate','DESC']],
             limit:1
         }).then(function(carePlans){
             console.log(JSON.stringify(carePlans));

@@ -63,9 +63,11 @@ angular.module('App')
 					});
 				patientFactory.getPatientCarePlans($scope.patientId,authorize.getCentre()).get({latestPlan:true})
 				.$promise.then(function(response){
-					if(response.length == 0) $scope.assessment.dryWeight = 0;
+					console.log("response:hhhhhhhhhho: " + response);
+					console.log(response);
+					if(!response.dryWeight) $scope.assessment.dryWeight = 0;
 					else $scope.assessment.dryWeight = response.dryWeight;
-					console.log("dryWeight: "+$scope.assessment.lastPostHDWeight);
+					console.log("dryWeight: "+$scope.assessment.dryWeight);
 
 				},function(response){
 					$scope.showalert_predialysis_assessment = true;
@@ -142,11 +144,15 @@ angular.module('App')
 			if(!$scope.view)
 				$scope.setPreHDWeight($scope.assessment.preHDWeight);
 		});
-		$scope.$watch('assessment.dryWeight',function(newVal3,oldval3){
-			console.log(newVal1 + ' '+ newVal3);
+	$scope.$watch('assessment.dryWeight',function(newVal3,oldval3){
+		console.log(newVal1 + ' hhlhklhlkhlkh'+ newVal3);
+		if(newVal3){
+			console.log("ggkhkjhkj "+ newVal3);
 			$scope.assessment.targetWeightLoss = newVal1 - newVal3;
-		});
+		}
 	});
+	});
+	$scope.savedOnce=false;
 	$scope.saveAssessment = function(){
 		$scope.assessment.patientId = $scope.basic.patientId;
 		$scope.assessment.preBasicId = $scope.basic.preBasicId;
@@ -157,6 +163,7 @@ angular.module('App')
 				$scope.showalert_predialysis_assessment=true;
 				$scope.message="Saved Successfully!";
 				$scope.messageColor = 'success';
+				$scope.savedOnce=true;
 			},function(response){
 				$scope.showalert_predialysis_assessment=true;
 				$scope.messageColor='danger';

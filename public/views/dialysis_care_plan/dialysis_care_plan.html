@@ -7,7 +7,7 @@
                     <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
                 </div>     
                 <div style="padding-top:30px" class="panel-body" >
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" name="carePlanForm" ng-submit="carePlanForm.$valid && editCarePlan?updateCarePlan():saveCarePlan()" >
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Name</label>                        
                             <div class="col-sm-6">
@@ -35,37 +35,37 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Dialysis Duration(First Time) (Hrs)</label>
                             <div class="col-sm-6">
-                                <input required type="number" class="form-control" id="dialysis_duration_first_time" name="dialysis_duration_first_time" placeholder="Enter Dialysis Duration " ng-model='carePlan.dialysisDurationFirstTime' min="0">
+                                <input type="number" class="form-control" id="dialysis_duration_first_time" name="dialysis_duration_first_time" placeholder="Enter Dialysis Duration " ng-model='carePlan.dialysisDurationFirstTime' min="0">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Dialysis Duration(Regular)</label>
                             <div class="col-sm-6">
-                                <input required type="number" class="form-control" id="dialysis_duration_regular" name="dialysis_duration_regular" placeholder="Enter Dry Weight " ng-model='carePlan.dialysisDurationRegular' min="0">
+                                <input type="number" class="form-control" id="dialysis_duration_regular" name="dialysis_duration_regular" placeholder="Enter Dry Weight " ng-model='carePlan.dialysisDurationRegular' min="0">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Blood Flow Rate</label>
                             <div class="col-sm-6">
-                                <input required type="number" class="form-control" id="blood_flow_rate" name="blood_flow_rate" placeholder="Blood Flow Rate" ng-model='carePlan.BFR' step="any" min="0">
+                                <input type="number" class="form-control" id="blood_flow_rate" name="blood_flow_rate" placeholder="Blood Flow Rate" ng-model='carePlan.BFR' step="any" min="0">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Dialyzate Flow Rate</label>
                             <div class="col-sm-6">
-                                <input required type="number" class="form-control" id="dialyzate_flow_rate" name="dialyzate_flow_rate" placeholder="Dialysis FLow Rate" ng-model='carePlan.DFR' step="any" min="0">
+                                <input type="number" class="form-control" id="dialyzate_flow_rate" name="dialyzate_flow_rate" placeholder="Dialysis FLow Rate" ng-model='carePlan.DFR' step="any" min="0">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Ultrafiltration Rate</label>
                             <div class="col-sm-6">
-                                <input required type="number" class="form-control" id="ultrafiltration_rate" name="ultrafiltration_rate" placeholder="Ultrafiltration Rate" ng-model='carePlan.UFR' step="any" min="0">
+                                <input type="number" class="form-control" id="ultrafiltration_rate" name="ultrafiltration_rate" placeholder="Ultrafiltration Rate" ng-model='carePlan.UFR' step="any" min="0">
                             </div>
                         </div>
                         <div class="form-group">
                             <label  class="col-sm-4 control-label">Heparin Free</label>
                             <div class="col-sm-6 ">
-                                <select name="heparin_free" required class="form-control" ng-model='carePlan.heparinFree'>
+                                <select name="heparin_free" class="form-control" ng-model='carePlan.heparinFree'>
                                     <option value="" selected disabled>-</option>
                                     <option value="Yes">Yes</option>
                                     <option value="No" >No</option>
@@ -75,19 +75,19 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Heparin Dosage (Bolus)</label>
                             <div class="col-sm-6">
-                                <input required type="number" class="form-control" id="heparin_dosage" name="Heparin Dosage" placeholder="heparin_dosage" ng-model='carePlan.heparinDosageBolus' min="0">
+                                <input type="number" class="form-control" id="heparin_dosage" name="Heparin Dosage" placeholder="heparin_dosage" ng-model='carePlan.heparinDosageBolus' min="0">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Heparin Dosage (Hourly)</label>
                             <div class="col-sm-6">
-                                <input required type="number" class="form-control" id="heparin_dosage" name="Heparin Dosage" placeholder="heparin_dosage" ng-model='carePlan.heparinDosageHourly' min="0">
+                                <input type="number" class="form-control" id="heparin_dosage" name="Heparin Dosage" placeholder="heparin_dosage" ng-model='carePlan.heparinDosageHourly' min="0">
                             </div>
                         </div>
                         <div class="form-group">
                             <label  class="col-sm-4 control-label">Dialyzate Type</label>
                             <div class="col-sm-6 ">
-                                <select name="dilaysate_type" required class="form-control" ng-model='carePlan.dialysateType'>
+                                <select name="dilaysate_type" class="form-control" ng-model='carePlan.dialysateType'>
                                     <option value="" selected disabled>-</option>
                                     <option ng-repeat="dialyzateType in dialyzateTypes" value="{{dialyzateType.dialyzateType}}" class="text-capitalize">{{dialyzateType.dialyzateType}}</option>
                                 </select>
@@ -96,20 +96,20 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Dialyzate Temperature</label>
                             <div class="col-sm-6">
-                                <input required type="number" class="form-control" id="dialysate_temperature" name="dialysate_temperature" placeholder="Dialysate Temperature" ng-model='carePlan.dialysateTemperature' step="any" min="0">
+                                <input type="number" class="form-control" id="dialysate_temperature" name="dialysate_temperature" placeholder="Dialysate Temperature" ng-model='carePlan.dialysateTemperature' step="any" min="0">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Dialyzate Frequency per Week</label>
                             <div class="col-sm-6">
-                                <input required type="number" class="form-control" id="dialyzate_frequency_per_week" name="dialyzate_frequency_per_week" placeholder="Dialyzate Frequency" ng-model='carePlan.dialysateFrequencyPerWeek'>
+                                <input type="number" class="form-control" id="dialyzate_frequency_per_week" name="dialyzate_frequency_per_week" placeholder="Dialyzate Frequency" ng-model='carePlan.dialysateFrequencyPerWeek'>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Access to be used</label>
                             <div class="col-sm-6">
                                 <!-- <input type="text" class="form-control" id="access_to_be_used" name="access_to_be_used" placeholder="Access Used" ng-model='carePlan.accessUsed'> -->
-                                <select name="access_to_be_used" required class="form-control" ng-model='carePlan.accessUsed'>
+                                <select name="access_to_be_used" class="form-control" ng-model='carePlan.accessUsed'>
                                     <option value="" selected disabled>-</option>
                                     <option ng-repeat="accessLine in accessLinesAvailable" value="{{accessLine}}" class="text-capitalize">{{accessLine}}</option>
                                 </select>
@@ -117,7 +117,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-9 col-sm-2">
-                                <button id="dialysis_care_plan_save" type="submit" class="btn btn-primary" ng-click="editCarePlan?updateCarePlan():saveCarePlan()">{{editCarePlan?'Update':'Save'}}</button>
+                                <button id="dialysis_care_plan_save" type="submit" class="btn btn-primary"ng-show="!savedOnce">{{editCarePlan?'Update':'Save'}}</button>
                             </div>
                         </div>
 						

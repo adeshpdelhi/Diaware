@@ -22,6 +22,7 @@ angular.module('App')
         $scope.setPreHDWeight  = function (val) {
             $scope.preHDWeight = val;
         };
+        $scope.savedOnce=false;
         $scope.savePreBasic = function(){
         	$scope.basic.patientId = $scope.patient.id;
     		$scope.basic.lastModifiedBy = authorize.getUsername();
@@ -31,6 +32,7 @@ angular.module('App')
                 function(response){
     				$scope.basic.preBasicId=response.preBasicId;
     				$scope.showalert_predialysis_basic=true;
+                    $scope.savedOnce=true;
     			},function(response){
     				$scope.showalert_predialysis_basic=false;
     				console.log(response);

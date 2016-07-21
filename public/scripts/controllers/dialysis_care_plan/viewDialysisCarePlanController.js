@@ -1,7 +1,7 @@
 'use strict';
 angular.module('App')
-.controller('ViewDialysisCarePlanController',['$scope','patientFactory','choosePatientFactory', 'authorize','backendFactory', function($scope,patientFactory,choosePatientFactory,authorize,backendFactory){
-	
+.controller('ViewDialysisCarePlanController',['$scope','patientFactory','choosePatientFactory', 'authorize','backendFactory','regularForm', function($scope,patientFactory,choosePatientFactory,authorize,backendFactory,regularForm){
+		$scope.regularForm = regularForm.regularForm;
 		backendFactory.getCentres().get({id:authorize.getCentre()}).$promise.then(function(response){
 			$scope.accessLinesAvailable = response.accessLinesAvailable;	
 		});
@@ -48,10 +48,38 @@ angular.module('App')
 	        	$scope.patient = response.patientDetail;
 	        }
         });
-        console.log("heyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
         console.log($scope.patient);
         console.log($scope.carePlan);
         console.log("end");
+        $scope.listPrevPlans = function(){
+			patientFactory.getPatientCarePlans($scope.carePlan.patientId, authorize.getCentre()).query(function(response){
+	        	$scope.prevPlansList = response;
+	        });	
+		};
+		$scope.latest = function(){
+			patientFactory.getPatientCarePlans(choosePatientFactory.getChosenPatient().id,authorize.getCentre()).get({latestPlan:true})
+			.$promise.then(function(response){
+			console.log(response );
+	        	console.log("ehy m i in here");
+	       		$scope.carePlan = response;
+	       		$scope.carePlan.prescriptionDate = new Date($scope.carePlan.prescriptionDate);
+	        	$scope.patient = response.patientDetail;
+        	});
+		}
+		$scope.fetchThisPlan = function(id){
+			patientFactory.getPatientCarePlans(choosePatientFactory.getChosenPatient().id,authorize.getCentre()).get({
+				carePlanId : id
+			})
+			.$promise.then(function(response){
+				 tempPlan = response;
+				 tempPlan.prescriptionDate = new Date(tempPlan.prescriptionDate);
+				 $scope.carePlan= tempPlan;
+				console.log(response);
+	        },function(response){
+				$scope.showAlert = true;
+				$scope.message = "Error: "+ response.status+ " " + response.statusText;
+			})
+		};
         $scope.updateCarePlan = function() {
         	$scope.carePlan.lastModifiedBy = authorize.getUsername();
         	if($scope.carePlan.new){
