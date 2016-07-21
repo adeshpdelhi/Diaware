@@ -24,6 +24,7 @@ angular.module('App')
 	backendFactory.getCentres().get({id:authorize.getCentre()}).$promise.then(function(response){
 		$scope.accessLinesAvailable = response.accessLinesAvailable;
 	})
+	$scope.savedOnce=false;
 	$scope.saveBasicMedical = function(){
 		$scope.basicMedical.patientId = $scope.basic.patientId;
 		$scope.basicMedical.preBasicId = $scope.basic.preBasicId;
@@ -31,6 +32,8 @@ angular.module('App')
 		console.log($scope.basicMedical);
 		monitoringChartFactory.getPreBasicMedicals($scope.basic.patientId).save($scope.basicMedical).$promise.then(function(response){
 			$scope.showalert_predialysis_basic_medical=true;
+			console.log('old value of savedOnce in basicMedical '+$scope.savedOnce);
+			$scope.savedOnce=true;
 			},function(response){
 				$scope.showalert_predialysis_basic_medical=false;
 				console.log(response);

@@ -13,7 +13,7 @@
                    
                     <tbody >
                         <tr ng-repeat = " (key,value) in patientChart" ng-if="key != 'patientDetail' && key != 'monitoringChartPreBasicMedical' && key != 'monitoringChartPreMachineFinalCheck' && key != 'monitoringChartPreAssessment' && key  != 'monitoringChartPreAccessAssessment' && key != 'monitoringChartPost' && key != 'monitoringChartIntras'" style="height:2px;" >
-                            <td width="10%" class="text-capitalize"><b>{{key}}</b></td>
+                            <td width="10%" class="text-capitalize"><b>{{regularForm(key)}}</b></td>
                             <td width="25%" ng-if="key!='monitoringDate'" >{{value}}</td>
                             <td width="25%" ng-if="key=='monitoringDate'" >{{value|date:dd-MMMM-YY-EEE}}</td>
 

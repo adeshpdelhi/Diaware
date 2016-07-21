@@ -82,7 +82,7 @@
     </div>
     <div class="form-group">
         <div class="col-sm-offset-8 col-sm-2">
-            <button type="submit" class="btn btn-primary">{{editingPreAccessAssessment?'Update':'Save'}}</button>
+            <button type="submit" class="btn btn-primary" ng-show="!savedOnce">{{editingPreAccessAssessment?'Update':'Save'}}</button>
         </div>
     </div>
 	<div class="form-group">

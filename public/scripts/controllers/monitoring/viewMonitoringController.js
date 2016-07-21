@@ -1,8 +1,9 @@
 'use strict';
 angular.module('App')
-.controller('ViewMonitoringController',['$scope','patientFactory','monitoringChartFactory','authorize','chosenPatientId', function($scope, patientFactory,monitoringChartFactory,authorize,chosenPatientId){
+.controller('ViewMonitoringController',['$scope','patientFactory','monitoringChartFactory','authorize','chosenPatientId','regularForm', function($scope, patientFactory,monitoringChartFactory,authorize,chosenPatientId, regularForm){
       // monitoringChartFactory.getPreBasic(chosenPatientId).get()
 	    $scope.chosenPatientId = chosenPatientId;
+	    $scope.regularForm = regularForm.regularForm;
 	    $scope.latest = function(){
 		    monitoringChartFactory.getPreBasic(chosenPatientId).get({fullChartLatest:true}).$promise.then(function(response){
 	        	$scope.patientChart = response;
