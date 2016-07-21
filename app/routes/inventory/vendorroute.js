@@ -9,7 +9,7 @@ vendorRouter.use(bodyParser.json());
 
 
 vendorRouter.route('/')
-/*
+
 .get(function (req, res, next) {
     
     console.log('procesing get');
@@ -30,6 +30,6 @@ vendorRouter.route('/')
     
 })
 ;
-*/
+
 
 module.exports = vendorRouter;

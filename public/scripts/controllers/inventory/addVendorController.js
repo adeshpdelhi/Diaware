@@ -1,6 +1,6 @@
 'use strict';
 angular.module('App')
-.controller('AddVendorController',['$scope','authorize', function($scope,authorize){
+.controller('AddVendorController',['$scope','authorize','inventoryFactory', function($scope,authorize,inventoryFactory){
 	
 	$scope.showalert_add_vendor=false;
 		
@@ -8,11 +8,11 @@ angular.module('App')
 			vendorId:null,
 			vendorName:null,
 			vendorAddress:null,
-			vendorTinNo:null,
+			vendorTINNo:null,
 			vendorContactPerson:null,
-			vendorContactNo:null,
+			vendorContactPersonNumber:null,
 			vendorIndroducedBy:null,
-			vendorIntroducedByPersonName:null,
+			vendorIntroducedByName:null,
 			saved:false
 		};
 		
@@ -21,7 +21,7 @@ angular.module('App')
 		
 		$scope.saveVendor = function(){
 			
-		/* inventoryFactory.getVendors().save($scope.addVendor).$promise.then(function(response){
+		 inventoryFactory.getVendors().save($scope.addVendor).$promise.then(function(response){
 
 				console.log($scope.addVendor);
 
@@ -30,16 +30,16 @@ angular.module('App')
 					vendorId:null,
 					vendorName:null,
 					vendorAddress:null,
-					vendorTinNo:null,
+					vendorTINNo:null,
 					vendorContactPerson:null,
-					vendorContactNo:null,
+					vendorContactPersonNumber:null,
 					vendorIndroducedBy:null,
-					vendorIntroducedByPersonName:null,
+					vendorIntroducedByName:null,
 					saved:false
-		};
-		$scope.showalert_add_vendor=true;
-		}
-		*/
+				};
+				$scope.showalert_add_vendor=true;
+		})
+		
 		
 		}
 	}])
