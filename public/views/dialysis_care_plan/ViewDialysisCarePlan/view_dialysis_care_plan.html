@@ -44,7 +44,7 @@
                 <div style="float:right; font-size: 80%; position: relative; top:10px"></div>
             </div>     
 
-            <div style="padding-top:30px" class="panel-body">    
+            <div style="padding-top:30px" class="panel-body" ng-show="carePlan.patientId!=null">    
                 <div class="alert alert-sucess" ng-show="updatedCarePlan">
                     {{message}}
                 </div> 
@@ -76,6 +76,9 @@
                </form>
                     <hr style="border-top:1px solid rgb(225,225,225);">
                 </div>
+            </div>
+            <div class="alert alert-danger" ng-show="carePlan.patientId==null || careplan.patientId.length==0">
+                No plans added for the patient
             </div>
         </div>
     </div>
