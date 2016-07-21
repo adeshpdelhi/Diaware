@@ -49,12 +49,13 @@ angular.module('App')
 		};
 		$scope.updateClinical = function(){
 			console.log('in Update Clinical function');
-			if($scope.event.date !== '' || $scope.event.details !== '' || $scope.event.comments !== ''){
+			if($scope.event.details !== '' || $scope.event.comments !== '' || $scope.event.date !== null){
 				if($scope.events.length)
 					$scope.event.ID = $scope.events[$scope.events.length - 1].ID + 1;
 				else $scope.event.ID = 0;
 				$scope.event.patientId = $scope.patient.id;
 				$scope.event.lastModifiedBy = authorize.getUsername();
+				console.log("why are you here");
 				$scope.events.push($scope.event);
 				console.log($scope.event);
 			}

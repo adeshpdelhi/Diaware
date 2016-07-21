@@ -88,10 +88,16 @@ angular.module('App')
 				.then(function(response){
 					$scope.message = "Details Saved Successfully!";
 					$scope.messageColor = 'success';
+					$scope.updateMyValuesFromMedical(false, true,$scope.message);
+					
+					// $scope.showalert_medical = true;
 				},function(response){
 					$scope.message = "Error: " + response.status + " " + response.statusText;
 					$scope.messageColor = 'danger';
 					console.log(response);
+					$scope.updateMyValuesFromMedical(false, true,$scope.message);
+
+					// $scope.showalert_medical = true;
 				});	
 			}
 			else{
@@ -100,14 +106,19 @@ angular.module('App')
 				.then(function(response){
 					$scope.message = "Details Saved Successfully!";
 					$scope.messageColor = 'success';
+					// $scope.showalert_medical = true;
+					$scope.updateMyValuesFromMedical(false, true,$scope.message);
+
 				},function(response){
 					$scope.message = "Error: " + response.status + " " + response.statusText;
 					$scope.messageColor = 'danger';
 					console.log(response);
+					// $scope.showalert_medical = true;
+					$scope.updateMyValuesFromMedical(false, true,$scope.message);
+
 				});
 			}
-			$scope.showalert_medical = true;
-			$scope.updateMyValuesFromMedical(false, $scope.showalert_medical,$scope.message);
+			
 		};
 
 	};

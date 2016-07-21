@@ -28,10 +28,10 @@
 
 </head>
 
-<body style= "background-color:#ffffff; width:100%;" ng-cloak>
+<body style= "background-color:#ffffff; width:100%;" ng-cloak autoscroll="true">
     <div ui-view="header"></div>
     <div ui-view="content" style="background-color:#ffffff; margin-bottom:120px"></div>
-    <div ui-view="footer" ></div>
+    <div ui-view="footer"></div>
 <!-- build:js scripts/main.js -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -59,7 +59,11 @@
     <!-- <script src="scripts/controllers/billing/viewBillController.js"></script> -->
     <!-- <script src="scripts/services/billingServices.js"></script> -->
     <script src="scripts/**/*.js"></script>
-
+    <script >
+        $rootScope.$on('$stateChangeSuccess', function() {
+           document.body.scrollTop = document.documentElement.scrollTop = 0;
+        });
+    </script>
     <!-- <script type="text/javascript">
         var datefield=document.createElement("input")
         datefield.setAttribute("type", "date")
