@@ -85,9 +85,9 @@ exports.verifyLoggedIn = function(req, res, next){
 	else
 	{
 		// var err = new Error('Not logged in');
-		// err.status = 403;
+		// err.status = 401;
 		// return next(err);
-		res.status(403);
+		res.status(401);
 		res.end("Not logged in!");
 	}
 }
@@ -100,9 +100,9 @@ exports.verifyAdmin = function(req, res, next){
 			else
 			{
 				// var err = new Error('Not an admin');
-				// err.status = 403;
+				// err.status = 401;
 				// return next(err);
-				res.status(403);
+				res.status(401);
 				res.end("Not an admin");
 			}
 		})
@@ -110,9 +110,9 @@ exports.verifyAdmin = function(req, res, next){
 	else
 	{
 		// var err = new Error('Not even logged in');
-		// err.status = 403;
+		// err.status = 401;
 		// return next(err);
-		res.status(403);
+		res.status(401);
 		res.end("Not even logged in");
 	}
 }
@@ -125,9 +125,9 @@ exports.verifyManager = function(req, res, next){
 			else
 			{
 				// var err = new Error('Not a manager');
-				// err.status = 403;
+				// err.status = 401;
 				// return next(err);
-				res.status(403);
+				res.status(401);
 				res.end("Not a manager");
 			}
 		})
@@ -135,9 +135,9 @@ exports.verifyManager = function(req, res, next){
 	else
 	{
 		// var err = new Error('Not even logged in');
-		// err.status = 403;
+		// err.status = 401;
 		// return next(err);
-		res.status(403);
+		res.status(401);
 		res.end("Not even loggedIn");
 	}
 }
@@ -153,10 +153,10 @@ exports.verifyClinical = function(req, res, next){
 			else
 			{
 				// var err = new Error('Not a clinical');
-				// err.status = 403;
+				// err.status = 401;
 				// return next(err);
 				console.log('Not a clinical');
-				res.status(403);
+				res.status(401);
 				res.end("Not a clinical");
 			}
 		})
@@ -165,9 +165,9 @@ exports.verifyClinical = function(req, res, next){
 	{
 		 console.log("Not clinical");
 		// var err = new Error('Not even logged in');
-		// err.status = 403;
+		// err.status = 401;
 		// return next(err);
-		res.status(403);
+		res.status(401);
 		res.end("Not even logged in");
 	}
 }
@@ -180,9 +180,9 @@ exports.verifyIncharge = function(req, res, next){
 			else
 			{
 				// var err = new Error('Not an incharge');
-				// err.status = 403;
+				// err.status = 401;
 				// return next(err);
-				res.status(403);
+				res.status(401);
 				res.end("Not an incharge");
 			}
 		})
@@ -190,9 +190,9 @@ exports.verifyIncharge = function(req, res, next){
 	else
 	{
 		// var err = new Error('Not even logged in');
-		// err.status = 403;
+		// err.status = 401;
 		// return next(err);
-		res.status(403);
+		res.status(401);
 		res.end("Not an incharge");
 	}
 }
