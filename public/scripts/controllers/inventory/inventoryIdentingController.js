@@ -17,9 +17,11 @@ angular.module('App')
 		};
 		
 		$scope.treatmentIndenting = {
+			centreId:null,
 			requestDate:null,
 			requiredByDate:null,
-			stockOrderTo:null
+			stockOrderTo:null,
+			status:null
 			
 		};
 		

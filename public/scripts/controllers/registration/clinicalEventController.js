@@ -3,6 +3,7 @@ angular.module('App')
 .controller('ClinicalEventController',['$scope','patientFactory', 'authorize', function($scope,patientFactory,authorize){
 		$scope.showalert_events=false;
 		$scope.savedOnce = false;
+		
 		if(!$scope.view || ($scope.patient != null && (!$scope.events || $scope.events.length == 0)))
 			$scope.events=[];
 		$scope.event = {
