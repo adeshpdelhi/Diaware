@@ -5,18 +5,15 @@ angular.module('App')
 	$scope.showalert_add_vendor=false;
 		
 		$scope.addVendor= {
-			vendorId:null,
 			vendorName:null,
-			vendorAddress:null,
-			vendorTINNo:null,
+			vendorAddress:null,	
+			vendorTINNumber:null,
 			vendorContactPerson:null,
 			vendorContactPersonNumber:null,
 			vendorIndroducedBy:null,
 			vendorIntroducedByName:null,
-			saved:false
+			
 		};
-		
-
 		
 		
 		$scope.saveVendor = function(){
@@ -27,15 +24,14 @@ angular.module('App')
 
 				$scope.addVendorForm.$setPristine();
 				$scope.addVendor= {
-					vendorId:null,
 					vendorName:null,
 					vendorAddress:null,
-					vendorTINNo:null,
+					vendorTINNumber:null,
 					vendorContactPerson:null,
 					vendorContactPersonNumber:null,
 					vendorIndroducedBy:null,
 					vendorIntroducedByName:null,
-					saved:false
+					
 				};
 				$scope.showalert_add_vendor=true;
 		})
