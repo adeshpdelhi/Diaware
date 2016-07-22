@@ -4,7 +4,7 @@ use temp;
 
 create table indents( -- if status sent for approval in admin then here status is sent for approval as well
 	centreId varchar(60) NOT NULL,
-	indentId int primary key AUTO_INCREMENT,
+	indentId int primary key NOT NULL AUTO_INCREMENT,
 	requestDate date,
 	requiredByDate date,
 	stockOrderTo varchar(60), -- could be reference to vendor table + corporate office
@@ -28,7 +28,7 @@ create table indentsItems(
 
 create table stock(
 	centreId varchar(60) NOT NULL,
-	itemId bigint AUTO_INCREMENT primary key,
+	itemId bigint AUTO_INCREMENT primary key NOT NULL,
 	itemName varchar(60),
 	usageType varchar(60),
 	brandName varchar(60),
@@ -38,7 +38,7 @@ create table stock(
 
 create table stockIssued(
 	centreId varchar(60) NOT NULL,
-	stockIssuedId bigint primary key,
+	stockIssuedId bigint primary key NOT NULL,
 	stockIssuedTo varchar(60),
 	estimatedTreatmentsNextDay int,
 	stockIssueDate date,
@@ -60,7 +60,7 @@ create table stockIssuedItems(
 create table consumption(
 	centreId varchar(60) NOT NULL,
 	treatementType varchar(60),
-	treatementId varchar(60) primary key,
+	treatementId varchar(60) primary key NOT NULL,
 	itemName varchar(60),
 	brand varchar(60),
 	type varchar(60),
@@ -69,15 +69,15 @@ create table consumption(
 );
 
 create table dialysisItems(
-	itemName varchar(60) primary key
+	itemName varchar(60) primary key NOT NULL
 );
 
 create table catheterizationItems(
-	itemName varchar(60) primary key
+	itemName varchar(60) primary key NOT NULL
 );
 
 create table vendor(
-	vendorId int primary key AUTO_INCREMENT,
+	vendorId int primary key NOT NULL AUTO_INCREMENT,
 	vendorName varchar(60),
 	vendorAddress varchar(60),
 	vendorTINNumber varchar(60),

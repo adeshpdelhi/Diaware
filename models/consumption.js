@@ -1,42 +1,41 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('vendor', {
-    vendorId: {
-      type: DataTypes.INTEGER(11),
+  return sequelize.define('consumption', {
+    centreId: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    treatementType: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    treatementId: {
+      type: DataTypes.STRING,
       allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+      primaryKey: true
     },
-    vendorName: {
+    itemName: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    vendorAddress: {
+    brand: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    vendorTINNumber: {
+    type: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    vendorContactPerson: {
+    quanityType: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    vendorContactPersonNumver: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    vendorIntroducedBy: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    vendorintroducedByName: {
-      type: DataTypes.STRING,
+    quantity: {
+      type: DataTypes.INTEGER(11),
       allowNull: true
     }
   }, {
-    tableName: 'vendor'
+    tableName: 'consumption'
   });
 };
