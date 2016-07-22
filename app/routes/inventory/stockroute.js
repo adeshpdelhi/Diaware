@@ -3,19 +3,20 @@ var bodyParser = require('body-parser');
 
 var db = require('../../models');
 
-var indentRouter = express.Router({mergeParams:true});
+var stockRouter = express.Router({mergeParams:true});
 
-indentRouter.use(bodyParser.json());
+stockRouter.use(bodyParser.json());
 
-var indentItemsRouter = require('./indentitemsroute');
-indentRouter.use('/:indentId/indentitems',indentItemsRouter);
-
-indentRouter.route('/')
+stockRouter.route('/')
 
 .get(function (req, res, next) {
     
     console.log('procesing get');
-    db.indent.findAll().then(function(indents){
+    db.stock.findAll({
+        where:{
+            centreId: req.params.centreId
+        }
+    }).then(function(indents){
     	console.log(JSON.stringify(indents));
     	res.json(indents);
     });
@@ -24,7 +25,7 @@ indentRouter.route('/')
 .post(function (req, res, next) {
 	console.log('processing post : '+ req.body);
     console.log(req.body);
-    db.indent.build(req.body).save().then(function(result){
+    db.stock.build(req.body).save().then(function(result){
         res.json(result);
     
     });
@@ -33,12 +34,12 @@ indentRouter.route('/')
     
 })
 
-indentRouter.route('/:indentId')
+stockRouter.route('/:itemId')
 .get(function(req,res,next){
     console.log('procesing get');
-    db.indent.findOne({
+    db.stock.findOne({
         where:{
-            indentId:parseInt(req.params.indentId,10),
+            itemId:parseInt(req.params.itemId,10),
         }
     }).then(function(indent){
         console.log(JSON.stringify(indent));
@@ -50,10 +51,10 @@ indentRouter.route('/:indentId')
 })
 .put(function(req,res,next){
     console.log(req.body);
-    db.indent.update(
+    db.stock.update(
     req.body, {
             where:{
-                indentId:parseInt(req.params.indentId,10),
+                itemId:parseInt(req.params.itemId,10),
             }
         }
     )
@@ -70,4 +71,4 @@ indentRouter.route('/:indentId')
 ;
 
 
-module.exports = indentRouter;
+module.exports = stockRouter;

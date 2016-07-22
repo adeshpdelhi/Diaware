@@ -20,7 +20,7 @@ create table indentItems(
 	brandName varchar(60),
 	quantityRequired int,
 	availabilityQuantity int, -- retrieve from stock
-	quantityType varchar(60),
+	quantityMeasurementType varchar(60),
 	primary key(indentId,itemNumber)
 );
 
@@ -31,7 +31,7 @@ create table stock(
 	usageType varchar(60),
 	brandName varchar(60),
 	availabilityQuantity int,
-	quantityType varchar(60)
+	quantityMeasurementType varchar(60)
 );
 
 create table stockIssued(
@@ -56,7 +56,7 @@ create table stockIssuedItems(
 	usageType varchar(60), --									   ---------- denotes a single item entry
 	brandName varchar(60), --									  /
 	quantity int, --											 /
-	quantityType varchar(60) --						   _________/
+	quantityMeasurementType varchar(60) --						   _________/
 );
 
 create table consumption(

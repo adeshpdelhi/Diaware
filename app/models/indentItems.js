@@ -6,11 +6,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       defaultValue: '0',
-      primaryKey: true,
-      references:{
-        model: 'indent',
-        key: 'indentId'
-      }
+      primaryKey: true
     },
     itemNumber: {
       type: DataTypes.INTEGER(11),
@@ -42,7 +38,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
-    quantityType: {
+    quantityMeasurementType: {
       type: DataTypes.STRING,
       allowNull: true
     }

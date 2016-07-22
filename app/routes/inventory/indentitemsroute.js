@@ -22,7 +22,7 @@ indentItemsRouter.route('/')
     console.log('procesing get');
     db.indentItems.findAll({
         where:{
-            indentItemsId:req.params.indentItemsId
+            indentId:parseInt(req.params.indentId,10)
         }
     }).then(function(indentItems){
         console.log(JSON.stringify(indentItems));
@@ -88,7 +88,7 @@ indentItemsRouter.route('/:itemNumber')
     )
     .then(function (result) { 
         console.log(JSON.stringify(result));
-        res.end("successfully updated")
+        res.end("successfully deleted")
     }, function(rejectedPromiseError){
     
     });
@@ -107,7 +107,7 @@ indentItemsRouter.route('/:itemNumber')
         console.log(JSON.stringify(result));
         // res.json(result);
         res.status(200);
-        res.end("successfully deleted")
+        res.end("successfully updated")
     }, function(rejectedPromiseError){
         res.status(500);
         res.end("Internal Server Error");
