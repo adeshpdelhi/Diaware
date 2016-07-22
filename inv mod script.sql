@@ -2,19 +2,19 @@ drop database if exists temp;
 create database temp;
 use temp;
 
-create table indents( -- if status sent for approval in admin then here status is sent for approval as well
+create table indent( -- if status sent for approval in admin then here status is sent for approval as well
 	centreId varchar(60) NOT NULL,
 	indentId int primary key NOT NULL AUTO_INCREMENT,
 	requestDate date,
 	requiredByDate date,
 	stockOrderTo varchar(60), -- could be reference to vendor table + corporate office
 	status varchar(60), -- status could be: saved, sent, approved, rejected , fulfilled
-	itemsRaised varchar(60) references indentsItems(indentItemsId),
-	itemsApproved varchar(60) references indentsItems(indentItemsId),
-	itemsReceived varchar(60) references indentsItems(indentItemsId)
+	itemsRaisedId varchar(60) references indentsItems(indentItemsId),
+	itemsApprovedId varchar(60) references indentsItems(indentItemsId),
+	itemsReceivedId varchar(60) references indentsItems(indentItemsId)
 );
 
-create table indentsItems(
+create table indentItems(
 	indentItemsId varchar(60), -- indentItemsId is centre+current date time
 	itemNumber int,
 	itemName varchar(60), -- to simulate array
@@ -91,7 +91,7 @@ create table vendor(
 	vendorAddress varchar(60),
 	vendorTINNumber varchar(60),
 	vendorContactPerson varchar(60),
-	vendorContactPersonNumver varchar(60),
+	vendorContactPersonNumber varchar(60),
 	vendorIntroducedBy varchar(60),
 	vendorIntroducedByName varchar(60)
 );
