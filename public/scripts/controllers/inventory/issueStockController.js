@@ -21,9 +21,11 @@ angular.module('App')
 			estimatedSingleUse:null,
 			estimatedReUse:null,
 			estimatedNewDialyser:null,
+			estimatedCatehterizationDoubleLumen:null,
+			estimatedCatehterizationSingleumen:null,
 			stockIssueDate:null,
 			stockTakerName:null,
-			nextIssueDate:null,
+			nextExpectedStockIssueDate:null,
 			saved:false
 		};
 		

@@ -16,12 +16,17 @@ angular.module('App')
 			saved:false
 		};
 		
+		$scope.treatmentIndenting = {
+			requestDate:null,
+			requiredByDate:null,
+			stockOrderTo:null
+			
+		};
+		
 		var cnt = 0;
 		$scope.addItem = function(){
 			$scope.showalert_inventory_identing=false;
-			//$scope.item.ID = cnt++;
-			//$scope.event.patientId = $scope.newpatient_basic.id;
-			//$scope.item.lastModifiedBy = $scope.newpatient_basic.lastModifiedBy;
+		
 			$scope.treatmentIndentingItems.push($scope.treatmentIndentingItem);
 			console.log($scope.treatmentIndentingItem);
 			//$scope.item.saved:true;
@@ -40,6 +45,8 @@ angular.module('App')
 		}
 		
 		$scope.sendRequest = function(){
+			
+			
 			
 		}
 		
