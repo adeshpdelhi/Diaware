@@ -70,21 +70,21 @@ insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id,create
 insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id,createdAt,updatedAt) values('JP1',"Saturday","18",'17','16','2016-07-13 10:48:56','2016-07-13 10:48:56');
 insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id,createdAt,updatedAt) values('JP1',"Sunday","19",'20','21','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
-insert into diseases(diseaseName) values('diabetes');
-insert into diseases(diseaseName) values('hypertension');
-insert into diseases(diseaseName) values('coronaryArteryDisease');
-insert into diseases(diseaseName) values('peripheralNeuropathy');
-insert into diseases(diseaseName) values('ratinopathy/Vision');
-insert into diseases(diseaseName) values('cerebrovascularDisease');
-insert into diseases(diseaseName) values('respiratoryDisease');
-insert into diseases(diseaseName) values('malignancy');
-insert into diseases(diseaseName) values('haemoglobiNopathy');
-insert into diseases(diseaseName) values('peripheralVascularDisease');
-insert into diseases(diseaseName) values('hepatitisB');
-insert into diseases(diseaseName) values('hepatitisC');
-insert into diseases(diseaseName) values('HIV');
-insert into diseases(diseaseName) values('malnutrition');
-insert into diseases(diseaseName) values('drugAllergy');
+insert into diseases(diseaseName,createdAt,updatedAt) values('diabetes','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into diseases(diseaseName,createdAt,updatedAt) values('hypertension','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into diseases(diseaseName,createdAt,updatedAt) values('coronaryArteryDisease','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into diseases(diseaseName,createdAt,updatedAt) values('peripheralNeuropathy','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into diseases(diseaseName,createdAt,updatedAt) values('ratinopathy/Vision','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into diseases(diseaseName,createdAt,updatedAt) values('cerebrovascularDisease','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into diseases(diseaseName,createdAt,updatedAt) values('respiratoryDisease','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into diseases(diseaseName,createdAt,updatedAt) values('malignancy','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into diseases(diseaseName,createdAt,updatedAt) values('haemoglobiNopathy','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into diseases(diseaseName,createdAt,updatedAt) values('peripheralVascularDisease','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into diseases(diseaseName,createdAt,updatedAt) values('hepatitisB','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into diseases(diseaseName,createdAt,updatedAt) values('hepatitisC','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into diseases(diseaseName,createdAt,updatedAt) values('HIV','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into diseases(diseaseName,createdAt,updatedAt) values('malnutrition','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into diseases(diseaseName,createdAt,updatedAt) values('drugAllergy','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 
 INSERT INTO `users` (`id`,`username`,`hashedPassword`,`centres`,`admin`,`incharge`,`manager`,`clinical`,`createdAt`,`updatedAt`) VALUES (DEFAULT,'admin','21232f297a57a5a743894a0e4a801fc3','JP1,CH',true,false,true,false,'2016-07-13 10:48:56','2016-07-13 10:48:56');

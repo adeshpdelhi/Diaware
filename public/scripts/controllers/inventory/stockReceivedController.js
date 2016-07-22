@@ -24,7 +24,6 @@ angular.module('App')
 			saved:false
 		};
 		
-		var cnt = 0;
 		
 		$scope.addItemInStockReceived = function(){
 			$scope.showForm=true;
@@ -33,9 +32,7 @@ angular.module('App')
 		
 		$scope.addStockReceivedItem = function(){
 			$scope.showalert_stock_received=false;
-			//$scope.item.ID = cnt++;
-			//$scope.event.patientId = $scope.newpatient_basic.id;
-			//$scope.item.lastModifiedBy = $scope.newpatient_basic.lastModifiedBy;
+			
 			if($scope.stockReceivedItem.itemName!==null)
 			{
 				$scope.stockReceivedItems.push($scope.stockReceivedItem);

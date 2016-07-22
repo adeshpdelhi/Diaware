@@ -92,6 +92,6 @@ create table vendor(
 	vendorTINNumber varchar(60),
 	vendorContactPerson varchar(60),
 	vendorContactPersonNumver varchar(60),
-	vendorIntroducedBy varchar(60),
+	vendorIndroducedBy varchar(60),
 	vendorIntroducedByName varchar(60)
 );
