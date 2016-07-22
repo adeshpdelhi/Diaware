@@ -64,12 +64,17 @@ create table stockIssuedItems(
 create table consumption(
 	centreId varchar(60) NOT NULL,
 	treatementType varchar(60),
-	treatementId varchar(60) primary key NOT NULL,
+	treatementId varchar(60) primary key NOT NULL
+);
+
+create table consumptionItems(
+	treatementId varchar(60) references consumption(treatementId),
 	itemName varchar(60),
 	brand varchar(60),
 	type varchar(60),
 	quanityType varchar(60),
-	quantity int
+	quantity int,
+	primary key(treatementId,itemName)
 );
 
 create table dialysisItems(

@@ -89,6 +89,8 @@ insert into diseases(diseaseName) values('drugAllergy');
 
 INSERT INTO `users` (`id`,`username`,`hashedPassword`,`centres`,`admin`,`incharge`,`manager`,`clinical`,`createdAt`,`updatedAt`) VALUES (DEFAULT,'admin','21232f297a57a5a743894a0e4a801fc3','JP1,CH',true,false,true,false,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 
+insert into vendor(vendorId ,vendorName,vendorAddress, vendorTINNumber,vendorContactPerson,vendorContactPersonNumver,vendorIntroducedBy,vendorIntroducedByName,createdAt,updatedAt) values(DEFAULT, 'kr dispensaries','jaipur','tann','aishhwarrya','1234567892','staff','rishabh','2016-07-13 10:48:56','2016-07-13 10:48:56')
+
 -- CREATE EVENT addNextWeeksAppointments
 --   ON SCHEDULE
 --     EVERY 1 DAY

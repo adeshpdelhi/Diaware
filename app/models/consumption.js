@@ -14,26 +14,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true
-    },
-    itemName: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    brand: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    type: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    quanityType: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    quantity: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true
     }
   }, {
     tableName: 'consumption'
