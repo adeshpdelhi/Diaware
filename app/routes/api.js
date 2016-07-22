@@ -24,5 +24,6 @@ apiRouter.use('/centres',auth.verifyLoggedIn,centreRouter);
 apiRouter.use('/panels',auth.verifyLoggedIn,panelRouter);
 apiRouter.use('/dropDowns',auth.verifyLoggedIn,dropDownRouter);
 apiRouter.use('/monitoringChart',auth.verifyClinical,monitoringRouter);
+apiRouter.use('/inventory',auth.verifyLoggedIn,inventoryRouter);
 
 module.exports = apiRouter;

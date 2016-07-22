@@ -32,7 +32,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     },
-    vendorintroducedByName: {
+    vendorIntroducedByName: {
       type: DataTypes.STRING,
       allowNull: true
     }
