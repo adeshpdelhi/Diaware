@@ -20,7 +20,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     type: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:[['','Raised','Approved','Received']]
+      }
     },
     itemName: {
       type: DataTypes.STRING,
