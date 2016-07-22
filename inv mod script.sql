@@ -40,7 +40,11 @@ create table stockIssued(
 	centreId varchar(60) NOT NULL,
 	stockIssuedId bigint primary key NOT NULL,
 	stockIssuedTo varchar(60),
-	estimatedTreatmentsNextDay int,
+	estimatedSingleUse int,
+	estimatedReUse int,
+	estimatedNewDialyzer int,
+	estimatedCatheterDoubleLumen int,
+	estimatedCatheterSingleLumen int,
 	stockIssueDate date,
 	stockTakerName varchar(60),
 	nextExpectedStockIssueDate date
@@ -84,5 +88,5 @@ create table vendor(
 	vendorContactPerson varchar(60),
 	vendorContactPersonNumver varchar(60),
 	vendorIntroducedBy varchar(60),
-	vendorintroducedByName varchar(60)
+	vendorIntroducedByName varchar(60)
 );
