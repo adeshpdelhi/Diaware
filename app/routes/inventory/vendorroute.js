@@ -13,7 +13,7 @@ vendorRouter.route('/')
 .get(function (req, res, next) {
     
     console.log('procesing get');
-    db.vendors.findAll().then(function(vendors){
+    db.vendor.findAll().then(function(vendors){
     	console.log(JSON.stringify(vendors));
     	res.json(vendors);
     });
@@ -21,7 +21,7 @@ vendorRouter.route('/')
 })
 .post(function (req, res, next) {
 	console.log('processing post : '+ req.body);
-    db.vendors.build(req.body).save().then(function(result){
+    db.vendor.build(req.body).save().then(function(result){
         res.json(result);
     
     });
