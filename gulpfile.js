@@ -25,9 +25,9 @@ gulp.task('jshint', function() {
 gulp.task('usemin',['jshint'], function () {
   return gulp.src('./public/**/*.html')
       .pipe(usemin({
-        css:[minifycss(),rev()],
-        // js: [ngannotate(),uglify(),rev()]
-        js: [ngannotate(),rev()]
+        //css:[minifycss(),rev()],
+        					// js: [ngannotate(),uglify(),rev()]
+        //js: [ngannotate(),rev()]
       }))
       .pipe(gulp.dest('dist/'));
 });
