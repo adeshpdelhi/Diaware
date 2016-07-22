@@ -63,12 +63,12 @@ indentItemsRouter.route('/')
 });
 
 
-indentItemsRouter.route('/:indentItemsId')
+indentItemsRouter.route('/:itemNumber')
 .get(function(req,res,next){
     console.log('procesing get');
     db.indentItems.findOne({
         where:{
-            indentItemsId:parseInt(req.params.indentItemsId,10),            
+            itemNumber:parseInt(req.params.itemNumber,10),            
             indentId:req.params.indentId
         }
     }).then(function(indentItem){
@@ -81,7 +81,7 @@ indentItemsRouter.route('/:indentItemsId')
     db.indentItems.destroy(
     {
         where:{
-            indentItemsId:parseInt(req.params.indentItemsId,10),            
+            itemNumber:parseInt(req.params.itemNumber,10),            
             indentId:req.params.indentId
             }
         }
@@ -98,7 +98,7 @@ indentItemsRouter.route('/:indentItemsId')
     db.indentItems.update(
     req.body, {
             where:{
-                indentItemsId:parseInt(req.params.indentItemsId,10),            
+                itemNumber:parseInt(req.params.itemNumber,10),            
                 indentId:req.params.indentId
             }
         }

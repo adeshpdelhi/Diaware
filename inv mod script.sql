@@ -14,7 +14,7 @@ create table indent( -- if status sent for approval in admin then here status is
 create table indentItems(
 	indentId int references indent(indentId),
 	itemNumber int,
-	itemType varchar(60), -- should be 'Raised' or 'Approved' or 'Received'
+	type varchar(60), -- should be 'Raised' or 'Approved' or 'Received'
 	itemName varchar(60), -- to simulate array
 	usageType varchar(60),
 	brandName varchar(60),

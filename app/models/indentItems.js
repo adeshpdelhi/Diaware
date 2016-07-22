@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: '0',
       primaryKey: true
     },
-    itemType: {
+    type: {
       type: DataTypes.STRING,
       allowNull: true
     },
