@@ -93,7 +93,7 @@ insert into vendor(vendorId ,vendorName,vendorAddress, vendorTINNumber,vendorCon
 
 insert into indent (centreId,indentId,requestDate,requiredByDate,stockOrderTo,status,createdAt,updatedAt) values('JP1',DEFAULT,'2016-07-13 10:48:56','2016-07-13 10:48:56','Me','Sent','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
-insert into indentItems(indentId, itemNumber, type, itemName, usageType, brandName, quantityRequired, availabilityQuantity, quantityType, createdAt, updatedAt) values (1,0,'Received','savlon','general stock', 'dettol', 4,2,'bottles','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into indentItems(indentId, itemNumber, type, itemName, usageType, brandName, quantityRequired, availabilityQuantity, quantityMeasurementType, createdAt, updatedAt) values (1,0,'Received','savlon','general stock', 'dettol', 4,2,'bottles','2016-07-13 10:48:56','2016-07-13 10:48:56');
 -- CREATE EVENT addNextWeeksAppointments
 --   ON SCHEDULE
 --     EVERY 1 DAY

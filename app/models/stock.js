@@ -28,7 +28,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
-    quantityType: {
+    quantityMeasurementType: {
       type: DataTypes.STRING,
       allowNull: true
     }
