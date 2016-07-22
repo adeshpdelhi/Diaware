@@ -21,6 +21,7 @@ vendorRouter.route('/')
 })
 .post(function (req, res, next) {
 	console.log('processing post : '+ req.body);
+    console.log(req.body);
     db.vendor.build(req.body).save().then(function(result){
         res.json(result);
     
@@ -29,17 +30,17 @@ vendorRouter.route('/')
 .delete(function(req,res,next){
     
 })
-/*
-panelRouter.route('/:panelId')
+
+vendorRouter.route('/:vendorId')
 .get(function(req,res,next){
     console.log('procesing get');
     db.vendor.findOne({
         where:{
-            id:parseInt(req.params.panelId,10),
+            vendorId:parseInt(req.params.vendorId,10),
         }
-    }).then(function(panel){
-        console.log(JSON.stringify(pvendor));
-        res.json(pvendor);
+    }).then(function(vendor){
+        console.log(JSON.stringify(vendor));
+        res.json(vendor);
     });
 })
 .delete(function(req,res,next){
@@ -50,7 +51,7 @@ panelRouter.route('/:panelId')
     db.vendor.update(
     req.body, {
             where:{
-                id:parseInt(req.params.vendorId,10),
+                vendorId:parseInt(req.params.vendorId,10),
             }
         }
     )
@@ -63,7 +64,7 @@ panelRouter.route('/:panelId')
         res.status(400);
         res.end('failed update')
     });
-})*/
+})
 ;
 
 
