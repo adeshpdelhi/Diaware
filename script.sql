@@ -91,8 +91,8 @@ INSERT INTO `users` (`id`,`username`,`hashedPassword`,`centres`,`admin`,`incharg
 
 insert into vendor(vendorId ,vendorName,vendorAddress, vendorTINNumber,vendorContactPerson,vendorContactPersonNumber,vendorIntroducedBy,vendorIntroducedByName,createdAt,updatedAt) values(DEFAULT, 'kr dispensaries','jaipur','tann','aishhwarrya','1234567892','staff','rishabh','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
-insert into indent (centreId,indentId,requestDate,requiredByDate,stockOrderTo,status,itemsRaisedId,itemsApprovedId,itemsReceivedId,createdAt,updatedAt) values('JP1',DEFAULT,'2016-07-13 10:48:56','2016-07-13 10:48:56','Me','Sent','abc','def','ghi','2016-07-13 10:48:56','2016-07-13 10:48:56');
-	
+insert into indent (centreId,indentId,requestDate,requiredByDate,stockOrderTo,status,createdAt,updatedAt) values('JP1',DEFAULT,'2016-07-13 10:48:56','2016-07-13 10:48:56','Me','Sent','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
 -- CREATE EVENT addNextWeeksAppointments
 --   ON SCHEDULE
 --     EVERY 1 DAY

@@ -27,18 +27,6 @@ module.exports = function(sequelize, DataTypes) {
     status: {
       type: DataTypes.STRING,
       allowNull: true
-    },
-    itemsRaisedId: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    itemsApprovedId: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    itemsReceivedId: {
-      type: DataTypes.STRING,
-      allowNull: true
     }
   }, {
     tableName: 'indent'

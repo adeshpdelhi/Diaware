@@ -8,22 +8,20 @@ create table indent( -- if status sent for approval in admin then here status is
 	requestDate date,
 	requiredByDate date,
 	stockOrderTo varchar(60), -- could be reference to vendor table + corporate office
-	status varchar(60), -- status could be: saved, sent, approved, rejected , fulfilled
-	itemsRaisedId varchar(60) references indentsItems(indentItemsId),
-	itemsApprovedId varchar(60) references indentsItems(indentItemsId),
-	itemsReceivedId varchar(60) references indentsItems(indentItemsId)
+	status varchar(60) -- status could be: saved, sent, approved, rejected , fulfilled
 );
 
 create table indentItems(
-	indentItemsId varchar(60), -- indentItemsId is centre+current date time
+	indentId int references indent(indentId),
 	itemNumber int,
+	itemType varchar(60), -- should be 'Raised' or 'Approved' or 'Received'
 	itemName varchar(60), -- to simulate array
 	usageType varchar(60),
 	brandName varchar(60),
 	quantityRequired int,
 	availabilityQuantity int, -- retrieve from stock
 	quantityType varchar(60),
-	primary key(indentItemsId,itemNumber)
+	primary key(indentId,itemNumber)
 );
 
 create table stock(

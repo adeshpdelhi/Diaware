@@ -5,7 +5,7 @@ var db = require('../../models');
 
 var indentItemsRouter = express.Router({mergeParams:true});
 
-clinicalEventRouter.use(bodyParser.json());
+indentItemsRouter.use(bodyParser.json());
 
 // include:[
 //             model:db.patientDetails,
@@ -14,25 +14,25 @@ clinicalEventRouter.use(bodyParser.json());
 //             }
 //         ]
 
-// can add route to fetch all patients clinicalEvents ie /api/majorClinicalEvents
+// can add route to fetch all patients indentItems ie /api/majorClinicalEvents
 
-clinicalEventRouter.route('/')
+indentItemsRouter.route('/')
 .get(function (req, res, next) {
     
     console.log('procesing get');
-    db.majorClinicalEvents.findAll({
+    db.indentItems.findAll({
         where:{
-            patientId:req.params.id
+            indentItemsId:req.params.indentItemsId
         }
-    }).then(function(clinicalEvents){
-        console.log(JSON.stringify(clinicalEvents));
-        res.json(clinicalEvents);
+    }).then(function(indentItems){
+        console.log(JSON.stringify(indentItems));
+        res.json(indentItems);
     });
     
 })
 .post(function (req, res, next) {
     console.log('processing post : '+ req.body);
-    db.majorClinicalEvents.build(req.body).save().then(function(result){
+    db.indentItems.build(req.body).save().then(function(result){
         // console.log(result);
         console.log(JSON.stringify(result));
         res.json(result);        
@@ -43,7 +43,7 @@ clinicalEventRouter.route('/')
 })
 // .put(function(req,res,next){
 //     console.log(req.body);
-//     db.majorClinicalEvents.update(
+//     db.indentItems.update(
 //     req.body, {
 //             where:{
 //                 patientId:req.params.id
@@ -63,26 +63,26 @@ clinicalEventRouter.route('/')
 });
 
 
-clinicalEventRouter.route('/:clinicalEventId')
+indentItemsRouter.route('/:indentItemsId')
 .get(function(req,res,next){
     console.log('procesing get');
-    db.majorClinicalEvents.findOne({
+    db.indentItems.findOne({
         where:{
-            id:parseInt(req.params.clinicalEventId,10),            
-            patientId:req.params.id
+            indentItemsId:parseInt(req.params.indentItemsId,10),            
+            indentId:req.params.indentId
         }
-    }).then(function(clinicalEvent){
-        console.log(JSON.stringify(clinicalEvent));
-        res.json(clinicalEvent);
+    }).then(function(indentItem){
+        console.log(JSON.stringify(indentItem));
+        res.json(indentItem);
     });
 })
 .delete(function(req,res,next){
     console.log("procesing delete");
-    db.majorClinicalEvents.destroy(
+    db.indentItems.destroy(
     {
         where:{
-            id:parseInt(req.params.clinicalEventId,10),
-            patientId:req.params.id
+            indentItemsId:parseInt(req.params.indentItemsId,10),            
+            indentId:req.params.indentId
             }
         }
     )
@@ -95,12 +95,11 @@ clinicalEventRouter.route('/:clinicalEventId')
 })
 .put(function(req,res,next){
     console.log(req.body);
-    db.majorClinicalEvents.update(
+    db.indentItems.update(
     req.body, {
             where:{
-                id:parseInt(req.params.clinicalEventId,10),            
-                // eventDetails:req.params.clinicalEvent,
-                patientId:req.params.id
+                indentItemsId:parseInt(req.params.indentItemsId,10),            
+                indentId:req.params.indentId
             }
         }
     )
@@ -116,4 +115,4 @@ clinicalEventRouter.route('/:clinicalEventId')
 })
 ;
 
-module.exports = clinicalEventRouter;
+module.exports = indentItemsRouter;

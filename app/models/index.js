@@ -121,4 +121,8 @@ dbmodel.futureAppointments.belongsTo(dbmodel.patientDetails,{foreignKey:'patient
 dbmodel.patientDetails.hasMany(dbmodel.attendedAppointments,{foreignKey:'patientId'});
 dbmodel.futureAppointments.belongsTo(dbmodel.patientDetails,{foreignKey:'patientId'});
 
+dbmodel.indent.hasMany(dbmodel.indentItems,{foreignKey:'indentId'});
+dbmodel.indentItems.belongsTo(dbmodel.indent,{foreignKey:'indentId'});
+
+
 module.exports = dbmodel;

@@ -2,17 +2,25 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('indentItems', {
-    indentItemsId: {
-      type: DataTypes.STRING,
+    indentId: {
+      type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: '',
-      primaryKey: true
+      defaultValue: '0',
+      primaryKey: true,
+      references:{
+        model: 'indent',
+        key: 'indentId'
+      }
     },
     itemNumber: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       defaultValue: '0',
       primaryKey: true
+    },
+    itemType: {
+      type: DataTypes.STRING,
+      allowNull: true
     },
     itemName: {
       type: DataTypes.STRING,
