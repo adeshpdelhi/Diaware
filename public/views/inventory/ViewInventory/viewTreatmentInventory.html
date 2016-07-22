@@ -1,10 +1,11 @@
-<div id="Registerbox" style="margin-top:20px;" class="mainbox col-sm-12" ng-cloak>                    
-    <div ng-show="editPanels">
+<div class="container">
+<div id="Registerbox" style="margin-top:60px;" class="mainbox col-sm-12" ng-cloak>                    
+    <!-- <div ng-show="editPanels">
         <div ng-include="'views/registration/panel.html'"></div> 
-    </div>
+    </div> -->
     <div class="panel" ng-show="!editPanels">
         <div class="panel-heading">
-            <div class="panel-title"><b>Patient Panel Details</b></div>
+            <div class="panel-title"><b>View Treatment Inventory</b></div>
             <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
         </div> 
 
@@ -27,7 +28,7 @@
 			<form>
 			<div class="form-group">
                     <div class="col-sm-offset-4 col-sm-10" ng-show="!editPanels">
-                        <button id="edit" type="submit" class="btn btn-primary" ng-click="editPanel()">Edit</button>
+                        <button id="edit" type="submit" class="btn btn-primary" ng-click="editTreatmentInventory()">Edit</button>
                     </div>
                 </div>
            </form>
@@ -36,4 +37,5 @@
                 </div>
         </div>
     </div>
+</div>
 </div>

@@ -29,6 +29,41 @@ vendorRouter.route('/')
 .delete(function(req,res,next){
     
 })
+/*
+panelRouter.route('/:panelId')
+.get(function(req,res,next){
+    console.log('procesing get');
+    db.vendor.findOne({
+        where:{
+            id:parseInt(req.params.panelId,10),
+        }
+    }).then(function(panel){
+        console.log(JSON.stringify(pvendor));
+        res.json(pvendor);
+    });
+})
+.delete(function(req,res,next){
+
+})
+.put(function(req,res,next){
+    console.log(req.body);
+    db.vendor.update(
+    req.body, {
+            where:{
+                id:parseInt(req.params.vendorId,10),
+            }
+        }
+    )
+    .then(function (result) { 
+        console.log('success vendor update');
+        res.status(200);
+        res.end('saved');
+    }, function(rejectedPromiseError){
+        console.log('failed vendor update');
+        res.status(400);
+        res.end('failed update')
+    });
+})*/
 ;
 
 
