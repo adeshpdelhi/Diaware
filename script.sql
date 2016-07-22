@@ -96,6 +96,12 @@ insert into indent (centreId,indentId,requestDate,requiredByDate,stockOrderTo,st
 insert into indentItems(indentId, itemNumber, type, itemName, usageType, brandName, quantityRequired, availabilityQuantity, quantityMeasurementType, createdAt, updatedAt) values (1,0,'Received','savlon','general stock', 'dettol', 4,2,'bottles','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 insert into stock(centreId, itemId, itemName, usageType, brandName, availabilityQuantity, quantityMeasurementType, createdAt, updatedAt) values('JP1',DEFAULT,'savlon','general stock','dettol',8,'bottles','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into stockIssued(centreId,stockIssuedId,stockIssuedTo,estimatedSingleUse,estimatedReUse,estimatedNewDialyzer,estimatedCatheterSingleLumen,estimatedCatheterDoubleLumen,stockIssueDate,stockTakerName,nextExpectedStockIssueDate,createdAt, updatedAt) values ('JP1',1,'floor',1,2,3,4,5,'2016-07-13 10:48:56','adesh','2016-07-13 10:48:56','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into stockIssuedItems(stockIssuedId,itemNumber,itemId,itemName, usageType, brandName, quantity, quantityMeasurementType, createdAt, updatedAt) values(1,0,25,'savlon','general stock','dettol',2,'bottles','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+
 -- CREATE EVENT addNextWeeksAppointments
 --   ON SCHEDULE
 --     EVERY 1 DAY

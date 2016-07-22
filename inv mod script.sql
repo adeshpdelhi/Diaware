@@ -41,8 +41,8 @@ create table stockIssued(
 	estimatedSingleUse int,
 	estimatedReUse int,
 	estimatedNewDialyzer int,
-	estimatedCatheterDoubleLumen int,
 	estimatedCatheterSingleLumen int,
+	estimatedCatheterDoubleLumen int,
 	stockIssueDate date,
 	stockTakerName varchar(60),
 	nextExpectedStockIssueDate date
@@ -50,13 +50,14 @@ create table stockIssued(
 
 create table stockIssuedItems(
 	stockIssuedId bigint references stockIssued(stockIssuedId),
-	itemNumber int, -- to simulate array		   ~~~~~~~~~\
-	itemId int, --											 \ 
-	itemName varchar(60), --										  \
+	itemNumber int, -- to simulate array			   ~~~~~~~~~\
+	itemId int, --										 		 \ 
+	itemName varchar(60), --								      \
 	usageType varchar(60), --									   ---------- denotes a single item entry
 	brandName varchar(60), --									  /
 	quantity int, --											 /
-	quantityMeasurementType varchar(60) --						   _________/
+	quantityMeasurementType varchar(60) --			   _________/
+	primary key(stockIssuedId,itemNumber)
 );
 
 create table consumption(

@@ -4,11 +4,13 @@ module.exports = function(sequelize, DataTypes) {
   return sequelize.define('stockIssuedItems', {
     stockIssuedId: {
       type: DataTypes.BIGINT,
-      allowNull: true
+      primaryKey: true,
+      allowNull: false
     },
     itemNumber: {
       type: DataTypes.INTEGER(11),
-      allowNull: true
+      primaryKey: true,
+      allowNull: false
     },
     itemId: {
       type: DataTypes.INTEGER(11),

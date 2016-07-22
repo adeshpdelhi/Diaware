@@ -8,7 +8,7 @@ var indentRouter = express.Router({mergeParams:true});
 indentRouter.use(bodyParser.json());
 
 var indentItemsRouter = require('./indentitemsroute');
-indentRouter.use('/:indentId/indentitems',indentItemsRouter);
+indentRouter.use('/:indentId/items',indentItemsRouter);
 
 indentRouter.route('/')
 
