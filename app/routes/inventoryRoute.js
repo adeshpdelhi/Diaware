@@ -22,5 +22,8 @@ inventoryRouter.use('/stockindenting',treatmentInventoryRouter);
 var vendorRouter = require('./inventory/vendorroute');
 inventoryRouter.use('/vendor',vendorRouter);
 
+var indentRouter = require('./inventory/indentroute');
+inventoryRouter.use('/indent',indentRouter);
+
 
 module.exports = inventoryRouter;

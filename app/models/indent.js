@@ -1,7 +1,7 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('indents', {
+  return sequelize.define('indent', {
     centreId: {
       type: DataTypes.STRING,
       allowNull: false
@@ -28,19 +28,19 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     },
-    itemsRaised: {
+    itemsRaisedId: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    itemsApproved: {
+    itemsApprovedId: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    itemsReceived: {
+    itemsReceivedId: {
       type: DataTypes.STRING,
       allowNull: true
     }
   }, {
-    tableName: 'indents'
+    tableName: 'indent'
   });
 };
