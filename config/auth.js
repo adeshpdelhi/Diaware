@@ -84,9 +84,11 @@ exports.verifyLoggedIn = function(req, res, next){
 		next();
 	else
 	{
-		var err = new Error('Not logged in');
-		err.status = 403;
-		return next(err);
+		// var err = new Error('Not logged in');
+		// err.status = 401;
+		// return next(err);
+		res.status(401);
+		res.end("Not logged in!");
 	}
 }
 
@@ -97,79 +99,100 @@ exports.verifyAdmin = function(req, res, next){
 				next();
 			else
 			{
-				var err = new Error('Not an admin');
-				err.status = 403;
-				return next(err);
+				// var err = new Error('Not an admin');
+				// err.status = 401;
+				// return next(err);
+				res.status(401);
+				res.end("Not an admin");
 			}
 		})
 	}
 	else
 	{
-		var err = new Error('Not even logged in');
-		err.status = 403;
-		return next(err);
+		// var err = new Error('Not even logged in');
+		// err.status = 401;
+		// return next(err);
+		res.status(401);
+		res.end("Not even logged in");
 	}
 }
 
 exports.verifyManager = function(req, res, next){
 	if(req.signedCookies.username){
 		users.findOne({where :{username: req.signedCookies.username}}).then(function(user){
-			if(user.manager==true)
+			if(user.manager==true || user.admin==true)
 				next();
 			else
 			{
-				var err = new Error('Not a manager');
-				err.status = 403;
-				return next(err);
+				// var err = new Error('Not a manager');
+				// err.status = 401;
+				// return next(err);
+				res.status(401);
+				res.end("Not a manager");
 			}
 		})
 	}
 	else
 	{
-		var err = new Error('Not even logged in');
-		err.status = 403;
-		return next(err);
+		// var err = new Error('Not even logged in');
+		// err.status = 401;
+		// return next(err);
+		res.status(401);
+		res.end("Not even loggedIn");
 	}
 }
 
 exports.verifyClinical = function(req, res, next){
 	if(req.signedCookies.username){
 		users.findOne({where :{username: req.signedCookies.username}}).then(function(user){
-			if(user.clinical==true)
-				next();
+			if(user.clinical==true || user.admin==true)
+				{
+					console.log("yes clinical");
+					next();
+				}
 			else
 			{
-				var err = new Error('Not a clinical');
-				err.status = 403;
-				return next(err);
+				// var err = new Error('Not a clinical');
+				// err.status = 401;
+				// return next(err);
+				console.log('Not a clinical');
+				res.status(401);
+				res.end("Not a clinical");
 			}
 		})
 	}
 	else
 	{
-		var err = new Error('Not even logged in');
-		err.status = 403;
-		return next(err);
+		 console.log("Not clinical");
+		// var err = new Error('Not even logged in');
+		// err.status = 401;
+		// return next(err);
+		res.status(401);
+		res.end("Not even logged in");
 	}
 }
 
 exports.verifyIncharge = function(req, res, next){
 	if(req.signedCookies.username){
 		users.findOne({where :{username: req.signedCookies.username}}).then(function(user){
-			if(user.incharge==true)
+			if(user.incharge==true || user.admin==true)
 				next();
 			else
 			{
-				var err = new Error('Not an incharge');
-				err.status = 403;
-				return next(err);
+				// var err = new Error('Not an incharge');
+				// err.status = 401;
+				// return next(err);
+				res.status(401);
+				res.end("Not an incharge");
 			}
 		})
 	}
 	else
 	{
-		var err = new Error('Not even logged in');
-		err.status = 403;
-		return next(err);
+		// var err = new Error('Not even logged in');
+		// err.status = 401;
+		// return next(err);
+		res.status(401);
+		res.end("Not an incharge");
 	}
 }

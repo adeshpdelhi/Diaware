@@ -1,4 +1,6 @@
 var express = require('express');
+var auth = require('../../config/auth');
+
 var apiRouter  = express.Router();
 
 var registrationRouter = require('./patientroute');
@@ -10,17 +12,17 @@ var dropDownRouter = require('./dropdownsroute');
 var monitoringRouter = require('./monitoringRoute');
 var inventoryRouter = require('./inventoryRoute');
 
-
-var scheduleRouter = require('./appointment/scheduleroute');
-apiRouter.use('/:centreId/schedulePatient',scheduleRouter);
-var appointmentRouter = require('./appointment/appointmentroute');
-apiRouter.use('/:centreId',appointmentRouter);
-
-apiRouter.use('/:centreId/patients',registrationRouter);
 apiRouter.use('/users',usersRouter);
-apiRouter.use('/:centreId/bills',billingRouter);
-apiRouter.use('/centres',centreRouter);
-apiRouter.use('/panels',panelRouter);
-apiRouter.use('/dropDowns',dropDownRouter);
-apiRouter.use('/monitoringChart',monitoringRouter);
+var scheduleRouter = require('./appointment/scheduleroute');
+apiRouter.use('/:centreId/schedulePatient',auth.verifyLoggedIn,scheduleRouter);
+var appointmentRouter = require('./appointment/appointmentroute');
+apiRouter.use('/:centreId',auth.verifyLoggedIn,appointmentRouter);
+
+apiRouter.use('/:centreId/patients',auth.verifyLoggedIn,registrationRouter);
+apiRouter.use('/:centreId/bills',auth.verifyManager,billingRouter);
+apiRouter.use('/centres',auth.verifyLoggedIn,centreRouter);
+apiRouter.use('/panels',auth.verifyLoggedIn,panelRouter);
+apiRouter.use('/dropDowns',auth.verifyLoggedIn,dropDownRouter);
+apiRouter.use('/monitoringChart',auth.verifyClinical,monitoringRouter);
+
 module.exports = apiRouter;

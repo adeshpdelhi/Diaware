@@ -49,9 +49,10 @@
                     {{message}}
                 </div> 
                 <div class="row " >
-                  <a href style="text-align:right" data-toggle="tooltip" title="View Latest Care Plan" data-placement="top" class="pull-left col-sm-offset-1"><span class="glyphicon glyphicon-pushpin" ng-click="latest()"></span></a>
+                  <!-- <a href style="text-align:right" data-toggle="tooltip" title="View Latest Care Plan" data-placement="top" class="pull-left col-sm-offset-1"><span class="glyphicon glyphicon-pushpin" ng-click="latest()"></span></a> -->
+                  <button class="btn btn-warning pull-left col-sm-push-2" ng-click="latest()">Latest</button>
                   <!-- glyphicon-pushpin -->
-                  <button class="btn btn-warning pull-right col-sm-pull-1" data-toggle="modal" data-target="#listPlansModal" ng-click="listPrevPlans()">List Previous Plans</button>
+                  <button class="btn btn-warning pull-right col-sm-pull-2" data-toggle="modal" data-target="#listPlansModal" ng-click="listPrevPlans()">List Previous Plans</button>
                 </div>   
                 <div style="padding-top:30px;" class="panel-body col-sm-10 col-sm-pull-1 col-sm-push-1" >   
                 <div class="table-responsive ">
