@@ -58,13 +58,13 @@ angular.module('App')
 
 		
 
-		$scope.removeItem = function(itemId){
-			console.log('deleting itemId '+itemId);
-		    for (var i = 0; i <$scope.indentItems.length; i++) {
-                if($scope.indentItems[i].itemId == itemId){
-                    $scope.indentItems.splice(i,1);
-                }
-            }
+		$scope.removeItem = function(index){
+			console.log('deleting iindex'+index);
+		    // for (var i = 0; i <$scope.indentItems.length; i++) {
+      //           if($scope.indentItems[i].itemId == itemId){
+                    $scope.indentItems.splice(index,1);
+            //     }
+            // }
 		};
 
 		$scope.addItem = function(obj){
