@@ -29,32 +29,31 @@ angular.module('App')
 		};
 
 		inventoryFactory.getItems().query().$promise.then(function(response){
-			// console.log(response);
-			// $scope.items = [];
-			// for(var i=0;i<response.length;i++)
-			// {
-			// 	if($scope.items.includes(response[i])==false)
-			// 		$scope.items.push(response[i]);
-			// }
 			$scope.filteredItems = response;
 		},function(response){
 			alert('item retieval failed');
 		});
+
+		inventoryFactory.getVendors().query().$promise.then(function(response){
+			$scope.vendors = response;
+		},function(response){
+			alert('vendors retieval failed');
+		});
 		
 
-		$scope.itemNameChanged = function(){
-			console.log('item printed in next line');
-			console.log($scope.indentItem.itemName);
-			$scope.usageTypes=[];
-			for(var i=0;i<$scope.items.length; i++)
-			{
-				if($scope.items[i].itemName == $scope.indentItem.itemName)
-				{
-					if($scope.usageTypes.includes($scope.items[i].usageTypes)==false)
-						$scope.usageTypes.push($scope.items[i].usageTypes);
-				}
-			}
-		}
+		// $scope.itemNameChanged = function(){
+		// 	console.log('item printed in next line');
+		// 	console.log($scope.indentItem.itemName);
+		// 	$scope.usageTypes=[];
+		// 	for(var i=0;i<$scope.items.length; i++)
+		// 	{
+		// 		if($scope.items[i].itemName == $scope.indentItem.itemName)
+		// 		{
+		// 			if($scope.usageTypes.includes($scope.items[i].usageTypes)==false)
+		// 				$scope.usageTypes.push($scope.items[i].usageTypes);
+		// 		}
+		// 	}
+		// }
 
 		
 
@@ -117,7 +116,7 @@ angular.module('App')
 			// 	console.log($scope.indentItem);
 			// }
 			/////////////////////////////////
-			
+			$scope.indent.status="Raised";
 			$scope.indent.centreId=authorize.getCentre();
 			$scope.indent.lastModifiedBy=authorize.getUsername();
 			inventoryFactory.getIndents(authorize.getCentre()).save($scope.indent).$promise.then(function(response){
@@ -137,7 +136,7 @@ angular.module('App')
 					}
 					$scope.indentForm.$setPristine();
 					$scope.savedOnce = true;
-					$scope.message = 'Saved!';
+					$scope.message = 'Sent!';
 					$scope.messageColor = 'success';
 					$scope.showAlert = true;
 					$scope.indent = {

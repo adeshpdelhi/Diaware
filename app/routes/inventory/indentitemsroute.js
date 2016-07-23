@@ -23,7 +23,10 @@ indentItemsRouter.route('/')
     db.indentItems.findAll({
         where:{
             indentId:parseInt(req.params.indentId,10)
-        }
+        },
+        include:[
+            db.item
+        ]
     }).then(function(indentItems){
         console.log(JSON.stringify(indentItems));
         res.json(indentItems);
@@ -70,7 +73,10 @@ indentItemsRouter.route('/:itemId')
         where:{
             itemId:parseInt(req.params.itemId,10),            
             indentId:req.params.indentId
-        }
+        },
+        include:[
+            db.item
+        ]
     }).then(function(indentItem){
         console.log(JSON.stringify(indentItem));
         res.json(indentItem);

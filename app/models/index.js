@@ -124,6 +124,9 @@ dbmodel.futureAppointments.belongsTo(dbmodel.patientDetails,{foreignKey:'patient
 dbmodel.indent.hasMany(dbmodel.indentItems,{foreignKey:'indentId'});
 dbmodel.indentItems.belongsTo(dbmodel.indent,{foreignKey:'indentId'});
 
+dbmodel.item.hasOne(dbmodel.indentItems,{foreignKey:'itemId'});
+dbmodel.indentItems.belongsTo(dbmodel.item,{foreignKey:'itemId'});
+
 dbmodel.stockIssued.hasMany(dbmodel.stockIssuedItems,{foreignKey:'stockIssuedId'});
 dbmodel.stockIssuedItems.belongsTo(dbmodel.stockIssued,{foreignKey:'stockIssuedId'});
 

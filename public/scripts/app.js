@@ -175,6 +175,17 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
 
             })
 
+            .state('app.inventory.indent.view', {
+                url:'view',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/ViewInventory/viewIndents.html',
+                        controller  : 'ViewIndentsController'        
+                    }
+                }
+
+            })
+
 
 
 
@@ -238,16 +249,16 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
 
 			////////////////////////////////////
 			
-			.state('app.inventory.view_inventory_identing', {
-                url:'Inventory_Identing/view',
-                views: {
-                    'content@': {
-                        templateUrl : 'views/inventory/ViewInventory/viewInventoryIdenting.html',
-                        controller  : 'ViewInventoryIdentingController'        
-                    }
-                }
+			// .state('app.inventory.view_inventory_identing', {
+   //              url:'Inventory_Identing/view',
+   //              views: {
+   //                  'content@': {
+   //                      templateUrl : 'views/inventory/ViewInventory/viewInventoryIdenting.html',
+   //                      controller  : 'ViewInventoryIdentingController'        
+   //                  }
+   //              }
 
-            })
+   //          })
 			
 			.state('app.inventory.view_stock_received', {
                 url:'Stock_Received/view',
