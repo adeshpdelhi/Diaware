@@ -98,9 +98,9 @@ create table vendor(
 	vendorId int primary key NOT NULL AUTO_INCREMENT,
 	vendorName varchar(60),
 	vendorAddress varchar(60),
-	vendorTINNumber varchar(60),
+	vendorTINNumber bigint,
 	vendorContactPerson varchar(60),
-	vendorContactPersonNumber varchar(60),
+	vendorContactPersonNumber bigint,
 	vendorIntroducedBy varchar(60),
 	vendorIntroducedByName varchar(60),
 	lastModifiedBy varchar(60)

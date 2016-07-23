@@ -136,6 +136,38 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                 url:'inventory/',
             })
 
+            .state('app.inventory.vendor', {
+                url:'vendor/'
+            })
+            .state('app.inventory.vendor.new', {
+                url:'new',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/addVendor.html',
+                        controller  : 'AddVendorController'        
+                    }
+                }
+
+            })
+
+            .state('app.inventory.vendor.view', {
+                url:'view',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/ViewInventory/viewVendor.html',
+                        controller  : 'ViewVendorController'        
+                    }
+                }
+
+            })
+
+
+
+
+
+
+
+
             .state('app.inventory.new_inventory_identing', {
                 url:'Inventory_Identing/new',
                 views: {
@@ -180,18 +212,18 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
 
             })
 			
-			.state('app.inventory.new_vendor', {
-                url:'Vendor/new',
-                views: {
-                    'content@': {
-                        templateUrl : 'views/inventory/addVendor.html',
-                        controller  : 'AddVendorController'        
-                    }
-                }
+			// .state('app.inventory.newvendor', {
+   //              url:'Vendor/new',
+   //              views: {
+   //                  'content@': {
+   //                      templateUrl : 'views/inventory/addVendor.html',
+   //                      controller  : 'AddVendorController'        
+   //                  }
+   //              }
 
-            })
+   //          })
 			
-			
+
 			////////////////////////////////////
 			
 			.state('app.inventory.view_inventory_identing', {
@@ -238,16 +270,16 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
 
             })
 			
-			.state('app.inventory.view_vendor', {
-                url:'Vendor/view',
-                views: {
-                    'content@': {
-                        templateUrl : 'views/inventory/ViewInventory/viewVendor.html',
-                        controller  : 'ViewVendorController'        
-                    }
-                }
+			// .state('app.inventory.view_vendor', {
+   //              url:'Vendor/view',
+   //              views: {
+   //                  'content@': {
+   //                      templateUrl : 'views/inventory/ViewInventory/viewVendor.html',
+   //                      controller  : 'ViewVendorController'        
+   //                  }
+   //              }
 
-            })
+   //          })
 			
 			////////////////////////////////////
 			

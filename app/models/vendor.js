@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     vendorTINNumber: {
-      type: DataTypes.STRING,
+      type: DataTypes.BIGINT,
       allowNull: true
     },
     vendorContactPerson: {
@@ -25,12 +25,15 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     vendorContactPersonNumber: {
-      type: DataTypes.STRING,
+      type: DataTypes.BIGINT,
       allowNull: true
     },
     vendorIntroducedBy: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      validate:{
+        isIn:[['','Staff','Others','New found locally','New found corporate office']]
+      }
     },
     vendorIntroducedByName: {
       type: DataTypes.STRING,

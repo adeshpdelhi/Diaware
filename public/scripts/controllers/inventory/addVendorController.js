@@ -2,9 +2,10 @@
 angular.module('App')
 .controller('AddVendorController',['$scope','authorize','inventoryFactory', function($scope,authorize,inventoryFactory){
 	
-	$scope.showalert_add_vendor=false;
-		
-		$scope.addVendor= {
+	$scope.showalert_vendor=false;
+	$scope.message='';
+	$scope.messageColor='';
+		$scope.vendor= {
 			vendorName:null,
 			vendorAddress:null,	
 			vendorTINNumber:null,
@@ -12,18 +13,16 @@ angular.module('App')
 			vendorContactPersonNumber:null,
 			vendorIndroducedBy:null,
 			vendorIntroducedByName:null,
-			
 		};
 		
 		
 		$scope.saveVendor = function(){
 			
-		 inventoryFactory.getVendors().save($scope.addVendor).$promise.then(function(response){
+		 inventoryFactory.getVendors(authorize.getCentre()).save($scope.vendor).$promise.then(function(response){
 
-				console.log($scope.addVendor);
-
-				$scope.addVendorForm.$setPristine();
-				$scope.addVendor= {
+				console.log(response);
+				$scope.vendorForm.$setPristine();
+				$scope.vendor= {
 					vendorName:null,
 					vendorAddress:null,
 					vendorTINNumber:null,
@@ -31,9 +30,16 @@ angular.module('App')
 					vendorContactPersonNumber:null,
 					vendorIndroducedBy:null,
 					vendorIntroducedByName:null,
-					
 				};
-				$scope.showalert_add_vendor=true;
+				$scope.showalert=true;
+				$scope.message='Saved successfully';
+				$scope.messageColor='success';
+		},
+		function(response){
+			console.log(response);
+			$scope.showalert=true;
+				$scope.message='Error saving!';
+				$scope.messageColor='danger';
 		})
 		
 		

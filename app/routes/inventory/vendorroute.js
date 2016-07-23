@@ -44,7 +44,14 @@ vendorRouter.route('/:vendorId')
     });
 })
 .delete(function(req,res,next){
-
+    db.vendor.destroy({
+        where:{
+            vendorId:parseInt(req.params.vendorId,10),
+        }
+    }).then(function(vendor){
+        console.log(JSON.stringify(vendor));
+        res.json(vendor);
+    });
 })
 .put(function(req,res,next){
     console.log(req.body);
