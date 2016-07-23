@@ -1,42 +1,38 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('vendor', {
-    vendorId: {
+  return sequelize.define('indent', {
+    centreId: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    indentId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    vendorName: {
+    requestDate: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    requiredByDate: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    stockOrderTo: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    vendorAddress: {
+    status: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    vendorTINNumber: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    vendorContactPerson: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    vendorContactPersonNumver: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    vendorIntroducedBy: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    vendorintroducedByName: {
+    lastModifiedBy: {
       type: DataTypes.STRING,
       allowNull: true
     }
   }, {
-    tableName: 'vendor'
+    tableName: 'indent'
   });
 };

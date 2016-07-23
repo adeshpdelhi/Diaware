@@ -1,41 +1,34 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('consumption', {
-    centreId: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    treatementType: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    treatementId: {
-      type: DataTypes.STRING,
+  return sequelize.define('item', {
+    itemId: {
+      type: DataTypes.BIGINT,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     itemName: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    brand: {
+    usageType: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    type: {
+    brandName: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    quanityType: {
+    quantityMeasurementType: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    quantity: {
-      type: DataTypes.INTEGER(11),
+    lastModifiedBy: {
+      type: DataTypes.STRING,
       allowNull: true
     }
   }, {
-    tableName: 'consumption'
+    tableName: 'item'
   });
 };

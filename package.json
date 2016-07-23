@@ -10,6 +10,7 @@
   },
   "scripts": {
     "start": "node ./config/bin/www",
+    "start refresh": "node ./config/bin/www refresh",
     "postinstall": "bower install"
   },
   "dependencies": {

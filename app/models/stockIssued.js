@@ -15,7 +15,23 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     },
-    estimatedTreatmentsNextDay: {
+    estimatedSingleUse: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    estimatedReUse: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    estimatedNewDialyzer: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    estimatedCatheterSingleLumen: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    estimatedCatheterDoubleLumen: {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
@@ -29,6 +45,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     nextExpectedStockIssueDate: {
       type: DataTypes.DATE,
+      allowNull: true
+    },
+    lastModifiedBy: {
+      type: DataTypes.STRING,
       allowNull: true
     }
   }, {

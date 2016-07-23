@@ -15,7 +15,7 @@ var fs = require('fs');
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-app.set('secPort', port+443);
+//app.set('secPort', port+443);
 /**
  * Create HTTP server.
  */
@@ -28,26 +28,32 @@ app.set('secPort', port+443);
 
 // server.listen(port);
 
+// print process.argv
+var forceObj = {force: false};
+if(process.argv[2]!=null && process.argv[2]=='refresh')
+  forceObj.force = true;
 
 var models = require('../../app/models');
 
-models.sequelize.sync().then(function () {
-  var server = http.createServer(app).listen(app.get('port'));
+models.sequelize.sync(forceObj).then(function () {
+  var server = http.createServer(app).listen(app.get('port'), function(){
+    console.log('server listening on port ', app.get('port'));
+  });
   server.on('error', onError);
   server.on('listening', onListening);
 
-  var options = {
-    key : fs.readFileSync(__dirname +'/private.key'),
-    cert: fs.readFileSync(__dirname + '/certificate.pem')
-  };
+  // var options = {
+  //   key : fs.readFileSync(__dirname +'/private.key'),
+  //   cert: fs.readFileSync(__dirname + '/certificate.pem')
+  // };
 
-  var secureServer = https.createServer(options,app);
+  // var secureServer = https.createServer(options,app);
 
-  secureServer.listen(app.get('secPort'), function(){
-    console.log('server listening on port ', app.get('secPort'));
-  });
-  secureServer.on('error',onError);
-  secureServer.on('listening', onListening);
+  // secureServer.listen(app.get('secPort'), function(){
+  //   console.log('server listening on port ', app.get('secPort'));
+  // });
+  // secureServer.on('error',onError);
+  // secureServer.on('listening', onListening);
 
   /**
    * Event listener for HTTP server "error" event.

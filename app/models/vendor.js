@@ -17,22 +17,26 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     vendorTINNumber: {
-      type: DataTypes.STRING,
+      type: DataTypes.BIGINT,
       allowNull: true
     },
     vendorContactPerson: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    vendorContactPersonNumver: {
-      type: DataTypes.STRING,
+    vendorContactPersonNumber: {
+      type: DataTypes.BIGINT,
       allowNull: true
     },
     vendorIntroducedBy: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    vendorintroducedByName: {
+    vendorIntroducedByName: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    lastModifiedBy: {
       type: DataTypes.STRING,
       allowNull: true
     }

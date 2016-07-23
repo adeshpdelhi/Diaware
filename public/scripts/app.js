@@ -145,19 +145,74 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                 url:'inventory/',
             })
 
-            .state('app.inventory.inventory_identing', {
-                url:'Inventory_Identing',
+            .state('app.inventory.vendor', {
+                url:'vendor/'
+            })
+            .state('app.inventory.vendor.new', {
+                url:'new',
                 views: {
                     'content@': {
-                        templateUrl : 'views/inventory/inventoryIdenting.html',
-                        controller  : 'InventoryIdentingController'        
+                        templateUrl : 'views/inventory/addVendor.html',
+                        controller  : 'AddVendorController'        
                     }
                 }
 
             })
+
+            .state('app.inventory.vendor.view', {
+                url:'view',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/ViewInventory/viewVendor.html',
+                        controller  : 'ViewVendorController'        
+                    }
+                }
+
+            })
+
+            .state('app.inventory.indent', {
+                url:'indent/',
+            })
+            .state('app.inventory.indent.new', {
+                url:'new',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/addIndent.html',
+                        controller  : 'AddIndentController'        
+                    }
+                }
+
+            })
+
+            .state('app.inventory.indent.view', {
+                url:'view',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/ViewInventory/viewIndents.html',
+                        controller  : 'ViewIndentsController'        
+                    }
+                }
+
+            })
+
+
+
+
+
+
+            // .state('app.inventory.new_inventory_identing', {
+            //     url:'Inventory_Identing/new',
+            //     views: {
+            //         'content@': {
+            //             templateUrl : 'views/inventory/inventoryIdenting.html',
+            //             controller  : 'InventoryIdentingController'        
+            //         }
+            //     }
+
+            // })
 			
-			.state('app.inventory.stock_received', {
-                url:'Stock_Received',
+			.state('app.inventory.new_stock_received', {
+                url:'Stock_Received/new',
                 views: {
                     'content@': {
                         templateUrl : 'views/inventory/stockReceived.html',
@@ -167,8 +222,8 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
 
             })
 			
-			.state('app.inventory.issue_stock', {
-                url:'Issue_Stock',
+			.state('app.inventory.new_issue_stock', {
+                url:'Issue_Stock/new',
                 views: {
                     'content@': {
                         templateUrl : 'views/inventory/issueStock.html',
@@ -178,8 +233,8 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
 
             })
 			
-			.state('app.inventory.treatment_inventory', {
-                url:'Treatment_Inventory_Consumption',
+			.state('app.inventory.new_treatment_inventory', {
+                url:'Treatment_Inventory_Consumption/new',
                 views: {
                     'content@': {
                         templateUrl : 'views/inventory/treatmentInventory.html',
@@ -189,17 +244,76 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
 
             })
 			
-			.state('app.inventory.add_vendor', {
-                url:'Add_Vendor',
+			// .state('app.inventory.newvendor', {
+   //              url:'Vendor/new',
+   //              views: {
+   //                  'content@': {
+   //                      templateUrl : 'views/inventory/addVendor.html',
+   //                      controller  : 'AddVendorController'        
+   //                  }
+   //              }
+
+   //          })
+			
+
+			////////////////////////////////////
+			
+			// .state('app.inventory.view_inventory_identing', {
+   //              url:'Inventory_Identing/view',
+   //              views: {
+   //                  'content@': {
+   //                      templateUrl : 'views/inventory/ViewInventory/viewInventoryIdenting.html',
+   //                      controller  : 'ViewInventoryIdentingController'        
+   //                  }
+   //              }
+
+   //          })
+			
+			.state('app.inventory.view_stock_received', {
+                url:'Stock_Received/view',
                 views: {
                     'content@': {
-                        templateUrl : 'views/inventory/addVendor.html',
-                        controller  : 'AddVendorController'        
+                        templateUrl : 'views/inventory/ViewInventory/viewStockReceived.html',
+                        controller  : 'ViewStockReceivedController'        
                     }
                 }
 
             })
 			
+			.state('app.inventory.view_issue_stock', {
+                url:'Issue_Stock/view',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/ViewInventory/viewIssueStock.html',
+                        controller  : 'ViewIssueStockController'        
+                    }
+                }
+
+            })
+			
+			.state('app.inventory.view_treatment_inventory', {
+                url:'Treatment_Inventory_Consumption/view',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/ViewInventory/viewTreatmentInventory.html',
+                        controller  : 'ViewTreatmentInventoryController'        
+                    }
+                }
+
+            })
+			
+			// .state('app.inventory.view_vendor', {
+   //              url:'Vendor/view',
+   //              views: {
+   //                  'content@': {
+   //                      templateUrl : 'views/inventory/ViewInventory/viewVendor.html',
+   //                      controller  : 'ViewVendorController'        
+   //                  }
+   //              }
+
+   //          })
+			
+			////////////////////////////////////
 			
             .state('app.billing',{
                 url:"billing/",
@@ -293,6 +407,16 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                     'content@':{
                         templateUrl:'views/admin/addCentre.html',
                         controller:'AddCentreController'
+                    }
+                }
+            })
+			
+			.state('app.admin.dashboard',{
+                url:"dashboard",
+                views:{
+                    'content@':{
+                        templateUrl:'views/admin/dashboard.html',
+                        controller:'DashboardController'
                     }
                 }
             })

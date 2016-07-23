@@ -1,28 +1,24 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('indentsItems', {
-    indentItemsId: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: '',
-      primaryKey: true
-    },
-    itemNumber: {
+  return sequelize.define('indentItems', {
+    indentId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       defaultValue: '0',
       primaryKey: true
     },
-    itemName: {
-      type: DataTypes.STRING,
-      allowNull: true
+    itemId: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      defaultValue: '0',
+      primaryKey: true,
+      references:{
+        model: 'item',
+        key: 'itemId'
+      }
     },
-    usageType: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    brandName: {
+    linkedStatus: {
       type: DataTypes.STRING,
       allowNull: true
     },
@@ -30,15 +26,15 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
-    availabilityQuantity: {
+    availableQuantity: {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
-    quantityType: {
+    lastModifiedBy: {
       type: DataTypes.STRING,
       allowNull: true
     }
   }, {
-    tableName: 'indentsItems'
+    tableName: 'indentItems'
   });
 };

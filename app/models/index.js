@@ -126,4 +126,18 @@ dbmodel.pastAppointments.belongsTo(dbmodel.patientDetails,{foreignKey:'patientId
 dbmodel.patientDetails.hasMany(dbmodel.cancelledAppointments,{foreignKey:'patientId'});
 dbmodel.cancelledAppointments.belongsTo(dbmodel.patientDetails,{foreignKey:'patientId'});
 
+dbmodel.indent.hasMany(dbmodel.indentItems,{foreignKey:'indentId'});
+dbmodel.indentItems.belongsTo(dbmodel.indent,{foreignKey:'indentId'});
+
+dbmodel.item.hasOne(dbmodel.indentItems,{foreignKey:'itemId'});
+dbmodel.indentItems.belongsTo(dbmodel.item,{foreignKey:'itemId'});
+
+dbmodel.stockIssued.hasMany(dbmodel.stockIssuedItems,{foreignKey:'stockIssuedId'});
+dbmodel.stockIssuedItems.belongsTo(dbmodel.stockIssued,{foreignKey:'stockIssuedId'});
+
+dbmodel.consumption.hasMany(dbmodel.consumptionItems,{foreignKey:'treatementId'});
+dbmodel.consumptionItems.belongsTo(dbmodel.consumption,{foreignKey:'treatementId'});
+
+
+
 module.exports = dbmodel;

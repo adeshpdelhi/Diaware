@@ -7,20 +7,33 @@ var inventoryRouter = express.Router({mergeParams:true});
 inventoryRouter.use(bodyParser.json());
 
 
-var stockIdentingRouter = require('./inventory/stockidentingroute');
-inventoryRouter.use('/stockidenting',stockIdentingRouter);
+// var stockIndentingRouter = require('./inventory/stockindentingroute');
+// inventoryRouter.use('/stockindenting',stockIndentingRouter);
 
-var stockReceivedRouter = require('./inventory/stockreceivedroute');
-inventoryRouter.use('/stockreceived',stockReceivedRouter);
+// var stockReceivedRouter = require('./inventory/stockreceivedroute');
+// inventoryRouter.use('/stockreceived',stockReceivedRouter);
 
-var stockIssueRouter = require('./inventory/stockissueroute');
-inventoryRouter.use('/stockissue',stockIssueRouter);
+// var stockIssueRouter = require('./inventory/stockissueroute');
+// inventoryRouter.use('/stockissue',stockIssueRouter);
 
-var treatmentInventoryRouter = require('./inventory/treatmentinventoryroute');
-inventoryRouter.use('/stockidenting',treatmentInventoryRouter);
+// var treatmentInventoryRouter = require('./inventory/treatmentinventoryroute');
+// inventoryRouter.use('/stockindenting',treatmentInventoryRouter);
 
-var vendorRouter = require('./inventory/vendorroute');
-inventoryRouter.use('/vendor',vendorRouter);	
+var consumptionRouter = require('./inventory/consumptionroute');
+inventoryRouter.use('/consumption',consumptionRouter);
+
+var treatementItemsRouter = require('./inventory/treatementitemsroute');
+inventoryRouter.use('/treatementitems',treatementItemsRouter);
+
+
+var indentRouter = require('./inventory/indentroute');
+inventoryRouter.use('/indent',indentRouter);
+
+var stockIssuedRouter = require('./inventory/stockissuedroute');
+inventoryRouter.use('/stock/issued/',stockIssuedRouter);
+
+var stockRouter = require('./inventory/stockroute');
+inventoryRouter.use('/stock',stockRouter);
 
 
 module.exports = inventoryRouter;

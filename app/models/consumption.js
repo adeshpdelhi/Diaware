@@ -11,28 +11,12 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     treatementId: {
-      type: DataTypes.STRING,
+      type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true
     },
-    itemName: {
+    lastModifiedBy: {
       type: DataTypes.STRING,
-      allowNull: true
-    },
-    brand: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    type: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    quanityType: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    quantity: {
-      type: DataTypes.INTEGER(11),
       allowNull: true
     }
   }, {

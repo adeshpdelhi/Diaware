@@ -25,4 +25,14 @@ apiRouter.use('/panels',auth.verifyLoggedIn,panelRouter);
 apiRouter.use('/dropDowns',auth.verifyLoggedIn,dropDownRouter);
 apiRouter.use('/monitoringChart',auth.verifyClinical,monitoringRouter);
 
+
+var itemRouter = require('./inventory/itemroute');
+apiRouter.use('/inventory/item',itemRouter);
+
+var vendorRouter = require('./inventory/vendorroute');
+apiRouter.use('/inventory/vendor',vendorRouter);
+
+apiRouter.use('/:centreId/inventory',auth.verifyLoggedIn,inventoryRouter);
+
+
 module.exports = apiRouter;

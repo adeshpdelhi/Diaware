@@ -1,18 +1,20 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('stock', {
-    centreId: {
-      type: DataTypes.STRING,
+  return sequelize.define('consumptionItems', {
+    treatementId: {
+      type: DataTypes.BIGINT,
       allowNull: false,
+      defaultValue: '0',
       primaryKey: true
     },
     itemId: {
-      type: DataTypes.BIGINT,
+      type: DataTypes.INTEGER(11),
       allowNull: false,
+      defaultValue: '0',
       primaryKey: true
     },
-    availableQuantity: {
+    quantity: {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
@@ -21,6 +23,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     }
   }, {
-    tableName: 'stock'
+    tableName: 'consumptionItems'
   });
 };

@@ -1,46 +1,53 @@
 'use strict';
 angular.module('App')
-.controller('AddVendorController',['$scope','authorize', function($scope,authorize){
-	
-	$scope.showalert_add_vendor=false;
-		
-		$scope.addVendor= {
-			vendorId:null,
-			vendorName:null,
-			vendorAddress:null,
-			vendorTinNo:null,
-			vendorContactPerson:null,
-			vendorContactNo:null,
-			vendorIndroducedBy:null,
-			vendorIntroducedByPersonName:null,
-			saved:false
-		};
-		
-
-		
-		
-		$scope.saveVendor = function(){
-			
-		/* inventoryFactory.getVendors().save($scope.addVendor).$promise.then(function(response){
-
-				console.log($scope.addVendor);
-
-				$scope.addVendorForm.$setPristine();
-				$scope.addVendor= {
-					vendorId:null,
-					vendorName:null,
-					vendorAddress:null,
-					vendorTinNo:null,
-					vendorContactPerson:null,
-					vendorContactNo:null,
-					vendorIndroducedBy:null,
-					vendorIntroducedByPersonName:null,
-					saved:false
-		};
-		$scope.showalert_add_vendor=true;
+.controller('ViewVendorController',['$scope','authorize','inventoryFactory', function($scope,authorize,inventoryFactory){
+		$scope.close = close;
+		$scope.updateVendors = function(){
+			inventoryFactory.getVendors().query().$promise.then(function(response){
+		      $scope.vendors = response;
+		      console.log(response);
+		    },function(response){
+		    	alert('unable to fetch vendors');
+		    });
 		}
-		*/
-		
+		$scope.updateVendors();
+		$scope.vendor = {};
+		$scope.editVendor = function(vendorId){
+			inventoryFactory.getVendors().get({vendorId:vendorId}).$promise.then(function(response){
+				$scope.vendor = response;
+			},function(response){
+				alert('Vendor retrieval failed');
+			})
+		};
+		$scope.updateVendor = function(){
+			$scope.vendor.lastModifiedBy = authorize.getUsername();
+			inventoryFactory.getVendors().update({vendorId:$scope.vendor.vendorId},$scope.vendor).$promise.then(function(response){
+				inventoryFactory.getVendors().query().$promise.then(function(response){
+			      $scope.vendors = response;
+			      console.log(response);
+			      $scope.dismiss();
+			    },function(response){
+			    	alert('unable to fetch vendors');
+			    });
+
+			},function(response){
+				alert('updation failed');
+			})
+		}
+		$scope.deleteVendor = function(vendorId){
+			console.log('deleteVendor for '+vendorId);
+			inventoryFactory.getVendors().remove({vendorId:vendorId});
+			$scope.updateVendors();
 		}
 	}])
-;
+
+.directive('myModal', function() {
+   return {
+     restrict: 'A',
+     link: function(scope, element, attr) {
+       scope.dismiss = function() {
+           element.modal('hide');
+       };
+     }
+   } 
+});
