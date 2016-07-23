@@ -17,12 +17,12 @@ create table indentItems(
 	itemId bigint,
 	linkedStatus varchar(60), -- should be 'Raised' or 'Approved' or 'Received'
 	quantityRequired int,
-	availabilityQuantity int, -- retrieve from stock
+	availableQuantity int, -- retrieve from stock
 	lastModifiedBy varchar(60),
 	primary key(indentId,itemId)
 );
 
-create table inventory(
+create table item(
 	itemId bigint AUTO_INCREMENT primary key NOT NULL,
 	itemName varchar(60),
 	usageType varchar(60),
@@ -34,7 +34,7 @@ create table inventory(
 create table stock(
 	centreId varchar(60) NOT NULL,
 	itemId bigint NOT NULL references inventory(itemId),
-	availabilityQuantity int,
+	availableQuantity int,
 	lastModifiedBy varchar(60),
 	primary key(centreId,itemId)
 );

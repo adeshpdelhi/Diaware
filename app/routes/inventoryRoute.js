@@ -25,8 +25,6 @@ inventoryRouter.use('/consumption',consumptionRouter);
 var treatementItemsRouter = require('./inventory/treatementitemsroute');
 inventoryRouter.use('/treatementitems',treatementItemsRouter);
 
-var vendorRouter = require('./inventory/vendorroute');
-inventoryRouter.use('/vendor',vendorRouter);
 
 var indentRouter = require('./inventory/indentroute');
 inventoryRouter.use('/indent',indentRouter);
@@ -36,8 +34,6 @@ inventoryRouter.use('/stock/issued/',stockIssuedRouter);
 
 var stockRouter = require('./inventory/stockroute');
 inventoryRouter.use('/stock',stockRouter);
-
-
 
 
 module.exports = inventoryRouter;

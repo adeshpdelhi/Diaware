@@ -2,7 +2,7 @@
 angular.module('App')
 .controller('AddVendorController',['$scope','authorize','inventoryFactory', function($scope,authorize,inventoryFactory){
 	
-	$scope.showalert_vendor=false;
+	$scope.showAlert=false;
 	$scope.message='';
 	$scope.messageColor='';
 		$scope.vendor= {
@@ -17,8 +17,8 @@ angular.module('App')
 		
 		
 		$scope.saveVendor = function(){
-			
-		 inventoryFactory.getVendors(authorize.getCentre()).save($scope.vendor).$promise.then(function(response){
+			$scope.vendor.lastModifiedBy = authorize.getUsername();
+		 inventoryFactory.getVendors().save($scope.vendor).$promise.then(function(response){
 
 				console.log(response);
 				$scope.vendorForm.$setPristine();
@@ -31,13 +31,13 @@ angular.module('App')
 					vendorIndroducedBy:null,
 					vendorIntroducedByName:null,
 				};
-				$scope.showalert=true;
+				$scope.showAlert=true;
 				$scope.message='Saved successfully';
 				$scope.messageColor='success';
 		},
 		function(response){
 			console.log(response);
-			$scope.showalert=true;
+			$scope.showAlert=true;
 				$scope.message='Error saving!';
 				$scope.messageColor='danger';
 		})

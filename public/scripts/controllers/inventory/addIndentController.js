@@ -1,140 +1,133 @@
 'use strict';
 angular.module('App')
-.controller('AddIndentController',['$scope','authorize', function($scope,patientFactory,authorize){
+.controller('AddIndentController',['$scope','authorize','inventoryFactory', function($scope,authorize,inventoryFactory){
 		$scope.savedOnce = false;
 		/////////
-		$scope.showalert_inventory_identing=false;
+		$scope.showAlert=false;
 		
 		
-		$scope.treatmentIndenting = {
+		$scope.indent = {
 			centreId:null,
 			requestDate:null,
 			requiredByDate:null,
 			stockOrderTo:null,
-			status:null
-			
+			status:null,
+			lastModifiedBy:null
 		};
 		
 		
-		$scope.treatmentIndentingItems=[];
-		$scope.treatmentIndentingItem = {
-				itemNumber:null,
-				type:null,
+		$scope.indentItems=[];
+		$scope.indentItem = {
+				itemId:null,
 				itemName:null,
 				usageType:null,
 				brandName:null,
 				quantityRequired:null,
 				availableQuantity:null,
 				quantityMeasurementType:null,
-				saved:false
+				lastModifiedBy:null
 		};
 		
 		
 		
-		
+		$scope.removeItem = function(itemId){
+			console.log('deleting itemId '+itemId);
+		    for (var i = 0; i <$scope.indentItems.length; i++) {
+                if($scope.indentItems[i].itemId == itemId){
+                    $scope.indentItems.splice(i,1);
+                }
+            }
+		};
+
 		$scope.addItem = function(){
 			
-			$scope.showalert_inventory_identing=false;
-		    $scope.treatmentIndentingItem.lastModifiedBy = authorize.getUsername();
-			if($scope.treatmentIndentingItems.length)
-				$scope.treatmentIndentingItem.itemNumber = $scope.treatmentIndentingItems[$scope.treatmentIndentingItems.length - 1].itemNumber + 1;
-			else $scope.treatmentIndentingItem.itemNumber = 0;
+			$scope.showAlert=false;
+		    $scope.indentItem.lastModifiedBy = authorize.getUsername();
+			// if($scope.indentItems.length)
+			// 	$scope.indentItem.itemNumber = $scope.indentItems[$scope.indentItems.length - 1].itemNumber + 1;
+			// else $scope.indentItem.itemNumber = 0;
 			
-			$scope.treatmentIndentingItem.type="Raised";
+			$scope.indentItem.linkedStatus="Raised";
 			
-			$scope.treatmentIndentingItems.push($scope.treatmentIndentingItem);
-			console.log($scope.treatmentIndentingItem);
+			$scope.indentItems.push($scope.indentItem);
+			console.log($scope.indentItem);
 			
-			$scope.inventoryIdentingForm.$setPristine();
+			$scope.indentForm.$setPristine();
 			
-			$scope.treatmentIndentingItem = {
-				itemNumber:null,
-				type:null,
+			$scope.indentItem = {
+				itemId:null,
 				itemName:null,
 				usageType:null,
 				brandName:null,
 				quantityRequired:null,
 				availableQuantity:null,
 				quantityMeasurementType:null,
-				saved:false
-		};
+				lastModifiedBy:null
+			};
 			
 			
 			
 		}
 		
 
-		$scope.sendRequest = function(){
-			if($scope.treatmentIndenting.itemName !== '' || $scope.treatmentIndenting.usageType !== '' || $scope.treatmentIndenting.brandName !== ''
-				|| $scope.treatmentIndenting.quantityRequired !== ''|| $scope.treatmentIndenting.avalaibleQuantity !== ''|| $scope.treatmentIndenting.quantityMeasurementType !== ''){
+		$scope.saveIndent = function(){
+			// if($scope.indent.itemName !== '' || $scope.indent.usageType !== '' || $scope.indent.brandName !== ''
+			// 	|| $scope.indent.quantityRequired !== ''|| $scope.indent.avalaibleQuantity !== ''|| $scope.indent.quantityMeasurementType !== ''){
 				
-				if($scope.treatmentIndentingItems.length)
-					$scope.treatmentIndentingItem.itemNumber = $scope.treatmentIndentingItems[$scope.treatmentIndentingItems.length - 1].itemNumber + 1;
-				else 
-					$scope.treatmentIndentingItem.itemNumber = 0;
+			// 	// if($scope.indentItems.length)
+			// 	// 	$scope.indentItem.itemNumber = $scope.indentItems[$scope.indentItems.length - 1].itemNumber + 1;
+			// 	// else 
+			// 	// 	$scope.indentItem.itemNumber = 0;
 			
-				$scope.treatmentIndentingItem.lastModifiedBy = authorize.getUsername();
-				$scope.treatmentIndentingItem.type="Raised";
+			// 	$scope.indentItem.lastModifiedBy = authorize.getUsername();
+			// 	$scope.indentItem.type="Raised";
 
-				$scope.treatmentIndentingItems.push($scope.treatmentIndentingItem);
-				console.log($scope.treatmentIndentingItem);
-			}
+			// 	$scope.indentItems.push($scope.indentItem);
+			// 	console.log($scope.indentItem);
+			// }
 			/////////////////////////////////
 			
-			$scope.treatmentIndenting.centreId=authorize.getCentre();
-			inventoryFactory.getIdents(authorize.getCentre()).save($scope.treatmentIndenting).$promise.then(function(response){
+			$scope.indent.centreId=authorize.getCentre();
+			$scope.indent.lastModifiedBy=authorize.getUsername();
+			inventoryFactory.getIndents(authorize.getCentre()).save($scope.indent).$promise.then(function(response){
 				
 					$scope.indentId=response.indentId;
-				
-				
-					var x = 0;
-					for(var i = 0; i<$scope.treatmentIndentingItems.length;i++){
-						
-						scope.treatmentIndentingItems[i].indentId=response.indentID;
-						if(!$scope.treatmentIndentingItems[i].saved){
-							$scope.treatmentIndentingItems[i].saved = true;
-							var id ;
-							console.log("i" + i);
-							console.log("x:outside " + x);
-							inventoryFactory.getIdentsItems(authorize.getCentre(),response.indentId).save($scope.treatmentIndentingItems[i]).$promise.then(function(response){
-								//$scope.showalert_events=true;
-								console.log($scope.treatmentIndentingItems[x]);
-								//$scope.events[x].id = response.id;
-								//console.log("x:inside " + x);
-								x++;
-							},function(response){
-								$scope.showalert_events=false;
-								console.log(response);
-							});	
-						}
-						else x++;
+					console.log($scope.indentItems);
+					console.log('here. length is '+$scope.indentItems.length);
+					for(var i = 0; i <  $scope.indentItems.length;  i++){			
+						$scope.indentItems[i].indentId=response.indentId;
+						inventoryFactory.getIndentItems(authorize.getCentre(),$scope.indentId).save($scope.indentItems[i]).$promise.then(function(response){
+						},function(response){
+							$scope.messageColor = 'danger';
+							$scope.showAlert = true;
+							return;
+						});	
 					}
-					for(var i = 0; i<$scope.treatmentIndentingItems.length;i++){
-						console.log($scope.treatmentIndentingItems[i].id + " " + $scope.treatmentIndentingItems[i].saved);
-					}
-					$scope.inventoryIdentingForm.$setPristine();
+					$scope.indentForm.$setPristine();
 					$scope.savedOnce = true;
-					$scope.treatmentIndenting = {
+					$scope.message = 'Saved!';
+					$scope.messageColor = 'success';
+					$scope.showAlert = true;
+					$scope.indent = {
 						centreId:null,
 						requestDate:null,
 						requiredByDate:null,
 						stockOrderTo:null,
-						status:null
-						
+						status:null,
+						lastModifiedBy:null
 					};
 		
 		
-		//$scope.treatmentIndentingItems=[];
-					$scope.treatmentIndentingItem = {
-							itemNumber:null,
-							type:null,
+					$scope.indentItems=[];
+					$scope.indentItem = {
+							itemId:null,
 							itemName:null,
 							usageType:null,
 							brandName:null,
 							quantityRequired:null,
 							availableQuantity:null,
 							quantityMeasurementType:null,
-							saved:false
+							lastModifiedBy:null
 					};
 				
 				

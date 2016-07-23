@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    availabilityQuantity: {
+    availableQuantity: {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
