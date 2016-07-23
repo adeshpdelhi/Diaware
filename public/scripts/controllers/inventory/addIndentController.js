@@ -131,6 +131,7 @@ angular.module('App')
 						},function(response){
 							$scope.messageColor = 'danger';
 							$scope.showAlert = true;
+							$scope.message = ' partial save failed';
 							return;
 						});	
 					}
@@ -167,6 +168,10 @@ angular.module('App')
 				
 				
 				
+			},function(response){
+				$scope.messageColor = 'danger';
+				$scope.showAlert = true;
+				$scope.message = 'Saving failed';
 			});
 
 			
