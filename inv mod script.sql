@@ -56,24 +56,25 @@ create table stockIssuedItems(
 	usageType varchar(60), --									   ---------- denotes a single item entry
 	brandName varchar(60), --									  /
 	quantity int, --											 /
-	quantityMeasurementType varchar(60) --			   _________/
+	quantityMeasurementType varchar(60), --			   _________/
 	primary key(stockIssuedId,itemNumber)
 );
 
 create table consumption(
 	centreId varchar(60) NOT NULL,
 	treatementType varchar(60),
-	treatementId varchar(60) primary key NOT NULL
+	treatementId bigint primary key NOT NULL
 );
 
 create table consumptionItems(
-	treatementId varchar(60) references consumption(treatementId),
+	treatementId bigint references consumption(treatementId),
+	itemNumber int,
 	itemName varchar(60),
 	brand varchar(60),
 	type varchar(60),
 	quanityType varchar(60),
 	quantity int,
-	primary key(treatementId,itemName)
+	primary key(treatementId,itemNumber)
 );
 
 create table dialysisItems(

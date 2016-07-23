@@ -31,7 +31,7 @@ app.set('port', port);
 
 var models = require('../../app/models');
 
-models.sequelize.sync().then(function () {
+models.sequelize.sync({force:true}).then(function () {
   var server = http.createServer(app).listen(app.get('port'), function(){
     console.log('server listening on port ', app.get('port'));
   });

@@ -3,16 +3,20 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('consumptionItems', {
     treatementId: {
-      type: DataTypes.STRING,
+      type: DataTypes.BIGINT,
       allowNull: false,
-      defaultValue: '',
+      defaultValue: '0',
+      primaryKey: true
+    },
+    itemNumber: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      defaultValue: '0',
       primaryKey: true
     },
     itemName: {
       type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: '',
-      primaryKey: true
+      allowNull: true
     },
     brand: {
       type: DataTypes.STRING,

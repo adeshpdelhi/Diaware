@@ -102,6 +102,12 @@ insert into stockIssued(centreId,stockIssuedId,stockIssuedTo,estimatedSingleUse,
 insert into stockIssuedItems(stockIssuedId,itemNumber,itemId,itemName, usageType, brandName, quantity, quantityMeasurementType, createdAt, updatedAt) values(1,0,25,'savlon','general stock','dettol',2,'bottles','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 
+insert into consumption(centreId,treatementType,treatementId,createdAt, updatedAt) values ('JP1','Single Use',25366,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into consumptionItems(treatementId,itemNumber,itemName,brand,type,quanityType,quantity,createdAt,updatedAt) values (25366,0,'savlon','dettol','dnt know yet','bottles',2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+
+
 -- CREATE EVENT addNextWeeksAppointments
 --   ON SCHEDULE
 --     EVERY 1 DAY
