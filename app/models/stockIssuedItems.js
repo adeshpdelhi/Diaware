@@ -8,34 +8,14 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: '0',
       primaryKey: true
     },
-    itemNumber: {
+    itemId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       defaultValue: '0',
       primaryKey: true
     },
-    itemId: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true
-    },
-    itemName: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    usageType: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    brandName: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
     quantity: {
       type: DataTypes.INTEGER(11),
-      allowNull: true
-    },
-    quantityMeasurementType: {
-      type: DataTypes.STRING,
       allowNull: true
     },
     lastModifiedBy: {

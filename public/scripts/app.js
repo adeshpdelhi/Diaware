@@ -161,23 +161,35 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
 
             })
 
-
-
-
-
-
-
-
-            .state('app.inventory.new_inventory_identing', {
-                url:'Inventory_Identing/new',
+            .state('app.inventory.indent', {
+                url:'indent/',
+            })
+            .state('app.inventory.indent.new', {
+                url:'new',
                 views: {
                     'content@': {
-                        templateUrl : 'views/inventory/inventoryIdenting.html',
-                        controller  : 'InventoryIdentingController'        
+                        templateUrl : 'views/inventory/addIndent.html',
+                        controller  : 'AddIndentController'        
                     }
                 }
 
             })
+
+
+
+
+
+
+            // .state('app.inventory.new_inventory_identing', {
+            //     url:'Inventory_Identing/new',
+            //     views: {
+            //         'content@': {
+            //             templateUrl : 'views/inventory/inventoryIdenting.html',
+            //             controller  : 'InventoryIdentingController'        
+            //         }
+            //     }
+
+            // })
 			
 			.state('app.inventory.new_stock_received', {
                 url:'Stock_Received/new',

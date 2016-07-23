@@ -8,25 +8,13 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: '0',
       primaryKey: true
     },
-    itemNumber: {
-      type: DataTypes.INTEGER(11),
+    itemId: {
+      type: DataTypes.BIGINT,
       allowNull: false,
       defaultValue: '0',
       primaryKey: true
     },
-    type: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    itemName: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    usageType: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    brandName: {
+    linkedStatus: {
       type: DataTypes.STRING,
       allowNull: true
     },
@@ -36,10 +24,6 @@ module.exports = function(sequelize, DataTypes) {
     },
     availabilityQuantity: {
       type: DataTypes.INTEGER(11),
-      allowNull: true
-    },
-    quantityMeasurementType: {
-      type: DataTypes.STRING,
       allowNull: true
     },
     lastModifiedBy: {

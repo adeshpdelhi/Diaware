@@ -14,27 +14,29 @@ create table indent( -- if status sent for approval in admin then here status is
 
 create table indentItems(
 	indentId int references indent(indentId),
-	itemNumber int,
-	type varchar(60), -- should be 'Raised' or 'Approved' or 'Received'
-	itemName varchar(60), -- to simulate array
-	usageType varchar(60),
-	brandName varchar(60),
+	itemId bigint,
+	linkedStatus varchar(60), -- should be 'Raised' or 'Approved' or 'Received'
 	quantityRequired int,
 	availabilityQuantity int, -- retrieve from stock
-	quantityMeasurementType varchar(60),
 	lastModifiedBy varchar(60),
-	primary key(indentId,itemNumber)
+	primary key(indentId,itemId)
 );
 
-create table stock(
-	centreId varchar(60) NOT NULL,
+create table inventory(
 	itemId bigint AUTO_INCREMENT primary key NOT NULL,
 	itemName varchar(60),
 	usageType varchar(60),
 	brandName varchar(60),
-	availabilityQuantity int,
 	quantityMeasurementType varchar(60),
 	lastModifiedBy varchar(60)
+);
+
+create table stock(
+	centreId varchar(60) NOT NULL,
+	itemId bigint NOT NULL references inventory(itemId),
+	availabilityQuantity int,
+	lastModifiedBy varchar(60),
+	primary key(centreId,itemId)
 );
 
 create table stockIssued(
@@ -53,16 +55,11 @@ create table stockIssued(
 );
 
 create table stockIssuedItems(
-	stockIssuedId bigint references stockIssued(stockIssuedId),
-	itemNumber int, -- to simulate array			   ~~~~~~~~~\
-	itemId int, --										 		 \ 
-	itemName varchar(60), --								      \
-	usageType varchar(60), --									   ---------- denotes a single item entry
-	brandName varchar(60), --									  /
-	quantity int, --											 /
-	quantityMeasurementType varchar(60), --			   _________/
+	stockIssuedId bigint references stockIssued(stockIssuedId),			  
+	itemId int references inventory(itemId), 
+	quantity int,
 	lastModifiedBy varchar(60),
-	primary key(stockIssuedId,itemNumber)
+	primary key(stockIssuedId,itemId)
 );
 
 create table consumption(
@@ -73,15 +70,11 @@ create table consumption(
 );
 
 create table consumptionItems(
-	treatementId bigint references consumption(treatementId),
-	itemNumber int,
-	itemName varchar(60),
-	brand varchar(60),
-	type varchar(60),
-	quanityType varchar(60),
+	treatementId bigint,
+	itemId int,
 	quantity int,
 	lastModifiedBy varchar(60),
-	primary key(treatementId,itemNumber)
+	primary key(treatementId,itemId)
 );
 
 create table dialysisItems(

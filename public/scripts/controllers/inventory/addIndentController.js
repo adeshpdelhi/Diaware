@@ -1,6 +1,6 @@
 'use strict';
 angular.module('App')
-.controller('ClinicalEventController',['$scope','patientFactory', 'authorize', function($scope,patientFactory,authorize){
+.controller('AddIndentController',['$scope','authorize', function($scope,patientFactory,authorize){
 		$scope.savedOnce = false;
 		/////////
 		$scope.showalert_inventory_identing=false;
@@ -63,78 +63,6 @@ angular.module('App')
 			
 		}
 		
-		
-		/*$scope.removeEvent = function(id){
-			$scope.showalert_events=false;
-		    for (var i = $scope.events.length - 1; i >= 0; i--) {
-                if($scope.events[i].ID == id){
-                	if($scope.events[i].saved)
-                		patientFactory.getPatientMajorClinicalEvents($scope.view?$scope.patient.id:$scope.newpatient_basic.id,authorize.getCentre()).delete({clinicalEventId:$scope.events[i].id});
-                	// get all clinical events of a patient find matching event, get id and then delete or delete by event detail
-                    $scope.events.splice(i,1);
-
-                }
-            }
-		};
-		
-		$scope.updateClinical = function(){
-			console.log('in Update Clinical function');
-			if($scope.event.details !== '' || $scope.event.comments !== '' || $scope.event.date !== null){
-				if($scope.events.length)
-					$scope.event.ID = $scope.events[$scope.events.length - 1].ID + 1;
-				else $scope.event.ID = 0;
-				$scope.event.patientId = $scope.patient.id;
-				$scope.event.lastModifiedBy = authorize.getUsername();
-				console.log("why are you here");
-				$scope.events.push($scope.event);
-				console.log($scope.event);
-			}
-			var x = 0;
-			for(var i = 0; i<$scope.events.length;i++){
-				console.log(JSON.parse(JSON.stringify($scope.events[i])));
-				if(!$scope.events[i].saved){
-					$scope.events[i].saved = true;
-					var id ;
-					console.log("i" + i);
-					console.log("x:outside " + x);
-					patientFactory.getPatientMajorClinicalEvents($scope.patient.id,authorize.getCentre()).save($scope.events[i])
-					.$promise.then(function(response){
-						$scope.showalert_events=true;
-						$scope.showAlertClinical = true;
-						$scope.message = "Updated Clinical Events Successfully";			
-						console.log($scope.events[x]);
-						$scope.events[x].id = response.id;
-						console.log("x:inside " + x);
-						x++;
-					},function(response){
-						$scope.showAlertClinical = true;
-						$scope.message = "Error: " + response.status + " " + response.statusText; 
-					});	
-				}
-				else {
-					$scope.events[i].lastModifiedBy = authorize.getUsername();
-					patientFactory.getPatientMajorClinicalEvents($scope.patient.id,authorize.getCentre()).update({
-						clinicalEventId:$scope.events[i].id
-					},$scope.events[i]).$promise.then(function(response){
-						$scope.showAlertClinical = true;
-						$scope.message = "Updated Clinical Events Successfully";			
-					},function(response){
-						$scope.showAlertClinical = true;
-						$scope.message = "Error: " + response.status + " " + response.statusText; 
-					});
-					x++;
-				}
-			}
-			$scope.updateMyValuesFromClinical(false,$scope.showAlertClinical, $scope.message);
-			$scope.clinicalEventForm.$setPristine();
-			$scope.event = {
-				ID:null,
-				date:'',
-				details:"",
-				comments:"",
-				saved:false
-	        };	
-		}; */
 
 		$scope.sendRequest = function(){
 			if($scope.treatmentIndenting.itemName !== '' || $scope.treatmentIndenting.usageType !== '' || $scope.treatmentIndenting.brandName !== ''

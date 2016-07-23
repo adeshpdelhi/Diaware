@@ -91,20 +91,22 @@ INSERT INTO `users` (`id`,`username`,`hashedPassword`,`centres`,`admin`,`incharg
 
 insert into vendor(vendorId ,vendorName,vendorAddress, vendorTINNumber,vendorContactPerson,vendorContactPersonNumber,vendorIntroducedBy,vendorIntroducedByName,createdAt,updatedAt) values(DEFAULT, 'kr dispensaries','jaipur',99999,'aishhwarrya',1234567892,'Staff','rishabh','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
+insert into inventory(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'savlon','General Stock','dettol','bottles','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
 insert into indent (centreId,indentId,requestDate,requiredByDate,stockOrderTo,status,createdAt,updatedAt) values('JP1',DEFAULT,'2016-07-13 10:48:56','2016-07-13 10:48:56','Me','Sent','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
-insert into indentItems(indentId, itemNumber, type, itemName, usageType, brandName, quantityRequired, availabilityQuantity, quantityMeasurementType, createdAt, updatedAt) values (1,0,'Received','savlon','general stock', 'dettol', 4,2,'bottles','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into indentItems(indentId, itemId, linkedStatus,quantityRequired, availabilityQuantity, createdAt, updatedAt) values (1,1,'Received',4,2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 
-insert into stock(centreId, itemId, itemName, usageType, brandName, availabilityQuantity, quantityMeasurementType, createdAt, updatedAt) values('JP1',DEFAULT,'savlon','general stock','dettol',8,'bottles','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into stock(centreId, itemId, availabilityQuantity, createdAt, updatedAt) values('JP1',1,8,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 insert into stockIssued(centreId,stockIssuedId,stockIssuedTo,estimatedSingleUse,estimatedReUse,estimatedNewDialyzer,estimatedCatheterSingleLumen,estimatedCatheterDoubleLumen,stockIssueDate,stockTakerName,nextExpectedStockIssueDate,createdAt, updatedAt) values ('JP1',1,'floor',1,2,3,4,5,'2016-07-13 10:48:56','adesh','2016-07-13 10:48:56','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
-insert into stockIssuedItems(stockIssuedId,itemNumber,itemId,itemName, usageType, brandName, quantity, quantityMeasurementType, createdAt, updatedAt) values(1,0,25,'savlon','general stock','dettol',2,'bottles','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into stockIssuedItems(stockIssuedId,itemId,quantity,createdAt, updatedAt) values(1,1,4,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 
 insert into consumption(centreId,treatementType,treatementId,createdAt, updatedAt) values ('JP1','Single Use',25366,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 
-insert into consumptionItems(treatementId,itemNumber,itemName,brand,type,quanityType,quantity,createdAt,updatedAt) values (25366,0,'savlon','dettol','dnt know yet','bottles',2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into consumptionItems(treatementId,itemId,quantity,createdAt,updatedAt) values (25366,1,2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 insert into dialysisItems(itemName,createdAt,updatedAt) values('Dialyzer','2016-07-13 10:48:56','2016-07-13 10:48:56');
 insert into dialysisItems(itemName,createdAt,updatedAt) values('Blood Tubing','2016-07-13 10:48:56','2016-07-13 10:48:56');

@@ -63,12 +63,12 @@ consumptionItemsRouter.route('/')
 });
 
 
-consumptionItemsRouter.route('/:itemNumber')
+consumptionItemsRouter.route('/:itemId')
 .get(function(req,res,next){
     console.log('procesing get');
     db.consumptionItems.findOne({
         where:{
-            itemNumber:parseInt(req.params.itemNumber,10),            
+            itemId:parseInt(req.params.itemId,10),            
             treatementId:req.params.treatementId
         }
     }).then(function(consumptionItem){
@@ -81,7 +81,7 @@ consumptionItemsRouter.route('/:itemNumber')
     db.consumptionItems.destroy(
     {
         where:{
-            itemNumber:parseInt(req.params.itemNumber,10),            
+            itemId:parseInt(req.params.itemId,10),            
             treatementId:req.params.treatementId
             }
         }
@@ -98,7 +98,7 @@ consumptionItemsRouter.route('/:itemNumber')
     db.consumptionItems.update(
     req.body, {
             where:{
-                itemNumber:parseInt(req.params.itemNumber,10),            
+                itemId:parseInt(req.params.itemId,10),            
                 treatementId:req.params.treatementId
             }
         }

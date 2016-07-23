@@ -63,12 +63,12 @@ stockIssuedItemsRouter.route('/')
 });
 
 
-stockIssuedItemsRouter.route('/:itemNumber')
+stockIssuedItemsRouter.route('/:itemId')
 .get(function(req,res,next){
     console.log('procesing get');
     db.stockIssuedItems.findOne({
         where:{
-            itemNumber:parseInt(req.params.itemNumber,10),            
+            itemId:parseInt(req.params.itemId,10),            
             stockIssuedId:req.params.stockIssuedId
         }
     }).then(function(stockIssuedItem){
@@ -81,7 +81,7 @@ stockIssuedItemsRouter.route('/:itemNumber')
     db.stockIssuedItems.destroy(
     {
         where:{
-            itemNumber:parseInt(req.params.itemNumber,10),            
+            itemId:parseInt(req.params.itemId,10),            
             stockIssuedId:req.params.stockIssuedId
             }
         }
@@ -98,7 +98,7 @@ stockIssuedItemsRouter.route('/:itemNumber')
     db.stockIssuedItems.update(
     req.body, {
             where:{
-                itemNumber:parseInt(req.params.itemNumber,10),            
+                itemId:parseInt(req.params.itemId,10),            
                 stockIssuedId:req.params.stockIssuedId
             }
         }

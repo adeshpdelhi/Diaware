@@ -1,38 +1,26 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('vendor', {
-    vendorId: {
-      type: DataTypes.INTEGER(11),
+  return sequelize.define('inventory', {
+    itemId: {
+      type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    vendorName: {
+    itemName: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    vendorAddress: {
+    usageType: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    vendorTINNumber: {
-      type: DataTypes.BIGINT,
-      allowNull: true
-    },
-    vendorContactPerson: {
+    brandName: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    vendorContactPersonNumber: {
-      type: DataTypes.BIGINT,
-      allowNull: true
-    },
-    vendorIntroducedBy: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    vendorIntroducedByName: {
+    quantityMeasurementType: {
       type: DataTypes.STRING,
       allowNull: true
     },
@@ -41,6 +29,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     }
   }, {
-    tableName: 'vendor'
+    tableName: 'inventory'
   });
 };
