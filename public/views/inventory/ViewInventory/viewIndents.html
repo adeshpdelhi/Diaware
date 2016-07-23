@@ -28,12 +28,12 @@
                         </thead>
                         <tbody >
                             <tr ng-repeat = "indent in indents" style="height:2px;" ng-click="openIndent(indent.indentId)">
-                                <td width="10%">{{indent.indentId}}</td>
-                                <td width="10%" >{{indent.centreId}}</td>
-                                <td width="10%">{{indent.requestDate|date:dd-MMMM-YY-EEE}}</td>
-                                <td width="10%" >{{indent.requiredByDate|date:dd-MMMM-YY-EEE}}</td>
-                                <td width="10%">{{indent.stockOrderTo}}</td>
-                                <td width="10%" >{{indent.status}}</td>
+                                <td width="10%" style="text-align:center;" >{{indent.indentId}}</td>
+                                <td width="10%" style="text-align:center;" >{{indent.centreId}}</td>
+                                <td width="10%" style="text-align:center;" >{{indent.requestDate|date:dd-MMMM-YY-EEE}}</td>
+                                <td width="10%" style="text-align:center;" >{{indent.requiredByDate|date:dd-MMMM-YY-EEE}}</td>
+                                <td width="10%" style="text-align:center;" >{{indent.stockOrderTo}}</td>
+                                <td width="10%" style="text-align:center;" >{{indent.status}}</td>
                                <!--  <td style="text-align:center;" width="5%"><button class="btn btn-danger" ng-click="removeItem($index)"><span class="glyphicon glyphicon-remove"></span></button></td> -->
 
                             </tr>    

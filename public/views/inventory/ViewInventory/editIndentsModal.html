@@ -1,5 +1,5 @@
         <div class="modal-header">
-            <h3 class="modal-title">View Indent</h3>
+            <h3 class="modal-title">Viewing Indent {{indent.indentId}}  <span style="color:{{indent.status=='Raised'?'orange':indent.status=='Approved'?'green':'blue'}}"><b>{{indent.status}}</b></span></h3>
         </div>
         <div class="modal-body" ng-cloak> 
             <div class="table-responsive ">
@@ -19,13 +19,13 @@
                         </thead>
                         <tbody >
                             <tr ng-repeat = "indentItem in indentItems" style="height:2px;" >
-                                <td width="10%" >{{indentItem.itemId}}</td>
-                                <td width="10%" >{{indentItem.item.itemName}}</td>
-                                <td width="10%">{{indentItem.item.usageType}}</td>
-                                <td width="10%" >{{indentItem.item.brandName}}</td>
-                                <td width="10%">{{indentItem.quantityRequired}}</td>
-                                <td width="10%" >{{indentItem.availableQuantity}}</td>
-                                <td width="10%">{{indentItem.item.quantityMeasurementType}}</td>
+                                <td width="10%" style="text-align:center;" >{{indentItem.itemId}}</td>
+                                <td width="10%" style="text-align:center;" >{{indentItem.item.itemName}}</td>
+                                <td width="10%" style="text-align:center;" >{{indentItem.item.usageType}}</td>
+                                <td width="10%" style="text-align:center;" >{{indentItem.item.brandName}}</td>
+                                <td width="10%" style="text-align:center;" >{{indentItem.quantityRequired}}</td>
+                                <td width="10%" style="text-align:center;" >{{indentItem.availableQuantity}}</td>
+                                <td width="10%" style="text-align:center;" >{{indentItem.item.quantityMeasurementType}}</td>
                                 <td style="text-align:center;" width="5%"><button class="btn btn-danger" ng-click="removeItem($index)"><span class="glyphicon glyphicon-remove"></span></button></td>
 
                             </tr>    
@@ -111,9 +111,12 @@
 
 
 
-                    <div class="form-group">
-                        <div class="col-sm-offset-8 col-sm-10">
-                            <button id="additem" type="submit" class="btn btn-success" ng-click="saveIndent()">Send Indent</button>
+                    <div ng-if="indent.status=='Raised'" class="row">
+                        <div class="col-sm-push-6 col-sm-pull-4 col-sm-2">
+                            <button type="submit" class="btn btn-default" ng-click="saveIndent('Raised')">Save</button>
+                        </div>
+                        <div class="col-sm-push-6 col-sm-pull-2 col-sm-2">
+                            <button type="submit" class="btn btn-success" ng-click="saveIndent('Approved')">Approve</button>
                         </div>
                     </div>
 

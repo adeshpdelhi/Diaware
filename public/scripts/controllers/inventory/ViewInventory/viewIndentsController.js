@@ -10,23 +10,14 @@ angular.module('App')
 		});
 		
 		$scope.openIndent = function(indentId){
-			inventoryFactory.getIndents(authorize.getCentre()).get({indentId:indentId}).$promise.then(function(response){
-				$scope.indent = response;
-			});
-			inventoryFactory.getIndentItems(authorize.getCentre(),indentId).query().$promise.then(function(response){
-				$scope.indentItems = response;
-				console.log(response);
-			});
+			
             var modalInstance = $uibModal.open({
               templateUrl: 'views/inventory/ViewInventory/editIndentsModal.html',
               controller: 'EditIndentsModalController',
               size:'lg',
               resolve: {
-	            indent: function () {
-	             return $scope.indent;
-	            },
-	            indentItems: function(){
-	            	return $scope.indentItems;
+	            indentId: function () {
+	             return indentId;
 	            }
 	          }
             });
@@ -36,23 +27,34 @@ angular.module('App')
 	}])
 
 
-.controller('EditIndentsModalController', ['$scope', '$state', 'authorize', '$uibModalInstance','indent','indentItems','inventoryFactory', function ($scope, $state, authorize, $uibModalInstance, indent, indentItems, inventoryFactory) {
-
+.controller('EditIndentsModalController', ['$scope','authorize', '$uibModalInstance','inventoryFactory', 'indentId','$state',function ($scope, authorize, $uibModalInstance,  inventoryFactory, indentId,$state) {
+	$scope.indentId = indentId;
 	inventoryFactory.getVendors().query().$promise.then(function(response){
 			$scope.vendors = response;
 		},function(response){
 			alert('vendors retieval failed');
 		});
-	inventoryFactory.getItems().query().$promise.then(function(response){
+		inventoryFactory.getItems().query().$promise.then(function(response){
 			$scope.filteredItems = response;
 		},function(response){
 			alert('item retieval failed');
 		});
-	$scope.indent = indent;	
-	$scope.indentItems = indentItems;
-    $scope.removeItem = function(index){
-			console.log('deleting iindex'+index);
-                    $scope.indentItems.splice(index,1);
+		$scope.updateIndents = function(){
+			inventoryFactory.getIndents(authorize.getCentre()).get({indentId:$scope.indentId}).$promise.then(function(response){
+					response.requestDate = new Date(response.requestDate);
+					response.requiredByDate = new Date(response.requiredByDate);
+					$scope.indent = response;
+			});
+		}
+		$scope.updateIndents();
+		inventoryFactory.getIndentItems(authorize.getCentre(),indentId).query().$promise.then(function(response){
+			$scope.indentItems = response;
+			console.log(response);
+		});
+		console.log($scope.indentItems);
+	    $scope.removeItem = function(index){
+				console.log('deleting iindex'+index);
+	            $scope.indentItems.splice(index,1);
 		};
 
 		$scope.addItem = function(obj){
@@ -60,7 +62,7 @@ angular.module('App')
 			$scope.indentItem=obj;
 			$scope.showAlert=false;
 		    $scope.indentItem.lastModifiedBy = authorize.getUsername();
-			$scope.indentItem.linkedStatus="Raised";
+			$scope.indentItem.item = {itemName: $scope.indentItem.itemName, usageType: $scope.indentItem.usageType, brandName: $scope.indentItem.brandName, quantityMeasurementType: $scope.indentItem.quantityMeasurementType};
 			$scope.indentItems.push($scope.indentItem);
 			for(var i=0;i<$scope.filteredItems.length;i++){
 				$scope.filteredItems[i].availableQuantity=$scope.filteredItems[i].quantityRequired=0;
@@ -81,8 +83,10 @@ angular.module('App')
 		}
 		
 
-		$scope.saveIndent = function(){
-			$scope.indent.status="Raised";
+		$scope.saveIndent = function(newStatus){
+			$scope.indent.status=newStatus;
+			for(var i=0;i<$scope.indentItems.length;i++)
+				$scope.indentItems[i].linkedStatus = newStatus;
 			$scope.indent.centreId=authorize.getCentre();
 			$scope.indent.lastModifiedBy=authorize.getUsername();
 			inventoryFactory.getIndents(authorize.getCentre()).save($scope.indent).$promise.then(function(response){
@@ -124,11 +128,16 @@ angular.module('App')
 							quantityMeasurementType:null,
 							lastModifiedBy:null
 					};
+					//$scope.updateIndents();
+					$uibModalInstance.close();
+					$state.go('app.inventory.indent.view',{},{reload: true});
 			},function(response){
 				$scope.messageColor = 'danger';
 				$scope.showAlert = true;
 				$scope.message = 'Saving failed';
 			});
+
+			
 		};
 }])
 
