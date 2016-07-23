@@ -35,7 +35,8 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                 url:'home',
                 views: {
                     'content@': {
-                        templateUrl : 'views/home.html'           
+                        templateUrl : 'views/home.html',
+                        controller:'DashBoardController'           
                     }
                 }
 
@@ -105,7 +106,7 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
             })
 
             .state('app.monitoring.new', {
-                url:'new',
+                url:'new?patientId&date',
                 views: {
                     'content@': {
                         // templateUrl : 'views/monitoring/newmonitoringchart.html',
@@ -117,15 +118,23 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
             })
 
             .state('app.monitoring.view', {
-                url:'view',
+                url:'view?patientId&date',
                 views: {
                     'content@': {
                         templateUrl : 'views/monitoring/ViewMonitoringChart/viewmonitoringchart.html',
                         controller : 'ViewMonitoringController',
                         resolve:{
-                            chosenPatientId:['choosePatientFactory', function(choosePatientFactory){
+                            chosenPatientId:['choosePatientFactory','$stateParams', function(choosePatientFactory,$stateParams){
+                                console.log("helloooooooooo");
                                 return choosePatientFactory.getChosenPatient().id;
                             }]
+                            // patient:['$state','monitoringChartFactory','choosePatientFactory','$stateParams',function($state,monitoringChartFactory,choosePatientFactory,$stateParams){
+                            //     console.log('yeaaaaaaaaaa');
+                                
+                            //     // if($state.params.patientId && $state.params.date){
+                            //     //     return monitoringChartFactory.getPreBasic($state.params.patientId).get({monitoringDate:$state.params.date});
+                            //     // }
+                            // }]
                         }
                     }
                 }
@@ -303,11 +312,26 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                 }
             })
             .state('app.appointment.viewAppointments',{
-                url:"viewAppointments",
+                url:"viewAppointments/",
                 views:{
                     'content@':{
-                        templateUrl:'views/appointments/viewAppointment.html',
+                        templateUrl:'views/appointments/viewAppointmentNew.html',
                         controller:'ViewAppointmentsController'
+                    }
+                }
+            })
+            .state('app.appointment.viewAppointments.details',{
+                url:'details/:id?filter',
+                views:{
+                    'content@':{
+                        templateUrl:'views/appointments/viewAppointmentDetails.html',
+                        controller:'ViewAppointmentDetailsController',
+                        resolve:{
+                            appointment:['$stateParams','appointmentFactory','authorize','$state', function($stateParams,appointmentFactory,authorize,$state){
+                                console.log("state :" + $state.params.filter + ", " + $stateParams.filter);
+                                return appointmentFactory.getFilteredAppointments(authorize.getCentre()).get({appointmentId:parseInt($stateParams.id,10),filter:$stateParams.filter})
+                            }]
+                        }
                     }
                 }
             })

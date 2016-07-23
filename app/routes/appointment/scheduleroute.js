@@ -57,13 +57,19 @@ scheduleRouter.route('/')
     				key == 'shift4' || 
     				key == 'shift5' || 
     				key	== 'shift6'){
-    				if(results[i][key]!= null && results[i][key][appointmentType+'Available'+tmtOnMachine] > 0){
-    					resp[objkey][key] = { 
-    						id:results[i][key].id,
-    					}
-    					// resp[objkey][key][(appointmentType+'Total'+tmtOnMachine)]=results[i][key][(appointmentType+'Total'+tmtOnMachine)];
-    					resp[objkey][key][(appointmentType+'Available'+tmtOnMachine)]=results[i][key][(appointmentType+'Available'+tmtOnMachine)];
-    				}
+    				if(results[i][key]!= null){
+                        resp[objkey][key] = { 
+                            id:results[i][key].id
+                        }
+                        resp[objkey][key][(appointmentType+'Available'+tmtOnMachine)]=results[i][key][(appointmentType+'Available'+tmtOnMachine)];
+                    }
+        //             if(results[i][key]!= null && results[i][key][appointmentType+'Available'+tmtOnMachine] > 0){
+    				// 	resp[objkey][key] = { 
+    				// 		id:results[i][key].id,
+    				// 	}
+    				// 	// resp[objkey][key][(appointmentType+'Total'+tmtOnMachine)]=results[i][key][(appointmentType+'Total'+tmtOnMachine)];
+    				// 	resp[objkey][key][(appointmentType+'Available'+tmtOnMachine)]=results[i][key][(appointmentType+'Available'+tmtOnMachine)];
+    				// }
     			}
     		}
     	}
@@ -77,16 +83,28 @@ scheduleRouter.route('/')
 	console.log('processing post : '+ req.body);
 	// res.json(req.body);
 	var insertedData=[];
+    var length = req.body.shiftPatients.length;
     for(var i =0;i<req.body.shiftPatients.length;i++){
-        db.shiftPatients.build(req.body.shiftPatients[i]).save().then(function(result){
-            insertedData.push(JSON.parse(JSON.stringify(result)));
-        });    
+        console.log("schedule :");
+        console.log(req.body.shiftPatients[i]);
+        if(req.body.shiftPatients[i].delete) {
+            length--;
+        }
+        if(req.body.shiftPatients[i].new){
+            db.shiftPatients.build(req.body.shiftPatients[i]).save().then(function(result){
+                insertedData.push(JSON.parse(JSON.stringify(result)));
+                if(insertedData.length == length){
+                    console.log("insertedData: yaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaay:");
+                    console.log(insertedData);
+                    res.json({shiftPatients:insertedData});
+                }
+            },function (rejectedPromiseError) {
+                res.status(500);
+                res.end("internal server error");
+            });    
+        }
     }
-    // db.shiftPatients.bulkCreate(req.body.shiftPatients).then(function(results){
-    // 	console.log(JSON.stringify(results));
-    // 	insertedData = JSON.parse(JSON.stringify(results));
-    // });	
-    var modifiedRows = [];
+    // var modifiedRows = [];
     for(key in req.body.update){
     	var object ={};
     	object[req.body.string] = req.body.update[key];
@@ -96,16 +114,104 @@ scheduleRouter.route('/')
     			id:key
     		}
     	}).then(function(resp){
-    		modifiedRows.push(JSON.parse(JSON.stringify(resp)));
-    	});
+    		// modifiedRows.push(JSON.parse(JSON.stringify(resp)));
+            console.log("modified ");
+            console.log(resp);
+    	},function(rejectedPromiseError){
+            res.status(500);
+            res.end("internal server error");
+        });
     }
-    var result = {insertedData:insertedData,updatedData:modifiedRows};
-    res.json(result);
-    // res.end('scheduleRouter working');
+    // var result = {insertedData:insertedData,updatedData:modifiedRows};
+    // res.json(result);
+    console.log('scheduleRouter working');
+})
+.put(function(req,res,next){
+    if(req.query.patientId){
+        var results = {};
+        results['shiftPatients'] = [];
+        var length = req.body.shiftPatients.length;
+        for(var i = 0; i < req.body.shiftPatients.length;i++)
+        {
+            if(req.body.shiftPatients[i].delete){
+                console.log("correct entry");
+                db.shiftPatients.destroy({
+                    where:{
+                        patientId: req.query.patientId,
+                        shiftId:req.body.shiftPatients[i].shiftId
+                    }
+                }).then(function(result){
+                    console.log(JSON.stringify(result));
+                    length--;
+                    if(results.shiftPatients.length == length){
+                        // results['updatedData'] = modifiedRows;
+                        console.log("done creating and deleting");
+                        res.json(results);
+                        console.log(JSON.stringify(results));
+                    }
+                    // results.shiftPatients.push(result);
+                },function(rejectedPromiseError){
+                    res.status(500);
+                    res.end(rejectedPromiseError);
+                });
+            }
+            else if(req.body.shiftPatients[i].new){
+                console.log("what y here?");
+                db.shiftPatients.build(req.body.shiftPatients[i]).save().then(function(result){
+                    // res.json(result);
+                    results.shiftPatients.push(result);
+                    if(results.shiftPatients.length == length){
+                        // results['updatedData'] = modifiedRows;
+                        console.log("done creating and deleting");
+                        res.json(results);
+                        console.log(JSON.stringify(results));
+                    }
+                },function (rejectedPromiseError) {
+                    res.status(500);
+                    res.end(rejectedPromiseError);
+                });
+            }
+            else results.shiftPatients.push(req.body.shiftPatients[i]);
+        }
+        // var modifiedRows = [];
+        for(key in req.body.update){
+            var object ={};
+            object[req.body.string] = req.body.update[key];
+            console.log(object);
+            db.shifts.update(object,{
+                where:{
+                    id:key
+                }
+            }).then(function(resp){
+                // modifiedRows.push(JSON.parse(JSON.stringify(resp)));
+                console.log("results scheduleroute inside put : ");
+                console.log(JSON.stringify(resp));
+                
+            },function(rejectedPromiseError){
+                res.status(500);
+                res.end(rejectedPromiseError);
+            });
+        }
+        
+        
+    }
+})
+.delete(function(req,res,next){
+    console.log("processing Delete all")
+    if(req.query.deleteAll){
+        db.shiftPatients.destroy({
+            where:{
+                patientId: req.query.patientId
+            }
+        }).then(function(results){
+            console.log("deleted successfully");
+            res.json(results);
+        },function (rejectedPromiseError) {
+            res.status(500);
+            res.end("internal server error")
+        });
+    }  
 });
-// .delete(function(req,res,next){
-    
-// });
 
 
 scheduleRouter.route('/:shiftId')

@@ -1,0 +1,777 @@
+[00:47:42] Using gulpfile ~/7MED/Diaware/gulpfile.js
+[00:47:42] Starting 'clean'...
+[00:47:42] Finished 'clean' after 27 ms
+[00:47:42] Starting 'default'...
+[00:47:42] Starting 'jshint'...
+[00:47:42] Starting 'imagemin'...
+[00:47:42] Starting 'clean'...
+[00:47:42] Finished 'default' after 20 ms
+[00:47:42] Finished 'clean' after 8.27 ms
+[00:47:42] Starting 'copyfonts'...
+[00:47:42] Finished 'copyfonts' after 4.77 ms
+
+public/scripts/app.js
+  line 1    col 1    Use the function form of "use strict".
+  line 248  col 123  Missing semicolon.
+  line 332  col 182  Missing semicolon.
+  line 3    col 1    'angular' is not defined.
+  line 128  col 33   'console' is not defined.
+  line 331  col 33   'console' is not defined.
+
+  ⚠  6 warnings
+
+
+public/scripts/controllers.js
+  line 1    col 1    Use the function form of "use strict".
+  line 13   col 17   Use '!==' to compare with 'null'.
+  line 89   col 30   Use '===' to compare with 'null'.
+  line 89   col 58   Use '===' to compare with 'null'.
+  line 89   col 85   Use '===' to compare with ''.
+  line 89   col 111  Use '===' to compare with ''.
+  line 103  col 16   Unnecessary semicolon.
+  line 153  col 24   Missing semicolon.
+  line 180  col 42   Use '===' to compare with '0'.
+  line 196  col 35   Use '===' to compare with '0'.
+  line 210  col 6    Missing semicolon.
+  line 219  col 65   Missing semicolon.
+  line 244  col 38   Use '===' to compare with 'null'.
+  line 260  col 73   Missing semicolon.
+  line 3    col 1    'angular' is not defined.
+  line 14   col 13   'console' is not defined.
+  line 28   col 9    'console' is not defined.
+  line 53   col 9    'console' is not defined.
+  line 58   col 9    'console' is not defined.
+  line 91   col 17   'console' is not defined.
+  line 105  col 9    'console' is not defined.
+  line 117  col 9    'console' is not defined.
+  line 138  col 17   'console' is not defined.
+  line 142  col 17   'console' is not defined.
+  line 152  col 5    'console' is not defined.
+  line 165  col 5    'console' is not defined.
+  line 166  col 5    'console' is not defined.
+  line 174  col 9    'console' is not defined.
+  line 252  col 21   'console' is not defined.
+  line 253  col 21   'console' is not defined.
+  line 254  col 21   'console' is not defined.
+  line 257  col 25   'console' is not defined.
+  line 262  col 25   'console' is not defined.
+  line 265  col 29   'console' is not defined.
+  line 284  col 25   'console' is not defined.
+  line 301  col 9    'console' is not defined.
+  line 302  col 9    'console' is not defined.
+  line 303  col 9    'console' is not defined.
+  line 308  col 17   'console' is not defined.
+  line 314  col 17   'console' is not defined.
+  line 322  col 17   'console' is not defined.
+  line 328  col 17   'console' is not defined.
+  line 338  col 17   'console' is not defined.
+  line 344  col 17   'console' is not defined.
+  line 23   col 13   'alert' is not defined.
+  line 99   col 17   'alert' is not defined.
+  line 102  col 17   'alert' is not defined.
+  line 209  col 9    '$state' is not defined.
+  line 213  col 9    '$state' is not defined.
+
+  ⚠  49 warnings
+
+
+public/scripts/services.js
+  line 1    col 1    Use the function form of "use strict".
+  line 51   col 22   Use '!==' to compare with 'null'.
+  line 51   col 46   Use '!==' to compare with ''.
+  line 58   col 17   Use '===' to compare with 'true'.
+  line 86   col 137  Missing semicolon.
+  line 111  col 6    Missing semicolon.
+  line 115  col 6    Missing semicolon.
+  line 120  col 54   Use '===' to compare with '0'.
+  line 123  col 6    Missing semicolon.
+  line 170  col 15   Use '===' to compare with ''.
+  line 183  col 6    Missing semicolon.
+  line 186  col 6    Missing semicolon.
+  line 3    col 1    'angular' is not defined.
+  line 56   col 9    'console' is not defined.
+  line 63   col 13   'console' is not defined.
+  line 65   col 13   'console' is not defined.
+  line 66   col 13   'console' is not defined.
+  line 81   col 24   'console' is not defined.
+  line 91   col 29   'console' is not defined.
+  line 113  col 9    'console' is not defined.
+  line 121  col 13   'console' is not defined.
+  line 133  col 9    'console' is not defined.
+  line 175  col 9    'console' is not defined.
+  line 178  col 13   'console' is not defined.
+  line 154  col 17   'alert' is not defined.
+  line 159  col 17   'alert' is not defined.
+  line 155  col 17   'next' is not defined.
+  line 160  col 17   'next' is not defined.
+
+  ⚠  28 warnings
+
+[00:47:42] gulp-notify: [Gulp notification] Images task complete
+
+public/scripts/services/appointmentFactory.js
+  line 1   col 1   Use the function form of "use strict".
+  line 56  col 10  Missing semicolon.
+  line 2   col 1   'angular' is not defined.
+
+  ⚠  3 warnings
+
+
+public/scripts/services/backendServices.js
+  line 1  col 1  Use the function form of "use strict".
+  line 2  col 1  'angular' is not defined.
+
+  ⚠  2 warnings
+
+[00:47:42] gulp-notify: [Gulp notification] Images task complete
+
+public/scripts/services/billingServices.js
+  line 1  col 1  Use the function form of "use strict".
+  line 2  col 1  'angular' is not defined.
+
+  ⚠  2 warnings
+
+
+public/scripts/services/inventoryServices.js
+  line 1  col 1  Use the function form of "use strict".
+  line 2  col 1  'angular' is not defined.
+
+  ⚠  2 warnings
+
+[00:47:42] gulp-notify: [Gulp notification] Images task complete
+
+public/scripts/services/monitoringChartFactory.js
+  line 1   col 1   Use the function form of "use strict".
+  line 2   col 1   'angular' is not defined.
+  line 10  col 9   'console' is not defined.
+  line 16  col 12  'console' is not defined.
+  line 22  col 11  'console' is not defined.
+  line 28  col 9   'console' is not defined.
+  line 34  col 9   'console' is not defined.
+  line 40  col 9   'console' is not defined.
+
+  ⚠  8 warnings
+
+
+public/scripts/services/patientFactory.js
+  line 1   col 1   Use the function form of "use strict".
+  line 2   col 1   'angular' is not defined.
+  line 8   col 9   'console' is not defined.
+  line 14  col 12  'console' is not defined.
+  line 20  col 11  'console' is not defined.
+  line 26  col 9   'console' is not defined.
+  line 32  col 9   'console' is not defined.
+
+  ⚠  7 warnings
+
+[00:47:42] gulp-notify: [Gulp notification] Images task complete
+[00:47:42] Finished 'imagemin' after 387 ms
+
+public/scripts/controllers/admin/addCenterController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 60  col 10  Missing semicolon.
+  line 3   col 1   'angular' is not defined.
+  line 31  col 17  'console' is not defined.
+  line 54  col 13  'console' is not defined.
+
+  ⚠  5 warnings
+
+
+public/scripts/controllers/admin/addUserController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 17  col 12  Confusing use of '!'.
+  line 26  col 20  Use '===' to compare with 'false'.
+  line 40  col 24  Use '!==' to compare with 'null'.
+  line 49  col 12  Confusing use of '!'.
+  line 56  col 17  Use '===' to compare with 'false'.
+  line 57  col 38  Use '!==' to compare with ''.
+  line 63  col 6   Missing semicolon.
+  line 3   col 1   'angular' is not defined.
+  line 15  col 9   'console' is not defined.
+  line 32  col 9   'console' is not defined.
+  line 48  col 9   'console' is not defined.
+  line 61  col 13  'console' is not defined.
+  line 28  col 21  'alert' is not defined.
+  line 41  col 17  'alert' is not defined.
+  line 43  col 17  'alert' is not defined.
+
+  ⚠  16 warnings
+
+
+public/scripts/controllers/admin/dataBaseController.js
+  line 1    col 1   Use the function form of "use strict".
+  line 52   col 6   Missing semicolon.
+  line 62   col 6   Missing semicolon.
+  line 100  col 6   Missing semicolon.
+  line 128  col 6   Missing semicolon.
+  line 184  col 11  Missing semicolon.
+  line 3    col 1   'angular' is not defined.
+  line 15   col 9   'console' is not defined.
+  line 32   col 9   'console' is not defined.
+  line 55   col 9   'console' is not defined.
+  line 68   col 9   'console' is not defined.
+  line 78   col 9   'console' is not defined.
+  line 89   col 9   'console' is not defined.
+  line 106  col 9   'console' is not defined.
+  line 117  col 9   'console' is not defined.
+  line 131  col 9   'console' is not defined.
+  line 147  col 9   'console' is not defined.
+  line 158  col 9   'console' is not defined.
+  line 172  col 9   'console' is not defined.
+  line 34   col 25  'alert' is not defined.
+  line 39   col 29  'alert' is not defined.
+  line 42   col 21  'alert' is not defined.
+  line 50   col 21  'alert' is not defined.
+  line 60   col 21  'alert' is not defined.
+  line 72   col 21  'alert' is not defined.
+  line 80   col 25  'alert' is not defined.
+  line 84   col 21  'alert' is not defined.
+  line 93   col 21  'alert' is not defined.
+  line 108  col 25  'alert' is not defined.
+  line 112  col 21  'alert' is not defined.
+  line 121  col 21  'alert' is not defined.
+
+  ⚠  31 warnings
+
+
+public/scripts/controllers/admin/viewUserController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 27  col 6   Missing semicolon.
+  line 40  col 12  Confusing use of '!'.
+  line 50  col 20  Use '===' to compare with 'false'.
+  line 63  col 12  Confusing use of '!'.
+  line 70  col 17  Use '===' to compare with 'false'.
+  line 71  col 35  Use '!==' to compare with ''.
+  line 77  col 6   Missing semicolon.
+  line 3   col 1   'angular' is not defined.
+  line 9   col 11  'console' is not defined.
+  line 43  col 9   'console' is not defined.
+  line 62  col 9   'console' is not defined.
+  line 75  col 13  'console' is not defined.
+  line 52  col 21  'alert' is not defined.
+
+  ⚠  14 warnings
+
+
+public/scripts/controllers/appointment/appointmentController.js
+  line 1    col 1   Use the function form of "use strict".
+  line 21   col 55  Use '!==' to compare with '0'.
+  line 31   col 47  Use '===' to compare with '0'.
+  line 55   col 59  Use '!==' to compare with 'null'.
+  line 55   col 77  Use '!==' to compare with 'null'.
+  line 123  col 17  Creating global 'for' variable. Should be 'for (var key ...'.
+  line 127  col 46  ['shift'] is better written in dot notation.
+  line 147  col 13  Creating global 'for' variable. Should be 'for (var key ...'.
+  line 155  col 27  ['shift'] is better written in dot notation.
+  line 167  col 54  Missing semicolon.
+  line 2    col 1   'angular' is not defined.
+  line 45   col 9   'console' is not defined.
+  line 52   col 9   'console' is not defined.
+  line 54   col 13  'console' is not defined.
+  line 87   col 9   'console' is not defined.
+  line 89   col 9   'console' is not defined.
+  line 90   col 9   'console' is not defined.
+  line 109  col 9   'console' is not defined.
+  line 119  col 9   'console' is not defined.
+  line 148  col 13  'console' is not defined.
+  line 161  col 9   'console' is not defined.
+  line 165  col 9   'console' is not defined.
+  line 167  col 13  'console' is not defined.
+  line 172  col 17  'console' is not defined.
+  line 173  col 17  'console' is not defined.
+  line 184  col 17  'console' is not defined.
+  line 195  col 9   'console' is not defined.
+  line 196  col 9   'console' is not defined.
+  line 199  col 13  'console' is not defined.
+  line 200  col 13  'console' is not defined.
+  line 222  col 17  'console' is not defined.
+  line 233  col 9   'console' is not defined.
+  line 234  col 9   'console' is not defined.
+  line 239  col 13  'console' is not defined.
+  line 240  col 13  'console' is not defined.
+  line 123  col 17  'key' is not defined.
+  line 124  col 53  'key' is not defined.
+  line 147  col 13  'key' is not defined.
+
+  ⚠  38 warnings
+
+
+public/scripts/controllers/appointment/viewAppointmentDetailsController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 16  col 6   Missing semicolon.
+  line 43  col 6   Missing semicolon.
+  line 51  col 1   Unnecessary semicolon.
+  line 2   col 1   'angular' is not defined.
+  line 5   col 5   'console' is not defined.
+  line 14  col 9   'console' is not defined.
+  line 19  col 13  'console' is not defined.
+  line 45  col 9   'console' is not defined.
+
+  ⚠  9 warnings
+
+
+public/scripts/controllers/appointment/viewAppointmentsController.js
+  line 1    col 1   Use the function form of "use strict".
+  line 82   col 18  Use '===' to compare with 'false'.
+  line 92   col 21  'i' is already defined.
+  line 120  col 19  ['filter'] is better written in dot notation.
+  line 127  col 19  ['filter'] is better written in dot notation.
+  line 136  col 19  ['filter'] is better written in dot notation.
+  line 137  col 19  ['attended'] is better written in dot notation.
+  line 146  col 19  ['filter'] is better written in dot notation.
+  line 147  col 19  ['attended'] is better written in dot notation.
+  line 160  col 19  Use '===' to compare with ''.
+  line 223  col 1   Unnecessary semicolon.
+  line 2    col 1   'angular' is not defined.
+  line 17   col 17  'console' is not defined.
+  line 39   col 9   'console' is not defined.
+  line 94   col 21  'console' is not defined.
+  line 191  col 9   'console' is not defined.
+  line 211  col 13  'console' is not defined.
+  line 214  col 13  'console' is not defined.
+
+  ⚠  18 warnings
+
+
+public/scripts/controllers/billing/newBillController.js
+  line 1    col 1    Use the function form of "use strict".
+  line 61   col 38   Use '!==' to compare with 'null'.
+  line 61   col 71   Use '!==' to compare with ''.
+  line 87   col 25   'i' is already defined.
+  line 90   col 81   Use '!==' to compare with 'null'.
+  line 91   col 112  Use '!==' to compare with 'null'.
+  line 122  col 44   Use '===' to compare with '0'.
+  line 122  col 83   Use '!==' to compare with 'null'.
+  line 158  col 49   Use '===' to compare with '0'.
+  line 3    col 1    'angular' is not defined.
+  line 60   col 13   'console' is not defined.
+  line 71   col 13   'console' is not defined.
+  line 88   col 21   'console' is not defined.
+  line 91   col 25   'console' is not defined.
+  line 124  col 21   'console' is not defined.
+  line 128  col 17   'console' is not defined.
+  line 155  col 13   'console' is not defined.
+  line 165  col 13   'console' is not defined.
+  line 170  col 17   'console' is not defined.
+
+  ⚠  19 warnings
+
+
+public/scripts/controllers/billing/viewBillController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 2   col 1   'angular' is not defined.
+  line 27  col 17  'console' is not defined.
+  line 30  col 17  'console' is not defined.
+
+  ⚠  4 warnings
+
+
+public/scripts/controllers/billing/viewBillDetailsController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 27  col 18  Expected an assignment or function call and instead saw an expression.
+  line 2   col 1   'angular' is not defined.
+
+  ⚠  3 warnings
+
+
+public/scripts/controllers/dialysis_care_plan/carePlanController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 33  col 11  Missing semicolon.
+  line 52  col 10  Missing semicolon.
+  line 2   col 1   'angular' is not defined.
+  line 11  col 9   'console' is not defined.
+  line 37  col 13  'console' is not defined.
+  line 46  col 21  'console' is not defined.
+
+  ⚠  7 warnings
+
+
+public/scripts/controllers/dialysis_care_plan/viewDialysisCarePlanController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 15  col 31  Missing semicolon.
+  line 18  col 48  Missing semicolon.
+  line 68  col 10  Missing semicolon.
+  line 81  col 15  Missing semicolon.
+  line 2   col 1   'angular' is not defined.
+  line 15  col 13  'console' is not defined.
+  line 16  col 13  'console' is not defined.
+  line 18  col 17  'console' is not defined.
+  line 42  col 21  'console' is not defined.
+  line 45  col 17  'console' is not defined.
+  line 51  col 9   'console' is not defined.
+  line 52  col 9   'console' is not defined.
+  line 53  col 9   'console' is not defined.
+  line 62  col 13  'console' is not defined.
+  line 63  col 17  'console' is not defined.
+  line 77  col 17  'console' is not defined.
+  line 87  col 17  'console' is not defined.
+  line 74  col 18  'tempPlan' is not defined.
+  line 75  col 18  'tempPlan' is not defined.
+  line 75  col 55  'tempPlan' is not defined.
+  line 76  col 35  'tempPlan' is not defined.
+
+  ⚠  22 warnings
+
+
+public/scripts/controllers/inventory/addVendorController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 41  col 11  Missing semicolon.
+  line 44  col 10  Missing semicolon.
+  line 2   col 1   'angular' is not defined.
+  line 26  col 17  'console' is not defined.
+
+  ⚠  5 warnings
+
+
+public/scripts/controllers/inventory/inventoryIdentingController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 40  col 10  Missing semicolon.
+  line 44  col 10  Missing semicolon.
+  line 2   col 1   'angular' is not defined.
+  line 26  col 13  'console' is not defined.
+
+  ⚠  5 warnings
+
+
+public/scripts/controllers/inventory/issueStockController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 50  col 10  Missing semicolon.
+  line 54  col 10  Missing semicolon.
+  line 2   col 1   'angular' is not defined.
+  line 37  col 13  'console' is not defined.
+
+  ⚠  5 warnings
+
+
+public/scripts/controllers/inventory/stockReceivedController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 32  col 10  Missing semicolon.
+  line 59  col 10  Missing semicolon.
+  line 63  col 10  Missing semicolon.
+  line 2   col 1   'angular' is not defined.
+  line 42  col 17  'console' is not defined.
+
+  ⚠  6 warnings
+
+
+public/scripts/controllers/inventory/treatmentInventoryController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 18  col 10  Missing semicolon.
+  line 2   col 1   'angular' is not defined.
+
+  ⚠  3 warnings
+
+
+public/scripts/controllers/monitoring/monitoringChartController.js
+  line 1   col 1    Use the function form of "use strict".
+  line 28  col 59   Use '===' to compare with 'false'.
+  line 28  col 97   Use '===' to compare with 'null'.
+  line 28  col 141  Use '===' to compare with '0'.
+  line 2   col 1    'angular' is not defined.
+  line 28  col 16   'angular' is not defined.
+  line 30  col 17   'console' is not defined.
+  line 36  col 13   'console' is not defined.
+  line 37  col 13   'console' is not defined.
+  line 49  col 21   'console' is not defined.
+
+  ⚠  10 warnings
+
+
+public/scripts/controllers/monitoring/monitoringIntraController.js
+  line 1    col 1   Use the function form of "use strict".
+  line 9    col 37  Use '===' to compare with '0'.
+  line 72   col 32  Don't make functions within a loop.
+  line 75   col 19  Don't make functions within a loop.
+  line 78   col 28  Missing semicolon.
+  line 81   col 21  'i' is already defined.
+  line 148  col 21  'val' is already defined.
+  line 2    col 1   'angular' is not defined.
+  line 147  col 17  'angular' is not defined.
+  line 154  col 17  'angular' is not defined.
+  line 163  col 17  'angular' is not defined.
+  line 10   col 11  'console' is not defined.
+  line 33   col 13  'console' is not defined.
+  line 34   col 13  'console' is not defined.
+  line 35   col 13  'console' is not defined.
+  line 46   col 17  'console' is not defined.
+  line 54   col 17  'console' is not defined.
+  line 66   col 17  'console' is not defined.
+  line 73   col 21  'console' is not defined.
+  line 84   col 17  'console' is not defined.
+  line 88   col 17  'console' is not defined.
+
+  ⚠  21 warnings
+
+
+public/scripts/controllers/monitoring/monitoringPostController.js
+  line 2   col 1   Use the function form of "use strict".
+  line 5   col 49  Use '!==' to compare with 'null'.
+  line 41  col 11  Missing semicolon.
+  line 3   col 1   'angular' is not defined.
+  line 46  col 13  'console' is not defined.
+  line 55  col 21  'console' is not defined.
+  line 71  col 21  'console' is not defined.
+  line 80  col 17  'console' is not defined.
+  line 84  col 25  'console' is not defined.
+
+  ⚠  9 warnings
+
+
+public/scripts/controllers/monitoring/monitoringPreAccessAssessmentController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 4   col 45  Use '!==' to compare with 'null'.
+  line 2   col 1   'angular' is not defined.
+  line 24  col 9   'console' is not defined.
+  line 34  col 17  'console' is not defined.
+  line 50  col 21  'console' is not defined.
+  line 58  col 17  'console' is not defined.
+  line 60  col 25  'console' is not defined.
+
+  ⚠  8 warnings
+
+
+public/scripts/controllers/monitoring/monitoringPreAssessmentController.js
+  line 1    col 1   Use the function form of "use strict".
+  line 4    col 45  Use '!==' to compare with 'null'.
+  line 57   col 44  Use '===' to compare with '0'.
+  line 2    col 1   'angular' is not defined.
+  line 5    col 9   'console' is not defined.
+  line 50   col 17  'console' is not defined.
+  line 51   col 17  'console' is not defined.
+  line 59   col 25  'console' is not defined.
+  line 66   col 21  'console' is not defined.
+  line 67   col 21  'console' is not defined.
+  line 70   col 21  'console' is not defined.
+  line 142  col 13  'console' is not defined.
+  line 148  col 9   'console' is not defined.
+  line 150  col 13  'console' is not defined.
+  line 160  col 9   'console' is not defined.
+  line 181  col 17  'console' is not defined.
+  line 190  col 13  'console' is not defined.
+
+  ⚠  17 warnings
+
+
+public/scripts/controllers/monitoring/monitoringPreBasicMedicalController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 4   col 45  Use '!==' to compare with 'null'.
+  line 4   col 77  Use '===' to compare with 'null'.
+  line 26  col 7   Missing semicolon.
+  line 2   col 1   'angular' is not defined.
+  line 32  col 9   'console' is not defined.
+  line 35  col 13  'console' is not defined.
+  line 39  col 17  'console' is not defined.
+  line 53  col 17  'console' is not defined.
+  line 61  col 13  'console' is not defined.
+
+  ⚠  10 warnings
+
+
+public/scripts/controllers/monitoring/monitoringPreMachineFinalCheckController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 4   col 45  Use '!==' to compare with 'null'.
+  line 39  col 7   Unnecessary semicolon.
+  line 2   col 1   'angular' is not defined.
+  line 28  col 9   'console' is not defined.
+  line 34  col 17  'console' is not defined.
+  line 48  col 21  'console' is not defined.
+  line 59  col 25  'console' is not defined.
+
+  ⚠  8 warnings
+
+
+public/scripts/controllers/monitoring/viewMonitoringController.js
+  line 1    col 1   Use the function form of "use strict".
+  line 16   col 43  Use '!==' to compare with 'null'.
+  line 50   col 43  Use '!==' to compare with 'null'.
+  line 66   col 61  Missing semicolon.
+  line 87   col 23  Use '!==' to compare with 'null'.
+  line 127  col 15  Missing semicolon.
+  line 2    col 1   'angular' is not defined.
+  line 9    col 13  'console' is not defined.
+  line 14   col 21  'console' is not defined.
+  line 15   col 21  'console' is not defined.
+  line 19   col 25  'console' is not defined.
+  line 29   col 25  'console' is not defined.
+  line 48   col 21  'console' is not defined.
+  line 49   col 21  'console' is not defined.
+  line 53   col 25  'console' is not defined.
+  line 63   col 25  'console' is not defined.
+  line 111  col 9   'console' is not defined.
+  line 123  col 17  'console' is not defined.
+  line 149  col 17  'console' is not defined.
+  line 198  col 13  'console' is not defined.
+  line 205  col 13  'console' is not defined.
+
+  ⚠  21 warnings
+
+
+public/scripts/controllers/registration/clinicalEventController.js
+  line 1    col 1    Use the function form of "use strict".
+  line 6    col 44   Use '!==' to compare with 'null'.
+  line 6    col 95   Use '===' to compare with '0'.
+  line 37   col 10   Missing semicolon.
+  line 71   col 36   Don't make functions within a loop.
+  line 79   col 23   Don't make functions within a loop.
+  line 88   col 55   Don't make functions within a loop.
+  line 91   col 23   Don't make functions within a loop.
+  line 126  col 153  Don't make functions within a loop.
+  line 132  col 23   Don't make functions within a loop.
+  line 139  col 21   'i' is already defined.
+  line 2    col 1    'angular' is not defined.
+  line 28   col 13   'console' is not defined.
+  line 51   col 13   'console' is not defined.
+  line 58   col 17   'console' is not defined.
+  line 60   col 17   'console' is not defined.
+  line 64   col 17   'console' is not defined.
+  line 68   col 21   'console' is not defined.
+  line 69   col 21   'console' is not defined.
+  line 75   col 25   'console' is not defined.
+  line 77   col 25   'console' is not defined.
+  line 117  col 17   'console' is not defined.
+  line 124  col 21   'console' is not defined.
+  line 125  col 21   'console' is not defined.
+  line 128  col 25   'console' is not defined.
+  line 130  col 25   'console' is not defined.
+  line 134  col 25   'console' is not defined.
+  line 140  col 17   'console' is not defined.
+
+  ⚠  28 warnings
+
+
+public/scripts/controllers/registration/medicalController.js
+  line 1    col 1    Use the function form of "use strict".
+  line 6    col 41   Use '!==' to compare with 'null'.
+  line 6    col 116  Use '===' to compare with '0'.
+  line 36   col 36   Use '===' to compare with 'null'.
+  line 36   col 78   Use '===' to compare with '0'.
+  line 57   col 6    Missing semicolon.
+  line 66   col 19   Don't make functions within a loop.
+  line 70   col 15   Don't make functions within a loop.
+  line 88   col 23   Don't make functions within a loop.
+  line 94   col 19   Don't make functions within a loop.
+  line 106  col 23   Don't make functions within a loop.
+  line 112  col 19   Don't make functions within a loop.
+  line 122  col 10   Unnecessary semicolon.
+  line 2    col 1    'angular' is not defined.
+  line 63   col 13   'console' is not defined.
+  line 73   col 17   'console' is not defined.
+  line 84   col 13   'console' is not defined.
+  line 97   col 21   'console' is not defined.
+  line 115  col 21   'console' is not defined.
+
+  ⚠  19 warnings
+
+
+public/scripts/controllers/registration/newRegisterationController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 2   col 1   'angular' is not defined.
+  line 12  col 17  'console' is not defined.
+  line 13  col 17  'console' is not defined.
+  line 16  col 24  'console' is not defined.
+  line 30  col 13  'console' is not defined.
+  line 32  col 13  'console' is not defined.
+  line 37  col 13  'console' is not defined.
+  line 41  col 13  'console' is not defined.
+  line 44  col 13  'console' is not defined.
+  line 48  col 13  'console' is not defined.
+  line 55  col 13  'console' is not defined.
+  line 63  col 21  'console' is not defined.
+
+  ⚠  13 warnings
+
+
+public/scripts/controllers/registration/otherController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 6   col 73  Use '!==' to compare with 'null'.
+  line 2   col 1   'angular' is not defined.
+  line 27  col 13  'console' is not defined.
+  line 31  col 13  'console' is not defined.
+  line 32  col 13  'console' is not defined.
+  line 37  col 17  'console' is not defined.
+  line 45  col 13  'console' is not defined.
+  line 49  col 21  'console' is not defined.
+  line 59  col 17  'console' is not defined.
+  line 60  col 17  'console' is not defined.
+  line 63  col 21  'console' is not defined.
+  line 72  col 13  'console' is not defined.
+
+  ⚠  13 warnings
+
+
+public/scripts/controllers/registration/panelController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 6   col 72  Use '!==' to compare with 'null'.
+  line 19  col 39  Use '!==' to compare with 'null'.
+  line 19  col 80  Use '!==' to compare with 'null'.
+  line 2   col 1   'angular' is not defined.
+  line 23  col 13  'console' is not defined.
+  line 35  col 13  'console' is not defined.
+  line 38  col 13  'console' is not defined.
+  line 43  col 21  'console' is not defined.
+  line 50  col 17  'console' is not defined.
+  line 53  col 21  'console' is not defined.
+  line 64  col 13  'console' is not defined.
+  line 70  col 17  'console' is not defined.
+
+  ⚠  13 warnings
+
+
+public/scripts/controllers/registration/viewRegisterationController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 2   col 1   'angular' is not defined.
+  line 10  col 13  'console' is not defined.
+  line 12  col 13  'console' is not defined.
+
+  ⚠  4 warnings
+
+
+public/scripts/controllers/inventory/ViewInventory/viewInventoryIdentingController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 40  col 10  Missing semicolon.
+  line 44  col 10  Missing semicolon.
+  line 2   col 1   'angular' is not defined.
+  line 26  col 13  'console' is not defined.
+
+  ⚠  5 warnings
+
+
+public/scripts/controllers/inventory/ViewInventory/viewIssueStockController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 50  col 10  Missing semicolon.
+  line 54  col 10  Missing semicolon.
+  line 2   col 1   'angular' is not defined.
+  line 37  col 13  'console' is not defined.
+
+  ⚠  5 warnings
+
+
+public/scripts/controllers/inventory/ViewInventory/viewStockReceivedController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 32  col 10  Missing semicolon.
+  line 59  col 10  Missing semicolon.
+  line 63  col 10  Missing semicolon.
+  line 2   col 1   'angular' is not defined.
+  line 42  col 17  'console' is not defined.
+
+  ⚠  6 warnings
+
+
+public/scripts/controllers/inventory/ViewInventory/viewTreatmentInventoryController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 18  col 10  Missing semicolon.
+  line 2   col 1   'angular' is not defined.
+
+  ⚠  3 warnings
+
+
+public/scripts/controllers/inventory/ViewInventory/viewVendorController.js
+  line 1   col 1   Use the function form of "use strict".
+  line 44  col 10  Missing semicolon.
+  line 2   col 1   'angular' is not defined.
+
+  ⚠  3 warnings
+
+[00:47:43] Finished 'jshint' after 1.1 s
+[00:47:43] Starting 'usemin'...
+[00:47:46] Finished 'usemin' after 3.66 s

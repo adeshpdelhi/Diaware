@@ -110,15 +110,20 @@ dbmodel.shiftPatients.belongsTo(dbmodel.patientDetails,{foreignKey:'patientId'})
 dbmodel.shiftPatients.hasMany(dbmodel.futureAppointments,{foreignKey:'shiftPatientsId'});       // on many dates
 dbmodel.futureAppointments.belongsTo(dbmodel.shiftPatients,{foreignKey:'shiftPatientsId'});
 
-dbmodel.shiftPatients.hasMany(dbmodel.attendedAppointments,{foreignKey:'shiftPatientsId'});
-dbmodel.attendedAppointments.belongsTo(dbmodel.shiftPatients,{foreignKey:'shiftPatientsId'}); // on multiple dates
+dbmodel.shiftPatients.hasMany(dbmodel.pastAppointments,{foreignKey:'shiftPatientsId'});
+dbmodel.pastAppointments.belongsTo(dbmodel.shiftPatients,{foreignKey:'shiftPatientsId'}); // on multiple dates
 
+dbmodel.shiftPatients.hasMany(dbmodel.cancelledAppointments,{foreignKey:'shiftPatientsId'});
+dbmodel.cancelledAppointments.belongsTo(dbmodel.shiftPatients,{foreignKey:'shiftPatientsId'}); // on multiple dates
 
 // dbmodel.shiftPatients.belongsTo()
 
 dbmodel.patientDetails.hasMany(dbmodel.futureAppointments,{foreignKey:'patientId'});
 dbmodel.futureAppointments.belongsTo(dbmodel.patientDetails,{foreignKey:'patientId'});
-dbmodel.patientDetails.hasMany(dbmodel.attendedAppointments,{foreignKey:'patientId'});
-dbmodel.futureAppointments.belongsTo(dbmodel.patientDetails,{foreignKey:'patientId'});
+dbmodel.patientDetails.hasMany(dbmodel.pastAppointments,{foreignKey:'patientId'});
+dbmodel.pastAppointments.belongsTo(dbmodel.patientDetails,{foreignKey:'patientId'});
+
+dbmodel.patientDetails.hasMany(dbmodel.cancelledAppointments,{foreignKey:'patientId'});
+dbmodel.cancelledAppointments.belongsTo(dbmodel.patientDetails,{foreignKey:'patientId'});
 
 module.exports = dbmodel;

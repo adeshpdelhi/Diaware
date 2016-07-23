@@ -1,8 +1,7 @@
 /* jshint indent: 2 */
 //of the past year maybe
-// make a trigger to shift the appointment automatically once marked attended
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('attendedAppointments', {
+  return sequelize.define('pastAppointments', {
     centreId:{
       type:DataTypes.STRING,
       allownull:true,
@@ -50,21 +49,20 @@ module.exports = function(sequelize, DataTypes) {
     },
     attended:{
       type:DataTypes.BOOLEAN,
-      allownull:true,
+      allownull:false,
       // default:false
       validate:{
         isTrue:function(value){
-          if(!value){
-            throw new Error('Only Attended appointments can be shifted here');
-          }
+          // if(!value){
+            // throw new Error('Only Attended appointments can be shifted here');
         }
       }
     },
     cancelled:{
       type:DataTypes.BOOLEAN,
-      allownull:null
+      allownull:true
     }
   }, {
-    tableName: 'attendedAppointments'
+    tableName: 'pastAppointments'
   });
 };

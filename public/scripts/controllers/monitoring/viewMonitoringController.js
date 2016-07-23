@@ -1,25 +1,113 @@
 'use strict';
 angular.module('App')
-.controller('ViewMonitoringController',['$scope','patientFactory','monitoringChartFactory','authorize','chosenPatientId','regularForm', function($scope, patientFactory,monitoringChartFactory,authorize,chosenPatientId, regularForm){
+.controller('ViewMonitoringController',['$scope','patientFactory','monitoringChartFactory','authorize','chosenPatientId','regularForm','$stateParams', function($scope, patientFactory,monitoringChartFactory,authorize,chosenPatientId, regularForm,$stateParams){
       // monitoringChartFactory.getPreBasic(chosenPatientId).get()
+      	// $scope.showAlertPatientNull = false;
 	    $scope.chosenPatientId = chosenPatientId;
 	    $scope.regularForm = regularForm.regularForm;
 	    $scope.latest = function(){
-		    monitoringChartFactory.getPreBasic(chosenPatientId).get({fullChartLatest:true}).$promise.then(function(response){
-	        	$scope.patientChart = response;
-	        	$scope.post = $scope.patientChart.monitoringChartPost;
-	        	$scope.intraTable = $scope.patientChart.monitoringChartIntras;
-	        	console.log($scope.intraTable.length + "ggggggggggggggggggggggggggggggggggggggggggs");	
-	        	$scope.accessAssessment = $scope.patientChart.monitoringChartPreAccessAssessment;	
-	        	$scope.assessment = $scope.patientChart.monitoringChartPreAssessment;
-	        	$scope.machineCheck = $scope.patientChart.monitoringChartPreMachineFinalCheck;
-	        	$scope.basicMedical = $scope.patientChart.monitoringChartPreBasicMedical;
-	        	$scope.patientChart.monitoringDate = new Date($scope.patientChart.monitoringDate);
-	        	$scope.basic = $scope.patientChart;	
-	        });
+	    	console.log( "patientId resolve app.js: " + $stateParams.patientId + " , date: "+ $stateParams.date);
+	    	if($stateParams.patientId && $stateParams.date){
+	    	    monitoringChartFactory.getPreBasic($stateParams.patientId).get({monitoringDate:$stateParams.date})
+	    	    .$promise.then(function (response) {
+	    	        $scope.patientChart = response;
+	    	        console.log('response');
+	    	        console.log(response);
+	    	        if(response.patientId != null){
+			        	$scope.post = $scope.patientChart.monitoringChartPost;
+			        	$scope.intraTable = $scope.patientChart.monitoringChartIntras;
+			        	console.log($scope.intraTable.length + "ggggggggggggggggggggggggggggggggggggggggggs");	
+			        	$scope.accessAssessment = $scope.patientChart.monitoringChartPreAccessAssessment;	
+			        	$scope.assessment = $scope.patientChart.monitoringChartPreAssessment;
+			        	$scope.machineCheck = $scope.patientChart.monitoringChartPreMachineFinalCheck;
+			        	$scope.basicMedical = $scope.patientChart.monitoringChartPreBasicMedical;
+			        	$scope.patientChart.monitoringDate = new Date($scope.patientChart.monitoringDate);
+			        	$scope.basic = $scope.patientChart;	
+		    			$scope.view = true;
+		    			$scope.showAlertPatientNull = false;
+		    		}else{
+		    			console.log("null patientChart");
+		    			$scope.showAlertPatientNull = true;
+		    			$scope.message = "No monitoring Chart added for the patient Yet "+($stateParams.date?('of this monitoring Date: '+new Date($stateParams.date)+'! '):'! ')+"Please Fill the monitoring Chart from new Monitoring Chart Section";
+		    			$scope.messageColor ="warning";
+		    			$scope.show = false;
+		    		}
+
+	    	    },function (response) {
+	    	    	$scope.showAlertPatientNull = true;
+	    	    	$scope.message = "Failed to fetch Patient";
+	    	    	$scope.messageColor ="danger";
+	    	    	$scope.show = false;
+
+	    	    });
+	    	}
+	    	else{
+	    	    monitoringChartFactory.getPreBasic(chosenPatientId).get({fullChartLatest:true})
+	    	    .$promise.then(function(response){
+	    	        $scope.patientChart = response;
+	    	        console.log('response');
+	    	        console.log(response);
+					if(response.patientId != null){
+			        	$scope.post = $scope.patientChart.monitoringChartPost;
+			        	$scope.intraTable = $scope.patientChart.monitoringChartIntras;
+			        	console.log($scope.intraTable.length + "ggggggggggggggggggggggggggggggggggggggggggs");	
+			        	$scope.accessAssessment = $scope.patientChart.monitoringChartPreAccessAssessment;	
+			        	$scope.assessment = $scope.patientChart.monitoringChartPreAssessment;
+			        	$scope.machineCheck = $scope.patientChart.monitoringChartPreMachineFinalCheck;
+			        	$scope.basicMedical = $scope.patientChart.monitoringChartPreBasicMedical;
+			        	$scope.patientChart.monitoringDate = new Date($scope.patientChart.monitoringDate);
+			        	$scope.basic = $scope.patientChart;	
+		    			$scope.view = true;
+		    			$scope.showAlertPatientNull = false;
+		    		}else{
+		    			console.log("null patientChart");
+
+		    			$scope.showAlertPatientNull = true;
+		    			$scope.queryDate = $stateParams.date
+		    			$scope.message = "No monitoring Chart added for the patient Yet "+($stateParams.date?('of this monitoring Date: '+new Date($stateParams.date)+'! '):'! ')+"Please Fill the monitoring Chart from new Monitoring Chart Section";
+
+		    			// $scope.message = "No monitoring Chart added for the patient Yet {{($stateParams.date?('of this monitoring Date: '+ queryDate|date:dd-MMMM-YY):'')}}! Please Fill the monitoring Chart from new Monitoring Chart Section";
+		    			$scope.messageColor ="warning";
+		    			$scope.show = false;
+		    		}
+
+	    	    },function (response) {
+	    	    	$scope.showAlertPatientNull = true;
+	    	    	$scope.message = "Failed to fetch Patient";
+	    	    	$scope.messageColor ="danger";
+	    	    	$scope.show = false;
+	    	    });
+	    	}
+		    // monitoringChartFactory.getPreBasic(chosenPatientId).get({fullChartLatest:true}).$promise.then(function(response){
+	        	
+	     //    });
 		};
-	    $scope.latest();
-	    $scope.view = true;
+		$scope.latest();
+		$scope.$watchCollection('[patientChart.patientId,patientChart]',function (newVal,oldVal) {
+			if(newVal != null) {
+				// $scope.isEditable();
+				// $scope.showAlertPatientNull = false;
+				// $scope.messageColor ="warning";
+				// $scope.message="";
+			}
+		});
+		// if(patient!= null){
+		// 	$scope.patientChart = patient;
+		// 	$scope.post = $scope.patientChart.monitoringChartPost;
+  //       	$scope.intraTable = $scope.patientChart.monitoringChartIntras;
+  //       	console.log($scope.intraTable.length + "ggggggggggggggggggggggggggggggggggggggggggs");	
+  //       	$scope.accessAssessment = $scope.patientChart.monitoringChartPreAccessAssessment;	
+  //       	$scope.assessment = $scope.patientChart.monitoringChartPreAssessment;
+  //       	$scope.machineCheck = $scope.patientChart.monitoringChartPreMachineFinalCheck;
+  //       	$scope.basicMedical = $scope.patientChart.monitoringChartPreBasicMedical;
+  //       	$scope.patientChart.monitoringDate = new Date($scope.patientChart.monitoringDate);
+  //       	$scope.basic = $scope.patientChart;	
+  //     		$scope.showAlertPatientNull = false;
+
+		// // }else if(patient == null && $stateParams.patientId== null && $stateParams.date == null){
+	 // //    	$scope.latest();
+		// }else{
+		// }
 	    console.log("inside ViewMonitoringController");
 		$scope.listPrevCharts = function(){
 			monitoringChartFactory.getPreBasic(chosenPatientId).query(function(response){
@@ -38,9 +126,7 @@ angular.module('App')
 				$scope.message = "Error: "+ response.status+ " " + response.statusText;
 			})
 		};
-		$scope.$watch('patientChart',function (newVal,oldVal) {
-			if(!$scope.patientChart) $scope.isEditable();
-		});
+		
 		$scope.isEditable = function(){
 			// if($scope.patientChart) return false;
 			var aptDate;

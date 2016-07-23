@@ -6,11 +6,12 @@ angular.module('App')
           return $resource(baseURL+":centreId/schedulePatient",{centreId:centreId},  {
           	'update':{method:'PUT' },
         	query: {method: 'get', isArray: false}
+
           });
         };
         this.getFutureAppointments = function(centreId){
         	return $resource(baseURL+":centreId/futureAppointments/:appointmentId",{centreId:centreId},  {
-          	'update':{method:'PUT',isArray:true },
+          	'update':{method:'PUT' },
         	query: {
               method: 'get', 
               isArray: true,
@@ -37,9 +38,21 @@ angular.module('App')
         };
         this.getPastAppointments = function(centreId){
         	return $resource(baseURL+":centreId/pastAppointments/:appointmentId",{centreId:centreId},  {
-          	'update':{method:'PUT',isArray:true },
+          	'update':{method:'PUT' },
         	query: {method: 'get', isArray: true}
           });
         };
+        this.getCancelledAppointments = function(centreId){
+          return $resource(baseURL+":centreId/cancelledAppointments/:appointmentId",{centreId:centreId},  {
+            'update':{method:'PUT' },
+          query: {method: 'get', isArray: true}
+          });
+        };
+        this.getFilteredAppointments = function(centreId){
+          return $resource(baseURL+":centreId/:filter/:appointmentId",{centreId:centreId},  {
+            'update':{method:'PUT' },
+          query: {method: 'get', isArray: true}
+          });
+        }
   }])
 ;

@@ -117,6 +117,8 @@ angular.module('App')
         return logged_in_user;
     };
     this.getActiveUser = function(next){
+        if(Object.keys(logged_in_user_object).length == 0)
+            console.log('yo');
         return logged_in_user_object;
     }
     this.setCentre = function(centre){

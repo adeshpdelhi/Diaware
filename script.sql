@@ -89,16 +89,25 @@ insert into diseases(diseaseName) values('drugAllergy');
 
 INSERT INTO `users` (`id`,`username`,`hashedPassword`,`centres`,`admin`,`incharge`,`manager`,`clinical`,`createdAt`,`updatedAt`) VALUES (DEFAULT,'admin','21232f297a57a5a743894a0e4a801fc3','JP1,CH',true,false,true,false,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 
--- CREATE EVENT addNextWeeksAppointments
---   ON SCHEDULE
---     EVERY 1 DAY
---     STARTS '2016-07-14 01:10:00' ON COMPLETION PRESERVE ENABLE 
---   DO
---     INSERT INTO futureAppointments (centreId, shiftPatientsId,date,dayOfTheWeek,patientId,shiftNumber)
---     -- OUTPUT inserted.Id, inserted.ColumnA, inserted.ColumnB
---     SELECT  S.id as shiftPatientsId, S.patientId as patientId, P.centreId as centreId, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 7 DAY) as date, S.dayOfTheWeek  as dayOfTheWeek, S.shiftNumber as shiftNumber
---     FROM    shiftPatients as S join patientDetails as P 
---     WHERE S.patientId == P.id and S.dayOfTheWeek == DAYNAME(DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 7 DAY),'2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+-- CREATE EVENT addNextWeeksAppointments   
+-- ON SCHEDULE EVERY 1 DAY 
+-- STARTS '2016-07-22 01:46:00' ON COMPLETION PRESERVE ENABLE 
+-- DO INSERT INTO futureAppointments (centreId, shiftPatientsId,date,dayOfTheWeek,patientId,shiftNumber)	SELECT  P.centreId as centreId, S.id as shiftPatientsId, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 7 DAY) as date, S.day  as dayOfTheWeek, S.patientId as patientId, S.shiftNumber as shiftNumber  FROM    shiftPatients as S join patientDetails as P 	WHERE S.patientId = P.id  and S.day = (select DAYNAME(DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 7 DAY)));
 
 
+-- CREATE EVENT addNextWeeksAppointments   
+-- ON SCHEDULE EVERY 1 DAY 
+-- STARTS '2016-07-22 01:43:00' ON COMPLETION PRESERVE ENABLE 
+-- DO insert into ledgerTable(ledgerType,ledgerName,cost) values('a','a',1)
 
+
+-- CREATE EVENT addNextWeeksAppointments    ON SCHEDULE AT CURRENT_TIMESTAMP DO INSERT INTO ledgerTable(ledgerType, ledgerName, cost) values("aish","aish",4000);
+
+-- CREATE EVENT `event_name` 
+-- ON SCHEDULE schedule
+-- [ON COMPLETION [NOT] PRESERVE] 
+-- [ENABLE | DISABLE | DISABLE ON SLAVE]
+-- DO BEGIN
+-- 	-- event body
+-- END;

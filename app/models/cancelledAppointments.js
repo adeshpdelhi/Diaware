@@ -48,21 +48,32 @@ module.exports = function(sequelize, DataTypes) {
       type:DataTypes.INTEGER(11),
       allownull:true
     },
-    attended:{
-      type:DataTypes.BOOLEAN,
-      allownull:true,
-      // default:false
-      validate:{
-        isTrue:function(value){
-          if(!value){
-            throw new Error('Only Attended appointments can be shifted here');
+    // attended:{
+    //   type:DataTypes.BOOLEAN,
+    //   allownull:true,
+    //   // default:false
+    //   validate:{
+    //     isTrue:function(value){
+    //       // if(!value){
+    //       //   throw new Error('Only Attended appointments can be shifted here');
+    //       // }
+    //     }
+    //   },
+    //   set:function(){
+    //     // this.setDataValue(attended,false);
+    //   }
+    // },
+      cancelled:{
+        type:DataTypes.BOOLEAN,
+        allownull:false,
+        validate:{
+          isTrue:function(value){
+            if(!value){
+              throw new Error('Only cancelled appointments can be shifted here');
+            }
           }
         }
-      },
-      set:function(){
-        this.setDataValue(attended,false);
       }
-    }
   }, {
     tableName: 'cancelledAppointments'
   });

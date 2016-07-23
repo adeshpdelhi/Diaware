@@ -21,6 +21,21 @@ router.get('/:username', auth.verifyLoggedIn, function(req, res) {
         }
     });
 });
+router.get('/',auth.verifyLoggedIn,function(req,res){
+    if(req.query.latestAddedUser){
+        users.find({
+            order:[['createdAt','DESC']],
+            limit:1
+        }).then(function(result){
+            console.log("fetch all users:");
+            console.log(JSON.stringify(result));
+            res.json(result);
+        },function(rejectedPromiseError){
+            res.status(400);
+            res.end('Unable to connect to the Database');
+        })
+    }
+});
 
 router.post('/login', function(req, res) {
     auth.login(req,res);

@@ -23,12 +23,32 @@ patientRouter.use('/:id/carePlans',carePlanRouter);
 
 patientRouter.route('/')
 .get(function (req, res, next) {
-    
+    var where = {};
+    if(req.params.centreId != 'all')
+        where['centreId'] = req.params.centreId;
+    if(req.query.dateFrom && req.query.dateTo){
+        where['createdAt'] ={
+            $gt:new Date(req.query.dateFrom),
+            $lt:new Date(req.query.dateTo)
+        }
+    }
+    if(req.query.count){
+        console.log("where: patient route");
+        console.log(where);
+        db.patientDetails.count({
+            where:where
+        }).then(function(result){
+            console.log("count: "+result);
+            res.json({count:result});
+        },function(rejectedPromiseError){
+            res.status(400);
+            res.end("Couldnt fetch Data");
+        })
+        return;    
+    }
     console.log('procesing get');
     db.patientDetails.findAll({
-        where:{
-            centreId:req.params.centreId
-        }
+        where:where
     }).then(function(patients){
     	console.log(JSON.stringify(patients));
     	res.json(patients);
@@ -52,8 +72,8 @@ patientRouter.route('/:id')
     if(req.query.getShifts && req.query.getMedicalHistory){
         db.patientDetails.find({
             where:{
-                id:req.params.id,
-                centreId:req.params.centreId
+                id:req.params.id
+                // centreId:req.params.centreId
             },
             include:[{
                 model:db.shiftPatients
@@ -70,8 +90,8 @@ patientRouter.route('/:id')
     if(req.query.fullDetails){
         db.patientDetails.find({
             where:{
-                id:req.params.id,
-                centreId:req.params.centreId
+                id:req.params.id
+                // centreId:req.params.centreId
             },
             include:[{
                 model:db.panelDetails
@@ -91,8 +111,8 @@ patientRouter.route('/:id')
     }
     db.patientDetails.findOne({
         where:{
-            id:req.params.id,
-            centreId:req.params.centreId
+            id:req.params.id
+            // centreId:req.params.centreId
         }
     }).then(function(patient){
         console.log(JSON.stringify(patient));

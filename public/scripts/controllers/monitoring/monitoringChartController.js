@@ -1,14 +1,15 @@
 'use strict';
 angular.module('App')
-.controller('MonitoringController',['$scope','patientFactory','choosePatientFactory','authorize','monitoringChartFactory', function($scope, patientFactory, choosePatientFactory, authorize,monitoringChartFactory){
-       $scope.showalert_predialysis_basic=false;
-        patientFactory.getPatients(authorize.getCentre()).get({id:choosePatientFactory.getChosenPatient().id}).$promise.then(function(response){
+.controller('MonitoringController',['$scope','patientFactory','choosePatientFactory','authorize','monitoringChartFactory','$stateParams', function($scope, patientFactory, choosePatientFactory, authorize,monitoringChartFactory,$stateParams){
+        $scope.showalert_predialysis_basic=false;
+        var chosenPatientId = $stateParams.patientId?($stateParams.patientId):(choosePatientFactory.getChosenPatient().id);
+        patientFactory.getPatients(authorize.getCentre()).get({id:chosenPatientId}).$promise.then(function(response){
         	$scope.patient =response;
         });
 		$scope.showDateAlert= false;
         $scope.basic = {
-        	patientId:null,
-        	monitoringDate:null,
+        	patientId:$stateParams.patientId?$stateParams.patientId:null,
+        	monitoringDate:$stateParams.date?(new Date($stateParams.date)):null,
         	preBasicId:null,
         	machineNumber:null,
         	bedNumber:null,
@@ -37,10 +38,14 @@ angular.module('App')
     		monitoringChartFactory.getPreBasic($scope.patient.id).save($scope.basic).$promise.then(
                 function(response){
     				$scope.basic.preBasicId=response.preBasicId;
+                    $scope.message = "Details Saved Successfully!";
+                    $scope.messageColor = "success";
     				$scope.showalert_predialysis_basic=true;
                     $scope.savedOnce=true;
     			},function(response){
-    				$scope.showalert_predialysis_basic=false;
+                    $scope.messageColor="danger";
+                    $scope.message ="Error: "+ response.status+ " "+ response.data+"!";
+    				$scope.showalert_predialysis_basic=true;
     				console.log(response);
     			});
 			

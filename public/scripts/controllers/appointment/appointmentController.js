@@ -1,59 +1,80 @@
 'use strict';
 angular.module('App')
-.controller('AppointmentController',['$scope','patient','appointmentFactory','centreDetails',function($scope,patient,appointmentFactory,centreDetails){
+.controller('AppointmentController',['$scope','patient','appointmentFactory','centreDetails','authorize',function($scope,patient,appointmentFactory,centreDetails,authorize){
 	$scope.patient = patient;
 	$scope.scheduled = false;
-	if($scope.patient.shiftPatients.length != 0){
-		$scope.patientScheduledMachine = $scope.patient.shiftPatients[0].tmtMachine;
-		$scope.patientScheduledAppointmentType = $scope.shiftPatients[0].appointmentType;
-		$scope.scheduled = true;
-	}
-	$scope.machineTypes = [];
-	if($scope.patient.medicalHistories.length != 0){
-		var medHist = $scope.patient.medicalHistories;
-		for(var i = 0; i < medHist.length; i++){
-			if(medHist[i].diseaseName == 'hepatitisB' && medHist[i].diseasePresent == 'Yes')
-				$scope.machineTypes.push('B+ Machine');
-			if(medHist[i].diseaseName == 'hepatitisC' && medHist[i].diseasePresent == 'Yes')
-				$scope.machineTypes.push('C+ Machine');
-			if(medHist[i].diseaseName == 'HIV' && medHist[i].diseasePresent =='Yes')
-				$scope.machineTypes.push('HIV Machine');
-		}
-		if($scope.machineTypes.length == 0) $scope.machineTypes.push("Negative Machine");
-	}
-	else 
-		$scope.machineTypes = ['Negative Machine','B+ Machine', 'C+ Machine','HIV Machine'] ;// fetch from db - store in db
-	
-	$scope.dataReceived = null;
 	$scope.dataEntered = false;
+	$scope.dataReceived = false;
+	$scope.scheduleSaved = false;
+	$scope.editSchedules = false;
 	$scope.appointmentTypes = ['OPD','ICU/IPD'];
-	$scope.$watch('appointmentType',function(newValue, oldValue){
-		$scope.$watch('tmtOnMachine',function(newVal, oldVal){
-			$scope.dataReceived = false;
-			// $scope.dataEntered = true;
-			if(newValue !== "" && newVal !== "" && newValue != null && newVal != null){
-            	newVal = newVal.replace(/[+]/g, 'Positive');
-            	newVal = newVal.replace(/[ ]/g,'')+'s';
-            	newValue = newValue.replace(/[/]/g, '_');
-            	// console.log(+"yo"+ newVal + " " + newValue);
-            	$scope.string = newValue+'Available'+newVal;
-				appointmentFactory.getSchedules(centreDetails.getCentreId()).query({appointmentType:newValue,tmtOnMachine:newVal}, function(results){
-					$scope.daysData = results;
-					$scope.dataReceived = true;
-					// console.log("hey"+results);
-				});
+
+	$scope.$watch('patient.id', function(newVal,oldVal){
+		if(newVal){
+			if($scope.patient.shiftPatients.length !== 0){
+				$scope.patientSchedule = $scope.patient.shiftPatients;
+				$scope.appointmentType = $scope.patient.shiftPatients[0].appointmentType;
+				$scope.tmtOnMachine = $scope.patient.shiftPatients[0].tmtMachine;
+				$scope.scheduled = true;
 			}
-		});
+			$scope.machineTypes = [];
+			if($scope.patient.medicalHistories.length != 0){
+				var medHist = $scope.patient.medicalHistories;
+				for(var i = 0; i < medHist.length; i++){
+					if(medHist[i].diseaseName == 'hepatitisB' && medHist[i].diseasePresent == 'Yes')
+						$scope.machineTypes.push('B+ Machine');
+					if(medHist[i].diseaseName == 'hepatitisC' && medHist[i].diseasePresent == 'Yes')
+						$scope.machineTypes.push('C+ Machine');
+					if(medHist[i].diseaseName == 'HIV' && medHist[i].diseasePresent =='Yes')
+						$scope.machineTypes.push('HIV Machine');
+				}
+				if($scope.machineTypes.length == 0) $scope.machineTypes.push("Negative Machine");
+			}
+			else 
+				$scope.machineTypes = ['Negative Machine','B+ Machine', 'C+ Machine','HIV Machine'] ;// fetch from db - store in db
+		}
 	});
-	$scope.objs =[];
-	$scope.$watch('freqPerWeek',function(newVal,oldVal){
-		if($scope.objs.length <= newVal)	
-			$scope.showAlert = false;
-		if($scope.objs.length > newVal)
-			$scope.showAlert = true;
+
+	$scope.reloadDaysData = function(newVal, newVal1){
+    	newVal1 = newVal1.replace(/[+]/g, 'Positive');
+    	newVal1 = newVal1.replace(/[ ]/g,'')+'s';
+    	newVal = newVal.replace(/[/]/g, '_');
+    	$scope.string = newVal+'Available'+newVal1;
+    	// console.log("string: " + $scope.string);
+    	$scope.daysData = {};
+    	console.log("loading fresh daysData");
+		appointmentFactory.getSchedules(authorize.getCentre()).query({appointmentType:newVal,tmtOnMachine:newVal1}, function(results){
+			$scope.daysData = results;
+			$scope.dataReceived = true;
+		});		
+	};
+	$scope.$watch('appointmentType', function(newVal, oldVal){
+		console.log("changed appointmentType to value " + newVal);
+		$scope.$watch('tmtOnMachine', function(newVal1, oldVal1){
+			console.log("inside watch to load daysData");
+			if(newVal1 !== "" && newVal !== "" && newVal1 != null && newVal != null){
+      			$scope.reloadDaysData(newVal,newVal1);
+			}
+		},true);
+	},true);
+
+	$scope.objs = [];
+	$scope.$watch('scheduled',function(newVal,oldVal){
+		if($scope.scheduled){
+			for(var i = 0 ; i < $scope.patientSchedule.length; i++)
+			{
+				$scope.patientSchedule[i].new = false;
+			}
+			$scope.objs = $scope.patientSchedule;
+		}
 	});
+	$scope.isBooked = function(id){
+		// console.log("is bOOked: id: "+id);
+		return $scope['saved_'+id];
+	};
 	$scope.book = function(id, shift, index, day){
-		var obj={};
+		var obj = {};
+		
 		obj.day = day;
 		obj.shiftId = id;
 		obj.appointmentType = $scope.appointmentType;
@@ -63,82 +84,182 @@ angular.module('App')
 		obj.shift= shift;
 		obj.new = true;
 
-		$scope.objs.push(obj);
+		console.log("index : "+ index);
+		$scope['saved_'+index] =true;
+		console.log('OBJECT BOOKED');
 		console.log(obj);
-		console.log($scope.objs);
-		$scope['saved_'+index] = true;
-		console.log($scope.objs.length + " " + $scope.freqPerWeek);
-		if($scope.objs.length > $scope.freqPerWeek)
-			$scope.showAlert = true;
-
-	};
-	$scope.saved = function(id){
-		return $scope['saved_' + id];
-	};
-	$scope.isEmpty = function(val){
-		// console.log(val + typeof(val));
-		return (Object.keys(val).length === 0);
+		for(var i = 0; i < $scope.objs.length; i++){
+			if($scope.objs[i].shiftId == id && $scope.objs[i].delete){
+				$scope.objs[i].delete = false;
+				return;
+			}
+		}
+		$scope.objs.push(obj);
 	};
 	$scope.unbook = function(day, index){
 		for (var i = $scope.objs.length - 1; i >= 0; i--) {
-			console.log($scope.objs[i].day + ' ' + day + " "+ $scope.objs[i].patientId+" "+ $scope.patient.id);
-			if($scope.objs[i].day == day && $scope.objs[i].patientId == $scope.patient.id){
+			if($scope.objs[i].day == day  && $scope.objs[i].patientId == $scope.patient.id){
 				if($scope.objs[i].new){
 					$scope.objs.splice(i,1);
 				}else{
-					objs[i]['delete'] = true;
-					$scope['saved_'+index] = false;
+					$scope.objs[i]['delete'] = true;
 				}
 			}
 		}
-		$scope['saved_'+index] = false;
-		if($scope.objs.length <= $scope.freqPerWeek )
-			$scope.showAlert = false;
-
+		console.log("OBJECT UNBOOKED");
+		$scope['saved_' + index] = false;
 	};
-
-	///working on edit schedule
+	
 	$scope.editSchedule = function(){
-		$scope.editSchedule == true;
+		$scope.editSchedules = true;
+		$scope.dataReceived = false;
+		$scope.scheduleSaved = false;
+		$scope.scheduled = false; // might create a problem while doing back
 		$scope.objs = [];
-		var schedule = $scope.patient.shiftPatients;
-		for(var i = 0 ;i < schedule.length;i++){
-			// $scope.book(schedule[i].shiftId,)
-		}
-	};
-	$scope.saveSchedule = function(){
-		var update = [];
-		var object = {};
-		if($scope.editSchedule){
+		console.log("inside editSchedule");
+		for(var i = 0; i < $scope.patientSchedule.length; i++){
+			var j = 0;
+			// console.log('i: ' + i);
+			for(key in $scope.daysData){
+				if($scope.patientSchedule[i].day == key && !$scope.patientSchedule[i].delete){
+					// console.log("day:" + key);
+					$scope.patientSchedule[i]['new'] = false;
+					$scope.patientSchedule[i]['shift'] = 'shift'+$scope.patientSchedule[i].shiftNumber;
+					$scope.objs.push($scope.patientSchedule[i]);
+					$scope['saved_'+ j] = true;
+				}
+				j++;
 
-		}
-		else{
-			for (var i =0; i<$scope.objs.length;i++){
-				//reduce available machines by 1
-				object[$scope.objs[i].shiftId] = $scope.daysData[$scope.objs[i].day][$scope.objs[i].shift][$scope.string] -1;
 			}
-			var reqBody = {shiftPatients:$scope.objs,update:object, string:$scope.string};
-			console.log("reqBody:");
-			console.log(reqBody);
-			appointmentFactory.getSchedules(centreDetails.getCentreId()).save(reqBody).$promise.then(function(results){
+		}
+		$scope.reloadDaysData($scope.appointmentType,$scope.tmtOnMachine);
 
+	};
+	$scope.planNewSchedule = function(){
+		$scope.scheduled = false; // might create a problem while doing back
+		$scope.newSchedule = true;
+		$scope.dataReceived = false;
+		$scope.scheduleSaved = false;
+		// $scope.appointmentType = "";
+		// $scope.tmtOnMachine = "";
+		var j = 0;
+		
+		for(key in $scope.daysData){
+			console.log("j: "+ j );
+			$scope['saved_'+ j++] = false;			
+		}
+		$scope.reloadDaysData($scope.appointmentType,$scope.tmtOnMachine);
+		for(var i = 0; i < $scope.objs.length;i++){
+			$scope.objs[i]['delete'] = true;
+			$scope.objs[i]['new'] = false;
+			$scope.objs[i]['shift'] = 'shift'+$scope.objs[i].shiftNumber;
+			// $scope['saved_'+ j] = false;			
+			
+		}
+
+		// $scope.objs = [];
+		console.log("inside planNewSchedule");
+	};
+
+	$scope.saveSchedule = function () {
+		console.log("inside saveSchedule");
+		if($scope.newSchedule){
+			console.log("deleting previous schedule")
+			appointmentFactory.getSchedules(authorize.getCentre()).delete({
+				patientId:$scope.patient.id,
+				deleteAll:true
+			}).$promise.then(function(results){
+				console.log("results deleted:");
+				console.log( results);
+			},function(response){
+				$scope.message = "Error: "+response.status+" " + response.statusCode + "!";
+				$scope.messageColor ='danger';			
+				$scope.scheduleSaved = true;
+				return;
 			});
 		}
+		var object = {};
+		for (var i =0; i<$scope.objs.length;i++){
+			if($scope.objs[i].delete){
+				console.log("after deleting, no of bed Available: " + ($scope.daysData[$scope.objs[i].day][$scope.objs[i].shift][$scope.string] +1));
+				object[$scope.objs[i].shiftId] = $scope.daysData[$scope.objs[i].day][$scope.objs[i].shift][$scope.string] +1;
+			}
+			if($scope.objs[i].new)
+				object[$scope.objs[i].shiftId] = $scope.daysData[$scope.objs[i].day][$scope.objs[i].shift][$scope.string] -1;
+		}
+		var reqBody = {
+			shiftPatients : $scope.objs,
+			update : object, 
+			string : $scope.string
+		};
+		console.log("reqBody:");
+		console.log(reqBody);
+		appointmentFactory.getSchedules(centreDetails.getCentreId()).save(reqBody).$promise.then(function(results){
+			$scope.patientSchedule = results.shiftPatients;
+			console.log("results saved: ");
+			console.log( $scope.patientSchedule);
+			$scope.message = "saved Successfully!";
+			$scope.messageColor ='success';
 
-		$scope.editSchedule = false;
+			$scope.scheduled = true;
+			$scope.newSchedule = false;
+			$scope.editSchedules = false;
+
+			$scope.scheduleSaved = true;
+		},function(response){
+			$scope.message = "Error: "+response.status+" " + response.statusCode + "!";
+			$scope.messageColor ='danger';			
+		});
+
+		
+
+	};	
+
+	$scope.saveEditedSchedule = function(){
+		var object = {};
+		for (var i =0; i<$scope.objs.length;i++){
+			if($scope.objs[i].delete){
+				console.log("after deleting, no of bed Available: " + ($scope.daysData[$scope.objs[i].day][$scope.objs[i].shift][$scope.string] +1));
+				object[$scope.objs[i].shiftId] = $scope.daysData[$scope.objs[i].day][$scope.objs[i].shift][$scope.string] +1;
+			}
+			if($scope.objs[i].new)
+				object[$scope.objs[i].shiftId] = $scope.daysData[$scope.objs[i].day][$scope.objs[i].shift][$scope.string] -1;
+		}
+		var reqBody = {
+			shiftPatients : $scope.objs,
+			update : object, 
+			string : $scope.string
+		};
+		console.log("reqBody:");
+		console.log(reqBody);
+		appointmentFactory.getSchedules(centreDetails.getCentreId()).update({
+			patientId:$scope.patient.id
+		},reqBody).$promise.then(function(results){
+			$scope.patientSchedule = results.shiftPatients;
+			console.log("results update:" );
+			console.log($scope.patientSchedule);
+			$scope.message = "saved Successfully!";
+			$scope.messageColor ='success';
+
+			$scope.scheduled = true;
+			$scope.newSchedule = false;
+			$scope.editSchedules = false;
+
+			$scope.scheduleSaved = true;
+		},function(response){
+			$scope.message = "Error: "+response.status+" " + response.statusCode + "!";
+			$scope.messageColor ='danger';			
+		});
+
+
+		$scope.scheduled = true;
+		$scope.newSchedule = false;
+		$scope.editSchedules = false;
+
+		$scope.scheduleSaved = true;
 
 	};
-	
-	// $scope.options = ['Monday-Thursday','Monday-Wednesday','Tuesday-Friday'];
-	$scope.weekDayComparator = function(v1, v2) {
-	  // If we don't get strings, just compare by index
-	  var weekDays = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-	  for(var i = 0; i < weekDays.length; i++){
-	  	if(v1.value == weekDays[i]) return -1;
-	  	if(v2.value == weekDays[i]) return 1;
-	  }
-	};
-	
+
 }])
 
 

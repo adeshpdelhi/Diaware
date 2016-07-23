@@ -75,18 +75,23 @@ module.exports = function(sequelize, DataTypes) {
         var date = [], x = 0; // multiple dates for same day
 
         for (var d = new Date(); d <= nextWeek ; d.setDate(d.getDate() + 1)) {
-            console.log(d + " day: " +weekday[d.getDay()] + "date: " + date[x]);
+            // console.log(d + " day: " +weekday[d.getDay()] + "date: " + date[x]);
             if(instance.day == weekday[d.getDay()]){
+              d.setHours(23,59,59,999);
               date.push(new Date(d));
-              console.log('instance:');
-              console.log(instance);
+              // console.log('instance:');
+              // console.log(instance);
               now.setHours(23,59,59,999);
-
               // date.setHours(0,0,0,0,0);
 
               var appointment = {};
               // ,attributes:['centreId']
-              sequelize.models.patientDetails.find({where:{id:instance.patientId}}).then(function(result){
+              sequelize.models.patientDetails.find({
+                where:{
+                  id:instance.patientId
+                },
+                attributes:['centreId']
+              }).then(function(result){
                 appointment['centreId'] = result.centreId;
                 appointment['shiftPatientsId'] =instance.id;
                 appointment['date'] = new Date(date[x]);

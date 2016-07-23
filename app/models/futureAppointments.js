@@ -64,26 +64,35 @@ module.exports = function(sequelize, DataTypes) {
         //create instance level update if possible else do this there in appointment router
         console.log("inside Hook");
         console.log(futureAppointment);
-        if(futureAppointment.attended){
+        if(futureAppointment.attended != null){
           //shift to attended appointments table
-          console.log(futureAppointment);
-          console.log("yo entered");
-          // sequelize.models.attendedAppointments.build(futureAppointment).save().then(function(result){
-          //   console.log(JSON.stringify(result));
-          //   sequelize.models.futureAppointments.destroy({
-          //     where:{
-          //       appointmentId:futureAppointment.appointmentId
-          //     }
-          //   }).then(function(result){
-          //     console.log(JSON.stringify(result));
-          //   });
-          // });
-          // sequelize.query("INSERT INTO attendedAppointments select * from futureAppointments where appointmentId = :id ;",{ replacements: { id: futureAppointment.appointmentId }}).spread(function(results, metadata) {
-          //   console.log(JSON.stringify(results));
-          //   sequelize.query("DELETE FROM futureAppointments where appointmentId = :id;",{replacements:{id:futureAppointment.appointmentId}}).spread(function(results1,metadata1){
-          //     console.log(JSON.stringify(results1));
-          //   }); 
-          // });
+          console.log(JSON.parse(JSON.stringify(futureAppointment)));
+          console.log("inside attended hook");
+          sequelize.models.pastAppointments.build(JSON.parse(JSON.stringify(futureAppointment))).save().then(function(result){
+            console.log(JSON.stringify(result));
+            sequelize.models.futureAppointments.destroy({
+              where:{
+                appointmentId:futureAppointment.appointmentId
+              }
+            }).then(function(result){
+              console.log(JSON.stringify(result));
+            });
+          });
+          return;
+        }
+        if(futureAppointment.cancelled){
+          // shift to cancelled appointments table if appointment cancelled
+          console.log("inside cancelled");
+          sequelize.models.cancelledAppointments.build(JSON.parse(JSON.stringify(futureAppointment))).save().then(function(result){
+            console.log(JSON.stringify(result));
+            sequelize.models.futureAppointments.destroy({
+              where:{
+                appointmentId:futureAppointment.appointmentId
+              }
+            }).then(function(result){
+              console.log(JSON.stringify(result));
+            });
+          });
         }
       }
     }
@@ -95,3 +104,11 @@ module.exports = function(sequelize, DataTypes) {
 // baad mein sochte hain .... waise toh ye bhi theek hi lag rha hai ... yahi rehne dete hain phir
 // a table for all future appointments and a table for past Attended appointments of maybe past 2-3 months ... usse zyada koi dekhega nhi kabhi :P
 
+
+
+// sequelize.query("INSERT INTO attendedAppointments select * from futureAppointments where appointmentId = :id ;",{ replacements: { id: futureAppointment.appointmentId }}).spread(function(results, metadata) {
+//   console.log(JSON.stringify(results));
+//   sequelize.query("DELETE FROM futureAppointments where appointmentId = :id;",{replacements:{id:futureAppointment.appointmentId}}).spread(function(results1,metadata1){
+//     console.log(JSON.stringify(results1));
+//   }); 
+// });

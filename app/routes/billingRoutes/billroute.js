@@ -10,13 +10,42 @@ billingRouter.use(bodyParser.json());
 billingRouter.route('/')
 .get(function (req, res, next) {
     	// console.log(JSON.stringify(bills));
+    var where ={};
+    if(req.query.status){
+        where['status'] = req.query.status;
+    }
+    if(req.query.sum){
+        console.log("where billroute");
+        console.log(where);
+        console.log("query billroute");
+        console.log(req.query.amount.toString());
+        // where[req.query.amount] =
+        db.billMaster.sum('totalAmount',{
+            where:where
+        }).then(function(result){
+            console.log("sum: " +result);
+            res.json({sum:result});
+        },function(rejectedPromiseError){
+            res.status(400);
+            res.end("Server Error")
+            // res.end(rejectedPromiseError);
+        })
+        return;
+    }
+    var where1 ={};
+    if(req.params.centreId != 'all'){
+        where1['centreId'] = req.params.centreId;
+    }
+    console.log("where billroute");
+    console.log(where1);
+    console.log(where);
+        
     console.log('procesing get');
     db.billMaster.findAll({
+        where:where,
     	include: [{
     		model:db.patientDetails,
-    		where:{
-    			centreId:req.params.centreId
-    		},
+    		where:where1,
             attributes:['name','id','contact','age']        
     	}]
     }).then(function(bills){
@@ -64,7 +93,7 @@ billingRouter.route('/:billId')
     	include:[{
     		model:db.patientDetails,
     		where:{
-    			centreId:req.params.centreId
+    			// centreId:req.params.centreId
     		},
             attributes:['name','contact','alternativeContact','gender','address']
     	},{

@@ -129,6 +129,16 @@ angular.module('App')
                 return true;
             }
         };
+        $scope.setPristine = function(){
+            $scope.subItem = {
+                // bill
+                transactionId: null,
+                transactionType:null,
+                ledger:null,
+                quantity:1,
+                amount:null
+            };
+        };
         $scope.removeEntry = function(id){
             for (var i = $scope.bill.subItems.length - 1; i >= 0; i--) {
                 if($scope.bill.subItems[i].transactionId == id){

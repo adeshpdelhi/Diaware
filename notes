@@ -7,15 +7,38 @@ https://dev.mysql.com/downloads/mysql/
 http://dev.mysql.com/doc/refman/5.7/en/upgrading.html 
 
 
-usermanagement(admin): 
-	ask for number of machines in a centre of each type - add hook - which inserts into weekDaySlots and shifts table 
-	----done---- add number of Machines of each type in centre Table
+-----done-----usermanagement(admin)
+
+ask for number of machines in a centre of each type - add hook - which inserts into weekDaySlots and shifts table 
+
+----done---- add number of Machines of each type in centre Table
+
+
+-----done---link appointment with monitoring chart - auto fill monitoring date with latest (/oldest pending) pending appointment of the patient
+instead of auto fill ... validation ... if no appointment of that date invalid
+-----done-----if monitoring chart exists for that date  invalid etc (ye toh shayad hoga... shayad);
+
+-----(done)kiya hua hai shayad xD-----view appointments - of a particular patient - that is set filter patient id and remove filter patient id
+
+add new register  to registration - coz after registering one patient cant register another patient unless visit another page
+
+dashboard:
+	----done----view todays appointments
+	----done----added uder notification
+	pending monitoring cgart for appointment
+	----done----view new bills - centre wise hmm
+	----done----total new registrations for the last month and month before that
+	----done----total amount earned / bill created this month and the last
+
+if centres == all
+	when post ask for centre
+
 
 notes
 *add relation between patientDetail and User
 *ask 7med about relation between vaccination details and list of diseases drop down (from clinical details panel)
 *link every table with user **
-add editable rights on user to admin only using passport 
+-----done-----add editable rights on user to admin only using passport 
 
 add active and inactive state of patient and a corresponding hook - patient inactive shift to inactive patients table
 
@@ -23,17 +46,15 @@ one time icu/ipd appointment - ignore these by event scheduler
 dont add icu/ipd to shiftpatients - one time event -direct add to list of appointments
 add another option - take direct appointment  by date (of the category of icu/ipd (mostly); but keep it generic)
 unke bolne pe hatayenge
-list of inactive schedules of a patient
+-useless-list of inactive schedules of a patient
 
 
 problem- creating and updating of carePlan both provided; on update prev version of careplan would get deleted as of now... so each time major change in careplan - suggested to create a new careplan forthat patient to have prev version stored; otherwise we need to change update backend
 
 
-
-
 add paranoid:true to each model - no record is deleted from the table
 
-remove update promise ... returns array -expects object - change put functions everywhere to return only status code
+-----done(in most of the places)-----remove update promise ... returns array -expects object - change put functions everywhere to return only status code
 
 pre dialysis
 -----done-----fetch last post hd weight from db ....
@@ -43,7 +64,7 @@ pre dialysis
 
 
 ','separated list of access lines in center table  : add validation for the same
-can set validation in db for accessUsed iin Pre as well
+-useless-can set validation in db for accessUsed iin Pre as well
 
 -----done-----medical history could use diseases db and but aise bhi theek hi hai .. making it compulsory to answer for all diseases; as pointed out by Rishabh correctly :D
 
@@ -56,25 +77,25 @@ and add min = 0 for all numebrs and decimals alike
 
 add validations to all forms
 
-catch sequelize errors and display warning using alert messages in html - add rejectedPromiseError to all .then() functions as second function
+-----done(in most)----catch sequelize errors and display warning using alert messages in html - add rejectedPromiseError to all .then() functions as second function
 
 add units where ever required
 
 add Decimal(10,3) to all models whereever Decimal else number of decimal places assumed = 0 - equivalent to integer 
 
 
-add alerts success on successful save - check if present everywhere
+----done(i guess everywhere)---add alerts success on successful save - check if present everywhere
 
 
 -----done-----when a schedule of a patient gets fixed ... insert his appointments for the 1st one month/week (to be in line with the event scheduler)
 
-add ng-cloak to each template
+-----done-----add ng-cloak to each template
 
 
 -----done-----make changes in bill db - have a billID - for an item purchase in one bill and transaction Id = one whole bill having n items - assigned at the time of the purchase(make payMent) - can be a string of patientID + timestamp or make patientID + timestamp + billID unique = primary key
 
 
-scheduling a task sql
+-----done-----scheduling a task sql
 http://stackoverflow.com/questions/9621355/how-to-schedule-a-mysql-query 
 
 CREATE EVENT my_event

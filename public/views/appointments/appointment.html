@@ -1,5 +1,5 @@
 <div class="container" ng-cloak>
-	<div class="row row-content col-sm-pull-1 col-sm-push-1 col-sm-10">
+	<div class="row row-content col-sm-pull-2 col-sm-push-2 col-sm-8">
 		<div class="panel" style="text-align:center;">
 			<div class="panel-heading">
 				<div class="panel-title">Schedule a patients Appointments</div>
@@ -8,9 +8,9 @@
 			<div style="padding-top:30px;" class="panel-body" style="text-align:center;">
 				<div class="media">
 				    <div class="media-body media-left media-middle">
-				        <label class="col-sm-3">PATIENT ID: {{patient.id}}</label>
-				        <label class="col-sm-3 text-capitalize">NAME: {{patient.name}}</label>
-				        <label class="col-sm-3">CONTACT: {{patient.contact}}</label>
+				        <label class="col-sm-4">PATIENT ID: {{patient.id}}</label>
+				        <label class="col-sm-4 text-capitalize">NAME: {{patient.name}}</label>
+				        <label class="col-sm-4">CONTACT: {{patient.contact}}</label>
 				        <!-- <label class="col-sm-3 text-uppercase">Patient Type: {{patient.bedType}}</label> -->
 				    </div>
 				    <div class="media-right">
@@ -18,57 +18,59 @@
 				    </div>
 				    <hr style="border-top:1px solid rgb(220,220,220);" />
 				</div>
-				<div class="alert alert-{{messageColor}}" ng-show="saved">
+				<div class="alert alert-{{messageColor}}" ng-show="scheduleSaved">
 					{{message}}
 				</div>
-				<div ng-show="scheduled">
-					<p>AppointmentType : {{patientScheduledAppointmentType}}</p>
-					<p>Machine Type : {{patientScheduledMachine}}</p>
-			    	<ul>Chosen Days of the Week:
-		    			<li ng-repeat="schedule in patient.shiftPatients"  style="font-size:18px;">{{schedule.
+				<div ng-show="scheduled && !editSchedules" class="col-sm-6">
+					<p class="pull-left">AppointmentType : {{appointmentType}}</p>
+					<p class="pull-left">Machine Type : {{tmtOnMachine}}</p>
+			    	<ul class="pull-left">Chosen Days of the Week:
+		    			<li ng-repeat="schedule in patientSchedule" ng-if="!schedule.delete"  >{{schedule.
 		    			day}}
-			    			<small class="text-capitalize" style="color:rgb(180,180,180); font-size:15px">(Shift: {{schedule.shiftNumber}})</small>
+			    			<small class="text-capitalize">(Shift: {{schedule.shiftNumber}})</small>
 		    			</li>
 		    		</ul>
-		    		<button class="btn btn-success" ng-click="editSchedule()" data-toggle="tooltip" title="Allowed to change only day and/or shifts in week for the same treatmentMachine and appointment Type and frequency per week" data-placement="top">Edit Schedule</button>
-		    		<button class="btn btn-success" ng-click="newSchedule()" data-toggle="tooltip" title="Click if want to delete previous and create new appointment Schedule">New Schedule</button>
+		    		<button class="btn btn-success col-sm-6" ng-click="editSchedule()" data-toggle="tooltip" title="Allowed to change only day and/or shifts in week for the same treatmentMachine and appointment Type and frequency per week" data-placement="top">Edit Schedule</button>
+		    		<button class="btn btn-success col-sm-6" ng-click="planNewSchedule()" data-toggle="tooltip" title="Click if want to delete previous and create new appointment Schedule">New Schedule</button>
 		    		<!-- change/create/add -->
 				</div>
-				<div ng-show="!saved && !scheduled || editSchedule">
-					<form class="form-horizontal" role="form" ng-submit="saveSchedule()">
-						<div class="form-group col-sm-12">
-							<label class="control-label col-sm-4">Choose Appointment Type</label>
-							<select class="col-sm-2" ng-model="appointmentType">
-								<option selected disabled value="">-</option>
-								<option ng-repeat="type in appointmentTypes" value="{{type}}" class="text-capitalize">{{type}}</option>
-							</select>
-						</div>
-						<div class="form-group col-sm-12">
-							<label class="control-label col-sm-4">Choose Treatment Machine</label>
-							<select class="col-sm-2" ng-model="tmtOnMachine" ng-change="dataEntered=true">
-								<option selected disabled value="">-</option>
-								<option ng-repeat="i in machineTypes" value="{{i}}">{{i}}</option>
-							</select>
-						</div>
-						<!-- freq per week not needed anymore ... just a dummy data for now -->
-						<div class="form-group col-sm-12">
-							<label class="control-label col-sm-4">Choose Frequency Per Week</label>
-							<select class="col-sm-2" ng-model="freqPerWeek">
-								<option selected disabled value="">-</option>
-								<option ng-repeat="i in [1,2,3,4,5,6]" value="{{i}}">{{i}}</option>
-							</select>
-						</div>
-						<div class="col-sm-12" ng-show="!dataReceived && dataEntered">
+				<div ng-show="!scheduled || newSchedule || editSchedules">
+					<form class="form-horizontal" role="form" ng-submit="editSchedules?saveEditedSchedule():saveSchedule()">
+						<div ng-show="!editSchedules">
+							<div class="form-group col-sm-12">
+								<label class="control-label col-sm-4">Choose Appointment Type</label>
+								<select class="col-sm-4" ng-model="appointmentType">
+									<option selected disabled value="">-</option>
+									<option ng-repeat="type in appointmentTypes" value="{{type}}" class="text-capitalize">{{type}}</option>
+								</select>
+							</div>
+							<div class="form-group col-sm-12">
+								<label class="control-label col-sm-4">Choose Treatment Machine</label>
+								<select class="col-sm-4" ng-model="tmtOnMachine" ng-change="dataEntered=true">
+									<option selected disabled value="">-</option>
+									<option ng-repeat="i in machineTypes" value="{{i}}">{{i}}</option>
+								</select>
+							</div>
+							<!-- freq per week not needed anymore ... just a dummy data for now -->
+							<!-- <div class="form-group col-sm-12">
+								<label class="control-label col-sm-4">Choose Frequency Per Week</label>
+								<select class="col-sm-2" ng-model="freqPerWeek">
+									<option selected disabled value="">-</option>
+									<option ng-repeat="i in [1,2,3,4,5,6]" value="{{i}}">{{i}}</option>
+								</select>
+							</div> -->
+					    </div>
+						<div class="col-sm-12" ng-show="!dataReceived && (dataEntered || editSchedules)">
 						    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 					    </div>
 					    <div ng-show="dataReceived">
-					    	<div ng-show="showAlert" class="alert alert-danger" style="padding:10px 0px;">
+					    	<!-- <div ng-show="showAlert" class="alert alert-danger" style="padding:10px 0px;">
 					    		<strong>Warning:</strong>Slots booked greater than {{freqPerWeek}}
-					    	</div>			  
+					    	</div>	 -->		  
 					    	<div class="form-group">
 					    		<label class="control-label col-sm-12" style="text-align:center; font-size:23px; color:#73ADFF">Choose Days Suitable for Dialysis</label>
 					    		<!-- |orderBy:key:false:weekDayComparator" -->
-					    		<div class="col-sm-6" ng-repeat="(key,value) in daysData" ng-if="!isEmpty(value)" ng-init = "saved_$index = false">
+					    		<div class="col-sm-6" ng-repeat="(key,value) in daysData" >
 					    			<md-card>
 					    				<md-card-title>
 					    					<md-card-title-text style="background-color:#73AD21">
@@ -80,20 +82,24 @@
 					    					<div ng-repeat="(shiftKey,shiftValue) in value">
 						    					<label class="control-label text-capitalize" style="text-align:left"> {{shiftKey}}: <br><small style="color:rgb(200,200,200)">Available {{appointmentType}} Machines <br>({{tmtOnMachine}}): {{shiftValue[string]}} <br></small></label>
 
-						    					<button type="button" class="btn btn-primary" id="button_{{$parent.$index}}" ng-click="book(shiftValue.id,shiftKey,$parent.$index,key)" ng-show="!saved($parent.$index)">Book</button>
+						    					<button type="button" class="btn btn-{{shiftValue[string] == 0?'danger':'primary'}}" id="button_{{$parent.$index}}" ng-click="book(shiftValue.id,shiftKey,$parent.$index,key)" ng-show="!isBooked($parent.$index)" ng-disabled="shiftValue[string] == 0">{{shiftValue[string] == 0?'Full':'Book'}}</button>
+						    					<p>{{$parent.$index}}</p>
+						    					<!-- <button type="button" class="btn btn-danger"></button> -->
 					    					</div>
-					    					<p>{{key}}</p>
-					    					<button type="button" class="btn btn-primary" ng-click="unbook(key,$parent.$index)" ng-show="saved($parent.$index)">UnBook</button>
+					    					<!-- <p>{{key}}</p> -->
+					    					<button type="button" class="btn btn-primary" ng-click="unbook(key,$index)" ng-show="isBooked($index)">UnBook</button>
+						    					<p>yo {{$parent.$index}} index:{{$index}}</p>
+
 					    				</md-card-content>
 					    			</md-card>
 					    		</div>
 					    	</div>
-					    	<ul>Chosen Days of the Week:
-				    			<li ng-repeat="ob in objs"  style="font-size:18px;">{{ob.day}}
-					    			<small class="text-capitalize" style="color:rgb(180,180,180); font-size:15px">(Shift: {{ob.shiftNumber}})</small>
+					    	<ul class="pull-left">Chosen Days of the Week:
+				    			<li ng-repeat="ob in objs" ng-if="!ob.delete">{{ob.day}}
+					    			<small class="text-capitalize">(Shift: {{ob.shiftNumber}})</small>
 				    			</li>
 				    		</ul>
-					    	<button class="col-sm-3 col-offset-7 btn btn-primary" type="submit" ng-show="!showAlert" >Save Patient Schedule</button>
+					    	<button class="col-sm-3 col-offset-7 btn btn-primary pull-right" type="submit" >Save Patient Schedule</button>
 					    </div>
 					</form>
 				</div>
