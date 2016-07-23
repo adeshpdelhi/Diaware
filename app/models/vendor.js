@@ -35,6 +35,10 @@ module.exports = function(sequelize, DataTypes) {
     vendorIntroducedByName: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+    lastModifiedBy: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     tableName: 'vendor'

@@ -46,6 +46,10 @@ module.exports = function(sequelize, DataTypes) {
     nextExpectedStockIssueDate: {
       type: DataTypes.DATE,
       allowNull: true
+    },
+    lastModifiedBy: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     tableName: 'stockIssued'

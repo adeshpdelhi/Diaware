@@ -33,6 +33,10 @@ module.exports = function(sequelize, DataTypes) {
     quantity: {
       type: DataTypes.INTEGER(11),
       allowNull: true
+    },
+    lastModifiedBy: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     tableName: 'consumptionItems'

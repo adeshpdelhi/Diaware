@@ -14,6 +14,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true
+    },
+    lastModifiedBy: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     tableName: 'consumption'

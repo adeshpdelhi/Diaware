@@ -31,6 +31,10 @@ module.exports = function(sequelize, DataTypes) {
     quantityMeasurementType: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+    lastModifiedBy: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     tableName: 'stock'

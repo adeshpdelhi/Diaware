@@ -8,7 +8,8 @@ create table indent( -- if status sent for approval in admin then here status is
 	requestDate date,
 	requiredByDate date,
 	stockOrderTo varchar(60), -- could be reference to vendor table + corporate office
-	status varchar(60) -- status could be: saved, sent, approved, rejected , fulfilled
+	status varchar(60), -- status could be: saved, sent, approved, rejected , fulfilled
+	lastModifiedBy varchar(60)
 );
 
 create table indentItems(
@@ -21,6 +22,7 @@ create table indentItems(
 	quantityRequired int,
 	availabilityQuantity int, -- retrieve from stock
 	quantityMeasurementType varchar(60),
+	lastModifiedBy varchar(60),
 	primary key(indentId,itemNumber)
 );
 
@@ -31,7 +33,8 @@ create table stock(
 	usageType varchar(60),
 	brandName varchar(60),
 	availabilityQuantity int,
-	quantityMeasurementType varchar(60)
+	quantityMeasurementType varchar(60),
+	lastModifiedBy varchar(60)
 );
 
 create table stockIssued(
@@ -45,7 +48,8 @@ create table stockIssued(
 	estimatedCatheterDoubleLumen int,
 	stockIssueDate date,
 	stockTakerName varchar(60),
-	nextExpectedStockIssueDate date
+	nextExpectedStockIssueDate date,
+	lastModifiedBy varchar(60)
 );
 
 create table stockIssuedItems(
@@ -57,13 +61,15 @@ create table stockIssuedItems(
 	brandName varchar(60), --									  /
 	quantity int, --											 /
 	quantityMeasurementType varchar(60), --			   _________/
+	lastModifiedBy varchar(60),
 	primary key(stockIssuedId,itemNumber)
 );
 
 create table consumption(
 	centreId varchar(60) NOT NULL,
 	treatementType varchar(60),
-	treatementId bigint primary key NOT NULL
+	treatementId bigint primary key NOT NULL,
+	lastModifiedBy varchar(60)
 );
 
 create table consumptionItems(
@@ -74,6 +80,7 @@ create table consumptionItems(
 	type varchar(60),
 	quanityType varchar(60),
 	quantity int,
+	lastModifiedBy varchar(60),
 	primary key(treatementId,itemNumber)
 );
 
@@ -95,5 +102,6 @@ create table vendor(
 	vendorContactPerson varchar(60),
 	vendorContactPersonNumber varchar(60),
 	vendorIntroducedBy varchar(60),
-	vendorIntroducedByName varchar(60)
+	vendorIntroducedByName varchar(60),
+	lastModifiedBy varchar(60)
 );
