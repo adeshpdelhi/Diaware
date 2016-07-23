@@ -92,6 +92,12 @@ INSERT INTO `users` (`id`,`username`,`hashedPassword`,`centres`,`admin`,`incharg
 insert into vendor(vendorId ,vendorName,vendorAddress, vendorTINNumber,vendorContactPerson,vendorContactPersonNumber,vendorIntroducedBy,vendorIntroducedByName,createdAt,updatedAt) values(DEFAULT, 'kr dispensaries','jaipur',99999,'aishhwarrya',1234567892,'Staff','rishabh','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'savlon','General Stock','dettol','bottles','2016-07-13 10:48:56','2016-07-13 10:48:56');
+	
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'savlon','Treatment Specific','dettol','bottles','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'savlon','General Stock','dettol','bottles','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'handwash','Emergency Stock','lifebuoy','bottles','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 insert into indent (centreId,indentId,requestDate,requiredByDate,stockOrderTo,status,createdAt,updatedAt) values('JP1',DEFAULT,'2016-07-13 10:48:56','2016-07-13 10:48:56','Me','Sent','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
