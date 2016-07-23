@@ -2,10 +2,15 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('dialysisItems', {
+    itemId: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
     itemName: {
       type: DataTypes.STRING,
-      allowNull: false,
-      primaryKey: true
+      allowNull: false
     }
   }, {
     tableName: 'dialysisItems'

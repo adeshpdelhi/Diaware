@@ -22,6 +22,9 @@ inventoryRouter.use(bodyParser.json());
 var consumptionRouter = require('./inventory/consumptionroute');
 inventoryRouter.use('/consumption',consumptionRouter);
 
+var treatementItemsRouter = require('./inventory/treatementitemsroute');
+inventoryRouter.use('/treatementitems',treatementItemsRouter);
+
 var vendorRouter = require('./inventory/vendorroute');
 inventoryRouter.use('/vendor',vendorRouter);
 

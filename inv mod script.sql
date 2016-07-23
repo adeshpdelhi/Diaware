@@ -78,11 +78,13 @@ create table consumptionItems(
 );
 
 create table dialysisItems(
-	itemName varchar(60) primary key NOT NULL
+	itemId int primary key NOT NULL AUTO_INCREMENT,
+	itemName varchar(60) NOT NULL
 );
 
 create table catheterizationItems(
-	itemName varchar(60) primary key NOT NULL
+	itemId int primary key NOT NULL AUTO_INCREMENT,
+	itemName varchar(60) NOT NULL
 );
 
 create table vendor(
