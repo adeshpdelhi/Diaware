@@ -91,6 +91,9 @@ INSERT INTO `users` (`id`,`username`,`hashedPassword`,`centres`,`admin`,`incharg
 
 insert into vendor(vendorId ,vendorName,vendorAddress, vendorTINNumber,vendorContactPerson,vendorContactPersonNumber,vendorIntroducedBy,vendorIntroducedByName,createdAt,updatedAt) values(DEFAULT, 'kr dispensaries','jaipur',99999,'aishhwarrya',1234567892,'Staff','rishabh','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
+insert into vendor(vendorId ,vendorName,vendorAddress, vendorTINNumber,vendorContactPerson,vendorContactPersonNumber,vendorIntroducedBy,vendorIntroducedByName,createdAt,updatedAt) values(DEFAULT, 'corporate office','delhi',99999,'mayank',1234567892,'Staff','rishabh','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+
 insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'savlon','General Stock','dettol','bottles','2016-07-13 10:48:56','2016-07-13 10:48:56');
 	
 insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'savlon','Treatment Specific','dettol','bottles','2016-07-13 10:48:56','2016-07-13 10:48:56');
