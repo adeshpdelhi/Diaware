@@ -38,7 +38,7 @@ consumptionRouter.route('/:treatementId')
     console.log('procesing get');
     db.consumption.findOne({
         where:{
-            treatementId:parseInt(req.params.treatementId,10),
+            treatementId:parseInt(req.params.treatementId,10)
         }
     }).then(function(consumption){
         console.log(JSON.stringify(consumption));
@@ -53,7 +53,7 @@ consumptionRouter.route('/:treatementId')
     db.consumption.update(
     req.body, {
             where:{
-                treatementId:parseInt(req.params.treatementId,10),
+                treatementId:parseInt(req.params.treatementId,10)
             }
         }
     )

@@ -38,7 +38,7 @@ indentRouter.route('/:indentId')
     console.log('procesing get');
     db.indent.findOne({
         where:{
-            indentId:parseInt(req.params.indentId,10),
+            indentId:parseInt(req.params.indentId,10)
         }
     }).then(function(indent){
         console.log(JSON.stringify(indent));
@@ -53,7 +53,7 @@ indentRouter.route('/:indentId')
     db.indent.update(
     req.body, {
             where:{
-                indentId:parseInt(req.params.indentId,10),
+                indentId:parseInt(req.params.indentId,10)
             }
         }
     )
