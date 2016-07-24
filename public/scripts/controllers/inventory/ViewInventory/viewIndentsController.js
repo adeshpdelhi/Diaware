@@ -93,6 +93,7 @@ angular.module('App')
 		    $scope.indentItem.lastModifiedBy = authorize.getUsername();
 			$scope.indentItem.item = {itemName: $scope.indentItem.itemName, usageType: $scope.indentItem.usageType, brandName: $scope.indentItem.brandName, quantityMeasurementType: $scope.indentItem.quantityMeasurementType};
 			$scope.indentItem.linkedStatus = $scope.viewStatus;
+			console.log('added item with id '+$scope.indentItem.itemId+' with status '+$scope.viewStatus);
 			$scope.indentItem.retrieved = false;
 			$scope.indentItems.push($scope.indentItem);
 			// for(var i=0;i<$scope.filteredItems.length;i++){
@@ -127,7 +128,6 @@ angular.module('App')
 			inventoryFactory.getIndents(authorize.getCentre()).update({indentId: $scope.indentId},$scope.indent).$promise.then(function(response){
 			for(var i=0;i<$scope.indentItems.length;i++)
 				$scope.indentItems[i].linkedStatus = 'Saved';
-			$scope.indent.centreId=authorize.getCentre();
 			$scope.indent.lastModifiedBy=authorize.getUsername();
 			console.log('adding back');
 			console.log($scope.indentItems);
@@ -195,7 +195,6 @@ angular.module('App')
 			inventoryFactory.getIndents(authorize.getCentre()).update({indentId: $scope.indentId},$scope.indent).$promise.then(function(response){
 			for(var i=0;i<$scope.indentItems.length;i++)
 				$scope.indentItems[i].linkedStatus = 'Raised';
-			$scope.indent.centreId=authorize.getCentre();
 			$scope.indent.lastModifiedBy=authorize.getUsername();
 			console.log('adding back');
 			console.log($scope.indentItems);
@@ -244,7 +243,6 @@ angular.module('App')
 			$scope.indent.status='Approved';
 			for(var i=0;i<$scope.indentItems.length;i++)
 				$scope.indentItems[i].linkedStatus = 'Approved';
-			$scope.indent.centreId=authorize.getCentre();
 			$scope.indent.lastModifiedBy=authorize.getUsername();
 			inventoryFactory.getIndents(authorize.getCentre()).update({indentId: $scope.indentId},$scope.indent).$promise.then(function(response){
 				
@@ -301,13 +299,18 @@ angular.module('App')
 		$scope.prepareReceiveIndent = function(){
 			$scope.viewStatus = 'Approved';
 			$scope.isReceiving = true;
+			var tempItems=[];
+			for (var i=0;i<$scope.indentItems.length;i++)
+				if($scope.indentItems[i].linkedStatus=='Approved')
+					tempItems.push($scope.indentItems[i]);
+			$scope.indentItems = tempItems; 
+			console.log($scope.indentItems);
 		}
 
 		$scope.receiveIndent = function(){
 			$scope.indent.status='Received';
 			for(var i=0;i<$scope.indentItems.length;i++)
 				$scope.indentItems[i].linkedStatus = 'Received';
-			$scope.indent.centreId=authorize.getCentre();
 			$scope.indent.lastModifiedBy=authorize.getUsername();
 			inventoryFactory.getIndents(authorize.getCentre()).update({indentId: $scope.indentId},$scope.indent).$promise.then(function(response){
 				
@@ -316,14 +319,16 @@ angular.module('App')
 					console.log('here. length is '+$scope.indentItems.length);
 					for(var i = 0; i <  $scope.indentItems.length;  i++){			
 						$scope.indentItems[i].indentId=$scope.indent.indentId;
-						inventoryFactory.getIndentItems(authorize.getCentre(),$scope.indentId).save($scope.indentItems[i]).$promise.then(function(response){
-							//console.log('added item with id');
-						},function(response){
-							$scope.messageColor = 'danger';
-							$scope.showAlert = true;
-							$scope.message = ' partial receive failed';
-							return;
-						});	
+						//if($scope.indentItems[i].linkedStatus == 'Approved'){
+							inventoryFactory.getIndentItems(authorize.getCentre(),$scope.indentId).save($scope.indentItems[i]).$promise.then(function(response){
+								//console.log('added item with id');
+							},function(response){
+								$scope.messageColor = 'danger';
+								$scope.showAlert = true;
+								$scope.message = ' partial receive failed';
+								return;
+							});	
+						//}
 					}
 					$scope.indentForm.$setPristine();
 					$scope.savedOnce = true;
