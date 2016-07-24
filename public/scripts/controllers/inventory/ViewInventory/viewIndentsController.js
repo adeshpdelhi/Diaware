@@ -325,38 +325,67 @@ angular.module('App')
 							},function(response){
 								$scope.messageColor = 'danger';
 								$scope.showAlert = true;
-								$scope.message = ' partial receive failed';
+								$scope.message = ' partial receive failed.. failed saving to stocks';
 								return;
 							});	
 						//}
 					}
-					$scope.indentForm.$setPristine();
-					$scope.savedOnce = true;
-					$scope.message = 'Received saved!';
-					$scope.messageColor = 'success';
-					$scope.showAlert = true;
-					$scope.indent = {
-						centreId:null,
-						requestDate:null,
-						requiredByDate:null,
-						stockOrderTo:null,
-						status:null,
-						lastModifiedBy:null
-					};
-					$scope.indentItems=[];
-					$scope.indentItem = {
-							itemId:null,
-							itemName:null,
-							usageType:null,
-							brandName:null,
-							quantityRequired:null,
-							availableQuantity:null,
-							quantityMeasurementType:null,
+
+					inventoryFactory.getStocks(authorize.getCentre()).query().$promise.then(function(response){
+						$scope.stocks=response;
+						console.log('stocks received');
+						console.log($scope.stocks);
+						console.log('indent items present');
+						console.log($scope.indentItems);
+						for(var i=0;i<$scope.indentItems.length;i++){
+							for(var j=0;j<$scope.stocks.length;j++)
+							{
+								//console.log('comparing '+$scope.stocks[j].itemId+' '+$scope.indentItems[i].itemId);
+								if($scope.stocks[j].itemId == $scope.indentItems[i].itemId)
+								{
+									$scope.stocks[j].availableQuantity+=$scope.indentItems[i].quantityRequired;
+									inventoryFactory.getStocks(authorize.getCentre()).update({centreId:$scope.stocks[j].centreId, itemId: $scope.stocks[j].itemId},$scope.stocks[j],$scope.stocks[j]);
+									//console.log($scope.stocks[j].itemId+' quantiy updated to '+$scope.stocks[j].availableQuantity);
+								}
+							}
+						}
+
+
+						$scope.indentForm.$setPristine();
+						$scope.savedOnce = true;
+						$scope.message = 'Received saved!';
+						$scope.messageColor = 'success';
+						$scope.showAlert = true;
+						$scope.indent = {
+							centreId:null,
+							requestDate:null,
+							requiredByDate:null,
+							stockOrderTo:null,
+							status:null,
 							lastModifiedBy:null
-					};
-					//$scope.updateIndents();
-					$uibModalInstance.close();
-					$state.go('app.inventory.indent.view',{},{reload: true});
+						};
+						$scope.indentItems=[];
+						$scope.indentItem = {
+								itemId:null,
+								itemName:null,
+								usageType:null,
+								brandName:null,
+								quantityRequired:null,
+								availableQuantity:null,
+								quantityMeasurementType:null,
+								lastModifiedBy:null
+						};
+						//$scope.updateIndents();
+						$uibModalInstance.close();
+						$state.go('app.inventory.indent.view',{},{reload: true});
+
+
+
+
+					},function(response){
+						alert('stock updation failed')
+					})
+					
 			},function(response){
 				$scope.messageColor = 'danger';
 				$scope.showAlert = true;

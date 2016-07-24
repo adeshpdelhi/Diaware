@@ -14,7 +14,7 @@ stockRouter.route('/')
     console.log('procesing get');
     db.stock.findAll({
         where:{
-            centreId: req.params.centreId,
+            centreId: req.params.centreId
         },
         include:[
             db.item
@@ -43,6 +43,7 @@ stockRouter.route('/:itemId')
     db.stock.findOne({
         where:{
             itemId:parseInt(req.params.itemId,10),
+            centreId: req.params.centreId
         },
         include:[
             db.item
@@ -61,6 +62,7 @@ stockRouter.route('/:itemId')
     req.body, {
             where:{
                 itemId:parseInt(req.params.itemId,10),
+                centreId: req.params.centreId
             }
         }
     )
