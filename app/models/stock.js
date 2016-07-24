@@ -10,7 +10,11 @@ module.exports = function(sequelize, DataTypes) {
     itemId: {
       type: DataTypes.BIGINT,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      references:{
+        model: 'item',
+        key: 'itemId'
+      }
     },
     availableQuantity: {
       type: DataTypes.INTEGER(11),

@@ -195,6 +195,19 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
 
             })
 
+            .state('app.inventory.stock', {
+                url:'stock/',
+            })
+            .state('app.inventory.stock.view', {
+                url:'view',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/ViewInventory/viewStocks.html',
+                        controller  : 'ViewStocksController'
+                    }
+                }
+
+            })
 
 
 

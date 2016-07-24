@@ -14,8 +14,11 @@ stockRouter.route('/')
     console.log('procesing get');
     db.stock.findAll({
         where:{
-            centreId: req.params.centreId
-        }
+            centreId: req.params.centreId,
+        },
+        include:[
+            db.item
+        ]
     }).then(function(indents){
     	console.log(JSON.stringify(indents));
     	res.json(indents);
@@ -40,7 +43,10 @@ stockRouter.route('/:itemId')
     db.stock.findOne({
         where:{
             itemId:parseInt(req.params.itemId,10),
-        }
+        },
+        include:[
+            db.item
+        ]
     }).then(function(indent){
         console.log(JSON.stringify(indent));
         res.json(indent);

@@ -138,6 +138,10 @@ dbmodel.stockIssuedItems.belongsTo(dbmodel.stockIssued,{foreignKey:'stockIssuedI
 dbmodel.consumption.hasMany(dbmodel.consumptionItems,{foreignKey:'treatementId'});
 dbmodel.consumptionItems.belongsTo(dbmodel.consumption,{foreignKey:'treatementId'});
 
+dbmodel.consumption.hasMany(dbmodel.consumptionItems,{foreignKey:'treatementId'});
+dbmodel.consumptionItems.belongsTo(dbmodel.consumption,{foreignKey:'treatementId'});
 
+dbmodel.item.hasOne(dbmodel.stock,{foreignKey:'itemId'});
+dbmodel.stock.belongsTo(dbmodel.item,{foreignKey:'itemId'});
 
 module.exports = dbmodel;
