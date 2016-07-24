@@ -23,7 +23,10 @@ stockIssuedItemsRouter.route('/')
     db.stockIssuedItems.findAll({
         where:{
             stockIssuedId:parseInt(req.params.stockIssuedId,10)
-        }
+        },
+        include:[
+            db.item
+        ]
     }).then(function(stockIssuedItems){
         console.log(JSON.stringify(stockIssuedItems));
         res.json(stockIssuedItems);
@@ -70,7 +73,10 @@ stockIssuedItemsRouter.route('/:itemId')
         where:{
             itemId:parseInt(req.params.itemId,10),            
             stockIssuedId:req.params.stockIssuedId
-        }
+        },
+        include:[
+            db.item
+        ]
     }).then(function(stockIssuedItem){
         console.log(JSON.stringify(stockIssuedItem));
         res.json(stockIssuedItem);
