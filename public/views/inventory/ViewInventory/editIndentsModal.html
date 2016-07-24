@@ -2,7 +2,10 @@
             <h3 class="modal-title">Viewing Indent {{indent.indentId}}  <span style="color:{{indent.status=='Raised'?'orange':indent.status=='Approved'?'green':'blue'}}"><b>{{indent.status}}</b></span></h3>
             <div>
             <div class="form-group">
-	            <div class="col-sm-3 col-sm-push-9">
+            	<div class="col-sm-2" ng-show="indent.status=='Approved' && !isReceiving">
+            		<button class="btn btn-success" ng-click="prepareReceiveIndent()">Received</button>
+            	</div>
+	            <div class="col-sm-3 col-sm-push-6" ng-show="!isReceiving">
 	            	<select name="chooseViewStatus" class="form-control" ng-model="viewStatus">
 	            		<option value="Saved" ng-if="indent.status == 'Saved'">Saved</option>
 	            		<option value="Raised" ng-if="indent.status=='Approved' || indent.status=='Received' || indent.status=='Raised'">Raised</option>
@@ -26,7 +29,7 @@
                                 <th style="text-align:center;" width="10%">Available Quantity</th>
                                 <th style="text-align:center;" width="10%">Quantity type</th>
 
-                                <th ng-if="(indent.status == 'Raised' && (activeUser.admin == true || activeUser.incharge==true)) || indent.status == 'Saved'" style="text-align:center;" width="5%">&nbsp;</th>
+                                <th ng-if="(indent.status == 'Raised' && (activeUser.admin == true || activeUser.incharge==true)) || indent.status == 'Saved' || isReceiving" style="text-align:center;" width="5%">&nbsp;</th>
                             </tr>    
                         </thead>
                         <tbody >
@@ -38,13 +41,13 @@
                                 <td width="10%" style="text-align:center;" >{{indentItem.quantityRequired}}</td>
                                 <td width="10%" style="text-align:center;" >{{indentItem.availableQuantity}}</td>
                                 <td width="10%" style="text-align:center;" >{{indentItem.item.quantityMeasurementType}}</td>
-                                <td ng-if="(indent.status == 'Raised' && (activeUser.admin == true || activeUser.incharge==true)) || indent.status == 'Saved'" style="text-align:center;" width="5%"><button class="btn btn-danger" ng-click="removeItem($index,indentItem)"><span class="glyphicon glyphicon-remove"></span></button></td>
+                                <td ng-if="(indent.status == 'Raised' && (activeUser.admin == true || activeUser.incharge==true)) || indent.status == 'Saved' || isReceiving" style="text-align:center;" width="5%"><button class="btn btn-danger" ng-click="removeItem($index,indentItem)"><span class="glyphicon glyphicon-remove"></span></button></td>
 
                             </tr>    
                         </tbody>
                     </table>
                 </div>
-                <span ng-show = "!addingItem &&( (indent.status=='Raised' && (activeUser.admin == true || activeUser.incharge == true) || indent.status=='Saved' ))" class="col-sm-1 col-sm-offset-11 glyphicon glyphicon-plus" ng-click="addingItem = true" style="font-size: 40px"></span>
+                <span ng-show = "!addingItem &&( (indent.status=='Raised' && (activeUser.admin == true || activeUser.incharge == true) || indent.status=='Saved' )  || isReceiving)" class="col-sm-1 col-sm-offset-11 glyphicon glyphicon-plus" ng-click="addingItem = true" style="font-size: 40px"></span>
                 <div ng-show="addingItem">
                 <span class="col-sm-1 col-sm-offset-11 glyphicon glyphicon-minus" ng-click="addingItem = false" style="font-size: 40px"></span>
                 <div class="form-group col-sm-10 col-sm-push-1">
@@ -132,6 +135,9 @@
                         </div>
                         <div ng-if="indent.status=='Saved' && (activeUser.admin == true || activeUser.incharge == true)" class="col-sm-push-6 col-sm-pull-2 col-sm-2">
                             <button type="submit" class="btn btn-success" ng-click="raiseIndent()">Raise</button>
+                        </div>
+                        <div ng-if="isReceiving" class="col-sm-push-6 col-sm-pull-2 col-sm-2">
+                            <button type="submit" class="btn btn-success" ng-click="receiveIndent()">Add To Stock</button>
                         </div>
                     </div>
 

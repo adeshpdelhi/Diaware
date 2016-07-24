@@ -297,11 +297,16 @@ angular.module('App')
 
 			
 		};
+		$scope.isReceiving = false;
+		$scope.prepareReceiveIndent = function(){
+			$scope.viewStatus = 'Approved';
+			$scope.isReceiving = true;
+		}
 
 		$scope.receiveIndent = function(){
-			$scope.indent.status='Approved';
+			$scope.indent.status='Received';
 			for(var i=0;i<$scope.indentItems.length;i++)
-				$scope.indentItems[i].linkedStatus = 'Approved';
+				$scope.indentItems[i].linkedStatus = 'Received';
 			$scope.indent.centreId=authorize.getCentre();
 			$scope.indent.lastModifiedBy=authorize.getUsername();
 			inventoryFactory.getIndents(authorize.getCentre()).update({indentId: $scope.indentId},$scope.indent).$promise.then(function(response){
@@ -316,13 +321,13 @@ angular.module('App')
 						},function(response){
 							$scope.messageColor = 'danger';
 							$scope.showAlert = true;
-							$scope.message = ' partial approve failed';
+							$scope.message = ' partial receive failed';
 							return;
 						});	
 					}
 					$scope.indentForm.$setPristine();
 					$scope.savedOnce = true;
-					$scope.message = 'Sent!';
+					$scope.message = 'Received saved!';
 					$scope.messageColor = 'success';
 					$scope.showAlert = true;
 					$scope.indent = {
@@ -350,11 +355,10 @@ angular.module('App')
 			},function(response){
 				$scope.messageColor = 'danger';
 				$scope.showAlert = true;
-				$scope.message = 'Approving failed';
+				$scope.message = 'Receiving failed';
 			});
+	}
 
-			
-		};
 }])
 
 ;
