@@ -24,22 +24,30 @@ indentRouter.route('/')
 .post(function (req, res, next) {
 	console.log('processing post : '+ req.body);
     console.log(req.body);
-    db.indent.findOne({
-        where:{
-            indentId:parseInt(req.body.indentId,10),
-        }
-    }).then(function(indent){
-        console.log('checking for ');
-        console.log(indent);
-        if(indent!=null)
-        {
-            console.log('found '+JSON.stringify(indent));
-            indent.destroy();
-            db.indent.build(req.body).save().then(function(result){
-                res.json(result);
-            });
-        }
-    });
+    if(req.body.indentId!=null){
+        db.indent.findOne({
+            where:{
+                indentId:parseInt(req.body.indentId,10),
+            }
+        }).then(function(indent){
+            console.log('checking for ');
+            console.log(indent);
+            if(indent!=null)
+            {
+                console.log('found '+JSON.stringify(indent));
+                indent.destroy();
+                db.indent.build(req.body).save().then(function(result){
+                    res.json(result);
+                });
+            }
+        });
+    }
+    else
+    {
+        db.indent.build(req.body).save().then(function(result){
+                    res.json(result);
+                });
+    }
     
 })
 .delete(function(req,res,next){

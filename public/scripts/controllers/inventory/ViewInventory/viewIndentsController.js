@@ -89,13 +89,13 @@ angular.module('App')
 				$scope.indentItems[i].linkedStatus = newStatus;
 			$scope.indent.centreId=authorize.getCentre();
 			$scope.indent.lastModifiedBy=authorize.getUsername();
-			inventoryFactory.getIndents(authorize.getCentre()).save($scope.indent).$promise.then(function(response){
+			inventoryFactory.getIndents(authorize.getCentre()).update($scope.indent.indentId,$scope.indent).$promise.then(function(response){
 				
-					$scope.indentId=response.indentId;
+				//	$scope.indentId=response.indentId;
 					console.log($scope.indentItems);
 					console.log('here. length is '+$scope.indentItems.length);
 					for(var i = 0; i <  $scope.indentItems.length;  i++){			
-						$scope.indentItems[i].indentId=response.indentId;
+						$scope.indentItems[i].indentId=$scope.indent.indentId;
 						inventoryFactory.getIndentItems(authorize.getCentre(),$scope.indentId).save($scope.indentItems[i]).$promise.then(function(response){
 						},function(response){
 							$scope.messageColor = 'danger';

@@ -120,7 +120,7 @@ angular.module('App')
 			$scope.indent.centreId=authorize.getCentre();
 			$scope.indent.lastModifiedBy=authorize.getUsername();
 			inventoryFactory.getIndents(authorize.getCentre()).save($scope.indent).$promise.then(function(response){
-				
+					console.log('indent id is '+response.indentId);
 					$scope.indentId=response.indentId;
 					console.log($scope.indentItems);
 					console.log('here. length is '+$scope.indentItems.length);
