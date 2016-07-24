@@ -116,7 +116,7 @@ angular.module('App')
 		}
 		
 
-		$scope.sendIndent = function(){
+		$scope.raiseIndent = function(){
 			$scope.indent.status="Raised";
 			$scope.indent.centreId=authorize.getCentre();
 			$scope.indent.lastModifiedBy=authorize.getUsername();
@@ -138,7 +138,7 @@ angular.module('App')
 					}
 					$scope.indentForm.$setPristine();
 					$scope.savedOnce = true;
-					$scope.message = 'Sent successfully!';
+					$scope.message = 'Raised successfully!';
 					$scope.messageColor = 'success';
 					$scope.showAlert = true;
 					$scope.indent = {

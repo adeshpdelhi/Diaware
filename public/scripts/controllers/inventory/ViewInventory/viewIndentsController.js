@@ -52,6 +52,30 @@ angular.module('App')
 				$scope.indentItems[i].retrieved = true;
 			console.log($scope.indentItems);
 		});
+
+		$scope.updateFilteredItems = function(){
+			inventoryFactory.getItems().query().$promise.then(function(response){
+				$scope.filteredItems = response;
+				inventoryFactory.getStocks($scope.indent.centreId).query().$promise.then(function(response){
+					$scope.stocks = response;
+					for(var i=0;i<$scope.filteredItems.length;i++)
+					{
+						for(j=0;j<$scope.stocks.length;j++){
+							if($scope.filteredItems[i].itemId == $scope.stocks[j].itemId)
+							{
+								$scope.filteredItems[i].availableQuantity = $scope.stocks[j].availableQuantity;
+							}
+						}
+						if($scope.filteredItems[i].availableQuantity==null)
+							$scope.filteredItems[i].availableQuantity = 0;
+					}
+				},function(response){ alert("Failed to retrieve item's availableQuantity from stock"); });
+			},function(response){
+				alert('item retieval failed');
+			});
+		}
+		$scope.updateFilteredItems();
+
 		$scope.toBeRemovedindentItems=[];
 		// console.log($scope.indentItems);
 	    $scope.removeItem = function(index,indentItem){
@@ -71,9 +95,10 @@ angular.module('App')
 			$scope.indentItem.linkedStatus = $scope.viewStatus;
 			$scope.indentItem.retrieved = false;
 			$scope.indentItems.push($scope.indentItem);
-			for(var i=0;i<$scope.filteredItems.length;i++){
-				$scope.filteredItems[i].availableQuantity=$scope.filteredItems[i].quantityRequired=0;
-			}
+			// for(var i=0;i<$scope.filteredItems.length;i++){
+			// 	$scope.filteredItems[i].availableQuantity=$scope.filteredItems[i].quantityRequired=0;
+			// }
+			$scope.updateFilteredItems();
 			$scope.indentItem = {
 				itemId:null,
 				itemName:null,
@@ -90,6 +115,7 @@ angular.module('App')
 		}
 		
 
+
 		$scope.saveIndent = function(){
 			
 			for (var i=0;i<$scope.toBeRemovedindentItems.length;i++)
@@ -97,8 +123,8 @@ angular.module('App')
 				if($scope.toBeRemovedindentItems[i].retrieved == true)
 					inventoryFactory.getIndentItems(authorize.getCentre(),$scope.indentId).remove({itemId:$scope.toBeRemovedindentItems[i].itemId, linkedStatus: $scope.toBeRemovedindentItems[i].linkedStatus});
 			}
-			inventoryFactory.getIndents(authorize.getCentre()).update({indentId: $scope.indentId},$scope.indent).$promise.then(function(response){
 			$scope.indent.status='Saved';
+			inventoryFactory.getIndents(authorize.getCentre()).update({indentId: $scope.indentId},$scope.indent).$promise.then(function(response){
 			for(var i=0;i<$scope.indentItems.length;i++)
 				$scope.indentItems[i].linkedStatus = 'Saved';
 			$scope.indent.centreId=authorize.getCentre();
@@ -158,60 +184,58 @@ angular.module('App')
 		};
 
 		$scope.raiseIndent = function(){
+			inventoryFactory.getIndentItems(authorize.getCentre(),$scope.indentId).query().$promise.then(function(response){
+				for (var i=0;i<response.length;i++)
+				{
+					if(response[i].linkedStatus == 'Saved')
+					inventoryFactory.getIndentItems(authorize.getCentre(),$scope.indentId).remove({itemId:response[i].itemId, linkedStatus: response[i].linkedStatus});
+				}
+			});
 			$scope.indent.status='Raised';
+			inventoryFactory.getIndents(authorize.getCentre()).update({indentId: $scope.indentId},$scope.indent).$promise.then(function(response){
 			for(var i=0;i<$scope.indentItems.length;i++)
 				$scope.indentItems[i].linkedStatus = 'Raised';
 			$scope.indent.centreId=authorize.getCentre();
 			$scope.indent.lastModifiedBy=authorize.getUsername();
-			inventoryFactory.getIndents(authorize.getCentre()).update({indentId: $scope.indentId},$scope.indent).$promise.then(function(response){
-				
-				//	$scope.indentId=response.indentId;
-					console.log($scope.indentItems);
-					console.log('here. length is '+$scope.indentItems.length);
-					for(var i = 0; i <  $scope.indentItems.length;  i++){			
-						$scope.indentItems[i].indentId=$scope.indent.indentId;
-						inventoryFactory.getIndentItems(authorize.getCentre(),$scope.indentId).save($scope.indentItems[i]).$promise.then(function(response){
-							//console.log('added item with id');
-						},function(response){
-							$scope.messageColor = 'danger';
-							$scope.showAlert = true;
-							$scope.message = ' partial approve failed';
-							return;
-						});	
-					}
-					$scope.indentForm.$setPristine();
-					$scope.savedOnce = true;
-					$scope.message = 'Raised!';
-					$scope.messageColor = 'success';
+			console.log('adding back');
+			console.log($scope.indentItems);
+			for(var i = 0; i <  $scope.indentItems.length;  i++){			
+				$scope.indentItems[i].indentId=$scope.indent.indentId;
+				inventoryFactory.getIndentItems(authorize.getCentre(),$scope.indentId).save($scope.indentItems[i]).$promise.then(function(response){
+				},function(response){
+					$scope.messageColor = 'danger';
 					$scope.showAlert = true;
-					$scope.indent = {
-						centreId:null,
-						requestDate:null,
-						requiredByDate:null,
-						stockOrderTo:null,
-						status:null,
-						lastModifiedBy:null
-					};
-					$scope.indentItems=[];
-					$scope.indentItem = {
-							itemId:null,
-							itemName:null,
-							usageType:null,
-							brandName:null,
-							quantityRequired:null,
-							availableQuantity:null,
-							quantityMeasurementType:null,
-							lastModifiedBy:null
-					};
-					//$scope.updateIndents();
-					$uibModalInstance.close();
-					$state.go('app.inventory.indent.view',{},{reload: true});
-			},function(response){
-				$scope.messageColor = 'danger';
-				$scope.showAlert = true;
-				$scope.message = 'Raising failed';
+					$scope.message = ' partial save failed';
+					return;
+				});	
+			}
+			$scope.indentForm.$setPristine();
+			$scope.savedOnce = true;
+			$scope.message = 'Raised!';
+			$scope.messageColor = 'success';
+			$scope.showAlert = true;
+			$scope.indent = {
+				centreId:null,
+				requestDate:null,
+				requiredByDate:null,
+				stockOrderTo:null,
+				status:null,
+				lastModifiedBy:null
+			};
+			$scope.indentItems=[];
+			$scope.indentItem = {
+					itemId:null,
+					itemName:null,
+					usageType:null,
+					brandName:null,
+					quantityRequired:null,
+					availableQuantity:null,
+					quantityMeasurementType:null,
+					lastModifiedBy:null
+			};
+			$uibModalInstance.close();
+			$state.go('app.inventory.indent.view',{},{reload: true});
 			});
-
 			
 		};
 
