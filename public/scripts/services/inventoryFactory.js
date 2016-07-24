@@ -23,7 +23,7 @@ angular.module('App')
 		}
 		
 		this.getIndentItems = function(centreId,indentId){
-			return $resource(baseURL+":centreId/inventory/indent/:indentId/items/:itemId",{centreId:centreId,indentId:indentId},  {'update':{method:'PUT' }});
+			return $resource(baseURL+":centreId/inventory/indent/:indentId/items/:itemId/:linkedStatus",{centreId:centreId,indentId:indentId},  {'update':{method:'PUT' }});
 		}
      	
      	this.getStocks = function(centreId){

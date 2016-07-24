@@ -8,8 +8,8 @@ angular.module('App')
 		
 		$scope.indent = {
 			centreId:null,
-			requestDate:null,
-			requiredByDate:null,
+			requestDate:new Date(),
+			requiredByDate:new Date(),
 			stockOrderTo:null,
 			status:null,
 			lastModifiedBy:null
@@ -27,13 +27,28 @@ angular.module('App')
 				quantityMeasurementType:null,
 				lastModifiedBy:null
 		};
-
-		inventoryFactory.getItems().query().$promise.then(function(response){
-			$scope.filteredItems = response;
-		},function(response){
-			alert('item retieval failed');
-		});
-
+		$scope.updateFilteredItems = function(){
+			inventoryFactory.getItems().query().$promise.then(function(response){
+				$scope.filteredItems = response;
+				inventoryFactory.getStocks(authorize.getCentre()).query().$promise.then(function(response){
+					$scope.stocks = response;
+					for(var i=0;i<$scope.filteredItems.length;i++)
+					{
+						for(j=0;j<$scope.stocks.length;j++){
+							if($scope.filteredItems[i].itemId == $scope.stocks[j].itemId)
+							{
+								$scope.filteredItems[i].availableQuantity = $scope.stocks[j].availableQuantity;
+							}
+						}
+						if($scope.filteredItems[i].availableQuantity==null)
+							$scope.filteredItems[i].availableQuantity = 0;
+					}
+				},function(response){ alert("Failed to retrieve item's availableQuantity from stock"); });
+			},function(response){
+				alert('item retieval failed');
+			});
+		}
+		$scope.updateFilteredItems();
 		inventoryFactory.getVendors().query().$promise.then(function(response){
 			$scope.vendors = response;
 		},function(response){
@@ -75,15 +90,16 @@ angular.module('App')
 			// 	$scope.indentItem.itemNumber = $scope.indentItems[$scope.indentItems.length - 1].itemNumber + 1;
 			// else $scope.indentItem.itemNumber = 0;
 			
-			$scope.indentItem.linkedStatus="Raised";
+			
 			
 			$scope.indentItems.push($scope.indentItem);
 			//console.log($scope.indentItem);
 			
 			//$scope.indentForm.$setPristine();
-			for(var i=0;i<$scope.filteredItems.length;i++){
-				$scope.filteredItems[i].availableQuantity=$scope.filteredItems[i].quantityRequired=0;
-			}
+			// for(var i=0;i<$scope.filteredItems.length;i++){
+			// 	$scope.filteredItems[i].availableQuantity=$scope.filteredItems[i].quantityRequired=0;
+			// }
+			$scope.updateFilteredItems();
 			$scope.indentItem = {
 				itemId:null,
 				itemName:null,
@@ -100,22 +116,7 @@ angular.module('App')
 		}
 		
 
-		$scope.saveIndent = function(){
-			// if($scope.indent.itemName !== '' || $scope.indent.usageType !== '' || $scope.indent.brandName !== ''
-			// 	|| $scope.indent.quantityRequired !== ''|| $scope.indent.availableQuantity !== ''|| $scope.indent.quantityMeasurementType !== ''){
-				
-			// 	// if($scope.indentItems.length)
-			// 	// 	$scope.indentItem.itemNumber = $scope.indentItems[$scope.indentItems.length - 1].itemNumber + 1;
-			// 	// else 
-			// 	// 	$scope.indentItem.itemNumber = 0;
-			
-			// 	$scope.indentItem.lastModifiedBy = authorize.getUsername();
-			// 	$scope.indentItem.type="Raised";
-
-			// 	$scope.indentItems.push($scope.indentItem);
-			// 	console.log($scope.indentItem);
-			// }
-			/////////////////////////////////
+		$scope.sendIndent = function(){
 			$scope.indent.status="Raised";
 			$scope.indent.centreId=authorize.getCentre();
 			$scope.indent.lastModifiedBy=authorize.getUsername();
@@ -126,6 +127,7 @@ angular.module('App')
 					console.log('here. length is '+$scope.indentItems.length);
 					for(var i = 0; i <  $scope.indentItems.length;  i++){			
 						$scope.indentItems[i].indentId=response.indentId;
+						$scope.indentItems[i].linkedStatus="Raised";
 						inventoryFactory.getIndentItems(authorize.getCentre(),$scope.indentId).save($scope.indentItems[i]).$promise.then(function(response){
 						},function(response){
 							$scope.messageColor = 'danger';
@@ -136,13 +138,13 @@ angular.module('App')
 					}
 					$scope.indentForm.$setPristine();
 					$scope.savedOnce = true;
-					$scope.message = 'Sent!';
+					$scope.message = 'Sent successfully!';
 					$scope.messageColor = 'success';
 					$scope.showAlert = true;
 					$scope.indent = {
 						centreId:null,
-						requestDate:null,
-						requiredByDate:null,
+						requestDate:new Date(),
+						requiredByDate:new Date(),
 						stockOrderTo:null,
 						status:null,
 						lastModifiedBy:null
@@ -161,11 +163,63 @@ angular.module('App')
 							lastModifiedBy:null
 					};
 				
-				
-				
-				
-				
-				
+			},function(response){
+				$scope.messageColor = 'danger';
+				$scope.showAlert = true;
+				$scope.message = 'Saving failed';
+			});
+
+			
+			
+		};
+
+
+		$scope.saveIndent = function(){
+			$scope.indent.status="Saved";
+			$scope.indent.centreId=authorize.getCentre();
+			$scope.indent.lastModifiedBy=authorize.getUsername();
+			inventoryFactory.getIndents(authorize.getCentre()).save($scope.indent).$promise.then(function(response){
+					console.log('indent id is '+response.indentId);
+					$scope.indentId=response.indentId;
+					console.log($scope.indentItems);
+					console.log('here. length is '+$scope.indentItems.length);
+					for(var i = 0; i <  $scope.indentItems.length;  i++){	
+						$scope.indentItems[i].linkedStatus="Saved";		
+						$scope.indentItems[i].indentId=response.indentId;
+						inventoryFactory.getIndentItems(authorize.getCentre(),$scope.indentId).save($scope.indentItems[i]).$promise.then(function(response){
+						},function(response){
+							$scope.messageColor = 'danger';
+							$scope.showAlert = true;
+							$scope.message = ' partial save failed';
+							return;
+						});	
+					}
+					$scope.indentForm.$setPristine();
+					$scope.savedOnce = true;
+					$scope.message = 'Saved successfully!';
+					$scope.messageColor = 'success';
+					$scope.showAlert = true;
+					$scope.indent = {
+						centreId:null,
+						requestDate:new Date(),
+						requiredByDate:new Date(),
+						stockOrderTo:null,
+						status:null,
+						lastModifiedBy:null
+					};
+		
+		
+					$scope.indentItems=[];
+					$scope.indentItem = {
+							itemId:null,
+							itemName:null,
+							usageType:null,
+							brandName:null,
+							quantityRequired:null,
+							availableQuantity:null,
+							quantityMeasurementType:null,
+							lastModifiedBy:null
+					};
 				
 			},function(response){
 				$scope.messageColor = 'danger';

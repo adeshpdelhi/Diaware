@@ -171,8 +171,9 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
             })
 
             .state('app.inventory.indent', {
-                url:'indent/',
+                url:'indent/'
             })
+
             .state('app.inventory.indent.new', {
                 url:'new',
                 views: {
@@ -196,8 +197,9 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
             })
 
             .state('app.inventory.stock', {
-                url:'stock/',
+                url:'stock/'
             })
+
             .state('app.inventory.stock.view', {
                 url:'view',
                 views: {
@@ -224,38 +226,38 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
 
             // })
 			
-			.state('app.inventory.new_stock_received', {
-                url:'Stock_Received/new',
-                views: {
-                    'content@': {
-                        templateUrl : 'views/inventory/stockReceived.html',
-                        controller  : 'StockReceivedController'        
-                    }
-                }
+			// .state('app.inventory.new_stock_received', {
+   //              url:'Stock_Received/new',
+   //              views: {
+   //                  'content@': {
+   //                      templateUrl : 'views/inventory/stockReceived.html',
+   //                      controller  : 'StockReceivedController'        
+   //                  }
+   //              }
 
-            })
+   //          })
 			
-			.state('app.inventory.new_issue_stock', {
-                url:'Issue_Stock/new',
-                views: {
-                    'content@': {
-                        templateUrl : 'views/inventory/issueStock.html',
-                        controller  : 'IssueStockController'        
-                    }
-                }
+			// .state('app.inventory.new_issue_stock', {
+   //              url:'Issue_Stock/new',
+   //              views: {
+   //                  'content@': {
+   //                      templateUrl : 'views/inventory/issueStock.html',
+   //                      controller  : 'IssueStockController'        
+   //                  }
+   //              }
 
-            })
+   //          })
 			
-			.state('app.inventory.new_treatment_inventory', {
-                url:'Treatment_Inventory_Consumption/new',
-                views: {
-                    'content@': {
-                        templateUrl : 'views/inventory/treatmentInventory.html',
-                        controller  : 'TreatmentInventoryController'        
-                    }
-                }
+			// .state('app.inventory.new_treatment_inventory', {
+   //              url:'Treatment_Inventory_Consumption/new',
+   //              views: {
+   //                  'content@': {
+   //                      templateUrl : 'views/inventory/treatmentInventory.html',
+   //                      controller  : 'TreatmentInventoryController'        
+   //                  }
+   //              }
 
-            })
+   //          })
 			
 			// .state('app.inventory.newvendor', {
    //              url:'Vendor/new',
@@ -282,38 +284,38 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
 
    //          })
 			
-			.state('app.inventory.view_stock_received', {
-                url:'Stock_Received/view',
-                views: {
-                    'content@': {
-                        templateUrl : 'views/inventory/ViewInventory/viewStockReceived.html',
-                        controller  : 'ViewStockReceivedController'        
-                    }
-                }
+			// .state('app.inventory.view_stock_received', {
+   //              url:'Stock_Received/view',
+   //              views: {
+   //                  'content@': {
+   //                      templateUrl : 'views/inventory/ViewInventory/viewStockReceived.html',
+   //                      controller  : 'ViewStockReceivedController'        
+   //                  }
+   //              }
 
-            })
+   //          })
 			
-			.state('app.inventory.view_issue_stock', {
-                url:'Issue_Stock/view',
-                views: {
-                    'content@': {
-                        templateUrl : 'views/inventory/ViewInventory/viewIssueStock.html',
-                        controller  : 'ViewIssueStockController'        
-                    }
-                }
+			// .state('app.inventory.view_issue_stock', {
+   //              url:'Issue_Stock/view',
+   //              views: {
+   //                  'content@': {
+   //                      templateUrl : 'views/inventory/ViewInventory/viewIssueStock.html',
+   //                      controller  : 'ViewIssueStockController'        
+   //                  }
+   //              }
 
-            })
+   //          })
 			
-			.state('app.inventory.view_treatment_inventory', {
-                url:'Treatment_Inventory_Consumption/view',
-                views: {
-                    'content@': {
-                        templateUrl : 'views/inventory/ViewInventory/viewTreatmentInventory.html',
-                        controller  : 'ViewTreatmentInventoryController'        
-                    }
-                }
+			// .state('app.inventory.view_treatment_inventory', {
+   //              url:'Treatment_Inventory_Consumption/view',
+   //              views: {
+   //                  'content@': {
+   //                      templateUrl : 'views/inventory/ViewInventory/viewTreatmentInventory.html',
+   //                      controller  : 'ViewTreatmentInventoryController'        
+   //                  }
+   //              }
 
-            })
+   //          })
 			
 			// .state('app.inventory.view_vendor', {
    //              url:'Vendor/view',

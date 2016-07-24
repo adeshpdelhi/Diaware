@@ -19,7 +19,7 @@
                                 <th style="text-align:center;" width="10%">Item Name</th>
                                 <th style="text-align:center;" width="10%">Usage Type</th>
                                 <th style="text-align:center;" width="10%">Brand Name</th>
-                                <th style="text-align:center;" width="10%">Quantity </th>
+                                <th style="text-align:center;" width="10%">Required Quantity</th>
                                 <th style="text-align:center;" width="10%">Available Quantity</th>
                                 <th style="text-align:center;" width="10%">Quantity type</th>
 
@@ -41,6 +41,7 @@
                         </tbody>
                     </table>
                 </div>
+                <br><br>
                 <span ng-show = "!addingItem" class="col-sm-1 col-sm-offset-11 glyphicon glyphicon-plus" ng-click="addingItem = true" style="font-size: 40px"></span>
                 <div ng-show="addingItem">
                 <span class="col-sm-1 col-sm-offset-11 glyphicon glyphicon-minus" ng-click="addingItem = false" style="font-size: 40px"></span>
@@ -71,7 +72,7 @@
                                 <th style="text-align:center;" width="10%">Item Name</th>
                                 <th style="text-align:center;" width="10%">Usage Type</th>
                                 <th style="text-align:center;" width="10%">Brand Name</th>
-                                <th style="text-align:center;" width="10%">Quantity</th>
+                                <th style="text-align:center;" width="10%">Required Quantity</th>
                                 <th style="text-align:center;" width="10%">Available Quantity</th>
                                 <th style="text-align:center;" width="10%">Quantity Measurement Type</th>
 
@@ -85,7 +86,8 @@
                                 <td style="text-align:center;" width="10%" >{{indentItem.usageType}}</td>
                                 <td style="text-align:center;" width="10%" >{{indentItem.brandName}}</td>
                                 <td style="text-align:center;" width="10%" ><input style="width:50%;" type="number" ng-init="indentItem.quantityRequired=0" ng-model="indentItem.quantityRequired"></td>
-                                <td style="text-align:center;" width="10%" ><input style="width:50%;" type="number" ng-init="indentItem.availableQuantity=0" ng-model="indentItem.availableQuantity"></td>
+                                <!-- <td style="text-align:center;" width="10%" ><input style="width:50%;" type="number" ng-init="indentItem.availableQuantity=0" ng-model="indentItem.availableQuantity"></td> -->
+                                <td style="text-align:center;" width="10%" >{{indentItem.availableQuantity}}</td> 
                                 <td style="text-align:center;" width="10%" >{{indentItem.quantityMeasurementType}}</td>
                                 <td style="text-align:center;" width="5%" ng-click="addItem({itemId: indentItem.itemId,itemName:indentItem.itemName,usageType: indentItem.usageType,brandName:indentItem.brandName,quantityRequired:indentItem.quantityRequired,availableQuantity:indentItem.availableQuantity,quantityMeasurementType:indentItem.quantityMeasurementType})"><span class="glyphicon glyphicon-plus"></span></td>
                             </tr>    
@@ -221,7 +223,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Indent Request Date</label>
                         <div class="col-sm-8">
-                            <input  type="date" class="form-control" ng-model="indent.requestDate" placeholder="">
+                            <input  type="date" class="form-control" ng-model="indent.requestDate" disabled>
                         </div>
                     </div>
 
@@ -236,8 +238,11 @@
 
 
                     <div class="form-group">
-                        <div class="col-sm-offset-8 col-sm-10">
-                            <button id="additem" type="submit" class="btn btn-success" ng-click="saveIndent()">Send Indent</button>
+                        <div class="col-sm-push-6 col-sm-pull-4 col-sm-2">
+                            <button type="submit" class="btn btn-default" ng-click="saveIndent()">Save</button>
+                        </div>
+                        <div class="col-sm-push-6 col-sm-pull-2 col-sm-2">
+                            <button type="submit" class="btn btn-success" ng-click="sendIndent()">Approve</button>
                         </div>
                     </div>
 

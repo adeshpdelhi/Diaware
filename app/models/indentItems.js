@@ -20,7 +20,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     linkedStatus: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false,
+      primaryKey: true
     },
     quantityRequired: {
       type: DataTypes.INTEGER(11),
