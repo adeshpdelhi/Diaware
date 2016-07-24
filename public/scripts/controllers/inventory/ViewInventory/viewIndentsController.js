@@ -344,7 +344,8 @@ angular.module('App')
 								if($scope.stocks[j].itemId == $scope.indentItems[i].itemId)
 								{
 									$scope.stocks[j].availableQuantity+=$scope.indentItems[i].quantityRequired;
-									inventoryFactory.getStocks(authorize.getCentre()).update({centreId:$scope.stocks[j].centreId, itemId: $scope.stocks[j].itemId},$scope.stocks[j],$scope.stocks[j]);
+									inventoryFactory.getStocks(authorize.getCentre()).update({centreId:$scope.stocks[j].centreId, itemId: $scope.stocks[j].itemId},$scope.stocks[j]);
+									// inventoryFactory.getStocks(authorize.getCentre()).update({centreId:$scope.stocks[j].centreId, itemId: $scope.stocks[j].itemId},$scope.stocks[j],$scope.stocks[j]);
 									//console.log($scope.stocks[j].itemId+' quantiy updated to '+$scope.stocks[j].availableQuantity);
 								}
 							}
