@@ -9,7 +9,7 @@ http://dev.mysql.com/doc/refman/5.7/en/upgrading.html
 
 -----done-----usermanagement(admin)
 
-ask for number of machines in a centre of each type - add hook - which inserts into weekDaySlots and shifts table 
+-----done-----ask for number of machines in a centre of each type - add hook - which inserts into weekDaySlots and shifts table 
 
 -----done-----if no centre exists in db ... after login show button to add center
 
@@ -25,8 +25,8 @@ ask for number of machines in a centre of each type - add hook - which inserts i
 
 add new register  to registration - coz after registering one patient cant register another patient unless visit another page
 
-update Center: cant decrease no of beds / shifts
-cant remove types of Machines
+-----done-----update Center: cant decrease no of beds / shifts
+-----done-----cant remove types of Machines
 
 dashboard:
 	----done----view todays appointments
@@ -36,8 +36,7 @@ dashboard:
 	----done----total new registrations for the last month and month before that
 	----done----total amount earned / bill created this month and the last
 
-if centres == all
-	when post ask for centre
+-----done (i guess test toh kiya hai) ------		if(centres == 'all') when post ask for centre
 
 if new center show notification on dashboard to enter data in backend || if backend table is empty show notification
 
