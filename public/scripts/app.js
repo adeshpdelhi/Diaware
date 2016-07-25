@@ -435,12 +435,12 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                 }
             })
             .state('app.admin',{
-                url:"admin/",
-                views:{
-                    'content@':{
-                        template:'views/admin/editDataBase.html',
-                    }
-                }
+                url:"admin/"
+                // views:{
+                //     'content@':{
+                //         template:'views/admin/editDataBase.html',
+                //     }
+                // }
             })
             .state('app.admin.editdatabase',{
                 url:"editdatabase",
@@ -474,22 +474,20 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                 url:"addcentre",
                 views:{
                     'content@':{
-                        templateUrl:'views/admin/addCentre.html',
-                        controller:'AddCentreController'
+                        templateUrl:'views/admin/addCentre.html'
+                        // controller:'AddCentreController'
                     }
                 }
             })
-			
-			.state('app.admin.dashboard',{
-                url:"dashboard",
+			.state('app.admin.editcentre',{
+                url:"editcentre",
                 views:{
                     'content@':{
-                        templateUrl:'views/admin/dashboard.html',
-                        controller:'DashboardController'
+                        templateUrl:'views/admin/editCentre.html',
+                        controller:'EditCentreController'
                     }
                 }
             })
-			
             .state('app.appointment',{
                 url:"appointment/",
                 views:{

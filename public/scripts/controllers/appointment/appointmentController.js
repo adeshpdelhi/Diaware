@@ -7,8 +7,12 @@ angular.module('App')
 	$scope.dataReceived = false;
 	$scope.scheduleSaved = false;
 	$scope.editSchedules = false;
-	$scope.appointmentTypes = ['OPD','ICU/IPD'];
+	$scope.appointmentTypes = ['OPD','IPD/ICU'];
 
+	// $scope.invalidCentre = false;
+	// if(authorize.getCentre() == 'all') {
+	// 	$scope.invalidCentre = true;
+	// }
 	$scope.$watch('patient.id', function(newVal,oldVal){
 		if(newVal){
 			if($scope.patient.shiftPatients.length !== 0){
@@ -43,7 +47,8 @@ angular.module('App')
     	// console.log("string: " + $scope.string);
     	$scope.daysData = {};
     	console.log("loading fresh daysData");
-		appointmentFactory.getSchedules(authorize.getCentre()).query({appointmentType:newVal,tmtOnMachine:newVal1}, function(results){
+    	var centre = (authorize.getCentre() == 'all')?$scope.patient.centreId:authorize.getCentre();
+		appointmentFactory.getSchedules(centre).query({appointmentType:newVal,tmtOnMachine:newVal1}, function(results){
 			$scope.daysData = results;
 			$scope.dataReceived = true;
 		});		
@@ -165,7 +170,8 @@ angular.module('App')
 		console.log("inside saveSchedule");
 		if($scope.newSchedule){
 			console.log("deleting previous schedule")
-			appointmentFactory.getSchedules(authorize.getCentre()).delete({
+    		var centre = (authorize.getCentre() == 'all')?$scope.patient.centreId:authorize.getCentre();
+			appointmentFactory.getSchedules(centre).delete({
 				patientId:$scope.patient.id,
 				deleteAll:true
 			}).$promise.then(function(results){

@@ -7,6 +7,9 @@
         </div>     
 
         <div style="padding-top:30px" class="panel-body">
+            <div class="alert alert-warning" ng-show="centreInvalidToSubmit">
+                You have selected all centers! Please choose a single center.
+            </div>
             <form class="form-horizontal" name="basicDetailsForm" ng-submit="basicDetailsForm.$valid && editBasic?updateBasicDetails():save_basic_details()" role="form">
 
                 <!-- <div class="form-group ">
@@ -236,7 +239,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-10">
-                        <button id="register" type="submit" class="btn btn-primary" ng-show="editBasic || !savedOnce">{{editBasic?'Update':'Register'}}</button>
+                        <button id="register" type="submit" class="btn btn-primary" ng-show="editBasic || !savedOnce" ng-disabled="centreInvalidToSubmit">{{editBasic?'Update':'Register'}}</button>
                     </div>
                 </div>
 				

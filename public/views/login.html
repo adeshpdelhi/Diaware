@@ -1,4 +1,7 @@
-<div class="container" ng-cloak>   
+<div ng-show="includeAddCentre">
+    <div ng-include="'views/admin/addCentre.html'"></div> 
+</div>
+<div class="container" ng-cloak ng-show="!includeAddCentre">   
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2"> 
         <div class="panel" >
             <div class="panel-heading">
@@ -38,17 +41,27 @@
                 <div class="row">   
                     <form class="form-horizontal"  role="form" ng-show="display_centre">
                         <div class="form-group">
-                        <label class="col-sm-3 control-label">Centre</label>
-                        <div class="col-xs-6">
-                        <select class="form-control"
-                           ng-options="channel.value as channel.label for channel in channels" ng-model="credentials.centre">
-                            <option value="" disabled></option>
-                        </select>
-                        </div>
-                        <br><br>
-                        <div style="margin-top:20px" class="form-group">
-                            <div class="col-sm-12 controls">
-                              <center><a class="btn btn-success" ng-click="chooseCentre()">Submit</a></center>    
+                            <div class="alert alert-{{messageColor}} col-sm-6" ng-show="addedCentre">
+                                {{message}}
+                            </div>
+                            <label class="col-sm-3 control-label">Centre</label>
+                            <div class="col-xs-6">
+                                <select class="form-control"
+                                   ng-options="channel.value as channel.label for channel in channels" ng-model="credentials.centre" ng-change = "submitCentre = true">
+                                    <option value="" disabled></option>
+                                </select>
+                            </div>
+                            <br><br>
+                            <div style="margin-top:20px" class="form-group" >
+                                <div class="col-sm-12 controls">
+                                  <center><a class="btn btn-success" ng-click="chooseCentre()" ng-show="submitCentre && !noCentresInDB" >Submit</a></center>   
+                                <button class="btn btn-success col-sm-2 col-sm-offset-3" ng-click="includeAddCentre = true" ng-show="showAddCentre && noCentresInDB">Add Centre</button>
+
+                                </div>
+
+                            </div>
+                            <div class="alert alert-warning" ng-show="showAlertAddCentre">
+                                Ask admin to add Centre!
                             </div>
                         </div>
                     </form>

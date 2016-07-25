@@ -1,3 +1,15 @@
+<style type="text/css">
+    .dropdown-submenu {
+        position: relative;
+    }
+
+    .dropdown-submenu .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -1px;
+    }
+</style>
+
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-show="loggedIn" ng-cloak>
     <div class="container">
         <div class="navbar-header">
@@ -126,18 +138,30 @@
                 </li> -->
 
                 <li ng-show="role.admin || role.incharge" ng-class="{active: stateis('app.admin')}" uib-dropdown on-toggle="toggled(open)">
+                    <!-- <div class="dropdown">
+                        
+                    </div> -->
                     <a style="cursor: pointer; display: block;" class="simple-dropdown" uib-dropdown-toggle>
                         <span class="glyphicon glyphicon-folder-open"
-                        aria-hidden="true"></span> Admin
+                        aria-hidden="true"></span> Admin<span class="caret"></span>
                     </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu  aria-labelledby="simple-dropdown">
-                        <li>
-							<a ui-sref="app.admin.dashboard">Dashboard</a>
-                            <a ui-sref="app.admin.editdatabase">Edit Database</a>
-                            <a ui-sref="app.admin.adduser">Add User</a>
-                            <a ui-sref="app.admin.viewuser">View Users</a>
-							 <a ui-sref="app.admin.addcentre">Add Centre</a>
-							 
+                    <ul class="dropdown-menu adminMenu" uib-dropdown-menu  aria-labelledby="simple-dropdown">
+                        <!-- <li> -->
+                        <li><a ui-sref="app.admin.editdatabase">Edit Database</a></li>
+                        <li class="dropdown-submenu">
+                            <a class="test" style="cursor: pointer; display: block;">Centre <span class="caret"></span></a>
+                            <ul class="dropdown-menu"  >
+                                <li><a ui-sref="app.admin.addcentre">Add Centre</a></li>
+                                <li><a ui-sref="app.admin.editcentre">View/Edit Centres</a> </li>
+                            </ul>
+                        </li>
+                        <!-- </li> -->
+                        <li class="dropdown-submenu">
+                            <a class="test" style="cursor: pointer; display: block;">User<span class="caret"></span></a>
+                            <ul class="dropdown-menu"  >
+                                <li><a ui-sref="app.admin.adduser">Add User</a></li>
+                                <li><a ui-sref="app.admin.viewuser">View Users</a> </li>
+                            </ul>
                         </li>
                     </ul>
                 </li>
@@ -168,3 +192,14 @@
     </div>
 </nav>         
 
+<script>
+$(document).ready(function(){
+  $('.dropdown-submenu a.test').on("click", function(e){
+    $(this).next('ul').toggle();
+    $(this).parent('li').siblings('li').children('ul').hide();
+    e.stopPropagation();
+    e.preventDefault();
+  });
+});
+
+</script>

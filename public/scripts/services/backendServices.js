@@ -16,7 +16,19 @@ angular.module('App')
         this.getLedgers = function(){
             return $resource(baseURL+"dropDowns/ledgers/:ledgerType", null,{'update':{method:'PUT'}});
         };  
-        // this.getDialysisTypes = function(){
+        this.getDiseases = function(){
+            return $resource(baseURL+"dropDowns/diseases/:diseaseName", null,{'update':{method:'PUT'}});
+        };
+        this.getCatheterizationItems = function(){
+            return $resource(baseURL+"dropDowns/catheterizationItems/:itemId", null,{'update':{method:'PUT'}});
+        };
+        this.getDialysisItems = function(){
+            return $resource(baseURL+"dropDowns/dialysisItems/:itemId", null,{'update':{method:'PUT'}});
+        };
+  }])
+;
+/*
+       // this.getDialysisTypes = function(){
         //     return $resource(baseURL+"dropDowns/dialysisTypes/:dialysisType", null,{'update':{method:'PUT'}});
         // };
         // this.getConsumableTypes = function(){
@@ -28,12 +40,6 @@ angular.module('App')
         // this.getPharmacyTypes = function(){
         //     return $resource(baseURL+"dropDowns/pharmacyTypes/:pharmacyType", null,{'update':{method:'PUT'}});
         // };
-        this.getDiseases = function(){
-            return $resource(baseURL+"dropDowns/diseases/:diseaseName", null,{'update':{method:'PUT'}});
-        };
-  }])
-;
-/*
 ,function(rejectedPromiseError){
         res.status(500);
         res.end("Internal Server Error");

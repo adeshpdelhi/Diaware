@@ -307,4 +307,95 @@ dropDownRouter.route('/diseases/:diseaseName')
     })    
 });
 
+
+
+
+
+
+
+dropDownRouter.route('/catheterizationItems')
+.get(function (req, res, next) {
+        
+    console.log('procesing get');
+    db.catheterizationItems.findAll().then(function(catheterizationItems){
+        console.log(JSON.stringify(catheterizationItems));
+        res.json(catheterizationItems);
+    },function(rejectedPromiseError){
+        res.status(500);
+        res.end("Internal Server Error");
+    });
+    
+})
+.post(function (req, res, next) {
+    console.log('processing post : '+ req.body);
+    db.catheterizationItems.build(req.body).save().then(function(result){
+        res.json(result);
+    // res.end('dropDownRouter working'); // send status code
+    },function(rejectedPromiseError){
+        res.status(500);
+        res.end("Internal Server Error");
+    });
+});
+
+dropDownRouter.route('/catheterizationItems/:itemId')
+.delete(function(req,res,next){
+    db.catheterizationItems.destroy({
+        where:{itemId:req.params.itemId}
+    }).then(function(result){
+        res.json(result);
+    },function(rejectedPromiseError){
+        res.status(500);
+        res.end("Internal Server Error");
+    })    
+});
+
+
+dropDownRouter.route('/dialysisItems')
+.get(function (req, res, next) {
+        
+    console.log('procesing get');
+    db.dialysisItems.findAll().then(function(dialysisItems){
+        console.log(JSON.stringify(dialysisItems));
+        res.json(dialysisItems);
+    },function(rejectedPromiseError){
+        res.status(500);
+        res.end("Internal Server Error");
+    });
+    
+})
+.post(function (req, res, next) {
+    console.log('processing post : '+ req.body);
+    db.dialysisItems.build(req.body).save().then(function(result){
+        res.json(result);
+    // res.end('dropDownRouter working'); // send status code
+    },function(rejectedPromiseError){
+        res.status(500);
+        res.end("Internal Server Error");
+    });
+});
+
+dropDownRouter.route('/dialysisItems/:itemId')
+.delete(function(req,res,next){
+    db.dialysisItems.destroy({
+        where:{itemId:req.params.itemId}
+    }).then(function(result){
+        res.json(result);
+    },function(rejectedPromiseError){
+        res.status(500);
+        res.end("Internal Server Error");
+    })    
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = dropDownRouter;

@@ -3,10 +3,17 @@
 angular.module('App')
 
 .controller('LoginController', ['$scope', 'authorize', '$state', 'backendFactory', function ($scope, authorize, $state, backendFactory) {
-    
+    $scope.submitCentre = false;
+    $scope.includeAddCentre = false;
+    $scope.noCentresInDB = false;
+    $scope.showAddCentre = false;
+    $scope.showAlertAddCentre = false;
+
     $scope.credentials = {username: "", password: "", centre: ""};
     $scope.display_centre = false;
     $scope.rememberme=false;
+    $scope.login = true;
+
     $scope.doLogin = function(){
         authorize.doAuth($scope.credentials.username,$scope.credentials.password,$scope.rememberme, function(user){
         //console.log ('success is '+success);
@@ -18,10 +25,30 @@ angular.module('App')
                 $scope.channels.push({value: tempcentres[i], label: tempcentres[i]});
             }
             $scope.display_centre=true;
+            if($scope.channels.length == 1 && $scope.channels[0].value == 'all'){
+                $scope.noCentresInDB = true;
+                $scope.submitCentre = false;
+                if(user.admin) $scope.showAddCentre = true;
+                else{
+                    $scope.showAlertAddCentre = true;
+                }
+            }
         }
         else
             alert('Login failed');
         });
+    };
+    $scope.addedCentre = false;
+    $scope.updateValuesFromChild = function(editCentre, alert,message,color,centreId){
+        $scope.includeAddCentre = editCentre;
+        console.log("centreAdded:"+centreId);
+        $scope.channels.push({value: centreId, label: centreId});
+        if(centreId!=''&& centreId !=null){
+            $scope.noCentresInDB=false;
+        }
+        $scope.addedCentre = alert;
+        $scope.message = message;
+        $scope.messageColor = color;
     };
     $scope.chooseCentre = function(){
         authorize.setCentre($scope.credentials.centre);
@@ -267,15 +294,15 @@ angular.module('App')
                         }
                         if(response.incharge){
                             if(roles === "") roles.push('Incharge');
-                            else roles = roles.push(",Incharge");
+                            else roles = roles.concat(",Incharge");
                         }
                         if(response.manager){
-                            if(roles === "") roles.push('Manager');
-                            else roles = roles.push(",Manager");
+                            if(roles === "") roles.concat('Manager');
+                            else roles = roles.concat(",Manager");
                         }
                         if(response.clinical){
                             if(roles === "") roles.push('Clinical');
-                            else roles = roles.push(",Clinical");
+                            else roles = roles.concat(",Clinical");
                         }
                         $scope.userNotifyMessage = "Notification: New User (" + response.username + ") added on " + formattedDate + " having roles of " + roles + ".";
                     }

@@ -83,12 +83,12 @@
 						    					<label class="control-label text-capitalize" style="text-align:left"> {{shiftKey}}: <br><small style="color:rgb(200,200,200)">Available {{appointmentType}} Machines <br>({{tmtOnMachine}}): {{shiftValue[string]}} <br></small></label>
 
 						    					<button type="button" class="btn btn-{{shiftValue[string] == 0?'danger':'primary'}}" id="button_{{$parent.$index}}" ng-click="book(shiftValue.id,shiftKey,$parent.$index,key)" ng-show="!isBooked($parent.$index)" ng-disabled="shiftValue[string] == 0">{{shiftValue[string] == 0?'Full':'Book'}}</button>
-						    					<p>{{$parent.$index}}</p>
+						    					<!-- <p>{{$parent.$index}}</p> -->
 						    					<!-- <button type="button" class="btn btn-danger"></button> -->
 					    					</div>
 					    					<!-- <p>{{key}}</p> -->
 					    					<button type="button" class="btn btn-primary" ng-click="unbook(key,$index)" ng-show="isBooked($index)">UnBook</button>
-						    					<p>yo {{$parent.$index}} index:{{$index}}</p>
+						    					<!-- <p>yo {{$parent.$index}} index:{{$index}}</p> -->
 
 					    				</md-card-content>
 					    			</md-card>

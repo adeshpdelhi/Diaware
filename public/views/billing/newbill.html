@@ -100,7 +100,7 @@
                                 <select ng-model="subItem.transactionType" class="col-sm-2" ng-change ="changeState(4)" ng-options = "type.transactionType as type.transactionType for type in transactionTypes" required >
                                     
                                 </select>
-                                <button class="text-danger pull-right" ng-click="setPristine()"><span class="glyphicon glyphicon-remove"></span></button>
+                                <a class="text-danger pull-right col-sm-pull-1" ng-click="setPristine()" style="font-size:18px;"><span class="glyphicon glyphicon-remove"></span></a>
                                 
                             </div>
                             <div ng-if = "show">

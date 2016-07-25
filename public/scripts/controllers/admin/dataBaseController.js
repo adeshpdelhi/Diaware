@@ -7,9 +7,10 @@ angular.module('App')
 	$scope.dialyzateType={};
 	$scope.transactionType={};
 	$scope.ledger={};
-	// $scope.consumableType={};
-	// $scope.procedureType={};
-	// $scope.pharmacyType={};
+	$scope.disease ={};
+	$scope.catheterizationItem ={};
+	$scope.dialysisItem  ={};
+
 	$scope.shouldShowForm = false;
 	$scope.displayList = function(){
 		console.log($scope.table);
@@ -21,44 +22,49 @@ angular.module('App')
 			$scope.showTransactionTypes();
 		if($scope.table == 'LedgerTable')
 			$scope.showLedgerTable();
-		// if($scope.table == 'ConsumableTypes')
-		// 	$scope.showConsumableTypes();
-		// if($scope.table == 'ProcedureTypes')
-		// 	$scope.showProcedureTypes();
-		// if($scope.table == 'PharmacyTypes')
-		// 	$scope.showPharmacyTypes();
+		if($scope.table == 'Diseases')
+			$scope.showDiseases();
+		if($scope.table == 'CatheterizationItems')
+			$scope.showCatheterizationItems();
+		if($scope.table == 'DialysisItems')
+			$scope.showDialysisItems();
 	};
 	$scope.addPanel = function(){
 		console.log($scope.panel);
-		backendFactory.getPanels().save($scope.panel).$promise.then(function(response){
-						alert('Panel saved');
-						backendFactory.getPanels().query().$promise.then(function(response){
-							$scope.panels=response;
-							$scope.showForm=false;
-						},function(response){
-							alert('Panels retrieval failed!');
-						});
-				},function(response){
-					alert('Panel save failed!');
-				});
+		backendFactory.getPanels().save($scope.panel)
+		.$promise.then(function(response){
+			alert('Panel saved');
+			backendFactory.getPanels().query().$promise.then(function(response){
+				$scope.panels=response;
+				$scope.showForm=false;
+			},function(response){
+				alert('Panels retrieval failed!');
+			});
+		},function(response){
+			alert('Panel save failed!');
+		});
 	};
-	$scope.preparePanelPopover = function(panelId){
-		backendFactory.getPanels().get({panelId:panelId}).$promise.then(function(response){
-					$scope.panelPopover.panel=response;
-					
-				},function(response){
-					alert('Panel retrieval failed!');
-				});
-	}
-	$scope.updatePanel = function(){
+	// $scope.preparePanelPopover = function(panelId){
+	// 	backendFactory.getPanels().get({
+	// 		panelId:panelId
+	// 	}).$promise.then(function(response){
+	// 		$scope.panelPopover.panel=response;
+			
+	// 	},function(response){
+	// 		alert('Panel retrieval failed!');
+	// 	});
+	// }
+	$scope.updatePanel = function(panel){
 		// $scope.panel=$scope.panelPopover.panel;
-		console.log($scope.panelPopover.panel);
-		backendFactory.getPanels().update({panelId:$scope.panelPopover.panel.id},$scope.panelPopover.panel);
+		console.log(panel);
+		backendFactory.getPanels().update({panelId:panel.id},panel);
 		backendFactory.getPanels().query().$promise.then(function(response){
-					$scope.panels=response;
-				},function(response){
-					alert('Panels retrieval failed!');
-				});
+			$scope.panels=response;
+			$scope.editPanel = false;
+		},function(response){
+			alert('Panels retrieval failed!');
+			$scope.editPanel = false;
+		});
 	}
 	$scope.panelPopover = {
 	    templateUrl: 'panelPopoverTemplate.html',
@@ -67,10 +73,10 @@ angular.module('App')
 	$scope.showPanels = function(){
 		console.log('showing panels');
 		backendFactory.getPanels().query().$promise.then(function(response){
-					$scope.panels=response;
-				},function(response){
-					alert('Panels retrieval failed!');
-				});
+			$scope.panels=response;
+		},function(response){
+			alert('Panels retrieval failed!');
+		});
 	};
 
 
@@ -97,9 +103,89 @@ angular.module('App')
 	$scope.deleteDialyzateType = function(dialyzateType){
 		backendFactory.getDialyzateTypes().delete({dialyzateType:dialyzateType});
 		$scope.showDialyzateTypes();
-	}
+	};
 
-	
+	$scope.addDisease = function(){
+		console.log($scope.disease);
+		backendFactory.getDiseases().save($scope.disease).$promise.then(function(response){
+				alert('disease saved');
+				$scope.showDiseases();
+				$scope.showForm=false;
+		},function(response){
+			alert('disease save failed!');
+		});
+	};
+
+	$scope.showDiseases = function(){
+		console.log('showing diseases');
+		backendFactory.getDiseases().query().$promise.then(function(response){
+			$scope.diseases=response;
+		},function(response){
+			alert('diseases retrieval failed!');
+		});
+	};
+
+	$scope.deleteDisease = function(diseaseName){
+		backendFactory.getDiseases().delete({diseaseName:diseaseName});
+		$scope.showDiseases();
+	};
+
+
+
+
+	$scope.addCatheterizationItem = function(){
+		console.log($scope.catheterizationItem);
+		backendFactory.getCatheterizationItems().save($scope.catheterizationItem).$promise.then(function(response){
+				alert('catheterizationItem saved');
+				$scope.showCatheterizationItems();
+				$scope.showForm=false;
+		},function(response){
+			alert('catheterizationItem save failed!');
+		});
+	};
+
+	$scope.showCatheterizationItems = function(){
+		console.log('showing catheterizationItems');
+		backendFactory.getCatheterizationItems().query().$promise.then(function(response){
+			$scope.catheterizationItems=response;
+		},function(response){
+			alert('catheterizationItems retrieval failed!');
+		});
+	};
+
+	$scope.deleteCatheterizationItem = function(itemId){
+		backendFactory.getCatheterizationItems().delete({itemId:itemId});
+		$scope.showCatheterizationItems();
+	};
+
+
+
+
+	$scope.addDialysisItem = function(){
+		console.log($scope.dialysisItem);
+		backendFactory.getDialysisItems().save($scope.dialysisItem).$promise.then(function(response){
+				alert('dialysisitem saved');
+				$scope.showDialysisItems();
+				$scope.showForm=false;
+		},function(response){
+			alert('dialysisItem save failed!');
+		});
+	};
+
+	$scope.showDialysisItems = function(){
+		console.log('showing diseases');
+		backendFactory.getDialysisItems().query().$promise.then(function(response){
+			$scope.dialysisItems = response;
+		},function(response){
+			alert('dialysisitems retrieval failed!');
+		});
+	};
+
+	$scope.deleteDialysisItem = function(itemId){
+		backendFactory.getDialysisItems().delete({itemId:itemId});
+		$scope.showDialysisItems();
+	};
+
 
 
 	$scope.addTransactionType = function(){
@@ -125,7 +211,7 @@ angular.module('App')
 	$scope.deleteTransactionType = function(transactionType){
 		backendFactory.getTransactionTypes().delete({transactionType:transactionType});
 		$scope.showTransactionTypes();
-	}
+	};
 
 	$scope.addLedger = function(){
 		console.log($scope.ledger);
@@ -183,107 +269,4 @@ angular.module('App')
 			$scope.messageColor = 'danger';
 		})
 	};
-
-	// $scope.addDialysisType = function(){
-	// 	console.log($scope.dialysisType);
-	// 	backendFactory.getDialysisTypes().save($scope.dialysisType).$promise.then(function(response){
-	// 					alert('DialysisType saved');
-	// 					$scope.showDialysisTypes();
-	// 					$scope.showForm=false;
-	// 			},function(response){
-	// 				alert('dialysisType save failed!');
-	// 			});
-	// };
-
-	// $scope.showDialysisTypes = function(){
-	// 	console.log('showing dialysisType');
-	// 	backendFactory.getDialysisTypes().query().$promise.then(function(response){
-	// 				$scope.dialysisTypes=response;
-	// 			},function(response){
-	// 				alert('dialysisTypes retrieval failed!');
-	// 			});
-	// };
-
-	// $scope.deleteDialysisType = function(dialysisType){
-	// 	backendFactory.getDialysisTypes().delete({dialysisType:dialysisType});
-	// 	$scope.showDialysisTypes();
-	// }
-
-
-	// $scope.addConsumableType = function(){
-	// 	console.log($scope.consumableType);
-	// 	backendFactory.getConsumableTypes().save($scope.consumableType).$promise.then(function(response){
-	// 					alert('ConsumableType saved');
-	// 					$scope.showConsumableTypes();
-	// 					$scope.showForm=false;
-	// 			},function(response){
-	// 				alert('consumableType save failed!');
-	// 			});
-	// };
-
-	// $scope.showConsumableTypes = function(){
-	// 	console.log('showing consumableType');
-	// 	backendFactory.getConsumableTypes().query().$promise.then(function(response){
-	// 				$scope.consumableTypes=response;
-	// 			},function(response){
-	// 				alert('consumableTypes retrieval failed!');
-	// 			});
-	// };
-
-	// $scope.deleteConsumableType = function(consumableType){
-	// 	backendFactory.getConsumableTypes().delete({consumableType:consumableType});
-	// 	$scope.showConsumableTypes();
-	// }
-
-
-	// $scope.addProcedureType = function(){
-	// 	console.log($scope.procedureType);
-	// 	backendFactory.getProcedureTypes().save($scope.procedureType).$promise.then(function(response){
-	// 					alert('ProcedureType saved');
-	// 					$scope.showProcedureTypes();
-	// 					$scope.showForm=false;
-	// 			},function(response){
-	// 				alert('procedureType save failed!');
-	// 			});
-	// };
-
-	// $scope.showProcedureTypes = function(){
-	// 	console.log('showing procedureType');
-	// 	backendFactory.getProcedureTypes().query().$promise.then(function(response){
-	// 				$scope.procedureTypes=response;
-	// 			},function(response){
-	// 				alert('procedureTypes retrieval failed!');
-	// 			});
-	// };
-
-	// $scope.deleteProcedureType = function(procedureType){
-	// 	backendFactory.getProcedureTypes().delete({procedureType:procedureType});
-	// 	$scope.showProcedureTypes();
-	// }
-
-	// $scope.addPharmacyType = function(){
-	// 	console.log($scope.pharmacyType);
-	// 	backendFactory.getPharmacyTypes().save($scope.pharmacyType).$promise.then(function(response){
-	// 					alert('PharmacyType saved');
-	// 					$scope.showPharmacyTypes();
-	// 					$scope.showForm=false;
-	// 			},function(response){
-	// 				alert('pharmacyType save failed!');
-	// 			});
-	// };
-
-	// $scope.showPharmacyTypes = function(){
-	// 	console.log('showing pharmacyType');
-	// 	backendFactory.getPharmacyTypes().query().$promise.then(function(response){
-	// 				$scope.pharmacyTypes=response;
-	// 			},function(response){
-	// 				alert('pharmacyTypes retrieval failed!');
-	// 			});
-	// };
-
-	// $scope.deletePharmacyType = function(pharmacyType){
-	// 	backendFactory.getPharmacyTypes().delete({pharmacyType:pharmacyType});
-	// 	$scope.showPharmacyTypes();
-	// }
-
 }]);

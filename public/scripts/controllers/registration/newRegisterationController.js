@@ -16,7 +16,11 @@ angular.module('App')
        				console.log("Error" + response.status +" " + response.statusText);
         		}
         	);
-
+        $scope.centreInvalidToSubmit = false;
+        if(centre == 'all'){
+        	console.log("centreInvalidToSubmit:" + $scope.centreInvalidToSubmit);
+        	$scope.centreInvalidToSubmit = true;
+        }
         $scope.newpatient_basic = {  id:null , name: null ,age: null , DOB: null , gender: null , contact: null , 
 							alternativeContact: null , location: null , address: null , bloodGroup: null , transplantWaitingList: null ,
 							maritalStatus: null , emergencyContactName: null , emergencyContactRelationship: null , 
