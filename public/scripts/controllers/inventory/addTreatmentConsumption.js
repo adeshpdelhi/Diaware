@@ -183,24 +183,24 @@ angular.module('App')
 								}
 							}
 			
-							// inventoryFactory.getFloor(authorize.getCentre()).query().$promise.then(function(response){
-							// 		$scope.floorItems= response;
-							// 		for(var i=0;i<$scope.consumptionItems.length;i++){
-							// 			var present = false;
-							// 			console.log('outer loop');
-							// 			for(var j=0;j<$scope.floorItems.length;j++)
-							// 			{
-							// 				console.log('comparing '+$scope.floorItems[j].itemId+' and '+$scope.consumptionItems[i].itemId);
-							// 				if($scope.floorItems[j].itemId == $scope.consumptionItems[i].itemId)
-							// 				{
-							// 					console.log("item "+$scope.floorItems[j].itemId+' present');
-							// 					$scope.floorItems[j].availableQuantity-=$scope.consumptionItems[i].quantity;
-							// 					inventoryFactory.getFloor(authorize.getCentre()).update({centreId:$scope.floorItems[j].centreId, itemId: $scope.floorItems[j].itemId},$scope.floorItems[j]);
-							// 					present = true;
-							// 				}
-							// 			}
-							// 		}
-							// 	});
+							inventoryFactory.getFloor(authorize.getCentre()).query().$promise.then(function(response){
+									$scope.floorItems= response;
+									for(var i=0;i<$scope.consumptionItems.length;i++){
+										var present = false;
+										console.log('outer loop');
+										for(var j=0;j<$scope.floorItems.length;j++)
+										{
+											console.log('comparing '+$scope.floorItems[j].itemId+' and '+$scope.consumptionItems[i].itemId);
+											if($scope.floorItems[j].itemId == $scope.consumptionItems[i].itemId)
+											{
+												console.log("item "+$scope.floorItems[j].itemId+' present');
+												$scope.floorItems[j].availableQuantity-=$scope.consumptionItems[i].quantity;
+												inventoryFactory.getFloor(authorize.getCentre()).update({centreId:$scope.floorItems[j].centreId, itemId: $scope.floorItems[j].itemId},$scope.floorItems[j]);
+												present = true;
+											}
+										}
+									}
+								});
 			
 							$scope.message='Saved successfully!';
 							$scope.messageColor='success';
@@ -230,24 +230,24 @@ angular.module('App')
 								}
 							}
 			
-							// inventoryFactory.getFloor(authorize.getCentre()).query().$promise.then(function(response){
-							// 		$scope.floorItems= response;
-							// 		for(var i=0;i<$scope.consumptionItems.length;i++){
-							// 			var present = false;
-							// 			console.log('outer loop');
-							// 			for(var j=0;j<$scope.floorItems.length;j++)
-							// 			{
-							// 				console.log('comparing '+$scope.floorItems[j].itemId+' and '+$scope.consumptionItems[i].itemId);
-							// 				if($scope.floorItems[j].itemId == $scope.consumptionItems[i].itemId)
-							// 				{
-							// 					console.log("item "+$scope.floorItems[j].itemId+' present');
-							// 					$scope.floorItems[j].availableQuantity-=$scope.consumptionItems[i].quantity;
-							// 					inventoryFactory.getFloor(authorize.getCentre()).update({centreId:$scope.floorItems[j].centreId, itemId: $scope.floorItems[j].itemId},$scope.floorItems[j]);
-							// 					present = true;
-							// 				}
-							// 			}
-							// 		}
-							// 	});
+							inventoryFactory.getFloor(authorize.getCentre()).query().$promise.then(function(response){
+									$scope.floorItems= response;
+									for(var i=0;i<$scope.consumptionItems.length;i++){
+										var present = false;
+										console.log('outer loop');
+										for(var j=0;j<$scope.floorItems.length;j++)
+										{
+											console.log('comparing '+$scope.floorItems[j].itemId+' and '+$scope.consumptionItems[i].itemId);
+											if($scope.floorItems[j].itemId == $scope.consumptionItems[i].itemId)
+											{
+												console.log("item "+$scope.floorItems[j].itemId+' present');
+												$scope.floorItems[j].availableQuantity-=$scope.consumptionItems[i].quantity;
+												inventoryFactory.getFloor(authorize.getCentre()).update({centreId:$scope.floorItems[j].centreId, itemId: $scope.floorItems[j].itemId},$scope.floorItems[j]);
+												present = true;
+											}
+										}
+									}
+								});
 			
 							$scope.message='Saved successfully!';
 							$scope.messageColor='success';
