@@ -252,6 +252,17 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
 
             })
 
+            .state('app.inventory.consumption.view', {
+                url:'view',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/ViewInventory/viewTreatmentConsumption.html',
+                        controller  : 'ViewTreatmentConsumptionController'
+                    }
+                }
+
+            })
+
 
             .state('app.inventory.floor', {
                 url:'floor/'
