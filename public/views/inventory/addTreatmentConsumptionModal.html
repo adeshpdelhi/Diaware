@@ -13,7 +13,7 @@
                     <option value="reUse" >Re-Use</option>
                     <option value="newDialyser">New Dialyser</option>
                     <option value="catheterizationSingleLumen">Catheterization Single Lumen</option>
-                    <option value="catehterizationDoubleLumen">Catehterization Double Lumen</option>
+                    <option value="catheterizationDoubleLumen">Catheterization Double Lumen</option>
                 </select>
             </div>
         </div>
@@ -42,6 +42,32 @@
                 </tbody>
             </table>
         </div>
+
+        <div ng-show="consumption.treatmentType == 'catheterizationSingleLumen' || consumption.treatmentType == 'catheterizationDoubleLumen'" class="table-responsive ">
+            <table class="table table-striped table-fixedheader table-bordered" >
+                <thead>
+                    <tr>
+                        <th style="text-align:center;" width="10%">Item Name</th>
+                        <th style="text-align:center;" width="10%">Brand Name</th>
+                        <th style="text-align:center;" width="10%">Quantity</th>
+                        <th style="text-align:center;" width="10%">Quantity type</th>
+                    </tr>    
+                </thead>
+                <tbody >
+                    <tr ng-repeat = "catheterizationTabularItem in catheterizationTabularItems" style="height:2px;" >
+                        <td width="10%" >{{catheterizationTabularItem.itemName}}</td>
+                        <td width="10%" ><select ng-model="catheterizationTabularItem.chosen.brandName" ng-change="updateQuantityType($index)" ng-options = "brand as brand for brand in catheterizationTabularItem.brandName">
+                            
+                        </select></td>
+                        <td width="10%"><input style="width:50%;" type="number" ng-init="catheterizationTabularItem.chosen.quantity=0" ng-model="catheterizationTabularItem.chosen.quantity"></td>
+                        <td width="10%"><select ng-disabled="catheterizationTabularItem.chosen.brandName==null || catheterizationTabularItem.chosen.brandName.length==0" ng-model="catheterizationTabularItem.chosen.quantityMeasurementType" ng-options = "quantityMeasurementType as quantityMeasurementType for quantityMeasurementType in catheterizationTabularItem.quantityMeasurementType">
+                            
+                        </select></td>
+                    </tr>    
+                </tbody>
+            </table>
+        </div>
+
         <div class="form-group">
             <div class="col-sm-2 col-sm-push-9">
                 <button class="form-control btn btn-primary" ng-click="addConsumption()">Add</button>

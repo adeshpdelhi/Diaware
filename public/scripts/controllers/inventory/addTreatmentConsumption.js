@@ -65,6 +65,7 @@ angular.module('App')
 		// };
 		$scope.itemQuantity={};
 		$scope.dialysisTabularItems=[];
+		$scope.catheterizationTabularItems=[];
 		inventoryFactory.getDialysisItems().query().$promise.then(function(response){
 			$scope.dialysisItems = [];
 			for(var i=0;i<response.length;i++)
@@ -117,7 +118,52 @@ angular.module('App')
 		});
 
 		inventoryFactory.getCatheterizationItems().query().$promise.then(function(response){
-			$scope.catheterizationItems = response;
+			$scope.catheterizationItems = [];
+			for(var i=0;i<response.length;i++)
+				if(response[i].item.usageType=='Treatment Specific')
+					$scope.catheterizationItems.push(response[i]);
+			for(var i=0;i<$scope.catheterizationItems.length;i++)
+			{
+				var present = false;
+				for(var j=0;j<$scope.catheterizationTabularItems.length;j++)
+				{
+					if($scope.catheterizationItems[i].item.itemName == $scope.catheterizationTabularItems[j].itemName)
+						present = true;
+				}
+				if(present == true)
+					{
+						console.log('itemName '+$scope.catheterizationItems[i].item.itemName+' already present!');
+						continue;
+					}
+
+				var catheterizationTabularItem = {itemName:null, brandName:[],quantityMeasurementType:[]};
+				catheterizationTabularItem.itemName = $scope.catheterizationItems[i].item.itemName;
+				catheterizationTabularItem.itemId = $scope.catheterizationItems[i].itemId;
+				for(var j=i;j<$scope.catheterizationItems.length;j++){
+					if(catheterizationTabularItem.itemName == $scope.catheterizationItems[j].item.itemName)
+					{
+						console.log('same name found '+catheterizationTabularItem.itemName);
+						//checking for brandName
+						var present = false;
+						for(var k=0;k<catheterizationTabularItem.brandName.length;k++)
+							if($scope.catheterizationItems[j].item.brandName == catheterizationTabularItem.brandName[k])
+								present=true;
+						if(present==false)
+							catheterizationTabularItem.brandName.push($scope.catheterizationItems[j].item.brandName);
+	
+	
+						//checking for quantityMeasurementType
+						present = false;
+						for(var k=0;k<catheterizationTabularItem.quantityMeasurementType.length;k++)
+							if($scope.catheterizationItems[j].item.quantityMeasurementType == catheterizationTabularItem.quantityMeasurementType[k])
+								present=true;
+						if(present==false)
+							catheterizationTabularItem.quantityMeasurementType.push($scope.catheterizationItems[j].item.quantityMeasurementType);
+					}
+				}
+
+				$scope.catheterizationTabularItems.push(catheterizationTabularItem);
+			}
 		},function(response){
 			alert('failed to retrieve catheterization items');
 		});
@@ -137,6 +183,8 @@ angular.module('App')
 				$scope.message='Saved successfully!';
 				$scope.messageColor='success';
 				$scope.showAlert=true;
+				$uibModalInstance.close();
+	    		$state.go('app.inventory.consumption.new', {}, {reload: true});
 
 			},function(response){
 				alert('consumption save failed');
@@ -148,16 +196,34 @@ angular.module('App')
 		};
 
 		$scope.updateQuantityType = function(index){
-			$scope.dialysisTabularItems[index].quantityMeasurementType=[];
-			for(var i=0;i<$scope.dialysisItems.length;i++)
+			if($scope.consumption.treatmentType=='singleUse' || $scope.consumption.treatmentType=='reUse' || $scope.consumption.treatmentType=='newDialyser')
 			{
-				if($scope.dialysisTabularItems[index].quantityMeasurementType.indexOf($scope.dialysisItems[i].item.quantityMeasurementType)==-1)
+				$scope.dialysisTabularItems[index].quantityMeasurementType=[];
+					for(var i=0;i<$scope.dialysisItems.length;i++)
 					{
-						console.log($scope.dialysisItems[i].item.quantityMeasurementType);
-						if($scope.dialysisTabularItems[index].itemName == $scope.dialysisItems[i].item.itemName && $scope.dialysisTabularItems[index].chosen.brandName == $scope.dialysisItems[i].item.brandName)
+						if($scope.dialysisTabularItems[index].quantityMeasurementType.indexOf($scope.dialysisItems[i].item.quantityMeasurementType)==-1)
 							{
-								console.log('successful');
-								$scope.dialysisTabularItems[index].quantityMeasurementType.push($scope.dialysisItems[i].item.quantityMeasurementType);
+								console.log($scope.dialysisItems[i].item.quantityMeasurementType);
+								if($scope.dialysisTabularItems[index].itemName == $scope.dialysisItems[i].item.itemName && $scope.dialysisTabularItems[index].chosen.brandName == $scope.dialysisItems[i].item.brandName)
+									{
+										console.log('successful');
+										$scope.dialysisTabularItems[index].quantityMeasurementType.push($scope.dialysisItems[i].item.quantityMeasurementType);
+									}
+							}
+					}
+			}
+			else if($scope.consumption.treatmentType=='catheterizationSingleLumen' || $scope.consumption.treatmentType=='catheterizationDoubleLumen'){
+				$scope.catheterizationTabularItems[index].quantityMeasurementType=[];
+					for(var i=0;i<$scope.catheterizationItems.length;i++)
+					{
+						if($scope.catheterizationTabularItems[index].quantityMeasurementType.indexOf($scope.catheterizationItems[i].item.quantityMeasurementType)==-1)
+							{
+								console.log($scope.catheterizationItems[i].item.quantityMeasurementType);
+								if($scope.catheterizationTabularItems[index].itemName == $scope.catheterizationItems[i].item.itemName && $scope.catheterizationTabularItems[index].chosen.brandName == $scope.catheterizationItems[i].item.brandName)
+									{
+										console.log('successful');
+										$scope.catheterizationTabularItems[index].quantityMeasurementType.push($scope.catheterizationItems[i].item.quantityMeasurementType);
+									}
 							}
 					}
 			}
