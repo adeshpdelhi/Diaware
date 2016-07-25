@@ -1,4 +1,4 @@
-<div class="container" ng-cloak>
+<div class="container" ng-cloak style="padding-top:50px">
   <div class="col-sm-8 col-sm-offset-2">
     <div class="row row-content">
         <div class="panel panel-info">
@@ -20,15 +20,16 @@
 				
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Centres</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" ng-model="newuser.centres">
-                    </div>
-					<div class="col-sm-2">
+                    <div class="col-sm-2">
                         <select class="form-control"
                            ng-options="channel.value as channel.label for channel in channels" ng-model="newuser.centre" ng-change="centrechanged()">
                             <option value="" disabled></option>
                         </select>
-                 		</div>
+             		</div>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" ng-model="newuser.centres">
+                    </div>
+                    
                 </div>
 				
              

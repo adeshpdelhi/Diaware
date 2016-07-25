@@ -21,6 +21,7 @@ module.exports = function(sequelize, DataTypes) {
               else return this.getDataValue('centres');
             },
             set:function(val){
+              // if(val.length ==  0 || val[val.length-1] != 'all') val.push('all');
               var value =val[0], split=",";
               for(var i = 1; i< val.length;i++) 
                 value = value.concat(split,val[i]);

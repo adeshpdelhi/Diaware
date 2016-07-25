@@ -11,16 +11,22 @@ http://dev.mysql.com/doc/refman/5.7/en/upgrading.html
 
 ask for number of machines in a centre of each type - add hook - which inserts into weekDaySlots and shifts table 
 
+-----done-----if no centre exists in db ... after login show button to add center
+
 ----done---- add number of Machines of each type in centre Table
 
 
------done---link appointment with monitoring chart - auto fill monitoring date with latest (/oldest pending) pending appointment of the patient
-instead of auto fill ... validation ... if no appointment of that date invalid
+-----done-----link appointment with monitoring chart - auto fill monitoring date with latest (/oldest pending)
+			pending appointment of the patient
+-----done-----instead of auto fill ... validation ... if no appointment of that date invalid
 -----done-----if monitoring chart exists for that date  invalid etc (ye toh shayad hoga... shayad);
 
 -----(done)kiya hua hai shayad xD-----view appointments - of a particular patient - that is set filter patient id and remove filter patient id
 
 add new register  to registration - coz after registering one patient cant register another patient unless visit another page
+
+update Center: cant decrease no of beds / shifts
+cant remove types of Machines
 
 dashboard:
 	----done----view todays appointments
@@ -33,11 +39,12 @@ dashboard:
 if centres == all
 	when post ask for centre
 
+if new center show notification on dashboard to enter data in backend || if backend table is empty show notification
 
 notes
-*add relation between patientDetail and User
-*ask 7med about relation between vaccination details and list of diseases drop down (from clinical details panel)
-*link every table with user **
+----what?xD----*add relation between patientDetail and User
+----i think wont be doing:/-----*ask 7med about relation between vaccination details and list of diseases drop down 								(from clinical details panel)
+----what not requiredXD-----*link every table with user **
 -----done-----add editable rights on user to admin only using passport 
 
 add active and inactive state of patient and a corresponding hook - patient inactive shift to inactive patients table
@@ -46,7 +53,7 @@ one time icu/ipd appointment - ignore these by event scheduler
 dont add icu/ipd to shiftpatients - one time event -direct add to list of appointments
 add another option - take direct appointment  by date (of the category of icu/ipd (mostly); but keep it generic)
 unke bolne pe hatayenge
--useless-list of inactive schedules of a patient
+--useless--list of inactive schedules of a patient
 
 
 problem- creating and updating of carePlan both provided; on update prev version of careplan would get deleted as of now... so each time major change in careplan - suggested to create a new careplan forthat patient to have prev version stored; otherwise we need to change update backend
