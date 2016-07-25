@@ -1,32 +1,57 @@
 <div class="modal-header">
-    <h3 class="modal-title">Add Treatment Consumption</h3>
+    <h3 class="modal-title">Add Treatment Consumption for {{consumption.treatmentId}}</h3>
 </div>
 <div class="modal-body" ng-cloak> 
     <form class="form-horizontal" role="form" name="issueStockForm">
-        <div class="form-group">
-            <label  class="col-sm-3 control-label">Treatment ID</label>
-            <div class="col-sm-8 ">
-                <select name="item_name" class="form-control" ng-model="treatmentInventory.treatmentId">
-                    <option value="" selected disabled>-</option>
-                    <option value="ID1">ID1</option>
-                    <option value="ID2" >ID2</option>
-                </select>
-            </div>
-        </div>
 
         <div class="form-group">
             <label  class="col-sm-3 control-label">Treatment Type</label>
             <div class="col-sm-8 ">
-                <select name="item_name" class="form-control" ng-model="treatmentInventory.treatmentType">
+                <select name="item_name" class="form-control" ng-model="consumption.treatmentType">
                     <option value="" selected disabled>-</option>
-                    <option value="singleuse">Single Use</option>
-                    <option value="reuse" >Re-Use</option>
-                    <option value="newdialyser">New Dialyser</option>
-                    <option value="catehterization_double_lumen"> Catehterization Double Lumen</option>
-                    <option value="catheterization_single_lumen" >Catheterization Single Lumen</option>
+                    <option value="singleUse">Single Use</option>
+                    <option value="reUse" >Re-Use</option>
+                    <option value="newDialyser">New Dialyser</option>
+                    <option value="catheterizationSingleLumen">Catheterization Single Lumen</option>
+                    <option value="catehterizationDoubleLumen">Catehterization Double Lumen</option>
                 </select>
             </div>
         </div>
-        
+
+        <div ng-show="consumption.treatmentType == 'singleUse' || consumption.treatmentType == 'reUse' || consumption.treatmentType == 'newDialyser'" class="table-responsive ">
+            <table class="table table-striped table-fixedheader table-bordered" >
+                <thead>
+                    <tr>
+                        <th style="text-align:center;" width="10%">Item Name</th>
+                        <th style="text-align:center;" width="10%">Brand Name</th>
+                        <th style="text-align:center;" width="10%">Quantity</th>
+                        <th style="text-align:center;" width="10%">Quantity type</th>
+                    </tr>    
+                </thead>
+                <tbody >
+                    <tr ng-repeat = "dialysisTabularItem in dialysisTabularItems" style="height:2px;" >
+                        <td width="10%" >{{dialysisTabularItem.itemName}}</td>
+                        <td width="10%" ><select ng-model="dialysisTabularItem.chosen.brandName" ng-change="updateQuantityType($index)" ng-options = "brand as brand for brand in dialysisTabularItem.brandName">
+                            
+                        </select></td>
+                        <td width="10%"><input style="width:50%;" type="number" ng-init="dialysisTabularItem.chosen.quantity=0" ng-model="dialysisTabularItem.chosen.quantity"></td>
+                        <td width="10%"><select ng-disabled="dialysisTabularItem.chosen.brandName==null || dialysisTabularItem.chosen.brandName.length==0" ng-model="dialysisTabularItem.chosen.quantityMeasurementType" ng-options = "quantityMeasurementType as quantityMeasurementType for quantityMeasurementType in dialysisTabularItem.quantityMeasurementType">
+                            
+                        </select></td>
+                    </tr>    
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 col-sm-push-9">
+                <button class="form-control btn btn-primary" ng-click="addConsumption()">Add</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="alert alert-{{messageColor}} alert-dismissable" ng-show="showAlert">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{message}}
+            </div>
+        </div>
     </form>
 </div>
