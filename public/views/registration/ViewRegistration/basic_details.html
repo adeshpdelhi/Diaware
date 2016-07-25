@@ -26,7 +26,9 @@
                     <tbody >
                         <tr ng-repeat = " (key,value) in patient" ng-if="key != 'panelDetail' && key != 'otherDetail' && key != 'medicalHistories' &&  key != 'majorClinicalEvents'" style="height:2px;" >
                             <td width="10%" class="text-capitalize"><b>{{regularForm(key)}}</b></td>
-                            <td width="25%" >{{value}}</td>
+                            <td width="25%" ng-if="key !='createdAt' && key != 'updatedAt' && key !='DOB'">{{value}}</td>
+                            <!-- <td width="25%" >{{value}}</td> -->
+                            <td width="25%" ng-if="key =='createdAt' || key == 'updatedAt' ||key =='DOB'">{{value|date:dd-MMMM-YY}}
                         </tr>    
                     </tbody>
                 </table>

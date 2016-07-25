@@ -20,7 +20,8 @@
                     <tbody >
                         <tr ng-repeat = " (key,value) in patientChart.monitoringChartPost" ng-if="key!='patientId' && key != 'postId'" style="height:2px;" >
                             <td width="10%" class="text-capitalize"><b>{{key}}</b></td>
-                            <td width="25%" >{{value}}</td>
+                            <td width="25%" ng-if="key !='createdAt' && key != 'updatedAt'">{{value}}</td>
+                            <td width="25%" ng-if="key =='createdAt' || key == 'updatedAt'">{{value|date:dd-MMMM-YY}}</td>
                         </tr>    
                     </tbody>
                 </table>

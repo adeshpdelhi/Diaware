@@ -19,7 +19,7 @@
                     </thead>
                     <tbody >
                         <tr ng-repeat = " medicalHistory in patient.medicalHistories" style="height:2px;" >
-                            <td ng-repeat="(key,value) in medicalHistory" ng-if="key != 'patientId'" >{{value}}</td>
+                            <td ng-repeat="(key,value) in medicalHistory" ng-if="key != 'patientId'" >{{(key=='createdAt'||key=='updatedAt' || key =='date')?(value|date:dd-MMMM-YY):value}}</td>
                         </tr>    
                     </tbody>
                 </table>
