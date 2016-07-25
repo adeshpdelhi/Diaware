@@ -27,8 +27,7 @@ angular.module('App')
 				quantityMeasurementType:null,
 				lastModifiedBy:null
 		};
-		$scope.updateFilteredItems = function(){
-			inventoryFactory.getItems().query().$promise.then(function(response){
+		inventoryFactory.getItems().query().$promise.then(function(response){
 				$scope.filteredItems = response;
 				inventoryFactory.getStocks(authorize.getCentre()).query().$promise.then(function(response){
 					$scope.stocks = response;
@@ -47,8 +46,21 @@ angular.module('App')
 			},function(response){
 				alert('item retieval failed');
 			});
+		$scope.updateFilteredItems = function(){
+			
+			for(var i=0;i<$scope.filteredItems.length;i++)
+					{
+						for(j=0;j<$scope.stocks.length;j++){
+							if($scope.filteredItems[i].itemId == $scope.stocks[j].itemId)
+							{
+								$scope.filteredItems[i].availableQuantity = $scope.stocks[j].availableQuantity;
+							}
+						}
+						if($scope.filteredItems[i].availableQuantity==null)
+							$scope.filteredItems[i].availableQuantity = 0;
+					}
 		}
-		$scope.updateFilteredItems();
+		
 		inventoryFactory.getVendors().query().$promise.then(function(response){
 			$scope.vendors = response;
 		},function(response){
@@ -72,18 +84,20 @@ angular.module('App')
 
 		
 
-		$scope.removeItem = function(index){
+		$scope.removeItem = function(indentItem,index){
 			console.log('deleting iindex'+index);
 		    // for (var i = 0; i <$scope.indentItems.length; i++) {
       //           if($scope.indentItems[i].itemId == itemId){
                     $scope.indentItems.splice(index,1);
+                    $scope.filteredItems.push(indentItem);
+                    $scope.updateFilteredItems();
             //     }
             // }
 		};
 
-		$scope.addItem = function(obj){
-			console.log(obj);
-			$scope.indentItem=obj;
+		$scope.addItem = function(indentItem,index){
+
+			$scope.indentItem=indentItem;
 			$scope.showAlert=false;
 		    $scope.indentItem.lastModifiedBy = authorize.getUsername();
 			// if($scope.indentItems.length)
@@ -93,6 +107,7 @@ angular.module('App')
 			
 			
 			$scope.indentItems.push($scope.indentItem);
+			$scope.filteredItems.splice(index,1);
 			//console.log($scope.indentItem);
 			
 			//$scope.indentForm.$setPristine();

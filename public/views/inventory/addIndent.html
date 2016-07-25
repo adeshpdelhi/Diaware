@@ -35,7 +35,7 @@
                                 <td width="10%">{{indentItem.quantityRequired}}</td>
                                 <td width="10%" >{{indentItem.availableQuantity}}</td>
                                 <td width="10%">{{indentItem.quantityMeasurementType}}</td>
-                                <td style="text-align:center;" width="5%"><button class="btn btn-danger" ng-click="removeItem($index)"><span class="glyphicon glyphicon-remove"></span></button></td>
+                                <td style="text-align:center;" width="5%"><button class="btn btn-danger" ng-click="removeItem(indentItem,$index)"><span class="glyphicon glyphicon-remove"></span></button></td>
 
                             </tr>    
                         </tbody>
@@ -89,7 +89,8 @@
                                 <!-- <td style="text-align:center;" width="10%" ><input style="width:50%;" type="number" ng-init="indentItem.availableQuantity=0" ng-model="indentItem.availableQuantity"></td> -->
                                 <td style="text-align:center;" width="10%" >{{indentItem.availableQuantity}}</td> 
                                 <td style="text-align:center;" width="10%" >{{indentItem.quantityMeasurementType}}</td>
-                                <td style="text-align:center;" width="5%" ng-click="addItem({itemId: indentItem.itemId,itemName:indentItem.itemName,usageType: indentItem.usageType,brandName:indentItem.brandName,quantityRequired:indentItem.quantityRequired,availableQuantity:indentItem.availableQuantity,quantityMeasurementType:indentItem.quantityMeasurementType})"><span class="glyphicon glyphicon-plus"></span></td>
+                                <td style="text-align:center;" width="5%" ng-click="addItem(indentItem,$index)"><span class="glyphicon glyphicon-plus"></span></td>
+                                <!-- <td style="text-align:center;" width="5%" ng-click="addItem({itemId: indentItem.itemId,itemName:indentItem.itemName,usageType: indentItem.usageType,brandName:indentItem.brandName,quantityRequired:indentItem.quantityRequired,availableQuantity:indentItem.availableQuantity,quantityMeasurementType:indentItem.quantityMeasurementType})"><span class="glyphicon glyphicon-plus"></span></td> -->
                             </tr>    
                         </tbody>
                     </table>

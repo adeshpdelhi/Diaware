@@ -45,16 +45,9 @@ angular.module('App')
 				response.requiredByDate = new Date(response.requiredByDate);
 				$scope.indent = response;
 				$scope.viewStatus = response.status;
-		});
-		inventoryFactory.getIndentItems(authorize.getCentre(),indentId).query().$promise.then(function(response){
-			$scope.indentItems = response;
-			for(var i=0;i<$scope.indentItems.length;i++)
-				$scope.indentItems[i].retrieved = true;
-			console.log($scope.indentItems);
-		});
 
-		$scope.updateFilteredItems = function(){
-			inventoryFactory.getItems().query().$promise.then(function(response){
+
+				inventoryFactory.getItems().query().$promise.then(function(response){
 				$scope.filteredItems = response;
 				inventoryFactory.getStocks($scope.indent.centreId).query().$promise.then(function(response){
 					$scope.stocks = response;
@@ -69,26 +62,60 @@ angular.module('App')
 						if($scope.filteredItems[i].availableQuantity==null)
 							$scope.filteredItems[i].availableQuantity = 0;
 					}
-				},function(response){ alert("Failed to retrieve item's availableQuantity from stock"); });
-			},function(response){
-				alert('item retieval failed');
-			});
+					for(var i=0;i<$scope.indentItems.length;i++)
+					{
+						for(var j=0;j<$scope.filteredItems.length;j++)
+							if($scope.indentItems[i].itemId == $scope.filteredItems[j].itemId)
+								$scope.filteredItems.splice(j,1);
+					}
+						},function(response){ alert("Failed to retrieve item's availableQuantity from stock"); });
+					},function(response){
+						alert('item retieval failed');
+					});
+
+
+
+		});
+		inventoryFactory.getIndentItems(authorize.getCentre(),indentId).query().$promise.then(function(response){
+			$scope.indentItems = response;
+			for(var i=0;i<$scope.indentItems.length;i++)
+				$scope.indentItems[i].retrieved = true;
+			console.log($scope.indentItems);
+		});
+		
+		$scope.updateFilteredItems = function(){
+					for(var i=0;i<$scope.filteredItems.length;i++)
+					{
+						for(j=0;j<$scope.stocks.length;j++){
+							if($scope.filteredItems[i].itemId == $scope.stocks[j].itemId)
+							{
+								$scope.filteredItems[i].availableQuantity = $scope.stocks[j].availableQuantity;
+							}
+						}
+						if($scope.filteredItems[i].availableQuantity==null)
+							$scope.filteredItems[i].availableQuantity = 0;
+					}
 		}
-		$scope.updateFilteredItems();
+		//$scope.updateFilteredItems();
 
 		$scope.toBeRemovedindentItems=[];
 		// console.log($scope.indentItems);
-	    $scope.removeItem = function(index,indentItem){
+	    $scope.removeItem = function(indentItem,index){
 				console.log('deleting iindex'+index);
 	            $scope.indentItems.splice(index,1);
 	            $scope.toBeRemovedindentItems.push(indentItem);
+	            indentItem.itemName = indentItem.item.itemName;
+	            indentItem.usageType = indentItem.item.usageType;
+	            indentItem.brandName = indentItem.item.brandName;
+	            indentItem.quantityMeasurementType = indentItem.item.quantityMeasurementType;
+	            $scope.filteredItems.push(indentItem);
+           		$scope.updateFilteredItems();
 		};
 
 		$scope.activeUser = authorize.getActiveUser();
 		$scope.centre = authorize.getCentre();
-		$scope.addItem = function(obj){
-			console.log(obj);
-			$scope.indentItem=obj;
+		$scope.addItem = function(indentItem, index){
+			$scope.indentItem=indentItem;
 			$scope.showAlert=false;
 		    $scope.indentItem.lastModifiedBy = authorize.getUsername();
 			$scope.indentItem.item = {itemName: $scope.indentItem.itemName, usageType: $scope.indentItem.usageType, brandName: $scope.indentItem.brandName, quantityMeasurementType: $scope.indentItem.quantityMeasurementType};
@@ -96,6 +123,7 @@ angular.module('App')
 			console.log('added item with id '+$scope.indentItem.itemId+' with status '+$scope.viewStatus);
 			$scope.indentItem.retrieved = false;
 			$scope.indentItems.push($scope.indentItem);
+			$scope.filteredItems.splice(index,1);
 			// for(var i=0;i<$scope.filteredItems.length;i++){
 			// 	$scope.filteredItems[i].availableQuantity=$scope.filteredItems[i].quantityRequired=0;
 			// }

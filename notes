@@ -111,4 +111,4 @@ CREATE EVENT my_event
 
  adesh:
 
- 1. handle duplicates in item list while creating indents
+ 1. handle duplicates in item list while creating indents ---done

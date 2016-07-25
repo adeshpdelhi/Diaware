@@ -28,21 +28,30 @@ angular.module('App')
 			nextExpectedStockIssueDate:new Date(),
 			lastModifiedBy:null
 		};
-		
+		inventoryFactory.getStocks(authorize.getCentre()).query().$promise.then(function(response){
+					$scope.filteredItems = response;
+					console.log(response);
+					for(var i=0;i<$scope.filteredItems.length;i++)
+						$scope.filteredItems[i].quantity=0;
+				},function(response){
+					alert('failed to retrieve stocks');
+				})
 		$scope.updateFilteredItems = function(){
-			inventoryFactory.getStocks(authorize.getCentre()).query().$promise.then(function(response){
-				$scope.filteredItems = response;
-				console.log(response);
 				for(var i=0;i<$scope.filteredItems.length;i++)
-					$scope.filteredItems[i].quantity=0;
-			},function(response){
-				alert('failed to retrieve stocks');
-			})
+						$scope.filteredItems[i].quantity=0;
 		}
-		$scope.updateFilteredItems();
-		$scope.addStockItem = function(obj){
-			console.log(obj);
-			$scope.issueStockItem=obj;
+		$scope.addStockItem = function(issueStockItem,index){
+			console.log(issueStockForm);
+			$scope.issueStockItem=issueStockItem;
+			$scope.issueStockItem.item = {itemId:issueStockItem.itemId,itemName:issueStockItem.itemName, usageType:issueStockItem.usageType, brandName:issueStockItem.brandName,quantityMeasurementType:issueStockItem.quantityMeasurementType};
+			// for (var i=0;i<$scope.issueStockItems.length;i++)
+			// 	if($scope.issueStockItem.itemId == $scope.issueStockItems[i].itemId)
+			// 	{
+			// 		alert('Item already exists in the list');
+			// 		return;
+			// 	}
+			$scope.filteredItems.splice(index,1);
+			console.log('here index is '+index);
 			$scope.showAlert=false;
 		    $scope.issueStockItem.lastModifiedBy = authorize.getUsername();
 			$scope.issueStockItems.push($scope.issueStockItem);
@@ -51,9 +60,13 @@ angular.module('App')
 			
 		}
 		
-		$scope.removeItem = function(index){
+		$scope.removeItem = function(filteredItem, index){
 			console.log('deleting iindex'+index);
             $scope.issueStockItems.splice(index,1);
+            console.log('adding this');
+            console.log(filteredItem);
+            $scope.filteredItems.push(filteredItem);
+            $scope.updateFilteredItems();
 		};
 
 		$scope.doIssueStock = function(){
@@ -107,6 +120,7 @@ angular.module('App')
 						nextExpectedStockIssueDate:new Date(),
 						lastModifiedBy:null
 					};
+					$scope.issueStockItems = [];
 
 				},function(response){alert('failed to update stocks')});
 				
