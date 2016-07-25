@@ -9,7 +9,8 @@ module.exports = function(sequelize, DataTypes) {
     stockIssuedId: {
       type: DataTypes.BIGINT,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     stockIssuedTo: {
       type: DataTypes.STRING,

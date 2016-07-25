@@ -3,16 +3,16 @@ var bodyParser = require('body-parser');
 
 var db = require('../../models');
 
-var stockRouter = express.Router({mergeParams:true});
+var floorRouter = express.Router({mergeParams:true});
 
-stockRouter.use(bodyParser.json());
+floorRouter.use(bodyParser.json());
 
-stockRouter.route('/')
+floorRouter.route('/')
 
 .get(function (req, res, next) {
     
     console.log('procesing get');
-    db.stock.findAll({
+    db.floor.findAll({
         where:{
             centreId: req.params.centreId
         },
@@ -28,7 +28,7 @@ stockRouter.route('/')
 .post(function (req, res, next) {
 	console.log('processing post : '+ req.body);
     console.log(req.body);
-    db.stock.build(req.body).save().then(function(result){
+    db.floor.build(req.body).save().then(function(result){
         res.json(result);
     
     });
@@ -37,10 +37,10 @@ stockRouter.route('/')
     
 })
 
-stockRouter.route('/:itemId')
+floorRouter.route('/:itemId')
 .get(function(req,res,next){
     console.log('procesing get');
-    db.stock.findOne({
+    db.floor.findOne({
         where:{
             itemId:parseInt(req.params.itemId,10),
             centreId: req.params.centreId
@@ -58,7 +58,7 @@ stockRouter.route('/:itemId')
 })
 .put(function(req,res,next){
     console.log(req.body);
-    db.stock.update(
+    db.floor.update(
     req.body, {
             where:{
                 itemId:parseInt(req.params.itemId,10),
@@ -79,4 +79,4 @@ stockRouter.route('/:itemId')
 ;
 
 
-module.exports = stockRouter;
+module.exports = floorRouter;

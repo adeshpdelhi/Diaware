@@ -1,28 +1,22 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('stockIssuedItems', {
-    stockIssuedId: {
-      type: DataTypes.BIGINT,
+  return sequelize.define('floor', {
+    centreId: {
+      type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: '0',
-      primaryKey: true,
-      references:{
-        model: 'stockIssued',
-        key: 'stockIssuedId'
-      }
+      primaryKey: true
     },
     itemId: {
       type: DataTypes.BIGINT,
       allowNull: false,
-      defaultValue: '0',
       primaryKey: true,
       references:{
         model: 'item',
         key: 'itemId'
       }
     },
-    quantity: {
+    availableQuantity: {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
@@ -31,6 +25,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     }
   }, {
-    tableName: 'stockIssuedItems'
+    tableName: 'floor'
   });
 };

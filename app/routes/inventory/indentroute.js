@@ -15,7 +15,11 @@ indentRouter.route('/')
 .get(function (req, res, next) {
     
     console.log('procesing get');
-    db.indent.findAll().then(function(indents){
+    db.indent.findAll({
+        where:{
+            centreId:req.params.centreId
+        }
+    }).then(function(indents){
     	console.log(JSON.stringify(indents));
     	res.json(indents);
     });

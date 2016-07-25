@@ -114,3 +114,8 @@ CREATE EVENT my_event
 
 
  http://www.mysqltutorial.org/mysql-triggers/working-mysql-scheduled-event/
+
+
+ adesh:
+
+ 1. handle duplicates in item list while creating indents ---done

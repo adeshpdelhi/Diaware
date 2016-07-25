@@ -1,9 +1,9 @@
 'use strict';
 angular.module('App')
-.controller('TreatmentInventoryController',['$scope','authorize', function($scope,authorize){
+.controller('AddTreatmentConsumptionController',['$scope','authorize','appointmentFactory', function($scope,authorize,appointmentFactory){
 	
 	
-	$scope.showalert_treatment_inventory=false;
+	$scope.showAlert=false;
 		
 		$scope.treatmentInventory= {
 			treatmentId:null,

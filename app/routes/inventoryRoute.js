@@ -35,5 +35,8 @@ inventoryRouter.use('/stock/issued/',stockIssuedRouter);
 var stockRouter = require('./inventory/stockroute');
 inventoryRouter.use('/stock',stockRouter);
 
+var stockRouter = require('./inventory/floorroute');
+inventoryRouter.use('/floor',stockRouter);
+
 
 module.exports = inventoryRouter;
