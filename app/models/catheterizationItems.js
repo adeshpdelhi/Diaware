@@ -3,15 +3,14 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('catheterizationItems', {
     itemId: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true
+      references:{
+        model: 'item',
+        key: 'itemId'
+      }
     },
-    itemName: {
-      type: DataTypes.STRING,
-      allowNull: false
-    }
   }, {
     tableName: 'catheterizationItems'
   });

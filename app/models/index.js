@@ -150,4 +150,10 @@ dbmodel.floor.belongsTo(dbmodel.item,{foreignKey:'itemId'});
 dbmodel.item.hasOne(dbmodel.stockIssuedItems,{foreignKey:'itemId'});
 dbmodel.stockIssuedItems.belongsTo(dbmodel.item,{foreignKey:'itemId'});
 
+dbmodel.item.hasOne(dbmodel.dialysisItems,{foreignKey:'itemId'});
+dbmodel.dialysisItems.belongsTo(dbmodel.item,{foreignKey:'itemId'});
+
+dbmodel.item.hasOne(dbmodel.catheterizationItems,{foreignKey:'itemId'});
+dbmodel.catheterizationItems.belongsTo(dbmodel.item,{foreignKey:'itemId'});
+
 module.exports = dbmodel;

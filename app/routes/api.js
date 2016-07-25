@@ -32,12 +32,10 @@ apiRouter.use('/inventory/item',itemRouter);
 var vendorRouter = require('./inventory/vendorroute');
 apiRouter.use('/inventory/vendor',vendorRouter);
 
-apiRouter.use('/:centreId/inventory',auth.verifyLoggedIn,inventoryRouter);
 
 var treatmentItemsRouter = require('./inventory/treatmentitemsroute');
-apiRouter.use('inventory/treatment/items',treatmentItemsRouter);
+apiRouter.use('/inventory/treatment/items',treatmentItemsRouter);
 
-
-
+apiRouter.use('/:centreId/inventory',auth.verifyLoggedIn,inventoryRouter);
 
 module.exports = apiRouter;

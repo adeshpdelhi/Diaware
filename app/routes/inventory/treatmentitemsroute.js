@@ -11,7 +11,11 @@ treatmentItemsRouter.use(bodyParser.json());
 treatmentItemsRouter.route('/dialysis')
 .get(function (req, res, next) {
     console.log('procesing get');
-    db.dialysisItems.findAll().then(function(dialysisItems){
+    db.dialysisItems.findAll({
+        include:[
+            db.item
+        ]
+    }).then(function(dialysisItems){
     	console.log(JSON.stringify(dialysisItems));
     	res.json(dialysisItems);
     },function(rejectedPromiseError){
@@ -34,7 +38,10 @@ treatmentItemsRouter.route('/dialysis')
 treatmentItemsRouter.route('/dialysis/:itemId')
 .get(function(req,res,next){
     db.dialysisItems.find({
-        where:{itemId:req.params.itemId}
+        where:{itemId:req.params.itemId},
+        include:[
+            db.item
+        ]
     }).then(function(result){
         res.json(result);
     },function(rejectedPromiseError){
@@ -58,7 +65,11 @@ treatmentItemsRouter.route('/dialysis/:itemId')
 treatmentItemsRouter.route('/catheterization')
 .get(function (req, res, next) {
     console.log('procesing get');
-    db.catheterizationItems.findAll().then(function(catheterizationItems){
+    db.catheterizationItems.findAll({
+        include:[
+            db.item
+        ]
+    }).then(function(catheterizationItems){
         console.log(JSON.stringify(catheterizationItems));
         res.json(catheterizationItems);
     },function(rejectedPromiseError){
@@ -81,7 +92,10 @@ treatmentItemsRouter.route('/catheterization')
 treatmentItemsRouter.route('/catheterization/:itemId')
 .get(function(req,res,next){
     db.catheterizationItems.find({
-        where:{itemId:req.params.itemId}
+        where:{itemId:req.params.itemId},
+        include:[
+            db.item
+        ]
     }).then(function(result){
         res.json(result);
     },function(rejectedPromiseError){
