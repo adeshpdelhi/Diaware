@@ -268,6 +268,26 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                 }
 
             })
+            .state('app.inventory.item', {
+                url:'item/'
+            })
+            .state('app.inventory.item.add', {
+                url:'add',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/addItems.html'
+                    }
+                }
+
+            })
+            .state('app.inventory.item.view', {
+                url:'view',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/ViewInventory/viewItems.html'
+                    }
+                }
+            })
 
             // .state('app.inventory.new_inventory_identing', {
             //     url:'Inventory_Identing/new',

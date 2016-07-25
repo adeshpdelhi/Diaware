@@ -7,6 +7,7 @@ angular.module('App')
 		if(!$scope.view || ($scope.patient != null && (!$scope.events || $scope.events.length == 0)))
 			$scope.events=[];
 		$scope.event = {
+			id:null,
 			ID:null,
 			date:'',
 			details:"",
@@ -74,7 +75,10 @@ angular.module('App')
 						$scope.showAlertClinical = true;
 						$scope.message = "Updated Clinical Events Successfully";			
 						console.log($scope.events[x]);
-						$scope.events[x].id = response.id;
+						$scope.events[x] =  JSON.parse(JSON.stringify(response));
+						// $scope.events[x].id = response.id;
+						// $scope.events[x].createdAt = response.createdAt;
+						// $scope.events[x].updatedAt = response.updatedAt;
 						console.log("x:inside " + x);
 						x++;
 					},function(response){

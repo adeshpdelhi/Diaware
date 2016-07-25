@@ -21,9 +21,9 @@ itemRouter.route('/')
 .post(function (req, res, next) {
 	console.log('processing post : '+ req.body);
     console.log(req.body);
-    db.item.build(req.body).save().then(function(result){
-        res.json(result);
-    
+    db.item.bulkCreate(req.body).then(function(response){
+        console.log(JSON.stringify(response));
+        res.json({result:JSON.parse(JSON.stringify(response))});
     });
 })
 .delete(function(req,res,next){
@@ -43,7 +43,16 @@ itemRouter.route('/:itemId')
     });
 })
 .delete(function(req,res,next){
-
+    db.item.destroy({
+        where:{
+            itemId:parseInt(req.params.itemId,10)
+        }
+    }).then(function(result){
+        res.json(result);
+    },function(rejectedPromiseError){
+        res.status(400);
+        res.end("Error Occurred in item route delete!");
+    })
 })
 .put(function(req,res,next){
     console.log(req.body);
@@ -53,8 +62,7 @@ itemRouter.route('/:itemId')
                 itemId:parseInt(req.params.itemId,10)
             }
         }
-    )
-    .then(function (result) { 
+    ).then(function (result) { 
         console.log('success item update');
         res.status(200);
         res.end('saved');

@@ -123,6 +123,9 @@
                             <a style="color:red">View General Consumption</a>
                             <a ui-sref="app.inventory.floor.view">View Floor</a>
 
+                            <a ui-sref="app.inventory.item.add" ng-show="role.admin"> Add Items</a>
+                            <a ui-sref="app.inventory.item.view" ng-show="role.admin"> View/Edit Items</a>
+
                            
 
                         </li>
