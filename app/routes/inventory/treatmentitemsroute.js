@@ -3,12 +3,12 @@ var bodyParser = require('body-parser');
 
 var db = require('../../models');
 
-var treatementItemsRouter = express.Router({mergeParams:true});
+var treatmentItemsRouter = express.Router({mergeParams:true});
 
-treatementItemsRouter.use(bodyParser.json());
+treatmentItemsRouter.use(bodyParser.json());
 
 
-treatementItemsRouter.route('/dialysis')
+treatmentItemsRouter.route('/dialysis')
 .get(function (req, res, next) {
     console.log('procesing get');
     db.dialysisItems.findAll().then(function(dialysisItems){
@@ -24,14 +24,14 @@ treatementItemsRouter.route('/dialysis')
 	console.log('processing post : '+ req.body);
     db.dialysisItems.build(req.body).save().then(function(result){
         res.json(result);
-    // res.end('treatementItemsRouter working'); // send status code
+    // res.end('treatmentItemsRouter working'); // send status code
     },function(rejectedPromiseError){
         res.status(500);
         res.end("Internal Server Error");
     });
 });
 
-treatementItemsRouter.route('/dialysis/:itemId')
+treatmentItemsRouter.route('/dialysis/:itemId')
 .get(function(req,res,next){
     db.dialysisItems.find({
         where:{itemId:req.params.itemId}
@@ -55,7 +55,7 @@ treatementItemsRouter.route('/dialysis/:itemId')
 });
 
 
-treatementItemsRouter.route('/catheterization')
+treatmentItemsRouter.route('/catheterization')
 .get(function (req, res, next) {
     console.log('procesing get');
     db.catheterizationItems.findAll().then(function(catheterizationItems){
@@ -71,14 +71,14 @@ treatementItemsRouter.route('/catheterization')
     console.log('processing post : '+ req.body);
     db.catheterizationItems.build(req.body).save().then(function(result){
         res.json(result);
-    // res.end('treatementItemsRouter working'); // send status code
+    // res.end('treatmentItemsRouter working'); // send status code
     },function(rejectedPromiseError){
         res.status(500);
         res.end("Internal Server Error");
     });
 });
 
-treatementItemsRouter.route('/catheterization/:itemId')
+treatmentItemsRouter.route('/catheterization/:itemId')
 .get(function(req,res,next){
     db.catheterizationItems.find({
         where:{itemId:req.params.itemId}
@@ -101,4 +101,4 @@ treatementItemsRouter.route('/catheterization/:itemId')
 });
 
 
-module.exports = treatementItemsRouter;
+module.exports = treatmentItemsRouter;

@@ -34,5 +34,10 @@ apiRouter.use('/inventory/vendor',vendorRouter);
 
 apiRouter.use('/:centreId/inventory',auth.verifyLoggedIn,inventoryRouter);
 
+var treatmentItemsRouter = require('./inventory/treatmentitemsroute');
+apiRouter.use('inventory/treatment/items',treatmentItemsRouter);
+
+
+
 
 module.exports = apiRouter;

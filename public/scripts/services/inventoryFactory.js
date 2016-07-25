@@ -6,12 +6,12 @@ angular.module('App')
       		return $resource(baseURL+"inventory/item/:itemId",null,  {'update':{method:'PUT' }});
      	};
 
-		this.getDialysisItems = function(centreId){
-      		return $resource(baseURL+":centreId/inventory/treatementitems/dialysis/:itemId",{centreId:centreId},  {'update':{method:'PUT' }});
+		this.getDialysisItems = function(){
+      		return $resource(baseURL+"inventory/treatment/items/dialysis/:itemId",null,  {'update':{method:'PUT' }});
      	};
 
-     	this.getCatheterizationItems = function(centreId){
-      		return $resource(baseURL+":centreId/inventory/treatementitems/catheterization/:itemId",{centreId:centreId},  {'update':{method:'PUT' }});
+     	this.getCatheterizationItems = function(){
+      		return $resource(baseURL+"inventory/treatment/items/catheterization/:itemId",null,  {'update':{method:'PUT' }});
      	};
 
 		this.getVendors = function(){
@@ -43,11 +43,11 @@ angular.module('App')
 		}
 		
 		this.getConsumptions = function(centreId){
-			return $resource(baseURL+":centreId/inventory/consumption/:treatementId",{centreId:centreId},  {'update':{method:'PUT' }});
+			return $resource(baseURL+":centreId/inventory/consumption/:treatmentId",{centreId:centreId},  {'update':{method:'PUT' }});
 		}
 		
-		this.getConsumptionItems = function(centreId,treatementId){
-			return $resource(baseURL+":centreId/inventory/consumption/:treatementId/items/:itemId",{centreId:centreId,treatementId:treatementId},  {'update':{method:'PUT' }});
+		this.getConsumptionItems = function(centreId,treatmentId){
+			return $resource(baseURL+":centreId/inventory/consumption/:treatmentId/items/:itemId",{centreId:centreId,treatmentId:treatmentId},  {'update':{method:'PUT' }});
 
 		}
      	
