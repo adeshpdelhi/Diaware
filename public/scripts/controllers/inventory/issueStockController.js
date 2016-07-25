@@ -119,8 +119,8 @@ angular.module('App')
 								}
 							}
 							if(present == false){
-								console.log("item "+$scope.issueStockItems[i].itemId+' present');
-								var newFloorItem = {itemId:$scope.issueStockItems[j].itemId,centreId:authorize.getCentre(),quantity: $scope.issueStockItems[j].quantity,lastModifiedBy:authorize.getUsername()};
+								console.log("item "+$scope.issueStockItems[i].itemId+' not present');
+								var newFloorItem = {itemId:$scope.issueStockItems[i].itemId,centreId:authorize.getCentre(),availableQuantity: $scope.issueStockItems[i].quantity,lastModifiedBy:authorize.getUsername()};
 								inventoryFactory.getFloor(authorize.getCentre()).save(newFloorItem);
 							}
 						}
