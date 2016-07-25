@@ -13,7 +13,9 @@
                     <tbody >
                         <tr ng-repeat = " (key,value) in patientChart.monitoringChartPreMachineFinalCheck" ng-if="key != 'patientId' && key != 'preBasicId'" style="height:2px;" >
                             <td width="10%" class="text-capitalize"><b>{{key}}</b></td>
-                            <td width="25%" >{{value}}</td>
+                            <td width="25%" ng-if="key !='createdAt' && key != 'updatedAt'">{{value}}</td>
+                            <!-- <td width="25%" >{{value}}</td> -->
+                            <td width="25%" ng-if="key =='createdAt' || key == 'updatedAt'">{{value|date:dd-MMMM-YY}}
                         </tr>    
                     </tbody>
                 </table>
