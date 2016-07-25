@@ -39,6 +39,14 @@ create table stock(
 	primary key(centreId,itemId)
 );
 
+create table floor(
+	centreId varchar(60) NOT NULL,
+	itemId bigint NOT NULL references inventory(itemId),
+	availableQuantity int,
+	lastModifiedBy varchar(60),
+	primary key(centreId,itemId)
+);
+
 create table stockIssued(
 	centreId varchar(60) NOT NULL,
 	stockIssuedId bigint primary key NOT NULL,

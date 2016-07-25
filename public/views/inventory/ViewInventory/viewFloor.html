@@ -1,0 +1,63 @@
+<div class="container">
+<div id="Registerbox" style="margin-top:60px;" class="mainbox col-sm-12" ng-cloak>                    
+   <!-- <div ng-show="editPanels">
+        <div ng-include="'views/registration/panel.html'"></div> 
+    </div> -->
+    <div class="panel" ng-show="!editPanels">
+        <div class="panel-heading">
+            <div class="panel-title"><b> View Floor </b></div>
+            <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
+        </div> 
+
+            <div style="padding-top:30px; text-align:center;" class="panel-body" >
+            <div class="row">	 
+	           <div class="form-group col-sm-10 col-sm-push-1">
+                    <label class="col-sm-1 control-label">Name</label>                        
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" ng-model="filt.name">
+                    </div>
+                    <label class="col-sm-1 control-label">Usage Type</label>
+                    <div class="col-sm-2">
+                        <input  type="text" class="form-control" ng-model="filt.usageType">
+                    </div>
+                    <label class="col-sm-1 control-label">Brand</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" ng-model="filt.brand">
+                    </div>  
+                    <label class="col-sm-1 control-label">Quantity Type</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" ng-model="filt.quantityMeasurementType">
+                    </div>  
+                </div>
+                </div>
+                <div class = "row">
+    			     <div class="table-responsive col-sm-10 col-sm-push-1 col-sm-pull-1">
+                        <table class="table table-striped table-fixedheader table-bordered" >
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center;" width="10%">Item Id</th>
+                                    <th style="text-align:center;" width="10%">Item Name</th>
+                                    <th style="text-align:center;" width="10%">Usage Type</th>
+                                    <th style="text-align:center;" width="10%">Brand Name</th>
+                                    <th style="text-align:center;" width="10%">Available Quantity</th>
+                                    <th style="text-align:center;" width="10%">Quantity type</th>
+                                </tr>    
+                            </thead>
+                            <tbody >
+                                <tr ng-repeat = "floorItem in floor | filter:filt.name | filter: filt.usageType | filter: filt.brand | filter: filt.quantityMeasurementType" style="height:2px;" >
+                                    <td width="10%" style="text-align:center;" >{{floorItem.itemId}}</td>
+                                    <td width="10%" style="text-align:center;" >{{floorItem.item.itemName}}</td>
+                                    <td width="10%" style="text-align:center;" >{{floorItem.item.usageType}}</td>
+                                    <td width="10%" style="text-align:center;" >{{floorItem.item.brandName}}</td>
+                                    <td width="10%" style="text-align:center;" >{{floorItem.availableQuantity}}</td>
+                                    <td width="10%" style="text-align:center;" >{{floorItem.item.quantityMeasurementType}}</td>
+                                </tr>    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <hr style="border-top:1px solid rgb(225,225,225);">
+                </div>
+        </div>
+    </div>
+</div>

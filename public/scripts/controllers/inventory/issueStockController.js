@@ -102,6 +102,29 @@ angular.module('App')
 							}
 						}
 
+					inventoryFactory.getFloor(authorize.getCentre()).query().$promise.then(function(response){
+						$scope.floorItems= response;
+						for(var i=0;i<$scope.issueStockItems.length;i++){
+							var present = false;
+							console.log('outer loop');
+							for(var j=0;j<$scope.floorItems.length;j++)
+							{
+								console.log('comparing '+$scope.floorItems[j].itemId+' and '+$scope.issueStockItems[i].itemId);
+								if($scope.floorItems[j].itemId == $scope.issueStockItems[i].itemId)
+								{
+									console.log("item "+$scope.floorItems[j].itemId+' present');
+									$scope.floorItems[j].availableQuantity+=$scope.issueStockItems[i].quantity;
+									inventoryFactory.getFloor(authorize.getCentre()).update({centreId:$scope.floorItems[j].centreId, itemId: $scope.floorItems[j].itemId},$scope.floorItems[j]);
+									present = true;
+								}
+							}
+							if(present == false){
+								console.log("item "+$scope.issueStockItems[i].itemId+' present');
+								var newFloorItem = {itemId:$scope.issueStockItems[j].itemId,centreId:authorize.getCentre(),quantity: $scope.issueStockItems[j].quantity,lastModifiedBy:authorize.getUsername()};
+								inventoryFactory.getFloor(authorize.getCentre()).save(newFloorItem);
+							}
+						}
+					});
 
 					$scope.issueStockForm.$setPristine();
 					$scope.savedOnce = true;
@@ -120,7 +143,7 @@ angular.module('App')
 						nextExpectedStockIssueDate:new Date(),
 						lastModifiedBy:null
 					};
-					$scope.issueStockItems = [];
+					//$scope.issueStockItems = [];
 
 				},function(response){alert('failed to update stocks')});
 				

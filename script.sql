@@ -115,6 +115,18 @@ insert into stock(centreId, itemId, availableQuantity, createdAt, updatedAt) val
 insert into stock(centreId, itemId, availableQuantity, createdAt, updatedAt) values('CH',3,2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 insert into stock(centreId, itemId, availableQuantity, createdAt, updatedAt) values('CH',4,15,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 
+
+insert into floor(centreId, itemId, availableQuantity, createdAt, updatedAt) values('JP1',1,8,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into floor(centreId, itemId, availableQuantity, createdAt, updatedAt) values('JP1',2,4,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into floor(centreId, itemId, availableQuantity, createdAt, updatedAt) values('JP1',3,6,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into floor(centreId, itemId, availableQuantity, createdAt, updatedAt) values('JP1',4,0,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into floor(centreId, itemId, availableQuantity, createdAt, updatedAt) values('CH',1,0,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into floor(centreId, itemId, availableQuantity, createdAt, updatedAt) values('CH',2,5,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into floor(centreId, itemId, availableQuantity, createdAt, updatedAt) values('CH',3,2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into floor(centreId, itemId, availableQuantity, createdAt, updatedAt) values('CH',4,15,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+
+
 insert into stockIssued(centreId,stockIssuedId,stockIssuedTo,estimatedSingleUse,estimatedReUse,estimatedNewDialyzer,estimatedCatheterSingleLumen,estimatedCatheterDoubleLumen,stockIssueDate,stockTakerName,nextExpectedStockIssueDate,createdAt, updatedAt) values ('JP1',DEFAULT,'floor',1,2,3,4,5,'2016-07-13 10:48:56','adesh','2016-07-13 10:48:56','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 insert into stockIssuedItems(stockIssuedId,itemId,quantity,createdAt, updatedAt) values(1,1,4,'2016-07-13 10:48:56','2016-07-13 10:48:56');

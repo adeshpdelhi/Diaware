@@ -30,6 +30,10 @@ angular.module('App')
 			return $resource(baseURL+":centreId/inventory/stock/:itemId",{centreId:centreId},  {'update':{method:'PUT' }});
 		}
 
+		this.getFloor = function(centreId){
+			return $resource(baseURL+":centreId/inventory/floor/:itemId",{centreId:centreId},  {'update':{method:'PUT' }});
+		}
+
      	this.getStocksIssued = function(centreId){
 			return $resource(baseURL+":centreId/inventory/stock/issued/:stockIssuedId",{centreId:centreId},  {'update':{method:'PUT' }});
 		}

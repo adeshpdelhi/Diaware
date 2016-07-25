@@ -237,9 +237,37 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
 
             })
 
+            .state('app.inventory.consumption', {
+                url:'consumption/'
+            })
+
+            .state('app.inventory.consumption.new', {
+                url:'view',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/addTreatmentConsumption.html',
+                        controller  : 'AddTreatmentConsumptionController'
+                    }
+                }
+
+            })
 
 
+            .state('app.inventory.floor', {
+                url:'floor/'
+            })
 
+
+            .state('app.inventory.floor.view', {
+                url:'view',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/ViewInventory/viewFloor.html',
+                        controller  : 'ViewFloorController'
+                    }
+                }
+
+            })
 
             // .state('app.inventory.new_inventory_identing', {
             //     url:'Inventory_Identing/new',
