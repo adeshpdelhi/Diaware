@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('consumptionItems', {
-    treatementId: {
+    treatmentId: {
       type: DataTypes.BIGINT,
       allowNull: false,
       defaultValue: '0',

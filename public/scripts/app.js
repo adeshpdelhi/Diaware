@@ -242,7 +242,7 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
             })
 
             .state('app.inventory.consumption.new', {
-                url:'view',
+                url:'new',
                 views: {
                     'content@': {
                         templateUrl : 'views/inventory/addTreatmentConsumption.html',

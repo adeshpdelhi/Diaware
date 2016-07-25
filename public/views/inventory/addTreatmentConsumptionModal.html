@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <h3 class="modal-title">Add Treatment Consumption</h3>
+</div>
+<div class="modal-body" ng-cloak> 
+    <form class="form-horizontal" role="form" name="issueStockForm">
+        <div class="form-group">
+            <label  class="col-sm-3 control-label">Treatment ID</label>
+            <div class="col-sm-8 ">
+                <select name="item_name" class="form-control" ng-model="treatmentInventory.treatmentId">
+                    <option value="" selected disabled>-</option>
+                    <option value="ID1">ID1</option>
+                    <option value="ID2" >ID2</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label  class="col-sm-3 control-label">Treatment Type</label>
+            <div class="col-sm-8 ">
+                <select name="item_name" class="form-control" ng-model="treatmentInventory.treatmentType">
+                    <option value="" selected disabled>-</option>
+                    <option value="singleuse">Single Use</option>
+                    <option value="reuse" >Re-Use</option>
+                    <option value="newdialyser">New Dialyser</option>
+                    <option value="catehterization_double_lumen"> Catehterization Double Lumen</option>
+                    <option value="catheterization_single_lumen" >Catheterization Single Lumen</option>
+                </select>
+            </div>
+        </div>
+        
+    </form>
+</div>

@@ -22,7 +22,7 @@ consumptionItemsRouter.route('/')
     console.log('procesing get');
     db.consumptionItems.findAll({
         where:{
-            treatementId:parseInt(req.params.treatementId,10)
+            treatmentId:parseInt(req.params.treatmentId,10)
         }
     }).then(function(consumptionItems){
         console.log(JSON.stringify(consumptionItems));
@@ -69,7 +69,7 @@ consumptionItemsRouter.route('/:itemId')
     db.consumptionItems.findOne({
         where:{
             itemId:parseInt(req.params.itemId,10),            
-            treatementId:req.params.treatementId
+            treatmentId:req.params.treatmentId
         }
     }).then(function(consumptionItem){
         console.log(JSON.stringify(consumptionItem));
@@ -82,7 +82,7 @@ consumptionItemsRouter.route('/:itemId')
     {
         where:{
             itemId:parseInt(req.params.itemId,10),            
-            treatementId:req.params.treatementId
+            treatmentId:req.params.treatmentId
             }
         }
     )
@@ -99,7 +99,7 @@ consumptionItemsRouter.route('/:itemId')
     req.body, {
             where:{
                 itemId:parseInt(req.params.itemId,10),            
-                treatementId:req.params.treatementId
+                treatmentId:req.params.treatmentId
             }
         }
     )

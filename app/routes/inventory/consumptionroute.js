@@ -8,7 +8,7 @@ var consumptionRouter = express.Router({mergeParams:true});
 consumptionRouter.use(bodyParser.json());
 
 var consumptionItemsRouter = require('./consumptionitemsroute');
-consumptionRouter.use('/:treatementId/items',consumptionItemsRouter);
+consumptionRouter.use('/:treatmentId/items',consumptionItemsRouter);
 
 consumptionRouter.route('/')
 
@@ -33,12 +33,12 @@ consumptionRouter.route('/')
     
 })
 
-consumptionRouter.route('/:treatementId')
+consumptionRouter.route('/:treatmentId')
 .get(function(req,res,next){
     console.log('procesing get');
     db.consumption.findOne({
         where:{
-            treatementId:parseInt(req.params.treatementId,10)
+            treatmentId:parseInt(req.params.treatmentId,10)
         }
     }).then(function(consumption){
         console.log(JSON.stringify(consumption));
@@ -53,7 +53,7 @@ consumptionRouter.route('/:treatementId')
     db.consumption.update(
     req.body, {
             where:{
-                treatementId:parseInt(req.params.treatementId,10)
+                treatmentId:parseInt(req.params.treatmentId,10)
             }
         }
     )

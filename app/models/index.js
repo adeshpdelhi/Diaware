@@ -135,11 +135,11 @@ dbmodel.indentItems.belongsTo(dbmodel.item,{foreignKey:'itemId'});
 dbmodel.stockIssued.hasMany(dbmodel.stockIssuedItems,{foreignKey:'stockIssuedId'});
 dbmodel.stockIssuedItems.belongsTo(dbmodel.stockIssued,{foreignKey:'stockIssuedId'});
 
-dbmodel.consumption.hasMany(dbmodel.consumptionItems,{foreignKey:'treatementId'});
-dbmodel.consumptionItems.belongsTo(dbmodel.consumption,{foreignKey:'treatementId'});
+dbmodel.consumption.hasMany(dbmodel.consumptionItems,{foreignKey:'treatmentId'});
+dbmodel.consumptionItems.belongsTo(dbmodel.consumption,{foreignKey:'treatmentId'});
 
-dbmodel.consumption.hasMany(dbmodel.consumptionItems,{foreignKey:'treatementId'});
-dbmodel.consumptionItems.belongsTo(dbmodel.consumption,{foreignKey:'treatementId'});
+dbmodel.consumption.hasMany(dbmodel.consumptionItems,{foreignKey:'treatmentId'});
+dbmodel.consumptionItems.belongsTo(dbmodel.consumption,{foreignKey:'treatmentId'});
 
 dbmodel.item.hasOne(dbmodel.stock,{foreignKey:'itemId'});
 dbmodel.stock.belongsTo(dbmodel.item,{foreignKey:'itemId'});

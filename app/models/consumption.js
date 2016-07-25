@@ -6,11 +6,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    treatementType: {
+    treatmentType: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    treatementId: {
+    treatmentId: {
       type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true
