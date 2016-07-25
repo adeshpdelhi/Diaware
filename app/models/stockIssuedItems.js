@@ -6,10 +6,14 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BIGINT,
       allowNull: false,
       defaultValue: '0',
-      primaryKey: true
+      primaryKey: true,
+      references:{
+        model: 'stockIssued',
+        key: 'stockIssuedId'
+      }
     },
     itemId: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.BIGINT,
       allowNull: false,
       defaultValue: '0',
       primaryKey: true,
