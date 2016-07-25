@@ -9,16 +9,16 @@
             <div class="col-sm-8 ">
                 <select name="item_name" class="form-control" ng-model="consumption.treatmentType">
                     <option value="" selected disabled>-</option>
-                    <option value="singleUse">Single Use</option>
-                    <option value="reUse" >Re-Use</option>
-                    <option value="newDialyser">New Dialyser</option>
-                    <option value="catheterizationSingleLumen">Catheterization Single Lumen</option>
-                    <option value="catheterizationDoubleLumen">Catheterization Double Lumen</option>
+                    <option value="Single Use">Single Use</option>
+                    <option value="Reuse" >Re-Use</option>
+                    <option value="New Dialyser">New Dialyser</option>
+                    <option value="Catheterization Single Lumen">Catheterization Single Lumen</option>
+                    <option value="Catheterization Double Lumen">Catheterization Double Lumen</option>
                 </select>
             </div>
         </div>
 
-        <div ng-show="consumption.treatmentType == 'singleUse' || consumption.treatmentType == 'reUse' || consumption.treatmentType == 'newDialyser'" class="table-responsive ">
+        <div ng-show="consumption.treatmentType == 'SingleUse' || consumption.treatmentType == 'Reuse' || consumption.treatmentType == 'New Dialyser'" class="table-responsive ">
             <table class="table table-striped table-fixedheader table-bordered" >
                 <thead>
                     <tr>
@@ -43,7 +43,7 @@
             </table>
         </div>
 
-        <div ng-show="consumption.treatmentType == 'catheterizationSingleLumen' || consumption.treatmentType == 'catheterizationDoubleLumen'" class="table-responsive ">
+        <div ng-show="consumption.treatmentType == 'Catheterization Single Lumen' || consumption.treatmentType == 'Catheterization Double Lumen'" class="table-responsive ">
             <table class="table table-striped table-fixedheader table-bordered" >
                 <thead>
                     <tr>

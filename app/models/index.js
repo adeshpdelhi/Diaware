@@ -156,4 +156,6 @@ dbmodel.dialysisItems.belongsTo(dbmodel.item,{foreignKey:'itemId'});
 dbmodel.item.hasOne(dbmodel.catheterizationItems,{foreignKey:'itemId'});
 dbmodel.catheterizationItems.belongsTo(dbmodel.item,{foreignKey:'itemId'});
 
+dbmodel.consumptionItems.belongsTo(dbmodel.item,{foreignKey:'itemId'});
+
 module.exports = dbmodel;

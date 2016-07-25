@@ -1,30 +1,44 @@
-        <div class="modal-header">
-            <h3 class="modal-title">Change Password</h3>
-        </div>
-        <div class="modal-body" ng-cloak> 
-            <form class="form-horizontal" role="form">
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Username</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" ng-model="user.username" disabled>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Old Password</label>
-                    <div class="col-sm-8">
-                        <input type="password" class="form-control" ng-model="oldpassword">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">New Password</label>
-                    <div class="col-sm-8">
-                        <input type="password" class="form-control" ng-model="newpassword">
-                    </div>
-                </div>
-                <div style="margin-top:20px" class="form-group">
-                    <div class="col-sm-12 controls">
-                      <center><a class="btn btn-success" ng-click="changePassword()">Submit</a></center>    
-                    </div>
-                </div>
-            </form>
-        </div>
+<div class="modal-header">
+    <h3 class="modal-title">Viewing Treatment Consumption {{consumption.treatmentId}}</h3>
+</div>
+<div class="modal-body" ng-cloak>
+    <div class="table-responsive col-sm-10 col-sm-push-1 col-sm-pull-1">
+        <table class="table table-striped table-fixedheader table-bordered" >
+            <thead>
+                <tr>
+                    <th style="text-align:center;" width="10%">Item Id</th>
+                    <th style="text-align:center;" width="10%">Item Name</th>
+                    <th style="text-align:center;" width="10%">Usage Type</th>
+                    <th style="text-align:center;" width="10%">Brand Name</th>
+                    <th style="text-align:center;" width="10%">Quantity</th>
+                    <th style="text-align:center;" width="10%">Measurement Type</th>
+                </tr>    
+            </thead>
+            <tbody >
+                <tr ng-repeat = "consumptionItem in consumptionItems" style="height:2px;" >
+                    <td style="text-align:center;" width="10%" >{{consumptionItem.itemId}}</td>
+                    <td style="text-align:center;" width="10%" >{{consumptionItem.item.itemName}}</td>
+                    <td style="text-align:center;" width="10%" >{{consumptionItem.item.usageType}}</td>
+                    <td style="text-align:center;" width="10%" >{{consumptionItem.item.brandName}}</td>
+                    <td style="text-align:center;" width="10%" >{{consumptionItem.quantity}}</td>
+                    <td style="text-align:center;" width="10%" >{{consumptionItem.item.quantityMeasurementType}}</td>
+                </tr>    
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+    <div class="table-responsive pull-left col-sm-10 col-sm-push-1 col-sm-pull-1">
+        <table class="table table-striped table-fixedheader table-bordered" >
+           
+            <tbody >
+                <tr ng-repeat = " (key,value) in consumption" style="height:2px;" >
+                    <td width="10%" class="text-capitalize" ><b>{{regularForm(key)}}</b></td>
+                    <td width="25%" ng-if="key!='createdAt' && key!='updatedAt'">{{value}}</td>
+                    <td width="25%" ng-if="!(key!='createdAt' && key!='updatedAt')">{{value |date:dd-MMMM-YY-EEE }}</td>
+                </tr>    
+            </tbody>
+        </table>
+    </div>
+    </div>
+    
+</div>

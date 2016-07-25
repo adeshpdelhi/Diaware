@@ -169,34 +169,104 @@ angular.module('App')
 		});
 
 		$scope.addConsumption = function(response){
-			inventoryFactory.getConsumptions(authorize.getCentre()).save($scope.consumption).$promise.then(function(response){
-
-				$scope.consumptionItems = [];
-				for(var i=0;i<$scope.dialysisTabularItems.length;i++){
-					for(var j=0;j<$scope.dialysisItems.length;j++){
-						if($scope.dialysisTabularItems[i].itemName == $scope.dialysisItems[j].item.itemName && $scope.dialysisTabularItems[i].chosen.brandName == $scope.dialysisItems[j].item.brandName && $scope.dialysisTabularItems[i].chosen.quantityMeasurementType == $scope.dialysisItems[j].item.quantityMeasurementType){
-								var consumptionItem = {treatmentId: $scope.consumption.treatmentId,itemId: $scope.dialysisItems[j].item.itemId,quantity:$scope.dialysisTabularItems[i].chosen.quantity,lastModifiedBy:authorize.getUsername()};
-								inventoryFactory.getConsumptionItems(authorize.getCentre(),$scope.consumption.treatmentId).save(consumptionItem).$promise.then(function(response){},function(response){alert('saving consumption items failed')});
-						}
-					}
+			if($scope.consumption.treatmentType=='Single Use' || $scope.consumption.treatmentType=='Reuse' || $scope.consumption.treatmentType=='New Dialyser')
+			{		inventoryFactory.getConsumptions(authorize.getCentre()).save($scope.consumption).$promise.then(function(response){
+			
+							$scope.consumptionItems = [];
+							for(var i=0;i<$scope.dialysisTabularItems.length;i++){
+								for(var j=0;j<$scope.dialysisItems.length;j++){
+									if($scope.dialysisTabularItems[i].itemName == $scope.dialysisItems[j].item.itemName && $scope.dialysisTabularItems[i].chosen.brandName == $scope.dialysisItems[j].item.brandName && $scope.dialysisTabularItems[i].chosen.quantityMeasurementType == $scope.dialysisItems[j].item.quantityMeasurementType){
+											var consumptionItem = {treatmentId: $scope.consumption.treatmentId,itemId: $scope.dialysisItems[j].item.itemId,quantity:$scope.dialysisTabularItems[i].chosen.quantity,lastModifiedBy:authorize.getUsername()};
+											inventoryFactory.getConsumptionItems(authorize.getCentre(),$scope.consumption.treatmentId).save(consumptionItem).$promise.then(function(response){},function(response){alert('saving consumption items failed')});
+											$scope.consumptionItems.push(consumptionItem);
+									}
+								}
+							}
+			
+							// inventoryFactory.getFloor(authorize.getCentre()).query().$promise.then(function(response){
+							// 		$scope.floorItems= response;
+							// 		for(var i=0;i<$scope.consumptionItems.length;i++){
+							// 			var present = false;
+							// 			console.log('outer loop');
+							// 			for(var j=0;j<$scope.floorItems.length;j++)
+							// 			{
+							// 				console.log('comparing '+$scope.floorItems[j].itemId+' and '+$scope.consumptionItems[i].itemId);
+							// 				if($scope.floorItems[j].itemId == $scope.consumptionItems[i].itemId)
+							// 				{
+							// 					console.log("item "+$scope.floorItems[j].itemId+' present');
+							// 					$scope.floorItems[j].availableQuantity-=$scope.consumptionItems[i].quantity;
+							// 					inventoryFactory.getFloor(authorize.getCentre()).update({centreId:$scope.floorItems[j].centreId, itemId: $scope.floorItems[j].itemId},$scope.floorItems[j]);
+							// 					present = true;
+							// 				}
+							// 			}
+							// 		}
+							// 	});
+			
+							$scope.message='Saved successfully!';
+							$scope.messageColor='success';
+							$scope.showAlert=true;
+							$uibModalInstance.close();
+				    		$state.go('app.inventory.consumption.new', {}, {reload: true});
+			
+						},function(response){
+							alert('consumption save failed');
+							$scope.message='Saving failed';
+							$scope.messageColor='danger';
+							$scope.showAlert=true;
+						});
 				}
-				$scope.message='Saved successfully!';
-				$scope.messageColor='success';
-				$scope.showAlert=true;
-				$uibModalInstance.close();
-	    		$state.go('app.inventory.consumption.new', {}, {reload: true});
 
-			},function(response){
-				alert('consumption save failed');
-				$scope.message='Saving failed';
-				$scope.messageColor='danger';
-				$scope.showAlert=true;
-			});
+				else if($scope.consumption.treatmentType=='Catheterization Single Lumen' || $scope.consumption.treatmentType=='Catheterization Double Lumen')
+				{		inventoryFactory.getConsumptions(authorize.getCentre()).save($scope.consumption).$promise.then(function(response){
+			
+							$scope.consumptionItems = [];
+							for(var i=0;i<$scope.catheterizationTabularItems.length;i++){
+								for(var j=0;j<$scope.catheterizationItems.length;j++){
+									if($scope.catheterizationTabularItems[i].itemName == $scope.catheterizationItems[j].item.itemName && $scope.catheterizationTabularItems[i].chosen.brandName == $scope.catheterizationItems[j].item.brandName && $scope.catheterizationTabularItems[i].chosen.quantityMeasurementType == $scope.catheterizationItems[j].item.quantityMeasurementType){
+											var consumptionItem = {treatmentId: $scope.consumption.treatmentId,itemId: $scope.catheterizationItems[j].item.itemId,quantity:$scope.catheterizationTabularItems[i].chosen.quantity,lastModifiedBy:authorize.getUsername()};
+											inventoryFactory.getConsumptionItems(authorize.getCentre(),$scope.consumption.treatmentId).save(consumptionItem).$promise.then(function(response){},function(response){alert('saving consumption items failed')});
+											$scope.consumptionItems.push(consumptionItem);
+									}
+								}
+							}
+			
+							// inventoryFactory.getFloor(authorize.getCentre()).query().$promise.then(function(response){
+							// 		$scope.floorItems= response;
+							// 		for(var i=0;i<$scope.consumptionItems.length;i++){
+							// 			var present = false;
+							// 			console.log('outer loop');
+							// 			for(var j=0;j<$scope.floorItems.length;j++)
+							// 			{
+							// 				console.log('comparing '+$scope.floorItems[j].itemId+' and '+$scope.consumptionItems[i].itemId);
+							// 				if($scope.floorItems[j].itemId == $scope.consumptionItems[i].itemId)
+							// 				{
+							// 					console.log("item "+$scope.floorItems[j].itemId+' present');
+							// 					$scope.floorItems[j].availableQuantity-=$scope.consumptionItems[i].quantity;
+							// 					inventoryFactory.getFloor(authorize.getCentre()).update({centreId:$scope.floorItems[j].centreId, itemId: $scope.floorItems[j].itemId},$scope.floorItems[j]);
+							// 					present = true;
+							// 				}
+							// 			}
+							// 		}
+							// 	});
+			
+							$scope.message='Saved successfully!';
+							$scope.messageColor='success';
+							$scope.showAlert=true;
+							$uibModalInstance.close();
+				    		$state.go('app.inventory.consumption.new', {}, {reload: true});
+			
+						},function(response){
+							alert('consumption save failed');
+							$scope.message='Saving failed';
+							$scope.messageColor='danger';
+							$scope.showAlert=true;
+						});
+				}
 			
 		};
 
 		$scope.updateQuantityType = function(index){
-			if($scope.consumption.treatmentType=='singleUse' || $scope.consumption.treatmentType=='reUse' || $scope.consumption.treatmentType=='newDialyser')
+			if($scope.consumption.treatmentType=='Single Use' || $scope.consumption.treatmentType=='Reuse' || $scope.consumption.treatmentType=='New Dialyser')
 			{
 				$scope.dialysisTabularItems[index].quantityMeasurementType=[];
 					for(var i=0;i<$scope.dialysisItems.length;i++)
@@ -212,7 +282,7 @@ angular.module('App')
 							}
 					}
 			}
-			else if($scope.consumption.treatmentType=='catheterizationSingleLumen' || $scope.consumption.treatmentType=='catheterizationDoubleLumen'){
+			else if($scope.consumption.treatmentType=='Catheterization Single Lumen' || $scope.consumption.treatmentType=='Catheterization Double Lumen'){
 				$scope.catheterizationTabularItems[index].quantityMeasurementType=[];
 					for(var i=0;i<$scope.catheterizationItems.length;i++)
 					{

@@ -1,83 +1,45 @@
-<div class="modal-header">
-    <h3 class="modal-title">Add Treatment Consumption for {{consumption.treatmentId}}</h3>
+<div class="container">
+<div style="margin-top:60px;" class="mainbox col-sm-12" ng-cloak>                    
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-title"><b> View Treatment Consumption </b></div>
+        <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
+    </div> 
+
+        <div style="padding-top:30px; text-align:center;" class="panel-body" >  
+            <div class="form-group col-sm-6 col-sm-push-3 col-sm-pull-3">
+                <label class="col-sm-2 control-label">Treatment ID</label>                        
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="filt.id">
+                </div>
+                <label class="col-sm-2 control-label">Treatment Type</label>
+                <div class="col-sm-4">
+                    <input  type="text" class="form-control" ng-model="filt.type">
+                </div>
+            </div> 
+            <div class="table-responsive pull-left">
+                <table class="table table-striped table-fixedheader table-bordered" >
+                    <thead>
+                        <tr>
+                            <th style="text-align:center;" width="10%">Treatment ID</th>
+                            <th style="text-align:center;" width="10%">Centre ID</th>
+                            <th style="text-align:center;" width="10%">Treatment Type</th>
+                            <th style="text-align:center;" width="10%">Last Modified By</th>
+                        </tr>    
+                    </thead>
+                    <tbody >
+                        <tr ng-repeat = "consumption in consumptions |filter: filt.id | filter: filt.type" style="height:2px;" ng-click="openConsumption(consumption.treatmentId)">
+                            <td width="10%" style="text-align:center;" >{{consumption.treatmentId}}</td>
+                            <td width="10%" style="text-align:center;" >{{consumption.centreId}}</td>
+                            <td width="10%" style="text-align:center;" >{{regularForm(consumption.treatmentType)}}</td>
+                            <td width="10%" style="text-align:center;" >{{consumption.lastModifiedBy}}</td>
+                        </tr>    
+                    </tbody>
+                </table>
+            </div>
+                 
+            <hr style="border-top:1px solid rgb(225,225,225);">
+            </div>
+    </div>
 </div>
-<div class="modal-body" ng-cloak> 
-    <form class="form-horizontal" role="form" name="issueStockForm">
-
-        <div class="form-group">
-            <label  class="col-sm-3 control-label">Treatment Type</label>
-            <div class="col-sm-8 ">
-                <select name="item_name" class="form-control" ng-model="consumption.treatmentType">
-                    <option value="" selected disabled>-</option>
-                    <option value="singleUse">Single Use</option>
-                    <option value="reUse" >Re-Use</option>
-                    <option value="newDialyser">New Dialyser</option>
-                    <option value="catheterizationSingleLumen">Catheterization Single Lumen</option>
-                    <option value="catheterizationDoubleLumen">Catheterization Double Lumen</option>
-                </select>
-            </div>
-        </div>
-
-        <div ng-show="consumption.treatmentType == 'singleUse' || consumption.treatmentType == 'reUse' || consumption.treatmentType == 'newDialyser'" class="table-responsive ">
-            <table class="table table-striped table-fixedheader table-bordered" >
-                <thead>
-                    <tr>
-                        <th style="text-align:center;" width="10%">Item Name</th>
-                        <th style="text-align:center;" width="10%">Brand Name</th>
-                        <th style="text-align:center;" width="10%">Quantity</th>
-                        <th style="text-align:center;" width="10%">Quantity type</th>
-                    </tr>    
-                </thead>
-                <tbody >
-                    <tr ng-repeat = "dialysisTabularItem in dialysisTabularItems" style="height:2px;" >
-                        <td width="10%" >{{dialysisTabularItem.itemName}}</td>
-                        <td width="10%" ><select ng-model="dialysisTabularItem.chosen.brandName" ng-change="updateQuantityType($index)" ng-options = "brand as brand for brand in dialysisTabularItem.brandName">
-                            
-                        </select></td>
-                        <td width="10%"><input style="width:50%;" type="number" ng-init="dialysisTabularItem.chosen.quantity=0" ng-model="dialysisTabularItem.chosen.quantity"></td>
-                        <td width="10%"><select ng-disabled="dialysisTabularItem.chosen.brandName==null || dialysisTabularItem.chosen.brandName.length==0" ng-model="dialysisTabularItem.chosen.quantityMeasurementType" ng-options = "quantityMeasurementType as quantityMeasurementType for quantityMeasurementType in dialysisTabularItem.quantityMeasurementType">
-                            
-                        </select></td>
-                    </tr>    
-                </tbody>
-            </table>
-        </div>
-
-        <div ng-show="consumption.treatmentType == 'catheterizationSingleLumen' || consumption.treatmentType == 'catheterizationDoubleLumen'" class="table-responsive ">
-            <table class="table table-striped table-fixedheader table-bordered" >
-                <thead>
-                    <tr>
-                        <th style="text-align:center;" width="10%">Item Name</th>
-                        <th style="text-align:center;" width="10%">Brand Name</th>
-                        <th style="text-align:center;" width="10%">Quantity</th>
-                        <th style="text-align:center;" width="10%">Quantity type</th>
-                    </tr>    
-                </thead>
-                <tbody >
-                    <tr ng-repeat = "catheterizationTabularItem in catheterizationTabularItems" style="height:2px;" >
-                        <td width="10%" >{{catheterizationTabularItem.itemName}}</td>
-                        <td width="10%" ><select ng-model="catheterizationTabularItem.chosen.brandName" ng-change="updateQuantityType($index)" ng-options = "brand as brand for brand in catheterizationTabularItem.brandName">
-                            
-                        </select></td>
-                        <td width="10%"><input style="width:50%;" type="number" ng-init="catheterizationTabularItem.chosen.quantity=0" ng-model="catheterizationTabularItem.chosen.quantity"></td>
-                        <td width="10%"><select ng-disabled="catheterizationTabularItem.chosen.brandName==null || catheterizationTabularItem.chosen.brandName.length==0" ng-model="catheterizationTabularItem.chosen.quantityMeasurementType" ng-options = "quantityMeasurementType as quantityMeasurementType for quantityMeasurementType in catheterizationTabularItem.quantityMeasurementType">
-                            
-                        </select></td>
-                    </tr>    
-                </tbody>
-            </table>
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-2 col-sm-push-9">
-                <button class="form-control btn btn-primary" ng-click="addConsumption()">Add</button>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="alert alert-{{messageColor}} alert-dismissable" ng-show="showAlert">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                {{message}}
-            </div>
-        </div>
-    </form>
 </div>
