@@ -26,25 +26,15 @@
                             </md-card-content>
                         </md-card>
                     </div>
-                    <!-- need to add editable table given in excel-->
-                    <!-- <div ng-repeat="treatment in pendingTreatments">
-                        {{treatment.patientId}}
-                    </div> -->
 
-              <!--       <div class="form-group">
-                        <div class="col-sm-offset-8 col-sm-10">
-                            <button id="additem" type="submit" class="btn btn-success" ng-click="saveTreatmentInventory()">Save Treatment Inventory</button>
-                        </div>
-                    </div>
 
                     <div class="form-group">
-                        <div class="alert alert-success alert-dismissable" ng-show="showalert_treatment_inventory">
+                        <div class="alert alert-{{messageColor}} alert-dismissable" ng-show="showAlert">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            Treatment Inventory Saved Successfully.
+                            {{message}}
                         </div>
                     </div>
 
-                </form> -->
             </div>
         </div>
     </div>
