@@ -67,6 +67,15 @@ angular.module('App')
 			lastModifiedBy: authorize.getUsername()
 		}
 
+		$scope.quantityError = function(){
+			if(!$scope.message.includes('Atleast item unavailable in floor')){
+				$scope.message = 'Quantity Error. Check quantity for the item.';
+				$scope.messageColor = 'danger';
+				$scope.showAlert = true;
+			}
+			else if(!scope.message.includes('Quantity Error. Check quantity for the item.'))
+				$scope.message = $scope.message + ' Quantity Error. Check quantity for the item.';
+		}
 		$scope.updateAvailableQuantity = function(index){
 			// console.log('checking');
 			// if(!(dialysisTabularItems[index].chosen.brandName.length!=0 && dialysisTabularItems[index].chosen.brandName!=null &&dialysisTabularItems[index].chosen.quantityMeasurementType.length!=0 && dialysisTabularItems[index].chosen.quantityMeasurementType!=null))
@@ -75,25 +84,46 @@ angular.module('App')
 			if($scope.consumption.treatmentType=='Single Use' || $scope.consumption.treatmentType=='Reuse' || $scope.consumption.treatmentType=='New Dialyser'){
 					inventoryFactory.getFloor(authorize.getCentre()).query().$promise.then(function(response){
 						var floorItems = response;
+						$scope.dialysisTabularItems[index].availableQuantity = 0;
 						for(var j=0;j<floorItems.length;j++){
-						if($scope.dialysisTabularItems[index].itemName == floorItems[j].item.itemName && $scope.dialysisTabularItems[index].chosen.brandName == floorItems[j].item.brandName && $scope.dialysisTabularItems[index].chosen.quantityMeasurementType == floorItems[j].item.quantityMeasurementType){
+						if($scope.dialysisTabularItems[index].itemName == floorItems[j].item.itemName && $scope.dialysisTabularItems[index].chosen.brandName == floorItems[j].item.brandName && $scope.dialysisTabularItems[index].chosen.quantityMeasurementType == floorItems[j].item.quantityMeasurementType &&floorItems[j].item.availableQuantity!=0){
 								$scope.dialysisTabularItems[index].availableQuantity = floorItems[j].availableQuantity;
+								console.log('available '+$scope.dialysisTabularItems[index].itemName+' '+$scope.dialysisTabularItems[index].chosen.brandName+' '+floorItems[j].item.quantityMeasurementType+' '+floorItems[j].availableQuantity);
 							}
 						}
 						if($scope.dialysisTabularItems[index].availableQuantity == null || $scope.dialysisTabularItems[index].availableQuantity == 0)
 						{
 							$scope.dialysisTabularItems[index].availableQuantity = 0;
-							$scope.message = 'Item unavailable in floor';
+							$scope.message = 'Atleast item unavailable in floor';
 							$scope.messageColor = 'danger';
+							$scope.messageIndex = index;
 							$scope.showAlert = true;
 						}
-						else
+						else if(index == $scope.messageIndex || $scope.message != 'Atleast item unavailable in floor')
 							$scope.showAlert = false;
 					})
 					
 			}
 			else if($scope.consumption.treatmentType=='Catheterization Single Lumen' || $scope.consumption.treatmentType=='Catheterization Double Lumen') {
-
+					inventoryFactory.getFloor(authorize.getCentre()).query().$promise.then(function(response){
+						var floorItems = response;
+						$scope.catheterizationTabularItems[index].availableQuantity = 0;
+						for(var j=0;j<floorItems.length;j++){
+						if($scope.catheterizationTabularItems[index].itemName == floorItems[j].item.itemName && $scope.catheterizationTabularItems[index].chosen.brandName == floorItems[j].item.brandName && $scope.catheterizationTabularItems[index].chosen.quantityMeasurementType == floorItems[j].item.quantityMeasurementType){
+								$scope.catheterizationTabularItems[index].availableQuantity = floorItems[j].availableQuantity;
+							}
+						}
+						if($scope.catheterizationTabularItems[index].availableQuantity == null || $scope.catheterizationTabularItems[index].availableQuantity == 0)
+						{
+							$scope.catheterizationTabularItems[index].availableQuantity = 0;
+							$scope.message = 'Atleast item unavailable in floor';
+							$scope.messageColor = 'danger';
+							$scope.messageIndex = index;
+							$scope.showAlert = true;
+						}
+						else if(index == $scope.messageIndex || $scope.message != 'Atleast item unavailable in floor')
+							$scope.showAlert = false;
+					})
 			}
 		}
 
@@ -209,7 +239,18 @@ angular.module('App')
 
 		$scope.addConsumption = function(response){
 			if($scope.consumption.treatmentType=='Single Use' || $scope.consumption.treatmentType=='Reuse' || $scope.consumption.treatmentType=='New Dialyser')
-			{		inventoryFactory.getConsumptions(authorize.getCentre()).save($scope.consumption).$promise.then(function(response){
+			{		
+
+				for(var i=0;i<$scope.dialysisTabularItems.length;i++){
+					if($scope.dialysisTabularItems[i].chosen.quantity==null || $scope.dialysisTabularItems[i].availableQuantity==null || $scope.dialysisTabularItems[i].chosen.quantity<1 || $scope.dialysisTabularItems[i].chosen.quantity>$scope.dialysisTabularItems[i].availableQuantity || $scope.dialysisTabularItems[i].availableQuantity==0){
+						$scope.message = 'One of the fields invalid';
+						$scope.messageColor = 'danger';
+						$scope.showAlert = true;
+						return;
+					}
+				}
+				//console.log('adding consumption now'); return;
+				inventoryFactory.getConsumptions(authorize.getCentre()).save($scope.consumption).$promise.then(function(response){
 			
 							$scope.consumptionItems = [];
 							for(var i=0;i<$scope.dialysisTabularItems.length;i++){
@@ -256,7 +297,19 @@ angular.module('App')
 				}
 
 				else if($scope.consumption.treatmentType=='Catheterization Single Lumen' || $scope.consumption.treatmentType=='Catheterization Double Lumen')
-				{		inventoryFactory.getConsumptions(authorize.getCentre()).save($scope.consumption).$promise.then(function(response){
+				{		
+
+					for(var i=0;i<$scope.catheterizationTabularItems.length;i++){
+						if($scope.catheterizationTabularItems[i].chosen.quantity==null || $scope.catheterizationTabularItems[i].availableQuantity==null || $scope.catheterizationTabularItems[i].chosen.quantity<1 || $scope.catheterizationTabularItems[i].chosen.quantity>$scope.catheterizationTabularItems[i].availableQuantity || $scope.catheterizationTabularItems[i].availableQuantity==0){
+							$scope.message = 'One of the fields invalid';
+							$scope.messageColor = 'danger';
+							$scope.showAlert = true;
+							return;
+						}
+					}
+
+
+					inventoryFactory.getConsumptions(authorize.getCentre()).save($scope.consumption).$promise.then(function(response){
 			
 							$scope.consumptionItems = [];
 							for(var i=0;i<$scope.catheterizationTabularItems.length;i++){
@@ -336,6 +389,7 @@ angular.module('App')
 							}
 					}
 			}
+			return true;
 		}
 	    //$uibModalInstance.close();
 	    //$state.go('app.home', {}, {reload: true});
