@@ -39,7 +39,7 @@ angular.module('App')
 								$scope.filteredItems[i].availableQuantity = $scope.stocks[j].availableQuantity;
 							}
 						}
-						if($scope.filteredItems[i].availableQuantity==null)
+						if($scope.filteredItems[i].availableQuantity===null)
 							$scope.filteredItems[i].availableQuantity = 0;
 					}
 				},function(response){ alert("Failed to retrieve item's availableQuantity from stock"); });
@@ -56,10 +56,10 @@ angular.module('App')
 								$scope.filteredItems[i].availableQuantity = $scope.stocks[j].availableQuantity;
 							}
 						}
-						if($scope.filteredItems[i].availableQuantity==null)
+						if($scope.filteredItems[i].availableQuantity===null)
 							$scope.filteredItems[i].availableQuantity = 0;
 					}
-		}
+		};
 		
 		inventoryFactory.getVendors().query().$promise.then(function(response){
 			$scope.vendors = response;
@@ -128,7 +128,7 @@ angular.module('App')
 			
 			$scope.addingItem=false;
 			
-		}
+		};
 		
 
 		$scope.raiseIndent = function(){
