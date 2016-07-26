@@ -19,9 +19,11 @@ inventoryRouter.use(bodyParser.json());
 // var treatmentInventoryRouter = require('./inventory/treatmentinventoryroute');
 // inventoryRouter.use('/stockindenting',treatmentInventoryRouter);
 
+var generalConsumptionRouter = require('./inventory/generalconsumptionroute');
+inventoryRouter.use('/consumption/general',generalConsumptionRouter);
+
 var consumptionRouter = require('./inventory/consumptionroute');
 inventoryRouter.use('/consumption',consumptionRouter);
-
 
 
 var indentRouter = require('./inventory/indentroute');

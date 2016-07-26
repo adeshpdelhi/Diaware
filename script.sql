@@ -206,6 +206,10 @@ insert into consumption(centreId,treatmentType,treatmentId,createdAt, updatedAt)
 
 insert into consumptionItems(treatmentId,itemId,quantity,createdAt,updatedAt) values (25366,1,2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 
+insert into generalConsumption(centreId, lastModifiedBy,createdAt,updatedAt) values ('JP1','admin','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into generalConsumptionItems(generalConsumptionId, itemId, quantity, lastModifiedBy, createdAt, updatedAt) values (1,1,5,'admin','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
 -- insert into dialysisItems(itemName,createdAt,updatedAt) values('Dialyzer','2016-07-13 10:48:56','2016-07-13 10:48:56');
 -- insert into dialysisItems(itemName,createdAt,updatedAt) values('Blood Tubing','2016-07-13 10:48:56','2016-07-13 10:48:56');
 -- insert into dialysisItems(itemName,createdAt,updatedAt) values('Fistula Needle','2016-07-13 10:48:56','2016-07-13 10:48:56');
