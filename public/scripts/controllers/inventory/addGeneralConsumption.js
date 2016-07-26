@@ -5,6 +5,6 @@ angular.module('App')
 		$scope.regularForm = regularForm.regularForm;
 		$scope.showAlert=false;
 
-		inventoryFactory.
+		
 		
 }])
