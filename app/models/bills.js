@@ -33,7 +33,8 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     }
   }, {
-    tableName: 'bills'
+    tableName: 'bills',
+    paranoid:true
   });
   
   return bills;

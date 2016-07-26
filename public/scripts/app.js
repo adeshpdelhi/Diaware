@@ -478,14 +478,14 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                 }
             })
             .state('app.billing.viewbill.details',{
-                url:'details/:id',
+                url:'details/:id?deleted',
                 views:{
                     'content@':{
                         templateUrl:'views/billing/viewBillDetails.html',
                         controller:'ViewBillDetailsController',
                         resolve:{
                             bill:['$stateParams','billFactory','authorize', function($stateParams,billFactory,authorize){
-                                return billFactory.getBills(authorize.getCentre()).get({billId:parseInt($stateParams.id)})
+                                return billFactory.getBills(authorize.getCentre()).get({billId:parseInt($stateParams.id),deleted:$stateParams.deleted})
                             }]
                         }
                     }

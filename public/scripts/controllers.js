@@ -186,6 +186,7 @@ angular.module('App')
         $scope.newUserNotification();
         $scope.statistics(false);
         $scope.viewPendingBills(false);
+        $scope.viewCancelledBills(false);
 
     },1000);
 
@@ -196,6 +197,11 @@ angular.module('App')
     $scope.allCentresBills = false;
     $scope.showContent = false;
     $scope.showContentBills = false;
+
+    $scope.showContentCancelledBills = false;
+    $scope.allCentresCancelledBills = false;
+    $scope.showCancelledBillsAlert = false;
+
     $scope.viewTodaysAppointments = function(allCentres){
         $scope.allCentresAppointments = allCentres;
         console.log(new Date());
@@ -232,8 +238,24 @@ angular.module('App')
             $scope.messageColorBills='danger'; 
         });
     };
-    $scope.viewBillDetails = function(id){
-        $state.go("app.billing.viewbill.details",{id:id});
+    $scope.viewCancelledBills = function(allCentres){
+        $scope.allCentresBills = allCentres;
+        billFactory.getBills(allCentres?'all':authorize.getCentre()).query({deleted:true},function(results){
+            $scope.billsCancelled  = results;
+            if($scope.billsCancelled.length==0){
+                $scope.showCancelledBillsAlert = true;
+                $scope.messageCancelledBills = 'Congratulations No Cancelled Bills ';
+                $scope.messageColorCancelledBills='success';     
+            }  
+            // $scope.currentShift = "";
+        },function(response){
+            $scope.showCancelledBillsAlert = true;
+            $scope.messageCancelledBills = 'Error: '+ response.status+ " - "+ response.data;
+            $scope.messageColorCancelledBills='danger'; 
+        });
+    };
+    $scope.viewBillDetails = function(id,deleted){
+        $state.go("app.billing.viewbill.details",{id:id,deleted:deleted});
     }
     $scope.viewAppointmentDetails = function(id){
         // console.log("filter:" + $scope.filter);

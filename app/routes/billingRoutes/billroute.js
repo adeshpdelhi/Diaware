@@ -12,7 +12,13 @@ billingRouter.route('/')
     	// console.log(JSON.stringify(bills));
     var where ={};
     if(req.query.status){
-        where['status'] = req.query.status;
+        if(req.query.status == 'Pending'){
+            where['status'] ={
+                $ne:'FullPaid'
+            }
+        }
+        else  
+            where['status'] = req.query.status;
     }
     if(req.query.sum){
         console.log("where billroute");
@@ -36,6 +42,13 @@ billingRouter.route('/')
     if(req.params.centreId != 'all'){
         where1['centreId'] = req.params.centreId;
     }
+    var paranoid = true;
+    if(req.query.deleted){
+        where['deletedAt'] = {
+            $ne:null
+        };
+        paranoid = false;
+    }
     console.log("where billroute");
     console.log(where1);
     console.log(where);
@@ -47,7 +60,8 @@ billingRouter.route('/')
     		model:db.patientDetails,
     		where:where1,
             attributes:['name','id','contact','age']        
-    	}]
+    	}],
+        paranoid:paranoid
     }).then(function(bills){
     	console.log(JSON.stringify(bills));
 	    res.json(bills);
@@ -86,10 +100,18 @@ billingRouter.route('/')
 billingRouter.route('/:billId')
 .get(function(req,res,next){
     console.log('procesing get');
+    var where = {};
+    var paranoid = true;
+    if(req.query.deleted){
+        where['deletedAt'] = {
+            $ne:null
+        };
+        paranoid = false;
+
+    }
+    where['billId'] = parseInt(req.params.billId,10);
     db.billMaster.find({
-    	where:{
-    		billId: parseInt(req.params.billId,10)
-    	},
+    	where:where,
     	include:[{
     		model:db.patientDetails,
     		where:{
@@ -97,8 +119,10 @@ billingRouter.route('/:billId')
     		},
             attributes:['name','contact','alternativeContact','gender','address']
     	},{
-            model:db.bills
-        }]
+            model:db.bills,
+            paranoid:paranoid
+        }],
+        paranoid:paranoid
     }).then(function(bill){
         console.log(JSON.stringify(bill));
         res.json(bill);

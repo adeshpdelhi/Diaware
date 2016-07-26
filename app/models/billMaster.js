@@ -54,7 +54,8 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     }
   }, {
-    tableName: 'billMaster'
+    tableName: 'billMaster',
+    paranoid:true
   });
   
   return bills;

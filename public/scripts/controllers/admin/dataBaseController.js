@@ -59,7 +59,8 @@ angular.module('App')
 		// $scope.panel=$scope.panelPopover.panel;
 		console.log(panel);
 		backendFactory.getPanels().update({panelId:panel.id},panel).$promise.then(function(response){
-			$scope.editPanel = false;			
+			$scope.editPanel = false;	
+			console.log('Successfully Updated!');		
 		},function(response){
 			$scope.editPanel = false;
 			alert('Update Failed!');
