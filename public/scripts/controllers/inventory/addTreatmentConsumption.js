@@ -23,7 +23,7 @@ angular.module('App')
 						if($scope.appointments[i].appointmentId == $scope.consumptions[j].treatmentId)
 							present=true;
 					}
-					if(present === false){
+					if(present == false){
 						$scope.pendingTreatments.push($scope.appointments[i]);
 						$scope.daysToLoop[$scope.appointments[i].dayOfTheWeek] = true;
 					}
@@ -40,7 +40,7 @@ angular.module('App')
 				alert('Failed to retrieve consumptions');
 			});
 			console.log(response);
-		},function(response){alert('Failed to retrieve appointments');});
+		},function(response){alert('Failed to retrieve appointments')});
 		// need to add attributes of editable table given in excel
 		
 		$scope.openAddConsumption = function(appointmentId){
@@ -79,7 +79,7 @@ angular.module('App')
 			for(var i=0;i<response.length;i++)
 				if(response[i].item.usageType=='Treatment Specific')
 					$scope.dialysisItems.push(response[i]);
-			for(i=0;i<$scope.dialysisItems.length;i++)
+			for(var i=0;i<$scope.dialysisItems.length;i++)
 			{
 				var present = false;
 				for(var j=0;j<$scope.dialysisTabularItems.length;j++)
@@ -96,12 +96,12 @@ angular.module('App')
 				var dialysisTabularItem = {itemName:null, brandName:[],quantityMeasurementType:[]};
 				dialysisTabularItem.itemName = $scope.dialysisItems[i].item.itemName;
 				dialysisTabularItem.itemId = $scope.dialysisItems[i].itemId;
-				for(j=i;j<$scope.dialysisItems.length;j++){
+				for(var j=i;j<$scope.dialysisItems.length;j++){
 					if(dialysisTabularItem.itemName == $scope.dialysisItems[j].item.itemName)
 					{
 						console.log('same name found '+dialysisTabularItem.itemName);
 						//checking for brandName
-						present = false;
+						var present = false;
 						for(var k=0;k<dialysisTabularItem.brandName.length;k++)
 							if($scope.dialysisItems[j].item.brandName == dialysisTabularItem.brandName[k])
 								present=true;
@@ -111,7 +111,7 @@ angular.module('App')
 	
 						//checking for quantityMeasurementType
 						present = false;
-						for(k=0;k<dialysisTabularItem.quantityMeasurementType.length;k++)
+						for(var k=0;k<dialysisTabularItem.quantityMeasurementType.length;k++)
 							if($scope.dialysisItems[j].item.quantityMeasurementType == dialysisTabularItem.quantityMeasurementType[k])
 								present=true;
 						if(present===false)
@@ -130,7 +130,7 @@ angular.module('App')
 			for(var i=0;i<response.length;i++)
 				if(response[i].item.usageType=='Treatment Specific')
 					$scope.catheterizationItems.push(response[i]);
-			for(i=0;i<$scope.catheterizationItems.length;i++)
+			for(var i=0;i<$scope.catheterizationItems.length;i++)
 			{
 				var present = false;
 				for(var j=0;j<$scope.catheterizationTabularItems.length;j++)
@@ -147,12 +147,12 @@ angular.module('App')
 				var catheterizationTabularItem = {itemName:null, brandName:[],quantityMeasurementType:[]};
 				catheterizationTabularItem.itemName = $scope.catheterizationItems[i].item.itemName;
 				catheterizationTabularItem.itemId = $scope.catheterizationItems[i].itemId;
-				for(j=i;j<$scope.catheterizationItems.length;j++){
+				for(var j=i;j<$scope.catheterizationItems.length;j++){
 					if(catheterizationTabularItem.itemName == $scope.catheterizationItems[j].item.itemName)
 					{
 						console.log('same name found '+catheterizationTabularItem.itemName);
 						//checking for brandName
-						present = false;
+						var present = false;
 						for(var k=0;k<catheterizationTabularItem.brandName.length;k++)
 							if($scope.catheterizationItems[j].item.brandName == catheterizationTabularItem.brandName[k])
 								present=true;
@@ -162,7 +162,7 @@ angular.module('App')
 	
 						//checking for quantityMeasurementType
 						present = false;
-						for(k=0;k<catheterizationTabularItem.quantityMeasurementType.length;k++)
+						for(var k=0;k<catheterizationTabularItem.quantityMeasurementType.length;k++)
 							if($scope.catheterizationItems[j].item.quantityMeasurementType == catheterizationTabularItem.quantityMeasurementType[k])
 								present=true;
 						if(present===false)
@@ -292,7 +292,7 @@ angular.module('App')
 			}
 			else if($scope.consumption.treatmentType=='Catheterization Single Lumen' || $scope.consumption.treatmentType=='Catheterization Double Lumen'){
 				$scope.catheterizationTabularItems[index].quantityMeasurementType=[];
-					for(i=0;i<$scope.catheterizationItems.length;i++)
+					for(var i=0;i<$scope.catheterizationItems.length;i++)
 					{
 						if($scope.catheterizationTabularItems[index].quantityMeasurementType.indexOf($scope.catheterizationItems[i].item.quantityMeasurementType)==-1)
 							{

@@ -75,7 +75,7 @@ angular.module('App')
                 },function(response){
                     $scope.updateParentValues(false,true,"Error: "+response.status + " " +response.statusText + "!",7);
                 });
-                done = true;
+                done = true
             }
             if(done) return;
             for(var i = 0;i< $scope.intraTable.length;i++){

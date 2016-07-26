@@ -3,7 +3,7 @@ angular.module('App')
 .controller('MedicalController',['$scope','patientFactory','authorize','backendFactory', function($scope,patientFactory,authorize,backendFactory){
 	$scope.savedOnce = false;
     var diseases = [];
-	if(!$scope.view || ( $scope.patient !== null && (!$scope.newPatient_Medical || $scope.newPatient_Medical.length == 0)) ){
+	if(!$scope.view || ( $scope.patient != null && (!$scope.newPatient_Medical || $scope.newPatient_Medical.length == 0)) ){
 		$scope.newPatient_Medical = [];
 		backendFactory.getDiseases().query(function(response){
 			diseases = response;
@@ -33,7 +33,7 @@ angular.module('App')
 		new:true
 	};
 	$scope.addOthers = function(){
-		if($scope.other.diseaseName===null || $scope.other.diseaseName.length ==0)
+		if($scope.other.diseaseName==null || $scope.other.diseaseName.length ==0)
 		{
 			$scope.showalert_medicalnew=true;
 			$scope.messagenew="Enter disease name";
@@ -54,7 +54,7 @@ angular.module('App')
 			new:true
 		};
 		$scope.otherForm.$setPristine();
-	};
+	}
 	$scope.saveMedical = function(){
 		$scope.showalert_medical=false;
 		for(var i = 0; i< $scope.newPatient_Medical.length;i++){
@@ -119,7 +119,7 @@ angular.module('App')
 				});
 			}
 			
-		}
+		};
 
 	};
 	$scope.regularForm =function(str){

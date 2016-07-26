@@ -3,7 +3,7 @@ angular.module('App')
 .controller('PanelController',['$scope','patientFactory','backendFactory','authorize','regularForm', function($scope,patientFactory,backendFactory,authorize, regularForm){
 		$scope.regularForm = regularForm.regularForm;
 		$scope.savedOnce = false;
-		if(!$scope.view || (!$scope.newPatient_Panel && $scope.patient !== null)){
+		if(!$scope.view || (!$scope.newPatient_Panel && $scope.patient != null)){
 			$scope.newPatient_Panel = { 
 				patientId: $scope.view?$scope.patient.id:$scope.newpatient_basic.id,
 				panelId:null, 
@@ -16,7 +16,7 @@ angular.module('App')
 				lastModifiedBy:null,
 				new:true
 			};	
-			if($scope.newPatient_Panel!==null && $scope.newPatient_Panel.panelId!==null)
+			if($scope.newPatient_Panel!=null && $scope.newPatient_Panel.panelId!=null)
 				backendFactory.getPanels().get({panelId:$scope.newPatient_Panel.panelId}).$promise.then(function(response){
 					$scope.newPatient_Panel.panelName=response.name;
 				});
