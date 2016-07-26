@@ -366,6 +366,7 @@ angular.module('App')
 						console.log('indent items present');
 						console.log($scope.indentItems);
 						for(var i=0;i<$scope.indentItems.length;i++){
+							var present = false;
 							for(var j=0;j<$scope.stocks.length;j++)
 							{
 								//console.log('comparing '+$scope.stocks[j].itemId+' '+$scope.indentItems[i].itemId);
@@ -373,9 +374,14 @@ angular.module('App')
 								{
 									$scope.stocks[j].availableQuantity+=$scope.indentItems[i].quantityRequired;
 									inventoryFactory.getStocks(authorize.getCentre()).update({centreId:$scope.stocks[j].centreId, itemId: $scope.stocks[j].itemId},$scope.stocks[j]);
+									present = true;
 									// inventoryFactory.getStocks(authorize.getCentre()).update({centreId:$scope.stocks[j].centreId, itemId: $scope.stocks[j].itemId},$scope.stocks[j],$scope.stocks[j]);
 									//console.log($scope.stocks[j].itemId+' quantiy updated to '+$scope.stocks[j].availableQuantity);
 								}
+							}
+							console.log('value of present '+present)
+							if(present == false){
+								inventoryFactory.getStocks(authorize.getCentre()).save({centreId: authorize.getCentre(),itemId: $scope.indentItems[i].itemId,availableQuantity:$scope.indentItems[i].quantityRequired, lastModifiedBy:authorize.getUsername()});
 							}
 						}
 

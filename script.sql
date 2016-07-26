@@ -94,6 +94,74 @@ insert into vendor(vendorId ,vendorName,vendorAddress, vendorTINNumber,vendorCon
 insert into vendor(vendorId ,vendorName,vendorAddress, vendorTINNumber,vendorContactPerson,vendorContactPersonNumber,vendorIntroducedBy,vendorIntroducedByName,createdAt,updatedAt) values(DEFAULT, 'corporate office','delhi',99999,'mayank',1234567892,'Staff','rishabh','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Blood Tubing ','Treatment Specific','Brand A','pair','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Dialysis on/off kit','Treatment Specific','Brand B','kit','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Dialyzer','Treatment Specific','Brand C','unit','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Disposable Appron','Treatment Specific','Brand D','unit','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Disposable Appron','Treatment Specific','Brand D','pair','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Disposable Appron','Treatment Specific','Brand D','kit','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Double Lumen Catheter','Treatment Specific','Brand A','pair','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Double Lumen Catheter','Treatment Specific','Brand B','pair','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Double Lumen Catheter','Treatment Specific','Brand C','pair','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Double Lumen Catheter','Treatment Specific','Brand D','pair','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Fistula Needle','Treatment Specific','Brand B','kit','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Gauze pieces','Treatment Specific','Brand C','unit','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Guide wire','Treatment Specific','Brand D','metre','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Guide wire','Treatment Specific','Brand D','pair','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Heparin','Treatment Specific','Brand A','bottle','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Introducer needle ','Treatment Specific','Brand B','pair','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'IV Set','Treatment Specific','Brand C','pair','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Normal Saline 1000 ml','Treatment Specific','Brand D','bottle','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Normal Saline 500 ml','Treatment Specific','Brand A','bottle','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Part A','Treatment Specific','Brand B','pair','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Part B','Treatment Specific','Brand C','pair','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Single Lumen Catheter','Treatment Specific','Brand C','unit','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Sterile Gloves','Treatment Specific','Brand D','pair','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Syringe 1 ml','Treatment Specific','Brand A','unit','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Syringe 10 ml','Treatment Specific','Brand B','unit','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Syringe 20 ml','Treatment Specific','Brand C','unit','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Syringe 20 ml','Treatment Specific','Brand A','pair','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Syringe 20 ml','Treatment Specific','Brand A','unit','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Syringe 5 ml','Treatment Specific','Brand D','unit','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Syringe 5 ml','Treatment Specific','Brand D','kit','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Syringe 5 ml','Treatment Specific','Brand E','pair','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Transducer Protector','Treatment Specific','Brand A','pair','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Transducer Protector','Treatment Specific','Brand B','unit','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Transducer Protector','Treatment Specific','Brand C','metre','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+
+
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Unsterile Gloves','Treatment Specific','Brand B','pair','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Unsterile Gloves','Treatment Specific','Brand B','unit','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'Unsterile Gloves','Treatment Specific','Brand C','pair','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+
+
+
+
+
 insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'savlon','General Stock','dettol','bottles','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'savlon','General Stock','dettol3','wide bottles','2016-07-13 10:48:56','2016-07-13 10:48:56');
@@ -171,18 +239,72 @@ insert into consumptionItems(treatmentId,itemId,quantity,createdAt,updatedAt) va
 -- insert into catheterizationItems(itemName,createdAt,updatedAt) values('Unsterile Gloves','2016-07-13 10:48:56','2016-07-13 10:48:56');
 -- insert into catheterizationItems(itemName,createdAt,updatedAt) values('Disposable Appron','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
+-- insert into dialysisItems(itemId, createdAt, updatedAt) values (1,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into dialysisItems(itemId, createdAt, updatedAt) values (2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into dialysisItems(itemId, createdAt, updatedAt) values (3,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into dialysisItems(itemId, createdAt, updatedAt) values (4,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into dialysisItems(itemId, createdAt, updatedAt) values (5,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+
 insert into dialysisItems(itemId, createdAt, updatedAt) values (1,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 insert into dialysisItems(itemId, createdAt, updatedAt) values (2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 insert into dialysisItems(itemId, createdAt, updatedAt) values (3,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into dialysisItems(itemId, createdAt, updatedAt) values (4,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into dialysisItems(itemId, createdAt, updatedAt) values (5,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into dialysisItems(itemId, createdAt, updatedAt) values (11,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into dialysisItems(itemId, createdAt, updatedAt) values (12,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into dialysisItems(itemId, createdAt, updatedAt) values (15,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into dialysisItems(itemId, createdAt, updatedAt) values (17,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into dialysisItems(itemId, createdAt, updatedAt) values (18,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into dialysisItems(itemId, createdAt, updatedAt) values (19,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into dialysisItems(itemId, createdAt, updatedAt) values (20,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into dialysisItems(itemId, createdAt, updatedAt) values (21,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into dialysisItems(itemId, createdAt, updatedAt) values (23,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into dialysisItems(itemId, createdAt, updatedAt) values (24,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into dialysisItems(itemId, createdAt, updatedAt) values (25,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into dialysisItems(itemId, createdAt, updatedAt) values (26,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into dialysisItems(itemId, createdAt, updatedAt) values (27,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into dialysisItems(itemId, createdAt, updatedAt) values (28,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into dialysisItems(itemId, createdAt, updatedAt) values (32,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into dialysisItems(itemId, createdAt, updatedAt) values (33,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into dialysisItems(itemId, createdAt, updatedAt) values (34,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into dialysisItems(itemId, createdAt, updatedAt) values (35,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into dialysisItems(itemId, createdAt, updatedAt) values (36,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into dialysisItems(itemId, createdAt, updatedAt) values (37,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 
-insert into catheterizationItems(itemId, createdAt, updatedAt) values (1,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 insert into catheterizationItems(itemId, createdAt, updatedAt) values (2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into catheterizationItems(itemId, createdAt, updatedAt) values (3,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 insert into catheterizationItems(itemId, createdAt, updatedAt) values (4,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 insert into catheterizationItems(itemId, createdAt, updatedAt) values (5,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (6,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (7,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (8,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (9,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (10,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (12,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (13,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (14,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (15,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (16,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (22,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (23,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (24,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (25,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (26,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (27,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (28,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (29,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (30,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (31,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (35,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (36,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into catheterizationItems(itemId, createdAt, updatedAt) values (37,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+
+
+-- insert into catheterizationItems(itemId, createdAt, updatedAt) values (1,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into catheterizationItems(itemId, createdAt, updatedAt) values (2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into catheterizationItems(itemId, createdAt, updatedAt) values (3,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into catheterizationItems(itemId, createdAt, updatedAt) values (4,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into catheterizationItems(itemId, createdAt, updatedAt) values (5,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 -- steps to create an event scheduler:
 -- (http://www.mysqltutorial.org/mysql-triggers/working-mysql-scheduled-event/ )

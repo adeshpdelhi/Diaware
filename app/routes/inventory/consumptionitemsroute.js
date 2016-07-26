@@ -23,7 +23,10 @@ consumptionItemsRouter.route('/')
     db.consumptionItems.findAll({
         where:{
             treatmentId:parseInt(req.params.treatmentId,10)
-        }
+        },
+        include:[
+            db.item
+        ]
     }).then(function(consumptionItems){
         console.log(JSON.stringify(consumptionItems));
         res.json(consumptionItems);
@@ -70,7 +73,10 @@ consumptionItemsRouter.route('/:itemId')
         where:{
             itemId:parseInt(req.params.itemId,10),            
             treatmentId:req.params.treatmentId
-        }
+        },
+        include:[
+            db.item
+        ]
     }).then(function(consumptionItem){
         console.log(JSON.stringify(consumptionItem));
         res.json(consumptionItem);

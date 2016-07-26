@@ -12,7 +12,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BIGINT,
       allowNull: false,
       defaultValue: '0',
-      primaryKey: true
+      primaryKey: true,
+      references:{
+        model: 'item',
+        key: 'itemId'
+      }
     },
     quantity: {
       type: DataTypes.INTEGER(11),

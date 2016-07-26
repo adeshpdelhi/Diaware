@@ -300,6 +300,32 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                 }
             })
 
+
+            .state('app.inventory.treatment', {
+                url:'treatment/'
+            })
+
+            .state('app.inventory.treatment.dialysis', {
+                url:'dialysis/',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/manageDialysisItems.html',
+                        controller: 'ManageDialysisItemsContoller'
+                    }
+                }
+            })
+
+            .state('app.inventory.treatment.catheterization', {
+                url:'catheterization/',
+                views: {
+                    'content@': {
+                        templateUrl : 'views/inventory/manageCatheterizationItems.html',
+                        controller: 'ManageCatheterizationItemsContoller'
+                    }
+                }
+            })
+
+
             // .state('app.inventory.new_inventory_identing', {
             //     url:'Inventory_Identing/new',
             //     views: {
