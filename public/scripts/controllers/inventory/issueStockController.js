@@ -101,30 +101,31 @@ angular.module('App')
 								}
 							}
 						}
-
-					inventoryFactory.getFloor(authorize.getCentre()).query().$promise.then(function(response){
-						$scope.floorItems= response;
-						for(var i=0;i<$scope.issueStockItems.length;i++){
-							var present = false;
-							console.log('outer loop');
-							for(var j=0;j<$scope.floorItems.length;j++)
-							{
-								console.log('comparing '+$scope.floorItems[j].itemId+' and '+$scope.issueStockItems[i].itemId);
-								if($scope.floorItems[j].itemId == $scope.issueStockItems[i].itemId)
+					if($scope.issueStock.stockIssuedTo == 'Floor'){
+						inventoryFactory.getFloor(authorize.getCentre()).query().$promise.then(function(response){
+							$scope.floorItems= response;
+							for(var i=0;i<$scope.issueStockItems.length;i++){
+								var present = false;
+								console.log('outer loop');
+								for(var j=0;j<$scope.floorItems.length;j++)
 								{
-									console.log("item "+$scope.floorItems[j].itemId+' present');
-									$scope.floorItems[j].availableQuantity+=$scope.issueStockItems[i].quantity;
-									inventoryFactory.getFloor(authorize.getCentre()).update({centreId:$scope.floorItems[j].centreId, itemId: $scope.floorItems[j].itemId},$scope.floorItems[j]);
-									present = true;
+									console.log('comparing '+$scope.floorItems[j].itemId+' and '+$scope.issueStockItems[i].itemId);
+									if($scope.floorItems[j].itemId == $scope.issueStockItems[i].itemId)
+									{
+										console.log("item "+$scope.floorItems[j].itemId+' present');
+										$scope.floorItems[j].availableQuantity+=$scope.issueStockItems[i].quantity;
+										inventoryFactory.getFloor(authorize.getCentre()).update({centreId:$scope.floorItems[j].centreId, itemId: $scope.floorItems[j].itemId},$scope.floorItems[j]);
+										present = true;
+									}
+								}
+								if(present == false){
+									console.log("item "+$scope.issueStockItems[i].itemId+' not present');
+									var newFloorItem = {itemId:$scope.issueStockItems[i].itemId,centreId:authorize.getCentre(),availableQuantity: $scope.issueStockItems[i].quantity,lastModifiedBy:authorize.getUsername()};
+									inventoryFactory.getFloor(authorize.getCentre()).save(newFloorItem);
 								}
 							}
-							if(present == false){
-								console.log("item "+$scope.issueStockItems[i].itemId+' not present');
-								var newFloorItem = {itemId:$scope.issueStockItems[i].itemId,centreId:authorize.getCentre(),availableQuantity: $scope.issueStockItems[i].quantity,lastModifiedBy:authorize.getUsername()};
-								inventoryFactory.getFloor(authorize.getCentre()).save(newFloorItem);
-							}
-						}
-					});
+						});
+					}
 
 					$scope.issueStockForm.$setPristine();
 					$scope.savedOnce = true;

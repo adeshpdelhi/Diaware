@@ -122,6 +122,6 @@ CREATE EVENT my_event
 3. choose smthn else other than appointmentID as ID for treatment wise consumption
 4. handle case when item added isn't even present --- maybe done
 5. warn if while adding treatment consumption there isn't enough items on floor
-6. add to floor while issuing to floor only if its for floor
+6. add to floor while issuing to floor only if its for floor ---done
 7. handle old treatments in treatment consumptions.
 8. refer to viewItems.html for managing the space above panels
