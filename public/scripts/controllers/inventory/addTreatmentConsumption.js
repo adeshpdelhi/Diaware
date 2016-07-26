@@ -2,7 +2,7 @@
 angular.module('App')
 .controller('AddTreatmentConsumptionController',['$scope','authorize','appointmentFactory','inventoryFactory','regularForm','$uibModal', function($scope,authorize,appointmentFactory, inventoryFactory, regularForm,$uibModal){
 		$scope.regularForm = regularForm.regularForm;
-	
+		$scope.pendingTreatments=[];
 		$scope.showAlert=false;
 		
 		// $scope.treatmentInventory= {
@@ -27,12 +27,14 @@ angular.module('App')
 						$scope.pendingTreatments.push($scope.appointments[i]);
 						$scope.daysToLoop[$scope.appointments[i].dayOfTheWeek] = true;
 					}
-					if($scope.pendingTreatments.length == 0)
-					{
-						$scope.message = 'All treatment consumptions added!';
-						$scope.messageColor = 'success';
-						$scope.showAlert = true;
-					}
+
+				}
+				console.log('length of pending treatments :'+$scope.pendingTreatments.length);
+				if($scope.pendingTreatments.length == 0)
+				{
+					$scope.message = 'All treatment consumptions added!';
+					$scope.messageColor = 'success';
+					$scope.showAlert = true;
 				}
 			},function(response){
 				alert('Failed to retrieve consumptions');

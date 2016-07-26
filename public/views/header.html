@@ -151,13 +151,18 @@
                                     <li><a ui-sref="app.inventory.floor.view">Floor</a></li>
                                 </ul>
                             </li>
-                            
-                            
                             <li class="dropdown-submenu">
                                 <a class="test" style="cursor: pointer; display: block;">Items <span class="caret"></span></a>
                                 <ul class="dropdown-menu"  >
                                     <li><a ui-sref="app.inventory.item.add" ng-show="role.admin"> Add Items</a></li>
                                     <li><a ui-sref="app.inventory.item.view" ng-show="role.admin"> View/Edit Items</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <a class="test" style="cursor: pointer; display: block;">Manage Treatment Items <span class="caret"></span></a>
+                                <ul class="dropdown-menu"  >
+                                    <li><a ui-sref="app.inventory.treatment.dialysis" ng-show="role.admin"> Dialysis</a></li>
+                                    <li><a ui-sref="app.inventory.treatment.catheterization" ng-show="role.admin"> Catheterization</a></li>
                                 </ul>
                             </li>
                         </li>
