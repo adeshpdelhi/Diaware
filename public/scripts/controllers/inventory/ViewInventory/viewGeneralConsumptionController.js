@@ -2,21 +2,21 @@
 angular.module('App')
 .controller('ViewGeneralConsumptionController',['$scope','authorize','inventoryFactory','$uibModal','regularForm', function($scope,authorize,inventoryFactory, $uibModal, regularForm){
 		$scope.regularForm = regularForm.regularForm;
-		inventoryFactory.getConsumptions(authorize.getCentre()).query().$promise.then(function(response){
-			$scope.consumptions = response;
+		inventoryFactory.getGeneralConsumptions(authorize.getCentre()).query().$promise.then(function(response){
+			$scope.generalConsumptions = response;
 		}, function(response){
 			alert('fetching consumptions failed');
 		})
 	
 		
-		$scope.openConsumption = function(treatmentId){
+		$scope.openGeneralConsumption = function(generalConsumptionId){
 			$uibModal.open({
-	          templateUrl: 'views/inventory/ViewInventory/viewTreatmentConsumptionModal.html',
-	          controller: 'ViewTreatmentConsumptionModalController',
+	          templateUrl: 'views/inventory/ViewInventory/viewGeneralConsumptionModal.html',
+	          controller: 'ViewGeneralConsumptionModalController',
 	          size:'lg' ,
 	          resolve: {
-	            treatmentId: function () {
-	             return treatmentId;
+	            generalConsumptionId: function () {
+	             return generalConsumptionId;
 	            }
 	          }
 	        });
@@ -26,19 +26,19 @@ angular.module('App')
 	
 	}])
 
-.controller('ViewGeneralConsumptionModalController', ['$scope', '$state', 'authorize', '$uibModalInstance', 'inventoryFactory','treatmentId', 'regularForm', function ($scope, $state, authorize, $uibModalInstance, inventoryFactory,treatmentId, regularForm) {
+.controller('ViewGeneralConsumptionModalController', ['$scope', '$state', 'authorize', '$uibModalInstance', 'inventoryFactory','generalConsumptionId', 'regularForm', function ($scope, $state, authorize, $uibModalInstance, inventoryFactory, generalConsumptionId, regularForm) {
 
 		$scope.regularForm = regularForm.regularForm;
-		$scope.treatmentId = treatmentId;
-		inventoryFactory.getConsumptions(authorize.getCentre()).get({treatmentId:treatmentId}).$promise.then(function(response){
-			$scope.consumption = response;
-			inventoryFactory.getConsumptionItems(authorize.getCentre(),treatmentId).query().$promise.then(function(response){
-					$scope.consumptionItems = response;
+		$scope.generalConsumptionId = generalConsumptionId;
+		inventoryFactory.getGeneralConsumptions(authorize.getCentre()).get({generalConsumptionId:generalConsumptionId}).$promise.then(function(response){
+			$scope.generalConsumption = response;
+			inventoryFactory.getGeneralConsumptionItems(authorize.getCentre(),generalConsumptionId).query().$promise.then(function(response){
+					$scope.generalConsumptionItems = response;
 			},function(response){
-				alert('failed to retrieve consumption items');
+				alert('failed to retrieve general consumption items');
 			});
 		},function(response){
-			alert('failed to retrieve consumption');
+			alert('failed to retrieve general consumption');
 		});
         // $uibModalInstance.close();
         // $state.go('app.home', {}, {reload: true});
