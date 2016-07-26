@@ -33,7 +33,7 @@ angular.module('App')
 					$scope.stocks = response;
 					for(var i=0;i<$scope.filteredItems.length;i++)
 					{
-						for(j=0;j<$scope.stocks.length;j++){
+						for(var j=0;j<$scope.stocks.length;j++){
 							if($scope.filteredItems[i].itemId == $scope.stocks[j].itemId)
 							{
 								$scope.filteredItems[i].availableQuantity = $scope.stocks[j].availableQuantity;
@@ -50,7 +50,7 @@ angular.module('App')
 			
 			for(var i=0;i<$scope.filteredItems.length;i++)
 					{
-						for(j=0;j<$scope.stocks.length;j++){
+						for(var j=0;j<$scope.stocks.length;j++){
 							if($scope.filteredItems[i].itemId == $scope.stocks[j].itemId)
 							{
 								$scope.filteredItems[i].availableQuantity = $scope.stocks[j].availableQuantity;

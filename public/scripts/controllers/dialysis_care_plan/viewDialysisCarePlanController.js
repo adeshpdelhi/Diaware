@@ -12,10 +12,10 @@ angular.module('App')
 		$scope.chosenPatientId = choosePatientFactory.getChosenPatient().id;
 		patientFactory.getPatientCarePlans(choosePatientFactory.getChosenPatient().id,authorize.getCentre()).get({latestPlan:true})
 		.$promise.then(function(response){
-			console.log("eth")
+			console.log("eth");
 			console.log(response );
         	if(!response.patientDetail){
-        		console.log("i m in here ! :D")
+        		console.log("i m in here ! :D");
 	        	$scope.carePlan ={
 		        	patientId: null,
 					carePlanId: null,
@@ -65,7 +65,7 @@ angular.module('App')
 	       		$scope.carePlan.prescriptionDate = new Date($scope.carePlan.prescriptionDate);
 	        	$scope.patient = response.patientDetail;
         	});
-		}
+		};
 		$scope.fetchThisPlan = function(id){
 			patientFactory.getPatientCarePlans(choosePatientFactory.getChosenPatient().id,authorize.getCentre()).get({
 				carePlanId : id
@@ -78,7 +78,7 @@ angular.module('App')
 	        },function(response){
 				$scope.showAlert = true;
 				$scope.message = "Error: "+ response.status+ " " + response.statusText;
-			})
+			});
 		};
         $scope.updateCarePlan = function() {
         	$scope.carePlan.lastModifiedBy = authorize.getUsername();

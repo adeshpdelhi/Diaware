@@ -17,7 +17,7 @@ angular.module('App')
     $scope.doLogin = function(){
         authorize.doAuth($scope.credentials.username,$scope.credentials.password,$scope.rememberme, function(user){
         //console.log ('success is '+success);
-        if(user !=null){
+        if(user !==null){
             console.log('successful login in controller');
             var tempcentres = user.centres;
             $scope.channels=[];
@@ -43,7 +43,7 @@ angular.module('App')
         $scope.includeAddCentre = editCentre;
         console.log("centreAdded:"+centreId);
         $scope.channels.push({value: centreId, label: centreId});
-        if(centreId!=''&& centreId !=null){
+        if(centreId!=''&& centreId !==null){
             $scope.noCentresInDB=false;
         }
         $scope.addedCentre = alert;
@@ -113,7 +113,7 @@ angular.module('App')
 
     $scope.user= authorize.getActiveUser();
     $scope.changePassword = function(){
-        if($scope.oldpassword==null || $scope.newpassword==null ||$scope.oldpassword=='' || $scope.newpassword=='')
+        if($scope.oldpassword===null || $scope.newpassword===null ||$scope.oldpassword=='' || $scope.newpassword=='')
             {   
                 console.log('not all fields specified');
                 return;
@@ -177,7 +177,7 @@ angular.module('App')
     }])
 .controller('DashBoardController',['$scope','appointmentFactory','authorize','patientFactory','billFactory','$timeout','$state',function($scope,appointmentFactory,authorize,patientFactory,billFactory,$timeout,$state){
     console.log("user");
-    var activeUser = {} 
+    var activeUser = {} ;
 
     $timeout(function(){
         activeUser = authorize.getActiveUser();
@@ -234,7 +234,7 @@ angular.module('App')
     };
     $scope.viewBillDetails = function(id){
         $state.go("app.billing.viewbill.details",{id:id});
-    }
+    };
     $scope.viewAppointmentDetails = function(id){
         // console.log("filter:" + $scope.filter);
         $state.go("app.appointment.viewAppointments.details",{id:id,filter:'futureAppointments'});    
@@ -243,7 +243,7 @@ angular.module('App')
     var  getDateString = function(date, format) {
         var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         getPaddedComp = function(comp) {
-            return ((parseInt(comp) < 10) ? ('0' + comp) : comp)
+            return ((parseInt(comp) < 10) ? ('0' + comp) : comp);
         },
         formattedDate = format,
         o = {
@@ -268,7 +268,7 @@ angular.module('App')
     $scope.newUserNotification = function(){
         if(activeUser.admin){
             authorize.getUsers().get({latestAddedUser:true}).$promise.then(function(response){
-                if(response.username == null){
+                if(response.username === null){
                     $scope.userNotify = true;
                     $scope.userAlert = true;
                     $scope.usesNotifyMessage = "Something Went wrong... Couldnt fetch data!";
@@ -284,7 +284,7 @@ angular.module('App')
                         console.log("yaaaaaaaaaaay ");
                         $scope.userNotify = true;
                         $scope.userAlert = false;
-                        var formattedDate = getDateString(date, "d-M-y")
+                        var formattedDate = getDateString(date, "d-M-y");
                         var roles = "";
                         console.log(response);
                         // for(key in user)

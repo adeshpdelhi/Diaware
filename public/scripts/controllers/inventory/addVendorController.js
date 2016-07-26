@@ -40,9 +40,9 @@ angular.module('App')
 			$scope.showAlert=true;
 				$scope.message='Error saving!';
 				$scope.messageColor='danger';
-		})
+		});
 		
 		
-		}
+		};
 	}])
 ;

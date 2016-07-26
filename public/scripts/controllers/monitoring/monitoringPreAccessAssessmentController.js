@@ -1,7 +1,7 @@
 'use strict';
 angular.module('App')
 .controller('MonitoringPreAccessAssessmentController',['$scope','authorize','backendFactory','monitoringChartFactory', function($scope,authorize,backendFactory,monitoringChartFactory){
-	if(!$scope.view || ($scope.patientChart != null  && !$scope.accessAssessment)){
+	if(!$scope.view || ($scope.patientChart !== null  && !$scope.accessAssessment)){
 		$scope.accessAssessment = {
 			preBasicId:null,
 			bruit:null,

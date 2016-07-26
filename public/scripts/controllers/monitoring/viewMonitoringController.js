@@ -13,7 +13,7 @@ angular.module('App')
 	    	        $scope.patientChart = response;
 	    	        console.log('response');
 	    	        console.log(response);
-	    	        if(response.patientId != null){
+	    	        if(response.patientId !== null){
 			        	$scope.post = $scope.patientChart.monitoringChartPost;
 			        	$scope.intraTable = $scope.patientChart.monitoringChartIntras;
 			        	console.log($scope.intraTable.length + "ggggggggggggggggggggggggggggggggggggggggggs");	
@@ -47,7 +47,7 @@ angular.module('App')
 	    	        $scope.patientChart = response;
 	    	        console.log('response');
 	    	        console.log(response);
-					if(response.patientId != null){
+					if(response.patientId !== null){
 			        	$scope.post = $scope.patientChart.monitoringChartPost;
 			        	$scope.intraTable = $scope.patientChart.monitoringChartIntras;
 			        	console.log($scope.intraTable.length + "ggggggggggggggggggggggggggggggggggggggggggs");	
@@ -63,7 +63,7 @@ angular.module('App')
 		    			console.log("null patientChart");
 
 		    			$scope.showAlertPatientNull = true;
-		    			$scope.queryDate = $stateParams.date
+		    			$scope.queryDate = $stateParams.date;
 		    			$scope.message = "No monitoring Chart added for the patient Yet "+($stateParams.date?('of this monitoring Date: '+new Date($stateParams.date)+'! '):'! ')+"Please Fill the monitoring Chart from new Monitoring Chart Section";
 
 		    			// $scope.message = "No monitoring Chart added for the patient Yet {{($stateParams.date?('of this monitoring Date: '+ queryDate|date:dd-MMMM-YY):'')}}! Please Fill the monitoring Chart from new Monitoring Chart Section";
@@ -84,7 +84,7 @@ angular.module('App')
 		};
 		$scope.latest();
 		$scope.$watchCollection('[patientChart.patientId,patientChart]',function (newVal,oldVal) {
-			if(newVal != null) {
+			if(newVal !== null) {
 				// $scope.isEditable();
 				// $scope.showAlertPatientNull = false;
 				// $scope.messageColor ="warning";
@@ -124,7 +124,7 @@ angular.module('App')
 			},function(response){
 				$scope.showAlert = true;
 				$scope.message = "Error: "+ response.status+ " " + response.statusText;
-			})
+			});
 		};
 		
 		$scope.isEditable = function(){

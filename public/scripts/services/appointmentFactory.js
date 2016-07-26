@@ -53,6 +53,6 @@ angular.module('App')
             'update':{method:'PUT' },
           query: {method: 'get', isArray: true}
           });
-        }
+        };
   }])
 ;

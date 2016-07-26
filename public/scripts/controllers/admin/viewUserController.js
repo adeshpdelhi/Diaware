@@ -24,7 +24,7 @@ angular.module('App')
 	          }
 	        });
 		});
-	}
+	};
 }])
 
 .controller('EditStaffModalController', ['$scope', '$state', 'authorize', '$uibModalInstance', 'user', function ($scope, $state, authorize, $uibModalInstance, user) {
@@ -47,7 +47,7 @@ angular.module('App')
 			    if(tempcentres[j]==newcentres[i])
 			    	flag=true;
 			}
-			if(flag==false)
+			if(flag===false)
 				{
 					alert('one of the centre invalid');
 					return;
@@ -67,12 +67,12 @@ angular.module('App')
 			if($scope.user.centre == $scope.user.centres[i])
 				flag = true;
 		}
-		if(flag == false){
+		if(flag === false){
 			if($scope.user.centres!='')
 				$scope.user.centres= $scope.user.centres+','+$scope.user.centre;
 			else
 				$scope.user.centres=$scope.user.centre;
 			console.log('added '+$scope.user.centre);
 		}
-	}
+	};
 }]);

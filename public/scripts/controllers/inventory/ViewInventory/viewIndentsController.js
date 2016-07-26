@@ -53,13 +53,13 @@ angular.module('App')
 					$scope.stocks = response;
 					for(var i=0;i<$scope.filteredItems.length;i++)
 					{
-						for(j=0;j<$scope.stocks.length;j++){
+						for(var j=0;j<$scope.stocks.length;j++){
 							if($scope.filteredItems[i].itemId == $scope.stocks[j].itemId)
 							{
 								$scope.filteredItems[i].availableQuantity = $scope.stocks[j].availableQuantity;
 							}
 						}
-						if($scope.filteredItems[i].availableQuantity==null)
+						if($scope.filteredItems[i].availableQuantity===null)
 							$scope.filteredItems[i].availableQuantity = 0;
 					}
 					for(var i=0;i<$scope.indentItems.length;i++)
@@ -86,16 +86,16 @@ angular.module('App')
 		$scope.updateFilteredItems = function(){
 					for(var i=0;i<$scope.filteredItems.length;i++)
 					{
-						for(j=0;j<$scope.stocks.length;j++){
+						for(var j=0;j<$scope.stocks.length;j++){
 							if($scope.filteredItems[i].itemId == $scope.stocks[j].itemId)
 							{
 								$scope.filteredItems[i].availableQuantity = $scope.stocks[j].availableQuantity;
 							}
 						}
-						if($scope.filteredItems[i].availableQuantity==null)
+						if($scope.filteredItems[i].availableQuantity===null)
 							$scope.filteredItems[i].availableQuantity = 0;
 					}
-		}
+		};
 		//$scope.updateFilteredItems();
 
 		$scope.toBeRemovedindentItems=[];
@@ -141,7 +141,7 @@ angular.module('App')
 			
 			$scope.addingItem=false;
 			
-		}
+		};
 		
 
 
@@ -149,7 +149,7 @@ angular.module('App')
 			
 			for (var i=0;i<$scope.toBeRemovedindentItems.length;i++)
 			{
-				if($scope.toBeRemovedindentItems[i].retrieved == true)
+				if($scope.toBeRemovedindentItems[i].retrieved === true)
 					inventoryFactory.getIndentItems(authorize.getCentre(),$scope.indentId).remove({itemId:$scope.toBeRemovedindentItems[i].itemId, linkedStatus: $scope.toBeRemovedindentItems[i].linkedStatus});
 			}
 			$scope.indent.status='Saved';
@@ -161,7 +161,7 @@ angular.module('App')
 			console.log($scope.indentItems);
 			for(var i = 0; i <  $scope.indentItems.length;  i++){			
 				$scope.indentItems[i].indentId=$scope.indent.indentId;
-				if($scope.indentItems[i].retrieved == false){
+				if($scope.indentItems[i].retrieved === false){
 					inventoryFactory.getIndentItems(authorize.getCentre(),$scope.indentId).save($scope.indentItems[i]).$promise.then(function(response){
 					},function(response){
 						$scope.messageColor = 'danger';
@@ -333,7 +333,7 @@ angular.module('App')
 					tempItems.push($scope.indentItems[i]);
 			$scope.indentItems = tempItems; 
 			console.log($scope.indentItems);
-		}
+		};
 
 		$scope.receiveIndent = function(){
 			$scope.indent.status='Received';
@@ -379,8 +379,8 @@ angular.module('App')
 									//console.log($scope.stocks[j].itemId+' quantiy updated to '+$scope.stocks[j].availableQuantity);
 								}
 							}
-							console.log('value of present '+present)
-							if(present == false){
+							console.log('value of present '+present);
+							if(present === false){
 								inventoryFactory.getStocks(authorize.getCentre()).save({centreId: authorize.getCentre(),itemId: $scope.indentItems[i].itemId,availableQuantity:$scope.indentItems[i].quantityRequired, lastModifiedBy:authorize.getUsername()});
 							}
 						}
@@ -418,15 +418,15 @@ angular.module('App')
 
 
 					},function(response){
-						alert('stock updation failed')
-					})
+						alert('stock updation failed');
+					});
 					
 			},function(response){
 				$scope.messageColor = 'danger';
 				$scope.showAlert = true;
 				$scope.message = 'Receiving failed';
 			});
-	}
+	};
 
 }])
 

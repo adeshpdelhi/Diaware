@@ -21,7 +21,7 @@ angular.module('App')
 	            }
 	          }
 	        });
-		}
+		};
 		
 		
 	
@@ -37,13 +37,13 @@ angular.module('App')
     	console.log($scope.stockIssued);
     },function(response){
     	alert('stock Issued retrieval failed');
-    })
+    });
 
     inventoryFactory.getStockIssuedItems(authorize.getCentre(),$scope.stockIssuedId).query().$promise.then(function(response){
     	$scope.stockIssuedItems = response;
     },function(response){
     	alert('stock issued items retrieval failed');
-    })
+    });
 }])
 
 ;

@@ -70,7 +70,7 @@ angular.module('App')
 			alert('Panels retrieval failed!');
 			// $scope.editPanel = false;
 		});
-	}
+	};
 	// $scope.panelPopover = {
 	//     templateUrl: 'panelPopoverTemplate.html',
 	//     title: 'Edit Panel Details'
@@ -92,7 +92,7 @@ angular.module('App')
 			// alert('Panels retrieval failed!');
 		},function(response){
 			alert('Panels Deletion failed!');
-		})
+		});
 	};	
 
 	$scope.addDialyzateType = function(){
@@ -282,6 +282,6 @@ angular.module('App')
 			$scope.alertLedger = true;
 			$scope.message ="Updation Failed!";
 			$scope.messageColor = 'danger';
-		})
+		});
 	};
 }]);

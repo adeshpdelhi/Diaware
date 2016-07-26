@@ -398,7 +398,7 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                         controller:'ViewBillDetailsController',
                         resolve:{
                             bill:['$stateParams','billFactory','authorize', function($stateParams,billFactory,authorize){
-                                return billFactory.getBills(authorize.getCentre()).get({billId:parseInt($stateParams.id)})
+                                return billFactory.getBills(authorize.getCentre()).get({billId:parseInt($stateParams.id)});
                             }]
                         }
                     }
@@ -490,7 +490,7 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                         resolve:{
                             appointment:['$stateParams','appointmentFactory','authorize','$state', function($stateParams,appointmentFactory,authorize,$state){
                                 console.log("state :" + $state.params.filter + ", " + $stateParams.filter);
-                                return appointmentFactory.getFilteredAppointments(authorize.getCentre()).get({appointmentId:parseInt($stateParams.id,10),filter:$stateParams.filter})
+                                return appointmentFactory.getFilteredAppointments(authorize.getCentre()).get({appointmentId:parseInt($stateParams.id,10),filter:$stateParams.filter});
                             }]
                         }
                     }

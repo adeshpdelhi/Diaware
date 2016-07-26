@@ -13,7 +13,7 @@ angular.module('App')
     $scope.changeAttendance = function(val){
         console.log("val:" + val);
         $scope.attendance = val;
-    }
+    };
     $scope.markAttendance = function(){
             $scope.appointment.attended = $scope.attendance;
             console.log($scope.appointment.attended);
@@ -40,12 +40,10 @@ angular.module('App')
             $scope.message = "Failes to cancel Apointment!";
             $scope.messageColor = "danger"; 
         });
-    }
+    };
     $scope.redirectToMonitoringChart = function(){
         console.log("app.monitoring.view" + $scope.appointment.patientId + " "+ $scope.appointment.date);
         $state.go('app.monitoring.view', {patientId:$scope.appointment.patientId, date:$scope.appointment.date});
     };
 
 }]);
-
-;

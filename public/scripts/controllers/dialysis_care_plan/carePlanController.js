@@ -30,7 +30,7 @@ angular.module('App')
         };
         backendFactory.getDialyzateTypes().query(function(response){
         	$scope.dialyzateTypes = response;
-        })
+        });
         $scope.savedOnce = false;
         $scope.saveCarePlan =function(){
         	$scope.carePlan.patientId = $scope.patient.id;
@@ -49,7 +49,7 @@ angular.module('App')
 			}
 			
 			);		
-        }
+        };
 
     }])
     ;

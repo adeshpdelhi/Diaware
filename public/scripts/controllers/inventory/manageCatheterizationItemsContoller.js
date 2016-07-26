@@ -17,7 +17,7 @@ angular.module('App')
 							if($scope.treatmentItems[j].itemId == response[i].itemId)
 								present = true;
 						}
-						if(present == false){
+						if(present === false){
 							$scope.filteredItems.push(response[i]);
 						}
 					}
@@ -25,12 +25,12 @@ angular.module('App')
 				console.log($scope.filteredItems);
 			},function(response){
 				alert('Failed to retrieve all items');
-			})
+			});
 
 		},function(response){
 			alert('Failed to retrieve catheterization items');
-		})
-	}
+		});
+	};
 
 	$scope.updateAllItems();
 	$scope.removeItem = function(treatmentItem){

@@ -20,45 +20,45 @@ angular.module('App')
 		
 		this.getIndents = function(centreId){
 			return $resource(baseURL+":centreId/inventory/indent/:indentId",{centreId:centreId},  {'update':{method:'PUT' }});
-		}
+		};
 		
 		this.getIndentItems = function(centreId,indentId){
 			return $resource(baseURL+":centreId/inventory/indent/:indentId/items/:itemId/:linkedStatus",{centreId:centreId,indentId:indentId},  {'update':{method:'PUT' }});
-		}
+		};
      	
      	this.getStocks = function(centreId){
 			return $resource(baseURL+":centreId/inventory/stock/:itemId",{centreId:centreId},  {'update':{method:'PUT' }});
-		}
+		};
 
 		this.getFloor = function(centreId){
 			return $resource(baseURL+":centreId/inventory/floor/:itemId",{centreId:centreId},  {'update':{method:'PUT' }});
-		}
+		};
 
      	this.getStocksIssued = function(centreId){
 			return $resource(baseURL+":centreId/inventory/stock/issued/:stockIssuedId",{centreId:centreId},  {'update':{method:'PUT' }});
-		}
+		};
 
 		this.getStockIssuedItems = function(centreId,stockIssuedId){
 			return $resource(baseURL+":centreId/inventory/stock/issued/:stockIssuedId/items/:itemId",{centreId:centreId,stockIssuedId:stockIssuedId},  {'update':{method:'PUT' }});
-		}
+		};
 		
 		this.getConsumptions = function(centreId){
 			return $resource(baseURL+":centreId/inventory/consumption/:treatmentId",{centreId:centreId},  {'update':{method:'PUT' }});
-		}
+		};
 		
 		this.getConsumptionItems = function(centreId,treatmentId){
 			return $resource(baseURL+":centreId/inventory/consumption/:treatmentId/items/:itemId",{centreId:centreId,treatmentId:treatmentId},  {'update':{method:'PUT' }});
 
-		}
+		};
 
 		this.getGeneralConsumptions = function(centreId){
 			return $resource(baseURL+":centreId/inventory/consumption/general/:generalConsumptionId",{centreId:centreId},  {'update':{method:'PUT' }});
-		}
+		};
 		
 		this.getGeneralConsumptionItems = function(centreId,generalConsumptionId){
 			return $resource(baseURL+":centreId/inventory/consumption/general/:generalConsumptionId/items/:itemId",{centreId:centreId,generalConsumptionId:generalConsumptionId},  {'update':{method:'PUT' }});
 
-		}
+		};
      	
   }])
 ;

@@ -6,13 +6,7 @@ angular.module('App')
 			$scope.stocks = response;
 		},function(response){
 			alert('stock retrieval failed');
-		})
-		
-	
-		
-		$scope.issueStock = function(){
-			
-		}
+		});
 		
 		
 	

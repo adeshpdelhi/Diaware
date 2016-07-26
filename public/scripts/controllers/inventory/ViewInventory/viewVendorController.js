@@ -1,7 +1,6 @@
 'use strict';
 angular.module('App')
 .controller('ViewVendorController',['$scope','authorize','inventoryFactory', function($scope,authorize,inventoryFactory){
-		$scope.close = close;
 		$scope.updateVendors = function(){
 			inventoryFactory.getVendors().query().$promise.then(function(response){
 		      $scope.vendors = response;
@@ -9,7 +8,7 @@ angular.module('App')
 		    },function(response){
 		    	alert('unable to fetch vendors');
 		    });
-		}
+		};
 		$scope.updateVendors();
 		$scope.vendor = {};
 		$scope.editVendor = function(vendorId){
@@ -17,7 +16,7 @@ angular.module('App')
 				$scope.vendor = response;
 			},function(response){
 				alert('Vendor retrieval failed');
-			})
+			});
 		};
 		$scope.updateVendor = function(){
 			$scope.vendor.lastModifiedBy = authorize.getUsername();
@@ -32,13 +31,13 @@ angular.module('App')
 
 			},function(response){
 				alert('updation failed');
-			})
-		}
+			});
+		};
 		$scope.deleteVendor = function(vendorId){
 			console.log('deleteVendor for '+vendorId);
 			inventoryFactory.getVendors().remove({vendorId:vendorId});
 			$scope.updateVendors();
-		}
+		};
 	}])
 
 .directive('myModal', function() {
@@ -49,5 +48,5 @@ angular.module('App')
            element.modal('hide');
        };
      }
-   } 
+   } ;
 });
