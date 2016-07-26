@@ -54,22 +54,27 @@ angular.module('App')
 	// 		alert('Panel retrieval failed!');
 	// 	});
 	// }
+	$scope.editPanel = false;
 	$scope.updatePanel = function(panel){
 		// $scope.panel=$scope.panelPopover.panel;
 		console.log(panel);
-		backendFactory.getPanels().update({panelId:panel.id},panel);
+		backendFactory.getPanels().update({panelId:panel.id},panel).$promise.then(function(response){
+			$scope.editPanel = false;			
+		},function(response){
+			$scope.editPanel = false;
+			alert('Update Failed!');
+		});
 		backendFactory.getPanels().query().$promise.then(function(response){
 			$scope.panels=response;
-			$scope.editPanel = false;
 		},function(response){
 			alert('Panels retrieval failed!');
-			$scope.editPanel = false;
+			// $scope.editPanel = false;
 		});
 	}
-	$scope.panelPopover = {
-	    templateUrl: 'panelPopoverTemplate.html',
-	    title: 'Edit Panel Details'
-	  };
+	// $scope.panelPopover = {
+	//     templateUrl: 'panelPopoverTemplate.html',
+	//     title: 'Edit Panel Details'
+	//   };
 	$scope.showPanels = function(){
 		console.log('showing panels');
 		backendFactory.getPanels().query().$promise.then(function(response){
@@ -79,6 +84,16 @@ angular.module('App')
 		});
 	};
 
+	$scope.removePanel = function(id){
+		console.log(id);
+		backendFactory.getPanels().delete({panelId:id}).$promise.then(function(response){
+			console.log(response);
+			$scope.showPanels();
+			// alert('Panels retrieval failed!');
+		},function(response){
+			alert('Panels Deletion failed!');
+		})
+	};	
 
 	$scope.addDialyzateType = function(){
 		console.log($scope.dialyzateType);

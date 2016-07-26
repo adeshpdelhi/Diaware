@@ -175,7 +175,7 @@ angular.module('App')
         	$state.go('app.'+callback);
         };
     }])
-.controller('DashBoardController',['$scope','appointmentFactory','authorize','patientFactory','billFactory','$timeout',function($scope,appointmentFactory,authorize,patientFactory,billFactory,$timeout){
+.controller('DashBoardController',['$scope','appointmentFactory','authorize','patientFactory','billFactory','$timeout','$state',function($scope,appointmentFactory,authorize,patientFactory,billFactory,$timeout,$state){
     console.log("user");
     var activeUser = {} 
 

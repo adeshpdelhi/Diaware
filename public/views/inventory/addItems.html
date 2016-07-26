@@ -48,7 +48,14 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Usage Type</label>
                             <div class="col-sm-6 ">
-                                <input type="text" class="form-control" id="usageType" name="usageType" placeholder="UsageType" ng-model="item.usageType">
+                                <select  class="form-control" id="usageType" name="usageType" placeholder="Enter Usage Type " ng-model="item.usageType">
+                                <option value="">-</option>
+                                <option value="utype1">uType1</option>
+                                <option value="utype2">uType2</option>
+                                <option value="utype3">uType3</option>
+
+                                </select>
+                                <!-- <input type="text" class="form-control" id="usageType" name="usageType" placeholder="UsageType" ng-model="item.usageType"> -->
                             </div>
                         </div>
 

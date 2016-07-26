@@ -16,13 +16,14 @@ angular.module('App')
 	};
 	$scope.saveChanges = function(){
 		console.log('yo');
+		$scope.edit = false;
+		
 		for (var i = deletedItems.length - 1; i >= 0; i--) {
 			inventoryFactory.getItems().delete({itemId:deletedItems[i].itemId}).$promise.then(function(response){
 				console.log(response);
 				$scope.showAlert = true;
 				$scope.message="Successfully Deleted Item!" ;
 				$scope.messageColor = "success";
-				$scope.edit = false;
 			},function(response){
 				console.log(response);
 				$scope.showAlert = true;

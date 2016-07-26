@@ -48,7 +48,18 @@ panelRouter.route('/:panelId')
     });
 })
 .delete(function(req,res,next){
-
+    console.log("procesing delete!");
+    db.panels.destroy({
+        where:{
+            id:parseInt(req.params.panelId,10)
+        }
+    }).then(function(result){
+        console.log(result);
+        res.json(result);
+    },function(result){
+        res.status(400);
+        res.end("Deletion of panel failed!");
+    });
 })
 .put(function(req,res,next){
     console.log(req.body);
