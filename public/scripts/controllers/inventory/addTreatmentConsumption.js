@@ -308,7 +308,7 @@ angular.module('App')
 						}
 					}
 
-
+					//console.log('adding nowww.. :/'); return;
 					inventoryFactory.getConsumptions(authorize.getCentre()).save($scope.consumption).$promise.then(function(response){
 			
 							$scope.consumptionItems = [];
