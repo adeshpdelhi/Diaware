@@ -252,7 +252,7 @@
                                 <td style="text-align:center;" width="10%" >{{stockItem.item.itemName}}</td>
                                 <td style="text-align:center;" width="10%" >{{stockItem.item.usageType}}</td>
                                 <td style="text-align:center;" width="10%" >{{stockItem.item.brandName}}</td>
-                                <td style="text-align:center;" width="10%" ><input style="width:50%;" type="number" ng-init="stockItem.quantity=1" ng-model="stockItem.quantity"></td>
+                                <td style="text-align:center;color:{{(stockItem.quantity<1 || stockItem.quantity>stockItem.availableQuantity)?'red':'black'}};" width="10%" ><input style="width:50%;" type="number" ng-init="stockItem.quantity=1" ng-model="stockItem.quantity"></td>
                                 <!-- <td style="text-align:center;" width="10%" ><input style="width:50%;" type="number" ng-init="stockItem.availableQuantity=0" ng-model="stockItem.availableQuantity"></td> -->
                                 <td style="text-align:center;" width="10%" >{{stockItem.availableQuantity}}</td> 
                                 <td style="text-align:center;" width="10%" >{{stockItem.item.quantityMeasurementType}}</td>
