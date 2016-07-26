@@ -11,12 +11,12 @@
             <div style="padding-top:30px" class="panel-body bg-warning" >
 
 
-                <form class="form-horizontal" role="form" name="issueStockForm">
+                <form class="form-horizontal" role="form" ng-submit="issueStockForm.$valid && doIssueStock()" name="issueStockForm">
 
                     <div class="form-group">
                         <label  class="col-sm-3 control-label">Stock Issued To</label>
                         <div class="col-sm-8 ">
-                            <select name="item_name" class="form-control" ng-model="issueStock.stockIssuedTo">
+                            <select name="item_name" class="form-control" required ng-model="issueStock.stockIssuedTo">
                                 <option value="" selected disabled>-</option>
                                 <option value="Floor">Floor</option>
                                 <option value="ICU" >ICU</option>
@@ -252,11 +252,11 @@
                                 <td style="text-align:center;" width="10%" >{{stockItem.item.itemName}}</td>
                                 <td style="text-align:center;" width="10%" >{{stockItem.item.usageType}}</td>
                                 <td style="text-align:center;" width="10%" >{{stockItem.item.brandName}}</td>
-                                <td style="text-align:center;" width="10%" ><input style="width:50%;" type="number" ng-init="stockItem.quantityRequired=0" ng-model="stockItem.quantity"></td>
+                                <td style="text-align:center;color:{{(stockItem.quantity<1 || stockItem.quantity>stockItem.availableQuantity)?'red':'black'}};" width="10%" ><input style="width:50%;" type="number" ng-init="stockItem.quantity=1" ng-model="stockItem.quantity"></td>
                                 <!-- <td style="text-align:center;" width="10%" ><input style="width:50%;" type="number" ng-init="stockItem.availableQuantity=0" ng-model="stockItem.availableQuantity"></td> -->
                                 <td style="text-align:center;" width="10%" >{{stockItem.availableQuantity}}</td> 
                                 <td style="text-align:center;" width="10%" >{{stockItem.item.quantityMeasurementType}}</td>
-                                <td style="text-align:center;" width="5%" ng-click="addStockItem({itemId: stockItem.itemId,itemName:stockItem.item.itemName,usageType: stockItem.item.usageType,brandName:stockItem.item.brandName,quantity:stockItem.quantity,availableQuantity:stockItem.availableQuantity,quantityMeasurementType:stockItem.item.quantityMeasurementType},$index)"><span class="glyphicon glyphicon-plus"></span></td>
+                                <td style="text-align:center;" width="5%" ng-click="(stockItem.quantity<1 || stockItem.quantity>stockItem.availableQuantity)? quantityError() : addStockItem({itemId: stockItem.itemId,itemName:stockItem.item.itemName,usageType: stockItem.item.usageType,brandName:stockItem.item.brandName,quantity:stockItem.quantity,availableQuantity:stockItem.availableQuantity,quantityMeasurementType:stockItem.item.quantityMeasurementType},$index)"><span class="glyphicon glyphicon-plus"></span></td>
                             </tr>    
                         </tbody>
                     </table>
@@ -269,7 +269,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-offset-8 col-sm-10">
-                            <button type="submit" class="btn btn-success" ng-click="doIssueStock()">Issue Stock</button>
+                            <button type="submit" class="btn btn-success" >Issue Stock</button>
                         </div>
                     </div>
 

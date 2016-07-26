@@ -197,7 +197,7 @@ insert into floor(centreId, itemId, availableQuantity, createdAt, updatedAt) val
 
 
 
-insert into stockIssued(centreId,stockIssuedId,stockIssuedTo,estimatedSingleUse,estimatedReUse,estimatedNewDialyzer,estimatedCatheterSingleLumen,estimatedCatheterDoubleLumen,stockIssueDate,stockTakerName,nextExpectedStockIssueDate,createdAt, updatedAt) values ('JP1',DEFAULT,'floor',1,2,3,4,5,'2016-07-13 10:48:56','adesh','2016-07-13 10:48:56','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into stockIssued(centreId,stockIssuedId,stockIssuedTo,estimatedSingleUse,estimatedReUse,estimatedNewDialyzer,estimatedCatheterSingleLumen,estimatedCatheterDoubleLumen,stockIssueDate,stockTakerName,nextExpectedStockIssueDate,createdAt, updatedAt) values ('JP1',DEFAULT,'Floor',1,2,3,4,5,'2016-07-13 10:48:56','adesh','2016-07-13 10:48:56','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 insert into stockIssuedItems(stockIssuedId,itemId,quantity,createdAt, updatedAt) values(1,1,4,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 
@@ -205,6 +205,10 @@ insert into stockIssuedItems(stockIssuedId,itemId,quantity,createdAt, updatedAt)
 insert into consumption(centreId,treatmentType,treatmentId,createdAt, updatedAt) values ('JP1','Single Use',25366,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 insert into consumptionItems(treatmentId,itemId,quantity,createdAt,updatedAt) values (25366,1,2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into generalConsumption(centreId, lastModifiedBy,createdAt,updatedAt) values ('JP1','admin','2016-07-13 10:48:56','2016-07-13 10:48:56');
+
+insert into generalConsumptionItems(generalConsumptionId, itemId, quantity, lastModifiedBy, createdAt, updatedAt) values (1,1,5,'admin','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 -- insert into dialysisItems(itemName,createdAt,updatedAt) values('Dialyzer','2016-07-13 10:48:56','2016-07-13 10:48:56');
 -- insert into dialysisItems(itemName,createdAt,updatedAt) values('Blood Tubing','2016-07-13 10:48:56','2016-07-13 10:48:56');

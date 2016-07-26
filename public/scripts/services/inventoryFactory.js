@@ -50,6 +50,15 @@ angular.module('App')
 			return $resource(baseURL+":centreId/inventory/consumption/:treatmentId/items/:itemId",{centreId:centreId,treatmentId:treatmentId},  {'update':{method:'PUT' }});
 
 		}
+
+		this.getGeneralConsumptions = function(centreId){
+			return $resource(baseURL+":centreId/inventory/consumption/general/:generalConsumptionId",{centreId:centreId},  {'update':{method:'PUT' }});
+		}
+		
+		this.getGeneralConsumptionItems = function(centreId,generalConsumptionId){
+			return $resource(baseURL+":centreId/inventory/consumption/general/:generalConsumptionId/items/:itemId",{centreId:centreId,generalConsumptionId:generalConsumptionId},  {'update':{method:'PUT' }});
+
+		}
      	
   }])
 ;
