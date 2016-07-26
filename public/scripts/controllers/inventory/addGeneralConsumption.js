@@ -9,18 +9,18 @@ angular.module('App')
 			$scope.filteredItems =response; 
 		},function(response){
 			alert('Failed to retrieve items on floor');
-		});
+		})
 		
 		$scope.addItem = function(filteredItem,index){
 			$scope.items.push(filteredItem);
 			$scope.filteredItems.splice(index,1);
-		};
+		}
 
 
 		$scope.removeItem = function(item,index){
 			$scope.filteredItems.push(item);
 			$scope.items.splice(index,1);
-		};
+		}
 
 		$scope.addGeneralConsumption = function(){
 			$scope.addingItem=false;
@@ -33,7 +33,7 @@ angular.module('App')
 
 					},function(response){
 						alert('Saving some items failed');
-					});
+					})
 				}
 
 				inventoryFactory.getFloor(authorize.getCentre()).query().$promise.then(function(response){
@@ -70,6 +70,6 @@ angular.module('App')
 				$scope.message = 'Failed to added!';
 				$scope.messageColor = 'danger';
 				$scope.showAlert = true;
-			});
-		};
-}]);
+			})
+		}
+}])

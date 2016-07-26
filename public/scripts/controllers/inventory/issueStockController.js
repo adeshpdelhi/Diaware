@@ -35,11 +35,11 @@ angular.module('App')
 						$scope.filteredItems[i].quantity=0;
 				},function(response){
 					alert('failed to retrieve stocks');
-				});
+				})
 		$scope.updateFilteredItems = function(){
 				for(var i=0;i<$scope.filteredItems.length;i++)
 						$scope.filteredItems[i].quantity=0;
-		};
+		}
 		$scope.addStockItem = function(issueStockItem,index){
 			console.log(issueStockForm);
 			$scope.issueStockItem=issueStockItem;
@@ -58,7 +58,7 @@ angular.module('App')
 			$scope.updateFilteredItems();
 			$scope.addingItem=false;
 			
-		};
+		}
 		
 		$scope.removeItem = function(filteredItem, index){
 			console.log('deleting iindex'+index);
@@ -118,7 +118,7 @@ angular.module('App')
 										present = true;
 									}
 								}
-								if(present === false){
+								if(present == false){
 									console.log("item "+$scope.issueStockItems[i].itemId+' not present');
 									var newFloorItem = {itemId:$scope.issueStockItems[i].itemId,centreId:authorize.getCentre(),availableQuantity: $scope.issueStockItems[i].quantity,lastModifiedBy:authorize.getUsername()};
 									inventoryFactory.getFloor(authorize.getCentre()).save(newFloorItem);
@@ -146,14 +146,14 @@ angular.module('App')
 					};
 					//$scope.issueStockItems = [];
 
-				},function(response){alert('failed to update stocks');});
+				},function(response){alert('failed to update stocks')});
 				
 			},function(response){
 				$scope.messageColor = 'danger';
 				$scope.showAlert = true;
 				$scope.message = 'Saving failed';
 			});
-		};
+		}
 		
 		
 	

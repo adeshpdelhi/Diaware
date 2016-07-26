@@ -1,7 +1,7 @@
 'use strict';
 angular.module('App')
 .controller('MonitoringPreBasicMedicalController' ,['$scope','authorize','backendFactory','monitoringChartFactory', function($scope,authorize,backendFactory,monitoringChartFactory){
-	if(!$scope.view || ($scope.patientChart !== null  && $scope.basicMedical === null)){
+	if(!$scope.view || ($scope.patientChart != null  && $scope.basicMedical == null)){
 		$scope.basicMedical ={
 			preBasicId: null,
 			dialyzerName: null,
@@ -23,7 +23,7 @@ angular.module('App')
 	$scope.showalert_predialysis_basic_medical=false;
 	backendFactory.getCentres().get({id:authorize.getCentre()}).$promise.then(function(response){
 		$scope.accessLinesAvailable = response.accessLinesAvailable;
-	});
+	})
 	$scope.savedOnce=false;
 	$scope.saveBasicMedical = function(){
 		$scope.basicMedical.patientId = $scope.basic.patientId;

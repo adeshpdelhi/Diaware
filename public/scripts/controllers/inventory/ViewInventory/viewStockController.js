@@ -4,6 +4,7 @@ angular.module('App')
 	
 		inventoryFactory.getStocks(authorize.getCentre()).query().$promise.then(function(response){
 			$scope.stocks = response;
+			console.log($scope.stocks);
 		},function(response){
 			alert('stock retrieval failed');
 		})

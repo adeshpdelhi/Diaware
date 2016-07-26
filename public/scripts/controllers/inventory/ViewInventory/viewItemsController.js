@@ -31,5 +31,5 @@ angular.module('App')
 				$scope.message = "Error: "+ response.status+' ' +response.statusText + "!";
 			});
 		}
-	};
+	}
 }]);

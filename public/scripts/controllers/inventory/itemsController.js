@@ -38,7 +38,7 @@ angular.module('App')
 			lastModifiedBy:null
 		};
 		$scope.itemForm.$setPristine();
-	};
+	}
 	$scope.saveItems = function(){
 		console.log($scope.items);
 		inventoryFactory.getItems().save($scope.items).$promise.then(function(response){

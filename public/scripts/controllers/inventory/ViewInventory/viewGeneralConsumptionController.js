@@ -6,7 +6,7 @@ angular.module('App')
 			$scope.generalConsumptions = response;
 		}, function(response){
 			alert('fetching consumptions failed');
-		});
+		})
 	
 		
 		$scope.openGeneralConsumption = function(generalConsumptionId){
@@ -20,7 +20,7 @@ angular.module('App')
 	            }
 	          }
 	        });
-		};
+		}
 		
 		
 	

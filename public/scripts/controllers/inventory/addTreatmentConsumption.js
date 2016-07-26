@@ -38,9 +38,9 @@ angular.module('App')
 				}
 			},function(response){
 				alert('Failed to retrieve consumptions');
-			});
+			})
 			console.log(response);
-		},function(response){alert('Failed to retrieve appointments')});
+		},function(response){alert('Failed to retrieve appointments')})
 		// need to add attributes of editable table given in excel
 		
 		$scope.openAddConsumption = function(appointmentId){
@@ -65,7 +65,7 @@ angular.module('App')
 			treatmentId:$scope.appointmentId,
 			treatmentType:null,
 			lastModifiedBy: authorize.getUsername()
-		};
+		}
 		// $scope.consumptionDialysis={
 		// 	itemName:null,
 		// 	brandName:null,
@@ -87,7 +87,7 @@ angular.module('App')
 					if($scope.dialysisItems[i].item.itemName == $scope.dialysisTabularItems[j].itemName)
 						present = true;
 				}
-				if(present === true)
+				if(present == true)
 					{
 						console.log('itemName '+$scope.dialysisItems[i].item.itemName+' already present!');
 						continue;
@@ -105,7 +105,7 @@ angular.module('App')
 						for(var k=0;k<dialysisTabularItem.brandName.length;k++)
 							if($scope.dialysisItems[j].item.brandName == dialysisTabularItem.brandName[k])
 								present=true;
-						if(present===false)
+						if(present==false)
 							dialysisTabularItem.brandName.push($scope.dialysisItems[j].item.brandName);
 	
 	
@@ -114,7 +114,7 @@ angular.module('App')
 						for(var k=0;k<dialysisTabularItem.quantityMeasurementType.length;k++)
 							if($scope.dialysisItems[j].item.quantityMeasurementType == dialysisTabularItem.quantityMeasurementType[k])
 								present=true;
-						if(present===false)
+						if(present==false)
 							dialysisTabularItem.quantityMeasurementType.push($scope.dialysisItems[j].item.quantityMeasurementType);
 					}
 				}
@@ -138,7 +138,7 @@ angular.module('App')
 					if($scope.catheterizationItems[i].item.itemName == $scope.catheterizationTabularItems[j].itemName)
 						present = true;
 				}
-				if(present === true)
+				if(present == true)
 					{
 						console.log('itemName '+$scope.catheterizationItems[i].item.itemName+' already present!');
 						continue;
@@ -156,7 +156,7 @@ angular.module('App')
 						for(var k=0;k<catheterizationTabularItem.brandName.length;k++)
 							if($scope.catheterizationItems[j].item.brandName == catheterizationTabularItem.brandName[k])
 								present=true;
-						if(present===false)
+						if(present==false)
 							catheterizationTabularItem.brandName.push($scope.catheterizationItems[j].item.brandName);
 	
 	
@@ -165,7 +165,7 @@ angular.module('App')
 						for(var k=0;k<catheterizationTabularItem.quantityMeasurementType.length;k++)
 							if($scope.catheterizationItems[j].item.quantityMeasurementType == catheterizationTabularItem.quantityMeasurementType[k])
 								present=true;
-						if(present===false)
+						if(present==false)
 							catheterizationTabularItem.quantityMeasurementType.push($scope.catheterizationItems[j].item.quantityMeasurementType);
 					}
 				}
@@ -185,7 +185,7 @@ angular.module('App')
 								for(var j=0;j<$scope.dialysisItems.length;j++){
 									if($scope.dialysisTabularItems[i].itemName == $scope.dialysisItems[j].item.itemName && $scope.dialysisTabularItems[i].chosen.brandName == $scope.dialysisItems[j].item.brandName && $scope.dialysisTabularItems[i].chosen.quantityMeasurementType == $scope.dialysisItems[j].item.quantityMeasurementType){
 											var consumptionItem = {treatmentId: $scope.consumption.treatmentId,itemId: $scope.dialysisItems[j].item.itemId,quantity:$scope.dialysisTabularItems[i].chosen.quantity,lastModifiedBy:authorize.getUsername()};
-											inventoryFactory.getConsumptionItems(authorize.getCentre(),$scope.consumption.treatmentId).save(consumptionItem).$promise.then(function(response){},function(response){alert('saving consumption items failed');});
+											inventoryFactory.getConsumptionItems(authorize.getCentre(),$scope.consumption.treatmentId).save(consumptionItem).$promise.then(function(response){},function(response){alert('saving consumption items failed')});
 											$scope.consumptionItems.push(consumptionItem);
 									}
 								}
@@ -232,7 +232,7 @@ angular.module('App')
 								for(var j=0;j<$scope.catheterizationItems.length;j++){
 									if($scope.catheterizationTabularItems[i].itemName == $scope.catheterizationItems[j].item.itemName && $scope.catheterizationTabularItems[i].chosen.brandName == $scope.catheterizationItems[j].item.brandName && $scope.catheterizationTabularItems[i].chosen.quantityMeasurementType == $scope.catheterizationItems[j].item.quantityMeasurementType){
 											var consumptionItem = {treatmentId: $scope.consumption.treatmentId,itemId: $scope.catheterizationItems[j].item.itemId,quantity:$scope.catheterizationTabularItems[i].chosen.quantity,lastModifiedBy:authorize.getUsername()};
-											inventoryFactory.getConsumptionItems(authorize.getCentre(),$scope.consumption.treatmentId).save(consumptionItem).$promise.then(function(response){},function(response){alert('saving consumption items failed');});
+											inventoryFactory.getConsumptionItems(authorize.getCentre(),$scope.consumption.treatmentId).save(consumptionItem).$promise.then(function(response){},function(response){alert('saving consumption items failed')});
 											$scope.consumptionItems.push(consumptionItem);
 									}
 								}
@@ -305,7 +305,7 @@ angular.module('App')
 							}
 					}
 			}
-		};
+		}
 	    //$uibModalInstance.close();
 	    //$state.go('app.home', {}, {reload: true});
 

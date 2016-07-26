@@ -6,7 +6,7 @@ angular.module('App')
 			$scope.consumptions = response;
 		}, function(response){
 			alert('fetching consumptions failed');
-		});
+		})
 	
 		
 		$scope.openConsumption = function(treatmentId){
@@ -20,7 +20,7 @@ angular.module('App')
 	            }
 	          }
 	        });
-		};
+		}
 		
 		
 	

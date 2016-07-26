@@ -18,8 +18,7 @@ var gulp = require('gulp'),
 
 gulp.task('jshint', function() {
   return gulp.src('public/scripts/**/*.js')
-  //.pipe(jshint())
-  .pipe(jshint({ "lookup": false,  "globalstrict":true,  "globals": {'console': false, 'alert' : false, 'angular': false}  }))
+  .pipe(jshint())
   .pipe(jshint.reporter(stylish));
 });
 

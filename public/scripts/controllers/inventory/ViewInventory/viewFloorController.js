@@ -7,7 +7,7 @@ angular.module('App')
 			console.log($scope.floor);
 		},function(response){
 			alert('Floor retrieval failed');
-		});
+		})
 		
 		
 		

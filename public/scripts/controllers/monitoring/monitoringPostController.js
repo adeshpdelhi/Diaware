@@ -2,7 +2,7 @@
 'use strict';
 angular.module('App')
 .controller('MonitoringPostController',['$scope','patientFactory','choosePatientFactory','authorize','monitoringChartFactory', function($scope, patientFactory, choosePatientFactory, authorize,monitoringChartFactory){
-        if(!$scope.view || ($scope.patientChart !== null && !$scope.post)){
+        if(!$scope.view || ($scope.patientChart != null && !$scope.post)){
             $scope.post = {
             	patientId:null,
             	postId:null,
@@ -38,7 +38,7 @@ angular.module('App')
         
         $scope.$watch('post.postWeight',function(newVal, oldVal){
         	$scope.post.weightLoss = ($scope.view?$scope.patientChart.monitoringChartPreAssessment.preHDWeight:$scope.preHDWeight) - $scope.post.postWeight;
-        });
+        })
         $scope.savePost = function(){
         	$scope.post.patientId = $scope.patient.id;
         	$scope.post.postId = $scope.basic.preBasicId;
