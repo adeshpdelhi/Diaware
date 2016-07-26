@@ -4,7 +4,7 @@ angular.module('App')
 		$scope.regularForm = regularForm.regularForm;
 		$scope.pendingTreatments=[];
 		$scope.showAlert=false;
-		
+
 		// $scope.treatmentInventory= {
 		// 	treatmentId:null,
 		// 	treatmentType:null,
@@ -66,6 +66,37 @@ angular.module('App')
 			treatmentType:null,
 			lastModifiedBy: authorize.getUsername()
 		}
+
+		$scope.updateAvailableQuantity = function(index){
+			// console.log('checking');
+			// if(!(dialysisTabularItems[index].chosen.brandName.length!=0 && dialysisTabularItems[index].chosen.brandName!=null &&dialysisTabularItems[index].chosen.quantityMeasurementType.length!=0 && dialysisTabularItems[index].chosen.quantityMeasurementType!=null))
+			// 	return;
+			console.log('wroking index: '+index);
+			if($scope.consumption.treatmentType=='Single Use' || $scope.consumption.treatmentType=='Reuse' || $scope.consumption.treatmentType=='New Dialyser'){
+					inventoryFactory.getFloor(authorize.getCentre()).query().$promise.then(function(response){
+						var floorItems = response;
+						for(var j=0;j<floorItems.length;j++){
+						if($scope.dialysisTabularItems[index].itemName == floorItems[j].item.itemName && $scope.dialysisTabularItems[index].chosen.brandName == floorItems[j].item.brandName && $scope.dialysisTabularItems[index].chosen.quantityMeasurementType == floorItems[j].item.quantityMeasurementType){
+								$scope.dialysisTabularItems[index].availableQuantity = floorItems[j].availableQuantity;
+							}
+						}
+						if($scope.dialysisTabularItems[index].availableQuantity == null || $scope.dialysisTabularItems[index].availableQuantity == 0)
+						{
+							$scope.dialysisTabularItems[index].availableQuantity = 0;
+							$scope.message = 'Item unavailable in floor';
+							$scope.messageColor = 'danger';
+							$scope.showAlert = true;
+						}
+						else
+							$scope.showAlert = false;
+					})
+					
+			}
+			else if($scope.consumption.treatmentType=='Catheterization Single Lumen' || $scope.consumption.treatmentType=='Catheterization Double Lumen') {
+
+			}
+		}
+
 		// $scope.consumptionDialysis={
 		// 	itemName:null,
 		// 	brandName:null,

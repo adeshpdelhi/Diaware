@@ -4,6 +4,11 @@ angular.module('App')
 
 		$scope.regularForm = regularForm.regularForm;
 		$scope.showAlert=false;
+		$scope.quantityError = function(){
+			$scope.message = 'Quantity Error. Check quantity for the item.';
+			$scope.messageColor = 'danger';
+			$scope.showAlert = true;
+		}
 		$scope.items = [];
 		inventoryFactory.getFloor(authorize.getCentre()).query().$promise.then(function(response){
 			$scope.filteredItems =response; 
@@ -23,6 +28,13 @@ angular.module('App')
 		}
 
 		$scope.addGeneralConsumption = function(){
+			if($scope.items.length==0)
+			{
+				$scope.message = 'Add atleast one item';
+				$scope.messageColor = 'danger';
+				$scope.showAlert = true;
+				return;
+			}
 			$scope.addingItem=false;
 			inventoryFactory.getGeneralConsumptions(authorize.getCentre()).save({centreId: authorize.getCentre(), lastModifiedBy: authorize.getUsername()}).$promise.then(function(response){
 				$scope.generalConsumptionId = response.generalConsumptionId;
