@@ -5,11 +5,11 @@
     }
 </style>
 <div style="margin-top:20px;" class="mainbox col-sm-8 col-sm-pull-2 col-sm-push-2" ng-cloak>                    
-    <div ng-show="editBasic">
-            <div ng-include="'views/registration/basic_details.html'"></div> 
-        </div>
-        
-    <div class="panel" ng-show="!editBasic">
+    <div ng-if="editBasic">
+        <div ng-include="'views/registration/basic_details.html'"></div> 
+    </div>
+    
+    <div class="panel" ng-if="!editBasic">
         <div class="panel-heading">
             <div class="panel-title"><b>Patient Basic Details</b></div>
             <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>

@@ -104,11 +104,11 @@
                                 
                             </div>
                             <div ng-if = "show">
-                                <div class="form-group" ng-class="{'has-error':billingForm.product.$error.required && !billingForm.product.$pristine}">
+                                <div class="form-group" ng-class="{'has-error':billingForm.ledger.$error.required && !billingForm.product.$pristine}">
                                     <label for="product" class="control-label col-sm-2 text-capitalize">{{subItem.transactionType}}</label>
                                     <select ng-model="subItem.ledger" class="col-sm-2" ng-change="" ng-options = "ledger.ledgerName as ledger.ledgerName for ledger in ledgers" id = "ledger" name="ledger" required>
                                     </select>
-                                    <span ng-show="billingForm.product.$error.required && !billingForm.product.$pristine" class="help-block">Ledger Name is required                      
+                                    <span ng-show="billingForm.ledger.$error.required && !billingForm.product.$pristine" class="help-block">Ledger Name is required                      
                                     </span>    
 
                                     <label for="qty" class="control-label col-sm-1">Quantity</label>

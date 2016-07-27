@@ -1,8 +1,8 @@
 <div id="Registerbox" style="margin-top:20px;" class="mainbox col-sm-8 col-sm-pull-2 col-sm-push-2" ng-cloak>                    
-    <div ng-show="editOthers">
+    <div ng-if="editOthers">
         <div ng-include="'views/registration/others.html'"></div> 
     </div>
-    <div class="panel" ng-show="!editOthers" >
+    <div class="panel" ng-if="!editOthers" >
         <div class="panel-heading">
             <div class="panel-title"><b>Patient Other Details</b></div>
             <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>

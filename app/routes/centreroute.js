@@ -116,6 +116,8 @@ var afterUpdate = function(newInstance, oldInstance){
     console.log("inside afterUpdate!");
     var weekday = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     var increase = captureIncrease(newInstance,oldInstance);
+    console.log(newInstance);
+    console.log(oldInstance);
     for(var i = 0 ;i<weekday.length;i++){
         for(var j = 0; j < newInstance.noOfShiftsPerDay; j++){
             if(j >= oldInstance.noOfShiftsPerDay){
@@ -186,6 +188,21 @@ centreRouter.route('/:id')
 .put(function(req,res,next){
     console.log(req.body);
     var newInstance = req.body;
+    if(req.query.updateCount){
+        db.centres.update(
+        req.body, {
+            where:{
+                id:req.params.id
+            }
+        }).then(function (result) { 
+            console.log(JSON.stringify(result));
+            res.end("successfully updated")
+        }, function(rejectedPromiseError){
+            res.status(400);
+            res.end("Problem Occured in centre Route update")
+        });
+        return; 
+    }
     db.centres.find({ 
         where: {
             id:req.params.id
@@ -206,18 +223,7 @@ centreRouter.route('/:id')
             });
         }
     });
-    // db.centres.update(
-    // req.body, {
-    //     where:{
-    //         id:req.params.id
-    //     }
-    // }).then(function (result) { 
-    //     console.log(JSON.stringify(result));
-    //     res.end("successfully updated")
-    // }, function(rejectedPromiseError){
-    //     res.status(400);
-    //     res.end("Problem Occured in centre Route update")
-    // });
+    
 })
 ;
 
