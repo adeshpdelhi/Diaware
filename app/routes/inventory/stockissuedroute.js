@@ -13,9 +13,14 @@ stockIssuedRouter.use('/:stockIssuedId/items',stockIssuedItemsRouter);
 stockIssuedRouter.route('/')
 
 .get(function (req, res, next) {
-    
     console.log('procesing get');
-    db.stockIssued.findAll().then(function(stocksIssued){
+    var where={};
+    if(req.params.centreId!='all')
+        where.centreId=req.params.centreId;
+    console.log('procesing get');
+    db.stockIssued.findAll({
+        where:where
+    }).then(function(stocksIssued){
     	console.log(JSON.stringify(stocksIssued));
     	res.json(stocksIssued);
     });

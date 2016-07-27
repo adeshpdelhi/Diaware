@@ -13,9 +13,14 @@ consumptionRouter.use('/:treatmentId/items',consumptionItemsRouter);
 consumptionRouter.route('/')
 
 .get(function (req, res, next) {
-    
     console.log('procesing get');
-    db.consumption.findAll().then(function(consumptions){
+    var where={};
+    if(req.params.centreId!='all')
+        where.centreId=req.params.centreId;
+    console.log('procesing get');
+    db.consumption.findAll({
+        where:where
+        }).then(function(consumptions){
     	console.log(JSON.stringify(consumptions));
     	res.json(consumptions);
     });

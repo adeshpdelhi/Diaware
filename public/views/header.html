@@ -111,7 +111,7 @@
                             <li class="dropdown-submenu" ng-show="role.admin || role.incharge || role.manager">
                                 <a class="test" style="cursor: pointer; display: block;">Indents <span class="caret"></span></a>
                                 <ul class="dropdown-menu"  >
-                                    <li><a ui-sref="app.inventory.indent.new">Add Indent</a></li>
+                                    <li><a ui-sref="app.inventory.indent.new" ng-show="centre!='all'">Add Indent</a></li>
                                     <li><a ui-sref="app.inventory.indent.view"> View Indents</a></li>
                                 </ul>
                             </li>
@@ -125,14 +125,14 @@
                             <li class="dropdown-submenu" ng-show="role.admin || role.incharge || role.clinical">
                                 <a class="test" style="cursor: pointer; display: block;">Treatment Consumption <span class="caret"></span></a>
                                 <ul class="dropdown-menu"  >
-                                    <li><a ui-sref="app.inventory.consumption.new">Add Treatment Consumption</a></li>
+                                    <li><a ui-sref="app.inventory.consumption.new" ng-show="centre!='all'">Add Treatment Consumption</a></li>
                                     <li><a ui-sref="app.inventory.consumption.view">View Treatment Consumption</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown-submenu" ng-show="role.admin || role.incharge || role.manager">
                                 <a class="test" style="cursor: pointer; display: block;">Issue Stock <span class="caret"></span></a>
                                 <ul class="dropdown-menu"  >
-                                    <li><a ui-sref="app.inventory.stock.issued.new">Issue Stock From Store</a></li>
+                                    <li><a ui-sref="app.inventory.stock.issued.new" ng-show="centre!='all'">Issue Stock From Store</a></li>
                                     <li><a ui-sref="app.inventory.stock.issued.view">View Issued Stock</a></li>
                                 </ul>
                             </li>
@@ -140,7 +140,7 @@
 							<li class="dropdown-submenu" ng-show="role.admin || role.incharge || role.clinical">
                                 <a class="test" style="cursor: pointer; display: block;">General Consumption <span class="caret"></span></a>
                                 <ul class="dropdown-menu"  >
-                                    <li><a ui-sref="app.inventory.consumption.general.new">Add General Consumption</a></li>
+                                    <li><a ui-sref="app.inventory.consumption.general.new" ng-show="centre!='all'">Add General Consumption</a></li>
                                     <li><a ui-sref="app.inventory.consumption.general.view">View General Consumption</a></li>
                                 </ul>
                             </li>

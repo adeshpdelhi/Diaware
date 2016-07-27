@@ -1,5 +1,5 @@
 <div class="container">
-<div style="margin-top:60px;" class="mainbox col-sm-12" ng-cloak>                    
+<div style="margin-top:60px;" class="mainbox col-sm-8 col-sm-push-2 col-sm-pull-2" ng-cloak>                    
 <div class="panel">
     <div class="panel-heading">
         <div class="panel-title"><b> View General Consumption </b></div>
@@ -7,13 +7,13 @@
     </div> 
 
         <div style="padding-top:30px; text-align:center;" class="panel-body" >  
-            <div class="form-group col-sm-8 col-sm-push-2 col-sm-pull-2">
-                <label class="col-sm-2 control-label">General Consumption ID</label>                        
-                <div class="col-sm-4">
+            <div class="form-group col-sm-10 col-sm-push-1 col-sm-pull-1">
+                <label class="col-sm-3 control-label">General Consumption ID</label>                        
+                <div class="col-sm-3">
                     <input type="text" class="form-control" ng-model="filt.id">
                 </div>
-                <label class="col-sm-2 control-label">Centre ID</label>
-                <div class="col-sm-4">
+                <label class="col-sm-3 control-label">Centre ID</label>
+                <div class="col-sm-3">
                     <input  type="text" class="form-control" ng-model="filt.centre">
                 </div>
             </div> 
@@ -23,13 +23,15 @@
                         <tr>
                             <th style="text-align:center;" width="10%">General Consumption ID</th>
                             <th style="text-align:center;" width="10%">Centre ID</th>
+                            <th style="text-align:center;" width="10%">Date</th>
                             <th style="text-align:center;" width="10%">Last Modified By</th>
                         </tr>    
                     </thead>
                     <tbody >
-                        <tr ng-repeat = "generalConsumption in generalConsumptions |filter: filt.id | filter: filt.centre" style="height:2px;" ng-click="openGeneralConsumption(generalConsumption.generalConsumptionId)">
+                        <tr ng-repeat = "generalConsumption in generalConsumptions |filter: filt.id | filter: filt.centre | orderBy: '-generalConsumptionId'" style="height:2px;" ng-click="openGeneralConsumption(generalConsumption.generalConsumptionId)">
                             <td width="10%" style="text-align:center;" >{{generalConsumption.generalConsumptionId}}</td>
                             <td width="10%" style="text-align:center;" >{{generalConsumption.centreId}}</td>
+                            <td width="10%" style="text-align:center;" >{{generalConsumption.date |date:dd-MMMM-YY-EEE}}</td>
                             <td width="10%" style="text-align:center;" >{{generalConsumption.lastModifiedBy}}</td>
                         </tr>    
                     </tbody>

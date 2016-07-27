@@ -12,6 +12,10 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
     lastModifiedBy: {
       type: DataTypes.STRING,
       allowNull: true

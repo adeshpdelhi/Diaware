@@ -13,9 +13,14 @@ generalConsumptionRouter.use('/:generalConsumptionId/items',generalConsumptionIt
 generalConsumptionRouter.route('/')
 
 .get(function (req, res, next) {
-    
     console.log('procesing get');
-    db.generalConsumption.findAll().then(function(generalConsumptions){
+    var where={};
+    if(req.params.centreId!='all')
+        where.centreId=req.params.centreId;
+    console.log('procesing get');
+    db.generalConsumption.findAll({
+        where:where
+    }).then(function(generalConsumptions){
     	console.log(JSON.stringify(generalConsumptions));
     	res.json(generalConsumptions);
     });

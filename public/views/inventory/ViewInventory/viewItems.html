@@ -2,7 +2,7 @@
 	<div id="Registerbox" style="margin-top:20px;" class="mainbox col-sm-12">                    
 	    <div class="panel" >
 	        <div class="panel-heading">
-	            <div class="panel-title"><b>{{edit?'View Items':'Remove Items'}}</b></div>
+	            <div class="panel-title"><b>{{!edit?'View Items':'Remove Items'}}</b></div>
 	            <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
 	        </div>      
 
@@ -10,8 +10,26 @@
 	            <div class="alert alert-{{messageColor}}" ng-show="showAlert">
                     {{message}}
                 </div>
-
-	            <div class="table-responsive ">
+                <div class="form-group">
+	                <label class="col-sm-1 control-label">Item ID</label>                        
+	                <div class="col-sm-2">
+	                    <input type="text" class="form-control" ng-model="filt.id">
+	                </div>
+	                <label class="col-sm-1 control-label">Item Name</label>
+	                <div class="col-sm-2">
+	                    <input  type="text" class="form-control" ng-model="filt.name">
+	                </div>
+	                <label class="col-sm-1 control-label">Usage Type</label>
+	                <div class="col-sm-2">
+	                    <input  type="text" class="form-control" ng-model="filt.type">
+	                </div>
+	                <label class="col-sm-1 control-label">Brand Name</label>
+	                <div class="col-sm-2">
+	                    <input  type="text" class="form-control" ng-model="filt.brand">
+	                </div>
+	            </div> 
+	            <br><br>
+	            <!-- <div class="table-responsive ">
 	                <table id="viewItems" class="table table-striped table-fixedheader table-bordered" ng-if="items.length != 0">
 	                    <thead>
 	                        <th ng-repeat="(key,value) in items[0]" style="text-align:center;" class="text-uppercase">{{key}}</th>
@@ -24,8 +42,31 @@
 	                        </tr>    
 	                    </tbody>
 	                </table>
-           		</div>
-			
+           		</div> -->
+				<div class="table-responsive pull-left">
+	                <table class="table table-striped table-fixedheader table-bordered" >
+	                    <thead>
+	                        <tr>
+	                            <th style="text-align:center;" width="10%">Item ID</th>
+	                            <th style="text-align:center;" width="10%">Item Name</th>
+	                            <th style="text-align:center;" width="10%">Usage Type</th>
+	                            <th style="text-align:center;" width="10%">Brand Name</th>
+	                            <th style="text-align:center;" width="10%">Quantity Measurement Type</th>
+	                            <th width="5%" ng-show="edit"> &nbsp;</th>
+	                        </tr>    
+	                    </thead>
+	                    <tbody >
+	                        <tr ng-repeat = "item in items |filter: filt.id | filter: filt.name |filter:filt.type | filter: filt.brand" style="height:2px;">
+	                            <td width="10%" style="text-align:center;" >{{item.itemId}}</td>
+	                            <td width="10%" style="text-align:center;" >{{item.itemName}}</td>
+	                            <td width="10%" style="text-align:center;" >{{item.usageType}}</td>
+	                            <td width="10%" style="text-align:center;" >{{item.brandName}}</td>
+	                            <td width="10%" style="text-align:center;" >{{item.quantityMeasurementType}}</td>
+	                            <td width="5%" ng-show="edit"><a class="text-danger" href ng-click="removeItem(item.itemId)"><span class="glyphicon glyphicon-remove"></span></a></td>
+	                        </tr>    
+	                    </tbody>
+	                </table>
+	            </div>
 				<form>
 					<div class="form-group">
 	                    <div class="col-sm-offset-4 col-sm-10">
