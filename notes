@@ -131,3 +131,10 @@ CREATE EVENT my_event
 9. make sure someone cannot issue more than available to them. ---done
 10. reset all inventory forms after sending/ remove save button-- 60% done
 11. manage viewing rights in inventory *IMPORTANT* - or maybe viewing right everywhere
+
+to do
+1. manage views in inventory
+2. protect app
+3. add routes protection for inventory ---done
+4. checkbox in view users ---done
+5. all centre
