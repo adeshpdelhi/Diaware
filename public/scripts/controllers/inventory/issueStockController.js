@@ -1,6 +1,6 @@
 'use strict';
 angular.module('App')
-.controller('IssueStockController',['$scope','authorize','inventoryFactory', function($scope,authorize,inventoryFactory){
+.controller('IssueStockController',['$scope','authorize','inventoryFactory','$timeout', function($scope,authorize,inventoryFactory,$timeout){
 	
 	
 	$scope.showAlert=false;
@@ -114,6 +114,18 @@ angular.module('App')
 								}
 							}
 						}
+					$timeout(function(){
+						console.log('updating stocks now');
+						inventoryFactory.getStocks(authorize.getCentre()).query().$promise.then(function(response){
+							$scope.filteredItems = response;
+							console.log(response);
+							for(var i=0;i<$scope.filteredItems.length;i++)
+								$scope.filteredItems[i].quantity=1;
+						},function(response){
+							alert('failed to retrieve stocks');
+					})},2000);
+
+
 					if($scope.issueStock.stockIssuedTo == 'Floor'){
 						inventoryFactory.getFloor(authorize.getCentre()).query().$promise.then(function(response){
 							$scope.floorItems= response;
@@ -137,28 +149,48 @@ angular.module('App')
 									inventoryFactory.getFloor(authorize.getCentre()).save(newFloorItem);
 								}
 							}
+							$scope.issueStockForm.$setPristine();
+							$scope.savedOnce = true;
+							$scope.message = 'Issued successfully!';
+							$scope.messageColor = 'success';
+							$scope.showAlert = true;
+							$scope.issueStock = {
+								stockIssuedTo:null,
+								estimatedSingleUse:null,
+								estimatedReUse:null,
+								estimatedNewDialyser:null,
+								estimatedCatehterizationDoubleLumen:null,
+								estimatedCatehterizationSingleumen:null,
+								stockIssueDate:new Date(),
+								stockTakerName:null,
+								nextExpectedStockIssueDate:new Date(),
+								lastModifiedBy:null
+							};
+							$scope.issueStockItems = [];
 
 						});
 					}
+					else{
+						$scope.issueStockForm.$setPristine();
+						$scope.savedOnce = true;
+						$scope.message = 'Issued successfully!';
+						$scope.messageColor = 'success';
+						$scope.showAlert = true;
+						$scope.issueStock = {
+							stockIssuedTo:null,
+							estimatedSingleUse:null,
+							estimatedReUse:null,
+							estimatedNewDialyser:null,
+							estimatedCatehterizationDoubleLumen:null,
+							estimatedCatehterizationSingleumen:null,
+							stockIssueDate:new Date(),
+							stockTakerName:null,
+							nextExpectedStockIssueDate:new Date(),
+							lastModifiedBy:null
+						};
+						$scope.issueStockItems = [];
+					}
 
-					$scope.issueStockForm.$setPristine();
-					$scope.savedOnce = true;
-					$scope.message = 'Issued successfully!';
-					$scope.messageColor = 'success';
-					$scope.showAlert = true;
-					$scope.issueStock = {
-						stockIssuedTo:null,
-						estimatedSingleUse:null,
-						estimatedReUse:null,
-						estimatedNewDialyser:null,
-						estimatedCatehterizationDoubleLumen:null,
-						estimatedCatehterizationSingleumen:null,
-						stockIssueDate:new Date(),
-						stockTakerName:null,
-						nextExpectedStockIssueDate:new Date(),
-						lastModifiedBy:null
-					};
-					//$scope.issueStockItems = [];
 
 				},function(response){alert('failed to update stocks')});
 				

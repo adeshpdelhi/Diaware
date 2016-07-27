@@ -134,10 +134,12 @@ CREATE EVENT my_event
 
 to do
 1. manage views in inventory ---done, verify again
-2. protect app
+2. protect app ---done what i could
 3. add routes protection for inventory ---done
 4. checkbox in view users ---done
 5. all centre ---done
 6. show centreId in floor or stock view ---done
-7. add filter to all views
-8. add date filter to inventory views
+7. add filter to all views ---done
+8. add date filter to inventory views ---done
+9. order all lists by id/date
+10. modify details when adding new treat consumption
