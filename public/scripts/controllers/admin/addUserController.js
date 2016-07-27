@@ -9,8 +9,7 @@ angular.module('App')
 	$timeout(function(){
 		$scope.tempcentres = authorize.getActiveUser().centres;
 		for(var i = 0; i<$scope.tempcentres.length; i++ ){
-			if($scope.tempcentres[i]!='all')
-			    $scope.channels.push({value: $scope.tempcentres[i], label: $scope.tempcentres[i]});
+		    $scope.channels.push({value: $scope.tempcentres[i], label: $scope.tempcentres[i]});
 		}
 	},1000);
 
