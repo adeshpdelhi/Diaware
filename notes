@@ -126,10 +126,10 @@ CREATE EVENT my_event
 
 3. choose smthn else other than appointmentID as ID for treatment wise consumption
 5. warn if while adding treatment consumption there isn't enough items on floor... . show available quantity when adding treatment consumption---- kindof done.. not needed anymore
-7. handle old treatments in treatment consumptions. 
+7. handle old treatments in treatment consumptions. --not doing
 8. refer to viewItems.html for managing the space above panels ---cannot be done
 9. make sure someone cannot issue more than available to them. ---done
-10. reset all inventory forms after sending/ remove save button-- 60% done
+10. reset all inventory forms after sending/ remove save button-- 60% done -- done 100%
 11. manage viewing rights in inventory *IMPORTANT* - or maybe viewing right everywhere --- done i guess
 
 to do
@@ -142,4 +142,4 @@ to do
 7. add filter to all views ---done
 8. add date filter to inventory views ---done
 9. order all lists by id/date --done
-10. modify patient details shown when adding new treat consumption
+10. modify patient details shown when adding new treat consumption ---done
