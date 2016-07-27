@@ -12,6 +12,10 @@
             <div style="padding-top:30px; text-align:center;" class="panel-body" >
             <div class="row">	 
 	           <div class="form-group col-sm-10 col-sm-push-1">
+                    <label class="col-sm-1 control-label">Centre ID</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" ng-model="filt.centre">
+                    </div>  
                     <label class="col-sm-1 control-label">Name</label>                        
                     <div class="col-sm-2">
                         <input type="text" class="form-control" ng-model="filt.name">
@@ -23,10 +27,6 @@
                     <label class="col-sm-1 control-label">Brand</label>
                     <div class="col-sm-2">
                         <input type="text" class="form-control" ng-model="filt.brand">
-                    </div>  
-                    <label class="col-sm-1 control-label">Quantity Type</label>
-                    <div class="col-sm-2">
-                        <input type="text" class="form-control" ng-model="filt.quantityMeasurementType">
                     </div>  
                 </div>
                 </div>
@@ -45,7 +45,7 @@
                                 </tr>    
                             </thead>
                             <tbody >
-                                <tr ng-repeat = "stock in stocks | filter:filt.name | filter: filt.usageType | filter: filt.brand | filter: filt.quantityMeasurementType" style="height:2px;" >
+                                <tr ng-repeat = "stock in stocks | filter:filt.name | filter: filt.usageType | filter: filt.brand | filter: filt.centre" style="height:2px;" >
                                     <td width="10%" style="text-align:center;" >{{stock.centreId}}</td>
                                     <td width="10%" style="text-align:center;" >{{stock.itemId}}</td>
                                     <td width="10%" style="text-align:center;" >{{stock.item.itemName}}</td>
