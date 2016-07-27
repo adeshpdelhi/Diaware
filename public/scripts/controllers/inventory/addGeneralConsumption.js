@@ -17,6 +17,7 @@ angular.module('App')
 		})
 		
 		$scope.addItem = function(filteredItem,index){
+			$scope.addingItem=false;
 			$scope.items.push(filteredItem);
 			$scope.filteredItems.splice(index,1);
 		}
@@ -36,7 +37,7 @@ angular.module('App')
 				return;
 			}
 			$scope.addingItem=false;
-			inventoryFactory.getGeneralConsumptions(authorize.getCentre()).save({centreId: authorize.getCentre(), lastModifiedBy: authorize.getUsername()}).$promise.then(function(response){
+			inventoryFactory.getGeneralConsumptions(authorize.getCentre()).save({centreId: authorize.getCentre(),date:new Date(), lastModifiedBy: authorize.getUsername()}).$promise.then(function(response){
 				$scope.generalConsumptionId = response.generalConsumptionId;
 				for(var i=0;i<$scope.items.length;i++){
 					$scope.items[i].lastModifiedBy = authorize.getUsername();
