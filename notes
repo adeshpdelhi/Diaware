@@ -141,5 +141,5 @@ to do
 6. show centreId in floor or stock view ---done
 7. add filter to all views ---done
 8. add date filter to inventory views ---done
-9. order all lists by id/date
-10. modify details when adding new treat consumption
+9. order all lists by id/date --done
+10. modify patient details shown when adding new treat consumption

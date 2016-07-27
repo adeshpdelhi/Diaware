@@ -202,7 +202,7 @@ insert into stockIssued(centreId,stockIssuedId,stockIssuedTo,estimatedSingleUse,
 insert into stockIssuedItems(stockIssuedId,itemId,quantity,createdAt, updatedAt) values(1,1,4,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 
-insert into consumption(centreId,treatmentType,treatmentId,createdAt, updatedAt) values ('JP1','Single Use',25366,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into consumption(centreId,treatmentType,treatmentId,createdAt, updatedAt) values ('JP1','Single Use',0,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 insert into consumptionItems(treatmentId,itemId,quantity,createdAt,updatedAt) values (25366,1,2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 

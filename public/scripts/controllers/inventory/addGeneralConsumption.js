@@ -1,6 +1,6 @@
 'use strict';
 angular.module('App')
-.controller('AddGeneralConsumptionController',['$scope','authorize','inventoryFactory','regularForm', function($scope,authorize,inventoryFactory, regularForm){
+.controller('AddGeneralConsumptionController',['$scope','authorize','inventoryFactory','regularForm','$timeout', function($scope,authorize,inventoryFactory, regularForm, $timeout){
 
 		$scope.regularForm = regularForm.regularForm;
 		$scope.showAlert=false;
@@ -36,6 +36,13 @@ angular.module('App')
 				$scope.showAlert = true;
 				return;
 			}
+			$timeout(function(){
+						inventoryFactory.getFloor(authorize.getCentre()).query().$promise.then(function(response){
+							$scope.filteredItems =response; 
+						},function(response){
+							alert('Failed to retrieve items on floor');
+						})
+					},2000);
 			$scope.addingItem=false;
 			inventoryFactory.getGeneralConsumptions(authorize.getCentre()).save({centreId: authorize.getCentre(),date:new Date(), lastModifiedBy: authorize.getUsername()}).$promise.then(function(response){
 				$scope.generalConsumptionId = response.generalConsumptionId;

@@ -40,7 +40,7 @@
                             </tr>    
                         </thead>
                         <tbody >
-                            <tr ng-repeat = "stockIssued in stocksIssued |filter:filt.id | filter: filt.centre | filter:filt.to" style="height:2px;" ng-click="openStockIssued(stockIssued.stockIssuedId)">
+                            <tr ng-repeat = "stockIssued in stocksIssued |filter:filt.id | filter: filt.centre | filter:filt.to | orderBy: '-stockIssuedId'" style="height:2px;" ng-click="openStockIssued(stockIssued.stockIssuedId)">
                                 <td width="10%" style="text-align:center;" >{{stockIssued.stockIssuedId}}</td>
                                 <td width="10%" style="text-align:center;" >{{stockIssued.centreId}}</td>
                                 <td width="10%" style="text-align:center;" >{{stockIssued.stockIssuedTo}}</td>

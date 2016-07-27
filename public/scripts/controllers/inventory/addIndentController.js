@@ -27,25 +27,18 @@ angular.module('App')
 				quantityMeasurementType:null,
 				lastModifiedBy:null
 		};
+		$scope.retrieveFilteredItems = function(){
 		inventoryFactory.getItems().query().$promise.then(function(response){
 				$scope.filteredItems = response;
 				inventoryFactory.getStocks(authorize.getCentre()).query().$promise.then(function(response){
 					$scope.stocks = response;
-					for(var i=0;i<$scope.filteredItems.length;i++)
-					{
-						for(j=0;j<$scope.stocks.length;j++){
-							if($scope.filteredItems[i].itemId == $scope.stocks[j].itemId)
-							{
-								$scope.filteredItems[i].availableQuantity = $scope.stocks[j].availableQuantity;
-							}
-						}
-						if($scope.filteredItems[i].availableQuantity==null)
-							$scope.filteredItems[i].availableQuantity = 0;
-					}
+					$scope.updateFilteredItems();
 				},function(response){ alert("Failed to retrieve item's availableQuantity from stock"); });
 			},function(response){
 				alert('item retieval failed');
 			});
+		};
+		$scope.retrieveFilteredItems();
 		$scope.updateFilteredItems = function(){
 			
 			for(var i=0;i<$scope.filteredItems.length;i++)
@@ -132,6 +125,7 @@ angular.module('App')
 		
 
 		$scope.raiseIndent = function(){
+			$scope.retrieveFilteredItems();
 			$scope.indent.status="Raised";
 			$scope.indent.centreId=authorize.getCentre();
 			$scope.indent.lastModifiedBy=authorize.getUsername();
@@ -190,6 +184,7 @@ angular.module('App')
 
 
 		$scope.saveIndent = function(){
+			$scope.retrieveFilteredItems();
 			$scope.indent.status="Saved";
 			$scope.indent.centreId=authorize.getCentre();
 			$scope.indent.lastModifiedBy=authorize.getUsername();

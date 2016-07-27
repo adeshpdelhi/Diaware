@@ -28,7 +28,7 @@
                         </tr>    
                     </thead>
                     <tbody >
-                        <tr ng-repeat = "generalConsumption in generalConsumptions |filter: filt.id | filter: filt.centre" style="height:2px;" ng-click="openGeneralConsumption(generalConsumption.generalConsumptionId)">
+                        <tr ng-repeat = "generalConsumption in generalConsumptions |filter: filt.id | filter: filt.centre | orderBy: '-generalConsumptionId'" style="height:2px;" ng-click="openGeneralConsumption(generalConsumption.generalConsumptionId)">
                             <td width="10%" style="text-align:center;" >{{generalConsumption.generalConsumptionId}}</td>
                             <td width="10%" style="text-align:center;" >{{generalConsumption.centreId}}</td>
                             <td width="10%" style="text-align:center;" >{{generalConsumption.date |date:dd-MMMM-YY-EEE}}</td>
