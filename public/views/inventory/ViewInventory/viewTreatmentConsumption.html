@@ -7,15 +7,24 @@
     </div> 
 
         <div style="padding-top:30px; text-align:center;" class="panel-body" >  
-            <div class="form-group col-sm-6 col-sm-push-3 col-sm-pull-3">
-                <label class="col-sm-2 control-label">Treatment ID</label>                        
-                <div class="col-sm-4">
+            <div class="form-group">
+                <label class="col-sm-1 control-label">Treatment ID</label>                        
+                <div class="col-sm-2">
                     <input type="text" class="form-control" ng-model="filt.id">
                 </div>
-                <label class="col-sm-2 control-label">Treatment Type</label>
-                <div class="col-sm-4">
+                <label class="col-sm-1 control-label">Centre ID</label>
+                <div class="col-sm-2">
+                    <input  type="text" class="form-control" ng-model="filt.centre">
+                </div>
+                <label class="col-sm-1 control-label">Treatment Type</label>
+                <div class="col-sm-2">
                     <input  type="text" class="form-control" ng-model="filt.type">
                 </div>
+                <label class="col-sm-1 control-label">Patient ID</label>
+                <div class="col-sm-2">
+                    <input  type="text" class="form-control" ng-model="filt.patientId">
+                </div>
+
             </div> 
             <div class="table-responsive pull-left">
                 <table class="table table-striped table-fixedheader table-bordered" >
@@ -23,14 +32,18 @@
                         <tr>
                             <th style="text-align:center;" width="10%">Treatment ID</th>
                             <th style="text-align:center;" width="10%">Centre ID</th>
+                            <th style="text-align:center;" width="10%">Patient ID</th>
+                            <th style="text-align:center;" width="10%">Date</th>
                             <th style="text-align:center;" width="10%">Treatment Type</th>
                             <th style="text-align:center;" width="10%">Last Modified By</th>
                         </tr>    
                     </thead>
                     <tbody >
-                        <tr ng-repeat = "consumption in consumptions |filter: filt.id | filter: filt.type" style="height:2px;" ng-click="openConsumption(consumption.treatmentId)">
+                        <tr ng-repeat = "consumption in consumptions |filter: filt.id | filter: filt.type |filter:filt.patientId | filter: filt.centre" style="height:2px;" ng-click="openConsumption(consumption.treatmentId)">
                             <td width="10%" style="text-align:center;" >{{consumption.treatmentId}}</td>
                             <td width="10%" style="text-align:center;" >{{consumption.centreId}}</td>
+                            <td width="10%" style="text-align:center;" >{{consumption.patientId}}</td>
+                            <td width="10%" style="text-align:center;" >{{consumption.treatmentDate |date:dd-MMMM-YY-EEE}}</td>
                             <td width="10%" style="text-align:center;" >{{regularForm(consumption.treatmentType)}}</td>
                             <td width="10%" style="text-align:center;" >{{consumption.lastModifiedBy}}</td>
                         </tr>    

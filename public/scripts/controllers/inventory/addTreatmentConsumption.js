@@ -57,18 +57,22 @@ angular.module('App')
 		};
 	
 	}])
-.controller('AddConsumptionModalController', ['$scope', '$state', 'authorize', '$uibModalInstance', 'appointmentId','inventoryFactory', function ($scope, $state, authorize, $uibModalInstance, appointmentId,inventoryFactory) {
+.controller('AddConsumptionModalController', ['$scope', '$state', 'authorize', '$uibModalInstance', 'appointmentId','inventoryFactory','appointmentFactory', function ($scope, $state, authorize, $uibModalInstance, appointmentId,inventoryFactory, appointmentFactory) {
 
 		$scope.appointmentId = appointmentId;
 		$scope.consumption={
-			centreId:authorize.getCentre(),
-			treatmentId:$scope.appointmentId,
-			treatmentType:null,
-			lastModifiedBy: authorize.getUsername()
-		}
+				centreId:authorize.getCentre(),
+				treatmentId:$scope.appointmentId,
+				treatmentType:null,
+				lastModifiedBy: authorize.getUsername()
+			};
+		appointmentFactory.getPastAppointments(authorize.getCentre()).get({appointmentId: $scope.appointmentId}).$promise.then(function(response){
+			$scope.consumption.treatmentDate = response.date;
+			$scope.consumption.patientId = response.patientId;
+		});
 
 		$scope.quantityError = function(){
-			if(!$scope.message.includes('Atleast item unavailable in floor')){
+			if(!$scope.message.includes('Atleast one item unavailable in floor')){
 				$scope.message = 'Quantity Error. Check quantity for the item.';
 				$scope.messageColor = 'danger';
 				$scope.showAlert = true;
@@ -94,12 +98,12 @@ angular.module('App')
 						if($scope.dialysisTabularItems[index].availableQuantity == null || $scope.dialysisTabularItems[index].availableQuantity == 0)
 						{
 							$scope.dialysisTabularItems[index].availableQuantity = 0;
-							$scope.message = 'Atleast item unavailable in floor';
+							$scope.message = 'Atleast one item unavailable in floor';
 							$scope.messageColor = 'danger';
 							$scope.messageIndex = index;
 							$scope.showAlert = true;
 						}
-						else if(index == $scope.messageIndex || $scope.message != 'Atleast item unavailable in floor')
+						else if(index == $scope.messageIndex || $scope.message != 'Atleast one item unavailable in floor')
 							$scope.showAlert = false;
 					})
 					
@@ -116,12 +120,12 @@ angular.module('App')
 						if($scope.catheterizationTabularItems[index].availableQuantity == null || $scope.catheterizationTabularItems[index].availableQuantity == 0)
 						{
 							$scope.catheterizationTabularItems[index].availableQuantity = 0;
-							$scope.message = 'Atleast item unavailable in floor';
+							$scope.message = 'Atleast one item unavailable in floor';
 							$scope.messageColor = 'danger';
 							$scope.messageIndex = index;
 							$scope.showAlert = true;
 						}
-						else if(index == $scope.messageIndex || $scope.message != 'Atleast item unavailable in floor')
+						else if(index == $scope.messageIndex || $scope.message != 'Atleast one item unavailable in floor')
 							$scope.showAlert = false;
 					})
 			}
