@@ -10,12 +10,12 @@ floorRouter.use(bodyParser.json());
 floorRouter.route('/')
 
 .get(function (req, res, next) {
-    
+    var where={};
+    if(req.params.centreId!='all')
+        where.centreId=req.params.centreId;
     console.log('procesing get');
     db.floor.findAll({
-        where:{
-            centreId: req.params.centreId
-        },
+        where:where,
         include:[
             db.item
         ]
@@ -39,12 +39,13 @@ floorRouter.route('/')
 
 floorRouter.route('/:itemId')
 .get(function(req,res,next){
+    var where={};
+    if(req.params.centreId!='all')
+        where.centreId=req.params.centreId;
+    where.itemId=parseInt(req.params.itemId,10)
     console.log('procesing get');
     db.floor.findOne({
-        where:{
-            itemId:parseInt(req.params.itemId,10),
-            centreId: req.params.centreId
-        },
+        where:where,
         include:[
             db.item
         ]

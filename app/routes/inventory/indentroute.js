@@ -13,12 +13,12 @@ indentRouter.use('/:indentId/items',indentItemsRouter);
 indentRouter.route('/')
 
 .get(function (req, res, next) {
-    
+    var where={};
+    if(req.params.centreId!='all')
+        where.centreId=req.params.centreId;
     console.log('procesing get');
     db.indent.findAll({
-        where:{
-            centreId:req.params.centreId
-        }
+        where: where
     }).then(function(indents){
     	console.log(JSON.stringify(indents));
     	res.json(indents);

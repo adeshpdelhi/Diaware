@@ -10,12 +10,12 @@ stockRouter.use(bodyParser.json());
 stockRouter.route('/')
 
 .get(function (req, res, next) {
-    
+    var where={};
+    if(req.params.centreId!='all')
+        where.centreId=req.params.centreId;
     console.log('procesing get');
     db.stock.findAll({
-        where:{
-            centreId: req.params.centreId
-        },
+        where:where,
         include:[
             db.item
         ]
@@ -40,11 +40,12 @@ stockRouter.route('/')
 stockRouter.route('/:itemId')
 .get(function(req,res,next){
     console.log('procesing get');
+    var where={};
+    if(req.params.centreId!='all')
+        where.centreId=req.params.centreId;
+    where.itemId=parseInt(req.params.itemId,10)
     db.stock.findOne({
-        where:{
-            itemId:parseInt(req.params.itemId,10),
-            centreId: req.params.centreId
-        },
+        where:where,
         include:[
             db.item
         ]
