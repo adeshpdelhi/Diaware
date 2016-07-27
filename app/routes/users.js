@@ -6,9 +6,14 @@ var crypto = require('crypto');
 
 
 router.get('/manage/:centreId', auth.verifyLoggedIn, function(req, res) {
-    users.findAll({where:{centres:{$like: '%'+req.params.centreId+'%'}}}).then(function(users){
-		res.json(users);
-	});
+	if(req.params.centreId=='all')
+		users.findAll().then(function(users){
+			res.json(users);
+		});
+	else
+	    users.findAll({where:{centres:{$like: '%'+req.params.centreId+'%'}}}).then(function(users){
+			res.json(users);
+		});
 });
 
 
