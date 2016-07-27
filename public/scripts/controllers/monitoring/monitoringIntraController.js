@@ -71,9 +71,9 @@ angular.module('App')
                 },$scope.intraTable[i])
                 .$promise.then(function(response){
                     console.log(response);
-                    $scope.updateParentValues(false,true,"Updated Successfully!",7);
+                    $scope.updateParentValues(false,true,"Updated Successfully!",7,'success');
                 },function(response){
-                    $scope.updateParentValues(false,true,"Error: "+response.status + " " +response.statusText + "!",7);
+                    $scope.updateParentValues(false,true,"Error: "+response.status + " " +response.statusText + "!",7,'danger');
                 });
                 done = true
             }
@@ -84,10 +84,10 @@ angular.module('App')
                 console.log($scope.intraTable[i]);
             }
             monitoringChartFactory.getIntra($scope.patientChart.patientId).save($scope.intraTable).$promise.then(function(response){
-                $scope.updateParentValues(false,true,"Updated Successfully!",7);
+                $scope.updateParentValues(false,true,"Updated Successfully!",7,'success');
                 console.log(response);
             },function(response){
-                $scope.updateParentValues(false,true,"Error: "+response.status + " "+ response.statusText + "!",7);    
+                $scope.updateParentValues(false,true,"Error: "+response.status + " "+ response.statusText + "!",7,'danger');    
             });
 
         };

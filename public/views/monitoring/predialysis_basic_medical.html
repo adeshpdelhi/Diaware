@@ -61,13 +61,13 @@
 <div class="form-group row">
 	<label class="col-sm-3 control-label">Bolus Amount</label>                        
 	<div class="col-sm-7">
-		<input  type="number" class="form-control" id="bolus_amount" name="bolus_amount" ng-model="basicMedical.bolusAmount">
+		<input  type="number" class="form-control" id="bolus_amount" name="bolus_amount" ng-model="basicMedical.bolusAmount" min = "0">
 	</div>
 </div>
 <div class="form-group row">
 	<label class="col-sm-3 control-label">Hourly Heparin</label>
 	<div class="col-sm-7">
-		<input  type="number" class="form-control" id="hourly_heparin" name="hourly_heparin" ng-model="basicMedical.hourlyHeparin">
+		<input  type="number" class="form-control" id="hourly_heparin" name="hourly_heparin" ng-model="basicMedical.hourlyHeparin" min ="0">
 	</div>
 </div>
 <div class="form-group row">
@@ -81,13 +81,13 @@
 <div class="form-group row">
 	<label class="col-sm-4 col-sm-pull-1 control-label">N.S. Flushing Frequeny</label>                        
 	<div class="col-sm-7 col-sm-pull-1">
-		<input  type="number" class="form-control" id="ns_flushing_frequency" name="ns_flushing_frequency"  ng-model="basicMedical.NSFlushingFrequency" >
+		<input  type="number" class="form-control" id="ns_flushing_frequency" name="ns_flushing_frequency"  ng-model="basicMedical.NSFlushingFrequency" min="0" >
 	</div>
 </div>
 <div class="form-group row">
 	<label class="col-sm-4 col-sm-pull-1 control-label">N.S. Flushing Volume</label>
 	<div class="col-sm-7 col-sm-pull-1">
-		<input  type="number" class="form-control" id="ns_flushing_volume" name="ns_flushing_volume" ng-model="basicMedical.NSFlushingVolume">
+		<input  type="number" class="form-control" id="ns_flushing_volume" name="ns_flushing_volume" ng-model="basicMedical.NSFlushingVolume" min ="0">
 	</div>
 </div>
 
@@ -97,9 +97,9 @@
     </div>
 </div>
 <div class="form-group">
-	<div class="alert alert-success alert-dismissable" ng-show="showalert_predialysis_basic_medical">
+	<div class="alert alert-{{messageColor}} alert-dismissable" ng-show="showalert_predialysis_basic_medical">
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		Details Saved Successfully.
+		{{message}}
 	</div>
 </div>
 </form>

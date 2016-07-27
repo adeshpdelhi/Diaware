@@ -147,39 +147,51 @@ angular.module('App')
 			},$scope.patientChart)
 			.$promise.then(function(response){
 				console.log(response);
+				$scope.messagePreBasic = "SuccessFully Updated Details!";
+				$scope.messageColorPreBasic = "success";
+			},function(response){
+				console.log(response);
+				$scope.messagePreBasic="Error: "+response.status + " " + response.statusText + "!";
+				$scope.messageColorPreBasic = 'danger';
 			});	
 		};
 		
-		$scope.updateParentValues = function(editing,alert,message,value){
+		$scope.updateParentValues = function(editing,alert,message,value,color){
 			if(value == 2){
 				$scope.editingPreBasicMedical = editing;
 				$scope.updatedPreBasicMedical = alert;
-				$scope.message = message;
+				$scope.messagePreBasicMedical = message;
+				$scope.messageColorPreBasicMedical = color;
 			}
 			if(value == 3){
 				$scope.editingPreMachineFinalCheck = editing;
 				$scope.updatedPreMachineFinalCheck = alert;
-				$scope.message = message;
+				$scope.messagePreMachineFinalCheck = message;
+				$scope.messageColorPreMachineFinalCheck=color;
 			}
 			if(value == 4){
 				$scope.editingPreAccessAssessment = editing;
 				$scope.updatedPreAccessAssessment = alert;
-				$scope.message = message;
+				$scope.messagePreAccessAssessment = message;
+				$scope.messageColorPreAccessAssessment = color;
 			}
 			if(value == 5){
 				$scope.editingPreAssessment = editing;
 				$scope.updatedPreAssessment = alert;
-				$scope.message = message;
+				$scope.messagePreAssessment = message;
+				$scope.messageColorPreAssessment = color;
 			}
 			if(value == 6){
 				$scope.editingPost = editing;
 				$scope.updatedPost = alert;
-				$scope.message = message;
+				$scope.messagePost = message;
+				$scope.messageColorPost = color;
 			}
 			if(value == 7){
 				$scope.editingIntra = editing;
 				$scope.updatedIntra = alert;
-				$scope.message = message;
+				$scope.messageIntra = message;
+				$scope.messageColorIntra = color;
 			}
 		} ;
 		

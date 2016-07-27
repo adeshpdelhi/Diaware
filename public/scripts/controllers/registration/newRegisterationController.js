@@ -62,9 +62,14 @@ angular.module('App')
 					$scope.showalert_basic_details=true;
 					$scope.savedOnce = true;
 					$scope.isRegistered = true;
+					$scope.message ="Saved Basic Details Successfully!";
+					$scope.messageColor ='success';
 				},function(response){
-					$scope.showalert_basic_details=false;
+					$scope.showalert_basic_details=true;
 					console.log(response);
+					$scope.message ='Error: ' +response.status + " " + response.statusText+ "!";
+					$scope.messageColor="danger";
+
 				});
 			//$scope.showalert_basic_details=true;
 			

@@ -32,14 +32,16 @@ angular.module('App')
 		console.log($scope.basicMedical);
 		monitoringChartFactory.getPreBasicMedicals($scope.basic.patientId).save($scope.basicMedical).$promise.then(function(response){
 			$scope.showalert_predialysis_basic_medical=true;
+			$scope.message="Successfully Saved Details";
+			$scope.messageColor="success";
 			console.log('old value of savedOnce in basicMedical '+$scope.savedOnce);
 			$scope.savedOnce=true;
 			},function(response){
-				$scope.showalert_predialysis_basic_medical=false;
+				$scope.showalert_predialysis_basic_medical=true;
+				$scope.message="Error: "+ response.status + " " + response.statusText + "!";
+				$scope.messageColor="danger";
 				console.log(response);
-			}
-			
-			);
+			});
 		//$scope.showalert_predialysis_basic_medical=true;
 	};
 	$scope.updatePreBasicMedical = function(){
@@ -51,7 +53,7 @@ angular.module('App')
 			},$scope.basicMedical)
 			.$promise.then(function(response){
 				console.log(response);
-				$scope.updateParentValues(false,true,"Updated Successfully!",2);
+				$scope.updateParentValues(false,true,"Updated Successfully!",2,'success');
 			},function(response){
 				$scope.updateParentValues(false,true,"Error: "+ response.status + " " + response.statusText +"!",2);
 			});
@@ -60,7 +62,7 @@ angular.module('App')
 			$scope.basicMedical.preBasicId = $scope.patientChart.preBasicId;
 			console.log($scope.basicMedical);
 			monitoringChartFactory.getPreBasicMedicals($scope.patientChart.patientId).save($scope.basicMedical).$promise.then(function(response){
-				$scope.updateParentValues(false,true,"Updated Successfully!",2);
+				$scope.updateParentValues(false,true,"Updated Successfully!",2,'danger');
 				
 			},function(response){
 				$scope.updateParentValues(false,true,"Error: "+ response.status + " " + response.statusText +"!",2);

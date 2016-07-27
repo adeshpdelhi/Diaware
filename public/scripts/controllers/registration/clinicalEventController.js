@@ -74,17 +74,23 @@ angular.module('App')
 					.$promise.then(function(response){
 						$scope.showalert_events=true;
 						$scope.showAlertClinical = true;
-						$scope.message = "Updated Clinical Events Successfully";			
+						$scope.message = "Updated Clinical Events Successfully";
+						$scope.messageColor = 'success';			
 						console.log($scope.events[x]);
 						$scope.events[x] =  JSON.parse(JSON.stringify(response));
 						// $scope.events[x].id = response.id;
 						// $scope.events[x].createdAt = response.createdAt;
 						// $scope.events[x].updatedAt = response.updatedAt;
 						console.log("x:inside " + x);
+						$scope.updateMyValuesFromClinical(false,$scope.showAlertClinical, $scope.message,$scope.messageColor);
+
 						x++;
 					},function(response){
 						$scope.showAlertClinical = true;
 						$scope.message = "Error: " + response.status + " " + response.statusText; 
+						$scope.messageColor = 'danger';
+						$scope.updateMyValuesFromClinical(false,$scope.showAlertClinical, $scope.message,$scope.messageColor);
+
 					});	
 				}
 				else {
@@ -93,15 +99,20 @@ angular.module('App')
 						clinicalEventId:$scope.events[i].id
 					},$scope.events[i]).$promise.then(function(response){
 						$scope.showAlertClinical = true;
-						$scope.message = "Updated Clinical Events Successfully";			
+						$scope.message = "Updated Clinical Events Successfully";
+						$scope.messageColor = 'success';			
+						$scope.updateMyValuesFromClinical(false,$scope.showAlertClinical, $scope.message,$scope.messageColor);
+						
 					},function(response){
 						$scope.showAlertClinical = true;
 						$scope.message = "Error: " + response.status + " " + response.statusText; 
+						$scope.messageColor = 'danger';
+						$scope.updateMyValuesFromClinical(false,$scope.showAlertClinical, $scope.message,$scope.messageColor);
+						
 					});
 					x++;
 				}
 			}
-			$scope.updateMyValuesFromClinical(false,$scope.showAlertClinical, $scope.message);
 			$scope.clinicalEventForm.$setPristine();
 			$scope.event = {
 				ID:null,
@@ -131,12 +142,16 @@ angular.module('App')
 					console.log("x:outside " + x);
 					patientFactory.getPatientMajorClinicalEvents($scope.newpatient_basic.id,authorize.getCentre()).save($scope.events[i]).$promise.then(function(response){
 						$scope.showalert_events=true;
+						$scope.messageColor='success'
+						$scope.message ="Saved Clinical Events Successfully!";
 						console.log($scope.events[x]);
 						$scope.events[x].id = response.id;
 						console.log("x:inside " + x);
 						x++;
 					},function(response){
-						$scope.showalert_events=false;
+						$scope.showalert_events=true;
+						$scope.messageColor='danger'
+						$scope.message ="Error: "+ response.status + ' ' + response.statusText + "!";
 						console.log(response);
 					});	
 				}

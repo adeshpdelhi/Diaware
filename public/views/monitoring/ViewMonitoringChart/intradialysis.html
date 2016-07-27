@@ -43,8 +43,8 @@
 <div class="container" ng-show="!editingIntra" ng-cloak>
   <div class="row row-content">
     <form class="form-horizontal col-sm-9" role="form">
-      <div class="alert alert-success" ng-show="updatedIntra">
-        Updated Successfully!
+      <div class="alert alert-{{messageColorIntra}}" ng-show="updatedIntra">
+        {{messageIntra}}
       </div>   
       
       <div class="table-responsive" id="intraTable">

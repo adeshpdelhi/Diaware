@@ -169,7 +169,7 @@
             <div class="form-group">
               <label class="col-sm-4 control-label">Number of Units</label>                        
               <div class="col-sm-7">
-                <input type="number" class="form-control" id="number_of_units" name="number_of_units" placeholder="Number of Units" ng-model="post.numberOfUnits">
+                <input type="number" class="form-control" id="number_of_units" name="number_of_units" placeholder="Number of Units" ng-model="post.numberOfUnits" min="0">
               </div>
             </div>
             <div class="form-group">
@@ -196,9 +196,9 @@
               </div>
             </div>
 			<div class="form-group">
-					<div class="alert alert-success alert-dismissable" ng-show="showalert_postdialysis">
+					<div class="alert alert-{{messageColor}} alert-dismissable" ng-show="showalert_postdialysis">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-						Details Saved Successfully.
+						{{message}}
 					</div>
 				</div>
           </form>    

@@ -32,6 +32,11 @@ angular.module('App')
 		lastModifiedBy:null,
 		new:true
 	};
+	function camelize(str) {
+	  return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
+	    return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
+	  }).replace(/\s+/g, '');
+	}
 	$scope.addOthers = function(){
 		if($scope.other.diseaseName==null || $scope.other.diseaseName.length ==0)
 		{
@@ -40,6 +45,7 @@ angular.module('App')
 			$scope.messageNewColor = 'danger';
 			return;
 		}
+		$scope.other.diseaseName = camelize($scope.other.diseaseName);
 		$scope.showalert_medical=false;
 		$scope.showalert_medicalnew=false;
 		$scope.other.patientId = $scope.view?$scope.patient.id:$scope.newpatient_basic.id;
@@ -88,14 +94,14 @@ angular.module('App')
 				.then(function(response){
 					$scope.message = "Details Saved Successfully!";
 					$scope.messageColor = 'success';
-					$scope.updateMyValuesFromMedical(false, true,$scope.message);
+					$scope.updateMyValuesFromMedical(false, true,$scope.message,$scope.messageColor);
 					
 					// $scope.showalert_medical = true;
 				},function(response){
 					$scope.message = "Error: " + response.status + " " + response.statusText;
 					$scope.messageColor = 'danger';
 					console.log(response);
-					$scope.updateMyValuesFromMedical(false, true,$scope.message);
+					$scope.updateMyValuesFromMedical(false, true,$scope.message,$scope.messageColor);
 
 					// $scope.showalert_medical = true;
 				});	
@@ -107,14 +113,14 @@ angular.module('App')
 					$scope.message = "Details Saved Successfully!";
 					$scope.messageColor = 'success';
 					// $scope.showalert_medical = true;
-					$scope.updateMyValuesFromMedical(false, true,$scope.message);
+					$scope.updateMyValuesFromMedical(false, true,$scope.message,$scope.messageColor);
 
 				},function(response){
 					$scope.message = "Error: " + response.status + " " + response.statusText;
 					$scope.messageColor = 'danger';
 					console.log(response);
 					// $scope.showalert_medical = true;
-					$scope.updateMyValuesFromMedical(false, true,$scope.message);
+					$scope.updateMyValuesFromMedical(false, true,$scope.message,$scope.messageColor);
 
 				});
 			}

@@ -10,7 +10,7 @@
             <form class="form-horizontal" name="othersForm" role="form" ng-submit="othersForm.$valid && editOthers?updateOtherDetails():saveOtherDetails()" enctype="multipart/form-data">
 
                 <div class="form-group">
-                    <label class="col-xs-12 col-sm-3 control-label">PAN Card No</label>
+                    <label class="col-xs-12 col-sm-4 control-label">PAN Card No</label>
                     <div class="col-xs-12 col-sm-6 ">
                         <input type="text" class="form-control" id="pan_card_no" name="pan_card_no" ng-model="newPatient_Others.PAN" placeholder="PAN Card No">
                     </div>
@@ -18,7 +18,7 @@
                     <!-- <button class="btn btn-primary col-xs-12 col-sm-2" ng-click="saveDocument()">Upload</button> -->
                 </div>
                 <div class="form-group">
-                    <label  class="col-xs-12 col-sm-3 control-label">Aadhar No</label>
+                    <label  class="col-xs-12 col-sm-4 control-label">Aadhar No</label>
                     <div class="col-xs-5 col-sm-6 ">
                         <input  type="text" class="form-control" id="aadhar_no" name="aadhar_no" ng-model="newPatient_Others.aadhar" placeholder="Aadhar number">
                     </div>
@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label  class="col-xs-12 col-sm-3 control-label">Passport No</label>
+                    <label  class="col-xs-12 col-sm-4 control-label">Passport No</label>
                     <div class="col-xs-5 col-sm-6 ">
                         <input  type="text" class="form-control" id="passport_no" name="passport_no" ng-model="newPatient_Others.passport" placeholder="Passport number">
                     </div>
@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label  class="col-xs-12 col-sm-3 control-label">Other Card No 1</label>
+                    <label  class="col-xs-12 col-sm-4 control-label">Other Card No 1</label>
                     <div class="col-xs-5 col-sm-6 ">
                         <input  type="text" class="form-control" id="other_card1_no" ng-model="newPatient_Others.otherCard1" name="other_card1_no" placeholder="">
                     </div>
@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label  class="col-xs-12 col-sm-3 control-label">Other Card No 2</label>
+                    <label  class="col-xs-12 col-sm-4 control-label">Other Card No 2</label>
                     <div class="col-xs-5 col-sm-6 ">
                         <input  type="text" class="form-control" id="other_card2_no" ng-model="newPatient_Others.otherCard2" name="other_card2_no" placeholder="">
                     </div>
@@ -56,7 +56,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label  class="col-xs-12 col-sm-3 control-label">Other Card No 3</label>
+                    <label  class="col-xs-12 col-sm-4 control-label">Other Card No 3</label>
                     <div class="col-xs-5 col-sm-6 ">
                         <input type="text" class="form-control" id="other_card3_no" ng-model="newPatient_Others.otherCard3" name="other_card3_no" placeholder="">
                     </div>
@@ -71,9 +71,9 @@
                 </div>
 				
 			<div class="form-group">
-					<div class="alert alert-success alert-dismissable" ng-show="showalert_others">
+					<div class="alert alert-{{messageColor}} alert-dismissable" ng-show="showalert_others">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-						Details Saved Successfully.
+						{{message}}
 					</div>
 				</div>
             </form>

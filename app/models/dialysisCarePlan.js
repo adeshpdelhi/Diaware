@@ -21,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     dryWeight: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10,2),
       allowNull: true
     },
     dialysisDurationFirstTime: {
@@ -33,15 +33,15 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     BFR: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10,2),
       allowNull: true
     },
     DFR: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10,2),
       allowNull: true
     },
     UFR: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10,2),
       allowNull: true
     },
     heparinFree: {
@@ -64,7 +64,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     dialysateTemperature: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10,2),
       allowNull: true
     },
     dialysateFrequencyPerWeek: {

@@ -26,15 +26,15 @@ module.exports = function(sequelize, DataTypes) {
     //   autoIncrement: true
     // },
     preHDWeight: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10,2),
       allowNull: true
     },
     lastPostHDWeight: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10,2),
       allowNull: true
     },
     weightGain:{
-      type:DataTypes.DECIMAL,
+      type:DataTypes.DECIMAL(10,2),
       allowNull:true,
       set:function(){
         var value = this.getDataValue('preHDWeight') - this.getDataValue('lastPostHDWeight'); 
@@ -42,11 +42,11 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     dryWeight: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10,2),
       allowNull: true
     },
     targetWeightLoss:{
-      type:DataTypes.DECIMAL,
+      type:DataTypes.DECIMAL(10,2),
       allowNull:true,
       set:function(){
         var value = this.getDataValue('preHDWeight') - this.getDataValue('dryWeight');
@@ -74,11 +74,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     temperature: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10,2),
       allowNull: true
     },
     pulse: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.DECIMAL(10,2),
       allowNull: true
     },
     BPSitting: {

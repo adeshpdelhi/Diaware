@@ -41,9 +41,9 @@ angular.module('App')
 				patientFactory.getPatientPanels($scope.newPatient_Panel.patientId,authorize.getCentre()).update($scope.newPatient_Panel)
 				.$promise.then(function(response){
 					console.log(response);
-					$scope.updateMyValuesFromPanel(false,true,"Successfully Updated!");
+					$scope.updateMyValuesFromPanel(false,true,"Successfully Updated!",'success');
 				},function(response){
-					$scope.updateMyValuesFromPanel(false,true,"Error: " + response.status+ " "+ response.statusText + "!");
+					$scope.updateMyValuesFromPanel(false,true,"Error: " + response.status+ " "+ response.statusText + "!",'danger');
 				});
 			}else{
 				$scope.newPatient_Panel.patientId = $scope.patient.id; 
@@ -51,9 +51,9 @@ angular.module('App')
 				patientFactory.getPatientPanels($scope.newPatient_Panel.patientId,authorize.getCentre()).save($scope.newPatient_Panel)
 				.$promise.then(function(response){
 					console.log(response);
-					$scope.updateMyValuesFromPanel(false,true,"Successfully Updated!");
+					$scope.updateMyValuesFromPanel(false,true,"Successfully Updated!",'success');
 				},function(response){
-					$scope.updateMyValuesFromPanel(false,true,"Error: " + response.status+ " "+ response.statusText + "!");
+					$scope.updateMyValuesFromPanel(false,true,"Error: " + response.status+ " "+ response.statusText + "!",'danger');
 				});
 	
 			}
@@ -64,9 +64,13 @@ angular.module('App')
 			console.log($scope.newPatient_Panel);
 			patientFactory.getPatientPanels($scope.newPatient_Panel.patientId,authorize.getCentre()).save($scope.newPatient_Panel).$promise.then(function(response){
 				$scope.showalert_panel=true;
+				$scope.message ="Successfully saved Panel Details!";
+				$scope.messageColor="success";
 				$scope.savedOnce = true;
 			},function(response){
-				$scope.showalert_panel=false;
+				$scope.showalert_panel=true;
+				$scope.message="Error: " +response.status +" "+ response.statusText+ "!";
+				$scope.messageColor="danger";
 				console.log(response);
 			}
 			

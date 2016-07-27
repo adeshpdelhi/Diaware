@@ -33,7 +33,12 @@ angular.module('App')
 			$promise.then(function(response){
 				$scope.showAlert = true;
 				$scope.message = "Updated Patient Basic Details Successfully";
+				$scope.messageColor = 'success';
 				$scope.editBasic = false;
+			},function(response){
+				console.log(response);
+				$scope.messageColor='danger';
+				$scope.message="Error: " + response.status + ' ' + response.statusText+ "!";
 			});
 		
 		};
@@ -42,36 +47,40 @@ angular.module('App')
 			
 		};
 		// $scope.$watch =
-		$scope.updateMyValuesFromClinical = function(editClinical, alert,message){
+		$scope.updateMyValuesFromClinical = function(editClinical, alert,message,messageColor){
 			$scope.editClinical = editClinical;
 			$scope.showAlertClinical = alert;
 			$scope.message = message;
+			$scope.messageColor = messageColor;
 		};
 
 		$scope.editMedicalHistory = function(){
 			$scope.editMedical = true;
 		};	
 
-		$scope.updateMyValuesFromMedical = function(editMedical, alert,message){
+		$scope.updateMyValuesFromMedical = function(editMedical, alert,message,messageColor){
 			$scope.editMedical = editMedical;
 			$scope.showAlertMedical = alert;
 			$scope.message = message;
+			$scope.messageColor = messageColor;
 		};
 		$scope.editOtherDetails = function(){
 			$scope.editOthers = true;
 		};
 
-		$scope.updateMyValuesFromOthers = function(editOthers, alert,message){
+		$scope.updateMyValuesFromOthers = function(editOthers, alert,message,messageColor){
 			$scope.editOthers = editOthers;
 			$scope.showAlertOther = alert;
 			$scope.message = message;
+			$scope.messageColor = messageColor;
 		};
 		$scope.editPanel = function(){
 			$scope.editPanels = true;
 		};
-		$scope.updateMyValuesFromPanel = function(editPanels, alert,message){
+		$scope.updateMyValuesFromPanel = function(editPanels, alert,message,messageColor){
 			$scope.editPanels = editPanels;
 			$scope.showAlertPanel = alert;
+			$scope.messageColor = messageColor;
 			$scope.message = message;
 		};
 

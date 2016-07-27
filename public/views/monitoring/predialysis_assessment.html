@@ -1,187 +1,188 @@
 <form class="form-horizontal" role="form" ng-controller="MonitoringPreAssessmentController" ng-submit="editingPreAssessment?updatePreAssessment():saveAssessment()" ng-cloak>
-<div class="row">
-	<div class="form-group col-sm-12">
-		<label class="col-sm-3 control-label">Pre HD Weight</label>                        
-		<div class="col-sm-3">
-			<input type="number" class="form-control" id="pre_hd_weight" name="pre_hd_weight" ng-model="assessment.preHDWeight">
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<label class="col-sm-3 control-label">Pre HD Weight</label>                        
+			<div class="col-sm-3">
+				<input type="number" class="form-control" id="pre_hd_weight" name="pre_hd_weight" ng-model="assessment.preHDWeight" min="0" step="any">
+			</div>
+			<label class="col-sm-3 control-label">Pre HD Weight</label>                        
+			<div class="col-sm-3">
+				<input type="number" class="form-control" id="pre_hd_weight" name="pre_hd_weight" ng-model="assessment.preHDWeight" min="0" step="any">
+			</div>
 		</div>
-		<label class="col-sm-3 control-label">Pre HD Weight</label>                        
-		<div class="col-sm-3">
-			<input type="number" class="form-control" id="pre_hd_weight" name="pre_hd_weight" ng-model="assessment.preHDWeight">
-		</div>
-		<!-- <label class="col-sm-2 control-label">Pre HD Weight</label>                        
-		<div class="col-sm-2">
-			<input type="number" class="form-control" id="pre_hd_weight" name="pre_hd_weight">
-		</div> -->
 	</div>
-</div>
 
-<div class="row">
-	<div class="form-group col-sm-12">
-		<label class="col-sm-3 control-label">Post weight at last HD</label>                        
-		<div class="col-sm-3">
-			<input type="number" class="form-control" id="post_weight_at_last_hd" name="post_weight_at_last_hd" ng-model="assessment.lastPostHDWeight">
-		</div>
-		<label class="col-sm-3 control-label">Dry Weight </label>                        
-		<div class="col-sm-3 ">
-			<input type="number" class="form-control" id="dry_weight" name="dry_weight" ng-model="assessment.dryWeight">
-		</div>
-		<!-- <label class="col-sm-2 control-label">Post Weight</label>                        
-		<div class="col-sm-2">
-			<input type="number" class="form-control" id="post_weight" name="post_weight">
-		</div> -->
-	</div>
-</div>
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<label class="col-sm-3 control-label">Post weight at last HD</label>                        
+			<div class="col-sm-3">
+				<input type="number" class="form-control" id="post_weight_at_last_hd" name="post_weight_at_last_hd" ng-model="assessment.lastPostHDWeight" min="0" step="any">
+			</div>
+			<label class="col-sm-3 control-label">Dry Weight </label>                        
+			<div class="col-sm-3 ">
+				<input type="number" class="form-control" id="dry_weight" name="dry_weight" ng-model="assessment.dryWeight" min="0" step="any">
+			</div>
 
-<div class="row">
-	<div class="form-group col-sm-12 ">
-		<label class="col-sm-3 control-label">Weight Gain</label>                        
-		<div class="col-sm-3">
-			<input type="number" class="form-control" id="weight_gain" name="weight_gain" ng-model="assessment.weightGain">
 		</div>
-		<label class="col-sm-3 control-label">Target Weight Loss</label>                        
-		<div class="col-sm-3">
-			<input type="number" class="form-control" id="target_weight_loss" name="target_weight_loss" ng-model="assessment.targetWeightLoss">
+	</div>
+
+	<div class="row">
+		<div class="form-group col-sm-12 ">
+			<label class="col-sm-3 control-label">Weight Gain</label>                        
+			<div class="col-sm-3">
+				<input type="number" class="form-control" id="weight_gain" name="weight_gain" ng-model="assessment.weightGain" min="0" step="any">
+			</div>
+			<label class="col-sm-3 control-label">Target Weight Loss</label>                        
+			<div class="col-sm-3">
+				<input type="number" class="form-control" id="target_weight_loss" name="target_weight_loss" ng-model="assessment.targetWeightLoss" min="0" step="any">
+			</div>
 		</div>
-		<!-- <label class="col-sm-2 control-label">Actual weight loss</label>                        
-		<div class="col-sm-2">
-			<input type="number" class="form-control" id="actual_weight_loss" name="actual_weight_loss">
-		</div> -->
 	</div>
-</div>
-<div class="form-group row">
-	<label class="col-sm-5  control-label">Physical/chest pain or discomfort</label>
-	<div class="col-sm-6 col-sm-pull-1">
-		<label class="radio-inline">
-		<input type="radio" name="physical_chest_pain_or_discomfort" value="Yes" ng-model="assessment.physicalChestPain">Yes</label>
-		<label class="radio-inline">
-		<input type="radio" name="physical_chest_pain_or_discomfort" value="No" ng-model="assessment.physicalChestPain">No</label>
+	<div class="form-group row">
+		<label class="col-sm-5  control-label">Physical/chest pain or discomfort</label>
+		<div class="col-sm-6 col-sm-pull-1">
+			<label class="radio-inline">
+				<input type="radio" name="physical_chest_pain_or_discomfort" value="Yes" ng-model="assessment.physicalChestPain">Yes
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="physical_chest_pain_or_discomfort" value="No" ng-model="assessment.physicalChestPain">No
+			</label>
+		</div>
 	</div>
-</div>
-<div class="form-group row">
-	<label class="col-sm-5 control-label">Chest Auscultation – clear</label>
-	<div class="col-sm-6 col-sm-pull-1">
-		<label class="radio-inline">
-		<input type="radio" name="chest_auscultation_clear" value="Yes" ng-model="assessment.chestAuscultation">Yes</label>
-		<label class="radio-inline">
-		<input type="radio" name="chest_auscultation_clear" value="No" ng-model="assessment.chestAuscultation">No</label>
+	<div class="form-group row">
+		<label class="col-sm-5 control-label">Chest Auscultation – clear</label>
+		<div class="col-sm-6 col-sm-pull-1">
+			<label class="radio-inline">
+				<input type="radio" name="chest_auscultation_clear" value="Yes" ng-model="assessment.chestAuscultation">Yes
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="chest_auscultation_clear" value="No" ng-model="assessment.chestAuscultation">No
+			</label>
+		</div>
 	</div>
-</div>
-<div class="form-group row">
-	<label class="col-sm-5  control-label">Recent Surgery/Injury/Trauma/Bleeding </label>
-	<div class="col-sm-6 col-sm-pull-1">
-		<label class="radio-inline">
-		<input type="radio" name="recent_surgery_injury_trauma_bleeding" value="Yes" ng-model="assessment.recentSurgery">Yes</label>
-		<label class="radio-inline">
-		<input type="radio" name="recent_surgery_injury_trauma_bleeding" value="No" ng-model="assessment.recentSurgery">No</label>
+	<div class="form-group row">
+		<label class="col-sm-5  control-label">Recent Surgery/Injury/Trauma/Bleeding </label>
+		<div class="col-sm-6 col-sm-pull-1">
+			<label class="radio-inline">
+				<input type="radio" name="recent_surgery_injury_trauma_bleeding" value="Yes" ng-model="assessment.recentSurgery">Yes
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="recent_surgery_injury_trauma_bleeding" value="No" ng-model="assessment.recentSurgery">No
+			</label>
+		</div>
 	</div>
-</div>
-<div class="form-group row">
-	<label class="col-sm-5 control-label">Peripheral Oedema</label>
-	<div class="col-sm-6 col-sm-pull-1">
-		<label class="radio-inline">
-		<input type="radio" name="peripheral_oedema" value="Yes" ng-model="assessment.peripheralOedema" >Yes</label>
-		<label class="radio-inline">
-		<input type="radio" name="peripheral_oedema" value="No" ng-model="assessment.peripheralOedema">No</label>
+	<div class="form-group row">
+		<label class="col-sm-5 control-label">Peripheral Oedema</label>
+		<div class="col-sm-6 col-sm-pull-1">
+			<label class="radio-inline">
+				<input type="radio" name="peripheral_oedema" value="Yes" ng-model="assessment.peripheralOedema" >Yes
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="peripheral_oedema" value="No" ng-model="assessment.peripheralOedema">No
+			</label>
+		</div>
 	</div>
-</div>
-<div class="form-group row">
-	<label class="col-sm-4 control-label">Respiratory Status</label>
-	<div class="col-sm-7">
+	<div class="form-group row">
+		<label class="col-sm-4 control-label">Respiratory Status</label>
+		<div class="col-sm-7">
 			<input type="text" class="form-control" id="respiratory_status" name="respiratory_status" ng-model="assessment.respiratoryStatus">
 		</div>
-</div>
-<div class="form-group row">
-	<label class="col-sm-4 control-label">Body Temperature</label>
-	<div class="col-sm-7">
-			<input type="number" class="form-control" id="body_temperature" name="body_temperature" ng-model="assessment.temperature">
-		</div>
-</div>
-<div class="form-group row">
-	<label class="col-sm-4 control-label">Pulse</label>
-	<div class="col-sm-7">
-			<input type="number" class="form-control" id="pule" name="pulse" ng-model="assessment.pulse">
-		</div>
-</div>
-<div class="form-group row">
-	<label class="col-sm-4 control-label">BP <small>(siting)</small></label>
-	<div class="col-sm-7" >
-		<select id="bp_sitting" name="bp_sitting" ng-model="assessment.BPSitting">                    
-			<option ng-repeat="n in [].constructor(51) track by $index"  >{{5*$index}}</option>
-		</select>
 	</div>
-</div>
- 
+	<div class="form-group row">
+		<label class="col-sm-4 control-label">Body Temperature</label>
+		<div class="col-sm-7">
+			<input type="number" class="form-control" id="body_temperature" name="body_temperature" ng-model="assessment.temperature" min="0" step="any">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-sm-4 control-label">Pulse</label>
+		<div class="col-sm-7">
+			<input type="number" class="form-control" id="pule" name="pulse" ng-model="assessment.pulse" min ="0" step="any">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-sm-4 control-label">BP <small>(siting)</small></label>
+		<div class="col-sm-7" >
+			<select id="bp_sitting" name="bp_sitting" ng-model="assessment.BPSitting">                    
+				<option ng-repeat="n in [].constructor(51) track by $index"  >{{5*$index}}</option>
+			</select>
+		</div>
+	</div>
 
-<div class="form-group row">
-	<label class="col-sm-4 control-label">BP <small>(standing)</small></label>
-	 <div class="col-sm-7" >
-		<select id="bp_standing" name="bp_standing" ng-model="assessment.BPStanding">                    
-			<option ng-repeat="n in [].constructor(51) track by $index" >{{5*$index}}</option>
-		</select>
+
+	<div class="form-group row">
+		<label class="col-sm-4 control-label">BP <small>(standing)</small></label>
+		<div class="col-sm-7" >
+			<select id="bp_standing" name="bp_standing" ng-model="assessment.BPStanding">                    
+				<option ng-repeat="n in [].constructor(51) track by $index" >{{5*$index}}</option>
+			</select>
+		</div>
 	</div>
-</div>
-<div class="form-group row">
-	<label class="col-sm-4 control-label">Breakfast/Lunch/Dinner</label>
-	<div class="col-sm-7">
-		<label class="radio-inline">
-		<input type="radio" name="breakfast_lunch_dinner" value="Yes" ng-model="assessment.breakfastLunchDinner">Yes</label>
-		<label class="radio-inline">
-		<input type="radio" name="breakfast_lunch_dinner" value="No" ng-model="assessment.breakfastLunchDinner">No</label>
+	<div class="form-group row">
+		<label class="col-sm-4 control-label">Breakfast/Lunch/Dinner</label>
+		<div class="col-sm-7">
+			<label class="radio-inline">
+				<input type="radio" name="breakfast_lunch_dinner" value="Yes" ng-model="assessment.breakfastLunchDinner">Yes
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="breakfast_lunch_dinner" value="No" ng-model="assessment.breakfastLunchDinner">No
+			</label>
+		</div>
 	</div>
-</div>
-<div class="form-group row">
-	<label class="col-sm-4 control-label">Patients subjective Statement</label>
-	<div class="col-sm-7">
+	<div class="form-group row">
+		<label class="col-sm-4 control-label">Patients subjective Statement</label>
+		<div class="col-sm-7">
 			<input type="text" class="form-control" id="patients_subjective_statement" name="patients_subjective_statement" ng-model="assessment.subjectiveStatement">
 		</div>
-</div>
-<div class="form-group row">
-	<label class="col-sm-4 control-label">Interdialytic Complaints</label>
-	<div class="col-sm-7">
-		<label class="radio-inline">
-		<input type="radio" name="interdialytic_complaints" value="Yes" ng-model="assessment.interdialyticComplaints">Yes</label>
-		<label class="radio-inline">
-		<input type="radio" name="interdialytic_complaints" value="No" ng-model="assessment.interdialyticComplaints">No</label>
 	</div>
-</div>
-<div class="form-group row">
-	<label class="col-sm-4 control-label">Ambulatory Status</label>
-	<div class="col-sm-7">
+	<div class="form-group row">
+		<label class="col-sm-4 control-label">Interdialytic Complaints</label>
+		<div class="col-sm-7">
+			<label class="radio-inline">
+				<input type="radio" name="interdialytic_complaints" value="Yes" ng-model="assessment.interdialyticComplaints">Yes
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="interdialytic_complaints" value="No" ng-model="assessment.interdialyticComplaints">No
+			</label>
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-sm-4 control-label">Ambulatory Status</label>
+		<div class="col-sm-7">
 			<input type="text" class="form-control" id="ambulatory_status" name="ambulatory_status" ng-model="assessment.ambulatoryStatus">
 		</div>
-</div>
-<div class="form-group row">
-	<label class="col-sm-3 col-sm-push-1 control-label">Adverse Incident</label>
-	<div class="col-sm-8 col-sm-push-1">
-        <label class="checkbox-inline"><input type="checkbox" name="hypotension" value="Yes" ng-model="assessment.hypotension">Hypotension</label>
-        <label class="checkbox-inline"><input type="checkbox" name="headache" value="Yes"  ng-model="assessment.headache">Headache</label>
-        <label class="checkbox-inline"><input type="checkbox" name="cramps" value="Yes" ng-model="assessment.cramps">Cramps</label>
-        <label class="checkbox-inline"><input type="checkbox" name="vomiting" value="Yes" ng-model="assessment.vomiting">Vomiting</label>
-        <label class="checkbox-inline"><input type="checkbox" name="fever" value="Yes" ng-model="assessment.fever">Fever</label>
-        <label class="checkbox-inline"><input type="checkbox" name="rigor" value="Yes" ng-model="assessment.rigor">Rigor</label>
-        <label class="checkbox-inline"><input type="checkbox" name="rash" value="Yes" ng-model="assessment.rash">Rash</label>
-        <label class="checkbox-inline"><input type="checkbox" name="chest_pain" value="Yes" ng-model="assessment.chest">Chest Pain</label>
-        <label class="checkbox-inline"><input type="checkbox" name="other_pain" value="Yes" ng-model="assessment.other">Other Pain</label>
-        <label class="checkbox-inline"><input type="checkbox" name="dyspnea" value="Yes" ng-model="assessment.dyspnea">Dyspnea</label>
-        <label class="checkbox-inline"><input type="checkbox" name="pruritus" value="Yes" ng-model="assessment.pruritus">Pruritus</label>	
 	</div>
-</div>
-<div class="form-group row">
-	<label class="col-sm-4 control-label">General Comments</label>
-	<div class="col-sm-7">
+	<div class="form-group row">
+		<label class="col-sm-3 col-sm-push-1 control-label">Adverse Incident</label>
+		<div class="col-sm-8 col-sm-push-1">
+			<label class="checkbox-inline"><input type="checkbox" name="hypotension" value="Yes" ng-model="assessment.hypotension">Hypotension</label>
+			<label class="checkbox-inline"><input type="checkbox" name="headache" value="Yes"  ng-model="assessment.headache">Headache</label>
+			<label class="checkbox-inline"><input type="checkbox" name="cramps" value="Yes" ng-model="assessment.cramps">Cramps</label>
+			<label class="checkbox-inline"><input type="checkbox" name="vomiting" value="Yes" ng-model="assessment.vomiting">Vomiting</label>
+			<label class="checkbox-inline"><input type="checkbox" name="fever" value="Yes" ng-model="assessment.fever">Fever</label>
+			<label class="checkbox-inline"><input type="checkbox" name="rigor" value="Yes" ng-model="assessment.rigor">Rigor</label>
+			<label class="checkbox-inline"><input type="checkbox" name="rash" value="Yes" ng-model="assessment.rash">Rash</label>
+			<label class="checkbox-inline"><input type="checkbox" name="chest_pain" value="Yes" ng-model="assessment.chest">Chest Pain</label>
+			<label class="checkbox-inline"><input type="checkbox" name="other_pain" value="Yes" ng-model="assessment.other">Other Pain</label>
+			<label class="checkbox-inline"><input type="checkbox" name="dyspnea" value="Yes" ng-model="assessment.dyspnea">Dyspnea</label>
+			<label class="checkbox-inline"><input type="checkbox" name="pruritus" value="Yes" ng-model="assessment.pruritus">Pruritus</label>	
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-sm-4 control-label">General Comments</label>
+		<div class="col-sm-7">
 			<input type="text" class="form-control" id="general_comments" name="general_comments" ng-model="assessment.generalComments">
 		</div>
-</div>
-<div class="form-group">
-    <div class="col-sm-offset-8 col-sm-2">
-        <button type="submit" class="btn btn-primary" ng-show="!savedOnce">{{editingPreAssessment?'Update':'Save'}}</button>
-    </div>
-</div>
-<div class="form-group">
-					<div class="alert alert-success alert-dismissable" ng-show="showalert_predialysis_assessment">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-						Details Saved Successfully.
-					</div>
-				</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-8 col-sm-2">
+			<button type="submit" class="btn btn-primary" ng-show="!savedOnce">{{editingPreAssessment?'Update':'Save'}}</button>
+		</div>
+	</div>
+	<div class="form-group">
+	<div class="alert alert-{{messageColor}} alert-dismissable" ng-show="showalert_predialysis_assessment">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			{{message}}
+		</div>
+	</div>
 </form>

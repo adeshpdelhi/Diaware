@@ -5,6 +5,7 @@ angular.module('App')
         var chosenPatientId = $stateParams.patientId?($stateParams.patientId):(choosePatientFactory.getChosenPatient().id);
         patientFactory.getPatients(authorize.getCentre()).get({id:chosenPatientId}).$promise.then(function(response){
         	$scope.patient =response;
+            $scope.basic.patientId = $scope.patient.id;
         });
 		$scope.showDateAlert= false;
         $scope.basic = {
@@ -19,6 +20,26 @@ angular.module('App')
         	endTime:null,
         	lastModifiedBy:null
         };
+
+        $scope.$watch('basic.patientId',function(newVal,oldVal){
+            if(newVal){
+                patientFactory.getPatientCarePlans(newVal,authorize.getCentre()).get({latestPlan:true})
+                .$promise.then(function(response){
+                    console.log("response:hhhhhhhhhho: " + response);
+                    console.log(response);
+                    if(!response.dialysisDurationRegular) $scope.basic.prescribedDuration = 0;
+                    else $scope.basic.prescribedDuration = response.dialysisDurationRegular;
+                    console.log("dryWeight: "+$scope.basic.prescribedDuration);
+
+                },function(response){
+                    $scope.showalert_predialysis_basic=true;
+
+                    // $scope.showalert_predialysis_assessment = true;
+                    $scope.message = " Error: " + response.status  + " " + response.statusText + "!";
+                    $scope.messageColor='danger';
+                });
+            }
+        });
         $scope.preHDWeight=0;
         $scope.setPreHDWeight  = function (val) {
             $scope.preHDWeight = val;

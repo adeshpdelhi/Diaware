@@ -78,6 +78,7 @@ angular.module('App')
 	        },function(response){
 				$scope.showAlert = true;
 				$scope.message = "Error: "+ response.status+ " " + response.statusText;
+				$scope.messageColor="danger";
 			})
 		};
         $scope.updateCarePlan = function() {
@@ -90,10 +91,14 @@ angular.module('App')
 					$scope.editCarePlan = false;
 					$scope.updatedCarePlan = true;
 					$scope.message = "Updated Successfully!";
+					$scope.messageColor="success";
+					
 				},function(response){
 					$scope.editCarePlan = false;
 					$scope.updateCarePlan = true;
 					$scope.message = "Error: "+ response.status+ " "+ response.statusText+"!";
+					$scope.messageColor="danger";
+
 				});	
         	}else{
         		patientFactory.getPatientCarePlans($scope.carePlan.patientId, authorize.getCentre()).update({
@@ -103,10 +108,13 @@ angular.module('App')
 					$scope.editCarePlan = false;
 					$scope.updatedCarePlan = true;
 					$scope.message = "Updated Successfully!";
+					$scope.messageColor="success";
 				},function(response){
 					$scope.editCarePlan = false;
 					$scope.updateCarePlan = true;
 					$scope.message = "Error: "+ response.status+ " "+ response.statusText+"!";
+					$scope.messageColor="danger";
+
 				});
         	}
         };

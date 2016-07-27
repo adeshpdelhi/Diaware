@@ -25,8 +25,10 @@
                       </table>
                     </div>
                   </div>
-                  <button type="button" class="btn btn-default btn-sm pull-right" data-dismiss="modal">Cancel</button>
                 </form>
+            </div>
+            <div class="modal-footer">
+                  <button type="button" class="btn btn-default btn-sm pull-right" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
@@ -45,7 +47,7 @@
             </div>     
 
             <div style="padding-top:30px" class="panel-body" ng-show="carePlan.patientId!=null">    
-                <div class="alert alert-sucess" ng-show="updatedCarePlan">
+                <div class="alert alert-{{messageColor}}" ng-show="updatedCarePlan">
                     {{message}}
                 </div> 
                 <div class="row " >

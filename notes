@@ -77,8 +77,8 @@ pre dialysis
 ?????set values false and true in db
 
 
-add step="any" to all decimal inputs 
-and add min = 0 for all numebrs and decimals alike
+-----done-----add step="any" to all decimal inputs 
+-----done-----and add min = 0 for all numebrs and decimals alike
 
 
 add validations to all forms

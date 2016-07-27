@@ -74,7 +74,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     dialysateTemperature: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10,2),
       allowNull: true
     },
     conductivity: {

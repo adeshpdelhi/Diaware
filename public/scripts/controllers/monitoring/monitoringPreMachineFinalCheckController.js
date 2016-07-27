@@ -28,13 +28,16 @@ angular.module('App')
 		console.log($scope.machineCheck);
 		monitoringChartFactory.getPreMachineFinalChecks($scope.basic.patientId).save($scope.machineCheck).$promise.then(function(response){
 			$scope.showalert_predialysis_machine_final_check=true;
+			$scope.message = 'Successfully Saved Details!';
+			$scope.messageColor = 'success';
 			$scope.savedOnce=true;
 			},function(response){
-				$scope.showalert_predialysis_machine_final_check=false;
+				$scope.showalert_predialysis_machine_final_check=true;
 				console.log(response);
-			}
-			
-			);
+				$scope.messageColor='danger';
+				$scope.message="Error: "+ response.status+ " " +response.statusText+"!";
+				
+			});
 		//$scope.showalert_predialysis_machine_final_check=true;
 	};;
 	$scope.updatePreMachineFinalCheck = function(){
@@ -46,9 +49,9 @@ angular.module('App')
 				},$scope.machineCheck)
 				.$promise.then(function(response){
 					console.log(response);
-					$scope.updateParentValues(false,true,"Updated Successfully!",3);
+					$scope.updateParentValues(false,true,"Updated Successfully!",3,'success');
 				},function(response){
-					$scope.updateParentValues(false,true,"Error: "+ response.status + " " +response.statusText+"!",3);
+					$scope.updateParentValues(false,true,"Error: "+ response.status + " " +response.statusText+"!",3,'danger');
 				});	
 			}
 			else{
@@ -57,9 +60,9 @@ angular.module('App')
 				$scope.machineCheck.machineNumber = $scope.patientChart.machineNumber;				
 				monitoringChartFactory.getPreMachineFinalChecks($scope.patientChart.patientId).save($scope.machineCheck).$promise.then(function(response){
 						console.log(response);
-						$scope.updateParentValues(false,true,"Updated Successfully!",3);
+						$scope.updateParentValues(false,true,"Updated Successfully!",3,'success');
 					},function(response){
-						$scope.updateParentValues(false,true,"Error: "+ response.status + " " +response.statusText+"!",3);
+						$scope.updateParentValues(false,true,"Error: "+ response.status + " " +response.statusText+"!",3,'danger');
 					});
 			}
 

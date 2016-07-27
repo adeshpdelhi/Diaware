@@ -60,6 +60,7 @@ angular.module('App')
 					},function(response){
 						$scope.showalert_predialysis_assessment = true;
 						$scope.message = " Error: " + response.status  + " " + response.statusText+"!";
+						$scope.messageColor="danger";
 					});
 				patientFactory.getPatientCarePlans($scope.patientId,authorize.getCentre()).get({latestPlan:true})
 				.$promise.then(function(response){
@@ -72,6 +73,7 @@ angular.module('App')
 				},function(response){
 					$scope.showalert_predialysis_assessment = true;
 					$scope.message = " Error: " + response.status  + " " + response.statusText + "!";
+					$scope.messageColor="danger";
 				});
 			}	
 		});
@@ -179,10 +181,10 @@ angular.module('App')
 			},$scope.assessment)
 			.$promise.then(function(response){
 				console.log(response);
-				$scope.updateParentValues(false,true,"Updated Successfully!",5);
+				$scope.updateParentValues(false,true,"Updated Successfully!",5,'success');
 
 			},function(response){
-				$scope.updateParentValues(false,true,"Error: "+response.status + " " +response.statusText + "!",5);
+				$scope.updateParentValues(false,true,"Error: "+response.status + " " +response.statusText + "!",5,'danger');
 			});	
 		}else{
 			$scope.assessment.patientId = $scope.patientChart.patientId;
@@ -190,10 +192,10 @@ angular.module('App')
 			console.log($scope.assessment);
 			monitoringChartFactory.getPreAssessments($scope.patientChart.patientId).save($scope.assessment)
 			.$promise.then(function(response){
-				$scope.updateParentValues(false,true,"Updated Successfully!",5);
+				$scope.updateParentValues(false,true,"Updated Successfully!",5,'success');
 				
 			},function(response){
-				$scope.updateParentValues(false,true,"Error: "+response.status + " " +response.statusText + "!",5);
+				$scope.updateParentValues(false,true,"Error: "+response.status + " " +response.statusText + "!",5,'danger');
 			});
 		}
 	};

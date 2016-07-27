@@ -32,8 +32,13 @@ angular.module('App')
 			console.log($scope.newPatient_Others);
 			patientFactory.getPatientOtherDetails($scope.newPatient_Others.patientId,authorize.getCentre()).save($scope.newPatient_Others).$promise.then(function(response){
 				$scope.showalert_others=true;
+				$scope.message ="Successfully Saved OtherDetails!";
+				$scope.messageColor="success";
+
 			},function(response){
-				$scope.showalert_others=false;
+				$scope.showalert_others=true;
+				$scope.messageColor='danger';
+				$scope.message="Error: "+ response.status+ " " +response.statusText+"!";
 				console.log(response);
 			});			//$scope.showalert_basic_details=true;
 			//$scope.showalert_others=true;
@@ -47,9 +52,9 @@ angular.module('App')
 				patientFactory.getPatientOtherDetails($scope.newPatient_Others.patientId,authorize.getCentre()).update($scope.newPatient_Others)
 				.$promise.then(function(response){
 					console.log(response);
-					$scope.updateMyValuesFromOthers(false,true,"Updated Successfully!");
+					$scope.updateMyValuesFromOthers(false,true,"Updated Successfully!",'success');
 				},function(response){
-					$scope.updateMyValuesFromOthers(false,true,"Error: "+response.status+" "+ response.statusText + "!");
+					$scope.updateMyValuesFromOthers(false,true,"Error: "+response.status+" "+ response.statusText + "!",'danger');
 				});
 			}
 			else{
@@ -61,9 +66,9 @@ angular.module('App')
 				patientFactory.getPatientOtherDetails($scope.newPatient_Others.patientId,authorize.getCentre()).save($scope.newPatient_Others)
 				.$promise.then(function(response){
 					console.log(response);
-					$scope.updateMyValuesFromOthers(false,true,"Updated Successfully!");
+					$scope.updateMyValuesFromOthers(false,true,"Updated Successfully!",'success');
 				},function(response){
-					$scope.updateMyValuesFromOthers(false,true,"Error: "+response.status+" "+ response.statusText + "!");
+					$scope.updateMyValuesFromOthers(false,true,"Error: "+response.status+" "+ response.statusText + "!",'danger');
 				});
 			}
 		};

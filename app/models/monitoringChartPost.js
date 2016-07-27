@@ -20,11 +20,11 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     postWeight: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10,2),
       allowNull: true
     },
     weightLoss: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10,2),
       allowNull: true
     },
     UFReading: {
@@ -40,11 +40,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     temperature: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10,2),
       allowNull: true
     },
     pulse: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.DECIMAL(10,2),
       allowNull: true
     },
     symptomaticHypotension: {
@@ -89,7 +89,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     KtVAchieved: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10,2),
       allowNull: true
     },
     EPODosage: {

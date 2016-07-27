@@ -69,9 +69,9 @@ angular.module('App')
                 },$scope.post)
                 .$promise.then(function(response){
                     console.log(response);
-                    $scope.updateParentValues(false,true,"Updated Successfully!",6);
+                    $scope.updateParentValues(false,true,"Updated Successfully!",6,'success');
                 },function(response){
-                    $scope.updateParentValues(false,true,"Error: "+response.status + " " +response.statusText + "!",6);
+                    $scope.updateParentValues(false,true,"Error: "+response.status + " " +response.statusText + "!",6,'danger');
                 });
             }else{
                 $scope.post.patientId = $scope.patientChart.patientId;
@@ -82,10 +82,10 @@ angular.module('App')
                 monitoringChartFactory.getPost($scope.patientChart.patientId).save($scope.post)
                 .$promise.then(function(response){
                         console.log(response);
-                        $scope.updateParentValues(false,true,"Updated Successfully!",6);
+                        $scope.updateParentValues(false,true,"Updated Successfully!",6,'success');
                     },
                     function(response){
-                        $scope.updateParentValues(false,true,"Error: "+response.status + " " +response.statusText + "!",6);
+                        $scope.updateParentValues(false,true,"Error: "+response.status + " " +response.statusText + "!",6,'danger');
 
                     });    
             }

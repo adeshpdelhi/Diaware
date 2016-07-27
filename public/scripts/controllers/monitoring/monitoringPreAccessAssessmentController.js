@@ -32,9 +32,7 @@ angular.module('App')
 				$scope.message = "Error: " + response.status + " " + response.statusText+"!";
 				$scope.messageColor='danger';
 				console.log(response);
-			}
-			
-			);
+			});
 		//$scope.showalert_predialysis_access_assessment=true;
 
 	};
@@ -48,7 +46,7 @@ angular.module('App')
 				},$scope.accessAssessment)
 				.$promise.then(function(response){
 					console.log(response);
-					$scope.updateParentValues(false,true,"Updated Successfully!",4);
+					$scope.updateParentValues(false,true,"Updated Successfully!",4,'success');
 				},function(response){
 					$scope.updateParentValues(false,true,"Error: " + response.status + " " + response.statusText+"!",4);
 				});
@@ -60,7 +58,7 @@ angular.module('App')
 						console.log(response);
 						$scope.updateParentValues(false,true,"Updated Successfully!",4);
 					},function(response){
-						$scope.updateParentValues(false,true,"Error: " + response.status + " " + response.statusText+"!",4);
+						$scope.updateParentValues(false,true,"Error: " + response.status + " " + response.statusText+"!",4,'danger');
 						
 					});	
 					

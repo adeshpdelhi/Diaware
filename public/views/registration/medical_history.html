@@ -9,14 +9,16 @@
         <div style="padding-top:30px" class="panel-body" >
             <form class="form-horizontal" role="form" name="medicalForm">
                 <div class="form-group" ng-repeat = "(i,medicalHistory) in newPatient_Medical track by $index">
-                    <label class="col-sm-3 control-label text-capitalize">{{regularForm(newPatient_Medical[i].diseaseName)}}</label>
+                    <label class="col-sm-3 control-label text-capitalize" ng-class="{'has-error': medicalForm.{{newPatient_Medical[i].diseaseName}}_radio.$invalid && !medicalForm.{{newPatient_Medical[i].diseaseName}}_radio.$pristine}">{{regularForm(newPatient_Medical[i].diseaseName)}} *</label>
                     <div class="col-sm-3">
                         <label class="radio-inline">
-                            <input type="radio" name="{{newPatient_Medical[i].diseaseName}}_radio" value="Yes" ng-model="newPatient_Medical[i].diseasePresent">Yes
+                            <input type="radio" name="{{newPatient_Medical[i].diseaseName}}_radio" value="Yes" ng-model="newPatient_Medical[i].diseasePresent" required>Yes
                         </label>
                         <label class="radio-inline">
                             <input type="radio" name="{{newPatient_Medical[i].diseaseName}}_radio"  value="No" ng-model="newPatient_Medical[i].diseasePresent">No
                         </label>
+                        <span ng-show="medicalForm.{{newPatient_Medical[i].diseaseName}}_radio.$error.required && !medicalForm.{{newPatient_Medical[i].diseaseName}}_radio.$pristine" class="help-block">Information Regarding This Disease is required                      
+                        </span>
                     </div>
                     <div class="col-sm-6">
                         <input  type="text" class="form-control" id="{{newPatient_Medical[i].diseaseName}}_comments" name="{{newPatient_Medical[i].diseaseName}}_comments" ng-model="newPatient_Medical[i].doctorComments" placeholder="Comments">
@@ -67,7 +69,7 @@
                 </div>
                 <div class="form-group">                   
                     <div class="col-sm-offset-5 col-sm-10">
-                        <button type="submit" id="medical_history_save" class="btn btn-primary" ng-show="editMedical || !savedOnce" ng-click="editMedical?updateMedical():saveMedical()">{{editMedical?'Update':'Save'}}</button> 
+                        <button type="submit" id="medical_history_save" class="btn btn-primary" ng-show="editMedical || !savedOnce" ng-click="editMedical?updateMedical():saveMedical()" ng-disabled="medicalForm.$invalid">{{editMedical?'Update':'Save'}}</button> 
                     </div>
                 </div>
 				
