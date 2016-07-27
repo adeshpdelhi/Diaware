@@ -244,7 +244,8 @@ angular.module('App')
 					$scope.messageColor = 'danger';
 				});
 	};
-
+	// $scope.tran
+	$scope.showTransactionTypes();
 	$scope.showLedgerTable = function(){
 		console.log('showing LedgerTable');
 		backendFactory.getLedgers().query(function(response){

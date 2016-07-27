@@ -10,7 +10,7 @@
             <div class="alert alert-warning" ng-show="centreInvalidToSubmit">
                 You have selected all centers! Please choose a single center.
             </div>
-            <form class="form-horizontal" name="basicDetailsForm" ng-submit="basicDetailsForm.$valid && editBasic?updateBasicDetails():save_basic_details()" role="form">
+            <form class="form-horizontal" name="basicDetailsForm" ng-submit="basicDetailsForm.$valid && editBasic?updateBasicDetails():save_basic_details()" role="form" novalidate>
 
                 <!-- <div class="form-group ">
                     <label class="col-sm-3 control-label">ID Number</label>
@@ -19,18 +19,22 @@
                     </div>
                 </div> -->
 
-                <div class="form-group">
+                <div class="form-group" ng-class="{'has-error': basicDetailsForm.name.$invalid && !basicDetailsForm.name.$pristine}">
                     <label class="col-sm-3 control-label">Name</label>                        
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" ng-model="newpatient_basic.name" required>
+                        <span ng-show="basicDetailsForm.name.$error.required && !basicDetailsForm.name.$pristine" class="help-block">Patient Name is required                      
+                        </span>    
                     </div>
                 </div>
 
 
-                <div class="form-group">
+                <div class="form-group"  ng-class="{'has-error': basicDetailsForm.dob.$invalid && !basicDetailsForm.dob.$pristine}">
                     <label class="col-sm-3 control-label">DOB</label>
                     <div class="col-sm-8">
-                        <input type="date" class="form-control" id="dob" name="dob" placeholder="Enter DOB" ng-model="newpatient_basic.DOB" ng-change="setAge()">
+                        <input type="date" class="form-control" id="dob" name="dob" placeholder="Enter DOB" ng-model="newpatient_basic.DOB" ng-change="setAge()" required>
+                        <span ng-show="basicDetailsForm.dob.$error.required && !basicDetailsForm.dob.$pristine" class="help-block">Patient DOB is required                      
+                        </span>    
                     </div>
                 </div>
 
@@ -60,14 +64,16 @@
                 </div>
 
 
-                <div class="form-group">
+                <div class="form-group" ng-class="{'has-error': basicDetailsForm.gender.$invalid && !basicDetailsForm.gender.$pristine}">
                     <label  class="col-sm-3 control-label">Gender</label>
                     <div class="col-sm-8 ">
-                        <select name="gender"  class="form-control" ng-model="newpatient_basic.gender">
+                        <select name="gender"  class="form-control" ng-model="newpatient_basic.gender" required>
                             <option value="" selected disabled>-</option>
                             <option value="Male" >Male</option>
                             <option value="Female">Female</option>
                         </select>
+                        <span ng-show="basicDetailsForm.gender.$error.required && !basicDetailsForm.gender.$pristine" class="help-block">Patient Gender is required                      
+                        </span>    
                     </div>
                 </div>
 
@@ -239,7 +245,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-10">
-                        <button id="register" type="submit" class="btn btn-primary" ng-show="editBasic || !savedOnce" ng-disabled="centreInvalidToSubmit">{{editBasic?'Update':'Register'}}</button>
+                        <button id="register" type="submit" class="btn btn-primary" ng-show="editBasic || !savedOnce" ng-disabled="centreInvalidToSubmit || basicDetailsForm.$invalid">{{editBasic?'Update':'Register'}}</button>
                     </div>
                 </div>
 				

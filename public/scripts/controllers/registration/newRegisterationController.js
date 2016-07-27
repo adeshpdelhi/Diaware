@@ -50,7 +50,7 @@ angular.module('App')
 			
 			$scope.newpatient_basic.id = centre + "-"+ currrentYear.toString() + "-"+ counter.toString();
 			console.log($scope.newpatient_basic);
-			backendFactory.getCentres().update({id:centre},{patientCount: counter+1});
+			backendFactory.getCentres().update({id:centre,updateCount: true},{patientCount: counter+1});
 
 			if($scope.newpatient_basic.emergencyContactMobile === "") $scope.newpatient_basic.emergencyContactMobile = null;
 			if($scope.newpatient_basic.contact === "") $scope.newpatient_basic.contact = null;
