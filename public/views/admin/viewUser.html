@@ -25,10 +25,10 @@
 		                        <tr ng-repeat = "user in users" style="height:2px;" ng-click="editStaff(user.username)">
 		                            <td width="10%" >{{user.username}}</td>
 		                            <td width="15%" >{{user.centres}}</td>
-		                            <td width="10%" >{{user.admin}}</td>
-		                            <td width="10%" >{{user.incharge}}</td>
-		                            <td width="10%" >{{user.manager}}</td>
-		                            <td width="10%" >{{user.clinical}}</td>
+		                            <td width="10%" >{{user.admin==true?'Yes':'No'}}</td>
+		                            <td width="10%" >{{user.incharge==true?'Yes':'No'}}</td>
+		                            <td width="10%" >{{user.manager==true?'Yes':'No'}}</td>
+		                            <td width="10%" >{{user.clinical==true?'Yes':'No'}}</td>
 		                        </tr>    
 		                    </tbody>
 		                </table>

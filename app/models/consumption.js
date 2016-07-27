@@ -6,6 +6,14 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    treatmentDate: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    patientId: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     treatmentType: {
       type: DataTypes.STRING,
       allowNull: true

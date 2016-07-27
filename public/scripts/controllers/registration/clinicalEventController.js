@@ -1,6 +1,7 @@
 'use strict';
 angular.module('App')
-.controller('ClinicalEventController',['$scope','patientFactory', 'authorize', function($scope,patientFactory,authorize){
+.controller('ClinicalEventController',['$scope','patientFactory', 'authorize','regularForm', function($scope,patientFactory,authorize, regularForm){
+		$scope.regularForm = regularForm.regularForm;
 		$scope.showalert_events=false;
 		$scope.savedOnce = false;
 		

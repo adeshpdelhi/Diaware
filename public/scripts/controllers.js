@@ -66,6 +66,12 @@ angular.module('App')
 }])
 
 .controller('HeaderController', ['$scope', '$state', 'authorize', '$uibModal', function ($scope, $state, authorize, $uibModal) {
+    if(authorize.isLoggedIn() === true)
+        {
+
+        }
+    else if(!$state.is('app.login'))
+        $state.go('app.login', {}, {reload: true});
     $scope.stateis = function(curstate) {
        return $state.includes(curstate);  
     }; 

@@ -60,7 +60,7 @@ exports.register = function(req, res){
 		users.findOne({where: {username: req.body.username}}).then(function(user){
 			if(user !=null){
 				res.end('Username already exists');
-				res.status(401);
+				res.status(400);
 			}
 			else
 			{
@@ -74,7 +74,7 @@ exports.register = function(req, res){
 	else
 	{
 		console.log('Enter all details');
-		res.status (401);
+		res.status (400);
 		res.end('Enter all details');
 	}
 }

@@ -1,15 +1,19 @@
 'use strict';
 
 angular.module('App')
-.controller('AddUserController',['$scope','authorize', function ($scope, authorize) {
+.controller('AddUserController',['$scope','authorize','$timeout', function ($scope, authorize,$timeout) {
 	$scope.showalert_add_user=false;
 	$scope.activeUser = authorize.getActiveUser();
 	$scope.newuser={username: null, password: null, centre:'', centres:'', admin:false,manager:false,incharge:false, clinical:false};
-	var tempcentres = authorize.getActiveUser().centres;
 	$scope.channels=[];
-	for(var i = 0; i<tempcentres.length; i++ ){
-	    $scope.channels.push({value: tempcentres[i], label: tempcentres[i]});
-	}
+	$timeout(function(){
+		$scope.tempcentres = authorize.getActiveUser().centres;
+		for(var i = 0; i<$scope.tempcentres.length; i++ ){
+			if($scope.tempcentres[i]!='all')
+			    $scope.channels.push({value: $scope.tempcentres[i], label: $scope.tempcentres[i]});
+		}
+	},1000);
+
 	$scope.addUser = function(){
 			$scope.showalert_add_user=false;
 		console.log($scope.newuser);
@@ -17,6 +21,12 @@ angular.module('App')
 		if(!($scope.newuser.centres.constructor === Array))
     		$scope.newuser.centres = $scope.newuser.centres.split(',');
 		var newcentres =$scope.newuser.centres;
+		if(newcentres.length==0){
+			$scope.showalert_add_user=true;
+			$scope.message = 'User cannot be added. Recheck centres';
+			$scope.messageColor='danger';
+			return;
+		}
 		for(var i=0; i<newcentres.length; i++){
 			var flag=false;
 			for(var j = 0; j<tempcentres.length; j++ ){
@@ -25,22 +35,34 @@ angular.module('App')
 			}
 			if(flag==false)
 				{
-					alert('one of the centre invalid');
+					$scope.showalert_add_user=true;
+					$scope.message = 'One of the centres invalid';
+					$scope.messageColor='danger';
 					return;
 				}
 		}
 		console.log('adding');
 		authorize.getUsers().save($scope.newuser).$promise.then(function(response){
 
-		$scope.showalert_add_user=true;
+			$scope.showalert_add_user=true;
+			$scope.message='User added successfully';
+			$scope.messageColor = 'success';
 			$scope.addUserForm.$setPristine();
 			$scope.newuser={username: null, password: null, centre:'', centres:'', admin:false,manager:false,incharge:false, clinical:false};
 
 		
 			if(response!=null)
-				alert('Added');
+				{
+					$scope.showalert_add_user=true;
+					$scope.message='User added successfully';
+					$scope.messageColor = 'success';
+				}
 			else
-				alert('Failed');
+				{
+					$scope.showalert_add_user=true;
+					$scope.message='Failed to add user!';
+					$scope.messageColor = 'danger';
+				}
 
 		});
 	};
