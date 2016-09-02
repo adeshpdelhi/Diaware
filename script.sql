@@ -4,7 +4,7 @@ use diaware;
 insert into centres (id, name,location,maxPatients,accessLinesAvailable, patientCount,noOfShiftsPerDay,OPDTotalNegativeMachines,typesOfMachinesAvailable,createdAt,updatedAt) values('JP1',"Apex Jaipur","malviya nagar",50,"femoral,fistoral,IJ,central",2,3,10,"NegativeMachines",'2016-07-13 10:48:56','2016-07-13 10:48:56');
 insert into patientDetails (id,name,contact,lastModifiedBy,centreId,createdAt,updatedAt) values("JP1-2016-1","adesh","987654321","aish", "JP1",'2016-07-13 10:48:56','2016-07-13 10:48:56');
 -- insert into bills(transactionId,status,amount,lastModifiedBy,patientId,createdAt,updatedAt) values(1,"Paid",26.89,"aish","JP1-2016-1",'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into appointments(appointmentId, patientId, centreId,billingDone) values (DEFAULT,"JP1-2016-1","JP1",true);
+insert into appointments(appointmentId, patientId, centreId,billingDone, date) values (DEFAULT,"JP1-2016-1","JP1",true, "2016-07-14");
 insert into centres( id, name,location,maxPatients,accessLinesAvailable, patientCount,noOfShiftsPerDay,OPDTotalNegativeMachines,typesOfMachinesAvailable,createdAt,updatedAt) values("CH","chandigarh","chandigarh",50,"femoral,fistoral,IJ",1,4,15,"NegativeMachines",'2016-07-13 10:48:56','2016-07-13 10:48:56');
 insert into panels (id, name, details,createdAt,updatedAt) values(1,"cghs","govt",'2016-07-13 10:48:56','2016-07-13 10:48:56');
 insert into panels (id, name, details,createdAt,updatedAt) values(2,"bahmas","govt",'2016-07-13 10:48:56','2016-07-13 10:48:56');
