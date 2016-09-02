@@ -210,7 +210,7 @@ angular.module('App')
         appointment = appointmentObj;
     };
     patFac.getAppointment = function(){
-        console.log('appointmentid is '+appointment.appointmentid);
+        console.log('appointmentid is '+appointment.appointmentId);
         //console.log('centre is '+logged_in_centre);
         return appointment;
     };

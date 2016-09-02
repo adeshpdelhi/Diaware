@@ -43,13 +43,22 @@ angular.module('App')
 		// },function(response){alert('Failed to retrieve appointments')})
 		// // need to add attributes of editable table given in excel
 		$scope.openAddConsumption = function(appointmentId){
+			var appointment = choosePatientFactory.getAppointment();
+			console.log('recieved appointment is ');
+			console.log(appointment);
+			if(appointment.treatmentConsumptionAdded)
+			{
+				$scope.message = "Treatment consumption already added!";
+				$scope.messageColor = "success";
+				return;
+			}
 			$uibModal.open({
               templateUrl: 'views/inventory/addTreatmentConsumptionModal.html',
               controller: 'AddConsumptionModalController',
               size:'lg',
 	          resolve: {
 	            appointmentId: function () {
-	             return (choosePatientFactory.getAppointment()).appointmentId;
+	             return appointment.appointmentId;
 	            }
 	          }
             });
