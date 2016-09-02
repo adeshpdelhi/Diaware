@@ -1,0 +1,26 @@
+
+<div id="Otabox" style="margin-top:20px;" class="mainbox" ng-cloak>                    
+    <div class="panel" >
+        <div class="panel-heading">
+            <div class="panel-title"><b>One-Time Appointment</b></div>
+            <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
+        </div>     
+
+        <div style="padding-top:30px" class="panel-body">
+				<div class="form-group  col-sm-push-7 col-sm-5" >
+                        <md-content class="col-sm-6">
+                            <md-datepicker  name="dateFrom" ng-model="ota_date" md-placeholder="Enter date">
+                            </md-datepicker>
+                            <div class="validation-messages" ng-messages="viewAppointmentsForm.dateFrom.$error">
+                                <div ng-message="valid" class="text-danger" >The entered value is not a date!</div>
+                            </div>
+                        </md-content>
+                        <div class="col-sm-2"></div>
+                    </div>
+				<button class="col-sm-3 col-offset-7 btn btn-primary " type="submit" ng-click="make_ota()" >Make Appointment</button>
+		</div>
+		</div>
+		</div>
+
+				
+					
