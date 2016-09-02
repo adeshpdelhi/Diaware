@@ -48,14 +48,14 @@
                             </thead>
                             <tbody style="max-height:300px;">
                             <!-- apply filter left -->
-                                <tr ng-repeat = "patient in appointments | filter: pat.name | filter: pat.id | filter: pat.contact" style="height:2px;cursor: pointer;" class='clickable-row' ng-click="redirect(patient.patientDetail.id)" > 
-                                    <td width="30%" >{{ patient.patientDetail.id }}</td>
-                                    <td width="40%">{{ patient.patientDetail.name }}</td>
-                                    <td width="30%">{{ patient.patientDetail.contact }}</td>
-                                    <td width="30%"  style="color:{{patient.present?'green':'red'}};"><span class="glyphicon glyphicon-{{ patient.present?'ok':'remove'}}"></span></td>
-                                    <td width="30%"  style="color:{{patient.billingDone?'green':'red'}};"><span class="glyphicon glyphicon-{{ patient.billingDone?'ok':'remove'}}"></span></td>
-                                    <td width="30%"  style="color:{{patient.monitoringDone?'green':'red'}};"><span class="glyphicon glyphicon-{{ patient.monitoringDone?'ok':'remove'}}"></span></td>
-                                    <td width="30%" style="color:{{patient.treatmentConsumptionAdded?'green':'red'}};"><span class="glyphicon glyphicon-{{ patient.treatmentConsumptionAdded?'ok':'remove'}}"></span></td>
+                                <tr ng-repeat = "appointment in appointments | filter: pat.name | filter: pat.id | filter: pat.contact" style="height:2px;cursor: pointer;" class='clickable-row' ng-click="redirect(appointment.patientDetail.id,appointment)" > 
+                                    <td width="30%" >{{ appointment.patientDetail.id }}</td>
+                                    <td width="40%">{{ appointment.patientDetail.name }}</td>
+                                    <td width="30%">{{ appointment.patientDetail.contact }}</td>
+                                    <td width="30%"  style="color:{{appointment.present?'green':'red'}};"><span class="glyphicon glyphicon-{{ appointment.present?'ok':'remove'}}"></span></td>
+                                    <td width="30%"  style="color:{{appointment.billingDone?'green':'red'}};"><span class="glyphicon glyphicon-{{ appointment.billingDone?'ok':'remove'}}"></span></td>
+                                    <td width="30%"  style="color:{{appointment.monitoringDone?'green':'red'}};"><span class="glyphicon glyphicon-{{ appointment.monitoringDone?'ok':'remove'}}"></span></td>
+                                    <td width="30%" style="color:{{appointment.treatmentConsumptionAdded?'green':'red'}};"><span class="glyphicon glyphicon-{{ appointment.treatmentConsumptionAdded?'ok':'remove'}}"></span></td>
                                 </tr>    
                             </tbody>
                         </table>

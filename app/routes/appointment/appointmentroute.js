@@ -204,6 +204,28 @@ appointmentRouter.route('/appointments/:appointmentId')
         res.json(result);
     });
 })
+.put(function(req, res, next){
+    db.appointments.find({ 
+        where: {
+            appointmentId:parseInt(req.params.appointmentId,10)
+            // centreId:req.params.centreId
+        } 
+    }).then(function(result){
+        if (result) { // if the record exists in the db
+            result.updateAttributes(req.body).then(function (result) { 
+                console.log(JSON.stringify(result));
+                res.status(200);
+                res.end("successfully updated");
+                console.log('updated successfully');
+            }, function(rejectedPromiseError){
+                res.status(500);
+                res.end('Internal Server Error');
+                console.log('cannot update: '+ rejectedPromiseError);
+            });
+        }
+    });
+
+})
 ;
 
 // appointmentRouter.route('/cancelledAppointments')

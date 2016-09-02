@@ -192,8 +192,9 @@ angular.module('App')
                 console.log("Error" + response.status + " " + response.statusText);
             }
         );
-        $scope.redirect = function(id){
+        $scope.redirect = function(id,appointment){
             choosePatientFactory.setPatient(id);
+            choosePatientFactory.setAppointment(appointment);
             var callback = $stateParams.callback;
             $state.go('app.'+callback);
         };

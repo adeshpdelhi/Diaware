@@ -125,7 +125,7 @@
                             <li class="dropdown-submenu" ng-show="role.admin || role.incharge || role.clinical">
                                 <a class="test" style="cursor: pointer; display: block;">Treatment Consumption <span class="caret"></span></a>
                                 <ul class="dropdown-menu"  >
-                                    <li><a ui-sref="app.inventory.consumption.new" ng-show="centre!='all'">Add Treatment Consumption</a></li>
+                                    <li><a ui-sref="app.choosePatientMatrix({callback:'inventory.consumption.new'})" ng-show="centre!='all'">Add Treatment Consumption</a></li>
                                     <li><a ui-sref="app.inventory.consumption.view">View Treatment Consumption</a></li>
                                 </ul>
                             </li>
