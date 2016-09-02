@@ -1,7 +1,7 @@
 /* jshint indent: 2 */
 // next 1 week or 1 month auto added by eventscheduler-mysql
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('futureAppointments', {
+  return sequelize.define('appointments', {
     centreId:{
       type:DataTypes.STRING,
       allownull:true,
@@ -54,7 +54,7 @@ module.exports = function(sequelize, DataTypes) {
       allownull:true
     },
     oneTimeAppointment:{
-      type:Datatypes.BOOLEAN,
+      type:DataTypes.BOOLEAN,
       allownull:false,
       defaultValue:false
     },
