@@ -1,6 +1,14 @@
 /* jshint indent: 2 */
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('shiftPatients', {
+    centreId:{
+      type:DataTypes.STRING,
+      allownull:true,
+      references:{
+        model:'centres',
+        key:'id'
+      }
+    },
     id:{
       type:DataTypes.INTEGER(11),
       allownull:false,

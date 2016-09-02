@@ -195,8 +195,6 @@ insert into floor(centreId, itemId, availableQuantity, createdAt, updatedAt) val
 insert into floor(centreId, itemId, availableQuantity, createdAt, updatedAt) values('CH',3,2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 insert into floor(centreId, itemId, availableQuantity, createdAt, updatedAt) values('CH',4,15,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 
-
-
 insert into stockIssued(centreId,stockIssuedId,stockIssuedTo,estimatedSingleUse,estimatedReUse,estimatedNewDialyzer,estimatedCatheterSingleLumen,estimatedCatheterDoubleLumen,stockIssueDate,stockTakerName,nextExpectedStockIssueDate,createdAt, updatedAt) values ('JP1',DEFAULT,'Floor',1,2,3,4,5,'2016-07-13 10:48:56','adesh','2016-07-13 10:48:56','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 insert into stockIssuedItems(stockIssuedId,itemId,quantity,createdAt, updatedAt) values(1,1,4,'2016-07-13 10:48:56','2016-07-13 10:48:56');

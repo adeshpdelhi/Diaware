@@ -10,14 +10,6 @@ module.exports = function(sequelize, DataTypes) {
         key:'id'
       }
     },
-    shiftPatientsId:{
-      type:DataTypes.INTEGER(11),
-      allownull:false,
-      references:{
-        model:'shiftPatients',
-        key:'id'
-      }
-    },
     appointmentId:{
       type:DataTypes.INTEGER(11),
       allownull:false,
@@ -35,6 +27,20 @@ module.exports = function(sequelize, DataTypes) {
         isIn:[['','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']]
       }
     },
+    appointmentType:{
+      type:DataTypes.STRING,
+      allownull:false,
+      validate:{
+        isIn:[['','IPD/ICU','OPD']]
+      }
+    },
+    tmtMachine:{
+      type:DataTypes.STRING,
+      allownull:false,
+      validate:{
+        isIn:[['','Negative Machine','B+ Machine', 'C+ Machine','HIV Machine']]
+      }
+    },
     patientId:{
       type:DataTypes.STRING,
       allownull:true,
@@ -47,10 +53,36 @@ module.exports = function(sequelize, DataTypes) {
       type:DataTypes.INTEGER(11),
       allownull:true
     },
-    attended:{
+    oneTimeAppointment:{
+      type:Datatypes.BOOLEAN,
+      allownull:false,
+      defaultValue:false
+    },
+
+    present:{
       type:DataTypes.BOOLEAN,
       allownull:true,
-      defaultValue: null
+      defaultValue: false
+    },
+    billingDone:{
+      type:DataTypes.BOOLEAN,
+      allownull:true,
+      defaultValue: false
+    },
+    monitoringDone:{
+      type:DataTypes.BOOLEAN,
+      allownull:true,
+      defaultValue: false
+    },
+    treatmentConsumptionAdded:{
+      type:DataTypes.BOOLEAN,
+      allownull:true,
+      defaultValue: false
+    },
+    processComplete:{
+      type:DataTypes.BOOLEAN,
+      allownull:true,
+      defaultValue: false
     },
     cancelled:{
       type:DataTypes.BOOLEAN,
@@ -58,7 +90,20 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue:false
     }
   }, {
-    tableName: 'futureAppointments',
+    tableName: 'appointments'
+  });
+};
+
+// sequelize.query("INSERT INTO attendedAppointments select * from futureAppointments where appointmentId = :id ;",{ replacements: { id: futureAppointment.appointmentId }}).spread(function(results, metadata) {
+//   console.log(JSON.stringify(results));
+//   sequelize.query("DELETE FROM futureAppointments where appointmentId = :id;",{replacements:{id:futureAppointment.appointmentId}}).spread(function(results1,metadata1){
+//     console.log(JSON.stringify(results1));
+//   }); 
+// });
+
+/*
+
+,
     hooks:{
       afterUpdate: function(futureAppointment){
         //create instance level update if possible else do this there in appointment router
@@ -96,19 +141,4 @@ module.exports = function(sequelize, DataTypes) {
         }
       }
     }
-  });
-};
-// muje lag rha hai ki umm ye table redundant hai ... saari appointments shift patients mein stoer ho skti hain
-//nhi ...ye chahiye hoga coz ismein ek period ka stored hain appointments.... but umm column toh almost same hai :/
-//refer karwa loon kya?
-// baad mein sochte hain .... waise toh ye bhi theek hi lag rha hai ... yahi rehne dete hain phir
-// a table for all future appointments and a table for past Attended appointments of maybe past 2-3 months ... usse zyada koi dekhega nhi kabhi :P
-
-
-
-// sequelize.query("INSERT INTO attendedAppointments select * from futureAppointments where appointmentId = :id ;",{ replacements: { id: futureAppointment.appointmentId }}).spread(function(results, metadata) {
-//   console.log(JSON.stringify(results));
-//   sequelize.query("DELETE FROM futureAppointments where appointmentId = :id;",{replacements:{id:futureAppointment.appointmentId}}).spread(function(results1,metadata1){
-//     console.log(JSON.stringify(results1));
-//   }); 
-// });
+*/
