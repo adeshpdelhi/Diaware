@@ -128,14 +128,14 @@ angular.module('App')
             //     alert('wrong old password');
             //     return;
             // }
-        authorize.getUsers().update({username:$scope.user.username},{oldpassword: $scope.oldpassword, newpassword:$scope.newpassword}).$promise.catch(function(response) {
-                alert('wrong old password');
-                return;
-            }).then(function() {
-                alert('password changed successfully');
+        authorize.getUsers().update({username:$scope.user.username},{oldpassword: $scope.oldpassword, newpassword:$scope.newpassword}).$promise.then(function(response) {
+                alert('Password changed successfully');  
+                $uibModalInstance.close();
+                console.log('updated password');              
+            }, function(response) {
+                alert('Wrong old password');
             });;
-        $uibModalInstance.close();
-        console.log('updated');
+        
 
 //        $state.go('app.home', {}, {reload: true});
     };
