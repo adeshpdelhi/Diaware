@@ -29,7 +29,9 @@ var app = express();
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
-app.use(logger('dev'));
+logger.format('custom',':date[clf] :method :url :status :response-time ms - :res[content-length] ');
+app.use(logger('custom'));
+
 app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
 app.use(bodyParser.urlencoded({ extended: false }));

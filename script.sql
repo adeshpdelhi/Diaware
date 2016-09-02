@@ -204,7 +204,7 @@ insert into stockIssuedItems(stockIssuedId,itemId,quantity,createdAt, updatedAt)
 
 insert into consumption(centreId,treatmentType,treatmentId,createdAt, updatedAt) values ('JP1','Single Use',0,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 
-insert into consumptionItems(treatmentId,itemId,quantity,createdAt,updatedAt) values (25366,1,2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into consumptionItems(treatmentId,itemId,quantity,createdAt,updatedAt) values (0,1,2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 insert into generalConsumption(centreId, lastModifiedBy,createdAt,updatedAt) values ('JP1','admin','2016-07-13 10:48:56','2016-07-13 10:48:56');
 

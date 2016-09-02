@@ -9,3 +9,27 @@
 8. add basic dashboard --- almost done
 9. coloured forms
 10. static tabs   ----- done
+
+
+28 July meeting: 
+0. viral market status -> viral marker status
+1. reset db edit forms after submission
+2. add frontend validation to new registration 
+3. clear db of blobs 
+4. panel payment is meant to be due
+5. add imp medical history  like hep B etc
+6. order the days shown in appointment add new
+7. add min to dialysis care plan
+8. when adding a new schedule show "Saved Successfully" .. ie. make S capital
+9. in dialysis care plan .. if heparin free is yes.. make next two fields(i.e. quanitity field) disabled.
+10. various modifications in appointment
+11. add shift in monitoring chart
+12.	in add new monitoring show today's appointments.. added ones in green others in red
+13. add a dropdown in dialyzer name
+14. dialyzate flow rate can be something other than the dropdown as well
+15. expose all dropdowns to an admin
+16. in predia access assesment .. in cannulation if selected reattempted. give them a field to enter the number.
+17. add treatment consumption.. pick dialysis type from monitoring chart
+18. 3 columns in indents ... requested quantity, approved quantity and received quantity..
+18.5. show available quantity at the beginning before the above 3 columns
+19. editable in receving indents(own suggestion: in approving indent as well)
