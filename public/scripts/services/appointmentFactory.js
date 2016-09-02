@@ -9,8 +9,8 @@ angular.module('App')
 
           });
         };
-        this.getFutureAppointments = function(centreId){
-        	return $resource(baseURL+":centreId/futureAppointments/:appointmentId",{centreId:centreId},  {
+        this.getAppointments = function(centreId){
+        	return $resource(baseURL+":centreId/appointments/:appointmentId",{centreId:centreId},  {
           	'update':{method:'PUT' },
         	query: {
               method: 'get', 

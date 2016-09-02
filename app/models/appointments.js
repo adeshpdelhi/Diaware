@@ -1,7 +1,7 @@
 /* jshint indent: 2 */
 // next 1 week or 1 month auto added by eventscheduler-mysql
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('appointments', {
+  return sequelize.define('futureAppointments', {
     centreId:{
       type:DataTypes.STRING,
       allownull:true,
@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     date:{
       type:DataTypes.DATEONLY,
-      allownull:false
+      allownull:true
     },
     dayOfTheWeek:{
       type:DataTypes.STRING,
@@ -29,21 +29,21 @@ module.exports = function(sequelize, DataTypes) {
     },
     appointmentType:{
       type:DataTypes.STRING,
-      allownull:false,
+      allownull:true,
       validate:{
         isIn:[['','IPD/ICU','OPD']]
       }
     },
     tmtMachine:{
       type:DataTypes.STRING,
-      allownull:false,
+      allownull:true,
       validate:{
         isIn:[['','Negative Machine','B+ Machine', 'C+ Machine','HIV Machine']]
       }
     },
     patientId:{
       type:DataTypes.STRING,
-      allownull:true,
+      allownull:false,
       references:{
         model:'patientDetails',
         key:'id'
@@ -54,8 +54,8 @@ module.exports = function(sequelize, DataTypes) {
       allownull:true
     },
     oneTimeAppointment:{
-      type:DataTypes.BOOLEAN,
-      allownull:false,
+      type:Datatypes.BOOLEAN,
+      allownull:true,
       defaultValue:false
     },
 
@@ -86,7 +86,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     cancelled:{
       type:DataTypes.BOOLEAN,
-      allownull:false,
+      allownull:true,
       defaultValue:false
     }
   }, {

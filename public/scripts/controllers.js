@@ -181,6 +181,24 @@ angular.module('App')
         	$state.go('app.'+callback);
         };
     }])
+
+.controller('ChoosePatientMatrixController',['$scope','patientFactory','choosePatientFactory','$state','$stateParams','authorize','appointmentFactory', function($scope,patientFactory, choosePatientFactory, $state, $stateParams,authorize, appointmentFactory){
+        appointmentFactory.getAppointments(authorize.getCentre()).query(
+            function(response){
+                console.log(response);
+                $scope.appointments = response;        
+            },
+            function(response){
+                console.log("Error" + response.status + " " + response.statusText);
+            }
+        );
+        $scope.redirect = function(id){
+            choosePatientFactory.setPatient(id);
+            var callback = $stateParams.callback;
+            $state.go('app.'+callback);
+        };
+    }])
+
 .controller('DashBoardController',['$scope','appointmentFactory','authorize','patientFactory','billFactory','$timeout','$state',function($scope,appointmentFactory,authorize,patientFactory,billFactory,$timeout,$state){
     console.log("user");
     var activeUser = {} 
@@ -214,7 +232,7 @@ angular.module('App')
         var toDate = new Date();
         $scope.today = toDate; 
         toDate.setHours(23,59,59,999);
-        appointmentFactory.getFutureAppointments(allCentres?'all':authorize.getCentre()).query({date:toDate},function(results){
+        appointmentFactory.getAppointments(allCentres?'all':authorize.getCentre()).query({date:toDate},function(results){
             $scope.appointments  = results;
             if($scope.appointments.length==0){
                 $scope.showAppointmentAlert = true;
