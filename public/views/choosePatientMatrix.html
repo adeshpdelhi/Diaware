@@ -43,7 +43,7 @@
                             </thead>
                             <tbody style="max-height:300px;">
                             <!-- apply filter left -->
-                                <tr ng-repeat = "appointment in appointments | filter: pat.name | filter: pat.id | filter: pat.contact" style="background-color:{{ (appointment.present&&appointment.billingDone && appointment.monitoringDone && appointment.treatmentConsumptionAdded )?'#99ff99':'#ffffff'}};height:2px;cursor: pointer;" class='clickable-row' ng-click="redirect(appointment.patientDetail.id,appointment)" > 
+                                <tr ng-repeat = "appointment in appointments | filter: pat.name | filter: pat.id | filter: pat.contact" style="background-color:{{ ((appointment.present&&appointment.billingDone && appointment.monitoringDone && appointment.treatmentConsumptionAdded) || appointment.processComplete )?'#99ff99':'#ffffff'}};height:2px;cursor: pointer;" class='clickable-row' ng-click="redirect(appointment.patientDetail.id,appointment)" > 
                                     <td width="15%">{{ appointment.date | date:dd-MMMM-YY-EEE }}</td>
                                     <td width="10%">{{ appointment.appointmentId }}</td>
                                     <td width="15%">{{ appointment.patientDetail.id }}</td>
