@@ -2,8 +2,9 @@
 -- create database diaware;
 use diaware;
 insert into centres (id, name,location,maxPatients,accessLinesAvailable, patientCount,noOfShiftsPerDay,OPDTotalNegativeMachines,typesOfMachinesAvailable,createdAt,updatedAt) values('JP1',"Apex Jaipur","malviya nagar",50,"femoral,fistoral,IJ,central",2,3,10,"NegativeMachines",'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into patientDetails (id,name,contact,lastModifiedBy,centreId,createdAt,updatedAt) values("JP1-2016-1","adesh","987654321","aish", "JP1",'2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into patientDetails (id,name,contact,lastModifiedBy,centreId,createdAt,updatedAt,type) values("JP1-2016-1","adesh","987654321","aish", "JP1",'2016-07-13 10:48:56','2016-07-13 10:48:56','Negative');
 -- insert into bills(transactionId,status,amount,lastModifiedBy,patientId,createdAt,updatedAt) values(1,"Paid",26.89,"aish","JP1-2016-1",'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into appointments(appointmentId, patientId, centreId,billingDone, date) values (DEFAULT,"JP1-2016-1","JP1",true, "2016-07-14");
 insert into centres( id, name,location,maxPatients,accessLinesAvailable, patientCount,noOfShiftsPerDay,OPDTotalNegativeMachines,typesOfMachinesAvailable,createdAt,updatedAt) values("CH","chandigarh","chandigarh",50,"femoral,fistoral,IJ",1,4,15,"NegativeMachines",'2016-07-13 10:48:56','2016-07-13 10:48:56');
 insert into panels (id, name, details,createdAt,updatedAt) values(1,"cghs","govt",'2016-07-13 10:48:56','2016-07-13 10:48:56');
 insert into panels (id, name, details,createdAt,updatedAt) values(2,"bahmas","govt",'2016-07-13 10:48:56','2016-07-13 10:48:56');
@@ -41,34 +42,34 @@ insert into monitoringChartPreMachineFinalCheck(preBasicId,patientId,machineNumb
 insert into monitoringChartPreAssessment(preBasicId,patientId,preHDWeight,lastPostHDWeight,dryWeight,physicalChestPain,lastModifiedBy,createdAt,updatedAt) values(1,"JP1-2016-1", 45.5,40.2,40,"Yes","aish",'2016-07-13 10:48:56','2016-07-13 10:48:56');
 insert into monitoringChartPreAccessAssessment(preBasicId,patientId,bruit,anyAbnormality,commencedBy,assistedBy,lastModifiedBy,createdAt,updatedAt) values(1, "JP1-2016-1","Good","No","adesh","Rishabh","aish",'2016-07-13 10:48:56','2016-07-13 10:48:56');
 
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Mon-1",6,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Mon-2",2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Mon-3",4,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Tue-1",5,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Tue-2",3,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Tue-3",3,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Wed-1",2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Wed-2",4,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Wed-3",5,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Thu-1",6,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Thu-2",6,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Thu-3",0,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Fri-1",0,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Fri-2",6,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Fri-3",6,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Sat-1",6,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Sat-2",6,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Sat-3",0,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Sun-1",0,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Sun-2",0,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Sun-3",0,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id,createdAt,updatedAt) values('JP1',"Monday","JP1-Mon-1",'JP1-Mon-2','JP1-Mon-3','2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id,createdAt,updatedAt) values('JP1',"Tuesday","JP1-Tue-1",'JP1-Tue-2','JP1-Tue-3','2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id,createdAt,updatedAt) values('JP1',"Wednesday","JP1-Wed-1",'JP1-Wed-2','JP1-Wed-3','2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id,createdAt,updatedAt) values('JP1',"Thursday","JP1-Thu-1",'JP1-Thu-2','JP1-Thu-3','2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id,createdAt,updatedAt) values('JP1',"Friday","JP1-Fri-1",'JP1-Fri-2','JP1-Fri-3','2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id,createdAt,updatedAt) values('JP1',"Saturday","JP1-Sat-1",'JP1-Sat-2','JP1-Sat-3','2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id,createdAt,updatedAt) values('JP1',"Sunday","JP1-Sun-1",'JP1-Sun-2','JP1-Sun-3','2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Mon-1",6,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Mon-2",2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Mon-3",4,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Tue-1",5,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Tue-2",3,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Tue-3",3,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Wed-1",2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Wed-2",4,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Wed-3",5,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Thu-1",6,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Thu-2",6,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Thu-3",0,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Fri-1",0,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Fri-2",6,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Fri-3",6,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Sat-1",6,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Sat-2",6,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Sat-3",0,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Sun-1",0,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Sun-2",0,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into shifts(id,OPDAvailableNegativeMachines,createdAt,updatedAt) values("JP1-Sun-3",0,'2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id,createdAt,updatedAt) values('JP1',"Monday","JP1-Mon-1",'JP1-Mon-2','JP1-Mon-3','2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id,createdAt,updatedAt) values('JP1',"Tuesday","JP1-Tue-1",'JP1-Tue-2','JP1-Tue-3','2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id,createdAt,updatedAt) values('JP1',"Wednesday","JP1-Wed-1",'JP1-Wed-2','JP1-Wed-3','2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id,createdAt,updatedAt) values('JP1',"Thursday","JP1-Thu-1",'JP1-Thu-2','JP1-Thu-3','2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id,createdAt,updatedAt) values('JP1',"Friday","JP1-Fri-1",'JP1-Fri-2','JP1-Fri-3','2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id,createdAt,updatedAt) values('JP1',"Saturday","JP1-Sat-1",'JP1-Sat-2','JP1-Sat-3','2016-07-13 10:48:56','2016-07-13 10:48:56');
+-- insert into weekDaySlots(centreId,dayOfTheWeek,shift1Id,shift2Id,shift3Id,createdAt,updatedAt) values('JP1',"Sunday","JP1-Sun-1",'JP1-Sun-2','JP1-Sun-3','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 insert into diseases(diseaseName,createdAt,updatedAt) values('diabetes','2016-07-13 10:48:56','2016-07-13 10:48:56');
 insert into diseases(diseaseName,createdAt,updatedAt) values('hypertension','2016-07-13 10:48:56','2016-07-13 10:48:56');
@@ -194,8 +195,6 @@ insert into floor(centreId, itemId, availableQuantity, createdAt, updatedAt) val
 insert into floor(centreId, itemId, availableQuantity, createdAt, updatedAt) values('CH',2,5,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 insert into floor(centreId, itemId, availableQuantity, createdAt, updatedAt) values('CH',3,2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 insert into floor(centreId, itemId, availableQuantity, createdAt, updatedAt) values('CH',4,15,'2016-07-13 10:48:56','2016-07-13 10:48:56');
-
-
 
 insert into stockIssued(centreId,stockIssuedId,stockIssuedTo,estimatedSingleUse,estimatedReUse,estimatedNewDialyzer,estimatedCatheterSingleLumen,estimatedCatheterDoubleLumen,stockIssueDate,stockTakerName,nextExpectedStockIssueDate,createdAt, updatedAt) values ('JP1',DEFAULT,'Floor',1,2,3,4,5,'2016-07-13 10:48:56','adesh','2016-07-13 10:48:56','2016-07-13 10:48:56','2016-07-13 10:48:56');
 

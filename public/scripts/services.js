@@ -45,6 +45,7 @@ angular.module('App')
     var logged_in_centre = '';
     var logged_in_user_object={};
     var logged_in_role = '';
+    var appointmentid = '';
     logged_in_user = $cookies.get('usernamelocal');
     var users = $resource(baseURL+"users/:username",null,  {'update':{method:'PUT' }});
     if(logged_in_user!=null && logged_in_user!='')
@@ -128,6 +129,7 @@ angular.module('App')
         //console.log('centre is '+logged_in_centre);
         return logged_in_centre;
     };
+
     this.isLoggedIn = function(){
         console.log("Logged in: "+logged_in+" "+logged_in_centre);
         //console.log('value sent back '+logged_in);
@@ -195,12 +197,22 @@ angular.module('App')
 .factory('choosePatientFactory',['$localStorage', function($localStorage){
     var patFac = {};
     var patient = $localStorage.getObject('chosenPatient','{}');
+    var appointment = $localStorage.getObject('appointment','{}');
     patFac.setPatient = function(id){
         patient = {id: id};
         $localStorage.storeObject('chosenPatient', patient);
     };
     patFac.getChosenPatient = function(){
         return patient;
+    };
+    patFac.setAppointment = function(appointmentObj){
+        $localStorage.storeObject('appointment', appointmentObj);
+        appointment = appointmentObj;
+    };
+    patFac.getAppointment = function(){
+        console.log('appointmentid is '+appointment.appointmentId);
+        //console.log('centre is '+logged_in_centre);
+        return appointment;
     };
     return patFac;
 }])

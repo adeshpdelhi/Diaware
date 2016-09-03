@@ -41,8 +41,8 @@
                     </a>
                     <ul class="dropdown-menu" uib-dropdown-menu  aria-labelledby="simple-dropdown">
                         <li>
-                            <a ui-sref="app.choosePatient({callback:'billing.newbill'})">New Bill</a>
-                            <a ui-sref="app.billing.viewbill">View/Edit Bill</a>
+                            <a ui-sref="app.choosePatientMatrix({callback:'billing.newbill'})">New Bill</a>
+                            <a ui-sref="app.billing.viewbill">View/Edit Billing</a>
 
                         </li>
                     </ul>
@@ -93,8 +93,8 @@
                     </a>
                     <ul class="dropdown-menu" uib-dropdown-menu  aria-labelledby="simple-dropdown">
                         <li>
-                            <a ui-sref="app.choosePatient({callback:'monitoring.new'})">Add New Monitoring Chart</a>
-                            <a ui-sref="app.choosePatient({callback:'monitoring.view'})">View/Edit</a>
+                            <a ui-sref="app.choosePatientMatrix({callback:'monitoring.new'})">Add New Monitoring Chart</a>
+                            <a ui-sref="app.choosePatientMatrix({callback:'monitoring.view'})">View/Edit</a>
 
                         </li>
                     </ul>
@@ -125,7 +125,7 @@
                             <li class="dropdown-submenu" ng-show="role.admin || role.incharge || role.clinical">
                                 <a class="test" style="cursor: pointer; display: block;">Treatment Consumption <span class="caret"></span></a>
                                 <ul class="dropdown-menu"  >
-                                    <li><a ui-sref="app.inventory.consumption.new" ng-show="centre!='all'">Add Treatment Consumption</a></li>
+                                    <li><a ui-sref="app.choosePatientMatrix({callback:'inventory.consumption.new'})" ng-show="centre!='all'">Add Treatment Consumption</a></li>
                                     <li><a ui-sref="app.inventory.consumption.view">View Treatment Consumption</a></li>
                                 </ul>
                             </li>

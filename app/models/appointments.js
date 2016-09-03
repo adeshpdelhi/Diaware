@@ -1,20 +1,12 @@
 /* jshint indent: 2 */
 // next 1 week or 1 month auto added by eventscheduler-mysql
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('futureAppointments', {
+  return sequelize.define('appointments', {
     centreId:{
       type:DataTypes.STRING,
       allownull:true,
       references:{
         model:'centres',
-        key:'id'
-      }
-    },
-    shiftPatientsId:{
-      type:DataTypes.INTEGER(11),
-      allownull:false,
-      references:{
-        model:'shiftPatients',
         key:'id'
       }
     },
@@ -26,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     date:{
       type:DataTypes.DATEONLY,
-      allownull:false
+      allownull:true
     },
     dayOfTheWeek:{
       type:DataTypes.STRING,
@@ -35,9 +27,23 @@ module.exports = function(sequelize, DataTypes) {
         isIn:[['','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']]
       }
     },
-    patientId:{
+    appointmentType:{
       type:DataTypes.STRING,
       allownull:true,
+      validate:{
+        isIn:[['','IPD/ICU','OPD']]
+      }
+    },
+    tmtMachine:{
+      type:DataTypes.STRING,
+      allownull:true,
+      validate:{
+        isIn:[['','NegativeMachine','BPositiveMachine', 'CPositiveMachine','HIVMachine']]
+      }
+    },
+    patientId:{
+      type:DataTypes.STRING,
+      allownull:false,
       references:{
         model:'patientDetails',
         key:'id'
@@ -47,18 +53,57 @@ module.exports = function(sequelize, DataTypes) {
       type:DataTypes.INTEGER(11),
       allownull:true
     },
-    attended:{
+    oneTimeAppointment:{
+      type: DataTypes.BOOLEAN,
+      allownull:true,
+      defaultValue:false
+    },
+
+    present:{
+      type:DataTypes.BOOLEAN,
+      allownull:true
+      // defaultValue: false
+    },
+    billingDone:{
       type:DataTypes.BOOLEAN,
       allownull:true,
-      defaultValue: null
+      defaultValue: false
+    },
+    monitoringDone:{
+      type:DataTypes.BOOLEAN,
+      allownull:true,
+      defaultValue: false
+    },
+    treatmentConsumptionAdded:{
+      type:DataTypes.BOOLEAN,
+      allownull:true,
+      defaultValue: false
+    },
+    processComplete:{
+      type:DataTypes.BOOLEAN,
+      allownull:true,
+      defaultValue: false
     },
     cancelled:{
       type:DataTypes.BOOLEAN,
-      allownull:false,
+      allownull:true,
       defaultValue:false
     }
   }, {
-    tableName: 'futureAppointments',
+    tableName: 'appointments'
+  });
+};
+
+// sequelize.query("INSERT INTO attendedAppointments select * from futureAppointments where appointmentId = :id ;",{ replacements: { id: futureAppointment.appointmentId }}).spread(function(results, metadata) {
+//   console.log(JSON.stringify(results));
+//   sequelize.query("DELETE FROM futureAppointments where appointmentId = :id;",{replacements:{id:futureAppointment.appointmentId}}).spread(function(results1,metadata1){
+//     console.log(JSON.stringify(results1));
+//   }); 
+// });
+
+/*
+
+,
     hooks:{
       afterUpdate: function(futureAppointment){
         //create instance level update if possible else do this there in appointment router
@@ -96,19 +141,4 @@ module.exports = function(sequelize, DataTypes) {
         }
       }
     }
-  });
-};
-// muje lag rha hai ki umm ye table redundant hai ... saari appointments shift patients mein stoer ho skti hain
-//nhi ...ye chahiye hoga coz ismein ek period ka stored hain appointments.... but umm column toh almost same hai :/
-//refer karwa loon kya?
-// baad mein sochte hain .... waise toh ye bhi theek hi lag rha hai ... yahi rehne dete hain phir
-// a table for all future appointments and a table for past Attended appointments of maybe past 2-3 months ... usse zyada koi dekhega nhi kabhi :P
-
-
-
-// sequelize.query("INSERT INTO attendedAppointments select * from futureAppointments where appointmentId = :id ;",{ replacements: { id: futureAppointment.appointmentId }}).spread(function(results, metadata) {
-//   console.log(JSON.stringify(results));
-//   sequelize.query("DELETE FROM futureAppointments where appointmentId = :id;",{replacements:{id:futureAppointment.appointmentId}}).spread(function(results1,metadata1){
-//     console.log(JSON.stringify(results1));
-//   }); 
-// });
+*/

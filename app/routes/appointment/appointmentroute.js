@@ -9,11 +9,16 @@ appointmentRouter.use(bodyParser.json());
 //db.patientDetails.create({patientId: '12345', name: 'heya', lastModifiedBy: 'adesh'});
 appointmentRouter.route('/futureAppointments')
 .get(function (req, res, next) {
-    	// console.log(JSON.stringify(bills));
     console.log('procesing get');
+    var today = new Date();
+    today.setHours(23,59,59,999);
+    
     var where = {};
     where['cancelled'] = false;
-    where['attended'] = null;
+    where['date'] = {
+        $gte:today
+    };
+
     //todays appointments
     if(req.query.date != null ) {
         where['date'] = {
@@ -21,27 +26,30 @@ appointmentRouter.route('/futureAppointments')
             $gt:new Date(Date.parse(req.query.date) - 24*60*60*1000)
         };
         console.log(where.date);
+        // where['processComplete'] = {};
+    }else{
+        where['processComplete'] = false;
     }
     if(req.params.centreId != 'all')  
         where['centreId'] = req.params.centreId;
 
     // var flag = true;
     //fetch pending appointments till that date for user to update their status to cancelled or not attended
-    var today = new Date();
-    today.setHours(0,0,0,000);
-    db.futureAppointments.findAll({
+    var yesterday = new Date();
+    yesterday.setDate(today.getDate()-1);
+    db.appointments.findAll({
         include: [{
-            model:db.shiftPatients
-        },{
             model:db.patientDetails,
             attributes:['name','id','contact']
         }],
         where:{
             centreId:req.params.centreId,
             date:{
-                $lt: today
+                $lte: yesterday
             },
-            attended:null,
+            present: {
+                $eq:null
+            },
             cancelled:false
         },
         // orderBy:[['date','shiftNumber']]
@@ -51,16 +59,10 @@ appointmentRouter.route('/futureAppointments')
             console.log("result:");
             console.log(JSON.stringify(result));
             res.status(206).json(result);
-            // res.json(JSON.stringify(result));
-            // console.log(flag);
-
-            // return ;
         }
         else{
-            db.futureAppointments.findAll({
+            db.appointments.findAll({
                 include: [{
-                   model:db.shiftPatients,
-                },{
                     model:db.patientDetails,
                     attributes:['name','id','contact']
                 }],
@@ -82,17 +84,13 @@ appointmentRouter.route('/futureAppointments')
 
 appointmentRouter.route('/futureAppointments/:appointmentId')
 .get(function (req, res, next) {
-        // console.log(JSON.stringify(bills));
     console.log('procesing get');
-    db.futureAppointments.find({
+    db.appointments.find({
         include: [{
-            model:db.shiftPatients
-        },{
             model:db.patientDetails
         }],
         where:{
             appointmentId:parseInt(req.params.appointmentId,10)
-            // centreId:req.params.centreId
         }
     }).then(function(result){
         console.log(JSON.stringify(result));
@@ -102,10 +100,9 @@ appointmentRouter.route('/futureAppointments/:appointmentId')
 })
 .delete(function(req,res,next){
     console.log('processing delete');
-    db.futureAppointments.destroy({
+    db.appointments.destroy({
         where:{
             appointmentId:parseInt(req.params.appointmentId,10)
-            // centreId:req.params.centreId
         }
     }).then(function(result){
         console.log("deleted successfully!");
@@ -114,7 +111,215 @@ appointmentRouter.route('/futureAppointments/:appointmentId')
     });
 })
 .put(function(req, res, next){
-    db.futureAppointments.find({ 
+    db.appointments.find({ 
+        where: {
+            appointmentId:parseInt(req.params.appointmentId,10)
+        } 
+    }).then(function(result){
+        if (result) { // if the record exists in the db
+            result.updateAttributes(req.body).then(function (result) { 
+                console.log(JSON.stringify(result));
+                res.status(200);
+                res.end("successfully updated");
+                console.log('updated successfully');
+            }, function(rejectedPromiseError){
+                res.status(500);
+                res.end('Internal Server Error');
+                console.log('cannot update: '+ rejectedPromiseError);
+            });
+        }
+    });
+
+})
+    // db.appointments.update(req.body,{
+    //     where:{
+    //         appointmentId:parseInt(req.params.appointmentId,10),
+    //         centreId:req.params.centreId
+    //     }
+    // }).then(function(result){
+    //     console.log("updated successfully!");
+    //     console.log(JSON.stringify(result));
+    //     res.json(result);
+    // });
+
+
+;
+// module.exports = appointmentRouter;
+
+appointmentRouter.route('/pastAppointments')
+.get(function(req,res,next){
+    console.log('procesing get');
+    var today = new Date();
+    today.setHours(23,59,59,999);
+    var where ={};
+    where['date'] = {
+        $lt:today
+    };
+
+    // where['present'] = {};
+
+    if(req.query.attended){
+        where['processComplete'] = true;
+    }else if(req.query.attended == false) 
+        where['present'] = req.query.attended;
+    
+    if(req.params.centreId != 'all')
+        where['centreId'] = req.params.centreId;
+    
+    if(req.query.count){
+        db.appointments.count({
+            where:where
+        }).then(function(result){
+            console.log("count:" + result);
+            res.json({count:result});
+        },function(rejectedPromiseError){
+            console.log(rejectedPromiseError);
+            res.status(400);
+            res.edn("couldnt fetch data appointment route");
+        })
+        return;
+    }
+    db.appointments.findAll({
+    	where:where,
+    	include:[{
+            model:db.patientDetails,
+            attributes:['name','id','contact']
+        }]
+    }).then(function(results){
+        console.log(JSON.stringify(results));
+        res.json(results);
+    });
+})
+;
+appointmentRouter.route('/pastAppointments/:appointmentId')
+.get(function (req, res, next) {
+        // console.log(JSON.stringify(bills));
+    console.log('procesing get');
+    console.log(parseInt(req.params.appointmentId,10));
+    console.log(req.params.centreId);
+    var today = new Date();
+    today.setHours(23,59,59,999);
+    db.appointments.find({
+        where:{
+            appointmentId:parseInt(req.params.appointmentId,10),
+            date:{
+                $lt: today
+            }
+        },
+        include: [{
+            model:db.patientDetails
+        }]
+    }).then(function(result){
+        console.log(JSON.stringify(result));
+        res.json(result);
+    });
+})
+;
+
+appointmentRouter.route('/cancelledAppointments')
+.get(function(req,res,next){
+    console.log('procesing get');
+    var today = new Date();
+    today.setHours(23,59,59,999);
+    
+    var where ={};
+    // where['date'] = {
+    //     $lt:today
+    // };
+
+    where['cancelled'] = true;
+
+    if(req.params.centreId != 'all')
+        where['centreId'] = req.params.centreId;
+    
+    db.appointments.findAll({
+        where:where,
+        include:[{
+            model:db.patientDetails,
+            attributes:['name','id','contact']
+        }]
+    }).then(function(results){
+        console.log(JSON.stringify(results));
+        res.json(results);
+    });
+})
+;
+appointmentRouter.route('/cancelledAppointments/:appointmentId')
+.get(function (req, res, next) {
+        // console.log(JSON.stringify(bills));
+    console.log('procesing get');
+
+    db.appointments.find({
+        include: [{
+            model:db.patientDetails
+        }],
+        where:{
+            appointmentId:parseInt(req.params.appointmentId,10),
+            cancelled:true
+        }
+    }).then(function(result){
+        console.log(JSON.stringify(result));
+        res.json(result);
+    });
+})
+;
+
+appointmentRouter.route('/appointments')
+.get(function(req,res,next){
+    console.log('procesing get');
+    var where ={};
+    // if(req.query.attended != null){
+    //     where['attended'] = JSON.parse(req.query.attended);
+    // }
+    if(req.params.centreId != 'all')
+        where['centreId'] = req.params.centreId;
+    // if(req.query.count){
+    //     db.appointments.count({
+    //         where:where
+    //     }).then(function(result){
+    //         console.log("count:" + result);
+    //         res.json({count:result});
+    //     },function(rejectedPromiseError){
+    //         console.log(rejectedPromiseError);
+    //         res.status(400);
+    //         res.edn("couldnt fetch data appointment route");
+    //     })
+    //     return;
+    // }
+    db.appointments.findAll({
+        where:where,
+        include:[
+        {
+            model:db.patientDetails,
+            attributes:['name','id','contact']
+        }]
+    }).then(function(results){
+        console.log(JSON.stringify(results));
+        res.json(results);
+    });
+})
+;
+appointmentRouter.route('/appointments/:appointmentId')
+.get(function (req, res, next) {
+        // console.log(JSON.stringify(bills));
+    console.log('procesing get');
+    console.log(parseInt(req.params.appointmentId,10));
+    console.log(req.params.centreId);
+    db.appointments.find({
+        where:{
+            appointmentId:parseInt(req.params.appointmentId,10)
+            // centreId:req.params.centreId
+        },
+        include: [{
+            model:db.patientDetails
+        }]
+    }).then(function(result){
+        console.log(JSON.stringify(result));
+        res.json(result);
+    });
+})
+.put(function(req, res, next){
+    db.appointments.find({ 
         where: {
             appointmentId:parseInt(req.params.appointmentId,10)
             // centreId:req.params.centreId
@@ -135,117 +340,6 @@ appointmentRouter.route('/futureAppointments/:appointmentId')
     });
 
 })
-    // db.futureAppointments.update(req.body,{
-    //     where:{
-    //         appointmentId:parseInt(req.params.appointmentId,10),
-    //         centreId:req.params.centreId
-    //     }
-    // }).then(function(result){
-    //     console.log("updated successfully!");
-    //     console.log(JSON.stringify(result));
-    //     res.json(result);
-    // });
-
-
 ;
 
-
-appointmentRouter.route('/pastAppointments')
-.get(function(req,res,next){
-    console.log('procesing get');
-    var where ={};
-    if(req.query.attended != null){
-        where['attended'] = JSON.parse(req.query.attended);
-    }
-    if(req.params.centreId != 'all')
-        where['centreId'] = req.params.centreId;
-    if(req.query.count){
-        db.pastAppointments.count({
-            where:where
-        }).then(function(result){
-            console.log("count:" + result);
-            res.json({count:result});
-        },function(rejectedPromiseError){
-            console.log(rejectedPromiseError);
-            res.status(400);
-            res.edn("couldnt fetch data appointment route");
-        })
-        return;
-    }
-    db.pastAppointments.findAll({
-    	where:where,
-    	include:[{
-    		model:db.shiftPatients
-    	},{
-            model:db.patientDetails,
-            attributes:['name','id','contact']
-        }]
-    }).then(function(results){
-        console.log(JSON.stringify(results));
-        res.json(results);
-    });
-})
-;
-appointmentRouter.route('/pastAppointments/:appointmentId')
-.get(function (req, res, next) {
-        // console.log(JSON.stringify(bills));
-    console.log('procesing get');
-    console.log(parseInt(req.params.appointmentId,10));
-    console.log(req.params.centreId);
-    db.pastAppointments.find({
-        where:{
-            appointmentId:parseInt(req.params.appointmentId,10)
-            // centreId:req.params.centreId
-        },
-        include: [{
-            model:db.shiftPatients
-        },{
-            model:db.patientDetails
-        }]
-    }).then(function(result){
-        console.log(JSON.stringify(result));
-        res.json(result);
-    });
-})
-;
-
-appointmentRouter.route('/cancelledAppointments')
-.get(function(req,res,next){
-    console.log('procesing get');
-    db.cancelledAppointments.findAll({
-        where:{
-            centreId: req.params.centreId
-        },
-        include:[{
-            model:db.shiftPatients
-        },{
-            model:db.patientDetails,
-            attributes:['name','id','contact']
-        }]
-    }).then(function(results){
-        console.log(JSON.stringify(results));
-        res.json(results);
-    });
-})
-;
-appointmentRouter.route('/cancelledAppointments/:appointmentId')
-.get(function (req, res, next) {
-        // console.log(JSON.stringify(bills));
-    console.log('procesing get');
-    db.cancelledAppointments.find({
-        include: [{
-            model:db.shiftPatients
-        },{
-            model:db.patientDetails
-        }],
-        where:{
-            appointmentId:parseInt(req.params.appointmentId,10)
-            // centreId:req.params.centreId
-        }
-    }).then(function(result){
-        console.log(JSON.stringify(result));
-        res.json(result);
-    });
-})
-;
 module.exports = appointmentRouter;
