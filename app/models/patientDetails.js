@@ -30,6 +30,13 @@ module.exports = function(sequelize, DataTypes) {
         isIn:[['','Male','Female']]
       }
     },
+    type:{
+      type:DataTypes.STRING,
+      allowNull:true ,
+      validate:{
+        isIn:[['','Negative', 'BPositive','CPositive','HIV']]
+      }
+    },
     contact: {
       type: DataTypes.STRING,
       allowNull: true,

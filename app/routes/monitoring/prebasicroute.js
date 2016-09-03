@@ -63,7 +63,7 @@ preBasicRouter.route('/')
 	console.log('processing post : '+ req.body);
     var monitoringDate = new Date(req.body.monitoringDate);
     monitoringDate.setHours(23,59,59,999); 
-    db.futureAppointments.find({
+    db.appointments.find({
         where:{
             patientId:req.params.id,
             date:{
@@ -73,16 +73,17 @@ preBasicRouter.route('/')
         }
     }).then(function(resultAppointment){
         console.log("appointment check!");
-        console.log(JSON.parse(JSON.stringify(resultAppointment)));
+        var result = JSON.parse(JSON.stringify(resultAppointment));
+        console.log(result);
 
-        if(JSON.parse(JSON.stringify(resultAppointment)) != null){
-            db.monitoringChartPreBasic.build(req.body).save().then(function(result){
-                res.json(result);
+        if(result != null &&  result.present == true && result.billingDone && !result.monitoringDone){
+            db.monitoringChartPreBasic.build(req.body).save().then(function(resultChart){
+                // res.json(result);
+                console.log(JSON.stringify(resultChart));
                 //mark that appointment as attended
-                resultAppointment.updateAttributes({attended:true}).then(function (result) { 
+                resultAppointment.updateAttributes({monitoringDone:true}).then(function (result) { 
                     console.log(JSON.stringify(result));
-                    res.status(200);
-                    res.end("successfully updated");
+                    res.json(resultChart);
                     console.log('updated successfully');
                 }, function(rejectedPromiseError){
                     res.status(500);
@@ -91,16 +92,23 @@ preBasicRouter.route('/')
                 });
                    
             },function(rejectedPromiseError){
+                console.log(rejectedPromiseError);
                 res.status(400);
-                res.end("Error:" + rejectedPromiseError);
-            });        
+                res.end("Error Saving the object:" + rejectedPromiseError);
+            });
         }else{
             res.status(400);
-            res.end('Invalid Monitoring Date. No such appointment exists of this date');
+            var string;
+            if(result == null) string = " No such appointment exists of this date!";
+            if(result.present == null || result.present == false) string = "Patient wasn't present for appointment!";
+            if(!result.billingDone) string = "Billing not Complete!";
+            if(result.monitoringDone) string = "Monitoring chart already filled for this date!";
+            res.end('Invalid Monitoring Date.' + string);
         }
     },function(rejectedPromiseError){
         res.status(500);
-        res.end("Internal Server Error (post find appointmentDate == monitoringDate)");
+        console.log(rejectedPromiseError+ "(In post find appointmentDate == monitoringDate)");
+        res.end("Internal Server Error");
     })
     
 })

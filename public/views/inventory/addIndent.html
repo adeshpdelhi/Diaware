@@ -85,11 +85,11 @@
                                 <td style="text-align:center;" width="10%" >{{indentItem.itemName}}</td>
                                 <td style="text-align:center;" width="10%" >{{indentItem.usageType}}</td>
                                 <td style="text-align:center;" width="10%" >{{indentItem.brandName}}</td>
-                                <td style="text-align:center;" width="10%" ><input style="width:50%;" type="number" ng-init="indentItem.quantityRequired=1" ng-model="indentItem.quantityRequired"></td>
+                                <td style="text-align:center;color:{{(indentItem.quantityRequired<1)?'red':'black'}};" width="10%" ><input style="width:50%;" type="number" ng-init="indentItem.quantityRequired=1" ng-model="indentItem.quantityRequired"></td>
                                 <!-- <td style="text-align:center;" width="10%" ><input style="width:50%;" type="number" ng-init="indentItem.availableQuantity=0" ng-model="indentItem.availableQuantity"></td> -->
                                 <td style="text-align:center;" width="10%" >{{indentItem.availableQuantity}}</td> 
                                 <td style="text-align:center;" width="10%" >{{indentItem.quantityMeasurementType}}</td>
-                                <td style="text-align:center;" width="5%" ng-click="addItem(indentItem,$index)"><span class="glyphicon glyphicon-plus"></span></td>
+                                <td style="text-align:center;" width="5%" ng-click="(indentItem.quantityRequired>0) && addItem(indentItem,$index)"><span class="glyphicon glyphicon-plus"></span></td>
                                 <!-- <td style="text-align:center;" width="5%" ng-click="addItem({itemId: indentItem.itemId,itemName:indentItem.itemName,usageType: indentItem.usageType,brandName:indentItem.brandName,quantityRequired:indentItem.quantityRequired,availableQuantity:indentItem.availableQuantity,quantityMeasurementType:indentItem.quantityMeasurementType})"><span class="glyphicon glyphicon-plus"></span></td> -->
                             </tr>    
                         </tbody>

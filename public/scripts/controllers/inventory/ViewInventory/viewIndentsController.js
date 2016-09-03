@@ -143,7 +143,12 @@ angular.module('App')
 			
 		}
 		
-
+		$scope.verifyIndentItemQuantity = function(){
+			for(var i=0;i<$scope.indentItems.length;i++)
+				if($scope.indentItems[i].quantityRequired<0)
+					return false;
+			return true;
+		}
 
 		$scope.saveIndent = function(){
 			

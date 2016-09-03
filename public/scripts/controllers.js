@@ -128,14 +128,14 @@ angular.module('App')
             //     alert('wrong old password');
             //     return;
             // }
-        authorize.getUsers().update({username:$scope.user.username},{oldpassword: $scope.oldpassword, newpassword:$scope.newpassword}).$promise.catch(function(response) {
-                alert('wrong old password');
-                return;
-            }).then(function() {
-                alert('password changed successfully');
+        authorize.getUsers().update({username:$scope.user.username},{oldpassword: $scope.oldpassword, newpassword:$scope.newpassword}).$promise.then(function(response) {
+                alert('Password changed successfully');  
+                $uibModalInstance.close();
+                console.log('updated password');              
+            }, function(response) {
+                alert('Wrong old password');
             });;
-        $uibModalInstance.close();
-        console.log('updated');
+        
 
 //        $state.go('app.home', {}, {reload: true});
     };
@@ -181,6 +181,25 @@ angular.module('App')
         	$state.go('app.'+callback);
         };
     }])
+
+.controller('ChoosePatientMatrixController',['$scope','patientFactory','choosePatientFactory','$state','$stateParams','authorize','appointmentFactory', function($scope,patientFactory, choosePatientFactory, $state, $stateParams,authorize, appointmentFactory){
+        appointmentFactory.getAppointments(authorize.getCentre()).query(
+            function(response){
+                console.log(response);
+                $scope.appointments = response;        
+            },
+            function(response){
+                console.log("Error" + response.status + " " + response.statusText);
+            }
+        );
+        $scope.redirect = function(id,appointment){
+            choosePatientFactory.setPatient(id);
+            choosePatientFactory.setAppointment(appointment);
+            var callback = $stateParams.callback;
+            $state.go('app.'+callback);
+        };
+    }])
+
 .controller('DashBoardController',['$scope','appointmentFactory','authorize','patientFactory','billFactory','$timeout','$state',function($scope,appointmentFactory,authorize,patientFactory,billFactory,$timeout,$state){
     console.log("user");
     var activeUser = {} 
