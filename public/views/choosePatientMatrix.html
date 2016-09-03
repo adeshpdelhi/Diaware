@@ -1,13 +1,69 @@
+<style type="text/css">
+    .datepickerdemoBasicUsage {
+        /*padding-left:-50px;  */
+        padding-right: 10px;
+    }
+    .datepickerdemoBasicUsage md-content {
+        /*padding-bottom: 200px; */
+        background: rgb(238,238,238);
+        margin-left: -50px;
+    }
+    .datepickerdemoBasicUsage .validation-messages {
+        font-size: 12px;
+        color: #dd2c00;
+        margin: 10px 0 0 25px; 
+    } 
+    md-datepicker.md-default-theme, md-datepicker, md-content{
+        background: rgb(238,238,238);
+        overflow: hidden;
+        /*padding-left: -20px;*/
+        margin-left:-30px;
+        margin-right: -20px;
+
+    }
+    .panel-heading h3 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: normal;
+        width: 75%;
+        padding-top: 8px;
+    }
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black;
+    }
+
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: #FFFFD9;
+        color: #B2b2b2;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 1;
+    }
+
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+    }
+</style>
 <div class="container" ng-cloak>
     <div class="row row-content col-sm-12">
         <div class="panel" >
             <div class="panel-heading">
-                <div class="panel-title"><b>Choose Appointment</b></div>
+                <div class="panel-title"><b>Choose Appointment</b><button type="button"  ng-click="toggleAndUpdate()" class="btn btn-warning pull-right">{{all?'View Today\'s Appointments':'View All Appointments'}}</button></div>
                 <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
+                <div class="clearfix"></div>
             </div>     
 
             <div style="padding-top:30px; text-align:center;" class="panel-body bg-warning" >
-                <form class="form-horizontal" role="form" name="choosePatientForm" id="choosePatientForm" novalidate>
+                <form class="form-horizontal" role="form" name="choosePatientMatrixForm" id="choosePatientForm" novalidate>
                  
                     <div class="form-group">
                         <label for="name" class="col-sm-1 control-label">Name</label>                        
@@ -15,14 +71,24 @@
                             <input type="text" class="form-control" id="name" name="name" ng-model="pat.name">
                         </div>
                         <!-- ng-required="!(name || id || contact) -->
-                        <label class="col-sm-2 control-label">Appointment ID</label>
+                        <label class="col-sm-1 control-label">Appointment ID</label>
                         <div class="col-sm-2">
                             <input  type="text" class="form-control" id="id" name="id" ng-model="pat.id">
                         </div>
-                        <label for="contactNumber" class="col-sm-2 control-label">Contact Number</label>
-                        <div class="col-sm-2">
-                            <input type="number" class="form-control" id="contactNumber" name="contactNumber" ng-model="pat.contact">
-                        </div>  
+                        <md-content class="col-sm-3">
+                            <md-datepicker  name="dateFrom" ng-model="dateFrom" md-placeholder="Enter date From">
+                            </md-datepicker>
+                            <div class="validation-messages" ng-messages="choosePatientMatrixForm.dateFrom.$error">
+                                <div ng-message="valid" class="text-danger" >The entered value is not a date!</div>
+                            </div>
+                        </md-content>
+                        <md-content class="col-sm-3">
+                            <md-datepicker name="dateTo" ng-model="dateTo" md-placeholder="Enter date To">
+                            </md-datepicker>
+                            <div class="validation-messages" ng-messages="choosePatientMatrixForm.dateTo.$error">
+                                <div ng-message="valid" class="text-danger" >The entered value is not a date!</div>
+                            </div>
+                        </md-content>
                     </div>
                     <hr/>
                     <!-- ng-if bhi use kr skte hain -->
@@ -32,6 +98,7 @@
                             <thead>
                                 <tr>
                                     <th  style="text-align:center;" width="15%">Date</th>
+                                    <th  style="text-align:center;" width="15%">Shift</th>
                                     <th style="text-align:center;" width="10%">Appointment ID</th>
                                     <th style="text-align:center;" width="15%">Patient ID</th>
                                     <th  style="text-align:center;" width="20%">Name</th>
@@ -43,8 +110,9 @@
                             </thead>
                             <tbody style="max-height:300px;">
                             <!-- apply filter left -->
-                                <tr ng-repeat = "appointment in appointments | filter: pat.name | filter: pat.id | filter: pat.contact" style="background-color:{{ ((appointment.present&&appointment.billingDone && appointment.monitoringDone && appointment.treatmentConsumptionAdded) || appointment.processComplete )?'#99ff99':'#ffffff'}};height:2px;cursor: pointer;" class='clickable-row' ng-click="redirect(appointment.patientDetail.id,appointment)" > 
+                                <tr ng-repeat = "appointment in appointments | filter: pat.name | filter: pat.id | dateFilter:dateFrom:dateTo | orderBy: ['date', 'shiftNumber']" style="background-color:{{((appointment.present&&appointment.billingDone && appointment.monitoringDone && appointment.treatmentConsumptionAdded) || appointment.processComplete )?'#99ff99':'#ffffff'}};height:2px;cursor: pointer;" class='clickable-row' ng-click="redirect(appointment.patientDetail.id,appointment)" > 
                                     <td width="15%">{{ appointment.date | date:dd-MMMM-YY-EEE }}</td>
+                                    <td width="10%">{{ appointment.shiftNumber }}</td>
                                     <td width="10%">{{ appointment.appointmentId }}</td>
                                     <td width="15%">{{ appointment.patientDetail.id }}</td>
                                     <td width="20%">{{ appointment.patientDetail.name }}</td>
