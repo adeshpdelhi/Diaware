@@ -167,8 +167,9 @@ scheduleRouter.route('/')
 .delete(function(req,res,next){
     console.log("processing Delete all")
     var today = new Date();
-    today.setHours(23,59,59,999);
-
+    // today.setHours(23,59,59,999);
+    var yesterday = new Date();
+    yesterday.setDate(today.getDate()-1);
     if(req.query.deleteAll){
         db.schedulePatients.destroy({
             where:{
@@ -179,7 +180,7 @@ scheduleRouter.route('/')
                 where:{
                     patientId:req.query.patientId,
                     date:{
-                        $gt:today
+                        $gt:yesterday
                     }
                 }
             }).then(function(result){

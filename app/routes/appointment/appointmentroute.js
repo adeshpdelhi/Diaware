@@ -18,7 +18,6 @@ appointmentRouter.route('/futureAppointments')
     where['date'] = {
         $gte:today
     };
-    where['processComplete'] = false;
 
     //todays appointments
     if(req.query.date != null ) {
@@ -27,6 +26,9 @@ appointmentRouter.route('/futureAppointments')
             $gt:new Date(Date.parse(req.query.date) - 24*60*60*1000)
         };
         console.log(where.date);
+        // where['processComplete'] = {};
+    }else{
+        where['processComplete'] = false;
     }
     if(req.params.centreId != 'all')  
         where['centreId'] = req.params.centreId;
