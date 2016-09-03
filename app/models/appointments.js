@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     date:{
       type:DataTypes.DATEONLY,
-      allownull:false
+      allownull:true
     },
     dayOfTheWeek:{
       type:DataTypes.STRING,
@@ -29,14 +29,14 @@ module.exports = function(sequelize, DataTypes) {
     },
     appointmentType:{
       type:DataTypes.STRING,
-      allownull:false,
+      allownull:true,
       validate:{
         isIn:[['','IPD/ICU','OPD']]
       }
     },
     tmtMachine:{
       type:DataTypes.STRING,
-      allownull:false,
+      allownull:true,
       validate:{
         isIn:[['','NegativeMachine','BPositiveMachine', 'CPositiveMachine','HIVMachine']]
       }
@@ -54,8 +54,8 @@ module.exports = function(sequelize, DataTypes) {
       allownull:true
     },
     oneTimeAppointment:{
-      type:DataTypes.BOOLEAN,
-      allownull:false,
+      type: DataTypes.BOOLEAN,
+      allownull:true,
       defaultValue:false
     },
 
@@ -86,7 +86,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     cancelled:{
       type:DataTypes.BOOLEAN,
-      allownull:false,
+      allownull:true,
       defaultValue:false
     }
   }, {

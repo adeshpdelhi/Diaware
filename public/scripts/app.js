@@ -42,6 +42,26 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
 
             })
 
+            .state('app.choosePatient',{
+                url:'choosePatient/:callback',
+                views:{
+                    'content@':{
+                        templateUrl:'views/choosePatient.html',
+                        controller:'ChoosePatientController'
+                    }
+                }
+            })
+
+            .state('app.choosePatientMatrix',{
+                url:'choosePatientMatrix/:callback',
+                views:{
+                    'content@':{
+                        templateUrl:'views/choosePatientMatrix.html',
+                        controller:'ChoosePatientMatrixController'
+                    }
+                }
+            })
+
             .state('app.registration', {
                 url:'registration/',
                 views: {
@@ -363,15 +383,7 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                     }
                 }
             })
-            .state('app.choosePatient',{
-                url:'choosePatient/:callback',
-                views:{
-                    'content@':{
-                        templateUrl:'views/choosePatient.html',
-                        controller:'ChoosePatientController'
-                    }
-                }
-            })
+            
             .state('app.billing.newbill',{
                 url:'newbill',
                 views:{
