@@ -167,7 +167,7 @@ appointmentRouter.route('/pastAppointments')
     where['date'] = {
         $lte:yesterday
     };
-    if(req.query.attended){
+    if(req.query.attended == true){
         where['processComplete'] = true;
     }else if(req.query.attended == false) 
         where['present'] = req.query.attended;
