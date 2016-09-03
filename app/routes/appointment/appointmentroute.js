@@ -263,4 +263,83 @@ appointmentRouter.route('/cancelledAppointments/:appointmentId')
     });
 })
 ;
+
+appointmentRouter.route('/appointments')
+.get(function(req,res,next){
+    console.log('procesing get');
+    var where ={};
+    // if(req.query.attended != null){
+    //     where['attended'] = JSON.parse(req.query.attended);
+    // }
+    if(req.params.centreId != 'all')
+        where['centreId'] = req.params.centreId;
+    // if(req.query.count){
+    //     db.appointments.count({
+    //         where:where
+    //     }).then(function(result){
+    //         console.log("count:" + result);
+    //         res.json({count:result});
+    //     },function(rejectedPromiseError){
+    //         console.log(rejectedPromiseError);
+    //         res.status(400);
+    //         res.edn("couldnt fetch data appointment route");
+    //     })
+    //     return;
+    // }
+    db.appointments.findAll({
+        where:where,
+        include:[
+        {
+            model:db.patientDetails,
+            attributes:['name','id','contact']
+        }]
+    }).then(function(results){
+        console.log(JSON.stringify(results));
+        res.json(results);
+    });
+})
+;
+appointmentRouter.route('/appointments/:appointmentId')
+.get(function (req, res, next) {
+        // console.log(JSON.stringify(bills));
+    console.log('procesing get');
+    console.log(parseInt(req.params.appointmentId,10));
+    console.log(req.params.centreId);
+    db.appointments.find({
+        where:{
+            appointmentId:parseInt(req.params.appointmentId,10)
+            // centreId:req.params.centreId
+        },
+        include: [{
+            model:db.patientDetails
+        }]
+    }).then(function(result){
+        console.log(JSON.stringify(result));
+        res.json(result);
+    });
+})
+.put(function(req, res, next){
+    db.appointments.find({ 
+        where: {
+            appointmentId:parseInt(req.params.appointmentId,10)
+            // centreId:req.params.centreId
+        } 
+    }).then(function(result){
+        if (result) { // if the record exists in the db
+            result.updateAttributes(req.body).then(function (result) { 
+                console.log(JSON.stringify(result));
+                res.status(200);
+                res.end("successfully updated");
+                console.log('updated successfully');
+            }, function(rejectedPromiseError){
+                res.status(500);
+                res.end('Internal Server Error');
+                console.log('cannot update: '+ rejectedPromiseError);
+            });
+        }
+    });
+
+})
+;
+
 module.exports = appointmentRouter;
