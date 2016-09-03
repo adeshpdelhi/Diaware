@@ -1,0 +1,80 @@
+
+<!--
+<div id="Otabox" style="margin-top:20px;" class="mainbox" ng-cloak>                    
+    <div class="panel" >
+        <div class="panel-heading">
+            <div class="panel-title"><b>One-Time Appointment</b></div>
+            <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
+        </div>     
+
+        <div style="padding-top:30px" class="panel-body">
+		 <form class="form-horizontal" name="basicDetailsForm"
+			<div class="form-group">
+                    <label class="col-sm-3 control-label">Appointment Type</label>                       
+                    <div class="col-sm-3 ">
+                       <select required name="ota_appointmentType"  class="form-control" ng-model="ota.appointmentType">
+                            <option value="" selected disabled>-</option>
+                            <option value="OPD">OPD</option>
+                            <option value="IPD/ICU">IPD/ICU</option>
+							
+                        </select>
+                    </div>
+			</div>
+			
+				<div class="form-group  col-sm-push-7 col-sm-5" >
+                        <md-content class="col-sm-6">
+                            <md-datepicker required name="dateFrom" ng-model="ota.date" md-placeholder="Enter date">
+                            </md-datepicker>
+                            <div class="validation-messages" ng-messages="viewAppointmentsForm.dateFrom.$error">
+                                <div ng-message="valid" class="text-danger" >The entered value is not a date!</div>
+                            </div>
+                        </md-content>
+                        <div class="col-sm-2"></div>
+                 </div>
+				 <div ng-show="showbeds">
+				 <div class="form-group">
+					<label class="col-sm-3 control-label">Shift 1 : {{shift1beds}}</label>   
+				 </div>
+				  <div class="form-group">
+					<label  class="col-sm-3 control-label">Shift 2 : {{shift2beds}}</label>   
+				 </div>
+				  <div class="form-group">
+					<label  class="col-sm-3 control-label">Shift 3 : {{shift3beds}}</label>   
+				 </div>
+				  <div class="form-group">
+					<label  class="col-sm-3 control-label">Shift 4 : {{shift4beds}}</label>   
+				 </div>
+				 </div>
+			<div class="form-group">
+                    <label class="col-sm-3 control-label">Shift No</label>                       
+                    <div class="col-sm-3 ">
+                       <select required name="ota_shift"  class="form-control" ng-model="ota.shift">
+                            <option value="" selected disabled>-</option>
+                            <option value="1"  >Shift 1</option>
+                            <option value="2"  >Shift 2</option>
+							<option value="3"  >Shift 3</option>
+							<option value="4"  >Shift 4</option>
+                        </select>
+                    </div>
+			</div>
+			
+			<div class="form-group">
+				<button class="col-sm-3 col-offset-7 btn btn-primary " type="submit" ng-click="make_ota()">Make Appointment</button>
+			</div>
+			
+			<div class="form-group">
+					<div class="alert alert-{{messageColor}} alert-dismissable" ng-show="showalert_ota">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						{{message}}
+					</div>
+			</div>
+			</form>
+
+		
+		</div>
+		</div>
+		</div>
+
+	-->
+	
+					
