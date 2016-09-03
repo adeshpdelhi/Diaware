@@ -240,6 +240,7 @@ angular.module('App')
             console.log(df + " " +date + ' ' + dt);
             if (date >= df && date <= dt)  {
                 result.push(items[i]);
+                console.log('Pushed');
             }
         }            
         return result;

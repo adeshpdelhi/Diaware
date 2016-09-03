@@ -183,6 +183,11 @@ angular.module('App')
     }])
 
 .controller('ChoosePatientMatrixController',['$scope','patientFactory','choosePatientFactory','$state','$stateParams','authorize','appointmentFactory', function($scope,patientFactory, choosePatientFactory, $state, $stateParams,authorize, appointmentFactory){
+    var todayDate = new Date();
+    $scope.all = false;
+    $scope.dateFrom = todayDate; $scope.dateTo = todayDate;
+    //todayDate.setHours(23,59,59,999);
+    $scope.fetchAllAppointments = function(){
         appointmentFactory.getAppointments(authorize.getCentre()).query(
             function(response){
                 console.log(response);
@@ -192,14 +197,29 @@ angular.module('App')
                 console.log("Error" + response.status + " " + response.statusText);
             }
         );
-        $scope.redirect = function(id,appointment){
-            choosePatientFactory.setPatient(id);
-            choosePatientFactory.setAppointment(appointment);
-            var callback = $stateParams.callback;
-            $state.go('app.'+callback);
-        };
-    }])
+    };
+    $scope.fetchAllAppointments();
+    $scope.redirect = function(id,appointment){
+        choosePatientFactory.setPatient(id);
+        choosePatientFactory.setAppointment(appointment);
+        var callback = $stateParams.callback;
+        $state.go('app.'+callback);
+    };
+    $scope.toggleAndUpdate = function(){
+        $scope.all = !$scope.all;
+        if($scope.all){
+            $scope.dateFrom = new Date(todayDate.getFullYear(),todayDate.getMonth()-1,todayDate.getDate());
+            $scope.dateTo = new Date(todayDate.getFullYear(),todayDate.getMonth()+1,todayDate.getDate());
+            //$scope.choosePatientMatrixForm.$setPristine(true);
+            // $scope.fetchAllAppointments();
 
+        }
+        else
+        {
+            $scope.dateFrom = todayDate; $scope.dateTo = todayDate;
+        }
+    }
+}])
 .controller('DashBoardController',['$scope','appointmentFactory','authorize','patientFactory','billFactory','$timeout','$state',function($scope,appointmentFactory,authorize,patientFactory,billFactory,$timeout,$state){
     console.log("user");
     var activeUser = {} 
