@@ -4,9 +4,28 @@ angular.module('App')
     $scope.toggle = false;
     $scope.dataReceived = false;
     $scope.prevSetFilter ='pastAppointments';
+    $scope.allAppointments = function(){
+        $scope.dataReceived = false;
+        appointmentFactory.getAppointments(authorize.getCentre()).query(function(response){
+            $scope.past = false;    
+            $scope.all = true;
+            $scope.today = false;
+            $scope.appointments = response;
+            $scope.filter = 'appointments';
+            if(response.$status == 206){
+                $scope.showAlertMarkOlderAppointments = true;
+            }
+            $scope.dataReceived = true ;
+            $scope.initCardContent();
+            $scope.future = true;
+            $scope.filterVal = "Future";
+        },function(response){
+            $scope.alert = true;
+            $scope.message = "Error:"+response.status+" "+ response.statusText;
+        });
+    }
     $scope.futureAppointments = function(){
         $scope.dataReceived = false;
-
         appointmentFactory.getFutureAppointments(authorize.getCentre()).query(function(response){
             $scope.past = false;    
             $scope.all = true;
@@ -21,8 +40,6 @@ angular.module('App')
             $scope.initCardContent();
             $scope.future = true;
             $scope.filterVal = "Future";
-
-
         },function(response){
             $scope.alert = true;
             $scope.message = "Error:"+response.status+" "+ response.statusText;

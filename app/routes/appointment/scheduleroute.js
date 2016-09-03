@@ -62,6 +62,8 @@ scheduleRouter.route('/')
             results = JSON.parse(JSON.stringify(results));
             var maxShifts = result.noOfShiftsPerDay;
             var maxBeds = result[req.query.appointmentType+"Total"+req.query.tmtOnMachine + "s"];
+            if(maxBeds == null)
+                maxBeds = 0;
             console.log(maxShifts);
             var weekday = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];        
             var resp = {}

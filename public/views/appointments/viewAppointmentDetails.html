@@ -36,7 +36,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-warning btn-sm" ng-click="markAttendance()" data-dismiss="modal">Confirm</button>
+                <button type="submit" class="btn btn-warning btn-sm" ng-click="markPresence()" data-dismiss="modal">Confirm</button>
                 <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
             </div>
         </div>
@@ -44,18 +44,14 @@
 </div>
 
 <div class="container" ng-cloak>
-    <div class="row row-content col-sm-6 col-sm-push-3 col-sm-pull-3 ">
+    <div class="row row-content col-sm-8 col-sm-push-2 col-sm-pull-2 ">
 
         <md-card class="col-sm-12">
             <md-card-title style="background-color:#73AD21;margin-top:10px;"  layout="row" layout-align="center center">
                 <md-card-title-text  layout-align="center center">
                     <span class="md-headline text-uppercase" >Appointment Details</span>
                 </md-card-title-text>
-                <md-button class="md-raised md-cornered md-warn md-hue-2 col-sm-2" layout-align="start end"ng-if="!appointment.cancelled" data-toggle="modal" data-target="#confirmationModal" ng-show="appointment.attended == null && !appointment.cancelled">Cancel</md-button>
-                <!-- <div class="pull-right">
-                    <button type="button" class="btn btn-danger" ng-if="!appointment.cancelled" data-toggle="modal" data-target="#confirmationModal">Cancel</button>
-                </div> -->
-                 
+                <md-button class="md-raised md-cornered md-warn md-hue-2 col-sm-2" layout-align="start end" data-toggle="modal" data-target="#confirmationModal" ng-show="appointment.present == null && !appointment.cancelled">Cancel</md-button>  
             </md-card-title>
             <md-card-content style="background-color:rgb(245,245,245);margin-top:10px; margin-bottom:10px;">
                 <div class="alert alert-{{messageColor}}" ng-show="showAlert">
@@ -69,48 +65,53 @@
                         <a href="#"><img class="media-object img-thumbnail" height ="100" width ="100" src="images/person-default.png" alt="defaultPerson"/></a>
                     </div>
                 </div>   
-                
-                <div> 
+                <div style="text-align:left;" class="col-sm-offset-2"> 
                     <ul  class="list-unstyled" ng-repeat="(key,value) in appointment.patientDetail" ng-if="key=='name' ||key=='contact'||key=='alternativeContact'||key=='address'||key=='gender' || key == 'age'">
                         <li class="row">
                             <label class="text-uppercase col-sm-6">{{key}}:</label>
                             <label class="text-capitalize col-sm-4">{{value}}</label>
                         </li>
                     </ul>   
-                </div>           
+                </div>
+
                 <hr style="border-top:1px solid rgb(225,225,225);">
-                <div class="row" style="font-size:15px; font-weight:15px; color:rgb(130,130,130); text-align:left;">
-                    <label class="text-uppercase col-sm-6">Appointment Type: </label>
-                    <label class="text-capitalize col-sm-6">{{appointment.shiftPatient.appointmentType}}</label>
-                </div>
-                <br/>
-
-                <div class="row" style="font-size:15px; font-weight:15px; color:rgb(130,130,130); text-align:left;">
-                    <label class="text-uppercase col-sm-6">Treatment On Machine: </label>
-                    <label class="text-capitalize col-sm-6">{{appointment.shiftPatient.tmtMachine}}</label>
-                </div>
-                <br/>
-                <!-- <hr style="border-top:1px solid rgb(225,225,225);"> -->
-                <ul  class="list-unstyled" ng-repeat="(key,value) in appointment" ng-if="key!='patientDetail' && key != 'patientId' && key != 'shiftPatient' && key !='createdAt' && key!='updatedAt'">
-                    <li class="row">
-                        <label class="text-uppercase col-sm-6">{{key}}:</label>
-                        <label class="text-capitalize col-sm-6" style="text-align:left;" ng-if="key != 'date' && key != 'attended' && key != 'cancelled'">{{value}}</label>
-                        <label class="col-sm-6" ng-if="key == 'createdAt'|| key =='updatedAt' || key == 'date'" style="text-align:left;">{{value|date:dd-MMMM-YY}}</label>
-                        <label class="col-sm-4" ng-if=" key == 'attended'" style="text-align:left;">{{value == null?'Pending':((value==true)?'Attended':'Not Attended')}}</label>
-                        <label class="col-sm-6" style="text-align:left;" ng-if=" key == 'cancelled'">{{(value==true)?'Cancelled':'Not Cancelled'}}</label>
-
-
-                    </li>
-                </ul>   
                 
-                <button class="row pull-right btn btn-primary col-sm-6" ng-if="appointment.attended == true" ng-click="redirectToMonitoringChart()" ng-if="isClinical()">View Monitoring Chart of Patient</button>
+                <div style="font-size:15px; font-weight:15px; color:rgb(130,130,130); text-align:left;">
+                    <label class="text-uppercase col-sm-3">Appointment Type: </label>
+                    <label class="text-capitalize col-sm-3">{{appointment.schedulePatient.appointmentType}}</label>
+                </div>
+
+                <div style="font-size:15px; font-weight:15px; color:rgb(130,130,130); text-align:left;">
+                    <label class="text-uppercase col-sm-3">Treatment On Machine: </label>
+                    <label class="text-capitalize col-sm-3">{{appointment.schedulePatient.tmtMachine}}</label>
+                </div>
+                <br/>
                 <br/>
 
+                <!-- <hr style="border-top:1px solid rgb(225,225,225);"> -->
+                <div style="text-align:left;" class="col-sm-offset-2">
+                    <ul  class="list-unstyled" ng-repeat="(key,value) in appointment" ng-if="key!='patientDetail' && key != 'patientId' && key != 'schedulePatient' && key !='createdAt' && key!='updatedAt'">
+                        <li class="row">
+                            <label class="text-uppercase col-sm-6">{{key}}:</label>
+                            <label class="text-capitalize col-sm-6" style="text-align:left;" ng-if="key != 'date' && key != 'present' && key != 'cancelled' && key != 'billingDone' && key != 'monitoringDone' && key != 'treatmentConsumptionAdded' && key != 'processComplete'">{{value}}</label>
+                            <label class="col-sm-6" ng-if="key == 'createdAt'|| key =='updatedAt' || key == 'date'" style="text-align:left;">{{value|date:dd-MMMM-YY}}</label>
+                            <label class="col-sm-4" ng-if=" key == 'billingDone' || key == 'monitoringDone' || key == 'treatmentConsumptionAdded' || key == 'processComplete'" style="text-align:left;">{{value == true?'Done':'Not Done'}}</label>
+                            <label class="col-sm-4" ng-if=" key == 'present'" style="text-align:left;">{{value == null?'Yet to Come':((value==true)?'Present':"Didn't attend")}}</label>
+                            <label class="col-sm-6" style="text-align:left;" ng-if=" key == 'cancelled'">{{(value==true)?'Cancelled':'Not Cancelled'}}</label>
+
+                        </li>
+                    </ul>   
+                    
+                    <button class="row pull-right btn btn-primary col-sm-6" ng-if="appointment.monitoringDone == true && isClinical() " ng-click="redirectToMonitoringChart()">View Monitoring Chart of Patient</button>
+                    <br/>
+                </div>
                 <hr  class="col-sm-12" style="border-top:1px solid rgb(225,225,225);">
-                <div class="row pull-right btn-group col-sm-12">
-                    <button class="btn btn-warning" ng-if="appointment.attended == null && !appointment.cancelled" ng-click="changeAttendance(false)" data-toggle="modal" data-target ="#confirmAttendanceModal">Mark Unattended</button>
-                    <!-- <div class="col-sm-1">&nbsp;&nbsp;</div> -->
-                    <button class="btn btn-success" ng-if="appointment.attended == null && !appointment.cancelled" ng-click="changeAttendance(true)" data-toggle="modal" data-target ="#confirmAttendanceModal">Mark Attended</button>
+                <div class="row" ng-if="appointment.present == null && !appointment.cancelled">
+                    <div class="pull-right btn-group">
+                        <button class="btn btn-warning" ng-click="changeAttendance(false)" data-toggle="modal" data-target ="#confirmAttendanceModal">Absent</button>
+                        <!-- <div class="col-sm-1">&nbsp;&nbsp;</div> -->
+                        <button class="btn btn-success" ng-click="changeAttendance(true)" data-toggle="modal" data-target ="#confirmAttendanceModal">Present</button>
+                    </div>
                 </div>
             </md-card-content>
         </md-card>
