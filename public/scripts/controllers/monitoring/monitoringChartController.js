@@ -2,6 +2,20 @@
 angular.module('App')
 .controller('MonitoringController',['$scope','patientFactory','choosePatientFactory','authorize','monitoringChartFactory','$stateParams', function($scope, patientFactory, choosePatientFactory, authorize,monitoringChartFactory,$stateParams){
         $scope.showalert_predialysis_basic=false;
+        var appointment = choosePatientFactory.getAppointment();
+        $scope.showChart = true;
+        if(appointment.monitoringDone || appointment.processComplete){
+            $scope.showChart = false;
+            $scope.messageChart = "Monitoring Chart for this appointment has already been filled!";
+        }
+        if(!appointment.present){
+            $scope.showChart = false;
+            $scope.messageChart = "Patient hasn't attended this appointment yet! Can't Fill its monitoring Chart!";   
+        }
+        // if(!appointment.billingDone){
+        //     $scope.showChart = false;
+        //     $scope.messageChart = "Patient hasn't payed the bills yet! Can't Fill its monitoring Chart!";      
+        // }
         var chosenPatientId = $stateParams.patientId?($stateParams.patientId):(choosePatientFactory.getChosenPatient().id);
         patientFactory.getPatients(authorize.getCentre()).get({id:chosenPatientId}).$promise.then(function(response){
         	$scope.patient =response;

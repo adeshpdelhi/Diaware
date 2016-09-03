@@ -100,12 +100,14 @@
                     <b>View Appointments</b>
                 </h3>
                 <div class="btn-group pull-right">
-                    <button type="button"  ng-click="toggleFunction()" class="btn btn-warning">{{toggle?'View Future Appointments':prevSetFilter}}</button>
+                    <button type="button"  ng-click="toggleFunction()" class="btn btn-warning">{{toggle?'View Future Appointments':((prevSetFilter =='appointments')?'All Appointments': prevSetFilter)}}</button>
                     <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="caret"></span>  <!-- caret -->
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
+                        <li><a class="dropdown-item" href ng-click="todaysAppointments()">Todays Appointments</a><li>
+                        <li><a class="dropdown-item" href ng-click="getAppointments('all')">All Appointments</a><li>
                         <li><a class="dropdown-item" href ng-click="getAppointments('allAttended')">All Attended Appointments</a><li>
                         <li><a class="dropdown-item" href ng-click="getAppointments('allUnAttended')">All Unattended Appointments</a></li>
                         <!-- <li><a class="dropdown-item" href ng-click="getAppointments('allPending')">All Pending (unmarked appointments) Appointments</a></li> -->
@@ -164,9 +166,9 @@
                     <hr  class="col-sm-12" style="border-top:1px solid rgb(220,220,220); padding-bottom:-20px;margin-bottom: -40px"/>
                     <p></p>
                     <div class="table-responsive col-sm-12">
-                        <div style="text-align:left">
+                        <!-- <div style="text-align:left">
                             <a href ng-click="all?todaysAppointments():futureAppointments()" style="color:#000099; text-align:left"><u>{{all?'todays':'all future'}}</u></a>
-                        </div>
+                        </div> -->
                         <md-card ng-if="dataReceived"  class="col-sm-12">
                             <md-card-title>
                                 <md-card-title-text style="background-color:#73AD21">

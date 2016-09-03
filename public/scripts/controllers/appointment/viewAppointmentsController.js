@@ -4,32 +4,32 @@ angular.module('App')
     $scope.toggle = false;
     $scope.dataReceived = false;
     $scope.prevSetFilter ='pastAppointments';
-    $scope.allAppointments = function(){
-        $scope.dataReceived = false;
-        appointmentFactory.getAppointments(authorize.getCentre()).query(function(response){
-            $scope.past = false;    
-            $scope.all = true;
-            $scope.today = false;
-            $scope.appointments = response;
-            $scope.filter = 'appointments';
-            if(response.$status == 206){
-                $scope.showAlertMarkOlderAppointments = true;
-            }
-            $scope.dataReceived = true ;
-            $scope.initCardContent();
-            $scope.future = true;
-            $scope.filterVal = "Future";
-        },function(response){
-            $scope.alert = true;
-            $scope.message = "Error:"+response.status+" "+ response.statusText;
-        });
-    }
+    // $scope.allAppointments = function(){
+    //     $scope.dataReceived = false;
+    //     appointmentFactory.getAppointments(authorize.getCentre()).query(function(response){
+    //         $scope.past = false;    
+    //         $scope.all = true;
+    //         $scope.today = false;
+    //         $scope.future = false;
+    //         $scope.appointments = response;
+    //         $scope.filter = 'appointments';
+    //         if(response.$status == 206){
+    //             $scope.showAlertMarkOlderAppointments = true;
+    //         }
+    //         $scope.dataReceived = true ;
+    //         $scope.initCardContent();
+    //         $scope.filterVal = "Future";
+    //     },function(response){
+    //         $scope.alert = true;
+    //         $scope.message = "Error:"+response.status+" "+ response.statusText;
+    //     });
+    // }
     $scope.futureAppointments = function(){
         $scope.dataReceived = false;
         appointmentFactory.getFutureAppointments(authorize.getCentre()).query(function(response){
             $scope.past = false;    
-            $scope.all = true;
             $scope.today = false;
+            $scope.future = true;
             $scope.appointments = response;
             $scope.filter = 'futureAppointments';
             if(response.$status == 206){
@@ -38,7 +38,6 @@ angular.module('App')
             }
             $scope.dataReceived = true ;
             $scope.initCardContent();
-            $scope.future = true;
             $scope.filterVal = "Future";
         },function(response){
             $scope.alert = true;
@@ -51,8 +50,8 @@ angular.module('App')
     // console.log($scope.appointments[0]);
     $scope.todaysAppointments =function(){
         $scope.dataReceived = false;
-        $scope.filter = 'futureAppointments';
-
+        // $scope.prevSetFilter = 'appointments';
+        $scope.filter = 'appointments';
         console.log(new Date());
         var toDate = new Date();
         toDate.setHours(23,59,59,999);
@@ -60,6 +59,7 @@ angular.module('App')
             $scope.appointments  = results;  
             $scope.today = true; 
             $scope.all = false; 
+            $scope.future = false;
             $scope.dataReceived = true ;
             $scope.initCardContent();
             $scope.filterVal = "Todays";
@@ -80,21 +80,22 @@ angular.module('App')
             });
         }
     };
-    $scope.pastAppointments = function(){
-        $scope.dataReceived = false;
+    // $scope.pastAppointments = function(){
+    //     $scope.dataReceived = false;
 
-        appointmentFactory.getPastAppointments(authorize.getCentre()).query(function(results){
-            $scope.appointments  = results;    
-            $scope.past = true;
-            $scope.dataReceived = true ;
-            $scope.today = false;
-            $scope.future = false;
-            $scope.initCardContent();
+    //     appointmentFactory.getPastAppointments(authorize.getCentre()).query(function(results){
+    //         $scope.appointments  = results;    
+    //         $scope.past = true;
+    //         $scope.dataReceived = true ;
+    //         $scope.today = false;
+    //         $scope.all = false;
+    //         $scope.future = false;
+    //         $scope.initCardContent();
 
 
-       });   
+    //    });   
 
-    };
+    // };
     $scope.markPresence = function(id, value){
         // if(value == false){
             for(var i = 0; i< $scope.appointments.length;i++)
@@ -130,6 +131,14 @@ angular.module('App')
         $scope.currentFilter = filter;
         $scope.prevSetFilter = filter;
         var object = {};
+        if(filter == 'all'){
+            $scope.today = false;
+            $scope.all = true;
+            $scope.future = false;
+            object['filter'] = 'appointments';
+            $scope.filter = 'appointments';
+            $scope.filterVal='All';
+        }
         if(filter == 'pastAppointments'){
             // $scope.pastAppointments();
             $scope.today = false;
