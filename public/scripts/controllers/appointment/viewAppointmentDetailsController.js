@@ -14,10 +14,10 @@ angular.module('App')
         console.log("val:" + val);
         $scope.attendance = val;
     }
-    $scope.markAttendance = function(){
-            $scope.appointment.attended = $scope.attendance;
+    $scope.markPresence = function(){
+            $scope.appointment.present = $scope.attendance;
             console.log($scope.appointment.attended);
-            appointmentFactory.getFutureAppointments(authorize.getCentre()).update({appointmentId:appointment.appointmentId},{attended:$scope.attendance})
+            appointmentFactory.getFutureAppointments(authorize.getCentre()).update({appointmentId:appointment.appointmentId},{present:$scope.attendance})
             .$promise.then(function(resp){
                 $scope.showAlert = true;
                 $scope.message = "Marked Attendance as " + ($scope.attendance?'attended':'not attended') + ' Successfully!';

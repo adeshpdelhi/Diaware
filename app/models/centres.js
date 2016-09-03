@@ -175,10 +175,8 @@ module.exports = function(sequelize, DataTypes) {
                     console.log("Erorr Occured While saving weekDaySlots");
                     return;
                   })
-
                 }
               }
-
             },function(rejectedPromiseError){
               console.log("Error Occured while saving Shift!");
               return;

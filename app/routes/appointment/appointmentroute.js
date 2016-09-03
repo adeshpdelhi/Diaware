@@ -16,7 +16,7 @@ appointmentRouter.route('/futureAppointments')
     var where = {};
     where['cancelled'] = false;
     where['date'] = {
-        $gte:today
+        $gt:today
     };
 
     //todays appointments
@@ -47,9 +47,19 @@ appointmentRouter.route('/futureAppointments')
             date:{
                 $lte: yesterday
             },
-            present: {
-                $eq:null
-            },
+            $or:[
+                {
+                    present: {
+                        $eq:null,
+                    }
+                },
+                {
+                    $and:{
+                        present: true,
+                        processComplete: false
+                    }
+                }
+            ],
             cancelled:false
         },
         // orderBy:[['date','shiftNumber']]
@@ -151,14 +161,13 @@ appointmentRouter.route('/pastAppointments')
     console.log('procesing get');
     var today = new Date();
     today.setHours(23,59,59,999);
+    var yesterday = new Date();
+    yesterday.setDate(today.getDate()-1);
     var where ={};
     where['date'] = {
-        $lt:today
+        $lte:yesterday
     };
-
-    // where['present'] = {};
-
-    if(req.query.attended){
+    if(req.query.attended == true){
         where['processComplete'] = true;
     }else if(req.query.attended == false) 
         where['present'] = req.query.attended;
@@ -221,12 +230,7 @@ appointmentRouter.route('/cancelledAppointments')
     console.log('procesing get');
     var today = new Date();
     today.setHours(23,59,59,999);
-    
     var where ={};
-    // where['date'] = {
-    //     $lt:today
-    // };
-
     where['cancelled'] = true;
 
     if(req.params.centreId != 'all')
@@ -268,24 +272,9 @@ appointmentRouter.route('/appointments')
 .get(function(req,res,next){
     console.log('procesing get');
     var where ={};
-    // if(req.query.attended != null){
-    //     where['attended'] = JSON.parse(req.query.attended);
-    // }
     if(req.params.centreId != 'all')
         where['centreId'] = req.params.centreId;
-    // if(req.query.count){
-    //     db.appointments.count({
-    //         where:where
-    //     }).then(function(result){
-    //         console.log("count:" + result);
-    //         res.json({count:result});
-    //     },function(rejectedPromiseError){
-    //         console.log(rejectedPromiseError);
-    //         res.status(400);
-    //         res.edn("couldnt fetch data appointment route");
-    //     })
-    //     return;
-    // }
+    
     db.appointments.findAll({
         where:where,
         include:[
@@ -308,7 +297,6 @@ appointmentRouter.route('/appointments/:appointmentId')
     db.appointments.find({
         where:{
             appointmentId:parseInt(req.params.appointmentId,10)
-            // centreId:req.params.centreId
         },
         include: [{
             model:db.patientDetails

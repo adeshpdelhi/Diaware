@@ -13,13 +13,15 @@ var deleteAppointments = function(schedule){
     console.log(schedule);
     var today = new Date();
     today.setHours(23,59,59,999);
+    var yesterday = new Date();
+    yesterday.setDate(today.getDate()-1);
     db.appointments.destroy({
         where:{
             patientId:schedule.patientId,
             shiftNumber:schedule.shiftNumber,
             dayOfTheWeek:schedule.day,
             date:{
-                $gt:today
+                $gt:yesterday
             }
         }
     }).then(function(results){
@@ -62,6 +64,8 @@ scheduleRouter.route('/')
             results = JSON.parse(JSON.stringify(results));
             var maxShifts = result.noOfShiftsPerDay;
             var maxBeds = result[req.query.appointmentType+"Total"+req.query.tmtOnMachine + "s"];
+            if(maxBeds == null)
+                maxBeds = 0;
             console.log(maxShifts);
             var weekday = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];        
             var resp = {}
