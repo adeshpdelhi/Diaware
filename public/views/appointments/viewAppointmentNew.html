@@ -187,8 +187,8 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <div style="text-align:center;" class="col-sm-8" ng-show="(showAlertMarkOlderAppointments || today) && !appointment.attended" >
-                                                <a href ng-click='markAttended(appointment.appointmentId, true)' id="markAppointment" data-toggle="tooltip" title="Mark Appointment as Attended" data-placement="top" style="font-size:20px" class="col-sm-6"><span class="glyphicon glyphicon glyphicon-ok-circle"></span></a>
-                                                <a href ng-click='markAttended(appointment.appointmentId, false)' id="markAppointment" data-toggle="tooltip" title="Mark Appointment as not Attended" data-placement="top" style="font-size:20px" class="col-sm-6"><span  class="glyphicon glyphicon glyphicon-ban-circle"></span></a>
+                                                <a href ng-click='markPresence(appointment.appointmentId, true)' id="markAppointment" data-toggle="tooltip" title="Mark Patient as Present" data-placement="top" style="font-size:20px" class="col-sm-6"><span class="glyphicon glyphicon glyphicon-ok-circle"></span></a>
+                                                <a href ng-click='markPresence(appointment.appointmentId, false)' id="markAppointment" data-toggle="tooltip" title="Mark Patient as not Present" data-placement="top" style="font-size:20px" class="col-sm-6"><span  class="glyphicon glyphicon glyphicon-ban-circle"></span></a>
                                                 <!-- glyphicon glyphicon-exclamation-sign -->
                                             </div>
                                             <a type="button" class="text-danger col-sm-4 pull-right" id="cancelAppointment_{{$index}}" ng-click="captureAppointment(appointment)" data-toggle="modal" data-target="#confirmationModal" ng-show="!appointment.cancelled && appointment.attended == null" >Cancel</span></a>

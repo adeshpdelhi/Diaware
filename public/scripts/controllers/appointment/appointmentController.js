@@ -15,39 +15,28 @@ angular.module('App')
 	// }
 	$scope.$watch('patient.id', function(newVal,oldVal){
 		if(newVal){
-			if($scope.patient.shiftPatients.length !== 0){
-				$scope.patientSchedule = $scope.patient.shiftPatients;
-				$scope.appointmentType = $scope.patient.shiftPatients[0].appointmentType;
-				$scope.tmtOnMachine = $scope.patient.shiftPatients[0].tmtMachine;
+			console.log(patient);
+			if($scope.patient.schedulePatients.length !== 0){
+				$scope.patientSchedule = $scope.patient.schedulePatients;
+				$scope.appointmentType = $scope.patient.schedulePatients[0].appointmentType;
+				$scope.tmtOnMachine = $scope.patient.schedulePatients[0].tmtMachine;
 				$scope.scheduled = true;
 			}
 			$scope.machineTypes = [];
-			if($scope.patient.medicalHistories.length != 0){
-				var medHist = $scope.patient.medicalHistories;
-				for(var i = 0; i < medHist.length; i++){
-					if(medHist[i].diseaseName == 'hepatitisB' && medHist[i].diseasePresent == 'Yes')
-						$scope.machineTypes.push('B+ Machine');
-					if(medHist[i].diseaseName == 'hepatitisC' && medHist[i].diseasePresent == 'Yes')
-						$scope.machineTypes.push('C+ Machine');
-					if(medHist[i].diseaseName == 'HIV' && medHist[i].diseasePresent =='Yes')
-						$scope.machineTypes.push('HIV Machine');
-				}
-				if($scope.machineTypes.length == 0) $scope.machineTypes.push("Negative Machine");
-			}
-			else 
-				$scope.machineTypes = ['Negative Machine','B+ Machine', 'C+ Machine','HIV Machine'] ;// fetch from db - store in db
+			$scope.machineTypes.push($scope.patient.type+"Machine");
 		}
 	});
 
 	$scope.reloadDaysData = function(newVal, newVal1){
     	newVal1 = newVal1.replace(/[+]/g, 'Positive');
-    	newVal1 = newVal1.replace(/[ ]/g,'')+'s';
+    	newVal1 = newVal1.replace(/[ ]/g,'');
     	newVal = newVal.replace(/[/]/g, '_');
     	$scope.string = newVal+'Available'+newVal1;
     	// console.log("string: " + $scope.string);
     	$scope.daysData = {};
     	console.log("loading fresh daysData");
     	var centre = (authorize.getCentre() == 'all')?$scope.patient.centreId:authorize.getCentre();
+    	console.log("appointmentType: "+ newVal+", tmtMachine: "+newVal1);
 		appointmentFactory.getSchedules(centre).query({appointmentType:newVal,tmtOnMachine:newVal1}, function(results){
 			$scope.daysData = results;
 			$scope.dataReceived = true;
@@ -77,16 +66,17 @@ angular.module('App')
 		// console.log("is bOOked: id: "+id);
 		return $scope['saved_'+id];
 	};
-	$scope.book = function(id, shift, index, day){
+	$scope.book = function(shift, index, day){
 		var obj = {};
 		
+		obj.centreId = $scope.patient.centreId;
+		obj.patientId = $scope.patient.id;
 		obj.day = day;
-		obj.shiftId = id;
+		shift = parseInt(shift.replace(/[^0-9]/g, ''),10);
+		obj.shiftNumber = shift;
 		obj.appointmentType = $scope.appointmentType;
 		obj.tmtMachine = $scope.tmtOnMachine;
-		obj.patientId = $scope.patient.id;
-		obj.shiftNumber = parseInt(shift.replace(/[^0-9]/g, ''),10);
-		obj.shift= shift;
+		// obj.shift= shift;
 		obj.new = true;
 
 		console.log("index : "+ index);
@@ -94,7 +84,7 @@ angular.module('App')
 		console.log('OBJECT BOOKED');
 		console.log(obj);
 		for(var i = 0; i < $scope.objs.length; i++){
-			if($scope.objs[i].shiftId == id && $scope.objs[i].delete){
+			if(!$scope.newSchedule && ($scope.objs[i].day == day) && ($scope.objs[i].shiftNumber == shift) && $scope.objs[i].delete){
 				$scope.objs[i].delete = false;
 				return;
 			}
@@ -159,9 +149,7 @@ angular.module('App')
 			$scope.objs[i]['new'] = false;
 			$scope.objs[i]['shift'] = 'shift'+$scope.objs[i].shiftNumber;
 			// $scope['saved_'+ j] = false;			
-			
 		}
-
 		// $scope.objs = [];
 		console.log("inside planNewSchedule");
 	};
@@ -184,24 +172,13 @@ angular.module('App')
 				return;
 			});
 		}
-		var object = {};
-		for (var i =0; i<$scope.objs.length;i++){
-			if($scope.objs[i].delete){
-				console.log("after deleting, no of bed Available: " + ($scope.daysData[$scope.objs[i].day][$scope.objs[i].shift][$scope.string] +1));
-				object[$scope.objs[i].shiftId] = $scope.daysData[$scope.objs[i].day][$scope.objs[i].shift][$scope.string] +1;
-			}
-			if($scope.objs[i].new)
-				object[$scope.objs[i].shiftId] = $scope.daysData[$scope.objs[i].day][$scope.objs[i].shift][$scope.string] -1;
-		}
 		var reqBody = {
-			shiftPatients : $scope.objs,
-			update : object, 
-			string : $scope.string
+			schedulePatients : $scope.objs
 		};
 		console.log("reqBody:");
 		console.log(reqBody);
 		appointmentFactory.getSchedules(centreDetails.getCentreId()).save(reqBody).$promise.then(function(results){
-			$scope.patientSchedule = results.shiftPatients;
+			$scope.patientSchedule = results.schedulePatients;
 			console.log("results saved: ");
 			console.log( $scope.patientSchedule);
 			$scope.message = "saved Successfully!";
@@ -216,32 +193,18 @@ angular.module('App')
 			$scope.message = "Error: "+response.status+" " + response.statusCode + "!";
 			$scope.messageColor ='danger';			
 		});
-
-		
-
 	};	
 
 	$scope.saveEditedSchedule = function(){
-		var object = {};
-		for (var i =0; i<$scope.objs.length;i++){
-			if($scope.objs[i].delete){
-				console.log("after deleting, no of bed Available: " + ($scope.daysData[$scope.objs[i].day][$scope.objs[i].shift][$scope.string] +1));
-				object[$scope.objs[i].shiftId] = $scope.daysData[$scope.objs[i].day][$scope.objs[i].shift][$scope.string] +1;
-			}
-			if($scope.objs[i].new)
-				object[$scope.objs[i].shiftId] = $scope.daysData[$scope.objs[i].day][$scope.objs[i].shift][$scope.string] -1;
-		}
 		var reqBody = {
-			shiftPatients : $scope.objs,
-			update : object, 
-			string : $scope.string
+			schedulePatients : $scope.objs
 		};
 		console.log("reqBody:");
 		console.log(reqBody);
 		appointmentFactory.getSchedules(centreDetails.getCentreId()).update({
 			patientId:$scope.patient.id
 		},reqBody).$promise.then(function(results){
-			$scope.patientSchedule = results.shiftPatients;
+			$scope.patientSchedule = results.schedulePatients;
 			console.log("results update:" );
 			console.log($scope.patientSchedule);
 			$scope.message = "saved Successfully!";

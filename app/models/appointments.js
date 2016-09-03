@@ -38,12 +38,12 @@ module.exports = function(sequelize, DataTypes) {
       type:DataTypes.STRING,
       allownull:false,
       validate:{
-        isIn:[['','Negative Machine','B+ Machine', 'C+ Machine','HIV Machine']]
+        isIn:[['','NegativeMachine','BPositiveMachine', 'CPositiveMachine','HIVMachine']]
       }
     },
     patientId:{
       type:DataTypes.STRING,
-      allownull:true,
+      allownull:false,
       references:{
         model:'patientDetails',
         key:'id'
@@ -61,8 +61,8 @@ module.exports = function(sequelize, DataTypes) {
 
     present:{
       type:DataTypes.BOOLEAN,
-      allownull:true,
-      defaultValue: false
+      allownull:true
+      // defaultValue: false
     },
     billingDone:{
       type:DataTypes.BOOLEAN,

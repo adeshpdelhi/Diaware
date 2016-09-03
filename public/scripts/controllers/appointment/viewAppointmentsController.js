@@ -78,25 +78,25 @@ angular.module('App')
        });   
 
     };
-    $scope.markAttended = function(id, value){
-        if(value == false){
+    $scope.markPresence = function(id, value){
+        // if(value == false){
             for(var i = 0; i< $scope.appointments.length;i++)
                 if($scope.appointments[i].appointmentId == id) $scope.appointments[i].attended = value;
-                appointmentFactory.getFutureAppointments(authorize.getCentre()).update({appointmentId:id},{attended:value}).$promise.then(function(resp){
-                    $scope.showAlertMarkedAttended = true;
-                    $scope.showAlertCancelled = false;
-                    $scope.showAlertMarkOlderAppointments = false;
-                });
-        }
-        else{
-            for(var i = 0 ; i < $scope.appointments.length;i++){
-                if($scope.appointments[i].appointmentId == id){
-                    console.log("app.monitoring.new" + $scope.appointments[i].patientId + " "+ $scope.appointments[i].date);
-                    $state.go('app.monitoring.new', {patientId:$scope.appointments[i].patientId, date:$scope.appointments[i].date});     
-                    break;
-                }   
-            }
-        }
+            appointmentFactory.getFutureAppointments(authorize.getCentre()).update({appointmentId:id},{present:value}).$promise.then(function(resp){
+                $scope.showAlertMarkedAttended = true;
+                $scope.showAlertCancelled = false;
+                $scope.showAlertMarkOlderAppointments = false;
+            });
+        // }
+        // else{
+        //     for(var i = 0 ; i < $scope.appointments.length;i++){
+        //         if($scope.appointments[i].appointmentId == id){
+        //             console.log("app.monitoring.new" + $scope.appointments[i].patientId + " "+ $scope.appointments[i].date);
+        //             $state.go('app.monitoring.new', {patientId:$scope.appointments[i].patientId, date:$scope.appointments[i].date});     
+        //             break;
+        //         }   
+        //     }
+        // }
     };
 
     $scope.toggleFunction = function(){
@@ -162,11 +162,11 @@ angular.module('App')
             $scope.future = false;
         }
         appointmentFactory.getFilteredAppointments(authorize.getCentre()).query(object,function(results){
-                $scope.appointments = results;
-                $scope.dataReceived = true ;
-                $scope.initCardContent();
-                // $scope.past 
-            });
+            $scope.appointments = results;
+            $scope.dataReceived = true ;
+            $scope.initCardContent();
+            // $scope.past 
+        });
     };
 
     $scope.initCardContent = function(){

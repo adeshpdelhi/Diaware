@@ -37,9 +37,9 @@ angular.module('App')
           });
         };
         this.getPastAppointments = function(centreId){
-        	return $resource(baseURL+":centreId/pastAppointments/:appointmentId",{centreId:centreId},  {
-          	'update':{method:'PUT' },
-        	query: {method: 'get', isArray: true}
+          return $resource(baseURL+":centreId/pastAppointments/:appointmentId",{centreId:centreId},  {
+            'update':{method:'PUT' },
+          query: {method: 'get', isArray: true}
           });
         };
         this.getCancelledAppointments = function(centreId){

@@ -86,7 +86,8 @@ dbmodel.monitoringChartPreBasic.hasOne(dbmodel.monitoringChartPost,{foreignKey:'
 dbmodel.monitoringChartPost.belongsTo(dbmodel.monitoringChartPreBasic,{foreignKey:'postId'});
 //add the other half - not needed :P
 
-
+dbmodel.patientDetails.hasMany(dbmodel.schedulePatients,{foreignKey:'patientId'});
+dbmodel.schedulePatients.belongsTo(dbmodel.patientDetails,{foreignKey:'patientId'});
 
 dbmodel.patientDetails.hasMany(dbmodel.appointments,{foreignKey:'patientId'});
 dbmodel.appointments.belongsTo(dbmodel.patientDetails,{foreignKey:'patientId'});
