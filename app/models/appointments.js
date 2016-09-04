@@ -99,7 +99,20 @@ module.exports = function(sequelize, DataTypes) {
       allownull:true
     }
   }, {
-    tableName: 'appointments'
+    tableName: 'appointments',
+    hooks:{
+      afterUpdate: function(appointment){
+        console.log("55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555");
+        if(appointment.present && appointment.billingDone && appointment.monitoringDone && appointment.treatmentConsumptionAdded){
+          appointment.updateAttributes({processComplete: true}).then(function (result) { 
+                console.log(JSON.stringify(result));
+                console.log("updated 'Process Complete' successfully");
+            }, function(rejectedPromiseError){
+                console.log('cannot update: '+ rejectedPromiseError);
+            });          
+        }
+      }
+    }
   });
 };
 
@@ -109,45 +122,3 @@ module.exports = function(sequelize, DataTypes) {
 //     console.log(JSON.stringify(results1));
 //   }); 
 // });
-
-/*
-
-,
-    hooks:{
-      afterUpdate: function(futureAppointment){
-        //create instance level update if possible else do this there in appointment router
-        console.log("inside Hook");
-        console.log(futureAppointment);
-        if(futureAppointment.attended != null){
-          //shift to attended appointments table
-          console.log(JSON.parse(JSON.stringify(futureAppointment)));
-          console.log("inside attended hook");
-          sequelize.models.pastAppointments.build(JSON.parse(JSON.stringify(futureAppointment))).save().then(function(result){
-            console.log(JSON.stringify(result));
-            sequelize.models.futureAppointments.destroy({
-              where:{
-                appointmentId:futureAppointment.appointmentId
-              }
-            }).then(function(result){
-              console.log(JSON.stringify(result));
-            });
-          });
-          return;
-        }
-        if(futureAppointment.cancelled){
-          // shift to cancelled appointments table if appointment cancelled
-          console.log("inside cancelled");
-          sequelize.models.cancelledAppointments.build(JSON.parse(JSON.stringify(futureAppointment))).save().then(function(result){
-            console.log(JSON.stringify(result));
-            sequelize.models.futureAppointments.destroy({
-              where:{
-                appointmentId:futureAppointment.appointmentId
-              }
-            }).then(function(result){
-              console.log(JSON.stringify(result));
-            });
-          });
-        }
-      }
-    }
-*/
