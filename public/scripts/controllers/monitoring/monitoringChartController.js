@@ -15,11 +15,11 @@ angular.module('App')
             $scope.messageChartColor = 'danger';
 
         }
-        // if(!appointment.billingDone){
-        //     $scope.showChart = false;
-        //     $scope.messageChart = "Patient hasn't payed the bills yet! Can't Fill its monitoring Chart!";      
-        //     $scope.messageChartColor = 'warning';
-        // }
+        if(!appointment.billingDone){
+            $scope.showChart = false;
+            $scope.messageChart = "Patient hasn't payed the bills yet! Can't Fill its monitoring Chart!";      
+            $scope.messageChartColor = 'warning';
+        }
         var chosenPatientId = $stateParams.patientId?($stateParams.patientId):(choosePatientFactory.getChosenPatient().id);
         patientFactory.getPatients(authorize.getCentre()).get({id:chosenPatientId}).$promise.then(function(response){
         	$scope.patient =response;
