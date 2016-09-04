@@ -61,6 +61,11 @@ module.exports = function(sequelize, DataTypes) {
       type:DataTypes.DECIMAL(10,2),
       allowNull:false
     },
+    // cancelled:{
+    //   type:DataTypes.BOOLEAN,
+    //   allowNull:true ,
+    //   defaultValue: false
+    // }
     lastModifiedBy: {
       type: DataTypes.STRING,
       allowNull: false

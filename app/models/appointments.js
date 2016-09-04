@@ -88,6 +88,15 @@ module.exports = function(sequelize, DataTypes) {
       type:DataTypes.BOOLEAN,
       allownull:true,
       defaultValue:false
+    },
+    allBillsCleared:{
+      type:DataTypes.BOOLEAN,
+      allownull:true,
+      defaultValue: false
+    },
+    billingRemarks:{
+      type:DataTypes.STRING(500),
+      allownull:true
     }
   }, {
     tableName: 'appointments'

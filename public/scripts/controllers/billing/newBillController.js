@@ -10,6 +10,7 @@ angular.module('App')
 
         });
         var appointment = choosePatientFactory.getAppointment();
+ 
         $scope.showBilling = true;
         if(!appointment.present){
             $scope.showBilling = false;
@@ -24,6 +25,14 @@ angular.module('App')
         .query({active:true},function(response){
             $scope.panels = response;
         });
+
+        $scope.prevRemarks = appointment.billingRemarks;
+
+        $scope.appoint = {
+            allBillsCleared: appointment.allBillsCleared,
+            billingRemarks: appointment.billingRemarks
+        }
+
         $scope.bill = {
             // billId:null,
             appointmentId:null,
@@ -156,17 +165,17 @@ angular.module('App')
             }
         };
         /*
-        
         */
         $scope.makePayment = function(status){
             $scope.bill.appointmentId =  appointment.appointmentId;
             $scope.bill.appointmentDate = appointment.date;
             console.log("entered makePayment");
-            if($scope.bill.modeOfPayment == 'cash' && dueBill && $scope.bill.amountPending > 0){
-                $scope.bill.status = "Due";
-            }
             $scope.bill.payableAmount = $scope.bill.totalAmount - ($scope.bill.totalAmount* $scope.bill.additionalDiscount/100); 
-                if($scope.bill.modeOfPayment == 'cashless'){
+            $scope.bill.patientPayableAmount = $scope.bill.payableAmount;
+            console.log($scope.bill.modeOfPayment);
+            console.log($scope.bill.amountPending);
+            console.log($scope.bill.status);
+            if($scope.bill.modeOfPayment === 'cashless'){
                 $scope.bill.patientPayableAmount = $scope.bill.payableAmount - $scope.bill.payableAmount * $scope.panelDiscount;
                 if($scope.bill.patientPayableAmount == 0)
                     $scope.bill.status = 'Pending';
@@ -192,7 +201,17 @@ angular.module('App')
                 $scope.message = "Error: " + response.status+ " " + response.statusText + "!";
                 $scope.messageColor = 'danger';
             });
-            appointmentFactory.getAppointments(authorize.getCentre()).update({appointmentId:$scope.bill.appointmentId},{billingDone:true});
+            console.log('allBillsCleared: ');
+            console.log($scope.appoint.allBillsCleared);
+            console.log('billingRemarks: ');
+            console.log($scope.appoint.billingRemarks);
+            appointmentFactory.getAppointments(authorize.getCentre()).update(
+                {appointmentId:$scope.bill.appointmentId},
+                {
+                    billingDone: true,
+                    allBillsCleared: $scope.appoint.allBillsCleared,
+                    billingRemarks: $scope.appoint.billingRemarks
+                });
 
         };
 
@@ -230,7 +249,6 @@ angular.module('App')
             };
             trId = 1; // fetch from db
             $scope.alert = false;
-
 
         };
 
