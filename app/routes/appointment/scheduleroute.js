@@ -15,6 +15,7 @@ var deleteAppointments = function(schedule){
     today.setHours(23,59,59,999);
     var yesterday = new Date();
     yesterday.setDate(today.getDate()-1);
+    yesterday.setHours(23,59,59,999);
     db.appointments.destroy({
         where:{
             patientId:schedule.patientId,
@@ -174,6 +175,7 @@ scheduleRouter.route('/')
     // today.setHours(23,59,59,999);
     var yesterday = new Date();
     yesterday.setDate(today.getDate()-1);
+    yesterday.setHours(23,59,59,999);
     if(req.query.deleteAll){
         db.schedulePatients.destroy({
             where:{

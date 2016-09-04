@@ -6,15 +6,19 @@ angular.module('App')
         $scope.showChart = true;
         if(appointment.monitoringDone || appointment.processComplete){
             $scope.showChart = false;
-            $scope.messageChart = "Monitoring Chart for this appointment has already been filled!";
+            $scope.messageChart = "Monitoring Chart for this appointment has already been filled! You may edit it by going to edit Monitoring Chart";
+            $scope.messageChartColor = 'success';
         }
         if(!appointment.present){
             $scope.showChart = false;
             $scope.messageChart = "Patient hasn't attended this appointment yet! Can't Fill its monitoring Chart!";   
+            $scope.messageChartColor = 'danger';
+
         }
         // if(!appointment.billingDone){
         //     $scope.showChart = false;
         //     $scope.messageChart = "Patient hasn't payed the bills yet! Can't Fill its monitoring Chart!";      
+        //     $scope.messageChartColor = 'warning';
         // }
         var chosenPatientId = $stateParams.patientId?($stateParams.patientId):(choosePatientFactory.getChosenPatient().id);
         patientFactory.getPatients(authorize.getCentre()).get({id:chosenPatientId}).$promise.then(function(response){
