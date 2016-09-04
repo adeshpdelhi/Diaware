@@ -77,8 +77,8 @@
                 		<label class="text-uppercase col-sm-6" ng-if="key != 'deletedAt'">{{key}}:</label>
                         <label class="text-uppercase col-sm-6" ng-if="key == 'deletedAt' && value != null">{{key}}</label>
                         <label class="text-captitalize col-sm-4" ng-if="key == 'deletedAt' && value != null">{{value | date:dd-MMMM-YY}}</label>
-                		<label class="text-capitalize col-sm-4" ng-if="key != 'totalAmount' && key!='payableAmount' && key !='patientPayableAmount' && key != 'createdAt' && key !='updatedAt' && key != 'deletedAt' && key != 'appointmentDate'" >{{value}}</label>
-                		<label class="text-capitalize col-sm-4" ng-if="key == 'totalAmount' || key=='payableAmount' || key =='patientPayableAmount'">{{value| currency:'&#8377;' }}</label>
+                		<label class="text-capitalize col-sm-4" ng-if="key != 'amountPending' && key != 'totalAmount' && key!='payableAmount' && key !='patientPayableAmount' && key != 'createdAt' && key !='updatedAt' && key != 'deletedAt' && key != 'appointmentDate'" >{{value}}</label>
+                		<label class="text-capitalize col-sm-4" ng-if="key == 'totalAmount' || key=='payableAmount' || key =='patientPayableAmount' || key =='amountPending'">{{value| currency:'&#8377;' }}</label>
                 		<label class="col-sm-4" ng-if="key == 'createdAt'|| key =='updatedAt' || key=='appointmentDate'">{{value|date}}
                         <!-- <label class="col-sm-4" ng-if="key == 'cancelled'">{{(value==true)?'Cancelled':'Not Cancelled'}} -->
 

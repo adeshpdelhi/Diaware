@@ -3,7 +3,7 @@ angular.module('App')
 .controller('ViewAppointmentsController',['$scope','appointmentFactory','authorize','$state',function($scope, appointmentFactory, authorize,$state){
     $scope.toggle = false;
     $scope.dataReceived = false;
-    $scope.prevSetFilter ='pastAppointments';
+    $scope.prevSetFilter ='todays';
     // $scope.allAppointments = function(){
     //     $scope.dataReceived = false;
     //     appointmentFactory.getAppointments(authorize.getCentre()).query(function(response){
@@ -51,7 +51,7 @@ angular.module('App')
     $scope.todaysAppointments =function(){
         $scope.dataReceived = false;
         // $scope.prevSetFilter = 'appointments';
-        $scope.filter = 'appointments';
+        // $scope.filter = 'appointments';
         console.log(new Date());
         var toDate = new Date();
         toDate.setHours(23,59,59,999);
@@ -131,6 +131,14 @@ angular.module('App')
         $scope.currentFilter = filter;
         $scope.prevSetFilter = filter;
         var object = {};
+        if(filter=="todays") {
+            $scope.today = true;
+            $scope.all = false;
+            $scope.future = false;
+            $scope.filterVal = "todays";
+            $scope.todaysAppointments();
+            return;
+        }
         if(filter == 'all'){
             $scope.today = false;
             $scope.all = true;
