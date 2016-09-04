@@ -106,16 +106,16 @@ angular.module('App')
 								//console.log('available '+$scope.dialysisTabularItems[index].itemName+' '+$scope.dialysisTabularItems[index].chosen.brandName+' '+floorItems[j].item.quantityMeasurementType+' '+floorItems[j].availableQuantity);
 							}
 						}
-						if($scope.dialysisTabularItems[index].availableQuantity == null || $scope.dialysisTabularItems[index].availableQuantity == 0)
-						{
-							$scope.dialysisTabularItems[index].availableQuantity = 0;
-							$scope.message = 'Atleast one item unavailable in floor';
-							$scope.messageColor = 'danger';
-							$scope.messageIndex = index;
-							$scope.showAlert = true;
-						}
-						else if(index == $scope.messageIndex || $scope.message != 'Atleast one item unavailable in floor')
-							$scope.showAlert = false;
+						// if($scope.dialysisTabularItems[index].availableQuantity == null || $scope.dialysisTabularItems[index].availableQuantity == 0)
+						// {
+						// 	$scope.dialysisTabularItems[index].availableQuantity = 0;
+						// 	$scope.message = 'Atleast one item unavailable in floor';
+						// 	$scope.messageColor = 'danger';
+						// 	$scope.messageIndex = index;
+						// 	$scope.showAlert = true;
+						// }
+						// else if(index == $scope.messageIndex || $scope.message != 'Atleast one item unavailable in floor')
+						// 	$scope.showAlert = false;
 					})
 					
 			}
@@ -128,16 +128,16 @@ angular.module('App')
 								$scope.catheterizationTabularItems[index].availableQuantity = floorItems[j].availableQuantity;
 							}
 						}
-						if($scope.catheterizationTabularItems[index].availableQuantity == null || $scope.catheterizationTabularItems[index].availableQuantity == 0)
-						{
-							$scope.catheterizationTabularItems[index].availableQuantity = 0;
-							$scope.message = 'Atleast one item unavailable in floor';
-							$scope.messageColor = 'danger';
-							$scope.messageIndex = index;
-							$scope.showAlert = true;
-						}
-						else if(index == $scope.messageIndex || $scope.message != 'Atleast one item unavailable in floor')
-							$scope.showAlert = false;
+						// if($scope.catheterizationTabularItems[index].availableQuantity == null || $scope.catheterizationTabularItems[index].availableQuantity == 0)
+						// {
+						// 	$scope.catheterizationTabularItems[index].availableQuantity = 0;
+						// 	$scope.message = 'Atleast one item unavailable in floor';
+						// 	$scope.messageColor = 'danger';
+						// 	$scope.messageIndex = index;
+						// 	$scope.showAlert = true;
+						// }
+						// else if(index == $scope.messageIndex || $scope.message != 'Atleast one item unavailable in floor')
+						// 	$scope.showAlert = false;
 					})
 			}
 		}
@@ -257,7 +257,9 @@ angular.module('App')
 			{		
 
 				for(var i=0;i<$scope.dialysisTabularItems.length;i++){
-					if($scope.dialysisTabularItems[i].chosen.quantity==null || $scope.dialysisTabularItems[i].availableQuantity==null || $scope.dialysisTabularItems[i].chosen.quantity<0 || $scope.dialysisTabularItems[i].chosen.quantity>$scope.dialysisTabularItems[i].availableQuantity || $scope.dialysisTabularItems[i].availableQuantity==0){
+					if($scope.dialysisTabularItems[i].chosen.quantity==null || $scope.dialysisTabularItems[i].availableQuantity==null || $scope.dialysisTabularItems[i].chosen.quantity<0 || $scope.dialysisTabularItems[i].chosen.quantity>$scope.dialysisTabularItems[i].availableQuantity ){
+							//add availableQuantity == 0 condition above
+						
 						$scope.message = 'One of the fields blank/invalid';
 						$scope.messageColor = 'danger';
 						$scope.showAlert = true;
@@ -316,7 +318,8 @@ angular.module('App')
 				{		
 
 					for(var i=0;i<$scope.catheterizationTabularItems.length;i++){
-						if($scope.catheterizationTabularItems[i].chosen.quantity==null || $scope.catheterizationTabularItems[i].availableQuantity==null || $scope.catheterizationTabularItems[i].chosen.quantity<0 || $scope.catheterizationTabularItems[i].chosen.quantity>$scope.catheterizationTabularItems[i].availableQuantity || $scope.catheterizationTabularItems[i].availableQuantity==0){
+						if($scope.catheterizationTabularItems[i].chosen.quantity==null || $scope.catheterizationTabularItems[i].availableQuantity==null || $scope.catheterizationTabularItems[i].chosen.quantity<0 || $scope.catheterizationTabularItems[i].chosen.quantity>$scope.catheterizationTabularItems[i].availableQuantity){
+							//add availableQuantity == 0 condition above
 							$scope.message = 'One of the fields blank/invalid';
 							$scope.messageColor = 'danger';
 							$scope.showAlert = true;
