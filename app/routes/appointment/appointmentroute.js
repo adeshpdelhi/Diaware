@@ -37,6 +37,8 @@ appointmentRouter.route('/futureAppointments')
     //fetch pending appointments till that date for user to update their status to cancelled or not attended
     var yesterday = new Date();
     yesterday.setDate(today.getDate()-1);
+    yesterday.setHours(23,59,59,999);
+    // console.log(yesterday);
     db.appointments.findAll({
         include: [{
             model:db.patientDetails,
@@ -65,33 +67,53 @@ appointmentRouter.route('/futureAppointments')
         // orderBy:[['date','shiftNumber']]
     }).then(function(result){
         console.log(JSON.stringify(result));
-        if(result.length !== 0){
-            console.log("result:");
-            console.log(JSON.stringify(result));
-            res.status(206).json(result);
-        }
-        else{
-            db.appointments.findAll({
-                include: [{
-                    model:db.patientDetails,
-                    attributes:['name','id','contact']
-                }],
-                where:where
-            }).then(function(results){
-                console.log("entered fetch  all appointments");
-                console.log(JSON.stringify(results));
+        db.appointments.findAll({
+            include: [{
+                model:db.patientDetails,
+                attributes:['name','id','contact']
+            }],
+            where:where
+        }).then(function(results){
+            console.log("entered fetch  all appointments");
+            console.log(JSON.stringify(results));
+            console.log(result.length);
+            results = JSON.parse(JSON.stringify(results));
+            if(result.length !== 0){
+                res.status(206).json(results);
+            }else{
                 res.status(200).json(results);
-                // res.json(results);
-            });
-        }
+            }
+            // res.json(results);
+        });
     });
-    
 })
 
 .delete(function(req,res,next){
     
 });
+/*
+    console.log(JSON.stringify(result));
+    if(result.length !== 0){
+        console.log("result:");
+        console.log(JSON.stringify(result));
+        res.status(206).json(result);
+    }
+    else{
+        db.appointments.findAll({
+            include: [{
+                model:db.patientDetails,
+                attributes:['name','id','contact']
+            }],
+            where:where
+        }).then(function(results){
+            console.log("entered fetch  all appointments");
+            console.log(JSON.stringify(results));
+            res.status(200).json(results);
+            // res.json(results);
+        });
+    }
 
+    */
 appointmentRouter.route('/futureAppointments/:appointmentId')
 .get(function (req, res, next) {
     console.log('procesing get');
@@ -163,14 +185,18 @@ appointmentRouter.route('/pastAppointments')
     today.setHours(23,59,59,999);
     var yesterday = new Date();
     yesterday.setDate(today.getDate()-1);
+    yesterday.setHours(23,59,59,999);
     var where ={};
     where['date'] = {
         $lte:yesterday
     };
-    if(req.query.attended == true){
+    
+    where['cancelled'] = false;
+
+    if(req.query.attended && JSON.parse(req.query.attended) == true){
         where['processComplete'] = true;
-    }else if(req.query.attended == false) 
-        where['present'] = req.query.attended;
+    }else if(req.query.attended && JSON.parse(req.query.attended) == false) 
+        where['present'] = JSON.parse(req.query.attended);
     
     if(req.params.centreId != 'all')
         where['centreId'] = req.params.centreId;
@@ -187,6 +213,22 @@ appointmentRouter.route('/pastAppointments')
             res.edn("couldnt fetch data appointment route");
         })
         return;
+    }
+            // res.status(206).json(result);
+    if(req.query.incomplete){
+        where['$or'] = [
+                {
+                    present: {
+                        $eq:null,
+                    }
+                },
+                {
+                    $and:{
+                        present: true,
+                        processComplete: false
+                    }
+                }
+            ];
     }
     db.appointments.findAll({
     	where:where,
@@ -287,6 +329,16 @@ appointmentRouter.route('/appointments')
         res.json(results);
     });
 })
+.post(function(req,res,next){
+    console.log("processing post");
+    var appointment = req.body;
+    console.log(appointment);
+    db.appointments.build(appointment).save().then(function(result){
+      console.log("saved appointment successfully!");
+      res.json(result);
+      console.log(JSON.stringify(result));
+    });
+})
 ;
 appointmentRouter.route('/appointments/:appointmentId')
 .get(function (req, res, next) {
@@ -329,5 +381,62 @@ appointmentRouter.route('/appointments/:appointmentId')
 
 })
 ;
+var sequelize = require('sequelize');
+
+appointmentRouter.route('/availableBeds/:date')
+.get(function (req, res, next) {
+    console.log('procesing get');
+    var where = {};
+    if(req.params.centreId == 'all')  {
+        res.end("Invalid Data!")
+        return;
+    }
+    if(req.params.centreId != 'all')  
+        where['centreId'] = req.params.centreId;
+    where['appointmentType'] = req.query.appointmentType;
+    where['tmtMachine'] = req.query.tmtOnMachine;
+    // Date.parse(req.query.date)
+    console.log(req.params.date);
+    var dt = new Date(req.params.date);
+    dt.setHours(23,59,59,999);
+    where['date']={
+        $lt:dt,
+        $gt: new Date(dt - 24*60*60*1000)
+    }
+    db.appointments.findAll({
+        where:where,
+        attributes: ["dayOfTheWeek","date","shiftNumber", [sequelize.fn('count', sequelize.col('appointmentId')), 'count']],
+        group:["dayOfTheWeek","date","shiftNumber"],
+    }).then(function(results){
+        // res.json(results);
+        console.log("result of search beds");
+        console.log(results.length);
+        db.centres.find({
+            where:{
+                id:req.params.centreId
+            }
+        }).then(function(result){
+            results = JSON.parse(JSON.stringify(results));
+            var maxShifts = result.noOfShiftsPerDay;
+            var maxBeds = result[req.query.appointmentType+"Total"+req.query.tmtOnMachine + "s"];
+            if(maxBeds == null)
+                maxBeds = 0;
+            console.log(maxShifts);
+            var resp = {}
+            resp[req.params.date] = {};
+            for(var j = 1; j <= maxShifts;j++){
+                console.log(req.query.appointmentType+"Total"+req.query.tmtOnMachine + "s");
+                resp[req.params.date]['shift'+j] = maxBeds;
+            }
+            for(var i = 0; i < results.length ; i++){
+                console.log(results[i]);
+                console.log(results[i].count);
+                resp[req.params.date]['shift'+results[i].shiftNumber] -= results[i].count;
+            }    
+            res.json(resp);
+        });
+    });
+
+})
 
 module.exports = appointmentRouter;

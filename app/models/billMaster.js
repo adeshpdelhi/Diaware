@@ -7,6 +7,18 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey:true,
       autoIncrement:true
     },
+    appointmentId:{
+      type:DataTypes.INTEGER(11),
+      allowNull:false,
+      references:{
+        model:'appointments',
+        key:'appointmentId'
+      }
+    },
+    appointmentDate:{
+      type:DataTypes.DATEONLY,
+      allowNull:true
+    },
     appointmentType: {
       type: DataTypes.STRING,
       allowNull: true
@@ -30,7 +42,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       validate:{
-        isIn:[['','Pending','FullPaid','PartialPaid']]
+        isIn:[['','Pending','FullPaid','PartialPaid','Due']]
       }
     },
     totalAmount: {

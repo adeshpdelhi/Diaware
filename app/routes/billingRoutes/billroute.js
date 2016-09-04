@@ -87,6 +87,7 @@ billingRouter.route('/')
             res.status(500);
             res.end("InternalServerError")
         });
+        // db.appointments.find()
     },function(rejectedPromiseError){
         res.status(500);
         res.end("InternalServerError");

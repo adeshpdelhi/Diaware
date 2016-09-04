@@ -100,7 +100,7 @@
                     <b>View Appointments</b>
                 </h3>
                 <div class="btn-group pull-right">
-                    <button type="button"  ng-click="toggleFunction()" class="btn btn-warning">{{toggle?'View Future Appointments':((prevSetFilter =='appointments')?'All Appointments': prevSetFilter)}}</button>
+                    <button type="button"  ng-click="toggleFunction()" class="btn btn-warning text-capitalize">{{toggle?'View Future Appointments':((prevSetFilter =='appointments')?'All Appointments': prevSetFilter)}}</button>
                     <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="caret"></span>  <!-- caret -->
                         <span class="sr-only">Toggle Dropdown</span>
@@ -108,6 +108,7 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a class="dropdown-item" href ng-click="todaysAppointments()">Todays Appointments</a><li>
                         <li><a class="dropdown-item" href ng-click="getAppointments('all')">All Appointments</a><li>
+                        <li><a class="dropdown-item" href ng-click="getAppointments('incompletePastAppointments')">All Incomplete Past Appointments</a><li>
                         <li><a class="dropdown-item" href ng-click="getAppointments('allAttended')">All Attended Appointments</a><li>
                         <li><a class="dropdown-item" href ng-click="getAppointments('allUnAttended')">All Unattended Appointments</a></li>
                         <!-- <li><a class="dropdown-item" href ng-click="getAppointments('allPending')">All Pending (unmarked appointments) Appointments</a></li> -->

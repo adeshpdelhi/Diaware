@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('App')
-    .controller('NewBillController',['$scope','patientFactory','billFactory', '$stateParams','choosePatientFactory','authorize','backendFactory', function($scope,patientFactory,billFactory, $stateParams, choosePatientFactory, authorize,backendFactory){
+    .controller('NewBillController',['$scope','patientFactory','billFactory', '$stateParams','choosePatientFactory','authorize','backendFactory','appointmentFactory', function($scope,patientFactory,billFactory, $stateParams, choosePatientFactory, authorize,backendFactory,appointmentFactory){
     // add other fields to display on top 
         var chosenPatientId = choosePatientFactory.getChosenPatient().id;
         patientFactory.getPatients(authorize.getCentre()).get({id:chosenPatientId}).$promise.then(function(response){
@@ -9,6 +9,11 @@ angular.module('App')
             $scope.bill.patientId = chosenPatientId;
 
         });
+        var appointment = choosePatientFactory.getAppointment();
+        $scope.showBilling = true;
+        if(!appointment.present){
+            $scope.showBilling = false;
+        }
         // backendFactory.getPanels().query(function(response){
         //     $scope.panels = response;    
         // });
@@ -21,6 +26,8 @@ angular.module('App')
         });
         $scope.bill = {
             // billId:null,
+            appointmentId:null,
+            appointmentDate:null,
             appointmentType:"",
             modeOfPayment:'',
             panelId: null,
@@ -152,17 +159,24 @@ angular.module('App')
         
         */
         $scope.makePayment = function(status){
+            $scope.bill.appointmentId =  appointment.appointmentId;
+            $scope.bill.appointmentDate = appointment.date;
             console.log("entered makePayment");
+            if($scope.bill.modeOfPayment == 'cash' && dueBill && $scope.bill.amountPending > 0){
+                $scope.bill.status = "Due";
+            }
             $scope.bill.payableAmount = $scope.bill.totalAmount - ($scope.bill.totalAmount* $scope.bill.additionalDiscount/100); 
-            $scope.bill.patientPayableAmount = $scope.bill.payableAmount - $scope.bill.payableAmount * $scope.panelDiscount;
-            if($scope.bill.patientPayableAmount == 0)
-                $scope.bill.status = 'Pending';
-            if($scope.bill.patientPayableAmount == $scope.bill.payableAmount)
-                $scope.bill.status = 'FullPaid';
-            if($scope.bill.patientPayableAmount > 0 && $scope.bill.patientPayableAmount < $scope.bill.payableAmount)
-                $scope.bill.status = "PartialPaid";
-            $scope.bill.amountPending = $scope.bill.payableAmount - $scope.bill.patientPayableAmount;
-            console.log("amountPending: " + $scope.bill.amountPending +"; payableAmount: " + $scope.bill.payableAmount +"; patientPayableAmount: " +$scope.bill.patientPayableAmount  );
+                if($scope.bill.modeOfPayment == 'cashless'){
+                $scope.bill.patientPayableAmount = $scope.bill.payableAmount - $scope.bill.payableAmount * $scope.panelDiscount;
+                if($scope.bill.patientPayableAmount == 0)
+                    $scope.bill.status = 'Pending';
+                if($scope.bill.patientPayableAmount == $scope.bill.payableAmount)
+                    $scope.bill.status = 'FullPaid';
+                if($scope.bill.patientPayableAmount > 0 && $scope.bill.patientPayableAmount < $scope.bill.payableAmount)
+                    $scope.bill.status = "PartialPaid";
+                $scope.bill.amountPending = $scope.bill.payableAmount - $scope.bill.patientPayableAmount;
+                console.log("amountPending: " + $scope.bill.amountPending +"; payableAmount: " + $scope.bill.payableAmount +"; patientPayableAmount: " +$scope.bill.patientPayableAmount  );
+            }
 
             $scope.bill.patientId = $scope.patient.id;
             $scope.bill.lastModifiedBy = authorize.getUsername();
@@ -178,13 +192,14 @@ angular.module('App')
                 $scope.message = "Error: " + response.status+ " " + response.statusText + "!";
                 $scope.messageColor = 'danger';
             });
-
-
+            appointmentFactory.getAppointments(authorize.getCentre()).update({appointmentId:$scope.bill.appointmentId},{billingDone:true});
 
         };
 
         $scope.reinit = function(){
             $scope.bill = {
+                appointmentId:null,
+                appointmentDate:null,
                 appointmentType:"",
                 modeOfPayment:null,
                 panelId: null,

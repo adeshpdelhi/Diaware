@@ -32,7 +32,7 @@
 </style>
 <div id="regclass" class="container" style="text-align:center; width: 100%; overflow:hidden;" ng-cloak>
     <div class="row row-content col-sm-10 col-sm-push-1 col-sm-pull-1 " ng-init="tab=1" >
-        <div class="alert alert-success" ng-if="!showChart">
+        <div class="alert alert-{{messageChartColor}}" ng-if="!showChart">
           {{messageChart}}
         </div>
         <div class="col-xs-12" ng-if="showChart">

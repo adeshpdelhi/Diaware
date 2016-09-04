@@ -1,7 +1,10 @@
 <div class="container" ng-cloak>
     <div class="row row-content col-sm-10 col-sm-pull-1 col-sm-push-1">
         <!-- <div id="Registerbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">  -->
-        <div class="panel" style="text-align:center;">
+        <div class="alert alert-danger" ng-if="!showBilling">
+            Patient hasn't come yet!. You may not bill the patient yet!.
+        </div>
+        <div class="panel" style="text-align:center;" ng-if="showBilling">
             <div class="panel-heading">
                 <div class="panel-title"><b>NEW BILL</b></div>
                 <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
@@ -15,10 +18,15 @@
                     <div class="row col-sm-12">
                         <div class="media">
                             <div class="media-body media-left media-middle">
-                                <label class="col-sm-4">PATIENT ID: {{patient.id}}</label>
-                                <label class="col-sm-4 text-capitalize">NAME: {{patient.name}}</label>
-                                <label class="col-sm-4">CONTACT: {{patient.contact}}</label>
-                            <!-- add other details like default panel -->
+                                <div class="row">
+                                    <label class="col-sm-4">PATIENT ID: {{patient.id}}</label>
+                                    <label class="col-sm-4 text-capitalize">NAME: {{patient.name}}</label>
+                                    <label class="col-sm-4">CONTACT: {{patient.contact}}</label>
+                                </div>
+                                <div class="row">
+
+                                </div>
+                                <!-- add other details like default panel -->
                             </div>
                             <div class="media-right">
                                 <a href="#"><img class="media-object img-thumbnail" height ="100" width ="100" src="images/person-default.png" alt="defaultPerson"/></a>
@@ -50,15 +58,24 @@
                                     <!-- <a ui-sref="#" ng-model=""> -->
                                 </tbody>
                             </table>
-                            <label class="col-sm-offset-5 col-sm-2">Total Amount</label>
+                            <label class="col-sm-2">Total Amount</label>
                             <label class="col-sm-2">{{bill.totalAmount | currency :'&#8377;'}}</label>
-                            
-                            <button type="submit" class="btn btn-primary col-sm-3" ng-click="makePayment()" ng-disabled=" !payable() || bill.saved">Make Payment/Save</button>
+                            <label class="col-sm-8">&nbsp;</label>
+                            <label class="pull-left col-sm-2">Payable Amount</label>
+                            <label class="col-sm-2">{{bill.payableAmount | currency :'&#8377;'}}</label>
 
+                            <div ng-if="bill.modeOfPayment=='cash'">
+                                <label class="col-sm-1 checkbox-inline"><input type="checkbox" ng-model="dueBill" value="due">Due</label>
+                                <label class="col-sm-2 control-label" ng-if="dueBill">Amount Due (&#8377;)</label>
+                                <div class="col-sm-2" ng-if="dueBill">
+                                    <input class="form-control" type="number" step="any" min="0" name="dueAmount" ng-model="bill.amountPending">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary pull-right col-sm-3" ng-click="makePayment()" ng-disabled=" !payable() || bill.saved">Make Payment/Save</button>
                         </div>
                         <hr/>
                     </div>
-            
+
                     <!-- <p style="font-size:135%;font-weight:bold; color:gray; font-family:'lucida console';">PAYMENT SECTION</p> -->
                     <div style="text-align:center;" ng-show="!bill.saved">
                         <div class="form-group">
@@ -81,7 +98,7 @@
                         <div class="form-group" ng-show="bill.modeOfPayment !== ''">
                             <label for="additionalDiscount" class="control-label col-sm-3">Additional Discount (in %)</label>
                             <div class="col-sm-3">
-                                <input type="number" name="additionalDiscount" id="additionalDiscount" ng-model="bill.additionalDiscount" step="any" min='0'>
+                                <input class="form-control" type="number" name="additionalDiscount" id="additionalDiscount" ng-model="bill.additionalDiscount" step="any" min='0'>
                             </div>
                         </div>
                         <div ng-if="panelSelected">
@@ -92,48 +109,45 @@
                             </div>
                         </div>
                         <div ng-show="basicSelectionComplete"> 
-                        <form class="form-horizontal" role="form" id="itemForm" name="itemForm" novalidate>
+                            <form class="form-horizontal" role="form" id="itemForm" name="itemForm" novalidate>
 
-                            <hr style="border-top:1px solid rgb(220,220,220);">
-                            <div class="form-group">
-                                <label for="transactionType" class="control-label col-sm-2">Transaction Type</label>
-                                <select ng-model="subItem.transactionType" class="col-sm-2" ng-change ="changeState(4)" ng-options = "type.transactionType as type.transactionType for type in transactionTypes" required >
-                                    
-                                </select>
-                                <a class="text-danger pull-right col-sm-pull-1" ng-click="setPristine()" style="font-size:18px;"><span class="glyphicon glyphicon-remove"></span></a>
-                                
-                            </div>
-                            <div ng-if = "show">
-                                <div class="form-group" ng-class="{'has-error':billingForm.ledger.$error.required && !billingForm.product.$pristine}">
-                                    <label for="product" class="control-label col-sm-2 text-capitalize">{{subItem.transactionType}}</label>
-                                    <select ng-model="subItem.ledger" class="col-sm-2" ng-change="" ng-options = "ledger.ledgerName as ledger.ledgerName for ledger in ledgers" id = "ledger" name="ledger" required>
-                                    </select>
-                                    <span ng-show="billingForm.ledger.$error.required && !billingForm.product.$pristine" class="help-block">Ledger Name is required                      
-                                    </span>    
-
-                                    <label for="qty" class="control-label col-sm-1">Quantity</label>
-                                    <div class="col-sm-2">
-                                        <input  type="number" name="qty" id="qty" ng-model="subItem.quantity">    
-                                    </div>
-                                    <!-- modify total cost according to quantity .... price of one item to be taken from backend database -->
-                                    <label for="cost" class="control-label col-sm-2">Amount (in Rs)</label>
-                                    <div class="col-sm-2">
-                                        <input type="number" name="cost" id="cost" ng-model="subItem.amount" disabled step="any" min='0'>    
-                                    </div>
-                                </div>
+                                <hr style="border-top:1px solid rgb(220,220,220);">
                                 <div class="form-group">
-                                    <button type="button" class="btn btn-success btn-circle btn-lg col-sm-push-5" ng-click="add()" ng-disabled="billingForm.$invalid"><span class="glyphicon glyphicon-plus"></span></button>
-                                    <!--  -->
-                                    <!-- <md-button class="md-fab">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                    </md-button> -->
+                                    <label for="transactionType" class="control-label col-sm-2">Transaction Type</label>
+                                    <select ng-model="subItem.transactionType" class="col-sm-2" ng-change ="changeState(4)" ng-options = "type.transactionType as type.transactionType for type in transactionTypes" required >
+
+                                    </select>
+                                    <a class="text-danger pull-right col-sm-pull-1" ng-click="setPristine()" style="font-size:18px;"><span class="glyphicon glyphicon-remove"></span></a>
+
+                                </div>
+                                <div ng-if = "show">
+                                    <div class="form-group" ng-class="{'has-error':billingForm.ledger.$error.required && !billingForm.product.$pristine}">
+                                        <label for="product" class="control-label col-sm-2 text-capitalize">{{subItem.transactionType}}</label>
+                                        <select ng-model="subItem.ledger" class="col-sm-2" ng-change="" ng-options = "ledger.ledgerName as ledger.ledgerName for ledger in ledgers" id = "ledger" name="ledger" required>
+                                        </select>
+                                        <span ng-show="billingForm.ledger.$error.required && !billingForm.product.$pristine" class="help-block">Ledger Name is required                      
+                                        </span>    
+
+                                        <label for="qty" class="control-label col-sm-1">Quantity</label>
+                                        <div class="col-sm-2">
+                                            <input  type="number" name="qty" id="qty" ng-model="subItem.quantity">    
+                                        </div>
+                                        <!-- modify total cost according to quantity .... price of one item to be taken from backend database -->
+                                        <label for="cost" class="control-label col-sm-2">Amount (in Rs)</label>
+                                        <div class="col-sm-2">
+                                            <input type="number" name="cost" id="cost" ng-model="subItem.amount" disabled step="any" min='0'>    
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-success btn-circle btn-lg col-sm-push-5" ng-click="add()" ng-disabled="billingForm.$invalid"><span class="glyphicon glyphicon-plus"></span></button>
+
+                                    </div>
                                 </div>
                             </form>
-                            </div>
                         </div>
                     </div>
-                </form>                     
+                </form>
             </div>
-         </div>
+        </div>
     </div>
 </div>

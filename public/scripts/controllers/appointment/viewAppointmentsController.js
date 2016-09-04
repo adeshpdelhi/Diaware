@@ -163,8 +163,14 @@ angular.module('App')
             object['attended'] = true;
             $scope.filter = 'pastAppointments';
             $scope.filterVal = "all attended";
-
-
+        }
+        if(filter == 'incompletePastAppointments'){
+            $scope.today = false;
+            $scope.future = false;
+            object['filter'] = 'pastAppointments';
+            object['incomplete'] = true;
+            $scope.filter = 'pastAppointments';
+            $scope.filterVal = "Incomplete Past";
         }
         if(filter == 'allUnAttended'){
             $scope.today = false;
