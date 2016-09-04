@@ -160,7 +160,7 @@ angular.module('App')
         console.log("this months: "+  firstDayOfThisMonth + " - " + lastDayOfThisMonth );
         console.log("last months: "+  firstDayOfLastMonth + " - " + lastDayOfLastMonth );
         console.log("last date of dec: "+ new Date(y,11+1,0) +" ; 1st day of december from jan" + new Date(y,0-1,1));
-        if($scope.role=='manager' ||$scope.isAdmin || $scope.role=='incharge'){
+        if($scope.role.manager || $scope.role.admin || $scope.role.incharge){
             patientFactory.getPatients(allCentres?'all':authorize.getCentre()).get({dateFrom:firstDayOfThisMonth, dateTo:lastDayOfThisMonth, count:true}).$promise.then(function(response){
                 $scope.thisMonthsRegistrations = response.count;
             },function(response){
@@ -174,7 +174,7 @@ angular.module('App')
                 
             });
         }
-        if($scope.role=='manager' ||$scope.isAdmin || $scope.role=='incharge'){
+        if($scope.role.manager || $scope.role.admin || $scope.role.incharge){
             appointmentFactory.getPastAppointments(allCentres?'all':authorize.getCentre()).get({attended:true, count:true}).$promise.then(function(response){
                 $scope.thisMonthsAttendedAppointments = response.count;
             },function(response){
@@ -188,7 +188,7 @@ angular.module('App')
                 
             });
         }
-        if($scope.isAdmin){
+        if($scope.role.admin){
             billFactory.getBills(allCentres?'all':authorize.getCentre()).get({sum:true,amount:'totalAmount',status:'FullPaid'}).$promise.then(function(response){
                 if(!response.sum) $scope.thisMonthsEarnings = 0;
                 else $scope.thisMonthsEarnings = response.sum;
@@ -210,9 +210,9 @@ angular.module('App')
 
     // $timeout(function(){
     // activeUser = authorize.getActiveUser();
-    activeUser = authorize.getRole();
-    if(activeUser == 'admin')
-    	$scope.isAdmin = true;
+    // var activeUser = authorize.getRole();
+    // if(activeUser == 'admin')
+	// $scope.isAdmin = true;
     //$scope.isAdmin = activeUser.admin;
     $scope.viewTodaysAppointments(false);
     $scope.newUserNotification();
@@ -222,8 +222,8 @@ angular.module('App')
 
     // },1000);
 
-    console.log(activeUser);
-    console.log("admin "+$scope.isAdmin);
+    // console.log(activeUser);
+    console.log("admin "+$scope.role.admin);
 
 }])
 ;
