@@ -56,8 +56,6 @@ angular.module('App')
               templateUrl: 'views/inventory/addTreatmentConsumptionModal.html',
               controller: 'AddConsumptionModalController',
               size:'lg',
-              backdrop  : 'static',
-		      keyboard  : false,
 	          resolve: {
 	            appointmentId: function () {
 	             return appointment.appointmentId;
@@ -261,7 +259,7 @@ angular.module('App')
 				for(var i=0;i<$scope.dialysisTabularItems.length;i++){
 					if($scope.dialysisTabularItems[i].chosen.quantity==null || $scope.dialysisTabularItems[i].availableQuantity==null || $scope.dialysisTabularItems[i].chosen.quantity<0 || $scope.dialysisTabularItems[i].chosen.quantity>$scope.dialysisTabularItems[i].availableQuantity ){
 							//add availableQuantity == 0 condition above
-
+						
 						$scope.message = 'One of the fields blank/invalid';
 						$scope.messageColor = 'danger';
 						$scope.showAlert = true;
