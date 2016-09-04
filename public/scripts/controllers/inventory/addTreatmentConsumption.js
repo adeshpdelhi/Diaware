@@ -1,74 +1,14 @@
 'use strict';
 angular.module('App')
-.controller('AddTreatmentConsumptionController',['$scope','authorize','appointmentFactory','inventoryFactory','regularForm','$uibModal','choosePatientFactory', function($scope,authorize,appointmentFactory, inventoryFactory, regularForm,$uibModal , choosePatientFactory){
-		// $scope.regularForm = regularForm.regularForm;
-		// $scope.pendingTreatments=[];
-		// $scope.showAlert=false;
-
-		// // $scope.treatmentInventory= {
-		// // 	treatmentId:null,
-		// // 	treatmentType:null,
-		// // 	saved:false
-		// // };
-		// $scope.pendingTreatments = [];
-		// $scope.daysToLoop = {};
-		// appointmentFactory.getPastAppointments(authorize.getCentre()).query({attended:true}).$promise.then(function(response){
-		// 	$scope.appointments = response;
-		// 	inventoryFactory.getConsumptions(authorize.getCentre()).query().$promise.then(function(response){
-		// 		$scope.consumptions = response;
-		// 		for(var i=0;i<$scope.appointments.length;i++)
-		// 		{
-		// 			var present = false;
-		// 			for(var j=0;j<$scope.consumptions.length;j++){
-		// 				if($scope.appointments[i].appointmentId == $scope.consumptions[j].treatmentId)
-		// 					present=true;
-		// 			}
-		// 			if(present == false){
-		// 				$scope.pendingTreatments.push($scope.appointments[i]);
-		// 				$scope.daysToLoop[$scope.appointments[i].dayOfTheWeek] = true;
-		// 			}
-
-		// 		}
-		// 		console.log('length of pending treatments :'+$scope.pendingTreatments.length);
-		// 		if($scope.pendingTreatments.length == 0)
-		// 		{
-		// 			$scope.message = 'All treatment consumptions added!';
-		// 			$scope.messageColor = 'success';
-		// 			$scope.showAlert = true;
-		// 		}
-		// 	},function(response){
-		// 		alert('Failed to retrieve consumptions');
-		// 	})
-		// 	console.log(response);
-		// },function(response){alert('Failed to retrieve appointments')})
-		// // need to add attributes of editable table given in excel
-		$scope.openAddConsumption = function(appointmentId){
-			var appointment = choosePatientFactory.getAppointment();
-			console.log('recieved appointment is ');
-			console.log(appointment);
-			if(appointment.treatmentConsumptionAdded)
-			{
-				$scope.message = "Treatment consumption already added!";
-				$scope.messageColor = "success";
-				return;
-			}
-			$uibModal.open({
-              templateUrl: 'views/inventory/addTreatmentConsumptionModal.html',
-              controller: 'AddConsumptionModalController',
-              size:'lg',
-	          resolve: {
-	            appointmentId: function () {
-	             return appointment.appointmentId;
-	            }
-	          }
-            });
-		};
-		$scope.openAddConsumption();
-	
-	}])
-.controller('AddConsumptionModalController', ['$scope', '$state', 'authorize', '$uibModalInstance', 'appointmentId','inventoryFactory','appointmentFactory', function ($scope, $state, authorize, $uibModalInstance, appointmentId,inventoryFactory, appointmentFactory) {
-
-		$scope.appointmentId = appointmentId;
+.controller('AddTreatmentConsumptionController',['$scope','authorize','appointmentFactory','inventoryFactory','regularForm','choosePatientFactory', function($scope, authorize,appointmentFactory, inventoryFactory, regularForm, choosePatientFactory){
+	$scope.appointment = choosePatientFactory.getAppointment();
+	$scope.appointmentId = $scope.appointment.appointmentId;
+	$scope.savedOnce = false;
+	if($scope.appointment.treatmentConsumptionAdded){
+		$scope.message = 'Treatment consumption already added';
+		$scope.messageColor = 'success';
+	}
+	if(choosePatientFactory)
 		$scope.consumption={
 				centreId:authorize.getCentre(),
 				treatmentId:$scope.appointmentId,
@@ -303,8 +243,8 @@ angular.module('App')
 							$scope.message='Saved successfully!';
 							$scope.messageColor='success';
 							$scope.showAlert=true;
-							$uibModalInstance.close();
-				    		$state.go('app.choosePatientMatrix', {callback:'inventory.consumption.new'}, {reload: true});
+							$scope.savedOnce = true;
+				    		// $state.go('app.choosePatientMatrix', {callback:'inventory.consumption.new'}, {reload: true});
 										
 						},function(response){
 							alert('consumption save failed');
@@ -363,8 +303,8 @@ angular.module('App')
 							$scope.message='Saved successfully!';
 							$scope.messageColor='success';
 							$scope.showAlert=true;
-							$uibModalInstance.close();
-				    		$state.go('app.choosePatientMatrix', {callback:'inventory.consumption.new'}, {reload: true});
+							$scope.savedOnce = true;
+				    		// $state.go('app.choosePatientMatrix', {callback:'inventory.consumption.new'}, {reload: true});
 			
 						},function(response){
 							alert('consumption save failed');
@@ -410,9 +350,5 @@ angular.module('App')
 			}
 			return true;
 		}
-	    //$uibModalInstance.close();
-	    //$state.go('app.home', {}, {reload: true});
-
-}])
-
+	}])
 ;
