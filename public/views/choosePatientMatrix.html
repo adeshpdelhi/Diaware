@@ -117,7 +117,7 @@
                                     <td width="15%">{{ appointment.patientDetail.id }}</td>
                                     <td width="20%">{{ appointment.patientDetail.name }}</td>
                                     <td width="10%" style="background-color:{{appointment.present?'#99ff99':'#ff9999'}};color:{{appointment.present?'green':'#b30000'}};"><span class="glyphicon glyphicon-{{ appointment.present?'ok':'remove'}}"></span></td>
-                                    <td width="10%" style="background-color:{{appointment.billingDone?'#99ff99':'#ff9999'}};color:{{appointment.billingDone?'green':'#b30000'}};"><span class="glyphicon glyphicon-{{ appointment.billingDone?'ok':'remove'}}"></span></td>
+                                    <td width="10%" style="background-color:{{appointment.billingDone?(appointment.allBillsCleared?'#99ff99':'#ffff4d'):'#ff9999'}};color:{{appointment.billingDone?(appointment.allBillsCleared?'green':'#999900'):'#b30000'}};"><span class="glyphicon glyphicon-{{ appointment.billingDone?(appointment.allBillsCleared?'ok':'time'):'remove'}}"></span></td>
                                     <td width="10%" style="background-color:{{appointment.monitoringDone?'#99ff99':'#ff9999'}};color:{{appointment.monitoringDone?'green':'#b30000'}};"><span class="glyphicon glyphicon-{{ appointment.monitoringDone?'ok':'remove'}}"></span></td>
                                     <td width="10%" style="background-color:{{appointment.treatmentConsumptionAdded?'#99ff99':'#ff9999'}};color:{{appointment.treatmentConsumptionAdded?'green':'#b30000'}};"><span class="glyphicon glyphicon-{{ appointment.treatmentConsumptionAdded?'ok':'remove'}}"></span></td>
                                 </tr>    
