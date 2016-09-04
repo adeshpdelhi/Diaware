@@ -10,7 +10,7 @@ angular.module('App')
 
         });
         var appointment = choosePatientFactory.getAppointment();
- 
+        $scope.dueBill = false;
         $scope.showBilling = true;
         if(!appointment.present){
             $scope.showBilling = false;
@@ -41,7 +41,7 @@ angular.module('App')
             modeOfPayment:'',
             panelId: null,
             additionalDiscount:0,
-            status:"Pending",
+            status:"FullPaid",
             totalAmount:0,
             payableAmount:0,
             patientPayableAmount:0,
