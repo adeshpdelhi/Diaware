@@ -23,12 +23,12 @@
 		<label class="col-sm-2 control-label">Date</label>                        
 		<div class="col-sm-8">
 		<md-content flex layout="row">
-		    <md-datepicker name="dateTo" id="dateTo" type="date" flex ng-model="basic.monitoringDate" md-placeholder="Enter date" required>
+		    <md-datepicker name="dateTo" id="dateTo" type="date" flex ng-model="basic.monitoringDate" md-placeholder="Enter date" required disabled>
 		    </md-datepicker>
 		    <!-- <div class="validation-messages" ng-messages="basicForm.dateTo.$error">
 		        <div ng-message="valid" class="text-danger" >The entered value is not a date!</div>
 		    </div> -->
-		    <span ng-show="(basicForm.dateTo.$error.required || basicForm.dateTo.$error.date) && !basicForm.dateTo.$pristine" class="help-block">Date invalid</span>
+		    <!-- <span ng-show="(basicForm.dateTo.$error.required || basicForm.dateTo.$error.date) && !basicForm.dateTo.$pristine" class="help-block">Date invalid</span> -->
 		</md-content>
 		<!-- <input type="date" class="form-control" id="date" name="date" ng-model="basic.monitoringDate"> -->
 		</div>

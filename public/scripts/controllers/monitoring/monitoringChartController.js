@@ -28,7 +28,7 @@ angular.module('App')
 		$scope.showDateAlert= false;
         $scope.basic = {
         	patientId:$stateParams.patientId?$stateParams.patientId:null,
-        	monitoringDate:$stateParams.date?(new Date($stateParams.date)):null,
+        	monitoringDate:new Date(appointment.date),
         	preBasicId:null,
         	machineNumber:null,
         	bedNumber:null,
