@@ -1,48 +1,48 @@
 <style type="text/css">
 	
-.personal-content {
-	margin: 0px auto;
-	/*padding-left: 50px ;*/
-	padding-top: 50px ;
-	padding-bottom: 50px ;
-	width: 600px;
-	color: #314a7a;
-	background-color: rgba(240,240,240,0.8)!important;
-	z-index:2;
-	min-height: 400px;
-}
+	.personal-content {
+		margin: 0px auto;
+		/*padding-left: 50px ;*/
+		padding-top: 50px ;
+		padding-bottom: 50px ;
+		width: 600px;
+		color: #314a7a;
+		background-color: rgba(240,240,240,0.8)!important;
+		z-index:2;
+		min-height: 400px;
+	}
 
-.t{
+	.t{
 
-    font-family: Raleway, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 40;
-    line-height: 1.05em;
-}
-.dateCSS{
-        
-        font-size:18px ;
-        /*color: #fff; */
-        font-weight:20px ; 
-        padding-top:-30px; 
-        margin-top: -20px
-        padding-bottom:10px;
-        margin-bottom: 10px ;
-        /*color: #d9d9d9;*/
-        color: rgb(150,150,150);
-        /*background-color: #e8e8e8;*/ text-shadow: rgba(255,255,255,.1) -1px -1px 1px,rgba(0,0,0,.5) 1px 1px 1px;
+		font-family: Raleway, "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-size: 16px;
+		font-weight: 40;
+		line-height: 1.05em;
+	}
+	.dateCSS{
+		
+		font-size:18px ;
+		/*color: #fff; */
+		font-weight:20px ; 
+		padding-top:-30px; 
+		margin-top: -20px
+		padding-bottom:10px;
+		margin-bottom: 10px ;
+		/*color: #d9d9d9;*/
+		color: rgb(150,150,150);
+		/*background-color: #e8e8e8;*/ text-shadow: rgba(255,255,255,.1) -1px -1px 1px,rgba(0,0,0,.5) 1px 1px 1px;
 
-    }
-    .row1:nth-of-type(odd) {
-    	background-color: rgb(238,238,238);
-    }
+	}
+	.row1:nth-of-type(odd) {
+		background-color: rgb(238,238,238);
+	}
 
 </style>
 
 <div class="jumbotron" style="background-image: url(images/banner.jpg);background-size: cover; height: 510px;  width:100%" ng-cloak>
 	<div class="container">
 		<div class="row row-content">
-			<div class="row">
+			<div class="row" ng-if="role.admin || role.incharge">
 				<div class="col-sm-7">
 					<div class="row" style="width:100%; height:70px;" ng-if="userNotify">
 						<p style="color:rgb(0, 38, 153); background-color:rgba(240,240,240,0.7); height:70px font-size:17px; font-weight:16px;" ng-class="{'text-danger':userAlert}">{{userNotifyMessage}}</p>
@@ -64,24 +64,24 @@
 						<p style="font-size:15px;">
 							New Registrations: 
 							<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<small style="color:rgb(0,0,0);font-size:14px;">This Month: {{thisMonthsRegistrations}}</small>
-								&nbsp;&nbsp;
-								<small style="color:rgb(0,0,0); font-size:14px;">Last Month: {{lastMonthsRegistrations}}</small>
+							<small style="color:rgb(0,0,0);font-size:14px;">This Month: {{thisMonthsRegistrations}}</small>
+							&nbsp;&nbsp;
+							<small style="color:rgb(0,0,0); font-size:14px;">Last Month: {{lastMonthsRegistrations}}</small>
 						</p>
 						<hr/>
 						<p style="font-size:15px;">
 							Total Attended Appointments:
 							<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<small style="color:rgb(0,0,0);font-size:14px;">This Month: {{thisMonthsAttendedAppointments}}</small>&nbsp;&nbsp;
-								<small style="color:rgb(0,0,0);font-size:14px;">Last Month: {{lastMonthsAttendedAppointments}}</small>
+							<small style="color:rgb(0,0,0);font-size:14px;">This Month: {{thisMonthsAttendedAppointments}}</small>&nbsp;&nbsp;
+							<small style="color:rgb(0,0,0);font-size:14px;">Last Month: {{lastMonthsAttendedAppointments}}</small>
 						</p>
 						<hr/>
-						<p ng-if="isAdmin" style="font-size:15px;">
+						<p ng-if="role.admin" style="font-size:15px;">
 							Total Earnings:
 							<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<small style="color:rgb(0,0,0);font-size:14px;">This Month: {{thisMonthsEarnings|currency :'&#8377;'}}</small>
-								&nbsp;&nbsp;
-								<small style="color:rgb(0,0,0);font-size:14px;">Last Month: {{lastMonthsEarnings|currency :'&#8377;'}}</small>
+							<small style="color:rgb(0,0,0);font-size:14px;">This Month: {{thisMonthsEarnings|currency :'&#8377;'}}</small>
+							&nbsp;&nbsp;
+							<small style="color:rgb(0,0,0);font-size:14px;">Last Month: {{lastMonthsEarnings|currency :'&#8377;'}}</small>
 						</p>
 					</md-card-content>
 				</md-card>
@@ -92,8 +92,8 @@
 <div class="container" style="background-color:#EFEFEF; width:100%">
 	<div class="row row-content">
 		<div class="col-sm-7">
-		<!-- (221,75,57) -->
-<!-- 69,170,255 -->
+			<!-- (221,75,57) -->
+			<!-- 69,170,255 -->
 			<md-card style="background-color:rgba(255,255,255,0.6);">
 				<md-card-title style="background-color:rgba(0, 38, 153,0.8); color:#ffffff; padding-top:12px; cursor:pointer; height:70px; margin:12px 12px;" ng-click="showContent = !showContent" layout="row" layout-align="center center">
 					<md-card-title-text  layout-align="center center">
@@ -109,23 +109,23 @@
 							{{message}}
 						</div>
 						<div ng-repeat="appointment in appointments | filter: patient.id | filter: patient.name | dateFilter:dateFrom:dateTo | orderBy:['date','shiftNumber']">
-						    <div ng-class="{'padding':currentShift != appointment.shiftNumber}"></div>    
-						    <div class="row row1">
-						        <div class="col-sm-2" style="font-size:15px;font-weight: 20px; color: rgb(150,150,150);">
-						             {{currentShift != appointment.shiftNumber?changeShift(appointment.shiftNumber):''}}   
-						        </div>
-						        <div class="col-sm-6 text-capitalize" ng-click="viewAppointmentDetails(appointment.appointmentId)" style="text-align: left; cursor:pointer;  padding-left:50px; border-left:1px solid rgb(230,230,230); font-size:15px; font-weight: 15px; color:rgb(120,120,120);">
-						            {{appointment.patientId}}  &nbsp; &nbsp; &nbsp; &nbsp; {{appointment.patientDetail.name}}
-						        </div>
-						    </div>
+							<div ng-class="{'padding':currentShift != appointment.shiftNumber}"></div>    
+							<div class="row row1">
+								<div class="col-sm-2" style="font-size:15px;font-weight: 20px; color: rgb(150,150,150);">
+									{{currentShift != appointment.shiftNumber?changeShift(appointment.shiftNumber):''}}   
+								</div>
+								<div class="col-sm-6 text-capitalize" ng-click="viewAppointmentDetails(appointment.appointmentId)" style="text-align: left; cursor:pointer;  padding-left:50px; border-left:1px solid rgb(230,230,230); font-size:15px; font-weight: 15px; color:rgb(120,120,120);">
+									{{appointment.patientId}}  &nbsp; &nbsp; &nbsp; &nbsp; {{appointment.patientDetail.name}}
+								</div>
+							</div>
 						</div> 
 					</md-content>
 				</md-card-content>
 			</md-card>
 		</div>
-		<div class="col-sm-push-5 col-sm-7">
-		<!-- (221,75,57) -->
-<!-- 69,170,255 -->
+		<div class="col-sm-push-5 col-sm-7" ng-if="role.admin || role.incharge || role.manager">
+			<!-- (221,75,57) -->
+			<!-- 69,170,255 -->
 			<md-card style="background-color:rgba(221,75,57,0.6);">
 				<md-card-title style="background-color:rgba(0, 38, 153,0.8); color:#ffffff; padding-top:12px; cursor:pointer; height:70px; margin:12px 12px;" ng-click="showContentBills = !showContentBills" layout="row" layout-align="center center">
 					<md-card-title-text  layout-align="center center">
@@ -141,21 +141,21 @@
 							{{messageBills}}
 						</div>
 						<div ng-repeat="bill in bills | orderBy:['totalAmount']">
-						    <div class="row row1">
-						        <div class="col-sm-2" style="font-size:15px;font-weight: 20px; color: rgb(150,150,150);">
-						             {{bill.billId}}   
-						        </div>
-						        <div class="col-sm-6 text-capitalize" ng-click="viewBillDetails(bill.billId)" style="text-align: left; cursor:pointer;  padding-left:50px; border-left:1px solid rgb(230,230,230); font-size:15px; font-weight: 15px; color:rgb(120,120,120);">
-						            {{bill.patientDetail.name}}  &nbsp; &nbsp; &nbsp; &nbsp; {{bill.totalAmount}}
-						        </div>
-						        
-						    </div>
+							<div class="row row1">
+								<div class="col-sm-2" style="font-size:15px;font-weight: 20px; color: rgb(150,150,150);">
+									{{bill.billId}}   
+								</div>
+								<div class="col-sm-6 text-capitalize" ng-click="viewBillDetails(bill.billId)" style="text-align: left; cursor:pointer;  padding-left:50px; border-left:1px solid rgb(230,230,230); font-size:15px; font-weight: 15px; color:rgb(120,120,120);">
+									{{bill.patientDetail.name}}  &nbsp; &nbsp; &nbsp; &nbsp; {{bill.totalAmount}}
+								</div>
+								
+							</div>
 						</div> 
 					</md-content>
 				</md-card-content>
 			</md-card>
 		</div>
-		<div class="col-sm-7" ng-if="isAdmin">
+		<div class="col-sm-7" ng-if="role.admin || role.manager || role.incharge">
 			<md-card style="background-color:rgba(255,255,255,0.6);">
 				<md-card-title style="background-color:rgba(0, 38, 153,0.8); color:#ffffff; padding-top:12px; cursor:pointer; height:70px; margin:12px 12px;" ng-click="showContentCancelledBills = !showContentCancelledBills" layout="row" layout-align="center center">
 					<md-card-title-text  layout-align="center center">
@@ -171,15 +171,15 @@
 							{{messageCancelledBills}}
 						</div>
 						<div ng-repeat="bill in billsCancelled | orderBy:['totalAmount']">
-						    <div class="row row1">
-						        <div class="col-sm-2" style="font-size:15px;font-weight: 20px; color: rgb(150,150,150);">
-						             {{bill.billId}}   
-						        </div>
-						        <div class="col-sm-6 text-capitalize" ng-click="viewBillDetails(bill.billId,true)" style="text-align: left; cursor:pointer;  padding-left:50px; border-left:1px solid rgb(230,230,230); font-size:15px; font-weight: 15px; color:rgb(120,120,120);">
-						            {{bill.patientDetail.name}}  &nbsp; &nbsp; &nbsp; &nbsp; {{bill.totalAmount}}
-						        </div>
-						        
-						    </div>
+							<div class="row row1">
+								<div class="col-sm-2" style="font-size:15px;font-weight: 20px; color: rgb(150,150,150);">
+									{{bill.billId}}   
+								</div>
+								<div class="col-sm-6 text-capitalize" ng-click="viewBillDetails(bill.billId,true)" style="text-align: left; cursor:pointer;  padding-left:50px; border-left:1px solid rgb(230,230,230); font-size:15px; font-weight: 15px; color:rgb(120,120,120);">
+									{{bill.patientDetail.name}}  &nbsp; &nbsp; &nbsp; &nbsp; {{bill.totalAmount}}
+								</div>
+								
+							</div>
 						</div> 
 					</md-content>
 				</md-card-content>

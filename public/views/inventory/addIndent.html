@@ -60,7 +60,7 @@
                     </div>  
                     <label class="col-sm-1 control-label">Quantity Type</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" ng-model="filt.quantityMeasurementType">
+                        <input  type="text" class="form-control" ng-model="filt.quantityMeasurementType">
                     </div>  
                 </div>
                 <br><br>
@@ -215,7 +215,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Stock order To</label>
                         <div class="col-sm-8 ">
-                        <select ng-model="indent.stockOrderTo" ng-options = "vendor.vendorName as vendor.vendorName for vendor in vendors">
+                        <select required ng-model="indent.stockOrderTo" ng-options = "vendor.vendorName as vendor.vendorName for vendor in vendors">
                             
                         </select>
                         </div>
@@ -224,14 +224,14 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Indent Request Date</label>
                         <div class="col-sm-8">
-                            <input  type="date" class="form-control" ng-model="indent.requestDate" disabled>
+                            <input type="date" class="form-control" ng-model="indent.requestDate" disabled>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Stock Required by Date</label>
                         <div class="col-sm-8">
-                            <input  type="date" class="form-control" id="stock_required_by_date" ng-model="indent.requiredByDate" placeholder="Enter Stock Delivery Date ">
+                            <input required type="date" class="form-control" id="stock_required_by_date" ng-model="indent.requiredByDate" placeholder="Enter Stock Delivery Date ">
                         </div>
                     </div>
 

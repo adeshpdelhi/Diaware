@@ -11,47 +11,43 @@
 
 
             <div class="form-group" ng-class="{'has-error': panelForm.panelId.$invalid && !panelForm.panelId.$pristine}">
-                <label class="col-sm-3 control-label">Panel *</label>
+                <label class="col-sm-3 control-label">Panel </label>
                 <div class="col-sm-8">
                     <select name="panelId" id="panelId" class="form-control" ng-model="newPatient_Panel.panelId" ng-select="" required>
                         <option value="">-</option>
                         <option ng-repeat = "panel in panels" value="{{panel.id}}" ng-selected = "newPatient_Panel.panelId == panel.id" required>{{panel.name}}</option>
                     </select>
-                    <span ng-show="panelForm.panelId.$error.required && !panelForm.panelId.$pristine" class="help-block">Panel Name is required                      
-                    </span>
+                    
                 </div>
             </div>
 			
 			<div class="form-group" ng-class="{'has-error': panelForm.panel_permission_no.$invalid && !panelForm.panel_permission_no.$pristine}">
-                <label class="col-xs-12 col-sm-3 control-label">Panel Permission No *</label>
+                <label class="col-xs-12 col-sm-3 control-label">Panel Permission No </label>
                 <div class="col-xs-5 col-sm-4 col-md-8">
                     <input type="text" class="form-control" id="panel_permission_no" ng-model="newPatient_Panel.panelPermissionNumber" name="panel_permission_no" placeholder="Panel Permission Number" required >
-                    <span ng-show="panelForm.panel_permission_number.$error.required && !panelForm.panel_permission_number.$pristine" class="help-block">Panel Permission Number is required                      
-                    </span>
+                    
                 </div>
             </div>
 	
             <div class="form-group" ng-class="{'has-error': (panelForm.panel_permission_date_from.$invalid && !panelForm.panel_permission_date_from.$pristine) || (panelForm.panel_permission_date_to.$invalid && !panelForm.panel_permission_date_to.$pristine)}">
-                <label class="col-sm-3 control-label">Panel Permission Date *</label>
+                <label class="col-sm-3 control-label">Panel Permission Date </label>
                 <div class="col-sm-9">
                   <label class="col-sm-1 control-label">From</label>
                   <div class="col-sm-5">
                     <input type="date" class="form-control" id="panel_permission_date_from" ng-model="newPatient_Panel.panelPermissionDateFrom" name="panel_permission_date_from" placeholder="" required>
-                    <span ng-show="panelForm.panel_permission_date_from.$error.required && !panelForm.panel_permission_date_from.$pristine" class="help-block">Panel Permission Date From is required                      
-                    </span>
+                   
                 </div>
 
                 <label class="col-sm-1 control-label">To</label>
                 <div class="col-sm-5">
                     <input type="date" class="form-control" id="panel_permission_date_to" ng-model="newPatient_Panel.panelPermissionDateTo" name="panel_permission_date_to" placeholder="" required>
-                    <span ng-show="panelForm.panel_permission_date_to.$error.required && !panelForm.panel_permission_date_to.$pristine" class="help-block">Panel Permission Date To is required                      
-                    </span>
+                   
                 </div>
             </div>
         </div>
 
         <div class="form-group" ng-class="{'has-error': panelForm.total_treatments_allowed.$invalid && !panelForm.total_treatments_allowed.$pristine}">
-         <label class="col-xs-12 col-sm-3 control-label">Total Treatments Allowed *</label>
+         <label class="col-xs-12 col-sm-3 control-label">Total Treatments Allowed </label>
          <div class="col-xs-5 col-sm-4 col-md-8">
             <input  type="number" class="form-control" id="total_treatments_allowed" ng-model="newPatient_Panel.totalTmtsPermitted" name="total_treatments_allowed" placeholder="No of Treatments" min = "0" >
              
@@ -66,16 +62,15 @@
     </div>
 
     <div class="form-group" ng-class="{'has-error': panelForm.renewal_date.$invalid && !panelForm.renewal_date.$pristine}">
-        <label class="col-xs-12 col-sm-3 control-label">Renewal Date *</label>
+        <label class="col-xs-12 col-sm-3 control-label">Renewal Date </label>
         <div class="col-xs-5 col-sm-4 col-md-8">
             <input type="date" class="form-control" id="renewal_date" name="renewal_date" ng-model="newPatient_Panel.renewalDate" placeholder="">
-            <span ng-show="panelForm.renewal_date.$error.required && !panelForm.renewal_date.$pristine" class="help-block">Total Treatments Allowed is required                      
-            </span>
+            
         </div>
     </div>
     <div class="form-group">
     <div class="col-sm-offset-5 col-sm-10">
-            <button type="submit" class="btn btn-primary" id="panel_save" ng-show="editPanels || !savedOnce" ng-disabled='panelForm.$invalid'>{{editPanels?'Update':'Save'}}</button>
+            <button type="submit" class="btn btn-primary" id="panel_save" ng-show="editPanels || !savedOnce">{{editPanels?'Update':'Save'}}</button>
         </div>
     </div>
 	

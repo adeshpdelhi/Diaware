@@ -484,6 +484,20 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                     }
                 }
             })
+		/*	.state('app.appointment.OneTimeAppointment',{
+                url:"OneTimeAppointment/",
+                views:{
+                    'content@':{
+                        templateUrl:'views/appointments/ota.html',
+                        controller:'OtaController',
+                        resolve:{
+                            patient:['authorize','patientFactory','choosePatientFactory', function(authorize,patientFactory,choosePatientFactory){
+                                return patientFactory.getPatients(authorize.getCentre()).get({id:choosePatientFactory.getChosenPatient().id,getSchedule:true});
+                            }]
+                        }
+                    }
+                }
+            }) */
             .state('app.appointment.viewAppointments',{
                 url:"viewAppointments/",
                 views:{
