@@ -191,6 +191,13 @@ appointmentRouter.route('/pastAppointments')
         $lte:yesterday
     };
     
+
+    if(req.query.dateFrom && req.query.dateTo){
+        where['date'] ={
+            $gt:new Date(req.query.dateFrom),
+            $lte:new Date(req.query.dateTo)
+        }
+    }
     where['cancelled'] = false;
 
     if(req.query.attended && JSON.parse(req.query.attended) == true){

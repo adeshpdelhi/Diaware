@@ -175,13 +175,13 @@ angular.module('App')
             });
         }
         if($scope.role.manager || $scope.role.admin || $scope.role.incharge){
-            appointmentFactory.getPastAppointments(allCentres?'all':authorize.getCentre()).get({attended:true, count:true}).$promise.then(function(response){
+            appointmentFactory.getPastAppointments(allCentres?'all':authorize.getCentre()).get({attended:true, count:true,dateFrom:firstDayOfThisMonth, dateTo:lastDayOfThisMonth}).$promise.then(function(response){
                 $scope.thisMonthsAttendedAppointments = response.count;
             },function(response){
                 console.log(response);
                 
             });
-            appointmentFactory.getPastAppointments(allCentres?'all':authorize.getCentre()).get({attended:true, count:true}).$promise.then(function(response){
+            appointmentFactory.getPastAppointments(allCentres?'all':authorize.getCentre()).get({attended:true, count:true,dateFrom:firstDayOfLastMonth, dateTo:lastDayOfLastMonth}).$promise.then(function(response){
                 $scope.lastMonthsAttendedAppointments = response.count;
             },function(response){
                 console.log(response);
@@ -189,14 +189,14 @@ angular.module('App')
             });
         }
         if($scope.role.admin){
-            billFactory.getBills(allCentres?'all':authorize.getCentre()).get({sum:true,amount:'totalAmount',status:'FullPaid'}).$promise.then(function(response){
+            billFactory.getBills(allCentres?'all':authorize.getCentre()).get({sum:true,amount:'totalAmount',status:'FullPaid',dateFrom:firstDayOfThisMonth, dateTo:lastDayOfThisMonth}).$promise.then(function(response){
                 if(!response.sum) $scope.thisMonthsEarnings = 0;
                 else $scope.thisMonthsEarnings = response.sum;
 
             },function(response){
                 console.log(response);
             });
-            billFactory.getBills(allCentres?'all':authorize.getCentre()).get({sum:true,amount:'totalAmount',status:'FullPaid'}).$promise.then(function(response){
+            billFactory.getBills(allCentres?'all':authorize.getCentre()).get({sum:true,amount:'totalAmount',status:'FullPaid',dateFrom:firstDayOfLastMonth, dateTo:lastDayOfLastMonth}).$promise.then(function(response){
                 if(!response.sum)$scope.lastMonthsEarnings = 0;
                 else $scope.lastMonthsEarnings = response.sum;
             },function(response){
