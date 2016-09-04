@@ -24,13 +24,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>                     
-                <h4 class="modal-title">Confirm Attendance </h4>
+                <h4 class="modal-title">Confirm Presence </h4>
             </div>
             <div class="modal-body">
                 <form>
                     <!-- <p>{{attendance}}</p> -->
 
-                    <p>Are you sure you want to mark the Appointment: appointment ID - {{appointment.appointmentId}} of patient :{{appointment.patientId}}) scheduled on date: {{appointment.date|date:EEEE-dd-MMMM-YY}} as {{attendance?'attended':'not attended'}}:?</p>
+                    <p>Are you sure you want to mark the patient {{appointment.patientId}} - {{appointment.patientDetail.name}} as {{attendance?'present':'absent'}} - for the appointment scheduled on date: {{appointment.date|date:EEEE-dd-MMMM-YY}}?</p>
                     <!-- <button type="submit" class="btn btn-warning btn-sm" ng-click="cancelBill()" data-dismiss="modal">Confirm</button> -->
                     <!-- <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button> -->
                 </form>
