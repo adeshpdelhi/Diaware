@@ -4,8 +4,7 @@ angular.module('App')
     $scope.appointment =  appointment;
     console.log(appointment);
     $scope.attendance = false;
-
-
+    
     $scope.isClinical = function(){
         var user = authorize.getActiveUser();
         return user.clinical || user.admin || user.incharge;

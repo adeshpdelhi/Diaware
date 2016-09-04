@@ -57,6 +57,26 @@
                 <div class="alert alert-{{messageColor}}" ng-show="showAlert">
                     {{message}}
                 </div>
+                <br/>
+                <label style="text-align:center" ng-if="!checkTodaysDate(appointment.date)">Process would start on {{appointment.date| date}}!</label>
+                <div class="table-responsive " ng-if="checkTodaysDate(appointment.date)">
+                    <table id="statusTable" class="table table-bordered" >
+                        <thead>
+                            <tr style="background-color:#FFF">
+                                <th style="text-align:center">Present</th>
+                                <th style="text-align:center">Billing Done</th>
+                                <th style="text-align:center">Monitoring Done</th>
+                                <th style="text-align:center">Treatment Consumption</th>
+                            </tr>    
+                        </thead>
+                        <tbody>
+                            <td width="10%" style="text-align:center;background-color:{{appointment.present?'#99ff99':'#ff9999'}};color:{{appointment.present?'green':'#b30000'}};"><span class="glyphicon glyphicon-{{ appointment.present?'ok':'remove'}}"></span></td>
+                            <td width="10%" style="text-align:center;background-color:{{appointment.billingDone?'#99ff99':'#ff9999'}};color:{{appointment.billingDone?'green':'#b30000'}};"><span class="glyphicon glyphicon-{{ appointment.billingDone?'ok':'remove'}}"></span></td>
+                            <td width="10%" style="text-align:center;background-color:{{appointment.monitoringDone?'#99ff99':'#ff9999'}};color:{{appointment.monitoringDone?'green':'#b30000'}};"><span class="glyphicon glyphicon-{{ appointment.monitoringDone?'ok':'remove'}}"></span></td>
+                            <td width="10%" style="text-align:center;background-color:{{appointment.treatmentConsumptionAdded?'#99ff99':'#ff9999'}};color:{{appointment.treatmentConsumptionAdded?'green':'#b30000'}};"><span class="glyphicon glyphicon-{{ appointment.treatmentConsumptionAdded?'ok':'remove'}}"></span></td>
+                        </tbody>
+                    </table>
+                </div>
                 <div class="media">
                     <div class="media-body media-left media-middle">
                         <label>PATIENT ID: {{appointment.patientId}}</label>
@@ -76,14 +96,14 @@
 
                 <hr style="border-top:1px solid rgb(225,225,225);">
                 
-                <div style="font-size:15px; font-weight:15px; color:rgb(130,130,130); text-align:left;">
-                    <label class="text-uppercase col-sm-3">Appointment Type: </label>
-                    <label class="text-capitalize col-sm-3">{{appointment.schedulePatient.appointmentType}}</label>
+                <div style="font-size:15px; font-weight:15px; text-align:left;">
+                    <label class="text-uppercase col-sm-4" style="text-align:center; color:rgb(80,80,80);" >Appointment Type: </label>
+                    <label class="text-capitalize col-sm-1" style="text-align:left;color:rgb(130,130,130)">{{appointment.appointmentType}}</label>
                 </div>
 
-                <div style="font-size:15px; font-weight:15px; color:rgb(130,130,130); text-align:left;">
-                    <label class="text-uppercase col-sm-3">Treatment On Machine: </label>
-                    <label class="text-capitalize col-sm-3">{{appointment.schedulePatient.tmtMachine}}</label>
+                <div style="font-size:15px; font-weight:15px;  text-align:left;">
+                    <label class="text-uppercase col-sm-5" style="text-align:center; color:rgb(80,80,80); ">Treatment On Machine: </label>
+                    <label class="text-capitalize col-sm-2 col-sm-pull-1" style="text-align:left; color:rgb(130,130,130);">&nbsp;&nbsp;&nbsp;{{appointment.tmtMachine}}</label>
                 </div>
                 <br/>
                 <br/>
