@@ -38,7 +38,7 @@
                         <td width="10%"><select ng-disabled="dialysisTabularItem.chosen.brandName==null || dialysisTabularItem.chosen.brandName.length==0" ng-change="dialysisTabularItem.chosen.brandName.length!=0 && dialysisTabularItem.chosen.brandName!=null &&dialysisTabularItem.chosen.quantityMeasurementType.length!=0 && dialysisTabularItem.chosen.quantityMeasurementType!=null && updateAvailableQuantity($index)" ng-model="dialysisTabularItem.chosen.quantityMeasurementType" ng-options = "quantityMeasurementType as quantityMeasurementType for quantityMeasurementType in dialysisTabularItem.quantityMeasurementType">
                             
                         </select></td>
-                        <td width="10%" style="color:{{(dialysisTabularItem.chosen.quantity<1 || dialysisTabularItem.chosen.quantity>dialysisTabularItem.availableQuantity)?'red':'black';}}"><input style="width:50%;" type="number"  ng-init="dialysisTabularItem.chosen.quantity=1" ng-model="dialysisTabularItem.chosen.quantity" ng-change="checkQuantityError($index)"></td>
+                        <td width="10%" style="color:{{(dialysisTabularItem.chosen.quantity<0 || dialysisTabularItem.chosen.quantity>dialysisTabularItem.availableQuantity)?'red':'black';}}"><input style="width:50%;" type="number"  ng-init="dialysisTabularItem.chosen.quantity=0" ng-model="dialysisTabularItem.chosen.quantity" ng-change="checkQuantityError($index)"></td>
                         <td width="10%" >{{dialysisTabularItem.availableQuantity}}</td>
                     </tr>    
                 </tbody>
@@ -65,7 +65,7 @@
                         <td width="10%"><select ng-disabled="catheterizationTabularItem.chosen.brandName==null || catheterizationTabularItem.chosen.brandName.length==0" ng-change="catheterizationTabularItem.chosen.brandName.length!=0   && catheterizationTabularItem.chosen.brandName!=null &&catheterizationTabularItem.chosen.quantityMeasurementType.length!=0 && catheterizationTabularItem.chosen.quantityMeasurementType!=null && updateAvailableQuantity($index)" ng-model="catheterizationTabularItem.chosen.quantityMeasurementType" ng-model="catheterizationTabularItem.chosen.quantityMeasurementType" ng-options = "quantityMeasurementType as quantityMeasurementType for quantityMeasurementType in catheterizationTabularItem.quantityMeasurementType">
                             
                         </select></td>
-                        <td width="10%" style="color:{{(catheterizationTabularItem.chosen.quantity<1 || catheterizationTabularItem.chosen.quantity>catheterizationTabularItem.availableQuantity)?'red':'black'}}"><input style="width:50%;" type="number" ng-init="catheterizationTabularItem.chosen.quantity=1" ng-model="catheterizationTabularItem.chosen.quantity" ng-change="checkQuantityError($index)"></td>
+                        <td width="10%" style="color:{{(catheterizationTabularItem.chosen.quantity<0 || catheterizationTabularItem.chosen.quantity>catheterizationTabularItem.availableQuantity)?'red':'black'}}"><input style="width:50%;" type="number" ng-init="catheterizationTabularItem.chosen.quantity=0" ng-model="catheterizationTabularItem.chosen.quantity" ng-change="checkQuantityError($index)"></td>
                         <td width="10%" >{{catheterizationTabularItem.availableQuantity}}</td>
                         
                     </tr>    
