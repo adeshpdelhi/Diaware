@@ -258,7 +258,7 @@ angular.module('App')
 
 				for(var i=0;i<$scope.dialysisTabularItems.length;i++){
 					if($scope.dialysisTabularItems[i].chosen.quantity==null || $scope.dialysisTabularItems[i].availableQuantity==null || $scope.dialysisTabularItems[i].chosen.quantity<0 || $scope.dialysisTabularItems[i].chosen.quantity>$scope.dialysisTabularItems[i].availableQuantity || $scope.dialysisTabularItems[i].availableQuantity==0){
-						$scope.message = 'One of the fields invalid';
+						$scope.message = 'One of the fields blank/invalid';
 						$scope.messageColor = 'danger';
 						$scope.showAlert = true;
 						return;
@@ -317,7 +317,7 @@ angular.module('App')
 
 					for(var i=0;i<$scope.catheterizationTabularItems.length;i++){
 						if($scope.catheterizationTabularItems[i].chosen.quantity==null || $scope.catheterizationTabularItems[i].availableQuantity==null || $scope.catheterizationTabularItems[i].chosen.quantity<0 || $scope.catheterizationTabularItems[i].chosen.quantity>$scope.catheterizationTabularItems[i].availableQuantity || $scope.catheterizationTabularItems[i].availableQuantity==0){
-							$scope.message = 'One of the fields invalid';
+							$scope.message = 'One of the fields blank/invalid';
 							$scope.messageColor = 'danger';
 							$scope.showAlert = true;
 							return;
