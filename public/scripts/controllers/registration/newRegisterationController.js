@@ -7,6 +7,11 @@ angular.module('App')
 		$scope.showalert_basic_details = false;
  		var counter = 0;
  		var centre = authorize.getCentre();
+        $scope.centreInvalidToSubmit = false;
+        if(centre == 'all'){
+        	console.log("centreInvalidToSubmit:" + $scope.centreInvalidToSubmit);
+        	$scope.centreInvalidToSubmit = true;
+        }
         backendFactory.getCentres().get({id:authorize.getCentre()})
         	.$promise.then(function(data){
         		console.log(data);
@@ -16,11 +21,7 @@ angular.module('App')
        				console.log("Error" + response.status +" " + response.statusText);
         		}
         	);
-        $scope.centreInvalidToSubmit = false;
-        if(centre == 'all'){
-        	console.log("centreInvalidToSubmit:" + $scope.centreInvalidToSubmit);
-        	$scope.centreInvalidToSubmit = true;
-        }
+        
         $scope.newpatient_basic = {  id:null , name: null ,age: null , DOB: null , gender: null ,type:null, contact: null , 
 							alternativeContact: null , location: null , address: null , bloodGroup: null , transplantWaitingList: null ,
 							maritalStatus: null , emergencyContactName: null , emergencyContactRelationship: null , 
