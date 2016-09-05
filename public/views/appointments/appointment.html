@@ -64,9 +64,6 @@
 						    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 					    </div>
 					    <div ng-show="dataReceived">
-					    	<!-- <div ng-show="showAlert" class="alert alert-danger" style="padding:10px 0px;">
-					    		<strong>Warning:</strong>Slots booked greater than {{freqPerWeek}}
-					    	</div>	 -->		  
 					    	<div class="form-group">
 					    		<label class="control-label col-sm-12" style="text-align:center; font-size:23px; color:#73ADFF">Choose Days Suitable for Dialysis</label>
 					    		<!-- |orderBy:key:false:weekDayComparator" -->
@@ -80,9 +77,9 @@
 					    				</md-card-title>
 					    				<md-card-content>
 					    					<div ng-repeat="(shiftKey,shiftValue) in value">
-						    					<label class="control-label text-capitalize" style="text-align:left"> {{shiftKey}}: <br><small style="color:rgb(200,200,200)">Available {{appointmentType}} Machines <br>({{tmtOnMachine}}): {{shiftValue[string]}} <br></small></label>
+						    					<label class="control-label text-capitalize" style="text-align:left"> {{shiftKey}}: <br><small style="color:rgb(200,200,200)">Available {{appointmentType}} Machines <br>({{tmtOnMachine}}): {{shiftValue}} <br></small></label>
 
-						    					<button type="button" class="btn btn-{{shiftValue[string] == 0?'danger':'primary'}}" id="button_{{$parent.$index}}" ng-click="book(shiftValue.id,shiftKey,$parent.$index,key)" ng-show="!isBooked($parent.$index)" ng-disabled="shiftValue[string] == 0">{{shiftValue[string] == 0?'Full':'Book'}}</button>
+						    					<button type="button" class="btn btn-{{shiftValue == 0?'danger':'primary'}}" id="button_{{$parent.$index}}" ng-click="book(shiftKey,$parent.$index,key)" ng-show="!isBooked($parent.$index)" ng-disabled="shiftValue == 0">{{shiftValue == 0?'Full':'Book'}}</button>
 						    					<!-- <p>{{$parent.$index}}</p> -->
 						    					<!-- <button type="button" class="btn btn-danger"></button> -->
 					    					</div>

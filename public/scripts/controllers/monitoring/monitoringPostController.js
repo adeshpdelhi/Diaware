@@ -2,6 +2,7 @@
 'use strict';
 angular.module('App')
 .controller('MonitoringPostController',['$scope','patientFactory','choosePatientFactory','authorize','monitoringChartFactory', function($scope, patientFactory, choosePatientFactory, authorize,monitoringChartFactory){
+        $scope.savedOnce = false;
         if(!$scope.view || ($scope.patientChart != null && !$scope.post)){
             $scope.post = {
             	patientId:null,
@@ -49,6 +50,7 @@ angular.module('App')
     				$scope.showalert_postdialysis=true;	
                     $scope.message="Saved Successfully!";
                     $scope.messageColor='success';		
+                    $scope.savedOnce = true;
     			},
     			function(response){
     				$scope.showalert_postdialysis=false;

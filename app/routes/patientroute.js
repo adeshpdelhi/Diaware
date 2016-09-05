@@ -69,16 +69,14 @@ patientRouter.route('/')
 patientRouter.route('/:id')
 .get(function(req,res,next){
     console.log('procesing get');
-    if(req.query.getShifts && req.query.getMedicalHistory){
+    if(req.query.getSchedule ){
         db.patientDetails.find({
             where:{
                 id:req.params.id
                 // centreId:req.params.centreId
             },
             include:[{
-                model:db.shiftPatients
-            },{
-                model:db.medicalHistory
+                model:db.schedulePatients
             }]
             // order: [['updatedAt', 'DESC']]
         }).then(function(patient){

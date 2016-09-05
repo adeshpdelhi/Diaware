@@ -2,6 +2,24 @@
 angular.module('App')
 .controller('MonitoringController',['$scope','patientFactory','choosePatientFactory','authorize','monitoringChartFactory','$stateParams', function($scope, patientFactory, choosePatientFactory, authorize,monitoringChartFactory,$stateParams){
         $scope.showalert_predialysis_basic=false;
+        var appointment = choosePatientFactory.getAppointment();
+        $scope.showChart = true;
+        if(appointment.monitoringDone || appointment.processComplete){
+            $scope.showChart = false;
+            $scope.messageChart = "Monitoring Chart for this appointment has already been filled! You may edit it by going to edit Monitoring Chart";
+            $scope.messageChartColor = 'success';
+        }
+        if(!appointment.present){
+            $scope.showChart = false;
+            $scope.messageChart = "Patient hasn't attended this appointment yet! Can't fill their monitoring Chart!";   
+            $scope.messageChartColor = 'danger';
+
+        }
+        if(!appointment.billingDone && appointment.present){
+            $scope.showChart = false;
+            $scope.messageChart = "Patient hasn't payed the bills yet! Can't fill their monitoring Chart!";      
+            $scope.messageChartColor = 'warning';
+        }
         var chosenPatientId = $stateParams.patientId?($stateParams.patientId):(choosePatientFactory.getChosenPatient().id);
         patientFactory.getPatients(authorize.getCentre()).get({id:chosenPatientId}).$promise.then(function(response){
         	$scope.patient =response;
@@ -10,7 +28,7 @@ angular.module('App')
 		$scope.showDateAlert= false;
         $scope.basic = {
         	patientId:$stateParams.patientId?$stateParams.patientId:null,
-        	monitoringDate:$stateParams.date?(new Date($stateParams.date)):null,
+        	monitoringDate:new Date(appointment.date),
         	preBasicId:null,
         	machineNumber:null,
         	bedNumber:null,

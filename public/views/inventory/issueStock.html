@@ -31,7 +31,7 @@
 
                             <label class="col-sm-3 control-label">Single Use</label>
                             <div class="col-sm-5">
-                                <input type="number" class="form-control" ng-model="issueStock.estimatedSingleUse" placeholder="Single Use Treatments">
+                                <input required type="number" min=0 class="form-control" ng-model="issueStock.estimatedSingleUse" placeholder="Single Use Treatments">
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                         <div class="col-sm-9">
                             <label class="col-sm-3 control-label">Re-use</label>
                             <div class="col-sm-5">
-                                <input type="number" class="form-control" ng-model="issueStock.estimatedReUse" placeholder="Re Use Treatments">
+                                <input required type="number" min=0 class="form-control" ng-model="issueStock.estimatedReUse" placeholder="Re Use Treatments">
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                         <div class="col-sm-9">
                             <label class="col-sm-3 control-label">New Dialyser</label>
                             <div class="col-sm-5">
-                                <input type="number" class="form-control" ng-model="issueStock.estimatedNewDialyzer" placeholder="New Dialyser Treatments">
+                                <input required type="number" min=0 class="form-control" ng-model="issueStock.estimatedNewDialyzer" placeholder="New Dialyser Treatments">
                             </div>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                         <div class="col-sm-9">
                             <label class="col-sm-3 control-label">Catehterization Double Lumen</label>
                             <div class="col-sm-5">
-                                <input type="number" class="form-control" ng-model="issueStock.estimatedCatheterDoubleLumen" placeholder="Re Use Treatments">
+                                <input type="number" min=0 class="form-control" ng-model="issueStock.estimatedCatheterDoubleLumen" placeholder="Re Use Treatments">
                             </div>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                         <div class="col-sm-9">
                             <label class="col-sm-3 control-label">Catehterization Single Lumen</label>
                             <div class="col-sm-5">
-                                <input type="number" class="form-control" ng-model="issueStock.estimatedCatheterSingleLumen" placeholder="New Dialyser Treatments">
+                                <input type="number" min=0 class="form-control" ng-model="issueStock.estimatedCatheterSingleLumen" placeholder="New Dialyser Treatments">
                             </div>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Stock Issue Date</label>
                         <div class="col-sm-8">
-                            <input type="date" class="form-control" placeholder="" ng-model="issueStock.stockIssueDate">
+                            <input required type="date" class="form-control" placeholder="" ng-model="issueStock.stockIssueDate">
                         </div>
                     </div>			
 
@@ -89,14 +89,14 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Stock Taker Name</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="" ng-model="issueStock.stockTakerName">
+                            <input required type="text" class="form-control" placeholder="" ng-model="issueStock.stockTakerName">
                         </div>
                     </div>	
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Next Expected Stock Issue Date</label>
                         <div class="col-sm-8">
-                            <input  type="date" class="form-control" ng-model="issueStock.nextExpectedStockIssueDate" placeholder="Next Expected Stock Issue Date">
+                            <input required  type="date" class="form-control" ng-model="issueStock.nextExpectedStockIssueDate" placeholder="Next Expected Stock Issue Date">
                         </div>
                     </div>					
 
@@ -105,77 +105,6 @@
 
 
                     <hr/>
-
-
-
-                    <!-- <div class="form-group">
-                        <label  class="col-sm-3 control-label">Item name</label>
-                        <div class="col-sm-8 ">
-                            <select name="item_name" class="form-control" ng-model="issueStockItem.itemName">
-                                <option value="" selected disabled>-</option>
-                                <option value="item1">Item1</option>
-                                <option value="item2" >Item2</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label  class="col-sm-3 control-label">Usage type</label>
-                        <div class="col-sm-8 ">
-                            <select name="usage_type" class="form-control" ng-model="issueStockItem.usageType">
-                                <option value="" selected disabled>-</option>
-                                <option value="treatment_specific">Treatment Specific</option>
-                                <option value="general_stock" >General Stock</option>
-                                <option value="emergency_stock" >Emergency Stock</option>
-
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label  class="col-sm-3 control-label">Brand name</label>
-                        <div class="col-sm-8 ">
-                            <select name="brand_name"  class="form-control" ng-model="issueStockItem.brandName">
-                                <option value="" selected disabled>-</option>
-                                <option value="brand1">brand1</option>
-                                <option value="brand2" >brand2</option>
-
-                            </select>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Quantity </label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" ng-model="issueStockItem.quantityRequired" placeholder="Enter Quantity ">
-                        </div>
-                    </div>
-
-
-
-                    <div class="form-group">
-                        <label  class="col-sm-3 control-label">Quantity type</label>
-                        <div class="col-sm-8 ">
-                            <select name="quantity_type" class="form-control" ng-model="issueStockItem.quantityType">
-                                <option value="" selected disabled>-</option>
-                                <option value="pairs">pairs</option>
-                                <option value="cans" >cans</option>
-                                <option value="liters">liters</option>
-                                <option value="boxed" >boxes</option>
-                                <option value="pieces">pieces</option>
-                                <option value="other" >other</option>
-
-                            </select>
-                        </div>
-                    </div> -->
-
-
-                    <!-- <div class="form-group">
-                        <div class="col-sm-offset-8 col-sm-10">
-                            <button id="additem" type="submit" class="btn btn-primary" ng-click="addStockItem()">Add Item</button>
-                        </div>
-                    </div> -->
 
 
             <div class="row">
@@ -252,7 +181,7 @@
                                 <td style="text-align:center;" width="10%" >{{stockItem.item.itemName}}</td>
                                 <td style="text-align:center;" width="10%" >{{stockItem.item.usageType}}</td>
                                 <td style="text-align:center;" width="10%" >{{stockItem.item.brandName}}</td>
-                                <td style="text-align:center;color:{{(stockItem.quantity<1 || stockItem.quantity>stockItem.availableQuantity)?'red':'black'}};" width="10%" ><input style="width:50%;" type="number" ng-init="stockItem.quantity=1" ng-model="stockItem.quantity"></td>
+                                <td style="text-align:center;color:{{(stockItem.quantity<1 || stockItem.quantity>stockItem.availableQuantity)?'red':'black'}};" width="10%" ><input style="width:50%;" type="number" min=0 ng-init="stockItem.quantity=1" ng-model="stockItem.quantity"></td>
                                 <!-- <td style="text-align:center;" width="10%" ><input style="width:50%;" type="number" ng-init="stockItem.availableQuantity=0" ng-model="stockItem.availableQuantity"></td> -->
                                 <td style="text-align:center;" width="10%" >{{stockItem.availableQuantity}}</td> 
                                 <td style="text-align:center;" width="10%" >{{stockItem.item.quantityMeasurementType}}</td>

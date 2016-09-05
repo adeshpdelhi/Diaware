@@ -86,7 +86,7 @@ angular.module('App')
 		$scope.updateFilteredItems = function(){
 					for(var i=0;i<$scope.filteredItems.length;i++)
 					{
-						for(j=0;j<$scope.stocks.length;j++){
+						for(var j=0;j<$scope.stocks.length;j++){
 							if($scope.filteredItems[i].itemId == $scope.stocks[j].itemId)
 							{
 								$scope.filteredItems[i].availableQuantity = $scope.stocks[j].availableQuantity;
@@ -143,7 +143,12 @@ angular.module('App')
 			
 		}
 		
-
+		$scope.verifyIndentItemQuantity = function(){
+			for(var i=0;i<$scope.indentItems.length;i++)
+				if($scope.indentItems[i].quantityRequired<0)
+					return false;
+			return true;
+		}
 
 		$scope.saveIndent = function(){
 			
@@ -268,6 +273,13 @@ angular.module('App')
 
 
 		$scope.approveIndent = function(){
+			if($scope.indent.stockOrderTo == null || $scope.indent.stockOrderTo.length==0){
+				$scope.message = 'Enter stockOrderTo!';
+				$scope.messageColor = 'danger';
+				$scope.showAlert = true;
+				return;
+			}
+			$scope.showAlert = false;
 			$scope.indent.status='Approved';
 			for(var i=0;i<$scope.indentItems.length;i++)
 				$scope.indentItems[i].linkedStatus = 'Approved';
@@ -379,7 +391,7 @@ angular.module('App')
 									//console.log($scope.stocks[j].itemId+' quantiy updated to '+$scope.stocks[j].availableQuantity);
 								}
 							}
-							console.log('value of present '+present)
+							console.log('value of present '+present);
 							if(present == false){
 								inventoryFactory.getStocks(authorize.getCentre()).save({centreId: authorize.getCentre(),itemId: $scope.indentItems[i].itemId,availableQuantity:$scope.indentItems[i].quantityRequired, lastModifiedBy:authorize.getUsername()});
 							}

@@ -82,7 +82,7 @@
                                 <td style="text-align:center;" width="10%" >{{item.item.itemName}}</td>
                                 <td style="text-align:center;" width="10%" >{{item.item.usageType}}</td>
                                 <td style="text-align:center;" width="10%" >{{item.item.brandName}}</td>
-                                <td style="text-align:center;" width="10%" ><input style="width:50%;" type="number" ng-init="item.quantity=1" ng-model="item.quantity"></td>
+                                <td style="text-align:center;color:{{(item.quantity<1 || item.quantity>item.availableQuantity)?'red':'black'}};" width="10%" ><input style="width:50%;" type="number" min=0 ng-init="item.quantity=1" ng-model="item.quantity"></td>
                                 <td style="text-align:center;" width="10%" >{{item.availableQuantity}}</td> 
                                 <td style="text-align:center;" width="10%" >{{item.item.quantityMeasurementType}}</td>
                                 <td style="text-align:center;" width="5%" ng-click="(item.quantity<1 || item.quantity>item.availableQuantity)? quantityError() : addItem(item,$index)"><span class="glyphicon glyphicon-plus"></span></td>

@@ -93,19 +93,22 @@
     </div>
 </div>
 <div class="container" ng-cloak>
-    <div class="row row-content col-sm-10 col-sm-push-1 col-sm-pull-1">
+    <div class="row row-content col-sm-12">
         <div class="panel">
             <div class="panel-heading">
                 <h3 class="panel-title pull-left">
                     <b>View Appointments</b>
                 </h3>
                 <div class="btn-group pull-right">
-                    <button type="button"  ng-click="toggleFunction()" class="btn btn-warning">{{toggle?'View Future Appointments':prevSetFilter}}</button>
+                    <button type="button"  ng-click="toggleFunction()" class="btn btn-warning text-capitalize">{{toggle?'View Future Appointments':((prevSetFilter =='appointments')?'All Appointments': prevSetFilter)}}</button>
                     <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="caret"></span>  <!-- caret -->
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
+                        <li><a class="dropdown-item" href ng-click="getAppointments('todays')">Todays Appointments</a><li>
+                        <li><a class="dropdown-item" href ng-click="getAppointments('all')">All Appointments</a><li>
+                        <li><a class="dropdown-item" href ng-click="getAppointments('incompletePastAppointments')">All Incomplete Past Appointments</a><li>
                         <li><a class="dropdown-item" href ng-click="getAppointments('allAttended')">All Attended Appointments</a><li>
                         <li><a class="dropdown-item" href ng-click="getAppointments('allUnAttended')">All Unattended Appointments</a></li>
                         <!-- <li><a class="dropdown-item" href ng-click="getAppointments('allPending')">All Pending (unmarked appointments) Appointments</a></li> -->
@@ -163,10 +166,10 @@
                     </div>
                     <hr  class="col-sm-12" style="border-top:1px solid rgb(220,220,220); padding-bottom:-20px;margin-bottom: -40px"/>
                     <p></p>
-                    <div class="table-responsive col-sm-8 col-sm-pull-2 col-sm-push-2 ">
-                        <div style="text-align:left">
+                    <div class="table-responsive col-sm-12">
+                        <!-- <div style="text-align:left">
                             <a href ng-click="all?todaysAppointments():futureAppointments()" style="color:#000099; text-align:left"><u>{{all?'todays':'all future'}}</u></a>
-                        </div>
+                        </div> -->
                         <md-card ng-if="dataReceived"  class="col-sm-12">
                             <md-card-title>
                                 <md-card-title-text style="background-color:#73AD21">
@@ -174,30 +177,52 @@
                                 </md-card-title-text>
                             </md-card-title>
                             <md-card-content>
-                                <div ng-repeat="appointment in appointments | filter: patient.id | filter: patient.name | dateFilter:dateFrom:dateTo | orderBy:['date','shiftNumber']">
-                                    <hr ng-if="appointment.date != currentDate" />
-                                    <div class="row dateCSS" ng-if="changeDate(appointment.date) || $index == 0">{{appointment.dayOfTheWeek}}, {{appointment.date|date:dd-MMMM-YY}}</div>
-                                    <div ng-class="{'padding':currentShift != appointment.shiftNumber}"></div>    
-                                    <div class="row row1">
-                                        <div class="col-sm-2" style="font-size:15px;font-weight: 20px; color: rgb(150,150,150);">
-                                             {{currentShift != appointment.shiftNumber?changeShift(appointment.shiftNumber):''}}   
-                                        </div>
-                                        <div class="col-sm-6 text-capitalize" ng-click="viewAppointmentDetails(appointment.appointmentId,filter)" style="text-align: left; cursor:pointer;  padding-left:50px; border-left:1px solid rgb(230,230,230); font-size:15px; font-weight: 15px; color:rgb(120,120,120);">
-                                            {{appointment.patientId}}  &nbsp; &nbsp; &nbsp; &nbsp; {{appointment.patientDetail.name}}
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div style="text-align:center;" class="col-sm-8" ng-show="(showAlertMarkOlderAppointments || today) && !appointment.attended" >
-                                                <a href ng-click='markAttended(appointment.appointmentId, true)' id="markAppointment" data-toggle="tooltip" title="Mark Appointment as Attended" data-placement="top" style="font-size:20px" class="col-sm-6"><span class="glyphicon glyphicon glyphicon-ok-circle"></span></a>
-                                                <a href ng-click='markAttended(appointment.appointmentId, false)' id="markAppointment" data-toggle="tooltip" title="Mark Appointment as not Attended" data-placement="top" style="font-size:20px" class="col-sm-6"><span  class="glyphicon glyphicon glyphicon-ban-circle"></span></a>
-                                                <!-- glyphicon glyphicon-exclamation-sign -->
-                                            </div>
-                                            <a type="button" class="text-danger col-sm-4 pull-right" id="cancelAppointment_{{$index}}" ng-click="captureAppointment(appointment)" data-toggle="modal" data-target="#confirmationModal" ng-show="!appointment.cancelled && appointment.attended == null" >Cancel</span></a>
-                                            <!-- <button></button> -->
-                                            
-                                        </div>
-
-                                    </div>
-                                </div> 
+                                <div class="table-responsive ">
+                                    <table id="resultTable" class="table table-striped table-fixedheader table-bordered" >
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align:center;" width="10%">Appointment ID</th>
+                                                <th  style="text-align:center;" width="20%">Date</th>
+                                                <th  style="text-align:center;" width="10%">Day</th>
+                                                <th  style="text-align:center;" width="10%">Shift</th>
+                                                <th style="text-align:center;" width="15%">Patient ID</th>
+                                                <th  style="text-align:center;" width="20%">Name</th>
+                                                <th  style="text-align:center;" width="10%">Present</th>
+                                                <th  style="text-align:center;" width="10%">Billing</th>
+                                                <th  style="text-align:center;" width="10%">Monitoring</th>
+                                                <th  style="text-align:center;" width="10%">Treatment Consumption</th>
+                                                <th ng-if="today">&nbsp;</th>
+                                                <!-- <th ng-show="!appointment.cancelled && !appointment.present"></th> -->
+                                            </tr>    
+                                        </thead>
+                                        <tbody style="max-height:300px;">
+                                        <!-- apply filter left -->
+                                            <tr ng-repeat = "appointment in appointments | filter: patient.id | filter: patient.name | dateFilter:dateFrom:dateTo | orderBy:['date','shiftNumber']" style="background-color:{{ (appointment.present&&appointment.billingDone && appointment.monitoringDone && appointment.treatmentConsumptionAdded)?'#99ff99':'#ffffff'}};height:2px;cursor: pointer;" class='clickable-row' ng-click="viewAppointmentDetails(appointment.appointmentId,filter)" > 
+                                                <td width="10%" >{{ appointment.appointmentId }}</td>
+                                                <th width="20%">{{ appointment.date | date:dd-MMMM-YY-EEE }}</th>
+                                                <td width="10%">{{appointment.dayOfTheWeek}}</td>
+                                                <td style="text-align:center;" width="10%">{{appointment.shiftNumber}}</td>
+                                                <td width="15%" >{{ appointment.patientDetail.id }}</td>
+                                                <td class="text-capitalize" width="20%">{{ appointment.patientDetail.name }}</td>
+                                                <td width="10%" style="background-color:{{appointment.present?'#99ff99':'#ff9999'}};color:{{appointment.present?'green':'#b30000'}};"><span class="glyphicon glyphicon-{{ appointment.present?'ok':'remove'}}"></span></td>
+                                                <td width="10%" style="background-color:{{appointment.billingDone?(appointment.allBillsCleared?'#99ff99':'#ffff4d'):'#ff9999'}};color:{{appointment.billingDone?(appointment.allBillsCleared?'green':'#999900'):'#b30000'}};"><span class="glyphicon glyphicon-{{ appointment.billingDone?(appointment.allBillsCleared?'ok':'time'):'remove'}}"></span></td>
+                                                <!-- <td width="10%" style="background-color:{{appointment.billingDone?'#99ff99':'#ff9999'}};color:{{appointment.billingDone?'green':'#b30000'}};"><span class="glyphicon glyphicon-{{ appointment.billingDone?'ok':'remove'}}"></span></td> -->
+                                                <td width="10%" style="background-color:{{appointment.monitoringDone?'#99ff99':'#ff9999'}};color:{{appointment.monitoringDone?'green':'#b30000'}};"><span class="glyphicon glyphicon-{{ appointment.monitoringDone?'ok':'remove'}}"></span></td>
+                                                <td width="10%" style="background-color:{{appointment.treatmentConsumptionAdded?'#99ff99':'#ff9999'}};color:{{appointment.treatmentConsumptionAdded?'green':'#b30000'}};"><span class="glyphicon glyphicon-{{ appointment.treatmentConsumptionAdded?'ok':'remove'}}"></span></td>
+                                                <td width="25%" ng-if="today && appointment.present != false" >
+                                                    <p>{{(appointment.present == true)?'Patient Present':'Yet to Come'}}</p>
+                                                </td>
+                                                <!-- <td width="35%" ng-if="today && appointment.present == null" >
+                                                    <a href ng-click='markPresence(appointment.appointmentId, true)' id="markAppointment" data-toggle="tooltip" title="Mark Patient as Present" data-placement="top" style="font-size:20px" class="col-sm-6"><span class="glyphicon glyphicon glyphicon-ok-circle"></span></a>
+                                                    <a href ng-click='markPresence(appointment.appointmentId, false)' id="markAppointment" data-toggle="tooltip" title="Mark Patient as not Present" data-placement="top" style="font-size:20px" class="col-sm-6"><span class="glyphicon glyphicon glyphicon-ban-circle"></span></a>
+                                                </td> -->
+                                                <!-- <td ng-show="!appointment.cancelled && !appointment.present">
+                                                    <a type="button" class="text-danger" id="cancelAppointment_{{$index}}" ng-click="captureAppointment(appointment)" data-toggle="modal" data-target="#confirmationModal" >Cancel</span></a>
+                                                </td> -->
+                                            </tr>    
+                                        </tbody>
+                                    </table>
+                                </div>
                             </md-card-content>
                         </md-card>
                     </div>

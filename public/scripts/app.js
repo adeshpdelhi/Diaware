@@ -42,6 +42,26 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
 
             })
 
+            .state('app.choosePatient',{
+                url:'choosePatient/:callback',
+                views:{
+                    'content@':{
+                        templateUrl:'views/choosePatient.html',
+                        controller:'ChoosePatientController'
+                    }
+                }
+            })
+
+            .state('app.choosePatientMatrix',{
+                url:'choosePatientMatrix/:callback',
+                views:{
+                    'content@':{
+                        templateUrl:'views/choosePatientMatrix.html',
+                        controller:'ChoosePatientMatrixController'
+                    }
+                }
+            })
+
             .state('app.registration', {
                 url:'registration/',
                 views: {
@@ -363,15 +383,7 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                     }
                 }
             })
-            .state('app.choosePatient',{
-                url:'choosePatient/:callback',
-                views:{
-                    'content@':{
-                        templateUrl:'views/choosePatient.html',
-                        controller:'ChoosePatientController'
-                    }
-                }
-            })
+            
             .state('app.billing.newbill',{
                 url:'newbill',
                 views:{
@@ -466,12 +478,22 @@ angular.module('App', ['ui.router','ngResource','ngDialog','ui.bootstrap','ngMat
                         controller:'AppointmentController',
                         resolve:{
                             patient:['authorize','patientFactory','choosePatientFactory', function(authorize,patientFactory,choosePatientFactory){
-                                return patientFactory.getPatients(authorize.getCentre()).get({id:choosePatientFactory.getChosenPatient().id,getShifts:true,getMedicalHistory:true});
+                                return patientFactory.getPatients(authorize.getCentre()).get({id:choosePatientFactory.getChosenPatient().id,getSchedule:true});
                             }]
                         }
                     }
                 }
             })
+			.state('app.appointment.OneTimeAppointment',{
+                url:"OneTimeAppointment/",
+                views:{
+                    'content@':{
+                        templateUrl:'views/appointments/ota.html',
+                        controller:'OtaController'
+                        
+                    }
+                }
+            }) 
             .state('app.appointment.viewAppointments',{
                 url:"viewAppointments/",
                 views:{

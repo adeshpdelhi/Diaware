@@ -21,7 +21,7 @@ angular.module('App')
         	console.log("centreInvalidToSubmit:" + $scope.centreInvalidToSubmit);
         	$scope.centreInvalidToSubmit = true;
         }
-        $scope.newpatient_basic = {  id:null , name: null ,age: null , DOB: null , gender: null , contact: null , 
+        $scope.newpatient_basic = {  id:null , name: null ,age: null , DOB: null , gender: null ,type:null, contact: null , 
 							alternativeContact: null , location: null , address: null , bloodGroup: null , transplantWaitingList: null ,
 							maritalStatus: null , emergencyContactName: null , emergencyContactRelationship: null , 
 							emergencyContactMobile: null , numberOfChildren: 0 , childrenContact: null , employementStatus: null ,
@@ -31,12 +31,35 @@ angular.module('App')
 		var currrentYear = (new Date()).getFullYear();	
 		
 		$scope.setAge = function(){
+			console.log("received dob");
 			console.log($scope.newpatient_basic.DOB);
-			var dobyear = $scope.newpatient_basic.DOB.getFullYear();
-			console.log(dobyear);
-			$scope.newpatient_basic.age = currrentYear - dobyear;		
+			// var dobyear = $scope.newpatient_basic.DOB.getFullYear();
+			var dob = new Date($scope.newpatient_basic.DOB);
+			console.log("date dob");
+
+			console.log(dob);
+			var today = new Date();
+			console.log("today");
+
+			console.log(today);
+			$scope.newpatient_basic.age = 0;
+			if(today.getYear() > dob.getYear()){
+				$scope.newpatient_basic.age = today.getYear() - dob.getYear();		
+				if(today.getMonth() < dob.getMonth()){
+					$scope.newpatient_basic.age--;		
+				}else{
+					if(today.getDate() < dob.getDate())
+						$scope.newpatient_basic.age--;		
+				}
+			}
 		};
-											
+		$scope.myDate = new Date()
+		$scope.maxDate = new Date(
+			$scope.myDate.getFullYear(),
+			$scope.myDate.getMonth(),
+			$scope.myDate.getDate());
+		
+			
         $scope.save_basic_details = function(){ 
         	console.log($scope.newpatient_basic.modeOfPayment);
         	if($scope.newpatient_basic.modeOfPayment == 'Panel') 

@@ -2,6 +2,7 @@
 angular.module('App')
 .controller('MonitoringIntraController',['$scope','patientFactory','choosePatientFactory','authorize','monitoringChartFactory', function($scope, patientFactory, choosePatientFactory, authorize,monitoringChartFactory){
         $scope.intraInit = false;
+        $scope.savedOnce = false;
         if(!$scope.view){      
             $scope.intraTable = [];
             $scope.intraInit = true;
@@ -49,6 +50,7 @@ angular.module('App')
 			    $scope.showalert_intradialysis=true;
 			    $scope.message="Saved Successfully!";
                 $scope.messageColor = 'success'; 
+                $scope.savedOnce = true;
             },function(response){
 				$scope.showalert_intradialysis=false;
 				console.log(response);

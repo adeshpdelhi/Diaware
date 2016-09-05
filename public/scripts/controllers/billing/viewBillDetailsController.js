@@ -36,7 +36,17 @@ angular.module('App')
 			}
 		};
 		$scope.cancelBill = function () {
-
+			// billFactory.getBills(authorize.getCentre()).update({billId:bill.billId},{cancelled:true}).$promise
+			// .then(function(response) {
+			// 	$scope.alert = true;
+			// 	$scope.message =" Cancelled The bill successfully!";
+			// 	$scope.messageColor = 'success';
+			// 	$scope.bill.cancelled = true;
+			// },function (response) {
+			// 	$scope.alert = true;
+			// 	$scope.message =" Error: "+response.status+ " " + response.statusText+ "!";
+			// 	$scope.messageColor = 'danger';
+			// });
 			billFactory.getBills(authorize.getCentre()).delete({billId:bill.billId}).$promise
 			.then(function(response) {
 				$scope.alert = true;

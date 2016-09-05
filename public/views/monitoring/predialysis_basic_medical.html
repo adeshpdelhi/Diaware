@@ -2,22 +2,22 @@
 <div class="form-group row">
 	<label class="col-sm-3 control-label">Dialyzer Name</label>                        
 	<div class="col-sm-7">
-		<input  type="text" class="form-control" id="dialyzer_name" name="dialyzer_name" ng-model="basicMedical.dialyzerName">
+		<input required type="text" class="form-control" id="dialyzer_name" name="dialyzer_name" ng-model="basicMedical.dialyzerName">
 	</div>
 </div>
 <div class="form-group row">
 	<label class="col-sm-3 control-label">Dialyzer Type: </label>
 	<div class="col-sm-7">
 		<label class="radio-inline">
-		<input type="radio" name="dialyzer_type" value="Reuse" ng-model="basicMedical.dialyzerType" >Reuse</label>
+		<input required type="radio" name="dialyzer_type" value="Reuse" ng-model="basicMedical.dialyzerType" >Reuse</label>
 		<label class="radio-inline">
-		<input type="radio" name="dialyzer_type" value="SingleUse" ng-model="basicMedical.dialyzerType">Single Use</label>
+		<input required type="radio" name="dialyzer_type" value="SingleUse" ng-model="basicMedical.dialyzerType">Single Use</label>
 	</div>
 </div>
 <div class="form-group row">
     <label class="col-sm-3 control-label">Access Used</label>
      <div class="col-sm-7">
-        <select name="access_used"  class="form-control" ng-model="basicMedical.accessUsed">
+        <select required name="access_used"  class="form-control" ng-model="basicMedical.accessUsed">
             <option disabled value="" selected></option>
             <option  ng-repeat="access in accessLinesAvailable" value="{{access}}" ng-selected="access == basicMedical.accessUsed " class="text-capitalize">{{access}}</option>
         </select>
@@ -27,9 +27,9 @@
 	<label class="col-sm-4 col-sm-pull-1 control-label">Central Line Created?</label>
 	<div class="col-sm-7 col-sm-pull-1">
 		<label class="radio-inline">
-		<input type="radio" name="central_line_created" value="Yes" ng-model="basicMedical.centralLineCreated" ng-change="showCentralLine=true">Yes</label>
+		<input required type="radio" name="central_line_created" value="Yes" ng-model="basicMedical.centralLineCreated" ng-change="showCentralLine=true">Yes</label>
 		<label class="radio-inline">
-		<input type="radio" name="central_line_created" value="No" ng-model="basicMedical.centralLineCreated" ng-change="showCentralLine=false">No</label>
+		<input required type="radio" name="central_line_created" value="No" ng-model="basicMedical.centralLineCreated" ng-change="showCentralLine=false">No</label>
 		<!-- <label class="radio-inline">
 		<input type="radio" name="central_line_created_dropdown" value="ij">IJ</label>
 		<label class="radio-inline">
@@ -53,27 +53,27 @@
 	<label class="col-sm-3 control-label">Anticoagulant</label>
 	<div class="col-sm-7">
 		<label class="radio-inline">
-		<input type="radio" name="anticoagulant" value="Yes" ng-model="basicMedical.anticoagulant">Yes</label>
+		<input required type="radio" name="anticoagulant" value="Yes" ng-model="basicMedical.anticoagulant">Yes</label>
 		<label class="radio-inline">
-		<input type="radio" name="anticoagulant" value="No" ng-model="basicMedical.anticoagulant">No</label>
+		<input required type="radio" name="anticoagulant" value="No" ng-model="basicMedical.anticoagulant">No</label>
 	</div>
 </div>
 <div class="form-group row">
 	<label class="col-sm-3 control-label">Bolus Amount</label>                        
 	<div class="col-sm-7">
-		<input  type="number" class="form-control" id="bolus_amount" name="bolus_amount" ng-model="basicMedical.bolusAmount" min = "0">
+		<input required  type="number" class="form-control" id="bolus_amount" name="bolus_amount" ng-model="basicMedical.bolusAmount" min = "0">
 	</div>
 </div>
 <div class="form-group row">
 	<label class="col-sm-3 control-label">Hourly Heparin</label>
 	<div class="col-sm-7">
-		<input  type="number" class="form-control" id="hourly_heparin" name="hourly_heparin" ng-model="basicMedical.hourlyHeparin" min ="0">
+		<input required type="number" class="form-control" id="hourly_heparin" name="hourly_heparin" ng-model="basicMedical.hourlyHeparin" min ="0">
 	</div>
 </div>
 <div class="form-group row">
 	<label class="col-sm-4 col-sm-pull-1 control-label">Heparin Stop Before</label>       
 	<div class="col-sm-7 col-sm-pull-1">
-		<input  type="text" class="form-control" id="heparin_stop_before" name="heparin_stop_before" ng-model="basicMedical.heparinStopPBefore" >
+		<input  required type="text" class="form-control" id="heparin_stop_before" name="heparin_stop_before" ng-model="basicMedical.heparinStopPBefore" >
 		<span class="help-block">(HH:MM) 24 hr format</span>
 	</div>
 </div>
@@ -81,13 +81,13 @@
 <div class="form-group row">
 	<label class="col-sm-4 col-sm-pull-1 control-label">N.S. Flushing Frequeny</label>                        
 	<div class="col-sm-7 col-sm-pull-1">
-		<input  type="number" class="form-control" id="ns_flushing_frequency" name="ns_flushing_frequency"  ng-model="basicMedical.NSFlushingFrequency" min="0" >
+		<input  required type="number" class="form-control" id="ns_flushing_frequency" name="ns_flushing_frequency"  ng-model="basicMedical.NSFlushingFrequency" min="0" >
 	</div>
 </div>
 <div class="form-group row">
 	<label class="col-sm-4 col-sm-pull-1 control-label">N.S. Flushing Volume</label>
 	<div class="col-sm-7 col-sm-pull-1">
-		<input  type="number" class="form-control" id="ns_flushing_volume" name="ns_flushing_volume" ng-model="basicMedical.NSFlushingVolume" min ="0">
+		<input  required type="number" class="form-control" id="ns_flushing_volume" name="ns_flushing_volume" ng-model="basicMedical.NSFlushingVolume" min ="0">
 	</div>
 </div>
 

@@ -8,95 +8,106 @@ var sequelize = require('sequelize');
 var scheduleRouter = express.Router({mergeParams:true});
 scheduleRouter.use(bodyParser.json());
 //db.patientDetails.create({patientId: '12345', name: 'heya', lastModifiedBy: 'adesh'});
+var deleteAppointments = function(schedule){
+    console.log("deleting!1111111111111111111111111111111111111111111111");
+    console.log(schedule);
+    var today = new Date();
+    today.setHours(23,59,59,999);
+    var yesterday = new Date();
+    yesterday.setDate(today.getDate()-1);
+    yesterday.setHours(23,59,59,999);
+    db.appointments.destroy({
+        where:{
+            patientId:schedule.patientId,
+            shiftNumber:schedule.shiftNumber,
+            dayOfTheWeek:schedule.day,
+            date:{
+                $gt:yesterday
+            }
+        }
+    }).then(function(results){
+        console.log(results);
+        console.log("deleted these appointments");
+    })
+}
 scheduleRouter.route('/')
 .get(function (req, res, next) {
-    	// console.log(JSON.stringify(bills));
     console.log('procesing get');
-    // sequelize.query("SELECT * FROM weekDaySlots as W JOIN shifts as S WHERE W.shift1Id == S.id && W")
-    db.weekDaySlots.findAll({
-    	where:{
-    		centreId:req.params.centreId
-    	},
-    	include: [{
-    		model:db.shifts,
-    		as:'shift1'
-    	},{
-    		model:db.shifts,
-    		as:'shift2'
-    	},{
-    		model:db.shifts,
-    		as:'shift3'
-    	},{
-    		model:db.shifts,
-    		as:'shift4'
-    	},{
-    		model:db.shifts,
-    		as:'shift5'
-    	},{
-    		model:db.shifts,
-    		as:'shift6'
-    	}]
+    var where = {};
+    if(req.params.centreId == 'all')  {
+        res.end("Invalid Data!")
+        return;
+    }
+    if(req.params.centreId != 'all')  
+        where['centreId'] = req.params.centreId;
+    where['appointmentType'] = req.query.appointmentType;
+    where['tmtMachine'] = req.query.tmtOnMachine;
+    var today = new Date();
+    today.setHours(23,59,59,999);
+    where['date']={
+        $gte: today
+    }
+    db.appointments.findAll({
+        where:where,
+        attributes: ["dayOfTheWeek","date","shiftNumber","oneTimeAppointment", [sequelize.fn('count', sequelize.col('appointmentId')), 'count']],
+        group:["dayOfTheWeek","date","shiftNumber","oneTimeAppointment"],
     }).then(function(results){
-    	var appointmentType = req.query.appointmentType;
-    	var tmtOnMachine = req.query.tmtOnMachine;
-    	// var freqPreWeek = req.query.freqPerWeek;// added : incase 7med says to have choice in dropdown instead of choosing days themselves
-    	// console.log(results);
-    	results = JSON.parse(JSON.stringify(results));
-    	console.log(results);
-    	var resp = {};
-    	for(var i = 0 ;i<7 ;i++){
-    		var objkey;
-    		for (var key in results[i]){
-    			if(key == 'dayOfTheWeek'){
-    				objkey = results[i][key];
-    				resp[results[i][key]] = {};
-    			}
-    			if( key == 'shift1' || 
-    				key == 'shift2' || 
-    				key == 'shift3' || 
-    				key == 'shift4' || 
-    				key == 'shift5' || 
-    				key	== 'shift6'){
-    				if(results[i][key]!= null){
-                        resp[objkey][key] = { 
-                            id:results[i][key].id
-                        }
-                        resp[objkey][key][(appointmentType+'Available'+tmtOnMachine)]=results[i][key][(appointmentType+'Available'+tmtOnMachine)];
-                    }
-        //             if(results[i][key]!= null && results[i][key][appointmentType+'Available'+tmtOnMachine] > 0){
-    				// 	resp[objkey][key] = { 
-    				// 		id:results[i][key].id,
-    				// 	}
-    				// 	// resp[objkey][key][(appointmentType+'Total'+tmtOnMachine)]=results[i][key][(appointmentType+'Total'+tmtOnMachine)];
-    				// 	resp[objkey][key][(appointmentType+'Available'+tmtOnMachine)]=results[i][key][(appointmentType+'Available'+tmtOnMachine)];
-    				// }
-    			}
-    		}
-    	}
-        console.log(resp);
-    	res.json(resp);
-    	// console.log(JSON.stringify(results));
-	    // res.json(results);
+        // res.json(results);
+        console.log("heeeeeeeeeeey");
+        console.log(results.length);
+        db.centres.find({
+            where:{
+                id:req.params.centreId
+            }
+            // attributes: ["noOfShiftsPerDay"]
+        }).then(function(result){
+            // res.json(results);
+            results = JSON.parse(JSON.stringify(results));
+            var maxShifts = result.noOfShiftsPerDay;
+            var maxBeds = result[req.query.appointmentType+"Total"+req.query.tmtOnMachine + "s"];
+            if(maxBeds == null)
+                maxBeds = 0;
+            console.log(maxShifts);
+            var weekday = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];        
+            var resp = {}
+            for (var  i = 0; i < 7;i++){
+                resp[weekday[i]] = {};
+                for(var j = 1; j <= maxShifts;j++){
+                    // console.log(req.query.appointmentType+"Total"+req.query.tmtOnMachine + "s");
+                    resp[weekday[i]]['shift'+j] = maxBeds;
+                }
+            }
+            for(var i = 0; i < results.length ; i++){
+                console.log(results[i]);
+                console.log(results[i].count);
+                var value = resp[results[i].dayOfTheWeek]['shift'+results[i].shiftNumber];
+                if(!results[i].oneTimeAppointment &&  (value + results[i].count)!= maxBeds)
+                    resp[results[i].dayOfTheWeek]['shift'+results[i].shiftNumber] -= results[i].count;
+            }    
+            res.json(resp);
+        });
     });
+
 })
 .post(function (req, res, next) {
 	console.log('processing post : '+ req.body);
 	// res.json(req.body);
 	var insertedData=[];
-    var length = req.body.shiftPatients.length;
-    for(var i =0;i<req.body.shiftPatients.length;i++){
+    var length = req.body.schedulePatients.length;
+    for(var i =0;i<req.body.schedulePatients.length;i++){
         console.log("schedule :");
-        console.log(req.body.shiftPatients[i]);
-        if(req.body.shiftPatients[i].delete) {
+        console.log(req.body.schedulePatients[i]);
+        if(req.body.schedulePatients[i].delete) {
             length--;
         }
-        if(req.body.shiftPatients[i].new){
-            db.shiftPatients.build(req.body.shiftPatients[i]).save().then(function(result){
+        if(req.body.schedulePatients[i].new){
+            console.log(req.body.schedulePatients[i]);
+            db.schedulePatients.build(req.body.schedulePatients[i]).save().then(function(result){
                 insertedData.push(JSON.parse(JSON.stringify(result)));
                 if(insertedData.length == length){
                     console.log("insertedData: yaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaay:");
                     console.log(insertedData);
-                    res.json({shiftPatients:insertedData});
+                    res.json({schedulePatients:insertedData});
                 }
             },function (rejectedPromiseError) {
                 res.status(500);
@@ -104,65 +115,47 @@ scheduleRouter.route('/')
             });    
         }
     }
-    // var modifiedRows = [];
-    for(key in req.body.update){
-    	var object ={};
-    	object[req.body.string] = req.body.update[key];
-    	console.log(object);
-    	db.shifts.update(object,{
-    		where:{
-    			id:key
-    		}
-    	}).then(function(resp){
-    		// modifiedRows.push(JSON.parse(JSON.stringify(resp)));
-            console.log("modified ");
-            console.log(resp);
-    	},function(rejectedPromiseError){
-            res.status(500);
-            res.end("internal server error");
-        });
-    }
-    // var result = {insertedData:insertedData,updatedData:modifiedRows};
-    // res.json(result);
     console.log('scheduleRouter working');
 })
 .put(function(req,res,next){
     if(req.query.patientId){
         var results = {};
-        results['shiftPatients'] = [];
-        var length = req.body.shiftPatients.length;
-        for(var i = 0; i < req.body.shiftPatients.length;i++)
+        results['schedulePatients'] = [];
+        var length = req.body.schedulePatients.length;
+        var X = [], x = 0;
+        for(var i = 0; i < req.body.schedulePatients.length;i++)
         {
-            if(req.body.shiftPatients[i].delete){
+            if(req.body.schedulePatients[i].delete){
+                X.push(i)
+                console.log("2222222222222222222222222222222222222222222222222222222222222222222222222222");
+                console.log(req.body.schedulePatients[i]);
                 console.log("correct entry");
-                db.shiftPatients.destroy({
+                db.schedulePatients.destroy({
                     where:{
                         patientId: req.query.patientId,
-                        shiftId:req.body.shiftPatients[i].shiftId
+                        shiftNumber:req.body.schedulePatients[i].shiftNumber,
+                        day:req.body.schedulePatients[i].day
                     }
                 }).then(function(result){
+                    deleteAppointments(req.body.schedulePatients[X[x++]]);
                     console.log(JSON.stringify(result));
                     length--;
-                    if(results.shiftPatients.length == length){
-                        // results['updatedData'] = modifiedRows;
+                    if(results.schedulePatients.length == length){
                         console.log("done creating and deleting");
                         res.json(results);
                         console.log(JSON.stringify(results));
                     }
-                    // results.shiftPatients.push(result);
                 },function(rejectedPromiseError){
                     res.status(500);
                     res.end(rejectedPromiseError);
                 });
             }
-            else if(req.body.shiftPatients[i].new){
+            else if(req.body.schedulePatients[i].new){
                 console.log("what y here?");
-                db.shiftPatients.build(req.body.shiftPatients[i]).save().then(function(result){
-                    // res.json(result);
-                    results.shiftPatients.push(result);
-                    if(results.shiftPatients.length == length){
-                        // results['updatedData'] = modifiedRows;
-                        console.log("done creating and deleting");
+                db.schedulePatients.build(req.body.schedulePatients[i]).save().then(function(result){
+                    results.schedulePatients.push(result);
+                    if(results.schedulePatients.length == length){
+                        console.log("done creating and deleting!!!!!!!!!!!!!");
                         res.json(results);
                         console.log(JSON.stringify(results));
                     }
@@ -171,39 +164,34 @@ scheduleRouter.route('/')
                     res.end(rejectedPromiseError);
                 });
             }
-            else results.shiftPatients.push(req.body.shiftPatients[i]);
+            else results.schedulePatients.push(req.body.schedulePatients[i]);
         }
-        // var modifiedRows = [];
-        for(key in req.body.update){
-            var object ={};
-            object[req.body.string] = req.body.update[key];
-            console.log(object);
-            db.shifts.update(object,{
-                where:{
-                    id:key
-                }
-            }).then(function(resp){
-                // modifiedRows.push(JSON.parse(JSON.stringify(resp)));
-                console.log("results scheduleroute inside put : ");
-                console.log(JSON.stringify(resp));
-                
-            },function(rejectedPromiseError){
-                res.status(500);
-                res.end(rejectedPromiseError);
-            });
-        }
-        
         
     }
 })
 .delete(function(req,res,next){
     console.log("processing Delete all")
+    var today = new Date();
+    // today.setHours(23,59,59,999);
+    var yesterday = new Date();
+    yesterday.setDate(today.getDate()-1);
+    yesterday.setHours(23,59,59,999);
     if(req.query.deleteAll){
-        db.shiftPatients.destroy({
+        db.schedulePatients.destroy({
             where:{
                 patientId: req.query.patientId
             }
         }).then(function(results){
+            db.appointments.destroy({
+                where:{
+                    patientId:req.query.patientId,
+                    date:{
+                        $gt:yesterday
+                    }
+                }
+            }).then(function(result){
+                console.log("deleted all future appointments!");
+            })
             console.log("deleted successfully");
             res.json(results);
         },function (rejectedPromiseError) {

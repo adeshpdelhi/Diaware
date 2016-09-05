@@ -4,8 +4,7 @@ angular.module('App')
     $scope.appointment =  appointment;
     console.log(appointment);
     $scope.attendance = false;
-
-
+    
     $scope.isClinical = function(){
         var user = authorize.getActiveUser();
         return user.clinical || user.admin || user.incharge;
@@ -14,10 +13,10 @@ angular.module('App')
         console.log("val:" + val);
         $scope.attendance = val;
     }
-    $scope.markAttendance = function(){
-            $scope.appointment.attended = $scope.attendance;
+    $scope.markPresence = function(){
+            $scope.appointment.present = $scope.attendance;
             console.log($scope.appointment.attended);
-            appointmentFactory.getFutureAppointments(authorize.getCentre()).update({appointmentId:appointment.appointmentId},{attended:$scope.attendance})
+            appointmentFactory.getFutureAppointments(authorize.getCentre()).update({appointmentId:appointment.appointmentId},{present:$scope.attendance})
             .$promise.then(function(resp){
                 $scope.showAlert = true;
                 $scope.message = "Marked Attendance as " + ($scope.attendance?'attended':'not attended') + ' Successfully!';
@@ -45,6 +44,50 @@ angular.module('App')
         console.log("app.monitoring.view" + $scope.appointment.patientId + " "+ $scope.appointment.date);
         $state.go('app.monitoring.view', {patientId:$scope.appointment.patientId, date:$scope.appointment.date});
     };
+    $scope.checkPreviousDate = function(date){
+        var today = new Date();
+        date = new Date(date);
+        console.log("appointment date");
+        console.log(date);
+        console.log ("todays date");
+        console.log(today);
+        if(date.getYear() < today.getYear())
+            return true;
+        else if( date.getYear() == today.getYear() && date.getMonth() < today.getMonth()){
+            return true;
+        }
+        else if( date.getYear() == today.getYear() && date.getMonth() == today.getMonth() && date.getDate() <= today.getDate()){
+            return true;
+        }
+        else return false;
+    }
+    $scope.checkTodaysDate = function(date){
+        var today = new Date();
+        date = new Date(date);
+        console.log("appointment date");
+        console.log(date);
+        console.log ("todays date");
+        console.log(today);
+        if(date.getYear() < today.getYear())
+            return true;
+        else if( date.getYear() == today.getYear() && date.getMonth() < today.getMonth()){
+            return true;
+        }
+        else if( date.getYear() == today.getYear() && date.getMonth() == today.getMonth() && date.getDate() <= today.getDate()){
+            return true;
+        }
+        else return false;
+        // var today = new Date();
+        // date = new Date(date);
+        // console.log("appointment date");
+        // console.log(date);
+        // console.log ("todays date");
+        // console.log(today);
+        // if(date.getDate() == today.getDate() && date.getMonth() == today.getMonth() && date.getYear() == today.getYear())
+        //     return true;
+        // else
+        //     return false;
+    }
 
 }]);
 

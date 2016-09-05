@@ -20,7 +20,14 @@ billingRouter.route('/')
         else  
             where['status'] = req.query.status;
     }
+    if(req.query.dateFrom && req.query.dateTo){
+        where['createdAt'] ={
+            $gt:new Date(req.query.dateFrom),
+            $lte:new Date(req.query.dateTo)
+        }
+    }
     if(req.query.sum){
+        //sum of over all centres
         console.log("where billroute");
         console.log(where);
         console.log("query billroute");
@@ -87,6 +94,7 @@ billingRouter.route('/')
             res.status(500);
             res.end("InternalServerError")
         });
+        // db.appointments.find()
     },function(rejectedPromiseError){
         res.status(500);
         res.end("InternalServerError");

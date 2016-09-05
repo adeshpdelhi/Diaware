@@ -38,10 +38,17 @@
                                 <td width="10%" style="text-align:center;" >{{indentItem.item.itemName}}</td>
                                 <td width="10%" style="text-align:center;" >{{indentItem.item.usageType}}</td>
                                 <td width="10%" style="text-align:center;" >{{indentItem.item.brandName}}</td>
-                                <td width="10%" style="text-align:center;" >{{indentItem.quantityRequired}}</td>
+                                <td width="10%" style="text-align:center;" >
+                                <div style="text-align:center;color:{{(indentItem.quantityRequired<0)?'red':'black'}};" ng-if="(viewStatus==indent.status && indent.status=='Raised' && (activeUser.admin == true || activeUser.incharge==true)) || isReceiving">
+                                    <input style="width:50%;" type="number" min=0 ng-model="indentItem.quantityRequired">
+                                </div>
+                                <div ng-if="!((viewStatus==indent.status && indent.status=='Raised' && (activeUser.admin == true || activeUser.incharge==true)) || isReceiving)">
+                                    {{indentItem.quantityRequired}}
+                                </div>
+                                </td>
                                 <td width="10%" style="text-align:center;" >{{indentItem.availableQuantity}}</td>
                                 <td width="10%" style="text-align:center;" >{{indentItem.item.quantityMeasurementType}}</td>
-                                <td ng-if="(indent.status == 'Raised' && (activeUser.admin == true || activeUser.incharge==true)) || indent.status == 'Saved' || isReceiving" style="text-align:center;" width="5%"><button class="btn btn-danger" ng-click="removeItem(indentItem,$index)"><span class="glyphicon glyphicon-remove"></span></button></td>
+                                <td ng-if="(indent.status == 'Raised' && (activeUser.admin == true || activeUser.incharge==true)) || indent.status == 'Saved' || isReceiving" style="text-align:center;" width="5%"><button class="btn btn-danger" ng-click=" removeItem(indentItem,$index)"><span class="glyphicon glyphicon-remove"></span></button></td>
 
                             </tr>    
                         </tbody>
@@ -90,10 +97,10 @@
                                 <td style="text-align:center;" width="10%" >{{indentItem.itemName}}</td>
                                 <td style="text-align:center;" width="10%" >{{indentItem.usageType}}</td>
                                 <td style="text-align:center;" width="10%" >{{indentItem.brandName}}</td>
-                                <td style="text-align:center;" width="10%" ><input style="width:50%;" type="number" ng-init="indentItem.quantityRequired=0" ng-model="indentItem.quantityRequired"></td>
+                                <td style="text-align:center;text-align:center;color:{{(indentItem.quantityRequired<1)?'red':'black'}};" width="10%" ><input style="width:50%;" type="number" min=0 ng-init="indentItem.quantityRequired=1" ng-model="indentItem.quantityRequired"></td>
                                 <td style="text-align:center;" width="10%" >{{indentItem.availableQuantity}}</td>
                                 <td style="text-align:center;" width="10%" >{{indentItem.quantityMeasurementType}}</td>
-                                <td style="text-align:center;" width="5%" ng-click="addItem(indentItem,$index)"><span class="glyphicon glyphicon-plus"></span></td>
+                                <td style="text-align:center;" width="5%" ng-click="(indentItem.quantityRequired>0) && addItem(indentItem,$index)"><span class="glyphicon glyphicon-plus"></span></td>
                                 <!-- <td style="text-align:center;" width="5%" ng-click="addItem({itemId: indentItem.itemId,itemName:indentItem.itemName,usageType: indentItem.usageType,brandName:indentItem.brandName,quantityRequired:indentItem.quantityRequired,availableQuantity:indentItem.availableQuantity,quantityMeasurementType:indentItem.quantityMeasurementType})"><span class="glyphicon glyphicon-plus"></span></td> -->
                             </tr>    
                         </tbody>
@@ -132,13 +139,13 @@
                             <button type="submit" class="btn btn-default" ng-click="saveIndent()">Save</button>
                         </div>
                         <div ng-if="indent.status=='Raised' && (activeUser.admin == true || activeUser.incharge == true)" class="col-sm-push-6 col-sm-pull-2 col-sm-2">
-                            <button type="submit" class="btn btn-success" ng-click="approveIndent()">Approve</button>
+                            <button type="submit" class="btn btn-success" ng-click="verifyIndentItemQuantity() && approveIndent()">Approve</button>
                         </div>
                         <div ng-if="indent.status=='Saved'" class="col-sm-push-6 col-sm-pull-2 col-sm-2">
-                            <button type="submit" class="btn btn-success" ng-click="raiseIndent()">Raise</button>
+                            <button type="submit" class="btn btn-success" ng-click="verifyIndentItemQuantity() && raiseIndent()">Raise</button>
                         </div>
                         <div ng-if="isReceiving" class="col-sm-push-6 col-sm-pull-2 col-sm-2">
-                            <button type="submit" class="btn btn-success" ng-click="receiveIndent()">Add To Stock</button>
+                            <button type="submit" class="btn btn-success" ng-click="verifyIndentItemQuantity() && receiveIndent()">Add To Stock</button>
                         </div>
                     </div>
 
