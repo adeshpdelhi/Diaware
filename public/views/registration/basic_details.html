@@ -112,10 +112,10 @@
                     <div class="col-sm-8 ">
                         <select name="gender"  class="form-control" ng-model="newpatient_basic.type" required>
                             <option value="" selected disabled>-</option>
-                            <option value="NegativeMachine">Negative</option>
-                            <option value="BPositiveMachine" >Hepatitis B+</option>
-                            <option value="CPositiveMachine">Hepatitis C+</option>
-                            <option value="HIVMachine">HIV</option>
+                            <option value="Negative">Negative</option>
+                            <option value="BPositive" >Hepatitis B+</option>
+                            <option value="CPositive">Hepatitis C+</option>
+                            <option value="HIV">HIV</option>
 
                         </select>
                         <span ng-show="basicDetailsForm.type.$error.required && !basicDetailsForm.type.$pristine" class="help-block">Patient Type is required                      
