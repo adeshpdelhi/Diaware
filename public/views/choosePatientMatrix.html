@@ -57,7 +57,8 @@
     <div class="row row-content col-sm-12">
         <div class="panel" >
             <div class="panel-heading">
-                <div class="panel-title"><b>Choose Appointment</b><button type="button"  ng-click="toggleAndUpdate()" class="btn btn-warning pull-right">{{all?'View Today\'s Appointments':'View All Appointments'}}</button></div>
+                <div class="panel-title">Viewing {{all?'All Appointments':'Today\'s Appointments'}}
+                <button type="button"  ng-click="toggleAndUpdate()" class="btn btn-warning pull-right">{{all?'View Today\'s Appointments':'View All Appointments'}}</button></div>
                 <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
                 <div class="clearfix"></div>
             </div>     
