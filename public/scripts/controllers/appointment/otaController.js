@@ -18,7 +18,7 @@ angular.module('App')
 		patientId:null,
 		date:null,
 		dayOfTheWeek:null,
-		shiftNumber:null,
+		shiftNumber:0,
 		appointmentType:null,
 		tmtMachine:null,
 		oneTimeAppointment:true,
@@ -89,43 +89,56 @@ $scope.make_ota=function(){
 		day="Saturday";
 
 	$scope.ota.dayOfTheWeek=day;
-	
+	console.log('shift selected = '+$scope.ota.shiftNumber)
+	console.log('checking for free shifts now '+$scope.ota.shiftNumber+' '+$scope.shift2beds);
 	//check if selected shift number has atleast one bed avalaible
 	if($scope.ota.shiftNumber==1)
 		if($scope.shift1beds>=1)
 			$scope.correctshift=true;
-	else if($scope.shiftNumber==2)
+	else if($scope.ota.shiftNumber==2)
+	{
+		console.log('shift 2 bed checking now');
 		if($scope.shift2beds>=1)
 			$scope.correctshift=true;
-	else if($scope.shiftNumber==3)
+	}
+	else if($scope.ota.shiftNumber==3)
 		if($scope.shift3beds>=1)
 			$scope.correctshift=true;
-	else if($scope.shiftNumber==4)
+	else if($scope.ota.shiftNumber==4)
 		if($scope.shift4beds>=1)
 			$scope.correctshift=true;
-	else if($scope.shiftNumber==5)
+	else if($scope.ota.shiftNumber==5)
 		if($scope.shift5beds>=1)
 			$scope.correctshift=true;
-	else if($scope.shiftNumber==6)
+	else if($scope.ota.shiftNumber==6)
 		if($scope.shift6beds>=1)
 			$scope.correctshift=true;
-	
+	console.log('checked: '+$scope.correctshift);
 	//set error if beds not avalaibl in selected shift
 	if($scope.correctshift==false)
-		$scope.message="Beds not Available in selected Shift";
+		$scope.message="Beds not available in selected Shift";
 	else if($scope.correctshift==true)
 	{
 			console.log("shifts are correct");
-
+			
+		console.log(new Date());
+        var newdate = new Date($scope.ota.date);
+        newdate.setHours(23,59,59,999);
+		$scope.ota.date=newdate;
+		console.log($scope.ota.date);
+		
 		$scope.message="";
 		console.log($scope.ota);
 		// save ota
+		$scope.ota.date = new Date($scope.ota.date);
+		$scope.ota.date = new Date("2016-09-04");
 		appointmentFactory.getAppointments(authorize.getCentre()).save($scope.ota).$promise.then(function(response){
 			console.log("saving ota");
 			$scope.showalert_ota=true;
 			$scope.message ="One Time Appointment Successful!";
 			$scope.messageColor ='success';
 		},function(response){
+			console.log("save failed");
 			$scope.showalert_ota=true;
 			console.log(response);
 			$scope.message ='Error: ' +response.status + " " + response.statusText+ "!";

@@ -71,7 +71,8 @@
                     <label class="col-sm-5 control-label">Appointment Type <font color="red">*</font></label>                       
                     <div class="col-sm-7">
 
-                       <select required name="ota_appointmentType"  class="form-control" ng-model="ota.appointmentType">
+                       <select required name="ota_appointmentType" ng-change="showbeds=false"  class="form-control" ng-model="ota.appointmentType">
+
                             <option value="" selected disabled>-</option>
                             <option value="OPD">OPD</option>
                             <option value="IPD/ICU">IPD/ICU</option>
@@ -125,12 +126,13 @@
 
                        <select required name="ota_shift"  class="form-control" ng-model="ota.shiftNumber">
                             <option value="" selected disabled>-</option>
-                            <option value="1" ng-if="shift1beds!=null" >Shift 1</option>
-                            <option value="2" ng-if="shift2beds!=null" >Shift 2</option>
-							<option value="3" ng-if="shift3beds!=null" >Shift 3</option>
-							<option value="4" ng-if="shift4beds!=null" >Shift 4</option>
-							<option value="5" ng-if="shift5beds!=null" >Shift 3</option>
-							<option value="6" ng-if="shift6beds!=null" >Shift 4</option>
+
+                            <option ng-if="shift1beds!=null" value="1">Shift 1</option>
+                            <option ng-if="shift2beds!=null" value="2">Shift 2</option>
+							<option ng-if="shift3beds!=null" value="3">Shift 3</option>
+							<option ng-if="shift4beds!=null" value="4">Shift 4</option>
+                            <option ng-if="shift5beds!=null" value="5">Shift 5</option>
+                            <option ng-if="shift6beds!=null" value="6">Shift 6</option>
                         </select>
                     
                     </div>
