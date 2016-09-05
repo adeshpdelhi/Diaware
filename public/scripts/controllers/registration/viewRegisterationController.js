@@ -1,6 +1,12 @@
 'use strict';
 angular.module('App')
 .controller('ViewRegistrationController',['$scope','patientFactory','choosePatientFactory','authorize','regularForm', function($scope, patientFactory, choosePatientFactory,authorize, regularForm){
+	var centre = authorize.getCentre();
+    $scope.centreInvalidToSubmit = false;
+    if(centre == 'all'){
+    	console.log("centreInvalidToSubmit:" + $scope.centreInvalidToSubmit);
+    	$scope.centreInvalidToSubmit = true;
+    }
 	$scope.regularForm = regularForm.regularForm;
         patientFactory.getPatients(authorize.getCentre()).get({id:choosePatientFactory.getChosenPatient().id,fullDetails:true}).$promise.then(function(response){
         	$scope.patient = response;
@@ -19,6 +25,35 @@ angular.module('App')
 			
 
         });
+        $scope.setAge = function(){
+			console.log("received dob");
+			console.log($scope.newpatient_basic.DOB);
+			// var dobyear = $scope.newpatient_basic.DOB.getFullYear();
+			var dob = new Date($scope.newpatient_basic.DOB);
+			console.log("date dob");
+
+			console.log(dob);
+			var today = new Date();
+			console.log("today");
+
+			console.log(today);
+			$scope.newpatient_basic.age = 0;
+			if(today.getYear() > dob.getYear()){
+				$scope.newpatient_basic.age = today.getYear() - dob.getYear();		
+				if(today.getMonth() < dob.getMonth()){
+					$scope.newpatient_basic.age--;		
+				}else{
+					if(today.getDate() < dob.getDate())
+						$scope.newpatient_basic.age--;		
+				}
+			}
+		};
+		$scope.myDate = new Date()
+		$scope.maxDate = new Date(
+			$scope.myDate.getFullYear(),
+			$scope.myDate.getMonth(),
+			$scope.myDate.getDate());
+
 		$scope.edit=false;
 		$scope.editBasicDetails = function(){
 			$scope.editBasic = true;
