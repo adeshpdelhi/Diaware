@@ -65,7 +65,7 @@ patientFactory.getPatients(authorize.getCentre()).get({id:choosePatientFactory.g
 	$scope.patient = response;
 	$scope.ota.centreId=authorize.getCentre();
 	$scope.ota.patientId=$scope.patient.id;
-	$scope.ota.tmtMachine=$scope.patient.type;
+	$scope.ota.tmtMachine=$scope.patient.type+'Machine';
 });
 
 ////////function
