@@ -38,7 +38,7 @@ angular.module('App')
         	endTime:null,
         	lastModifiedBy:null
         };
-
+        
         $scope.$watch('basic.patientId',function(newVal,oldVal){
             if(newVal){
                 patientFactory.getPatientCarePlans(newVal,authorize.getCentre()).get({latestPlan:true})
@@ -92,3 +92,25 @@ angular.module('App')
 
     }])
 ;
+/*
+$scope.validateEndTime = function(startTime,endTime){
+    if(angular.isUndefined(endTime)|| angular.isUndefined(startTime)) 
+        return false;
+    console.log(endTime);
+    console.log(startTime);
+
+    var end = endTime.split(':');
+    var start = startTime.split(':')
+    if(angular.isUndefined(end[1]) || angular.isUndefined(start[1])){
+        return false;
+    }
+    var endHrs = parseInt(end[0]), endMin = parseInt(end[1]);
+    var startHrs = parseInt(start[0]), startMin = parseInt(start[1]);
+    if( endHrs > 23 || endMin > 59 || startHrs > 23 || startMin > 59 ) 
+        return false;
+    if(endHrs < startHrs) return false;
+    else if( endHrs > startHrs) return true;
+    else if(endMin > startMin) return true;
+    else return false;
+};
+*/
