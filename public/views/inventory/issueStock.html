@@ -31,7 +31,7 @@
 
                             <label class="col-sm-3 control-label">Single Use</label>
                             <div class="col-sm-5">
-                                <input required type="number" class="form-control" ng-model="issueStock.estimatedSingleUse" placeholder="Single Use Treatments">
+                                <input required type="number" min=0 class="form-control" ng-model="issueStock.estimatedSingleUse" placeholder="Single Use Treatments">
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                         <div class="col-sm-9">
                             <label class="col-sm-3 control-label">Re-use</label>
                             <div class="col-sm-5">
-                                <input required type="number" class="form-control" ng-model="issueStock.estimatedReUse" placeholder="Re Use Treatments">
+                                <input required type="number" min=0 class="form-control" ng-model="issueStock.estimatedReUse" placeholder="Re Use Treatments">
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                         <div class="col-sm-9">
                             <label class="col-sm-3 control-label">New Dialyser</label>
                             <div class="col-sm-5">
-                                <input required type="number" class="form-control" ng-model="issueStock.estimatedNewDialyzer" placeholder="New Dialyser Treatments">
+                                <input required type="number" min=0 class="form-control" ng-model="issueStock.estimatedNewDialyzer" placeholder="New Dialyser Treatments">
                             </div>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                         <div class="col-sm-9">
                             <label class="col-sm-3 control-label">Catehterization Double Lumen</label>
                             <div class="col-sm-5">
-                                <input type="number" class="form-control" ng-model="issueStock.estimatedCatheterDoubleLumen" placeholder="Re Use Treatments">
+                                <input type="number" min=0 class="form-control" ng-model="issueStock.estimatedCatheterDoubleLumen" placeholder="Re Use Treatments">
                             </div>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                         <div class="col-sm-9">
                             <label class="col-sm-3 control-label">Catehterization Single Lumen</label>
                             <div class="col-sm-5">
-                                <input type="number" class="form-control" ng-model="issueStock.estimatedCatheterSingleLumen" placeholder="New Dialyser Treatments">
+                                <input type="number" min=0 class="form-control" ng-model="issueStock.estimatedCatheterSingleLumen" placeholder="New Dialyser Treatments">
                             </div>
                         </div>
                     </div>
@@ -181,7 +181,7 @@
                                 <td style="text-align:center;" width="10%" >{{stockItem.item.itemName}}</td>
                                 <td style="text-align:center;" width="10%" >{{stockItem.item.usageType}}</td>
                                 <td style="text-align:center;" width="10%" >{{stockItem.item.brandName}}</td>
-                                <td style="text-align:center;color:{{(stockItem.quantity<1 || stockItem.quantity>stockItem.availableQuantity)?'red':'black'}};" width="10%" ><input style="width:50%;" type="number" ng-init="stockItem.quantity=1" ng-model="stockItem.quantity"></td>
+                                <td style="text-align:center;color:{{(stockItem.quantity<1 || stockItem.quantity>stockItem.availableQuantity)?'red':'black'}};" width="10%" ><input style="width:50%;" type="number" min=0 ng-init="stockItem.quantity=1" ng-model="stockItem.quantity"></td>
                                 <!-- <td style="text-align:center;" width="10%" ><input style="width:50%;" type="number" ng-init="stockItem.availableQuantity=0" ng-model="stockItem.availableQuantity"></td> -->
                                 <td style="text-align:center;" width="10%" >{{stockItem.availableQuantity}}</td> 
                                 <td style="text-align:center;" width="10%" >{{stockItem.item.quantityMeasurementType}}</td>

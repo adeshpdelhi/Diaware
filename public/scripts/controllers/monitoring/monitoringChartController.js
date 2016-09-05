@@ -11,13 +11,13 @@ angular.module('App')
         }
         if(!appointment.present){
             $scope.showChart = false;
-            $scope.messageChart = "Patient hasn't attended this appointment yet! Can't Fill its monitoring Chart!";   
+            $scope.messageChart = "Patient hasn't attended this appointment yet! Can't fill their monitoring Chart!";   
             $scope.messageChartColor = 'danger';
 
         }
-        if(!appointment.billingDone){
+        if(!appointment.billingDone && appointment.present){
             $scope.showChart = false;
-            $scope.messageChart = "Patient hasn't payed the bills yet! Can't Fill its monitoring Chart!";      
+            $scope.messageChart = "Patient hasn't payed the bills yet! Can't fill their monitoring Chart!";      
             $scope.messageChartColor = 'warning';
         }
         var chosenPatientId = $stateParams.patientId?($stateParams.patientId):(choosePatientFactory.getChosenPatient().id);
