@@ -1,6 +1,6 @@
 <form class="form-horizontal" role="form" ng-controller="MonitoringPreMachineFinalCheckController" ng-submit="editingPreMachineFinalCheck?updatePreMachineFinalCheck():saveMachineCheck()" ng-cloak>
 <div class="form-group row">
-	<label class="col-sm-4 col-sm-pull-1 control-label">Machine Test Passed?</label>
+	<label class="col-sm-4 col-sm-pull-1 control-label">Machine Test Passed? <font color="red">*</font></label>
 	<div class="col-sm-7 col-sm-pull-1">
 		<label class="radio-inline">
 		<input required type="radio" name="machine_test_passed" value="Yes" ng-model="machineCheck.machineTestPassed">Yes</label>
@@ -9,13 +9,13 @@
 	</div>
 </div>
 <div class="form-group row">
-	<label class="col-sm-3 control-label">Checked By * </label>                        
+	<label class="col-sm-3 control-label">Checked By <font color="red">*</font> </label>                        
 	<div class="col-sm-7">
 		<input required type="text" class="form-control" id="checked_by" name="checked_by" ng-model="machineCheck.machineTestCheckedBy">
 	</div>
 </div>
 <div class="form-group row">
-	<label class="col-sm-4 col-sm-pull-1 control-label">Air Detector/Line Clamp *</label>
+	<label class="col-sm-4 col-sm-pull-1 control-label">Air Detector/Line Clamp <font color="red">*</font></label>
 	<div class="col-sm-7 col-sm-pull-1">
 		<label class="radio-inline">
 		<input required type="radio" name="air_detector_or_line_clamp" value="Yes" ng-model="machineCheck.airDetector">Yes</label>
@@ -24,7 +24,7 @@
 	</div>
 </div>
 <div class="form-group row">
-	<label class="col-sm-3 control-label">Alarm Limits *</label>
+	<label class="col-sm-3 control-label">Alarm Limits <font color="red">*</font></label>
 	<div class="col-sm-7">
 		<label class="radio-inline">
 		<input required type="radio" name="alarm_limits" value="Yes" ng-model="machineCheck.alarmLimits" >Yes</label>
@@ -34,7 +34,7 @@
 </div>
 
 <div class="form-group row">
-	<label class="col-sm-4 col-sm-pull-1 control-label">Dialyzate Flow Rate *<small>(ml/min)</small></label>
+	<label class="col-sm-4 col-sm-pull-1 control-label">Dialyzate Flow Rate <font color="red">*</font><font color="red">*</font><small>(ml/min)</small></label>
 	 <div class="col-sm-7 col-sm-pull-1">
 		<select required name="dialyzate_flow_rate"  class="form-control" ng-model="machineCheck.dialyzateFlowRate">
 			<option disabled value="" selected></option>
@@ -45,7 +45,7 @@
 	</div>
 </div>
 <div class="form-group row">
-	<label class="col-sm-4 col-sm-pull-1 control-label">Dialysate Counter Current Flow *</label>
+	<label class="col-sm-4 col-sm-pull-1 control-label">Dialysate Counter Current Flow <font color="red">*</font></label>
 	<div class="col-sm-7 col-sm-pull-1">
 		<label class="radio-inline">
 		<input required type="radio" name="dialysate_counter_current_flow" value="Yes" ng-model="machineCheck.dialysisCounterCurrentFlow">Yes</label>
@@ -54,7 +54,7 @@
 	</div>
 </div>
 <div class="form-group row">
-	<label class="col-sm-4 col-sm-pull-1 control-label">Dialyzate Temperature (&deg;C) *</label>
+	<label class="col-sm-4 col-sm-pull-1 control-label">Dialyzate Temperature (&deg;C) <font color="red">*</font></label>
 	 <div class="col-sm-7 col-sm-pull-1">
 		<select required name="dialyzate_temperature"  class="form-control" ng-model="machineCheck.dialysateTemperature">
 			<option disabled value="" selected></option>
@@ -67,7 +67,7 @@
 	</div>
 </div>
 <div class="form-group row">
-	<label class="col-sm-4 col-sm-pull-1 control-label">Conductivity <small>(mS/cm) *</small></label>
+	<label class="col-sm-4 col-sm-pull-1 control-label">Conductivity <small>(mS/cm) <font color="red">*</font></small></label>
 	 <div class="col-sm-7 col-sm-pull-1">
 		<select required name="conductivity"  class="form-control" ng-model="machineCheck.conductivity">
 			<option disabled value="" selected></option>
@@ -81,7 +81,7 @@
 	</div>
 </div>
 <div class="form-group row">
-	<label class="col-sm-3 control-label">Part A Concentrate *</label>
+	<label class="col-sm-3 control-label">Part A Concentrate <font color="red">*</font></label>
 	 <div class="col-sm-7">
 		<select required name="a_concentrate"  class="form-control" ng-model="machineCheck.partAConcentrationCombination">
 			<option disabled value="" selected></option>

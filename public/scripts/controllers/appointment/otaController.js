@@ -33,11 +33,6 @@ angular.module('App')
 
 	};
 
-	/*$scope.shift1beds=3;
-	$scope.shift2beds=1;
-	$scope.shift3beds=0;
- 	$scope.shift4beds=2;
-*/
 	$scope.$watch('ota.date',function(newVal,oldVal){
 
 		if(newVal){
@@ -70,6 +65,7 @@ patientFactory.getPatients(authorize.getCentre()).get({id:choosePatientFactory.g
 
 ////////function
 $scope.make_ota=function(){
+	$scope.correctshift = false;
 	$scope.ota.oneTimeAppointment=true;
 	console.log("In make ota");
 	//no of beds
@@ -94,15 +90,23 @@ $scope.make_ota=function(){
 		day="Saturday";
 
 	$scope.ota.dayOfTheWeek=day;
+	console.log('shift selected = '+$scope.ota.shiftNumber)
 	console.log('checking for free shifts now '+$scope.ota.shiftNumber+' '+$scope.shift2beds);
 	//check if selected shift number has atleast one bed avalaible
-	if($scope.ota.shiftNumber==1)
-		if($scope.shift1beds>=1)
+	if($scope.ota.shiftNumber==1){
+		console.log('shift 1 bed checking now');
+		if($scope.shift1beds>=1){
+			console.log('yeahhhhh');
 			$scope.correctshift=true;
-	else if($scope.ota.shiftNumber==2){
+		}
+	}
+	else if($scope.ota.shiftNumber==2)
+	{
 		console.log('shift 2 bed checking now');
-		if($scope.shift2beds>=1)
+		if($scope.shift2beds>=1){
+			console.log('yeahhhhh');
 			$scope.correctshift=true;
+		}
 	}
 	else if($scope.ota.shiftNumber==3)
 		if($scope.shift3beds>=1)
@@ -123,16 +127,25 @@ $scope.make_ota=function(){
 	else if($scope.correctshift==true)
 	{
 			console.log("shifts are correct");
-
+			
+		console.log(new Date());
+        var newdate = new Date($scope.ota.date);
+        newdate.setHours(23,59,59,999);
+		$scope.ota.date=newdate;
+		console.log($scope.ota.date);
+		
 		$scope.message="";
 		console.log($scope.ota);
 		// save ota
+		$scope.ota.date = new Date($scope.ota.date);
+		//$scope.ota.date = new Date("2016-09-04");
 		appointmentFactory.getAppointments(authorize.getCentre()).save($scope.ota).$promise.then(function(response){
 			console.log("saving ota");
 			$scope.showalert_ota=true;
 			$scope.message ="One Time Appointment Successful!";
 			$scope.messageColor ='success';
 		},function(response){
+			console.log("save failed");
 			$scope.showalert_ota=true;
 			console.log(response);
 			$scope.message ='Error: ' +response.status + " " + response.statusText+ "!";
@@ -141,4 +154,27 @@ $scope.make_ota=function(){
 		});
 	}
 }
+
+$scope.ota={
+		centreId:null,
+		patientId:null,
+		date:null,
+		dayOfTheWeek:null,
+		shiftNumber:0,
+		appointmentType:null,
+		tmtMachine:null,
+		oneTimeAppointment:true,
+		//faltu
+	billingDone:null,
+	monitoringDone:null,
+	treatmentConsumptionAdded:null,
+	processComplete:null,
+	cancelled:null,
+	allBillsCleared:null,
+	billingRemarks:null
+
+	};
+
+
+
 }]);

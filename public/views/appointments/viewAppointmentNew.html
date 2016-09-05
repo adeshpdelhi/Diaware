@@ -191,7 +191,7 @@
                                                 <th  style="text-align:center;" width="10%">Billing</th>
                                                 <th  style="text-align:center;" width="10%">Monitoring</th>
                                                 <th  style="text-align:center;" width="10%">Treatment Consumption</th>
-                                                <th ng-if="today">&nbsp;</th>
+                                                <!-- <th ng-if="today">&nbsp;</th> -->
                                                 <!-- <th ng-show="!appointment.cancelled && !appointment.present"></th> -->
                                             </tr>    
                                         </thead>
@@ -209,9 +209,9 @@
                                                 <!-- <td width="10%" style="background-color:{{appointment.billingDone?'#99ff99':'#ff9999'}};color:{{appointment.billingDone?'green':'#b30000'}};"><span class="glyphicon glyphicon-{{ appointment.billingDone?'ok':'remove'}}"></span></td> -->
                                                 <td width="10%" style="background-color:{{appointment.monitoringDone?'#99ff99':'#ff9999'}};color:{{appointment.monitoringDone?'green':'#b30000'}};"><span class="glyphicon glyphicon-{{ appointment.monitoringDone?'ok':'remove'}}"></span></td>
                                                 <td width="10%" style="background-color:{{appointment.treatmentConsumptionAdded?'#99ff99':'#ff9999'}};color:{{appointment.treatmentConsumptionAdded?'green':'#b30000'}};"><span class="glyphicon glyphicon-{{ appointment.treatmentConsumptionAdded?'ok':'remove'}}"></span></td>
-                                                <td width="25%" ng-if="today && appointment.present != false" >
+                                                <!-- <td width="25%" ng-if="today && appointment.present != false" >
                                                     <p>{{(appointment.present == true)?'Patient Present':'Yet to Come'}}</p>
-                                                </td>
+                                                </td> -->
                                                 <!-- <td width="35%" ng-if="today && appointment.present == null" >
                                                     <a href ng-click='markPresence(appointment.appointmentId, true)' id="markAppointment" data-toggle="tooltip" title="Mark Patient as Present" data-placement="top" style="font-size:20px" class="col-sm-6"><span class="glyphicon glyphicon glyphicon-ok-circle"></span></a>
                                                     <a href ng-click='markPresence(appointment.appointmentId, false)' id="markAppointment" data-toggle="tooltip" title="Mark Patient as not Present" data-placement="top" style="font-size:20px" class="col-sm-6"><span class="glyphicon glyphicon glyphicon-ban-circle"></span></a>

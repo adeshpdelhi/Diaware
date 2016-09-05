@@ -42,39 +42,39 @@
         </div>
     </div> -->
 	<div class="form-group row">
-		<label class="col-sm-2 control-label">Machine#</label>                        
+		<label class="col-sm-2 control-label">Machine# <font color="red">*</font></label>                        
 		<div class="col-sm-8">
 			<input required type="number" class="form-control" id="machine_no" name="machine_no" ng-model="basic.machineNumber" min="0">
 		</div>
 	</div>
 	<div class="form-group row">
-		<label class="col-sm-2 control-label">Bed#</label>                        
+		<label class="col-sm-2 control-label">Bed# <font color="red">*</font></label>                        
 		<div class="col-sm-8">
 			<input required type="number" class="form-control" id="bed_no" name="bed_no" ng-model="basic.bedNumber" min="0">
 		</div>
 	</div>
 	<div class="form-group row">
-		<label class="col-sm-3 col-sm-pull-1 control-label">Technician Name</label>               
+		<label class="col-sm-3 col-sm-pull-1 control-label">Technician Name <font color="red">*</font></label>               
 		<div class="col-sm-8 col-sm-pull-1">
 			<input required type="text" class="form-control" id="technician_name" name="technician_name" ng-model="basic.leadTechnicianName">
 		</div>
 	</div>
 
 	<div class="form-group row">
-		<label class="col-sm-4  col-sm-pull-2 control-label">Prescribed Duration</label>                        
+		<label class="col-sm-4  col-sm-pull-2 control-label">Prescribed Duration <font color="red">*</font></label>                        
 		<div class="col-sm-8 col-sm-pull-2">
 			<input required type="number" class="form-control" id="prescribed_duration" name="prescribed_duration" ng-model="basic.prescribedDuration" min="0" placeholder="Prescribed Duration" >
 		</div>
 	</div>
 	<div class="form-group row">
-		<label class="col-sm-3 col-sm-pull-1 control-label">Start Time</label>                        
+		<label class="col-sm-3 col-sm-pull-1 control-label">Start Time <font color="red">*</font></label>                        
 		<div class="col-sm-8 col-sm-pull-1">
 			<input  required type="text" class="form-control" id="start_time" name="start_time" ng-model="basic.startTime">
 			<span class="help-block">(HH:MM - 24 hr format)</span>
 		</div>
 	</div>
 	<div class="form-group row">
-		<label class="col-sm-3 col-sm-pull-1 control-label">End Time</label>                        
+		<label class="col-sm-3 col-sm-pull-1 control-label">End Time <font color="red">*</font></label>                        
 		<div class="col-sm-8 col-sm-pull-1">
 			<input required type="text" class="form-control" id="end_time" name="end_time" ng-model="basic.endTime">
 			<span class="help-block">(HH:MM - 24 hr format)</span>
@@ -83,10 +83,6 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-push-4 col-sm-pull-5 col-sm-3">
-		    <!-- <div class="alert alert-danger alert-dismissable" ng-show="showDateAlert">
-			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			Invalid Date
-			</div> -->
 			<span ng-show="showDateAlert" style="color:red; ">Date invalid</span>
 		</div>
 		<div class="col-sm-push-4 col-sm-2">
