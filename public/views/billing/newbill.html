@@ -102,10 +102,13 @@
 
                         <div ng-if="bill.modeOfPayment=='cash'" class="col-sm-offset-2 col-sm-7">
                             <label class="col-sm-4 checkbox-inline"><input type="checkbox" ng-model="bill.status" ng-true-value="'Due'" ng-false-value="'FullPaid'">Payment Due</label>
-
-                            <label class="col-sm-4 control-label" ng-if="bill.status == 'Due'">Amount Due (&#8377;)</label>
-                            <div class="col-sm-4" ng-if="bill.status =='Due'">
-                                <input class="form-control" type="number" step="any" min="0" name="dueAmount" ng-model="bill.amountPending">
+                            <div class="col-sm-8" ng-class="{'has-error':billingForm.dueAmount.$invalid}" >
+                                <label class="col-sm-6 control-label" ng-if="bill.status == 'Due'">Amount Due (&#8377;)</label>
+                                <div class="col-sm-6" ng-if="bill.status =='Due'">
+                                    <input class="form-control" type="number" step="any" min="0" max="{{bill.totalAmount}}" name="dueAmount" id="dueAmount" ng-model="bill.amountPending">
+                                </div>
+                                <span ng-show="billingForm.dueAmount.$invalid" class="help-block text-danger">Amount Pending Can't be more than total amount!                      
+                                </span>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary pull-right col-sm-3" ng-disabled=" !payable() || bill.saved" data-toggle="modal" data-target ="#confirmPaymentModal">Make Payment/Save</button>

@@ -1,4 +1,27 @@
+<style type="text/css">
+    .datepickerdemoBasicUsage {
+        /*padding-left:-50px;  */
+        padding-right: 10px;
+    }
+    .datepickerdemoBasicUsage md-content {
+        /*padding-bottom: 200px; */
+        background: rgb(238,238,238);
+        /*margin-left: -50px;*/
+    }
+    .datepickerdemoBasicUsage .validation-messages {
+        font-size: 12px;
+        color: #dd2c00;
+        margin: 10px 0 0 25px; 
+    } 
+    md-datepicker.md-default-theme, md-datepicker, md-content{
+        background: rgb(238,238,238);
+        overflow: hidden;
+        padding-left: -20px;
+        /*margin-left:-30px;*/
+        margin-right: -20px;
 
+    }
+</style>
 <div id="Registerbox" style="margin-top:20px;" class="mainbox" ng-cloak>                    
     <div class="panel" >
         <div class="panel-heading">
@@ -23,12 +46,20 @@
 
 
                 <div class="form-group"  ng-class="{'has-error': basicDetailsForm.dob.$invalid && !basicDetailsForm.dob.$pristine}">
-                    <label class="col-sm-3 control-label">DOB <font color="red">*</font></label>
-                    <div class="col-sm-8">
+
+                    <label class="col-sm-3 control-label">DOB *</label>
+                    <md-datepicker class="col-sm-8" style="text-align:left;" name="dob" id="dob" ng-model="newpatient_basic.DOB" md-placeholder="Enter DOB" required md-max-date="maxDate" ng-change="setAge()"></md-datepicker>
+
+                    <div class="validation-messages" ng-messages="basicDetailsForm.dob.$error && !basicDetailsForm.dob.$pristine">
+                      <div ng-message="valid">The entered value is not a date!</div>
+                      <div ng-message="required">This date is required!</div>
+                      <div ng-message="maxdate">Date is too late!</div>
+                    </div>
+
                         <input required type="date" class="form-control" id="dob" name="dob" placeholder="Enter DOB" ng-model="newpatient_basic.DOB" ng-change="setAge()" required>
                         <span ng-show="basicDetailsForm.dob.$error.required && !basicDetailsForm.dob.$pristine" class="help-block">Patient DOB is required                      
                         </span>    
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="form-group">
@@ -74,10 +105,10 @@
                     <div class="col-sm-8 ">
                         <select name="gender"  class="form-control" ng-model="newpatient_basic.type" required>
                             <option value="" selected disabled>-</option>
-                            <option value="NegativeMachine">Negative</option>
-                            <option value="BPositiveMachine" >Hepatitis B+</option>
-                            <option value="CPositiveMachine">Hepatitis C+</option>
-                            <option value="HIVMachine">HIV</option>
+                            <option value="Negative">Negative</option>
+                            <option value="BPositive" >Hepatitis B+</option>
+                            <option value="CPositive">Hepatitis C+</option>
+                            <option value="HIV">HIV</option>
 
                         </select>
                         <span ng-show="basicDetailsForm.type.$error.required && !basicDetailsForm.type.$pristine" class="help-block">Patient Type is required                      
@@ -270,6 +301,4 @@
         </div>
     </div>
 </div>
-
-
-
+    
