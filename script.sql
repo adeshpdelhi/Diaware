@@ -2,7 +2,7 @@
 -- create database diaware;
 use diaware;
 insert into centres (id, name,location,maxPatients,accessLinesAvailable, patientCount,noOfShiftsPerDay,OPDTotalNegativeMachines,typesOfMachinesAvailable,createdAt,updatedAt) values('JP1',"Apex Jaipur","malviya nagar",50,"femoral,fistoral,IJ,central",2,3,10,"NegativeMachines",'2016-07-13 10:48:56','2016-07-13 10:48:56');
-insert into patientDetails (id,name,contact,lastModifiedBy,centreId,createdAt,updatedAt,type) values("JP1-2016-1","adesh","987654321","aish", "JP1",'2016-07-13 10:48:56','2016-07-13 10:48:56','Negative');
+insert into patientDetails (id,name,contact,lastModifiedBy,centreId,createdAt,updatedAt,type) values("JP1-2016-1","adesh","987654321","aish", "JP1",'2016-07-13 10:48:56','2016-07-13 10:48:56','NegativeMachine');
 -- insert into bills(transactionId,status,amount,lastModifiedBy,patientId,createdAt,updatedAt) values(1,"Paid",26.89,"aish","JP1-2016-1",'2016-07-13 10:48:56','2016-07-13 10:48:56');
 -- insert into appointments(appointmentId, patientId, centreId,billingDone, date) values (DEFAULT,"JP1-2016-1","JP1",true, "2016-07-14");
 insert into appointments (centreId,date,dayOfTheWeek,appointmentType,tmtMachine,patientId,shiftNumber,oneTimeAppointment,createdAt,updatedAt) values('JP1','2016-09-2','Friday','OPD','NegativeMachine','JP1-2016-1',2,false,'2016-07-13 10:48:56','2016-07-13 10:48:56');
