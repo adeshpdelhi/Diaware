@@ -175,7 +175,7 @@ insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,cre
 
 insert into item(itemId,itemName,usageType,brandName,quantityMeasurementType,createdAt,updatedAt) values (DEFAULT, 'handwash','Treatment Specific','lifebuoy','bottles','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
-insert into indent (centreId,indentId,requestDate,requiredByDate,stockOrderTo,status,createdAt,updatedAt) values('JP1',DEFAULT,'2016-07-13 10:48:56','2016-07-13 10:48:56','Me','Raised','2016-07-13 10:48:56','2016-07-13 10:48:56');
+insert into indent (centreId,indentId,requestDate,requiredByDate,stockOrderTo,status,createdAt,updatedAt) values('JP1',DEFAULT,'2016-07-13 10:48:56','2016-07-13 10:48:56','corporate office','Raised','2016-07-13 10:48:56','2016-07-13 10:48:56');
 
 insert into indentItems(indentId, itemId, linkedStatus,quantityRequired, availableQuantity, createdAt, updatedAt) values (1,1,'Raised',4,2,'2016-07-13 10:48:56','2016-07-13 10:48:56');
 
