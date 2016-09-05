@@ -56,7 +56,7 @@
 						<md-card-title-text layout-align="center center" class="col-sm-8">
 							<span class="md-headline text-uppercase" style="font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;  font-size: 16px; font-weight:14px; line-height: 1.5;"  >Statistics of last Month</span>
 						</md-card-title-text>
-						<md-button md-no-ink class="md-warn col-sm-4" layout="start end"  style="padding-right:-20px" ng-click="statistics(!allCentresStats)">{{!allCentresStats?'all Centres':'This Centres'}}</md-button>
+						<md-button ng-if="role.admin" md-no-ink class="md-warn col-sm-4" layout="start end"  style="padding-right:-20px" ng-click="statistics(!allCentresStats)">{{!allCentresStats?'all Centres':'This Centres'}}</md-button>
 
 					</md-card-title>
 					<md-card-content  style=" max-height:500px; margin-top: 13px; color:rgb(0, 38, 153); ">
@@ -100,7 +100,7 @@
 						<span class="md-headline text-uppercase" style="" >View Todays Appointments</span>
 						<span class="md-subheading dateCSS" >Today {{today|date:dd-MMMM-YY}} </span>
 					</md-card-title-text>
-					<md-button md-no-ink class="md-warn col-sm-3" layout="start end" ng-click="viewTodaysAppointments(!allCentresAppointments)">{{!allCentresAppointments?'all Centres':'This Centres'}}</md-button>
+					<md-button ng-if="role.admin" md-no-ink class="md-warn col-sm-3" layout="start end" ng-click="viewTodaysAppointments(!allCentresAppointments)">{{!allCentresAppointments?'all Centres':'This Centres'}}</md-button>
 
 				</md-card-title>
 				<md-card-content ng-show="showContent" style="max-height:600px; color:rgb(0, 38, 153)">
@@ -150,7 +150,7 @@
 						<span class="md-headline text-uppercase" style="" >Pending Bills</span>
 						<!-- <span class="md-subheading dateCSS" >Today {{today|date:dd-MMMM-YY}} </span> -->
 					</md-card-title-text>
-					<md-button md-no-ink class="md-warn col-sm-3" layout="start end" ng-click="viewPendingBills(!allCentresBills)">{{!allCentresBills?'all Centres':'This Centres'}}</md-button>
+					<md-button ng-if="role.admin" md-no-ink class="md-warn col-sm-3" layout="start end" ng-click="viewPendingBills(!allCentresBills)">{{!allCentresBills?'all Centres':'This Centres'}}</md-button>
 
 				</md-card-title>
 				<md-card-content ng-show="showContentBills" style="max-height:600px; color:rgb(0, 38, 153)">
@@ -200,7 +200,7 @@
 						<span class="md-headline text-uppercase" style="" >Cancelled Bills</span>
 						<!-- <span class="md-subheading dateCSS" >Today {{today|date:dd-MMMM-YY}} </span> -->
 					</md-card-title-text>
-					<md-button md-no-ink class="md-warn col-sm-3" layout="start end" ng-click="viewCancelledBills(!allCentresCancelledBills,true)">{{!allCentresCancelledBills?'all Centres':'This Centres'}}</md-button>
+					<md-button ng-if="role.admin" md-no-ink class="md-warn col-sm-3" layout="start end" ng-click="viewCancelledBills(!allCentresCancelledBills,true)">{{!allCentresCancelledBills?'all Centres':'This Centres'}}</md-button>
 
 				</md-card-title>
 				<md-card-content ng-show="showContentCancelledBills" style="max-height:600px; color:rgb(0, 38, 153)">
