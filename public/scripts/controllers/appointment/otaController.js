@@ -33,11 +33,6 @@ angular.module('App')
 
 	};
 
-	/*$scope.shift1beds=3;
-	$scope.shift2beds=1;
-	$scope.shift3beds=0;
- 	$scope.shift4beds=2;
-*/
 	$scope.$watch('ota.date',function(newVal,oldVal){
 
 		if(newVal){

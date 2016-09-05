@@ -10,7 +10,7 @@
 
 			<div class="form-group">
 				<div class="col-sm-push-3 col-sm-8" >
-                    <label class="col-sm-3 control-label">Appointment Type</label>                       
+                    <label class="col-sm-3 control-label">Appointment Type <font color="red">*</font></label>                       
                     <div class="col-sm-3 col-sm-push-1">
                        <select required name="ota_appointmentType"  class="form-control" ng-model="ota.appointmentType">
                             <option value="" selected disabled>-</option>
@@ -23,7 +23,7 @@
 			</div>
 			
 			<div class="form-group col-sm-push-3 col-sm-8" >
-                        <label class="col-sm-3 control-label">Date </label> 
+                        <label class="col-sm-3 control-label">Date <font color="red">*</font></label> 
                         <md-content class="col-sm-3 col-sm-push-1">
                             <md-datepicker required name="dateFrom" ng-model="ota.date" md-placeholder="Enter date">
                             </md-datepicker>
@@ -59,14 +59,16 @@
 
 			<div class="form-group">
 				<div class="col-sm-push-3 col-sm-8" >
-                    <label class="col-sm-3 control-label">Shift No</label>                       
+                    <label class="col-sm-3 control-label">Shift No <font color="red">*</font></label>                       
                     <div class="col-sm-3 col-sm-push-1">
                        <select required name="ota_shift"  class="form-control" ng-model="ota.shiftNumber">
                             <option value="" selected disabled>-</option>
-                            <option value="1"  >Shift 1</option>
-                            <option value="2"  >Shift 2</option>
-							<option value="3"  >Shift 3</option>
-							<option value="4"  >Shift 4</option>
+                            <option value="1" ng-if="shift1beds!=null" >Shift 1</option>
+                            <option value="2" ng-if="shift2beds!=null" >Shift 2</option>
+							<option value="3" ng-if="shift3beds!=null" >Shift 3</option>
+							<option value="4" ng-if="shift4beds!=null" >Shift 4</option>
+							<option value="5" ng-if="shift5beds!=null" >Shift 3</option>
+							<option value="6" ng-if="shift6beds!=null" >Shift 4</option>
                         </select>
                     
                     </div>

@@ -12,15 +12,8 @@
             </div>
             <form class="form-horizontal" name="basicDetailsForm" ng-submit="basicDetailsForm.$valid && editBasic?updateBasicDetails():save_basic_details()" role="form" novalidate>
 
-                <!-- <div class="form-group ">
-                    <label class="col-sm-3 control-label">ID Number</label>
-                    <div class="col-sm-8">
-                        <input type="number" class="form-control" id="id" name="id" placeholder="Enter ID" disabled>
-                    </div>
-                </div> -->
-
                 <div class="form-group" ng-class="{'has-error': basicDetailsForm.name.$invalid && !basicDetailsForm.name.$pristine}">
-                    <label class="col-sm-3 control-label">Name *</label>                        
+                    <label class="col-sm-3 control-label">Name <font color="red">*</font></label>                        
                     <div class="col-sm-8">
                         <input required type="text" class="form-control" id="name" name="name" placeholder="Enter Name" ng-model="newpatient_basic.name" required>
                         <span ng-show="basicDetailsForm.name.$error.required && !basicDetailsForm.name.$pristine" class="help-block">Patient Name is required                      
@@ -30,7 +23,7 @@
 
 
                 <div class="form-group"  ng-class="{'has-error': basicDetailsForm.dob.$invalid && !basicDetailsForm.dob.$pristine}">
-                    <label class="col-sm-3 control-label">DOB *</label>
+                    <label class="col-sm-3 control-label">DOB <font color="red">*</font></label>
                     <div class="col-sm-8">
                         <input required type="date" class="form-control" id="dob" name="dob" placeholder="Enter DOB" ng-model="newpatient_basic.DOB" ng-change="setAge()" required>
                         <span ng-show="basicDetailsForm.dob.$error.required && !basicDetailsForm.dob.$pristine" class="help-block">Patient DOB is required                      
@@ -46,7 +39,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">Blood Group *</label>               
+                    <label class="col-sm-3 control-label">Blood Group <font color="red">*</font></label>               
                     <div class="col-sm-8 ">
                         <select  required name="blood_group"  class="form-control" ng-model="newpatient_basic.bloodGroup">
                             <option value=""  selected disabled>-</option>
@@ -65,7 +58,7 @@
 
 
                 <div class="form-group" ng-class="{'has-error': basicDetailsForm.gender.$invalid && !basicDetailsForm.gender.$pristine}">
-                    <label  class="col-sm-3 control-label">Gender *</label>
+                    <label  class="col-sm-3 control-label">Gender <font color="red">*</font></label>
                     <div class="col-sm-8 ">
                         <select required name="gender"  class="form-control" ng-model="newpatient_basic.gender" required>
                             <option value="" selected disabled>-</option>
@@ -77,7 +70,7 @@
                     </div>
                 </div>
                 <div class="form-group" ng-class="{'has-error': basicDetailsForm.type.$invalid && !basicDetailsForm.type.$pristine}">
-                    <label  class="col-sm-3 control-label">Type *</label>
+                    <label  class="col-sm-3 control-label">Type <font color="red">*</font></label>
                     <div class="col-sm-8 ">
                         <select name="gender"  class="form-control" ng-model="newpatient_basic.type" required>
                             <option value="" selected disabled>-</option>
@@ -93,14 +86,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">Location *</label>
+                    <label class="col-sm-3 control-label">Location <font color="red">*</font></label>
                     <div class="col-sm-8">
                         <input required type="text" class="form-control" id="location" name="location" placeholder="Enter Location" ng-model="newpatient_basic.location">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label  class="col-sm-3 control-label">Address *</label>
+                    <label  class="col-sm-3 control-label">Address <font color="red">*</font></label>
                     <div class="col-sm-8">
                         <textarea required  class="form-control" id="address" name="address" rows="4" ng-model="newpatient_basic.address"></textarea>
                     </div>
@@ -158,7 +151,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">Transplant Waiting List *</label>                       
+                    <label class="col-sm-3 control-label">Transplant Waiting List <font color="red">*</font></label>                       
                     <div class="col-sm-8 ">
                         <select required class="form-control" ng-model="newpatient_basic.transplantWaitingList">
                             <option value="" selected disabled>-</option>
@@ -196,7 +189,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">Viral Market Status *</label>                        
+                    <label class="col-sm-3 control-label">Viral Market Status <font color="red">*</font></label>                        
                     <div class="col-sm-8">
                         <select required class="form-control" ng-model="newpatient_basic.viralMarkerStatus">
                             <option value="" selected disabled>-</option>
@@ -206,14 +199,14 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label  class="col-sm-3 control-label">Doctor Name *</label>                        
+                    <label  class="col-sm-3 control-label">Doctor Name <font color="red">*</font></label>                        
                     <div class="col-sm-8">
                         <input required type="text" class="form-control" id="doctor_name" name="doctor_name" placeholder="Doctor Name" ng-model="newpatient_basic.doctorName">
                     </div>
                 </div>
 
                 <div class="form-group" ng-class="{'has-error': basicDetailsForm.payment_mode.$invalid && !basicDetailsForm.payment_mode.$pristine}" >
-                    <label class="col-sm-3 control-label">Payment Mode *</label>
+                    <label class="col-sm-3 control-label">Payment Mode <font color="red">*</font></label>
                     <div class="col-sm-8">
                         <select name="payment_mode" id="payment_mode" class="form-control" ng-model="newpatient_basic.modeOfPayment" required>
                             <option value="" selected disabled>-</option>
