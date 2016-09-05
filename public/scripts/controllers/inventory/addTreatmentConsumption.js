@@ -1,74 +1,14 @@
 'use strict';
 angular.module('App')
-.controller('AddTreatmentConsumptionController',['$scope','authorize','appointmentFactory','inventoryFactory','regularForm','$uibModal','choosePatientFactory', function($scope,authorize,appointmentFactory, inventoryFactory, regularForm,$uibModal , choosePatientFactory){
-		// $scope.regularForm = regularForm.regularForm;
-		// $scope.pendingTreatments=[];
-		// $scope.showAlert=false;
-
-		// // $scope.treatmentInventory= {
-		// // 	treatmentId:null,
-		// // 	treatmentType:null,
-		// // 	saved:false
-		// // };
-		// $scope.pendingTreatments = [];
-		// $scope.daysToLoop = {};
-		// appointmentFactory.getPastAppointments(authorize.getCentre()).query({attended:true}).$promise.then(function(response){
-		// 	$scope.appointments = response;
-		// 	inventoryFactory.getConsumptions(authorize.getCentre()).query().$promise.then(function(response){
-		// 		$scope.consumptions = response;
-		// 		for(var i=0;i<$scope.appointments.length;i++)
-		// 		{
-		// 			var present = false;
-		// 			for(var j=0;j<$scope.consumptions.length;j++){
-		// 				if($scope.appointments[i].appointmentId == $scope.consumptions[j].treatmentId)
-		// 					present=true;
-		// 			}
-		// 			if(present == false){
-		// 				$scope.pendingTreatments.push($scope.appointments[i]);
-		// 				$scope.daysToLoop[$scope.appointments[i].dayOfTheWeek] = true;
-		// 			}
-
-		// 		}
-		// 		console.log('length of pending treatments :'+$scope.pendingTreatments.length);
-		// 		if($scope.pendingTreatments.length == 0)
-		// 		{
-		// 			$scope.message = 'All treatment consumptions added!';
-		// 			$scope.messageColor = 'success';
-		// 			$scope.showAlert = true;
-		// 		}
-		// 	},function(response){
-		// 		alert('Failed to retrieve consumptions');
-		// 	})
-		// 	console.log(response);
-		// },function(response){alert('Failed to retrieve appointments')})
-		// // need to add attributes of editable table given in excel
-		$scope.openAddConsumption = function(appointmentId){
-			var appointment = choosePatientFactory.getAppointment();
-			console.log('recieved appointment is ');
-			console.log(appointment);
-			if(appointment.treatmentConsumptionAdded)
-			{
-				$scope.message = "Treatment consumption already added!";
-				$scope.messageColor = "success";
-				return;
-			}
-			$uibModal.open({
-              templateUrl: 'views/inventory/addTreatmentConsumptionModal.html',
-              controller: 'AddConsumptionModalController',
-              size:'lg',
-	          resolve: {
-	            appointmentId: function () {
-	             return appointment.appointmentId;
-	            }
-	          }
-            });
-		};
-		$scope.openAddConsumption();
-	
-	}])
-.controller('AddConsumptionModalController', ['$scope', '$state', 'authorize', '$uibModalInstance', 'appointmentId','inventoryFactory','appointmentFactory', function ($scope, $state, authorize, $uibModalInstance, appointmentId,inventoryFactory, appointmentFactory) {
-
-		$scope.appointmentId = appointmentId;
+.controller('AddTreatmentConsumptionController',['$scope','authorize','appointmentFactory','inventoryFactory','regularForm','choosePatientFactory', function($scope, authorize,appointmentFactory, inventoryFactory, regularForm, choosePatientFactory){
+	$scope.appointment = choosePatientFactory.getAppointment();
+	$scope.appointmentId = $scope.appointment.appointmentId;
+	$scope.savedOnce = false;
+	if($scope.appointment.treatmentConsumptionAdded){
+		$scope.message = 'Treatment consumption already added';
+		$scope.messageColor = 'success';
+	}
+	if(choosePatientFactory)
 		$scope.consumption={
 				centreId:authorize.getCentre(),
 				treatmentId:$scope.appointmentId,
@@ -106,16 +46,16 @@ angular.module('App')
 								//console.log('available '+$scope.dialysisTabularItems[index].itemName+' '+$scope.dialysisTabularItems[index].chosen.brandName+' '+floorItems[j].item.quantityMeasurementType+' '+floorItems[j].availableQuantity);
 							}
 						}
-						if($scope.dialysisTabularItems[index].availableQuantity == null || $scope.dialysisTabularItems[index].availableQuantity == 0)
-						{
-							$scope.dialysisTabularItems[index].availableQuantity = 0;
-							$scope.message = 'Atleast one item unavailable in floor';
-							$scope.messageColor = 'danger';
-							$scope.messageIndex = index;
-							$scope.showAlert = true;
-						}
-						else if(index == $scope.messageIndex || $scope.message != 'Atleast one item unavailable in floor')
-							$scope.showAlert = false;
+						// if($scope.dialysisTabularItems[index].availableQuantity == null || $scope.dialysisTabularItems[index].availableQuantity == 0)
+						// {
+						// 	$scope.dialysisTabularItems[index].availableQuantity = 0;
+						// 	$scope.message = 'Atleast one item unavailable in floor';
+						// 	$scope.messageColor = 'danger';
+						// 	$scope.messageIndex = index;
+						// 	$scope.showAlert = true;
+						// }
+						// else if(index == $scope.messageIndex || $scope.message != 'Atleast one item unavailable in floor')
+						// 	$scope.showAlert = false;
 					})
 					
 			}
@@ -128,16 +68,16 @@ angular.module('App')
 								$scope.catheterizationTabularItems[index].availableQuantity = floorItems[j].availableQuantity;
 							}
 						}
-						if($scope.catheterizationTabularItems[index].availableQuantity == null || $scope.catheterizationTabularItems[index].availableQuantity == 0)
-						{
-							$scope.catheterizationTabularItems[index].availableQuantity = 0;
-							$scope.message = 'Atleast one item unavailable in floor';
-							$scope.messageColor = 'danger';
-							$scope.messageIndex = index;
-							$scope.showAlert = true;
-						}
-						else if(index == $scope.messageIndex || $scope.message != 'Atleast one item unavailable in floor')
-							$scope.showAlert = false;
+						// if($scope.catheterizationTabularItems[index].availableQuantity == null || $scope.catheterizationTabularItems[index].availableQuantity == 0)
+						// {
+						// 	$scope.catheterizationTabularItems[index].availableQuantity = 0;
+						// 	$scope.message = 'Atleast one item unavailable in floor';
+						// 	$scope.messageColor = 'danger';
+						// 	$scope.messageIndex = index;
+						// 	$scope.showAlert = true;
+						// }
+						// else if(index == $scope.messageIndex || $scope.message != 'Atleast one item unavailable in floor')
+						// 	$scope.showAlert = false;
 					})
 			}
 		}
@@ -257,7 +197,9 @@ angular.module('App')
 			{		
 
 				for(var i=0;i<$scope.dialysisTabularItems.length;i++){
-					if($scope.dialysisTabularItems[i].chosen.quantity==null || $scope.dialysisTabularItems[i].availableQuantity==null || $scope.dialysisTabularItems[i].chosen.quantity<0 || $scope.dialysisTabularItems[i].chosen.quantity>$scope.dialysisTabularItems[i].availableQuantity || $scope.dialysisTabularItems[i].availableQuantity==0){
+					if($scope.dialysisTabularItems[i].chosen.quantity==null || $scope.dialysisTabularItems[i].availableQuantity==null || $scope.dialysisTabularItems[i].chosen.quantity<0 || $scope.dialysisTabularItems[i].chosen.quantity>$scope.dialysisTabularItems[i].availableQuantity ){
+							//add availableQuantity == 0 condition above
+						
 						$scope.message = 'One of the fields blank/invalid';
 						$scope.messageColor = 'danger';
 						$scope.showAlert = true;
@@ -301,8 +243,8 @@ angular.module('App')
 							$scope.message='Saved successfully!';
 							$scope.messageColor='success';
 							$scope.showAlert=true;
-							$uibModalInstance.close();
-				    		$state.go('app.choosePatientMatrix', {callback:'inventory.consumption.new'}, {reload: true});
+							$scope.savedOnce = true;
+				    		// $state.go('app.choosePatientMatrix', {callback:'inventory.consumption.new'}, {reload: true});
 										
 						},function(response){
 							alert('consumption save failed');
@@ -316,7 +258,8 @@ angular.module('App')
 				{		
 
 					for(var i=0;i<$scope.catheterizationTabularItems.length;i++){
-						if($scope.catheterizationTabularItems[i].chosen.quantity==null || $scope.catheterizationTabularItems[i].availableQuantity==null || $scope.catheterizationTabularItems[i].chosen.quantity<0 || $scope.catheterizationTabularItems[i].chosen.quantity>$scope.catheterizationTabularItems[i].availableQuantity || $scope.catheterizationTabularItems[i].availableQuantity==0){
+						if($scope.catheterizationTabularItems[i].chosen.quantity==null || $scope.catheterizationTabularItems[i].availableQuantity==null || $scope.catheterizationTabularItems[i].chosen.quantity<0 || $scope.catheterizationTabularItems[i].chosen.quantity>$scope.catheterizationTabularItems[i].availableQuantity){
+							//add availableQuantity == 0 condition above
 							$scope.message = 'One of the fields blank/invalid';
 							$scope.messageColor = 'danger';
 							$scope.showAlert = true;
@@ -360,8 +303,8 @@ angular.module('App')
 							$scope.message='Saved successfully!';
 							$scope.messageColor='success';
 							$scope.showAlert=true;
-							$uibModalInstance.close();
-				    		$state.go('app.choosePatientMatrix', {callback:'inventory.consumption.new'}, {reload: true});
+							$scope.savedOnce = true;
+				    		// $state.go('app.choosePatientMatrix', {callback:'inventory.consumption.new'}, {reload: true});
 			
 						},function(response){
 							alert('consumption save failed');
@@ -407,9 +350,5 @@ angular.module('App')
 			}
 			return true;
 		}
-	    //$uibModalInstance.close();
-	    //$state.go('app.home', {}, {reload: true});
-
-}])
-
+	}])
 ;

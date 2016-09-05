@@ -55,7 +55,7 @@
                     <ul class="dropdown-menu" uib-dropdown-menu  aria-labelledby="simple-dropdown">
                         <li>
                             <a ng-show="role.admin || role.incharge || role.manager" ui-sref="app.choosePatient({callback:'appointment'})">Patient Schedule</a>
-                            <!--<a ng-show="role.admin || role.incharge || role.manager" ui-sref="app.choosePatient({callback:'OneTimeAppointment'})">One Time Appointnment</a>-->
+                            <a ng-show="role.admin || role.incharge || role.manager" ui-sref="app.choosePatient({callback:'appointment.OneTimeAppointment'})">One Time Appointnment</a>
 
 							<a ui-sref="app.appointment.viewAppointments">View/Change Appointments</a>
 

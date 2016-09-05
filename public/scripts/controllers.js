@@ -178,6 +178,8 @@ angular.module('App')
         $scope.redirect = function(id){
         	choosePatientFactory.setPatient(id);
         	var callback = $stateParams.callback;
+            console.log('app.'+callback);
+            console.log(callback);
         	$state.go('app.'+callback);
         };
     }])

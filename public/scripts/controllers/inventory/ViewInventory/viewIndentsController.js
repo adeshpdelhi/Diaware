@@ -86,7 +86,7 @@ angular.module('App')
 		$scope.updateFilteredItems = function(){
 					for(var i=0;i<$scope.filteredItems.length;i++)
 					{
-						for(j=0;j<$scope.stocks.length;j++){
+						for(var j=0;j<$scope.stocks.length;j++){
 							if($scope.filteredItems[i].itemId == $scope.stocks[j].itemId)
 							{
 								$scope.filteredItems[i].availableQuantity = $scope.stocks[j].availableQuantity;
@@ -384,7 +384,7 @@ angular.module('App')
 									//console.log($scope.stocks[j].itemId+' quantiy updated to '+$scope.stocks[j].availableQuantity);
 								}
 							}
-							console.log('value of present '+present)
+							console.log('value of present '+present);
 							if(present == false){
 								inventoryFactory.getStocks(authorize.getCentre()).save({centreId: authorize.getCentre(),itemId: $scope.indentItems[i].itemId,availableQuantity:$scope.indentItems[i].quantityRequired, lastModifiedBy:authorize.getUsername()});
 							}
