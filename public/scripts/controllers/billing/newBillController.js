@@ -164,7 +164,7 @@ angular.module('App')
                 }
             }
         };
-        $scope.$watch('bill.totalAmount',function(newValue,oldValue){
+        $scope.$watch('bill.totalAmount + bill.additionalDiscount',function(newValue,oldValue){
             if(newValue > 0){
                 $scope.bill.payableAmount = $scope.bill.totalAmount - ($scope.bill.totalAmount* $scope.bill.additionalDiscount/100); 
                 $scope.bill.patientPayableAmount = $scope.bill.payableAmount;
