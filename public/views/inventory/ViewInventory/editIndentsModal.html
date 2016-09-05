@@ -40,7 +40,7 @@
                                 <td width="10%" style="text-align:center;" >{{indentItem.item.brandName}}</td>
                                 <td width="10%" style="text-align:center;" >
                                 <div style="text-align:center;color:{{(indentItem.quantityRequired<0)?'red':'black'}};" ng-if="(viewStatus==indent.status && indent.status=='Raised' && (activeUser.admin == true || activeUser.incharge==true)) || isReceiving">
-                                    <input style="width:50%;" type="number" ng-model="indentItem.quantityRequired">
+                                    <input style="width:50%;" type="number" min=0 ng-model="indentItem.quantityRequired">
                                 </div>
                                 <div ng-if="!((viewStatus==indent.status && indent.status=='Raised' && (activeUser.admin == true || activeUser.incharge==true)) || isReceiving)">
                                     {{indentItem.quantityRequired}}
@@ -97,7 +97,7 @@
                                 <td style="text-align:center;" width="10%" >{{indentItem.itemName}}</td>
                                 <td style="text-align:center;" width="10%" >{{indentItem.usageType}}</td>
                                 <td style="text-align:center;" width="10%" >{{indentItem.brandName}}</td>
-                                <td style="text-align:center;text-align:center;color:{{(indentItem.quantityRequired<1)?'red':'black'}};" width="10%" ><input style="width:50%;" type="number" ng-init="indentItem.quantityRequired=1" ng-model="indentItem.quantityRequired"></td>
+                                <td style="text-align:center;text-align:center;color:{{(indentItem.quantityRequired<1)?'red':'black'}};" width="10%" ><input style="width:50%;" type="number" min=0 ng-init="indentItem.quantityRequired=1" ng-model="indentItem.quantityRequired"></td>
                                 <td style="text-align:center;" width="10%" >{{indentItem.availableQuantity}}</td>
                                 <td style="text-align:center;" width="10%" >{{indentItem.quantityMeasurementType}}</td>
                                 <td style="text-align:center;" width="5%" ng-click="(indentItem.quantityRequired>0) && addItem(indentItem,$index)"><span class="glyphicon glyphicon-plus"></span></td>

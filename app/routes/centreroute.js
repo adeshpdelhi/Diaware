@@ -212,7 +212,7 @@ centreRouter.route('/:id')
         if (oldCentre.id) { // if the record exists in the db
             oldCentre.updateAttributes(req.body).then(function (result) { 
                 console.log(JSON.stringify(result));
-                afterUpdate(newInstance,oldInstance);
+                // afterUpdate(newInstance,oldInstance);
                 res.status(200);
                 res.end("successfully updated");
                 console.log('updated successfully');
