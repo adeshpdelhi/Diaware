@@ -65,6 +65,7 @@ patientFactory.getPatients(authorize.getCentre()).get({id:choosePatientFactory.g
 
 ////////function
 $scope.make_ota=function(){
+	$scope.correctshift = false;
 	$scope.ota.oneTimeAppointment=true;
 	console.log("In make ota");
 	//no of beds
@@ -92,14 +93,20 @@ $scope.make_ota=function(){
 	console.log('shift selected = '+$scope.ota.shiftNumber)
 	console.log('checking for free shifts now '+$scope.ota.shiftNumber+' '+$scope.shift2beds);
 	//check if selected shift number has atleast one bed avalaible
-	if($scope.ota.shiftNumber==1)
-		if($scope.shift1beds>=1)
+	if($scope.ota.shiftNumber==1){
+		console.log('shift 1 bed checking now');
+		if($scope.shift1beds>=1){
+			console.log('yeahhhhh');
 			$scope.correctshift=true;
+		}
+	}
 	else if($scope.ota.shiftNumber==2)
 	{
 		console.log('shift 2 bed checking now');
-		if($scope.shift2beds>=1)
+		if($scope.shift2beds>=1){
+			console.log('yeahhhhh');
 			$scope.correctshift=true;
+		}
 	}
 	else if($scope.ota.shiftNumber==3)
 		if($scope.shift3beds>=1)
@@ -147,4 +154,27 @@ $scope.make_ota=function(){
 		});
 	}
 }
+
+$scope.ota={
+		centreId:null,
+		patientId:null,
+		date:null,
+		dayOfTheWeek:null,
+		shiftNumber:0,
+		appointmentType:null,
+		tmtMachine:null,
+		oneTimeAppointment:true,
+		//faltu
+	billingDone:null,
+	monitoringDone:null,
+	treatmentConsumptionAdded:null,
+	processComplete:null,
+	cancelled:null,
+	allBillsCleared:null,
+	billingRemarks:null
+
+	};
+
+
+
 }]);
