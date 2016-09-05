@@ -131,7 +131,7 @@ $scope.make_ota=function(){
 		console.log($scope.ota);
 		// save ota
 		$scope.ota.date = new Date($scope.ota.date);
-		$scope.ota.date = new Date("2016-09-04");
+		//$scope.ota.date = new Date("2016-09-04");
 		appointmentFactory.getAppointments(authorize.getCentre()).save($scope.ota).$promise.then(function(response){
 			console.log("saving ota");
 			$scope.showalert_ota=true;
