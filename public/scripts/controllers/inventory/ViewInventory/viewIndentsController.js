@@ -273,6 +273,13 @@ angular.module('App')
 
 
 		$scope.approveIndent = function(){
+			if($scope.indent.stockOrderTo == null || $scope.indent.stockOrderTo.length==0){
+				$scope.message = 'Enter stockOrderTo!';
+				$scope.messageColor = 'danger';
+				$scope.showAlert = true;
+				return;
+			}
+			$scope.showAlert = false;
 			$scope.indent.status='Approved';
 			for(var i=0;i<$scope.indentItems.length;i++)
 				$scope.indentItems[i].linkedStatus = 'Approved';
