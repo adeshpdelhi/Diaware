@@ -34,19 +34,7 @@
                         </li>
                     </ul>
                 </li>
-                <li ng-show="role.admin || role.incharge || role.manager" ng-class="{active: stateis('app.billing')}" uib-dropdown on-toggle="toggled(open)">
-                    <a style="cursor: pointer; display: block;" class="simple-dropdown" uib-dropdown-toggle>
-                        <span class="glyphicon glyphicon-usd"
-                        aria-hidden="true"></span> Billing
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu  aria-labelledby="simple-dropdown">
-                        <li>
-                            <a ui-sref="app.choosePatientMatrix({callback:'billing.newbill'})">New Bill</a>
-                            <a ui-sref="app.billing.viewbill">View/Edit Billing</a>
-
-                        </li>
-                    </ul>
-                </li>
+                
                 <li  ng-class="{active: stateis('app.appointment')}" uib-dropdown on-toggle="toggled(open)">
                     <a style="cursor: pointer; display: block;" class="simple-dropdown" uib-dropdown-toggle>
                         <span class="glyphicon glyphicon-calendar"
@@ -62,7 +50,19 @@
                         </li>
                     </ul>
                 </li>
-				
+				<li ng-show="role.admin || role.incharge || role.manager" ng-class="{active: stateis('app.billing')}" uib-dropdown on-toggle="toggled(open)">
+                    <a style="cursor: pointer; display: block;" class="simple-dropdown" uib-dropdown-toggle>
+                        <span class="glyphicon glyphicon-usd"
+                        aria-hidden="true"></span> Billing
+                    </a>
+                    <ul class="dropdown-menu" uib-dropdown-menu  aria-labelledby="simple-dropdown">
+                        <li>
+                            <a ui-sref="app.choosePatientMatrix({callback:'billing.newbill'})">New Bill</a>
+                            <a ui-sref="app.billing.viewbill">View/Edit Billing</a>
+
+                        </li>
+                    </ul>
+                </li>
 				<li ng-show="role.admin || role.incharge || role.clinical" ng-class="{active: stateis('app.dialysis_care_plan')}" uib-dropdown on-toggle="toggled(open)">
                     <a style="cursor: pointer; display: block;" class="simple-dropdown" uib-dropdown-toggle >
                         <span class="glyphicon glyphicon-user"
