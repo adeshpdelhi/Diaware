@@ -26,8 +26,8 @@ angular.module('App')
 	billingDone:null,
 	monitoringDone:null,
 	treatmentConsumptionAdded:null,
-	processComplete:null,
-	cancelled:null,
+	processComplete:false,
+	cancelled:false,
 	allBillsCleared:null,
 	billingRemarks:null
 
@@ -168,8 +168,8 @@ $scope.ota={
 	billingDone:null,
 	monitoringDone:null,
 	treatmentConsumptionAdded:null,
-	processComplete:null,
-	cancelled:null,
+	processComplete:false,
+	cancelled:false,
 	allBillsCleared:null,
 	billingRemarks:null
 
