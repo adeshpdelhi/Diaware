@@ -29,7 +29,7 @@ angular.module('App')
 	processComplete:false,
 	cancelled:false,
 	allBillsCleared:false,
-	billingRemarks:null
+	billingRemarks:null,
 	present: false
 	};
 
@@ -171,7 +171,7 @@ $scope.ota={
 	processComplete:false,
 	cancelled:false,
 	allBillsCleared:false,
-	billingRemarks:null
+	billingRemarks:null,
 	present: false
 	};
 
