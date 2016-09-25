@@ -63,99 +63,100 @@
         </div>     
 
         <div style="padding-top:30px" class="panel-body">
-		 <form class="form-horizontal" name="basicDetailsForm">
+        <div class="form-group">
+            <div class="alert alert-{{messageColor}} alert-dismissable" ng-show="showalert_ota">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{message}}
+            </div>
+        </div>
+           <form class="form-horizontal" name="basicDetailsForm">
 
 
-			<div class="form-group col-sm-push-2 col-sm-8">
-				<!-- <div class="" > -->
-                    <label class="col-sm-5 control-label">Appointment Type <font color="red">*</font></label>                       
-                    <div class="col-sm-7">
+               <div class="form-group col-sm-push-2 col-sm-8">
+                <!-- <div class="" > -->
+                <label class="col-sm-5 control-label">Appointment Type <font color="red">*</font></label>                       
+                <div class="col-sm-7">
 
-                       <select required name="ota_appointmentType" ng-change="showbeds=false"  class="form-control" ng-model="ota.appointmentType">
+                   <select required name="ota_appointmentType" ng-change="showbeds=false"  class="form-control" ng-model="ota.appointmentType">
 
-                            <option value="" selected disabled>-</option>
-                            <option value="OPD">OPD</option>
-                            <option value="IPD/ICU">IPD/ICU</option>
-							
-                        </select>
-                    </div>
-                    <!-- </div> -->
-			</div>
-			
+                    <option value="" selected disabled>-</option>
+                    <option value="OPD">OPD</option>
+                    <option value="IPD/ICU">IPD/ICU</option>
 
-			<div class="form-group col-sm-8 col-sm-push-2" >
-                        <label class="col-sm-4 control-label">Date <font color="red">*</font></label> 
-                        <md-content class="col-sm-8 col-sm-push-2">
+                </select>
+            </div>
+            <!-- </div> -->
+        </div>
 
-                            <md-datepicker required name="dateFrom" ng-model="ota.date" md-placeholder="Enter date">
-                            </md-datepicker>
-                            <div class="validation-messages" ng-messages="viewAppointmentsForm.dateFrom.$error">
-                                <div ng-message="valid" class="text-danger" >The entered value is not a date!</div>
-                            </div>
-                        </md-content>
-                        <!-- <div class="col-sm-2"></div> -->
-                 </div>
 
-            <div class="form-group col-sm-8 col-sm-push-4" ng-show="showbeds">
-                 <!-- <div class="col-sm-push-3 col-sm-8" > -->
-					 <div class="form-group"  ng-if="shift1beds!=null">
-						<label class="col-sm-3 control-label">Shift 1 : {{shift1beds}}</label>   
-					 </div>
-					  <div class="form-group"  ng-if="shift2beds!=null">
-						<label  class="col-sm-3 control-label">Shift 2 : {{shift2beds}}</label>   
-					 </div>
-					  <div class="form-group"  ng-if="shift3beds!=null">
-						<label  class="col-sm-3 control-label">Shift 3 : {{shift3beds}}</label>   
-					 </div>
-					  <div class="form-group" ng-if="shift4beds!=null">
-						<label  class="col-sm-3 control-label">Shift 4 : {{shift4beds}}</label>   
-					 </div>
-					 <div class="form-group" ng-if="shift5beds!=null">
-						<label  class="col-sm-3 control-label">Shift 5 : {{shift5beds}}</label>   
-					 </div>
-					 <div class="form-group" ng-if="shift6beds!=null">
-						<label  class="col-sm-3 control-label">Shift 6 : {{shift6beds}}</label>   
-					 </div>
-				 <!-- </div> -->
-			</div>
+        <div class="form-group col-sm-8 col-sm-push-2" >
+            <label class="col-sm-4 control-label">Date <font color="red">*</font></label> 
+            <md-content class="col-sm-8 col-sm-push-2">
 
-			<div class="form-group col-sm-8 col-sm-push-2">
-				<!-- <div class="col-sm-push-3 col-sm-8" > -->
-                    <label class="col-sm-4 control-label">Shift No <font color="red">*</font></label>                       
-                    <div class="col-sm-8 col-sm-push-1">
+                <md-datepicker required name="dateFrom" ng-model="ota.date" md-placeholder="Enter date">
+                </md-datepicker>
+                <div class="validation-messages" ng-messages="viewAppointmentsForm.dateFrom.$error">
+                    <div ng-message="valid" class="text-danger" >The entered value is not a date!</div>
+                </div>
+            </md-content>
+            <!-- <div class="col-sm-2"></div> -->
+        </div>
 
-                       <select required name="ota_shift"  class="form-control" ng-model="ota.shiftNumber">
-                            <option value="" selected disabled>-</option>
+        <div class="form-group col-sm-8 col-sm-push-4" ng-show="showbeds">
+         <!-- <div class="col-sm-push-3 col-sm-8" > -->
+         <div class="form-group"  ng-if="shift1beds!=null">
+          <label class="col-sm-3 control-label">Shift 1 : {{shift1beds}}</label>   
+      </div>
+      <div class="form-group"  ng-if="shift2beds!=null">
+          <label  class="col-sm-3 control-label">Shift 2 : {{shift2beds}}</label>   
+      </div>
+      <div class="form-group"  ng-if="shift3beds!=null">
+          <label  class="col-sm-3 control-label">Shift 3 : {{shift3beds}}</label>   
+      </div>
+      <div class="form-group" ng-if="shift4beds!=null">
+          <label  class="col-sm-3 control-label">Shift 4 : {{shift4beds}}</label>   
+      </div>
+      <div class="form-group" ng-if="shift5beds!=null">
+          <label  class="col-sm-3 control-label">Shift 5 : {{shift5beds}}</label>   
+      </div>
+      <div class="form-group" ng-if="shift6beds!=null">
+          <label  class="col-sm-3 control-label">Shift 6 : {{shift6beds}}</label>   
+      </div>
+      <!-- </div> -->
+  </div>
 
-                            <option ng-if="shift1beds!=null" value="1">Shift 1</option>
-                            <option ng-if="shift2beds!=null" value="2">Shift 2</option>
-							<option ng-if="shift3beds!=null" value="3">Shift 3</option>
-							<option ng-if="shift4beds!=null" value="4">Shift 4</option>
-                            <option ng-if="shift5beds!=null" value="5">Shift 5</option>
-                            <option ng-if="shift6beds!=null" value="6">Shift 6</option>
-                        </select>
-                    
-                    </div>
-                    <!-- </div> -->
-			</div>
-			
-			<div class="form-group col-sm-8 col-sm-push-4">
-				<button class=" col-sm-push-5 btn btn-primary " type="submit" ng-click="make_ota()">Add Appointment</button>
-			</div>
-			
-			<div class="form-group">
-					<div class="alert alert-{{messageColor}} alert-dismissable" ng-show="showalert_ota">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-						{{message}}
-					</div>
-			</div>
-			</form>
+  <div class="form-group col-sm-8 col-sm-push-2">
+    <!-- <div class="col-sm-push-3 col-sm-8" > -->
+    <label class="col-sm-4 control-label">Shift No <font color="red">*</font></label>                       
+    <div class="col-sm-8 col-sm-push-1">
 
-		
-		</div>
-		</div>
-		</div>
+       <select required name="ota_shift"  class="form-control" ng-model="ota.shiftNumber">
+        <option value="" selected disabled>-</option>
 
-	
-	
-					
+        <option ng-if="shift1beds!=null" value="1">Shift 1</option>
+        <option ng-if="shift2beds!=null" value="2">Shift 2</option>
+        <option ng-if="shift3beds!=null" value="3">Shift 3</option>
+        <option ng-if="shift4beds!=null" value="4">Shift 4</option>
+        <option ng-if="shift5beds!=null" value="5">Shift 5</option>
+        <option ng-if="shift6beds!=null" value="6">Shift 6</option>
+    </select>
+
+</div>
+<!-- </div> -->
+</div>
+
+<div class="form-group col-sm-8 col-sm-push-4">
+    <button class=" col-sm-push-5 btn btn-primary " type="submit" ng-click="make_ota()">Add Appointment</button>
+</div>
+
+
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+
+
