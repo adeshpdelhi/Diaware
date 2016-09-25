@@ -23,14 +23,14 @@ angular.module('App')
 		tmtMachine:null,
 		oneTimeAppointment:true,
 		//faltu
-	billingDone:null,
-	monitoringDone:null,
-	treatmentConsumptionAdded:null,
+	billingDone:false,
+	monitoringDone:false,
+	treatmentConsumptionAdded:false,
 	processComplete:false,
 	cancelled:false,
-	allBillsCleared:null,
+	allBillsCleared:false,
 	billingRemarks:null
-
+	present: false
 	};
 
 	$scope.$watch('ota.date',function(newVal,oldVal){
@@ -165,14 +165,14 @@ $scope.ota={
 		tmtMachine:null,
 		oneTimeAppointment:true,
 		//faltu
-	billingDone:null,
-	monitoringDone:null,
-	treatmentConsumptionAdded:null,
+	billingDone:false,
+	monitoringDone:false,
+	treatmentConsumptionAdded:false,
 	processComplete:false,
 	cancelled:false,
-	allBillsCleared:null,
+	allBillsCleared:false,
 	billingRemarks:null
-
+	present: false
 	};
 
 
