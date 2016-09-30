@@ -140,10 +140,11 @@ $scope.make_ota=function(){
 		$scope.ota.date = new Date($scope.ota.date);
 		//$scope.ota.date = new Date("2016-09-04");
 		appointmentFactory.getAppointments(authorize.getCentre()).save($scope.ota).$promise.then(function(response){
-			console.log("saving ota");
+			console.log("saving ota.. clearing form");
 			$scope.showalert_ota=true;
 			$scope.message ="One Time Appointment Successful!";
 			$scope.messageColor ='success';
+			$scope.otaForm.$setPristine();
 		},function(response){
 			console.log("save failed");
 			$scope.showalert_ota=true;
