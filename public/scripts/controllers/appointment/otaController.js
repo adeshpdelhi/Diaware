@@ -1,19 +1,9 @@
 'use strict';
 angular.module('App')
 .controller('OtaController',['$scope','patientFactory','choosePatientFactory','appointmentFactory','centreDetails','authorize',function($scope,patientFactory,choosePatientFactory,appointmentFactory,centreDetails,authorize){
-	$scope.patient=null;
-	$scope.beds=null;
-	$scope.showbeds=false;
-	$scope.shift1beds=null;
-	$scope.shift2beds=null;
-	$scope.shift3beds=null;
-	$scope.shift4beds=null;
-	$scope.shift5beds=null;
-	$scope.shift6beds=null;
-	$scope.showalert_ota=false;
-	$scope.correctshift=false;
 
-	$scope.ota={
+	$scope.reset = function(){
+		$scope.ota={
 		centreId:null,
 		patientId:null,
 		date:null,
@@ -23,15 +13,38 @@ angular.module('App')
 		tmtMachine:null,
 		oneTimeAppointment:true,
 		//faltu
-	billingDone:false,
-	monitoringDone:false,
-	treatmentConsumptionAdded:false,
-	processComplete:false,
-	cancelled:false,
-	allBillsCleared:false,
-	billingRemarks:null,
-	present: false
-	};
+		billingDone:false,
+		monitoringDone:false,
+		treatmentConsumptionAdded:false,
+		processComplete:false,
+		cancelled:false,
+		allBillsCleared:false,
+		billingRemarks:null,
+		present: false
+		};
+
+		$scope.patient=null;
+		$scope.beds=null;
+		$scope.showbeds=false;
+		$scope.shift1beds=null;
+		$scope.shift2beds=null;
+		$scope.shift3beds=null;
+		$scope.shift4beds=null;
+		$scope.shift5beds=null;
+		$scope.shift6beds=null;
+		$scope.correctshift=false;
+
+
+		patientFactory.getPatients(authorize.getCentre()).get({id:choosePatientFactory.getChosenPatient().id,fullDetails:true}).$promise.then(function(response){
+			$scope.patient = response;
+			$scope.ota.centreId=authorize.getCentre();
+			$scope.ota.patientId=$scope.patient.id;
+			$scope.ota.tmtMachine=$scope.patient.type+'Machine';
+		});
+
+	}
+
+	$scope.reset();
 
 	$scope.$watch('ota.date',function(newVal,oldVal){
 
@@ -41,6 +54,7 @@ angular.module('App')
 			appointmentFactory.getAvailableBeds(authorize.getCentre()).get({date:$scope.ota.date,appointmentType:$scope.ota.appointmentType,tmtOnMachine:$scope.ota.tmtMachine}).$promise.then(function(response){
 				$scope.beds=response;
 				console.log('in here');
+				console.log($scope.beds);
 				for(key in $scope.beds){
 					console.log('here: key is '+key);
 						 console.log(key);
@@ -56,12 +70,7 @@ angular.module('App')
 			});
 		}
 	});
-patientFactory.getPatients(authorize.getCentre()).get({id:choosePatientFactory.getChosenPatient().id,fullDetails:true}).$promise.then(function(response){
-	$scope.patient = response;
-	$scope.ota.centreId=authorize.getCentre();
-	$scope.ota.patientId=$scope.patient.id;
-	$scope.ota.tmtMachine=$scope.patient.type+'Machine';
-});
+
 
 ////////function
 $scope.make_ota=function(){
@@ -144,7 +153,7 @@ $scope.make_ota=function(){
 			$scope.showalert_ota=true;
 			$scope.message ="One Time Appointment Successful!";
 			$scope.messageColor ='success';
-			$scope.otaForm.$setPristine();
+			$scope.reset();
 		},function(response){
 			console.log("save failed");
 			$scope.showalert_ota=true;
@@ -156,25 +165,7 @@ $scope.make_ota=function(){
 	}
 }
 
-$scope.ota={
-		centreId:null,
-		patientId:null,
-		date:null,
-		dayOfTheWeek:null,
-		shiftNumber:0,
-		appointmentType:null,
-		tmtMachine:null,
-		oneTimeAppointment:true,
-		//faltu
-	billingDone:false,
-	monitoringDone:false,
-	treatmentConsumptionAdded:false,
-	processComplete:false,
-	cancelled:false,
-	allBillsCleared:false,
-	billingRemarks:null,
-	present: false
-	};
+
 
 
 
