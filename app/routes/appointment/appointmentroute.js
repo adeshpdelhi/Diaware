@@ -405,6 +405,7 @@ appointmentRouter.route('/availableBeds/:date')
     // Date.parse(req.query.date)
     console.log(req.params.date);
     var dt = new Date(req.params.date);
+    dt.setDate(dt.getDate()+1);
     dt.setHours(23,59,59,999);
     where['date']={
         $lt:dt,
