@@ -126,7 +126,7 @@
                     <br/>
                 </div>
                 <hr  class="col-sm-12" style="border-top:1px solid rgb(225,225,225);">
-                <div class="row" ng-if="appointment.present == null && !appointment.cancelled && checkTodaysDate(appointment.date)">
+                <div class="row" ng-if="(appointment.present == null || appointment.present == false) && !appointment.cancelled && checkTodaysDate(appointment.date)">
                     <div class="pull-right btn-group">
                         <button class="btn btn-warning" ng-click="changeAttendance(false)" data-toggle="modal" data-target ="#confirmAttendanceModal">Absent</button>
                         <!-- <div class="col-sm-1">&nbsp;&nbsp;</div> -->

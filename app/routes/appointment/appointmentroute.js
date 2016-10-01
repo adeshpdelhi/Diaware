@@ -402,14 +402,14 @@ appointmentRouter.route('/availableBeds/:date')
         where['centreId'] = req.params.centreId;
     where['appointmentType'] = req.query.appointmentType;
     where['tmtMachine'] = req.query.tmtOnMachine;
-    // Date.parse(req.query.date)
     console.log(req.params.date);
     var dt = new Date(req.params.date);
     dt.setDate(dt.getDate()+1);
-    dt.setHours(23,59,59,999);
+    // dt.setHours(23,59,59,999);
+    console.log(dt.toISOString().substring(0, 10));
     where['date']={
-        $lt:dt,
-        $gt: new Date(dt - 24*60*60*1000)
+        $eq:dt.toISOString().substring(0, 10),
+        // $gt: new Date(dt - 24*60*60*1000)
     }
     db.appointments.findAll({
         where:where,
