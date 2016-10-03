@@ -82,6 +82,20 @@ router.put('/:username',auth.verifyAdmin, function(req, res) {
     }
 });
 
+router.delete('/:username',auth.verifyAdmin,function(req,res){
+    users.destroy({
+        where:{
+            username:req.params.username
+        }
+    }).then(function(result){
+        res.json(result);
+    },function(rejectedPromiseError){
+        res.status(400);
+        res.end("Error Occurred in user route delete!");
+    })
+});
+
+
 // router.put('/:username', function(req,res){
 //     console.log(req.body);
 //     users.update(
