@@ -58,6 +58,11 @@ angular.module('App')
         $uibModalInstance.close();
     };
 
+    $scope.deleteStaff = function(){
+        authorize.getUsers().delete({username:user.username},$scope.user);
+        $uibModalInstance.close();
+    };
+
 	$scope.centrechanged = function(){
 		console.log('change detected: contained? '+$scope.user.centres.includes($scope.user.centre)+ ' '+$scope.user.centres+' '+$scope.user.centre);
 		if(!($scope.user.centres.constructor === Array))
