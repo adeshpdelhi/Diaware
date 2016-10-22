@@ -23,9 +23,13 @@ angular.module('App')
 }])
 .factory('staffFactory', ['baseURL','$resource', function (baseURL, $resource) {
     var centreStaff = $resource(baseURL+"users/manage/:centreId",null,  {'update':{method:'PUT' }, 'getFiltered': {method:'GET', isArray: true}});
+    var localCenterStaff = $resource(baseURL+"users/retrieveStaffOnly/:centreId",null,  {'update':{method:'PUT' }, 'getFiltered': {method:'GET', isArray: true}});
     return {
         getCentreStaff : function(){
             return centreStaff;
+        },
+        getLocalStaffOnly : function(){
+            return localCenterStaff;
         }
     };
 }])

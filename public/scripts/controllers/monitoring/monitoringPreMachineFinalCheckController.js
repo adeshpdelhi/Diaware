@@ -1,6 +1,6 @@
 'use strict';
 angular.module('App')
-.controller('MonitoringPreMachineFinalCheckController',['$scope','authorize','backendFactory','monitoringChartFactory', function($scope,authorize,backendFactory,monitoringChartFactory){
+.controller('MonitoringPreMachineFinalCheckController',['$scope','authorize','backendFactory','monitoringChartFactory','staffFactory', function($scope,authorize,backendFactory,monitoringChartFactory, staffFactory){
 	if(!$scope.view || ($scope.patientChart != null && !$scope.machineCheck)){
 		$scope.machineCheck = {
 			preBasicId:null,
@@ -18,6 +18,14 @@ angular.module('App')
 			new:true
 		};
 	}
+	$scope.centres=authorize.getCentre();
+	$scope.getStaff = function(){
+		staffFactory.getLocalStaffOnly().getFiltered({centreId:$scope.centres}).$promise.then(function(response){
+	      $scope.staff = response;
+	      console.log(response);
+	    });
+	};
+	$scope.getStaff();
 	$scope.showalert_predialysis_machine_final_check=false;
 	$scope.savedOnce=false;
 	$scope.saveMachineCheck = function(){

@@ -10,6 +10,7 @@ angular.module('App')
 	$scope.disease ={};
 	$scope.catheterizationItem ={};
 	$scope.dialysisItem  ={};
+	$scope.respiratoryStatusNew  ={};
 
 	$scope.shouldShowForm = false;
 	$scope.displayList = function(){
@@ -20,6 +21,8 @@ angular.module('App')
 			$scope.showDialyzateTypes();
 		if($scope.table == 'TransactionTypes')
 			$scope.showTransactionTypes();
+		if($scope.table == 'Respiratory Status')
+			$scope.showRespiratoryStatus();
 		if($scope.table == 'LedgerTable')
 			$scope.showLedgerTable();
 		if($scope.table == 'Diseases')
@@ -227,6 +230,31 @@ angular.module('App')
 	$scope.deleteTransactionType = function(transactionType){
 		backendFactory.getTransactionTypes().delete({transactionType:transactionType});
 		$scope.showTransactionTypes();
+	};
+
+	$scope.addRespiratoryStatus = function(){
+		console.log($scope.respiratoryStatusNew);
+		backendFactory.getRespiratoryStatus().save($scope.respiratoryStatusNew).$promise.then(function(response){
+						alert('respiratoryStatus saved');
+						$scope.showRespiratoryStatus();
+						$scope.showForm=false;
+				},function(response){
+					alert('respiratoryStatus save failed!');
+				});
+	};
+
+	$scope.showRespiratoryStatus = function(){
+		console.log('showing respiratoryStatus');
+		backendFactory.getRespiratoryStatus().query().$promise.then(function(response){
+					$scope.respiratoryStatus=response;
+				},function(response){
+					alert('respiratoryStatus retrieval failed!');
+				});
+	};
+
+	$scope.deleteRespiratoryStatus = function(respiratoryStatus){
+		backendFactory.getRespiratoryStatus().delete({respiratoryStatus:respiratoryStatus});
+		$scope.showRespiratoryStatus();
 	};
 
 	$scope.addLedger = function(){

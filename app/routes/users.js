@@ -16,6 +16,17 @@ router.get('/manage/:centreId', auth.verifyLoggedIn, function(req, res) {
 		});
 });
 
+router.get('/retrieveStaffOnly/:centreId', auth.verifyLoggedIn, function(req, res) {
+    if(req.params.centreId=='all')
+        users.findAll().then(function(users){
+            res.json(users);
+        });
+    else
+        users.findAll({where:{centres:{$like: '%'+req.params.centreId+'%'}, admin:false, incharge:false}}).then(function(users){
+            res.json(users);
+        });
+});
+
 
 router.get('/:username', auth.verifyLoggedIn, function(req, res) {
     users.findOne({where:{username:req.params.username}}).then(function(user){

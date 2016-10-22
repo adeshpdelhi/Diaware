@@ -60,7 +60,7 @@ dropDownRouter.route('/transactionTypes')
     
 })
 .post(function (req, res, next) {
-    console.log('processing post : '+ req.body);
+    console.log('processing post : '+ JSON.stringify(req.body));
     db.transactionTypes.build(req.body).save().then(function(result){
         res.json(result);
     },function(rejectedPromiseError){
@@ -391,7 +391,39 @@ dropDownRouter.route('/dialysisItems/:itemId')
 
 
 
+dropDownRouter.route('/respiratoryStatus')
+.get(function (req, res, next) {
+    console.log('procesing get');
+    db.respiratoryStatus.findAll().then(function(respiratoryStatus){
+        console.log(JSON.stringify(respiratoryStatus));
+        res.json(respiratoryStatus);
+    },function(rejectedPromiseError){
+        res.status(500);
+        res.end("Internal Server Error");
+    });
+    
+})
+.post(function (req, res, next) {
+    console.log('processing post : '+ JSON.stringify(req.body));
+    db.respiratoryStatus.build(req.body).save().then(function(result){
+        res.json(result);
+    },function(rejectedPromiseError){
+        res.status(500);
+        res.end("Internal Server Error");
+    });
+});
 
+dropDownRouter.route('/respiratoryStatus/:respiratoryStatus')
+.delete(function(req,res,next){
+    db.respiratoryStatus.destroy({
+        where:{respiratoryStatus:req.params.respiratoryStatus}
+    }).then(function(result){
+        res.json(result);
+    },function(rejectedPromiseError){
+        res.status(500);
+        res.end("Internal Server Error");
+    })    
+});
 
 
 
