@@ -1,7 +1,7 @@
 
 'use strict';
 angular.module('App')
-.controller('MonitoringPostController',['$scope','patientFactory','choosePatientFactory','authorize','monitoringChartFactory', function($scope, patientFactory, choosePatientFactory, authorize,monitoringChartFactory){
+.controller('MonitoringPostController',['$scope','patientFactory','choosePatientFactory','authorize','monitoringChartFactory','backendFactory', function($scope, patientFactory, choosePatientFactory, authorize,monitoringChartFactory, backendFactory){
         $scope.savedOnce = false;
         if(!$scope.view || ($scope.patientChart != null && !$scope.post)){
             $scope.post = {
@@ -36,7 +36,9 @@ angular.module('App')
             };
         }
 		$scope.showalert_postdialysis=false;
-        
+        backendFactory.getRespiratoryStatus().query(function(response){
+            $scope.respiratoryStatus = response;
+        });
         $scope.$watch('post.postWeight',function(newVal, oldVal){
         	$scope.post.weightLoss = ($scope.view?$scope.patientChart.monitoringChartPreAssessment.preHDWeight:$scope.preHDWeight) - $scope.post.postWeight;
         })

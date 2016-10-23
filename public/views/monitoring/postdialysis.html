@@ -109,11 +109,11 @@
                 <input  type="text" class="form-control" id="cardiac_status" name="cardiac_status" placeholder="Cardiac Status" ng-model="post.cardiacStatus">
               </div>
             </div>
-            <div class="form-group">
-              <label class="col-sm-4 control-label">Respiratory Status</label>                        
-              <div class="col-sm-7">
-                <input type="text" class="form-control" id="respiratory_status" name="respiratory_status" placeholder="Respiratory Status" ng-model="post.respiratoryStatus">
-              </div>
+            <div class="form-group">  
+                <label class="control-label col-sm-4">Respiratory Status</label>
+                <select ng-model="post.respiratoryStatus" class="col-sm-7" ng-options = "respiratoryStatus.respiratoryStatus as respiratoryStatus.respiratoryStatus for respiratoryStatus in respiratoryStatus" required >
+
+                </select>
             </div>
             <div class="form-group">
               <label class="col-sm-4 control-label">Mental Status</label>                        

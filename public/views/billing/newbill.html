@@ -140,7 +140,8 @@
                         <div class="form-group" ng-show="bill.modeOfPayment !== ''">
                             <label for="additionalDiscount" class="control-label col-sm-3">Additional Discount (in %)</label>
                             <div class="col-sm-3">
-                                <input class="form-control" type="number" name="additionalDiscount" id="additionalDiscount" ng-model="bill.additionalDiscount" step="any" min='0'>
+                                <input class="form-control" type="number" name="additionalDiscount" id="additionalDiscount" ng-model="bill.additionalDiscount" step="any" min='0' max="100">
+                                <span ng-show="billingForm.additionalDiscount.$invalid" class="help-block text-danger">Invalid Discount</span>
                             </div>
                         </div>
                         <div ng-if="panelSelected">

@@ -25,6 +25,11 @@ angular.module('App')
         this.getDialysisItems = function(){
             return $resource(baseURL+"dropDowns/dialysisItems/:itemId", null,{'update':{method:'PUT'}});
         };
+
+        this.getRespiratoryStatus = function(){
+            return $resource(baseURL+"dropDowns/respiratoryStatus/:respiratoryStatus", null,{'update':{method:'PUT'}});
+        };
+
   }])
 ;
 /*

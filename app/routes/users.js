@@ -16,6 +16,17 @@ router.get('/manage/:centreId', auth.verifyLoggedIn, function(req, res) {
 		});
 });
 
+router.get('/retrieveStaffOnly/:centreId', auth.verifyLoggedIn, function(req, res) {
+    if(req.params.centreId=='all')
+        users.findAll().then(function(users){
+            res.json(users);
+        });
+    else
+        users.findAll({where:{centres:{$like: '%'+req.params.centreId+'%'}, admin:false, incharge:false}}).then(function(users){
+            res.json(users);
+        });
+});
+
 
 router.get('/:username', auth.verifyLoggedIn, function(req, res) {
     users.findOne({where:{username:req.params.username}}).then(function(user){
@@ -81,6 +92,20 @@ router.put('/:username',auth.verifyAdmin, function(req, res) {
     });
     }
 });
+
+router.delete('/:username',auth.verifyAdmin,function(req,res){
+    users.destroy({
+        where:{
+            username:req.params.username
+        }
+    }).then(function(result){
+        res.json(result);
+    },function(rejectedPromiseError){
+        res.status(400);
+        res.end("Error Occurred in user route delete!");
+    })
+});
+
 
 // router.put('/:username', function(req,res){
 //     console.log(req.body);

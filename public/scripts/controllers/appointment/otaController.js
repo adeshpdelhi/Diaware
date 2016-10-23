@@ -1,19 +1,9 @@
 'use strict';
 angular.module('App')
 .controller('OtaController',['$scope','patientFactory','choosePatientFactory','appointmentFactory','centreDetails','authorize',function($scope,patientFactory,choosePatientFactory,appointmentFactory,centreDetails,authorize){
-	$scope.patient=null;
-	$scope.beds=null;
-	$scope.showbeds=false;
-	$scope.shift1beds=null;
-	$scope.shift2beds=null;
-	$scope.shift3beds=null;
-	$scope.shift4beds=null;
-	$scope.shift5beds=null;
-	$scope.shift6beds=null;
-	$scope.showalert_ota=false;
-	$scope.correctshift=false;
 
-	$scope.ota={
+	$scope.reset = function(){
+		$scope.ota={
 		centreId:null,
 		patientId:null,
 		date:null,
@@ -23,15 +13,38 @@ angular.module('App')
 		tmtMachine:null,
 		oneTimeAppointment:true,
 		//faltu
-	billingDone:null,
-	monitoringDone:null,
-	treatmentConsumptionAdded:null,
-	processComplete:null,
-	cancelled:null,
-	allBillsCleared:null,
-	billingRemarks:null
+		billingDone:false,
+		monitoringDone:false,
+		treatmentConsumptionAdded:false,
+		processComplete:false,
+		cancelled:false,
+		allBillsCleared:false,
+		billingRemarks:null,
+		present: false
+		};
 
-	};
+		$scope.patient=null;
+		$scope.beds=null;
+		$scope.showbeds=false;
+		$scope.shift1beds=null;
+		$scope.shift2beds=null;
+		$scope.shift3beds=null;
+		$scope.shift4beds=null;
+		$scope.shift5beds=null;
+		$scope.shift6beds=null;
+		$scope.correctshift=false;
+
+
+		patientFactory.getPatients(authorize.getCentre()).get({id:choosePatientFactory.getChosenPatient().id,fullDetails:true}).$promise.then(function(response){
+			$scope.patient = response;
+			$scope.ota.centreId=authorize.getCentre();
+			$scope.ota.patientId=$scope.patient.id;
+			$scope.ota.tmtMachine=$scope.patient.type+'Machine';
+		});
+
+	}
+
+	$scope.reset();
 
 	$scope.$watch('ota.date',function(newVal,oldVal){
 
@@ -41,6 +54,7 @@ angular.module('App')
 			appointmentFactory.getAvailableBeds(authorize.getCentre()).get({date:$scope.ota.date,appointmentType:$scope.ota.appointmentType,tmtOnMachine:$scope.ota.tmtMachine}).$promise.then(function(response){
 				$scope.beds=response;
 				console.log('in here');
+				console.log($scope.beds);
 				for(key in $scope.beds){
 					console.log('here: key is '+key);
 						 console.log(key);
@@ -56,15 +70,11 @@ angular.module('App')
 			});
 		}
 	});
-patientFactory.getPatients(authorize.getCentre()).get({id:choosePatientFactory.getChosenPatient().id,fullDetails:true}).$promise.then(function(response){
-	$scope.patient = response;
-	$scope.ota.centreId=authorize.getCentre();
-	$scope.ota.patientId=$scope.patient.id;
-	$scope.ota.tmtMachine=$scope.patient.type+'Machine';
-});
+
 
 ////////function
 $scope.make_ota=function(){
+	$scope.correctshift = false;
 	$scope.ota.oneTimeAppointment=true;
 	console.log("In make ota");
 	//no of beds
@@ -92,14 +102,20 @@ $scope.make_ota=function(){
 	console.log('shift selected = '+$scope.ota.shiftNumber)
 	console.log('checking for free shifts now '+$scope.ota.shiftNumber+' '+$scope.shift2beds);
 	//check if selected shift number has atleast one bed avalaible
-	if($scope.ota.shiftNumber==1)
-		if($scope.shift1beds>=1)
+	if($scope.ota.shiftNumber==1){
+		console.log('shift 1 bed checking now');
+		if($scope.shift1beds>=1){
+			console.log('yeahhhhh');
 			$scope.correctshift=true;
+		}
+	}
 	else if($scope.ota.shiftNumber==2)
 	{
 		console.log('shift 2 bed checking now');
-		if($scope.shift2beds>=1)
+		if($scope.shift2beds>=1){
+			console.log('yeahhhhh');
 			$scope.correctshift=true;
+		}
 	}
 	else if($scope.ota.shiftNumber==3)
 		if($scope.shift3beds>=1)
@@ -133,10 +149,11 @@ $scope.make_ota=function(){
 		$scope.ota.date = new Date($scope.ota.date);
 		//$scope.ota.date = new Date("2016-09-04");
 		appointmentFactory.getAppointments(authorize.getCentre()).save($scope.ota).$promise.then(function(response){
-			console.log("saving ota");
+			console.log("saving ota.. clearing form");
 			$scope.showalert_ota=true;
 			$scope.message ="One Time Appointment Successful!";
 			$scope.messageColor ='success';
+			$scope.reset();
 		},function(response){
 			console.log("save failed");
 			$scope.showalert_ota=true;
@@ -147,4 +164,9 @@ $scope.make_ota=function(){
 		});
 	}
 }
+
+
+
+
+
 }]);
