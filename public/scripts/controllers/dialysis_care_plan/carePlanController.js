@@ -7,6 +7,8 @@ angular.module('App')
         backendFactory.getCentres().get({id:authorize.getCentre()}).$promise.then(function(response){
         	$scope.accessLinesAvailable = response.accessLinesAvailable;	
         });
+		$scope.showheparin=true;
+		
 		$scope.showalert_dialysis_care_plan=false;
         console.log($scope.patient);
         $scope.carePlan ={
@@ -28,6 +30,25 @@ angular.module('App')
 			accessUsed: null,
 			lastModifiedBy: null
         };
+		
+		
+
+	
+	$scope.$watch('carePlan.heparinFree',function(newVal,oldVal){
+		console.log('second--- ');
+console.log(showheparin);
+		console.log($scope.carePlan.heparinFree);
+		if(newVal){
+			if($scope.carePlan.heparinFree=="Yes")
+			{
+				$scope.showheparin=true;
+			}
+			else if($scope.carePlan.heparinFree=="No")
+			{
+				$scope.showheparin=false;
+			} 
+		}
+	});
         backendFactory.getDialyzateTypes().query(function(response){
         	$scope.dialyzateTypes = response;
         })

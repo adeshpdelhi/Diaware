@@ -5,7 +5,34 @@ angular.module('App')
       	// $scope.showAlertPatientNull = false;
 	    $scope.chosenPatientId = chosenPatientId;
 	    $scope.regularForm = regularForm.regularForm;
+		$scope.showBolus=true;
+	$scope.showHourlyHeparin=true;
+	
 	    $scope.latest = function(){
+			//////////////////
+			console.log('second--- ');
+
+				console.log($scope.basicMedical.anticoagulant);
+				
+	$scope.$watch('basicMedical.anticoagulant',function(newVal,oldVal){
+				console.log('second--- ');
+
+				console.log($scope.basicMedical.anticoagulant);
+				if(newVal){
+					if($scope.basicMedical.anticoagulant=="Yes")
+					{
+						$scope.showBolus=false;
+						$scope.showHourlyHeparin=false;
+					}
+					else if($scope.basicMedical.anticoagulant=="No")
+					{
+						$scope.showBolus=true;
+						$scope.showHourlyHeparin=true;
+					} 
+				}
+	});
+			///////////////
+			
 	    	console.log( "patientId resolve app.js: " + $stateParams.patientId + " , date: "+ $stateParams.date);
 	    	if($stateParams.patientId && $stateParams.date){
 	    	    monitoringChartFactory.getPreBasic($stateParams.patientId).get({monitoringDate:$stateParams.date})

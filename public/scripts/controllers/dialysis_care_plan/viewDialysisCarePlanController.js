@@ -81,6 +81,22 @@ angular.module('App')
 				$scope.messageColor="danger";
 			})
 		};
+		$scope.showheparin=true;
+		$scope.$watch('carePlan.heparinFree',function(newVal,oldVal){
+				console.log('second--- ');
+console.log(showheparin);
+				console.log($scope.carePlan.heparinFree);
+				if(newVal){
+					if($scope.carePlan.heparinFree=="Yes")
+					{
+						$scope.showheparin=true;
+					}
+					else if($scope.carePlan.heparinFree=="No")
+					{
+						$scope.showheparin=false;
+					} 
+				}
+	});
         $scope.updateCarePlan = function() {
         	$scope.carePlan.lastModifiedBy = authorize.getUsername();
         	if($scope.carePlan.new){

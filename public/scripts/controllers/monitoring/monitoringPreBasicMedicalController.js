@@ -20,6 +20,27 @@ angular.module('App')
 		};
 		$scope.showCentralLine = false;
 	}
+	///////////////////////////////////////////////////////////////////////////
+	$scope.showBolus=true;
+	$scope.showHourlyHeparin=true;
+	$scope.$watch('basicMedical.anticoagulant',function(newVal,oldVal){
+				console.log('second--- ');
+
+				console.log($scope.basicMedical.anticoagulant);
+				if(newVal){
+					if($scope.basicMedical.anticoagulant=="Yes")
+					{
+						$scope.showBolus=false;
+						$scope.showHourlyHeparin=false;
+					}
+					else if($scope.basicMedical.anticoagulant=="No")
+					{
+						$scope.showBolus=true;
+						$scope.showHourlyHeparin=true;
+					} 
+				}
+	});
+	//////////////////////////////////////////////////////////////////////////////
 	$scope.showalert_predialysis_basic_medical=false;
 	backendFactory.getCentres().get({id:authorize.getCentre()}).$promise.then(function(response){
 		$scope.accessLinesAvailable = response.accessLinesAvailable;
