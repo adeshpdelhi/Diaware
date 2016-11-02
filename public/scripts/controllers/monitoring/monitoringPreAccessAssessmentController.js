@@ -1,6 +1,6 @@
 'use strict';
 angular.module('App')
-.controller('MonitoringPreAccessAssessmentController',['$scope','authorize','backendFactory','monitoringChartFactory', function($scope,authorize,backendFactory,monitoringChartFactory){
+.controller('MonitoringPreAccessAssessmentController',['$scope','authorize','backendFactory','monitoringChartFactory', 'staffFactory', function($scope,authorize,backendFactory,monitoringChartFactory, staffFactory){
 	if(!$scope.view || ($scope.patientChart != null  && !$scope.accessAssessment)){
 		$scope.accessAssessment = {
 			preBasicId:null,
@@ -15,6 +15,13 @@ angular.module('App')
 			new:true
 		};
 	}
+	$scope.getStaff = function(){
+		staffFactory.getLocalStaffOnly().getFiltered({centreId:authorize.getCentre()}).$promise.then(function(response){
+	      $scope.staff = response;
+	      console.log(response);
+	    });
+	};
+	$scope.getStaff();
 	$scope.showalert_predialysis_access_assessment=false;
 	$scope.savedOnce=false;
 	$scope.saveAccessAssessment = function(){

@@ -139,11 +139,17 @@
                 <input type="number" class="form-control" id="epo_dosage" name="epo_dosage" placeholder="EPO Dosage" ng-model="post.EPODosage" step="any" min="0">
               </div>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label  class="col-xs-12 col-sm-4 control-label">EPO Given By</label>
               <div class="col-sm-7 ">
                 <input type="text" class="form-control" id="epo_given_by" name="epo_given_by" placeholder="EPO Given By" ng-model="post.EPOGivenBy">
               </div>
+            </div> -->
+            <div class="form-group">  
+                <label class="control-label col-sm-3">EPO Given By</label>
+                <select ng-model="post.EPOGivenBy" class="col-sm-8" ng-options = "staff.username as staff.username for staff in staff" required >
+
+                </select>
             </div>
             <div class="form-group">
               <label class="col-sm-4 control-label">EPO Supply</label>
@@ -178,11 +184,17 @@
                 <input type="text" class="form-control" id="blood_bank_name" name="blood_bank_name" placeholder="Blood Bank Name" ng-model="post.bloodBankName">
               </div>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label class="col-sm-4 control-label">Concluded By</label>                        
               <div class="col-sm-7">
                 <input type="text" class="form-control" id="concluded_by" name="concluded_by" placeholder="Concluded By" ng-model="post.concludedBy">
               </div>
+            </div> -->
+            <div class="form-group">  
+                <label class="control-label col-sm-3">Concluded By</label>
+                <select ng-model="post.concludedBy" class="col-sm-8" ng-options = "staff.username as staff.username for staff in staff" required >
+
+                </select>
             </div>
             <div class="form-group">
               <label class="col-sm-4 control-label">Any Other Comments</label>                        

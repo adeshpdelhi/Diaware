@@ -67,7 +67,7 @@
     </div>
 
 
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label class="col-xs-12 col-sm-3 control-label">Commenced By</label>
         <div class="col-sm-8">
             <input  type="text" class="form-control" id="commenced_by" name="commenced_by" placeholder="Commenced By" ng-model="accessAssessment.commencedBy">
@@ -79,7 +79,22 @@
         <div class="col-sm-8">
             <input  type="text" class="form-control" id="assissted_by" name="assissted_by" placeholder="Assissted By" ng-model="accessAssessment.assistedBy">
         </div>
+    </div> -->
+
+    <div class="form-group">  
+        <label class="control-label col-sm-3">Commenced By</label>
+        <select ng-model="accessAssessment.commencedBy" class="col-sm-8" ng-options = "staff.username as staff.username for staff in staff" required >
+
+        </select>
     </div>
+
+    <div class="form-group">  
+        <label class="control-label col-sm-3">Assisted By</label>
+        <select ng-model="accessAssessment.assistedBy" class="col-sm-8" ng-options = "staff.username as staff.username for staff in staff" required >
+
+        </select>
+    </div>
+
     <div class="form-group">
         <div class="col-sm-offset-8 col-sm-2">
             <button type="submit" class="btn btn-primary" ng-show="!savedOnce">{{editingPreAccessAssessment?'Update':'Save'}}</button>

@@ -1,7 +1,7 @@
 
 'use strict';
 angular.module('App')
-.controller('MonitoringPostController',['$scope','patientFactory','choosePatientFactory','authorize','monitoringChartFactory','backendFactory', function($scope, patientFactory, choosePatientFactory, authorize,monitoringChartFactory, backendFactory){
+.controller('MonitoringPostController',['$scope','patientFactory','choosePatientFactory','authorize','monitoringChartFactory','backendFactory','staffFactory', function($scope, patientFactory, choosePatientFactory, authorize,monitoringChartFactory, backendFactory, staffFactory){
         $scope.savedOnce = false;
         if(!$scope.view || ($scope.patientChart != null && !$scope.post)){
             $scope.post = {
@@ -35,6 +35,13 @@ angular.module('App')
                 new:true
             };
         }
+        $scope.getStaff = function(){
+            staffFactory.getLocalStaffOnly().getFiltered({centreId:authorize.getCentre()}).$promise.then(function(response){
+              $scope.staff = response;
+              console.log(response);
+            });
+        };
+        $scope.getStaff();
 		$scope.showalert_postdialysis=false;
         backendFactory.getRespiratoryStatus().query(function(response){
             $scope.respiratoryStatus = response;
